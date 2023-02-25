@@ -1,0 +1,13 @@
+{% extends "capeditor/widgets/polygon.html" %}
+
+{% block extra_js %}
+  {{ block.super }}
+
+  <script>
+    // Custom JavaScript for the basemap
+  </script>
+{% endblock %}
+
+{% block after_field %}
+  <div id="basemap"></div>
+{% endblock %}

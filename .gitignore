@@ -1,0 +1,23 @@
+# Python-specific files
+__pycache__/
+*.py[cod]
+
+# Django-specific files
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+
+# Wagtail-specific files
+staticfiles/
+/static
+node_modules/
+yarn-error.log
+
+# Development files
+.env
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
