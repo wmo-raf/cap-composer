@@ -34,6 +34,20 @@ INSTALLED_APPS = [
 ]
 ```
 
+Set up restframeworkxml renderers
+
+```py
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework_xml.renderers.XMLRenderer',  # add XMLRenderer
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework_xml.parsers.XMLParser',
+    ),
+}
+```
+
 #### 4. Include the cap urls
 In `urls.py`, include the cap urls as below. This is where the cap api for listed (`/cap/caps.xml`) and detailed(`/cap/{cap_id}.xml`) cap view will be hosted.
 
@@ -152,7 +166,8 @@ This is an optional child section of the Alert Info Section i.e
 </alert>
 ``` 
 
-![Alert Resource](images/alert_sections/dom.jpg "Alert Resource section")
+![Alert Resource](images/alert_sections/alert_resource.png "Alert Resource section")
 
 
 Multiple instances of this section are allowed. It contains the **Description (resourceDesc), MIME Type (mimeType), File Size (size), URI (uri), Dereferenced URI (derefUri) and Digest (digest)**
+
