@@ -1,7 +1,10 @@
-CAP Editor
+<img style="float: right;" height="30" src="images/caplogo.jpeg">
+
+CAP Editor 
 ============
 
 A Wagtail Commmon Alerting Protocol (CAP) Editor python package installable as an app on any wagtail project (version>=4.1). 
+
 
 The **Common Alerting Protocol (CAP)** provides an open, non-proprietary digital message format for all types of alerts and notifications. It does not address any particular application or telecommunications method.  The CAP format is compatible with emerging techniques, such as Web services, as well as existing formats including the Specific Area Message Encoding (SAME) used for the United States’ National Oceanic and Atmospheric Administration (NOAA) Weather Radio and the Emergency Alert System (EAS)
 
