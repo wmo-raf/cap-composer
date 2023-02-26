@@ -1,6 +1,4 @@
-<img style="float: right;" height="30" src="images/caplogo.jpeg" markdown="1">
-
-CAP Editor 
+CAP Editor <img style="float: right;" height="40" src="images/caplogo.jpeg" markdown="1"> 
 ============
 
 A Wagtail Commmon Alerting Protocol (CAP) Editor python package installable as an app on any wagtail project (version>=4.1). 
