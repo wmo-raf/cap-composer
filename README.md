@@ -88,14 +88,15 @@ Create one or more `Alert Page` by adding it as a child to the `Alert Listing Pa
 
 ![Alert Detail Page](images/alert_detail.png "Alert Detail Page")
 
+---
 
 ### Sections in the Alert Page and corresponding XML
 
-The overal Document Object Model of an alert is as below:
+The overall Document Object Model of an alert is as below:
 
 ![Alert DOM](images/alert_sections/dom.jpg "CAP Document Object Model")
 
-#### Alert Identification
+### A. Alert Identification
 
 This is the root section of CAP corresponds to:
 
@@ -111,7 +112,7 @@ It contains the **Message ID (identifier), Sender ID(sender), Sent Dat/Time (sen
 
 ![Alert Identification](images/alert_sections/alert_id.png "Alert Identification section")
 
-#### Alert Info
+### B. Alert Info
 
 This is an optional child section of the Alert Identification Section i.e 
 
@@ -126,7 +127,7 @@ This is an optional child section of the Alert Identification Section i.e
 
 Multiple instances of this section are allowed. It contains the **Langauge (langauge), Event Category/Categories (category), Event Type (event), Response Type/Types (responseType), Urgency (urgency), Severity (severity), Certainty (certainty), Audience (audience), Event Code/Codes (eventCode), Effective Date/Time (effective), Onset Date/Time (onset), Expiration Date/Time (expires), Sender Name (senderName), Headline (headline), Event description (description), Instructions (instruction), Information URL (web), Contact Info (contact) and Parameter/Parameters (parameter)**.
 
-#### Alert Area
+### C. Alert Area
 
 This is an optional child section of the Alert Info Section i.e 
 
@@ -147,7 +148,7 @@ Multiple instances of this section are allowed. It contains the **Area Descripti
 
 ![Alert Area](images/alert_sections/alert_area.png "Alert Area section")
 
-#### Alert Resource
+### D. Alert Resource
 This is an optional child section of the Alert Info Section i.e 
 
 ```xml
