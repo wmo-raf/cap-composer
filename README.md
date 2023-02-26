@@ -24,12 +24,11 @@ http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
             Alert](#creating-a-cap-alert)
         -   [Sections in the Alert Page and corresponding
             XML](#sections-in-the-alert-page-and-corresponding-xml)
-        -   [A. Alert
-            Identification](#a.-alert-identification)
-        -   [B. Alert Info](#b.-alert-info)
-        -   [C. Alert Area](#c.-alert-area)
-        -   [D. Alert
-            Resource](#d.-alert-resource)
+            -   [A. Alert
+                Identification](#a.-alert-identification)
+            -   [B. Alert Info](#b.-alert-info)
+            -   [C. Alert Area](#c.-alert-area)
+            -   [D. Alert Resource](#d.-alert-resource)
     -   [Integrations](#integrations)
     
 ## Quick start
