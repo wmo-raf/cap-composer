@@ -1,4 +1,4 @@
-<img style="float: right;" height="30" src="images/caplogo.jpeg">
+<img style="float: right;" height="30" src="images/caplogo.jpeg" markdown="1">
 
 CAP Editor 
 ============
