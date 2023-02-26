@@ -1,6 +1,3 @@
-
-
-
 # CAP Editor  <img style="float: right;" height="40" src="images/caplogo.jpeg" markdown="1"> 
 
 A Wagtail Commmon Alerting Protocol (CAP) Editor python package
@@ -18,22 +15,22 @@ System (EAS)
 The CAP xml response follows the structure of the schema provided at
 http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
 
-# Contents
+## Contents
 
--   [CAP Editor](#cap-editor){#toc-cap-editor}
-    -   [Quick start](#quick-start){#toc-quick-start}
-    -   [Usage](#usage){#toc-usage}
+-   [CAP Editor](#cap-editor)
+    -   [Quick start](#quick-start)
+    -   [Usage](#usage)
         -   [Creating a CAP
-            Alert](#creating-a-cap-alert){#toc-creating-a-cap-alert}
+            Alert](#creating-a-cap-alert)
         -   [Sections in the Alert Page and corresponding
-            XML](#sections-in-the-alert-page-and-corresponding-xml){#toc-sections-in-the-alert-page-and-corresponding-xml}
+            XML](#sections-in-the-alert-page-and-corresponding-xml)
         -   [A. Alert
-            Identification](#a.-alert-identification){#toc-a.-alert-identification}
-        -   [B. Alert Info](#b.-alert-info){#toc-b.-alert-info}
-        -   [C. Alert Area](#c.-alert-area){#toc-c.-alert-area}
+            Identification](#a.-alert-identification)
+        -   [B. Alert Info](#b.-alert-info)
+        -   [C. Alert Area](#c.-alert-area)
         -   [D. Alert
-            Resource](#d.-alert-resource){#toc-d.-alert-resource}
-    -   [Integrations](#integrations){#toc-integrations}
+            Resource](#d.-alert-resource)
+    -   [Integrations](#integrations)
     
 ## Quick start
 
