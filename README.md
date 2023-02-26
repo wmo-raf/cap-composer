@@ -126,7 +126,7 @@ The overall Document Object Model of an alert is as below:
 
 ![Alert DOM](images/alert_sections/dom.jpg "CAP Document Object Model")
 
-### A. Alert Identification
+#### A. Alert Identification
 
 This is the root section of CAP corresponds to:
 
@@ -147,7 +147,7 @@ parameters.
 ![Alert
 Identification](images/alert_sections/alert_id.png "Alert Identification section")
 
-### B. Alert Info
+#### B. Alert Info
 
 This is an optional child section of the Alert Identification Section
 i.e
@@ -170,7 +170,7 @@ Expiration Date/Time (expires), Sender Name (senderName), Headline
 Information URL (web), Contact Info (contact) and Parameter/Parameters
 (parameter)**.
 
-### C. Alert Area
+#### C. Alert Area
 
 This is an optional child section of the Alert Info Section i.e
 
@@ -194,7 +194,7 @@ Circle/Circles (circle), Area Geocode/Geocodes (geocode), Altitude
 
 ![Alert Area](images/alert_sections/alert_area.png "Alert Area section")
 
-### D. Alert Resource
+#### D. Alert Resource
 
 This is an optional child section of the Alert Info Section i.e
 
