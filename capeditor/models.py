@@ -23,6 +23,7 @@ class AlertList(Page):
     parent_page_type = [
         'wagtailcore.Page'  # appname.ModelName
     ]
+    max_count = 1
     
 
 class Alert(Page):
