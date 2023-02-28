@@ -10,7 +10,7 @@ setup(
         'Django>=4.0.0',
         'djangorestframework-xml>=2.0.0',
         'six>=1.16.0',
-        'wagtail>=4.1.2',
+        'wagtail>=4.0.0',
         'wagtail-cache>=2.2.0',
         'psycopg2-binary>=2.9.5'
     ],
