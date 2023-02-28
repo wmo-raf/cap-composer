@@ -7,7 +7,7 @@ setup(
     author='Grace Amondi',
     author_email='miswa.grace@gmail.com',
     install_requires=[
-        'Django>=4.1.7',
+        'Django>=4.0.0',
         'djangorestframework-xml>=2.0.0',
         'six>=1.16.0',
         'wagtail>=4.1.2',
