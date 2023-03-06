@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import Alert, AlertArea, AlertInfo
+from .models import Alert, AlertArea, AlertInfo,AlertGeocode,AlertResponseType
 from django.urls import reverse
+from wagtail.rich_text import RichText
 
 
 class LatLonField(serializers.Field):
@@ -26,11 +27,42 @@ class LatLonField(serializers.Field):
         return " ".join(lat_lon_ls)
 
 
+class AlertResponseTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AlertResponseType
+        fields = ['response_type']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        # Modify the XML tag name
+        representation[f'responseType'] = representation.pop('response_type')
+        # request = self.context.get('request')
+        # if request:
+        #     representation['link'] = self.get_link(instance)
+        # Modify the XML output as needed
+        # representation['other_field'] = 'some value'
+        return {k: v for k, v in representation.items() if v or v == 0 or v == False}
+
+
 class AlertGeocodeSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = AlertArea
+        model = AlertGeocode
         fields = ['name', 'value']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        # Modify the XML tag name
+        representation[f'valueName'] = representation.pop('name')
+        # request = self.context.get('request')
+        # if request:
+        #     representation['link'] = self.get_link(instance)
+        # Modify the XML output as needed
+        # representation['other_field'] = 'some value'
+        return {k: v for k, v in representation.items() if v or v == 0 or v == False}
+
+
 
 class AlertAreaSerializer(serializers.ModelSerializer):
     geocode = serializers.SerializerMethodField()
@@ -43,7 +75,7 @@ class AlertAreaSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_geocode(obj):
-        serializer = AlertAreaSerializer(obj.geocodes,  many=True)
+        serializer = AlertGeocodeSerializer(obj.geocodes,  many=True)
         return serializer.data
 
     def to_representation(self, instance):
@@ -53,11 +85,23 @@ class AlertAreaSerializer(serializers.ModelSerializer):
 
 class AlertInfoSerializer(serializers.ModelSerializer):
     area = serializers.SerializerMethodField()
+    responseType = serializers.SerializerMethodField()
+    description = serializers.CharField()
 
     class Meta:
         model = AlertInfo
-        fields = ['language', 'category', 'event', 'urgency','severity', 'certainty', 'audience', 'effective', 'onset', 'expires', 'headline', 'description', 'instruction', 'web', 'contact', 'area',]
+        fields = ['language', 'category', 'event','responseType', 'urgency','severity', 'certainty', 'audience', 'effective', 'onset', 'expires', 'headline', 'description', 'instruction', 'web', 'contact', 'area',]
         # fields = '__all__'
+
+
+    @staticmethod
+    def get_responseType(obj):
+        serializer = AlertResponseTypeSerializer(obj.response_types, many=True)
+        resp_ls = []
+        for resp in serializer.data:
+            resp_ls.append(resp['responseType'])
+
+        return resp_ls
 
     @staticmethod
     def get_area(obj):
@@ -66,7 +110,8 @@ class AlertInfoSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-      
+        representation['description'] = str(representation['description'])
+                
         return {k: v for k, v in representation.items() if v or v == 0 or v == False}
 
 

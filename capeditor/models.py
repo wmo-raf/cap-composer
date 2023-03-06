@@ -275,6 +275,13 @@ class AlertInfo(ClusterableModel):
         
     ]
 
+    @property
+    def is_expired(self):
+        difference = (timezone.now() - self.expires).days
+        if difference >= 0:
+            return True
+        return False
+
 
 class AlertResponseType(Orderable):
     RESPONSE_TYPE_CHOICES = (
@@ -294,6 +301,9 @@ class AlertResponseType(Orderable):
     response_type = models.CharField(max_length=100, choices=RESPONSE_TYPE_CHOICES,
                                      help_text="The code denoting the type of action recommended for the "
                                                "target audience")
+
+    def __str__(self) -> str:
+        return self.response_type
 
 
 class AlertResource(Orderable):

@@ -27,11 +27,7 @@
     min-height: 480px;
     width: 100%;
   }
-  @media screen and (max-width: 1605px) {
-    .container {
-      max-width: 80vw !important;
-    }
-  }
+
 
   #autoresizing {
     display: block;
@@ -49,16 +45,38 @@
   </div>
 
   <div class="hero-body">
-    <div class="container has-text-centered" style="width: 40vw">
+    <div class="container">
       <p class="title" style="color: rgb(239, 239, 239); font-size: 28px">
         {{page.title}}
       </p>
-      {% comment %}
-      <p class="subtitle" style="color: #fff">{{page.get_severity_display}}</p>
-      {% endcomment %} {% for alert_area in page.alert_areas.values%}
-      <span class="tag is-light">{{alert_area.area_desc}}</span>
+
+      {% for info in page.alert_info.all %}
+      {% if info.alert_areas %}
+      <div style="padding-bottom:2em"> 
+      {% for alert_area in info.alert_areas.values%}
+       <span class="tag is-light">{{alert_area.area_desc}}</span> 
 
       {% endfor %}
+    </div>
+      {% endif %}
+      
+      {% endfor %}
+
+      
+      
+
+      <a href="/cap/{{page.identifier}}.xml"
+          class="button is-rounded pri-btn sign-up; padding: 2em 0"
+          style="    background-color: rgb(132, 148, 178);
+          border: 0;"
+          target="_blank" rel="nofollow"
+          >
+          <span class="has-text-white">View XML</span>
+          <span class="icon">
+              <i class="fas fa-arrow-right has-text-white"></i>
+          </span>
+      </a>
+    
     </div>
   </div>
 
@@ -66,10 +84,10 @@
 
   <div class="hero-foot">
     <nav class="tabs is-boxed">
-      <div class="container is-justify-content-center">
+      <div class="container">
         <!-- tabs  -->
-        <div class="tabs is-boxed is-centered">
-          <ul class="is-justify-content-center">
+        <div class="tabs is-boxed">
+          <ul>
             <li class="is-active">
               <a>Web Preview</a>
             </li>
@@ -113,6 +131,10 @@
         <div class="column is-6 block" style="margin: 0 1em">
 
           {% for info in page.alert_info.all %}
+          {% if info.is_expired %}
+          
+              Note: This alert has expired. 
+          {% endif %}
 
           <h2 class="title" style="font-size: 20px">
             {% if info.event %}{{info.event}} event{% endif %} 
