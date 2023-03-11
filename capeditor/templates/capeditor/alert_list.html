@@ -2,6 +2,7 @@
 {% load wagtailcore_tags %}
 
 {% block extra_css %} {{ block.super }}
+<link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 {% endblock %} 
 
@@ -25,6 +26,20 @@
    
   </section>
 
+  <section class="listing-section">
+    <h2 id="results" class="section-title has-text-centered">Browse CAP Alerts</h2>
+    <div class="container">
+      <div class="columns" style="width: 100%;margin: 0">
+        <div class="column is-3 is-full-mobile">
+          {% comment %} {% include 'cap_filter_include.html' with filters=page.filters %} {% endcomment %}
+        </div>
+        <div class="column is-9 is-full-mobile">
+          {% include 'cap_list_include.html' with caps=caps %}
+        </div>
+      </div>
+    </div>
+  </section>
+
 
 
 {% endblock content %} 
@@ -32,14 +47,14 @@
 {% block extra_js %} 
 
 {{ block.super }}
-
+<script src='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js'></script>
 <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 
 <script>
-  mapboxgl.accessToken =
+  maplibregl.accessToken =
     "pk.eyJ1IjoiZ3JhY2VhbW9uZGkiLCJhIjoiY2s4dGphcGQwMDBhcjNmcnkzdGk3MnlrZCJ9.54r40Umo0l3dHseEbrQpUg";
 
-  const map = new mapboxgl.Map({
+  const map = new maplibregl.Map({
     container: "map", // container ID
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: "mapbox://styles/mapbox/light-v10", // style URL
@@ -84,8 +99,6 @@
         });
       }
     });
-
-    console.log(polyFeature);
 
     map.on("load", () => {
       map.addSource("alert-areas", {
@@ -137,7 +150,7 @@
         // Copy coordinates array.
         const description = e.features[0].properties.areaDesc;
 
-        new mapboxgl.Popup()
+        new maplibregl.Popup()
           .setLngLat(e.lngLat)
           .setHTML(`<h2>${description}</h2>`)
           .addTo(map);

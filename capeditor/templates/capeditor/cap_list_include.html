@@ -1,0 +1,71 @@
+{% load wagtailcore_tags wagtailimages_tags lazyimages_tags nmhs_cms_tags static %}
+
+<div class="results-view">
+    <div class="results-header">
+        <h5 class="results-count results">
+            Showing {{ products.paginator.count }} result{{ products.paginator.count|pluralize }}
+        </h5>
+        <div>
+            <button id="list-view-button" class="product-filter view active" name="view" value="list">
+                <i class="fas fa-th-list"></i>
+            </button>
+            <button id="grid-view-button" class="product-filter view" name="view" value="grid">
+                <i class="fas fa-grip-horizontal"></i>
+            </button>
+        </div>
+    </div>
+    <div class="results-list list-view">
+        {% for alert in self.get_alerts.alerts.all %}
+            <div class="result-list-item">
+                <div class="result-list-item-wrapper">
+                    <a href="{{ product.url }}" class="result-list-item-image">
+                        <figure class="image">
+                            {% if product.image %}
+                                {% image product.image original as crp_img %}
+                                <img class="progressive__img progressive--not-loaded"
+                                     style="object-fit: cover"
+                                     data-progressive="{{ crp_img.url }}"
+                                     src="{% lazy_image_url crp_img %}" alt="{{ product.title }}"/>
+                            {% endif %}
+                        </figure>
+                    </a>
+                    <div class="result-list-item-detail">
+                        <a href="{{ alert.url }}" class="result-list-item-title">
+                            <h5>
+                                {{ alert.title }}
+                            </h5>
+                        </a>
+
+                        {% for info in alert.alert_info.all %}
+                        <p class="result-list-item-more read">
+                            {{info.get_severity_display}}
+                        </p>
+                            {% for alert_area in info.alert_areas.values%}
+                            <span class="tag is-info"> <i class="fa fa-location-pin pr-1"> </i> {{alert_area.area_desc}}</span>
+                            {{alert_area.area}}
+                            {% endfor %}
+                    
+                    
+                        {% endfor %}
+                       
+                        <div class="result-list-item-meta">
+                            {% comment %} <span class="">{{ product.month|month_name }} {{ product.year }}</span> {% endcomment %}
+                            <a class="result-list-item-more read" href="{{ alert.url }}">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% include 'pagination_include.html' with items=products %}
+</div>
+
+{% block extra_js %}
+
+<script>
+    console.log('{{self.get_alerts.alerts|escapejs}}')
+</script>
+
+{% endblock extra_js %}

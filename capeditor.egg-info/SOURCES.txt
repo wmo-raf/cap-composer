@@ -20,5 +20,6 @@ capeditor.egg-info/top_level.txt
 capeditor/static/capeditor/js/hide_attributes.js
 capeditor/templates/capeditor/alert.html
 capeditor/templates/capeditor/alert_list.html
+capeditor/templates/capeditor/cap_list_include.html
 capeditor/templates/capeditor/widgets/basemap_polygon.html
 capeditor/templates/capeditor/widgets/polygon.html

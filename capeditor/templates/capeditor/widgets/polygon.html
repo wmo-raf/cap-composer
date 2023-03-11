@@ -42,15 +42,41 @@
                     }
                 ).addTo(map);
 
+
+                var style = {
+                    color: '#3288ff',
+                    opacity: 1.0,
+                    fillOpacity: 0.3,
+                    weight: 3,
+                    clickable: false
+                };
+                L.Control.FileLayerLoad.LABEL = '<i class="fa-solid fa-file-arrow-up"></i>';
+                var uploadControl = L.Control.fileLayerLoad({
+                    fitBounds: true,
+                    layerOptions: {
+                        style: style,
+                        pointToLayer: function (data, latlng) {
+                            return L.circleMarker(
+                                latlng,
+                                { style: style }
+                            );
+                        }
+                    }
+                });
+                // uploadControl.addTo(map);
+
                 // initialize feature group of drawn items
                 var drawnItems = new L.FeatureGroup();
 
                 map.addLayer(drawnItems);
 
+
+
                 // add draw control
                 let drawControl;
 
                 let canCreateNewDraw = true;
+
 
                 function _initToolbar() {
                     if (drawControl) map.removeControl(drawControl);
@@ -76,6 +102,15 @@
                     });
 
                     map.addControl(drawControl);
+                    map.addControl(uploadControl);
+
+                    if(canCreateNewDraw){
+                        $input.parent().find(".leaflet-control-filelayer").show()
+
+                    } else{
+                        $input.parent().find(".leaflet-control-filelayer").hide()
+
+                    }
                 }
 
                 var loadPolygon = function () {
@@ -115,6 +150,10 @@
 
                 map.on("draw:created", function (e) {
                     drawnItems.addLayer(e.layer);
+                    console.log("Drawn Layer",e.layer);
+                    console.log("Drawn Geojson",e.layer.toGeoJSON());
+                    console.log("Drawn",e.layer.toGeoJSON().geometry);
+
                     canCreateNewDraw = false;
                     _initToolbar();
 
@@ -160,6 +199,30 @@
                 });
 
                 loadPolygon();
+
+                uploadControl.loader.on('data:loaded', function (e) {
+                    var layer = e.layer;
+                    if(e.layer.toGeoJSON().features){
+                        console.log("Uploaded Layer",Object.values(e.layer._layers)[0]);
+
+                        console.log("Uploaded Geojson",e.layer.toGeoJSON().features[0]);
+
+                        if(e.layer.toGeoJSON().features[0].geometry.type === 'Polygon'){
+                            drawnItems.addLayer(Object.values(e.layer._layers)[0]);
+                            canCreateNewDraw = false;
+                            _initToolbar();
+        
+                            $polyfield.val(
+                                JSON.stringify(e.layer.toGeoJSON().features[0].geometry)
+                            );
+                            $geom.val(JSON.stringify(e.layer.toGeoJSON().features[0]));
+                        }
+                    }
+                    
+                    
+                });
+
+
             }
         });
     });

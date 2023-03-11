@@ -20,7 +20,9 @@ class BasemapPolygonWidget(forms.HiddenInput):
             js=(
                 "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js",
                 "https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js",
-
+                "https://unpkg.com/togeojson@0.16.0",
+                "https://unpkg.com/leaflet-filelayer@1.2.0",
+                "https://kit.fontawesome.com/db8ac3c257.js"
             ),
         )
 
