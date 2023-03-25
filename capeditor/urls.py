@@ -1,6 +1,6 @@
 from django.urls import path,register_converter
 
-from .views import AlertList,AlertDetail
+from capeditor.views import AlertList,AlertDetail
 
 class IdentifierConverter:
     regex = r'[A-Za-z0-9_-]+'

@@ -4,9 +4,9 @@ from django.shortcuts import render
 from rest_framework.response import Response
 
 from rest_framework import generics,renderers
-from .models import Alert
-from .serializers import AlertSerializer
-from .renderers import CustomXMLRenderer
+from capeditor.models import Alert
+from capeditor.serializers import AlertSerializer
+from capeditor.renderers import CustomXMLRenderer
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from rest_framework import status

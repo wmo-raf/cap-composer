@@ -12,7 +12,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel, InlinePanel,FieldRowPanel
-from .widgets import  BasemapPolygonWidget
+from capeditor.widgets import  BasemapPolygonWidget
         
             
 # Create your models here.

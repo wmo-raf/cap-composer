@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Alert, AlertArea, AlertInfo,AlertGeocode,AlertResponseType
+from capeditor.models import Alert, AlertArea, AlertInfo,AlertGeocode,AlertResponseType
 from django.urls import reverse
 from wagtail.rich_text import RichText
 
