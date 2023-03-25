@@ -12,7 +12,8 @@ setup(
         'six>=1.16.0',
         'wagtail>=4.0.0',
         'wagtail-cache>=2.2.0',
-        'psycopg2-binary>=2.9.5'
+        'psycopg2-binary>=2.9.5',
+        'wagtail-lazyimages>=0.1.5'
     ],
     include_package_data=True,
     packages=find_packages(),
