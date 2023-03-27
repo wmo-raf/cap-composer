@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags static %}
+
+{% block extra_css %} {{ block.super }}
+<link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+
+
+<style>
+  .tabs li a {
+    color: rgb(239, 239, 239);
+  }
+  .tabs.is-active {
+    color: #333;
+  }
+  .tab-content {
+    padding: 1rem;
+    display: none;
+  }
+
+  .tab-content.is-active {
+    display: block;
+  }
+
+  #map {
+    min-height: 480px;
+    width: 100%;
+  }
+
+
+  #autoresizing {
+    display: block;
+    overflow: hidden;
+    resize: none;
+  }
+</style>
+{% endblock %} 
+
+{% block content %}
+
+{% for info in page.alert_info.all %}
+
+{% for alert_area in info.alert_areas.values%}
+<input
+  name="alert-area"
+  class="alert-area"
+  id="area-{{ alert_area.id }}"
+  type="hidden"
+  value="{{info.severity}}~{{alert_area.area_desc}}~{{ alert_area.area }}"
+/>
+
+{% endfor %}
+
+{% endfor %}
+<main class="is-index">
+
+  <section class="featured-event-section">
+      <div class="container">
+          {% comment %} <h2 class="section-title center">Latest Alert</h2> {% endcomment %}
+          {% include 'capeditor/alert_item_include.html' with item_title=page.title item_url=page.url item_info=page.alert_info.all item_identifier=page.identifier %}
+      </div>
+  </section>
+
+
+</main>
+{% endblock content %} 
+
+{% block extra_js %} {{ block.super }}
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/db8ac3c257.js" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+<script>
+  
+  const map = new maplibregl.Map({
+    container: "map", // container ID
+    style: "https://api.maptiler.com/maps/basic-v2/style.json?key=uYCBTRo5fyHCkPvoa5Io", // style URL
+    center: [30.019531249998607, 16.130262012034265], // starting position [lng, lat]
+    zoom: 4.2, // starting zoom
+    scrollZoom: false,
+  });
+
+  var allAreas = $(".alert-area")
+    .map(function () {
+      return this.value;
+    })
+    .get();
+
+  if (allAreas.length > 0) {
+    var polyFeature = [];
+    allAreas.map((area) => {
+      // Remove the SRID prefix
+      const wktWithoutSrid = area.split("~")[2].replace(/^SRID=\d+;/, "");
+
+      // Extract the coordinates from the polygon string using a regex pattern
+      const match = /\((.*?)\)/.exec(wktWithoutSrid);
+
+      revCoords = [];
+
+      if (match) {
+        const coordinatePairs = match[1].split(", ");
+        const coordinates = coordinatePairs.map((pair) =>
+          pair.replace("(", "").split(" ").map(parseFloat)
+        );
+
+        polyFeature.push({
+          type: "Feature",
+          geometry: {
+            type: "Polygon",
+            coordinates: [coordinates],
+          },
+          properties: {
+            areaDesc: area.split("~")[1],
+            severity: area.split("~")[0],
+          },
+        });
+      }
+    });
+
+
+    map.on("load", () => {
+      map.addSource("alert-areas", {
+        type: "geojson",
+        data: {
+          type: "FeatureCollection",
+          features: polyFeature,
+        },
+      });
+
+      map.addLayer({
+        id: "alert-areas-layer",
+        type: "fill",
+        source: "alert-areas",
+        paint: {
+          "fill-color": "#088",
+          "fill-opacity": 0.8,
+          "fill-color": [
+            "case",
+            ["==", ["get", "severity"], "Extreme"],
+            "#d72f2a",
+            ["==", ["get", "severity"], "Severe"],
+            "#f89904",
+            ["==", ["get", "severity"], "Moderate"],
+            "#e4e616",
+            ["==", ["get", "severity"], "Minor"],
+            "#53ffff",
+            ["==", ["get", "severity"], "Unknown"],
+            "#3366ff",
+            "black",
+          ],
+          "fill-opacity": 0.8,
+        },
+      });
+      var sourceBounds = new maplibregl.LngLatBounds();
+      map.getSource("alert-areas")._data.features.forEach(function (feature) {
+        sourceBounds.extend(feature.geometry.coordinates[0]);
+      });
+
+      var bounds = turf.bbox({
+        type: "FeatureCollection",
+        features: polyFeature,
+      });
+      map.fitBounds(bounds, { padding: 20 });
+
+      // When a click event occurs on a feature in the places layer, open a popup at the
+      // location of the feature, with description HTML from its properties.
+      map.on("click", "alert-areas-layer", (e) => {
+        // Copy coordinates array.
+        const description = e.features[0].properties.areaDesc;
+
+        new maplibregl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML(`<h3>${description}</h3>`)
+          .addTo(map);
+      });
+
+      // Change the cursor to a pointer when the mouse is over the places layer.
+      map.on("mouseenter", "alert-areas-layer", () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+
+      // Change it back to a pointer when it leaves.
+      map.on("mouseleave", "alert-areas-layer", () => {
+        map.getCanvas().style.cursor = "";
+      });
+    });
+  }
+
+  textarea = document.querySelector("#autoresizing");
+  textarea.addEventListener("input", autoResize, false);
+
+  function autoResize() {
+    this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";
+  }
+
+  let tabsWithContent = (function () {
+    let tabs = document.querySelectorAll(".tabs li");
+    let tabsContent = document.querySelectorAll(".tab-content");
+
+    let deactvateAllTabs = function () {
+      tabs.forEach(function (tab) {
+        tab.classList.remove("is-active");
+      });
+    };
+
+    let hideTabsContent = function () {
+      tabsContent.forEach(function (tabContent) {
+        tabContent.classList.remove("is-active");
+      });
+    };
+
+    let activateTabsContent = function (tab) {
+      tabsContent[getIndex(tab)].classList.add("is-active");
+    };
+
+    let getIndex = function (el) {
+      return [...el.parentElement.children].indexOf(el);
+    };
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        deactvateAllTabs();
+        hideTabsContent();
+        tab.classList.add("is-active");
+        activateTabsContent(tab);
+      });
+    });
+
+    tabs[0].click();
+  })();
+
+  $("document").ready(function () {
+    $("textarea").each(function () {
+      $(this).val($(this).val().trim());
+    });
+  });
+</script>
+
+{% endblock %}

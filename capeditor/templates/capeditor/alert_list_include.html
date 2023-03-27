@@ -1,0 +1,122 @@
+{% load wagtailcore_tags wagtailimages_tags lazyimages_tags static %}
+
+<div class="results-view">
+    <div class="results-header">
+        <h5 class="results-count results">
+            {{alerts}}
+            Showing {{ alerts.paginator.count }} result{{ alerts.paginator.count|pluralize }}
+        </h5>
+        <div>
+            <button id="list-view-button" class="product-filter view active" name="view" value="list">
+                <i class="fas fa-th-list"></i>
+            </button>
+            <button id="grid-view-button" class="product-filter view" name="view" value="grid">
+                <i class="fas fa-grip-horizontal"></i>
+            </button>
+        </div>
+    </div>
+    <div class="results-list list-view">
+        {% for alert in alerts %}
+            <div class="result-list-item">
+                <div class="result-list-item-wrapper">
+                    <a href="{{ product.url }}" class="result-list-item-image">
+                        <figure class="image">
+                            {% if product.image %}
+                                {% image product.image original as crp_img %}
+                                <img class="progressive__img progressive--not-loaded"
+                                     style="object-fit: cover"
+                                     data-progressive="{{ crp_img.url }}"
+                                     src="{% lazy_image_url crp_img %}" alt="{{ product.title }}"/>
+                            {% endif %}
+                        </figure>
+                    </a>
+                    <div class="result-list-item-detail">
+                        <a href="{{ alert.url }}" class="result-list-item-title">
+                            <h5>
+                                {{ alert.title }}
+                            </h5>
+                        </a>
+
+                        {% for info in alert.alert_info.all %}
+                        {% if info.is_expired %}
+          
+                            <p class="result-list-item-more read">Note: <b>Expired</b></p>
+                        {% endif %}
+                        <p class="result-list-item-more read">
+                            {{info.get_severity_display}}
+                        </p>
+                            {% for alert_area in info.alert_areas.values%}
+                            <span class="tag is-dark"> <i class="fa fa-location-pin pr-1"> </i> {{alert_area.area_desc}}</span>
+                            {% endfor %}
+                    
+                    
+                        {% endfor %}
+                       
+                        <div class="result-list-item-meta">
+                            {% comment %} <span class="">{{ product.month|month_name }} {{ product.year }}</span> {% endcomment %}
+                            <a class="result-list-item-more read" href="{{ alert.url }}">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% include 'capeditor/pagination_include.html' with items=alerts %}
+</div>
+
+{% block extra_js %}
+
+    <script>
+
+        $(document).ready(function () {
+
+            // If on smaller screens, collapse all filter items
+            const windowWidth = $(window).width();
+
+            if (windowWidth <= 768) {
+                //for  smaller devices
+                $('.results-filter .js-accordion-item').removeClass('active');
+            }
+
+            // initialize filter accordion
+            accordion.init({speed: 300, oneOpen: false});
+
+            const listButton = $("#list-view-button");
+            const gridButton = $("#grid-view-button");
+            const wrapper = $(".results-list");
+            const resultItem = $(".result-list-item");
+
+
+            const params = getParams(window.location.href);
+
+            // mark checkboxes from params url, on load
+            markCheckboxesFromUrlParams('product-filter', params, function (params) {
+                if (params && params.view) {
+                    if (params.view === 'grid') {
+                        listButton.removeClass("active");
+                        gridButton.addClass("active");
+                        wrapper.removeClass("list-view").addClass("grid-view columns is-mobile is-multiline");
+                        resultItem.addClass("column is-one-third-desktop is-full-mobile");
+                    } else {
+                        gridButton.removeClass("active");
+                        listButton.addClass("active");
+                        wrapper.removeClass("grid-view columns is-mobile is-multiline").addClass("list-view");
+                        resultItem.removeClass("column is-one-third-desktop is-full-mobile");
+                    }
+                }
+            });
+
+            const baseUrl = "{{ page.url }}";
+
+            filterChangeListener('product-filter', params, function (clickedEl, url_params) {
+                window.location.href = `${baseUrl}?${url_params}#results`;
+            });
+
+        });
+
+
+    </script>
+
+{% endblock %}

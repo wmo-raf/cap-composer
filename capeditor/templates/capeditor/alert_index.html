@@ -1,46 +1,40 @@
 {% extends 'base.html' %} 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags static %}
 
 {% block extra_css %} {{ block.super }}
 <link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
 {% endblock %} 
 
 {% block content %}
-<section class="hero is-small" style="background-color: #262d38">
-    <div class="hero-head">
-      <nav class="navbar">
-        <div class="container"></div>
-      </nav>
-    </div>
-  
-    <div class="hero-body">
-      <div class="container has-text-centered" style="width: 40vw">
-        <p class="title" style="color: rgb(239, 239, 239); font-size: 28px">
-          {{page.title}}
-        </p>
-  
-      </div>
-    </div>
-  
-   
-  </section>
+<main class="is-index">
+
+{% if latest_alert %}
+      <section class="featured-event-section">
+          <div class="container">
+              <h2 class="section-title center">Latest Alert</h2>
+              {% include 'capeditor/latest_alert_include.html' with item_title=latest_alert.title item_url=latest_alert.url item_info=latest_alert.alert_info.all item_identifier=latest_alert.identifier%}
+          </div>
+      </section>
+  {% endif %}
 
   <section class="listing-section">
     <h2 id="results" class="section-title has-text-centered">Browse CAP Alerts</h2>
     <div class="container">
       <div class="columns" style="width: 100%;margin: 0">
         <div class="column is-3 is-full-mobile">
-          {% comment %} {% include 'cap_filter_include.html' with filters=page.filters %} {% endcomment %}
+          {% include 'capeditor/alert_filter_include.html' with filters=page.filters %}
         </div>
         <div class="column is-9 is-full-mobile">
-          {% include 'cap_list_include.html' with caps=caps %}
+          {% include 'capeditor/alert_list_include.html' with alerts=alerts %}
         </div>
       </div>
     </div>
   </section>
 
-
+</main>
 
 {% endblock content %} 
 
@@ -49,6 +43,7 @@
 {{ block.super }}
 <script src='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js'></script>
 <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+<script src="https://kit.fontawesome.com/db8ac3c257.js" crossorigin="anonymous"></script>
 
 <script>
   maplibregl.accessToken =

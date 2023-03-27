@@ -1,6 +1,7 @@
 import uuid
 from django.utils.functional import cached_property
 from django.contrib.gis.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 from wagtail.models import Page
 from wagtail.models import Orderable
 from modelcluster.fields import ParentalKey
@@ -10,6 +11,7 @@ from datetime import datetime
 from django.utils import timezone
 # from Inlinepanel.edit_handlers import InlinePanel
 from django.utils.text import slugify
+from capeditor.utils import  paginate, query_param_to_list
 
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel, InlinePanel,FieldRowPanel
 from capeditor.widgets import  BasemapPolygonWidget
@@ -17,6 +19,9 @@ from capeditor.widgets import  BasemapPolygonWidget
             
 # Create your models here.
 class AlertList(Page):
+    template = "capeditor/alert_index.html"
+    ajax_template = 'capeditor/alert_list_include.html'
+
     subpage_types = [
         'capeditor.Alert',  # appname.ModelName
     ]
@@ -24,11 +29,90 @@ class AlertList(Page):
         'wagtailcore.Page'  # appname.ModelName
     ]
     max_count = 1
+
+    alerts_per_page = models.PositiveIntegerField(default=6, validators=[
+        MinValueValidator(6),
+        MaxValueValidator(20),
+    ], help_text="How many of this products should be visible on the landing page filter section ?")
+
+    content_panels = Page.content_panels +[
+        FieldPanel('alerts_per_page'),
+    ]
+
+    @property
+    def filters(self):
+
+        URGENCIES = {
+            'Immediate':('Immediate'),
+            'Expected':('Expected'),
+            'Future':('Future'),
+            'Past':('Past'),
+            'Unknown':('Unknown'),
+        }
+        
+        SEVERITIES = {
+            'Extreme': ("Extreme - Extraordinary threat to life or property"),
+            'Severe': ("Severe - Significant threat to life or property"),
+            'Moderate': ("Moderate - Possible threat to life or property"),
+            'Minor': ("Minor - Minimal to no known threat to life or property"),
+            'Unknown': ("Unknown - Severity unknown"),
+        }
+
+        CERTAINTIES = {
+            'Observed': ("Observed - Determined to have occurred or to be ongoing"),
+            'Likely': ("Likely - Likely (percentage > ~50%)"),
+            'Possible': ("Possible - Possible but not likely (percentage <= ~50%)"),
+            'Unlikely': ("Unlikely - Not expected to occur (percentage ~ 0)"),
+            'Unknown': ("Unknown - Certainty unknown"),
+        }
+        return {'urgency': URGENCIES, 'severity':SEVERITIES, 'certainty': CERTAINTIES}
+
+    @property
+    def all_alerts(self):
+        return Alert.objects.live()
+
+    def filter_alerts(self, request):
+        alerts = self.all_alerts
+
+        
+        urgency = query_param_to_list(request.GET.get("urgency"), as_int=False)
+        severity = query_param_to_list(request.GET.get("severity"), as_int=False)
+        certainty = query_param_to_list(request.GET.get("certainty"), as_int=False)
+
+        filters = models.Q()
+
+        if urgency:
+            filters &= models.Q(alert_info__urgency__in=urgency)
+        if severity:
+            filters &= models.Q(alert_info__severity__in=severity)
+        if certainty:
+            filters &= models.Q(alert_info__certainty__in=certainty)
+
+        return alerts.filter(filters)
+
+    def filter_and_paginate_alerts(self, request):
+        page = request.GET.get('page')
+
+        filtered_alerts = self.filter_alerts(request)
+
+        paginated_alerts = paginate(filtered_alerts, page, self.alerts_per_page)
+
+        return paginated_alerts
+
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(AlertList,
+                        self).get_context(request, *args, **kwargs)
+
+        context['alerts'] = self.filter_and_paginate_alerts(request)
+        context['latest_alert'] = self.all_alerts[0]
+
+        return context
     
 
 class Alert(Page):
 
-    templates = "alert.html"
+    template = "capeditor/alert_detail.html"
 
     STATUS_CHOICES = (
         ("Draft", "Draft - A preliminary template or draft, not actionable in its current form"),
@@ -113,6 +197,8 @@ class Alert(Page):
     parent_page_type = [
         'wagtailcore.Page'  # appname.ModelName
     ]
+
+    
 
 
 class AlertAddress(Orderable):

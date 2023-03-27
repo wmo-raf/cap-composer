@@ -1,0 +1,74 @@
+{% load static %}
+
+<div class="results-filter">
+    <div class="accordion js-accordion">
+        {% if filters.urgency %}
+        <div class="accordion__item js-accordion-item active">
+            <h6 class="accordion-header js-accordion-header filter-item-header">
+                <span> Filter by Urgency </span>
+                <i class="fas fa-sort-down" aria-hidden="true"></i>
+            </h6>
+            <div class="accordion-body js-accordion-body">
+                <div class="accordion-body__contents">
+                    {% for urgency in filters.urgency %}
+                        <label class="checkbox-container" for="{{ urgency }}">
+                            <span class="filter-sub-item">{{ urgency }}</span>
+                            <input type="checkbox" id="{{ urgency }}" name="urgency" value="{{ urgency }}"
+                                   class="product-filter urgency">
+                            <span class="checkmark"></span>
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+       
+    </div>
+    <div class="accordion js-accordion">
+        {% if filters.severity %}
+        <div class="accordion__item js-accordion-item active">
+            <h6 class="accordion-header js-accordion-header filter-item-header">
+                <span> Filter by Severity </span>
+                <i class="fas fa-sort-down" aria-hidden="true"></i>
+            </h6>
+            <div class="accordion-body js-accordion-body">
+                <div class="accordion-body__contents">
+                    {% for severity in filters.severity %}
+                        <label class="checkbox-container" for="{{ severity }}">
+                            <span class="filter-sub-item">{{ severity }}</span>
+                            <input type="checkbox" id="{{ severity }}" name="severity" value="{{ severity }}"
+                                   class="product-filter severity">
+                            <span class="checkmark"></span>
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+       
+    </div>
+    <div class="accordion js-accordion">
+        {% if filters.certainty %}
+        <div class="accordion__item js-accordion-item active">
+            <h6 class="accordion-header js-accordion-header filter-item-header">
+                <span> Filter by Certainty </span>
+                <i class="fas fa-sort-down" aria-hidden="true"></i>
+            </h6>
+            <div class="accordion-body js-accordion-body">
+                <div class="accordion-body__contents">
+                    {% for certainty in filters.certainty %}
+                        <label class="checkbox-container" for="{{ certainty }}">
+                            <span class="filter-sub-item">{{ certainty }}</span>
+                            <input type="checkbox" id="{{ certainty }}" name="certainty" value="{{ certainty }}"
+                                   class="product-filter certainty">
+                            <span class="checkmark"></span>
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+       
+    </div>
+</div>
+

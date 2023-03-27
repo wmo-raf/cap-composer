@@ -1,0 +1,280 @@
+{% load wagtailcore_tags wagtailimages_tags lazyimages_tags %}
+
+{% for info in item_info %}
+
+    {% for alert_area in info.alert_areas.values%}
+        <input
+        name="alert-area"
+        class="alert-area"
+        id="area-{{ alert_area.id }}"
+        type="hidden"
+        value="{{info.severity}}~{{alert_area.area_desc}}~{{ alert_area.area }}"
+        />
+
+    {% endfor %}
+
+{% endfor %}
+<div class="columns is-multiline featured-item-block" style="align-items: flex-start;">
+    <div class="column is-5-widescreen is-full-mobile featured-item-image mb-4">
+      
+
+      {% for info in item_info %}
+      {% for alert_area in info.alert_areas.values%}
+      <span class="tag is-dark" style="margin:1em 0"> <i class="fa fa-location-pin pr-1"> </i> {{alert_area.area_desc}}</span>
+      {% endfor %}
+      {% endfor %}
+
+      <div id="alert-map" style="height:400px; border-radius:2em; background-color:#e9e8e8"></div>
+
+    </div>
+    
+    <div class="column is-6-widescreen is-full-mobile featured-item-detail">
+        <div class="featured-item-header">
+            <span class="featured-item-header-tag">
+                Latest
+            </span>
+            <div class="share-buttons">
+              <a class="button is-small is-rounded"
+              href="{% url 'alert_by_id' item_identifier %}"
+              target="_blank" rel="noopener"
+            >
+               
+                <span class="share-button-title">View XML</span>
+                <span class="icon">
+                  <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </span>
+            </a>
+            
+            </div>
+           
+        </div>
+        <div class="featured-item-body">
+            <h3 class="featured-item-title">
+                <a href="{{ item_url }}">
+                    {{ item_title }}
+                    
+                </a>
+            </h3>
+                <div class="featured-item-snippet format-text">
+                    {% for info in item_info %}
+                {% if info.is_expired %}
+            
+                Note: This alert has expired. 
+                {% endif %}
+
+                <h3 class="title" style="font-size: 20px !important">
+                    {% if info.event %}{{info.event}} event{% endif %} 
+                    {% if info.area%} at {% for alert_area in info.alert_areas.values%}
+                    {{alert_area.area_desc}}, {% endfor %}{% endif %} 
+                    {% if info.onset %}effective on {{info.onset}}{% endif %} {% if info.expires %} and expires on
+                    {{info.expires}}{% endif %}
+                </h3>
+
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Urgency</th>
+                        <td>{{info.get_urgency_display}}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Severity</th>
+
+
+                        {% if info.severity == 'Extreme'  %}
+                        <td><span class="tag is-medium" style="background-color:rgb(215, 48, 42, 0.4); color:#000 " >{{info.get_severity_display}}</span></td>
+
+                        {% elif info.severity == 'Severe'%}
+                        <td><span class="tag is-medium" style="background-color:rgb(248, 154, 4, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
+
+                        {% elif info.severity == 'Moderate'%}
+                        <td><span class="tag is-medium" style="background-color:rgb(227, 230, 22, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
+
+                        {% elif info.severity == 'Minor'%}
+                        <td><span class="tag is-medium" style="background-color:rgb(83, 255, 255,0.4); color:#000" >{{info.get_severity_display}}</span></td>
+
+                        {% elif info.severity == 'Unknown'%}
+                        <td><span class="tag is-medium" style="background-color:rgb(51, 102, 255, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
+
+                                                
+                        {% endif %}
+                        
+
+                    </tr>
+
+                    <tr>
+                        <th>Certainity</th>
+                        <td>{{info.get_certainty_display}}</td>
+                    </tr>
+
+                    {% if info.audience %}
+                    <tr>
+                        <th>Audience</th>
+                        <td>{{info.audience}}</td>
+                    </tr>
+                    {% endif %}
+                    
+                    {% if info.instruction %}
+                    <tr>
+                        <th>Instructions</th>
+                        <td>{{info.instruction|richtext}}</td>
+                    </tr>
+                    {% endif %}
+
+                    {% if info.contact %}
+
+                    <tr>
+                        <th>Contact Information</th>
+                        <td>{{info.contact}}</td>
+                    </tr>
+
+                    {% endif %}
+                    </tbody>
+                </table>
+
+                {% endfor %}
+            </div>
+        </div>
+        <div class="featured-item-meta">
+            <div class="featured-item-tags">
+                {% if item_tags.all %}
+                    <span class="featured-item-tags-title">Tags: </span>
+                    {% for tag in item_tags.all %}
+                        <span class="featured-item-tag">
+                            {{ tag }}
+                            {% if not forloop.last %},{{ " " }} {% endif %}
+                        </span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="featured-item-more">
+                <span class="meta-sub">{{ item_meta|date:"d M Y" }}</span>
+                <span class="featured-item-readmore">
+                    <a href="{{ item_url }}">
+                        Read More
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    const map = new maplibregl.Map({
+        container: "alert-map", // container ID
+        style: "https://api.maptiler.com/maps/basic-v2/style.json?key=uYCBTRo5fyHCkPvoa5Io", // style URL
+        center: [30.019531249998607, 16.130262012034265], // starting position [lng, lat]
+        zoom: 4.2, // starting zoom
+        scrollZoom: false,
+      });
+
+      var allAreas = $(".alert-area")
+    .map(function () {
+      return this.value;
+    })
+    .get();
+
+  if (allAreas.length > 0) {
+    var polyFeature = [];
+    allAreas.map((area) => {
+      // Remove the SRID prefix
+      const wktWithoutSrid = area.split("~")[2].replace(/^SRID=\d+;/, "");
+
+      // Extract the coordinates from the polygon string using a regex pattern
+      const match = /\((.*?)\)/.exec(wktWithoutSrid);
+
+      revCoords = [];
+
+      if (match) {
+        const coordinatePairs = match[1].split(", ");
+        const coordinates = coordinatePairs.map((pair) =>
+          pair.replace("(", "").split(" ").map(parseFloat)
+        );
+
+        polyFeature.push({
+          type: "Feature",
+          geometry: {
+            type: "Polygon",
+            coordinates: [coordinates],
+          },
+          properties: {
+            areaDesc: area.split("~")[1],
+            severity: area.split("~")[0],
+          },
+        });
+      }
+    });
+
+
+    map.on("load", () => {
+      map.addSource("alert-areas", {
+        type: "geojson",
+        data: {
+          type: "FeatureCollection",
+          features: polyFeature,
+        },
+      });
+
+      map.addLayer({
+        id: "alert-areas-layer",
+        type: "fill",
+        source: "alert-areas",
+        paint: {
+          "fill-color": "#088",
+          "fill-opacity": 0.8,
+          "fill-color": [
+            "case",
+            ["==", ["get", "severity"], "Extreme"],
+            "#d72f2a",
+            ["==", ["get", "severity"], "Severe"],
+            "#f89904",
+            ["==", ["get", "severity"], "Moderate"],
+            "#e4e616",
+            ["==", ["get", "severity"], "Minor"],
+            "#53ffff",
+            ["==", ["get", "severity"], "Unknown"],
+            "#3366ff",
+            "black",
+          ],
+          "fill-opacity": 0.8,
+        },
+      });
+      var sourceBounds = new maplibregl.LngLatBounds();
+      map.getSource("alert-areas")._data.features.forEach(function (feature) {
+        sourceBounds.extend(feature.geometry.coordinates[0]);
+      });
+
+      var bounds = turf.bbox({
+        type: "FeatureCollection",
+        features: polyFeature,
+      });
+      map.fitBounds(bounds, { padding: 20 });
+
+      // When a click event occurs on a feature in the places layer, open a popup at the
+      // location of the feature, with description HTML from its properties.
+      map.on("click", "alert-areas-layer", (e) => {
+        // Copy coordinates array.
+        const description = e.features[0].properties.areaDesc;
+
+        new maplibregl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML(`<h3>${description}</h3>`)
+          .addTo(map);
+      });
+
+      // Change the cursor to a pointer when the mouse is over the places layer.
+      map.on("mouseenter", "alert-areas-layer", () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+
+      // Change it back to a pointer when it leaves.
+      map.on("mouseleave", "alert-areas-layer", () => {
+        map.getCanvas().style.cursor = "";
+      });
+    });
+  }
+</script>
+
+
+{% endblock extra_js %}
