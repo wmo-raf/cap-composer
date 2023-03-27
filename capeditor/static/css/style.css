@@ -2146,3 +2146,13 @@ p.footer-link {
         display: none;
     }
 }
+
+
+.featured-item-snippet .table{
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table th:not([align]) {
+    width: 30%;
+}

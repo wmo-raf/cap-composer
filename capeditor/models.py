@@ -301,9 +301,9 @@ class AlertInfo(ClusterableModel):
     expires = models.DateTimeField(blank=True, null=True,
                                    help_text="The expiry time of the information of the alert message")
     headline = models.TextField(blank=True, null=True, help_text="The text headline of the alert message")
-    description = RichTextField(blank=True, null=True,
+    description = models.TextField(blank=True, null=True,
                                    help_text="The text describing the subject event of the alert message")
-    instruction = RichTextField(blank=True, null=True,
+    instruction = models.TextField(blank=True, null=True,
                                    help_text="The text describing the recommended action to be taken by "
                                              "recipients of the alert message")
     web = models.URLField(blank=True, null=True,

@@ -70,7 +70,7 @@
                     {{info.expires}}{% endif %}
                 </h3>
 
-                <table class="table" style="table-layout: fixed">
+                <table class="table">
                   <tbody>
                     <tr>
                         <th>Urgency</th>
@@ -82,19 +82,19 @@
 
 
                         {% if info.severity == 'Extreme'  %}
-                        <td><span class="tag is-medium" style="background-color:rgb(215, 48, 42, 0.4); color:#000 " >{{info.get_severity_display}}</span></td>
+                        <td><span class="is-medium" style="background-color:rgb(215, 48, 42, 0.4); color:#000 " >{{info.get_severity_display}}</span></td>
 
                         {% elif info.severity == 'Severe'%}
-                        <td><span class="tag is-medium" style="background-color:rgb(248, 154, 4, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
+                        <td><span class="is-medium" style="background-color:rgb(248, 154, 4, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
 
                         {% elif info.severity == 'Moderate'%}
-                        <td><span class="tag is-medium" style="background-color:rgb(227, 230, 22, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
+                        <td><span class="is-medium" style="background-color:rgb(227, 230, 22, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
 
                         {% elif info.severity == 'Minor'%}
-                        <td><span class="tag is-medium" style="background-color:rgb(83, 255, 255,0.4); color:#000" >{{info.get_severity_display}}</span></td>
+                        <td><span class="is-medium" style="background-color:rgb(83, 255, 255,0.4); color:#000" >{{info.get_severity_display}}</span></td>
 
                         {% elif info.severity == 'Unknown'%}
-                        <td><span class="tag is-medium" style="background-color:rgb(51, 102, 255, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
+                        <td><span class="is-medium" style="background-color:rgb(51, 102, 255, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
 
                                                 
                         {% endif %}
@@ -117,7 +117,7 @@
                     {% if info.instruction %}
                     <tr>
                         <th>Instructions</th>
-                        <td>{{info.instruction|richtext}}</td>
+                        <td>{{info.instruction}}</td>
                     </tr>
                     {% endif %}
 

@@ -20,6 +20,7 @@ capeditor.egg-info/requires.txt
 capeditor.egg-info/top_level.txt
 capeditor/migrations/0001_initial.py
 capeditor/migrations/0002_alertlist_alerts_per_page.py
+capeditor/migrations/0003_alter_alertinfo_description_and_more.py
 capeditor/migrations/__init__.py
 capeditor/static/capeditor/js/hide_attributes.js
 capeditor/static/css/style.css
