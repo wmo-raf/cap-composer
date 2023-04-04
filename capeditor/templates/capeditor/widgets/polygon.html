@@ -150,10 +150,6 @@
 
                 map.on("draw:created", function (e) {
                     drawnItems.addLayer(e.layer);
-                    console.log("Drawn Layer",e.layer);
-                    console.log("Drawn Geojson",e.layer.toGeoJSON());
-                    console.log("Drawn",e.layer.toGeoJSON().geometry);
-
                     canCreateNewDraw = false;
                     _initToolbar();
 

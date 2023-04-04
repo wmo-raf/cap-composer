@@ -1357,7 +1357,7 @@ p.footer-link {
 @media screen and (max-width: 1605px) {
 
     .container {
-        max-width: 85vw
+        max-width: 75vw !important
     }
 
     .work.container {
@@ -2155,4 +2155,8 @@ p.footer-link {
 
 .table th:not([align]) {
     width: 30%;
+}
+
+main section {
+    padding: 90px 0;
 }

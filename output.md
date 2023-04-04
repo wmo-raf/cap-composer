@@ -265,7 +265,7 @@ Parse the alerts in the home template:
 
             <!-- area list  -->
             {% for alert_area in info.alert_areas.values%}
-                <p>{{alert_area.area_desc}}</p>
+                <p>{{alert_area.areaDesc}}</p>
                 <p>{{ alert_area.area }}</p>
             {% endfor %}
 

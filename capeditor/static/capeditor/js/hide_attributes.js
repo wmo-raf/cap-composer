@@ -1,8 +1,37 @@
+
 window.addEventListener('DOMContentLoaded', (event) => {
-    $('.restriction').hide()
-    $('.addresses').hide()
-    $('.note').hide()
-    $('.references').hide()
+    // console.log("scope value",$('#id_scope').val())
+
+    // check scope 
+    if($('#id_scope').val() === 'Restricted'){
+        $('.restriction').show()
+        $('.addresses').hide()
+    } 
+    
+    if($('#id_scope').val() === 'Private'){
+        $('.addresses').show()
+        $('.restriction').hide()
+
+    }
+
+    if($('#id_scope').val() === 'Public'){
+        $('.restriction').hide()
+        $('.addresses').hide()
+    }
+    
+    // check message 
+    if($('#id_message_type').val() === 'Error'){
+        $('.note').show()
+        $('.references').show()
+    }else if($('#id_message_type').val()  === 'Update' || $('#id_message_type').val()  === 'Cancel' || $('#id_message_type').val()  === 'Ack'){
+        $('.references').show()
+        $('.note').hide()
+
+    }else{
+        $('.note').hide()
+        $('.references').hide()
+    }
+
     $('#id_scope').on('change', function(e) {
         var optionSelected =  $("option:selected", this)
         var valueSelected  = optionSelected.val();
@@ -14,12 +43,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
         
         if(valueSelected === 'Private'){
             $('.addresses').show()
+            // $('#id_restriction').html('')
             $('.restriction').hide()
 
         }
 
         if(valueSelected === 'Public'){
             $('.restriction').hide()
+            // $('#id_restriction').html('')
             $('.addresses').hide()
         }
 
@@ -31,8 +62,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         if(valueSelected == 'Error'){
             $('.note').show()
-        }else if(valueSelected == 'Update'){
             $('.references').show()
+        }else if(valueSelected == 'Update' || valueSelected == 'Cancel' || valueSelected == 'Ack'){
+            $('.references').show()
+            $('.note').hide()
         }else{
             $('.note').hide()
             $('.references').hide()

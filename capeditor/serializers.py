@@ -1,7 +1,16 @@
 from rest_framework import serializers
-from capeditor.models import Alert, AlertArea, AlertInfo,AlertGeocode,AlertResponseType
+from capeditor.models import Alert, AlertArea, AlertInfo,AlertGeocode,AlertResponseType, AlertAddress, AlertReference, AlertResource
 from django.urls import reverse
-from wagtail.rich_text import RichText
+import datetime
+import pytz
+
+def parseTZ(date_str):
+    dt = datetime.datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ")
+    dt = dt.replace(tzinfo=pytz.UTC)
+    date_str = dt.strftime("%Y-%m-%dT%H:%M:%S%z")
+    date_str = date_str[:-2] + ':' + date_str[-2:]
+
+    return date_str
 
 
 class LatLonField(serializers.Field):
@@ -26,9 +35,15 @@ class LatLonField(serializers.Field):
         # Return the latitude and longitude values as a dictionary
         return " ".join(lat_lon_ls)
 
+        
+class AlertAddressSerializer(serializers.ModelSerializer):
+    # address_ls = AddressField(source="address")
+
+    class Meta:
+        model = AlertAddress
+        fields = ['address']
 
 class AlertResponseTypeSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = AlertResponseType
         fields = ['response_type']
@@ -63,6 +78,11 @@ class AlertGeocodeSerializer(serializers.ModelSerializer):
         return {k: v for k, v in representation.items() if v or v == 0 or v == False}
 
 
+class AlertResourceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AlertResource
+        fields = ['resourceDesc', 'uri', 'digest', 'size', 'mimeType']
 
 class AlertAreaSerializer(serializers.ModelSerializer):
     geocode = serializers.SerializerMethodField()
@@ -70,7 +90,7 @@ class AlertAreaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AlertArea
-        fields = ['area_desc', 'polygon', 'geocode', 'altitude', 'ceiling']
+        fields = ['areaDesc', 'polygon', 'geocode', 'altitude', 'ceiling']
         # fields = '__all__'
 
     @staticmethod
@@ -87,12 +107,18 @@ class AlertInfoSerializer(serializers.ModelSerializer):
     area = serializers.SerializerMethodField()
     responseType = serializers.SerializerMethodField()
     description = serializers.CharField()
+    resource = serializers.SerializerMethodField()
 
     class Meta:
         model = AlertInfo
-        fields = ['language', 'category', 'event','responseType', 'urgency','severity', 'certainty', 'audience', 'effective', 'onset', 'expires', 'headline', 'description', 'instruction', 'web', 'contact', 'area',]
+        fields = ['language', 'category', 'event','responseType', 'urgency','severity', 'certainty', 'audience', 'effective', 'onset', 'expires', 'headline', 'description', 'instruction', 'web', 'contact', 'area','resource']
         # fields = '__all__'
 
+
+    @staticmethod
+    def get_resource(obj):
+        serializer = AlertResourceSerializer(obj.resources,  many=True)
+        return serializer.data
 
     @staticmethod
     def get_responseType(obj):
@@ -111,32 +137,95 @@ class AlertInfoSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['description'] = str(representation['description'])
+        representation['effective'] = parseTZ(representation['effective'])
+        representation['onset'] = parseTZ(representation['onset'])
+        representation['expires'] = parseTZ(representation['expires'])
+
                 
         return {k: v for k, v in representation.items() if v or v == 0 or v == False}
 
+class AlertReferenceSerializer(serializers.ModelSerializer):
+    alerts = serializers.SerializerMethodField()
+    class Meta:
+        model = AlertReference
+        fields = ['alerts']
+
+    @staticmethod
+    def get_alerts(obj):
+        serializer = AlertSerializer(obj.ref_alert)
+
+        data = serializer.data        
+
+        return f"{data['sender']},{data['identifier']},{data['sent']}"
 
 class AlertSerializer(serializers.ModelSerializer):
 
     info = serializers.SerializerMethodField()
-
+    addresses = serializers.SerializerMethodField()
+    references = serializers.SerializerMethodField()
     class Meta:
         model = Alert
-        fields = ['identifier', 'sender', 'sent', 'status', 'message_type', 'scope', 'source', 'restriction', 'code', 'note', 'info']
+        fields = ['identifier', 'sender', 'sent', 'status', 'msgType', 'scope', 'source', 'restriction', 'code', 'note', 'addresses', 'references','info']
         # fields = '__all__'
         # depth = 1
-
-    
         
     @staticmethod
     def get_info(obj):
         serializer = AlertInfoSerializer(obj.alert_info,  many=True)
         return serializer.data
 
+    @staticmethod
+    def get_addresses(obj):
+        serializer = AlertAddressSerializer(obj.addresses, many = True)
+        address_ls = []
+
+        if serializer.data:
+            for data in serializer.data:
+                if data['address']:
+                    address_ls.append(data['address'])
+
+            return ' '.join(address_ls)
+        
+        return None
+
+    @staticmethod
+    def get_references(obj):
+        serializer = AlertReferenceSerializer(obj.references, many = True)
+
+        reference_ls =[]
+        if serializer.data:
+            for data in serializer.data:
+                if data['alerts']:
+                    reference_ls.append(data['alerts'])
+
+            return ' '.join(reference_ls)
+
+        return serializer.data
+
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
+
+        representation['sent'] = parseTZ(representation['sent'])
         # Modify the XML tag name
-        representation[f'msgType'] = representation.pop('message_type')
+        # representation[f'msgType'] = representation.pop('message_type')
+
+        # check for scope condition
+        if representation[f'scope'] == 'Restricted':
+            representation[f'addresses'] = None
+        elif representation[f'scope'] == 'Private':
+            representation[f'restriction'] = None
+        elif representation[f'scope'] == 'Public':
+            representation[f'restriction'] = None
+            representation[f'addresses'] = None
+
+        # check message type 
+        if representation[f'msgType'] == 'Update' or representation[f'msgType'] == 'Cancel'  or representation[f'msgType'] == 'Ack':
+            representation[f'note'] = None
+        elif representation[f'msgType'] == 'Alert':
+            representation[f'note'] = None
+            representation[f'references'] = None
+
         # request = self.context.get('request')
         # if request:
         #     representation['link'] = self.get_link(instance)

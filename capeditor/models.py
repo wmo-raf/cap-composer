@@ -1,4 +1,6 @@
 import uuid
+import hashlib
+
 from django.utils.functional import cached_property
 from django.contrib.gis.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -112,6 +114,12 @@ class AlertList(Page):
 
 class Alert(Page):
 
+    subpage_types = [
+    ]
+    parent_page_type = [
+        'capeditor.AlertList'  # appname.ModelName
+    ]
+
     template = "capeditor/alert_detail.html"
 
     STATUS_CHOICES = (
@@ -149,7 +157,7 @@ class Alert(Page):
     sent = models.DateTimeField(help_text="Time and date of origination of the alert", default=timezone.now)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES,
                               help_text="The code denoting the appropriate handling of the alert", default='Actual')
-    message_type = models.CharField(max_length=100, choices=MESSAGE_TYPE_CHOICES,
+    msgType = models.CharField(max_length=100, choices=MESSAGE_TYPE_CHOICES,
                                     help_text="The code denoting the nature of the alert message",  default='Alert')
     scope = models.CharField(max_length=100,
                              choices=SCOPE_CHOICES,
@@ -172,9 +180,10 @@ class Alert(Page):
             FieldPanel('sender'),
             FieldPanel('sent'),
             ]),
+            FieldPanel('source'),
             
             FieldPanel('status',),
-            FieldPanel('message_type', classname="message"),
+            FieldPanel('msgType', classname="message"),
             InlinePanel('references', heading="Earlier Reference Alerts -  If applicable", label="Alert", classname="references"),
 
             FieldPanel('note', classname='note'),
@@ -204,7 +213,7 @@ class Alert(Page):
 class AlertAddress(Orderable):
     alert = ParentalKey('Alert', related_name="addresses")
     name = models.TextField(help_text="Name of the recipient")
-    address = models.TextField(blank=True, null=True, help_text="Address/Email/Contact")
+    address = models.EmailField(blank=True, null=True, help_text="Email")
 
     def __str__(self):
         return self.name
@@ -217,6 +226,11 @@ class AlertReference(Orderable):
 
     def __str__(self):
         return f'{self.ref_alert.sender},{self.ref_alert.identifier},{self.ref_alert.sent}'
+    
+    @property
+    def reference(self):
+        return f'{self.ref_alert.sender},{self.ref_alert.identifier},{self.ref_alert.sent}'
+
 
 
 class AlertIncident(Orderable):
@@ -371,14 +385,14 @@ class AlertInfo(ClusterableModel):
 
 class AlertResponseType(Orderable):
     RESPONSE_TYPE_CHOICES = (
-        ("shelter", "Shelter - Take shelter in place or per instruction"),
-        ("evacuate", "Evacuate - Relocate as instructed in the instruction"),
-        ("prepare", "Prepare - Relocate as instructed in the instruction"),
-        ("execute", "Execute - Execute a pre-planned activity identified in instruction"),
-        ("avoid", "Avoid - Avoid the subject event as per the instruction"),
-        ("monitor", "Monitor - Attend to information sources as described in instruction"),
-        ("assess", "Assess - Evaluate the information in this message - DONT USE FOR PUBLIC ALERTS"),
-        ("all_clear",
+        ("Shelter", "Shelter - Take shelter in place or per instruction"),
+        ("Evacuate", "Evacuate - Relocate as instructed in the instruction"),
+        ("Prepare", "Prepare - Relocate as instructed in the instruction"),
+        ("Execute", "Execute - Execute a pre-planned activity identified in instruction"),
+        ("Avoid", "Avoid - Avoid the subject event as per the instruction"),
+        ("Monitor", "Monitor - Attend to information sources as described in instruction"),
+        ("Assess", "Assess - Evaluate the information in this message - DONT USE FOR PUBLIC ALERTS"),
+        ("AllClear",
          "All Clear - The subject event no longer poses a threat or concern and any follow on action is described in instruction"),
         ("None", "No action recommended"),
     )
@@ -394,9 +408,9 @@ class AlertResponseType(Orderable):
 
 class AlertResource(Orderable):
     alert_info = ParentalKey('AlertInfo', related_name='resources', null=True)
-    resource_type = models.CharField(max_length=100, blank=True, null=True,
+    mimeType = models.CharField(max_length=100, blank=True, null=True,
                                      help_text="Resource type whether is image, file etc")
-    resource_desc = models.TextField(help_text="The text describing the type and content of the resource file")
+    resourceDesc = models.TextField(help_text="The text describing the type and content of the resource file")
     file = models.ForeignKey(
         'wagtaildocs.Document',
         help_text="File, Document etc",
@@ -405,33 +419,39 @@ class AlertResource(Orderable):
         on_delete=models.SET_NULL,
         related_name='+',
     )
-    link = models.URLField(blank=True, null=True, help_text="The identifier of the hyperlink for the resource file")
+    uri = models.URLField(blank=True, null=True, help_text="The identifier of the hyperlink for the resource file", verbose_name='link')
     derefUri = models.TextField(blank=True, null=True,
                                 help_text="The base-64 encoded data content of the resource file")
     digest = models.TextField(blank=True, null=True,
                               help_text="The code representing the digital digest ('hash') computed "
                                         "from the resource file")
+    
+    size = models.IntegerField(null=True, blank=True)
 
     panels = [
-        FieldPanel('resource_type'),
-        FieldPanel('resource_desc'),
+        FieldPanel('resourceDesc'),
         FieldPanel('file'),
-        FieldPanel('link'),
     ]
 
     @property
     def mime_type(self):
         return None
 
+    
+    def save(self ,*args, **kwargs):
+        self.size = self.file.file.size
+        self.mimeType = self.file.content_type
+        self.uri = self.file.url
+        with open(self.file.file.path, 'rb') as file:
+            document_content = file.read()
+        self.digest = hashlib.sha256(document_content).hexdigest()
 
-    @property
-    def size(self):
-        return None
+        return super(AlertResource, self).save(*args, **kwargs)
 
 
 class AlertArea(ClusterableModel):
     alert_info = ParentalKey('AlertInfo', related_name='alert_areas', null=True)
-    area_desc = models.CharField(max_length=100, help_text="The text describing the affected area of the alert message",
+    areaDesc = models.CharField(max_length=100, help_text="The text describing the affected area of the alert message",
                                  verbose_name="Affected areas / Regions",null=True)
    
     area = models.PolygonField(help_text="The paired values of points defining a polygon that delineates the affected "
@@ -448,7 +468,7 @@ class AlertArea(ClusterableModel):
                                          "MUST NOT be used except in combination with the altitude element. ") 
                           
     panels = [
-        FieldPanel('area_desc'),
+        FieldPanel('areaDesc'),
         FieldPanel('area', widget=BasemapPolygonWidget() ),
         InlinePanel('geocodes', label="Geocode", heading="Geocodes "),
         FieldPanel('altitude'),
