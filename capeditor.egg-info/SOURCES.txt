@@ -27,9 +27,10 @@ capeditor/migrations/0006_rename_resource_desc_alertresource_resourcedesc_and_mo
 capeditor/migrations/0007_alertresource_size.py
 capeditor/migrations/0008_rename_resource_type_alertresource_mimetype.py
 capeditor/migrations/__init__.py
-capeditor/static/capeditor/js/common.js
-capeditor/static/capeditor/js/hide_attributes.js
+capeditor/static/css/header.css
 capeditor/static/css/style.css
+capeditor/static/js/common.js
+capeditor/static/js/hide_attributes.js
 capeditor/templates/capeditor/alert_detail.html
 capeditor/templates/capeditor/alert_filter_include.html
 capeditor/templates/capeditor/alert_index.html
