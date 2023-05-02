@@ -5,8 +5,7 @@ from django.templatetags.static import static
 from capeditor.models import Alert
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, 
-    modeladmin_register,
-    ModelAdminGroup
+    modeladmin_register
 )
 
 @hooks.register("insert_editor_js")
@@ -14,7 +13,6 @@ def insert_editor_js():
     return format_html(
         '<script src="{}"></script>',static("js/hide_attributes.js"),
     )
-
 
 @hooks.register("insert_global_admin_css")
 def insert_global_admin_css():
