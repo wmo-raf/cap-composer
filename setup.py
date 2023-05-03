@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='capeditor',
-    version='0.1.1',
+    version='0.1.2',
     description='Wagtail CAP Editor can be used as standalone or integrated into website',
     author='Grace Amondi',
     author_email='miswa.grace@gmail.com',
