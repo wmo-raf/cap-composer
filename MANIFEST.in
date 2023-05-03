@@ -1,4 +1,4 @@
-include README.rst
+include README.md
 recursive-include capeditor *.html
 recursive-include capeditor *.py
 recursive-include capeditor/static *
