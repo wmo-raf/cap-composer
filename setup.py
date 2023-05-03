@@ -26,8 +26,8 @@ install_requirements = parse_requirements(os.path.join(PROJECT_ROOT, 'requiremen
 requirements = [getattr(ir, 'requirement', str(getattr(ir, 'req', None))) for ir in install_requirements]
 
 setup(
-    name='cap-editor',
-    version='0.1.5',
+    name='capeditor',
+    version='0.1.6',
     packages=find_packages(),
     install_requires=requirements,
     include_package_data=True,
