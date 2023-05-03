@@ -1,4 +1,4 @@
-django,
+django
 djangorestframework-xml
 six
 wagtail
