@@ -1,0 +1,7 @@
+django,
+djangorestframework-xml
+six
+wagtail
+wagtail-cache
+psycopg2-binary
+wagtail-lazyimages
