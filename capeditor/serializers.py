@@ -1,14 +1,22 @@
-from rest_framework import serializers
-from capeditor.models import Alert, AlertArea, AlertInfo,AlertGeocode,AlertResponseType, AlertAddress, AlertReference, AlertResource
-from django.urls import reverse
-import datetime
 import pytz
+from dateutil.parser import isoparse
+from rest_framework import serializers
+from shapely import wkt
 
-def parseTZ(date_str):
-    dt = datetime.datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ")
-    dt = dt.replace(tzinfo=pytz.UTC)
-    date_str = dt.strftime("%Y-%m-%dT%H:%M:%S%z")
-    date_str = date_str[:-2] + ':' + date_str[-2:]
+
+def parse_tz(date_str):
+    dt = isoparse(date_str)
+
+    # check if we have timezone info
+    if dt.tzinfo:
+        # check if timezone is equal to UTC, and replace '+' with '-' to match CAP Protocol time formats
+        if dt.utcoffset().total_seconds() == 0:
+            date_str = dt.isoformat().replace("+", "-")
+        else:
+            date_str = dt.isoformat()
+    # NO timezone. Assume is UTC
+    else:
+        date_str = dt.replace(tzinfo=pytz.UTC).isoformat().replace("+", "-")
 
     return date_str
 
@@ -35,17 +43,16 @@ class LatLonField(serializers.Field):
         # Return the latitude and longitude values as a dictionary
         return " ".join(lat_lon_ls)
 
-        
+
 class AlertAddressSerializer(serializers.ModelSerializer):
     # address_ls = AddressField(source="address")
 
     class Meta:
-        model = AlertAddress
         fields = ['address']
+
 
 class AlertResponseTypeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AlertResponseType
         fields = ['response_type']
 
     def to_representation(self, instance):
@@ -61,9 +68,7 @@ class AlertResponseTypeSerializer(serializers.ModelSerializer):
 
 
 class AlertGeocodeSerializer(serializers.ModelSerializer):
-
     class Meta:
-        model = AlertGeocode
         fields = ['name', 'value']
 
     def to_representation(self, instance):
@@ -79,29 +84,28 @@ class AlertGeocodeSerializer(serializers.ModelSerializer):
 
 
 class AlertResourceSerializer(serializers.ModelSerializer):
-
     class Meta:
-        model = AlertResource
         fields = ['resourceDesc', 'uri', 'digest', 'size', 'mimeType']
+
 
 class AlertAreaSerializer(serializers.ModelSerializer):
     geocode = serializers.SerializerMethodField()
     polygon = LatLonField(source="area")
 
     class Meta:
-        model = AlertArea
         fields = ['areaDesc', 'polygon', 'geocode', 'altitude', 'ceiling']
         # fields = '__all__'
 
     @staticmethod
     def get_geocode(obj):
-        serializer = AlertGeocodeSerializer(obj.geocodes,  many=True)
+        serializer = AlertGeocodeSerializer(obj.geocodes, many=True)
         return serializer.data
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-      
+
         return {k: v for k, v in representation.items() if v or v == 0 or v == False}
+
 
 class AlertInfoSerializer(serializers.ModelSerializer):
     area = serializers.SerializerMethodField()
@@ -110,14 +114,14 @@ class AlertInfoSerializer(serializers.ModelSerializer):
     resource = serializers.SerializerMethodField()
 
     class Meta:
-        model = AlertInfo
-        fields = ['language', 'category', 'event','responseType', 'urgency','severity', 'certainty', 'audience', 'effective', 'onset', 'expires', 'headline', 'description', 'instruction', 'web', 'contact', 'area','resource']
+        fields = ['language', 'category', 'event', 'responseType', 'urgency', 'severity', 'certainty', 'audience',
+                  'effective', 'onset', 'expires', 'headline', 'description', 'instruction', 'web', 'contact', 'area',
+                  'resource']
         # fields = '__all__'
-
 
     @staticmethod
     def get_resource(obj):
-        serializer = AlertResourceSerializer(obj.resources,  many=True)
+        serializer = AlertResourceSerializer(obj.resources, many=True)
         return serializer.data
 
     @staticmethod
@@ -131,52 +135,76 @@ class AlertInfoSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_area(obj):
-        serializer = AlertAreaSerializer(obj.alert_areas,  many=True)
+        serializer = AlertAreaSerializer(obj.alert_areas, many=True)
         return serializer.data
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['description'] = str(representation['description'])
-        representation['effective'] = parseTZ(representation['effective'])
-        representation['onset'] = parseTZ(representation['onset'])
-        representation['expires'] = parseTZ(representation['expires'])
+        representation['effective'] = parse_tz(representation['effective'])
+        representation['onset'] = parse_tz(representation['onset'])
+        representation['expires'] = parse_tz(representation['expires'])
 
-                
         return {k: v for k, v in representation.items() if v or v == 0 or v == False}
+
 
 class AlertReferenceSerializer(serializers.ModelSerializer):
     alerts = serializers.SerializerMethodField()
+
     class Meta:
-        model = AlertReference
         fields = ['alerts']
 
     @staticmethod
     def get_alerts(obj):
         serializer = AlertSerializer(obj.ref_alert)
 
-        data = serializer.data        
+        data = serializer.data
 
         return f"{data['sender']},{data['identifier']},{data['sent']}"
 
-class AlertSerializer(serializers.ModelSerializer):
 
+class AlertSerializer(serializers.ModelSerializer):
     info = serializers.SerializerMethodField()
-    addresses = serializers.SerializerMethodField()
-    references = serializers.SerializerMethodField()
+
+    # addresses = serializers.SerializerMethodField()
+    # references = serializers.SerializerMethodField()
+
     class Meta:
-        model = Alert
-        fields = ['identifier', 'sender', 'sent', 'status', 'msgType', 'scope', 'source', 'restriction', 'code', 'note', 'addresses', 'references','info']
-        # fields = '__all__'
-        # depth = 1
-        
-    @staticmethod
-    def get_info(obj):
-        serializer = AlertInfoSerializer(obj.alert_info,  many=True)
-        return serializer.data
+        fields = ['identifier', 'sender', 'sent', 'status', 'msgType', 'scope', 'source', 'restriction', 'code', 'note',
+                  'info']
+
+    def get_info(self, obj):
+        request = self.context.get("request")
+        info_values = []
+        for info in obj.info:
+            info_obj = info.block.get_api_representation(info.value)
+            # assign full url
+            info_obj["web"] = obj.get_full_url(request)
+            for field in list(info_obj):
+                if not info_obj[field]:
+                    info_obj.pop(field)
+
+            area_values = []
+            if info_obj.get("area"):
+                areas = info_obj.get("area")
+                for area in areas:
+                    shape = wkt.loads(area.get("polygon"))
+                    if shape:
+                        area_value = {
+                            **area,
+                            "polygon": " ".join(["{},{}".format(x, y) for x, y in list(shape.exterior.coords)])
+                        }
+                        for field in list(area_value):
+                            if not area_value[field]:
+                                area_value.pop(field)
+                        area_values.append(area_value)
+                info_obj["area"] = area_values
+
+            info_values.append(info_obj)
+        return info_values
 
     @staticmethod
     def get_addresses(obj):
-        serializer = AlertAddressSerializer(obj.addresses, many = True)
+        serializer = AlertAddressSerializer(obj.addresses, many=True)
         address_ls = []
 
         if serializer.data:
@@ -185,14 +213,14 @@ class AlertSerializer(serializers.ModelSerializer):
                     address_ls.append(data['address'])
 
             return ' '.join(address_ls)
-        
+
         return None
 
     @staticmethod
     def get_references(obj):
-        serializer = AlertReferenceSerializer(obj.references, many = True)
+        serializer = AlertReferenceSerializer(obj.references, many=True)
 
-        reference_ls =[]
+        reference_ls = []
         if serializer.data:
             for data in serializer.data:
                 if data['alerts']:
@@ -202,11 +230,10 @@ class AlertSerializer(serializers.ModelSerializer):
 
         return serializer.data
 
-
     def to_representation(self, instance):
         representation = super().to_representation(instance)
 
-        representation['sent'] = parseTZ(representation['sent'])
+        representation['sent'] = parse_tz(representation['sent'])
         # Modify the XML tag name
         # representation[f'msgType'] = representation.pop('message_type')
 
@@ -220,7 +247,8 @@ class AlertSerializer(serializers.ModelSerializer):
             representation[f'addresses'] = None
 
         # check message type 
-        if representation[f'msgType'] == 'Update' or representation[f'msgType'] == 'Cancel'  or representation[f'msgType'] == 'Ack':
+        if representation[f'msgType'] == 'Update' or representation[f'msgType'] == 'Cancel' or representation[
+            f'msgType'] == 'Ack':
             representation[f'note'] = None
         elif representation[f'msgType'] == 'Alert':
             representation[f'note'] = None
@@ -237,5 +265,3 @@ class AlertSerializer(serializers.ModelSerializer):
     #     # define your custom URL generation logic here
     #     # the `obj` parameter is the object being serialized
     #     return reverse('alert_by_id', args=[obj.identifier])
-
-    

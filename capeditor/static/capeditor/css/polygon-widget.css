@@ -1,0 +1,8 @@
+.polygon_map_wrapper {
+
+}
+
+.polygon_map_wrapper .polygon_map {
+    height: 400px;
+    width: 100%;
+}
