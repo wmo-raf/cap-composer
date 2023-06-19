@@ -27,7 +27,7 @@ requirements = [getattr(ir, 'requirement', str(getattr(ir, 'req', None))) for ir
 
 setup(
     name='capeditor',
-    version='0.1.8',
+    version='0.1.9',
     packages=find_packages(),
     install_requires=requirements,
     include_package_data=True,

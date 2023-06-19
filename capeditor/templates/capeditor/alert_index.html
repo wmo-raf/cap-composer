@@ -23,7 +23,9 @@
 {% if latest_alert %}
       <section class="featured-event-section">
           <div class="container">
-              <h2 class="section-title center">Latest Alert</h2>
+              <h2 class="section-title center">{{page.title}}</h2>
+
+              <h3 class="section-title center">Latest Alert</h3>
               {% include 'capeditor/latest_alert_include.html' with item_title=latest_alert.title item_url=latest_alert.url item_info=latest_alert.alert_info.all item_identifier=latest_alert.identifier%}
           </div>
       </section>

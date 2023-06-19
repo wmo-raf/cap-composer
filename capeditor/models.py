@@ -29,7 +29,7 @@ class AlertList(Page):
         'capeditor.Alert',  # appname.ModelName
     ]
     parent_page_type = [
-        'wagtailcore.Page'  # appname.ModelName
+        # 'wagtailcore.Page'  # appname.ModelName
     ]
     max_count = 1
 
@@ -74,7 +74,7 @@ class AlertList(Page):
 
     @property
     def all_alerts(self):
-        return Alert.objects.live()
+        return Alert.objects.live().exclude(status='Draft').filter(scope='Public').order_by('-alert_info__effective')
 
     def filter_alerts(self, request):
         alerts = self.all_alerts
@@ -156,7 +156,7 @@ class Alert(Page):
                                   help_text=_("Unique ID. Auto generated on creation."), verbose_name=_("Identifier"))
     sender = models.EmailField(max_length=255,
                               help_text=_(" Identifies the originator of an alert. "
-                                        "This can be an email of the institution for example"), default='grace@gmail.com', verbose_name=_("Sender"))
+                                        "This can be an email of the institution for example"), verbose_name=_("Sender"))
     sent = models.DateTimeField(help_text=_("Time and date of origination of the alert"), default=timezone.now, verbose_name=_("Sent"))
     status = models.CharField(max_length=50, choices=STATUS_CHOICES,
                               help_text=_("The code denoting the appropriate handling of the alert"), default='Actual', verbose_name=_("Status"))
@@ -245,6 +245,10 @@ class AlertInfo(ClusterableModel):
 
     LANGUAGE_CHOICES = (
         ('en', _("English")),
+        ('fr', _("French")),
+        ('ar', _("Arabic")),
+        ('am', _("Amharic")),
+        ('sw', _("Swahili")),
     )
 
     CATEGORY_CHOICES = (
