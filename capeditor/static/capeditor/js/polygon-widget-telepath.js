@@ -13,14 +13,7 @@
             name: name
         };
 
-        const polygonWidget = new PolygonWidget(options);
-        polygonWidget.setState(initialState);
-
-        if (initialState) {
-            polygonWidget.initFromState()
-        }
-
-        return polygonWidget;
+        return new PolygonWidget(options, initialState);
     };
 
     window.telepath.register('capeditor.widgets.PolygonInput', PolygonInput);

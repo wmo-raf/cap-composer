@@ -3,36 +3,95 @@ import uuid
 from django.contrib.gis.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from modelcluster.fields import ParentalKey
-from modelcluster.models import ClusterableModel
 from wagtail import blocks
 from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
-from wagtail.contrib.settings.models import BaseSiteSetting
+from wagtail.contrib.settings.models import BaseSiteSetting, BaseGenericSetting
 from wagtail.contrib.settings.registry import register_setting
 from wagtail.fields import StreamField
-from wagtail.models import Page, Orderable, Site
+from wagtail.models import Page, Site
 
-from capeditor.blocks import AlertInfo
+from capeditor.blocks import AlertInfo, HazardTypeBlock, AudienceTypeBlock, SENDER_NAME_HELP_TEXT, CONTACT_HELP_TEXT, \
+    EVENT_HELP_TEXT
+
+
+class CountryBoundary(BaseGenericSetting):
+    name_0 = models.CharField(max_length=100, blank=True, null=True)
+    name_1 = models.CharField(max_length=100, blank=True, null=True)
+    name_2 = models.CharField(max_length=100, blank=True, null=True)
+    gid_0 = models.CharField(max_length=100, blank=True, null=True)
+    gid_1 = models.CharField(max_length=100, blank=True, null=True)
+    gid_2 = models.CharField(max_length=100, blank=True, null=True)
+    level = models.IntegerField(blank=True, null=True)
+    size = models.CharField(max_length=100, blank=True, null=True)
+
+    geom = models.MultiPolygonField(srid=4326)
+
+    class Meta:
+        verbose_name_plural = _("Country Boundaries")
+
+    def __str__(self):
+        return str(self.pk)
+
+    @property
+    def bbox(self):
+        min_x, min_y, max_x, max_y = self.geom.envelope.extent
+        bbox = [min_x, min_y, max_x, max_y]
+        return bbox
+
+    @property
+    def info(self):
+        info = {"iso": self.gid_0}
+
+        if self.level == 0:
+            info.update({"name": self.name_0})
+
+        if self.level == 1:
+            gid_1 = self.gid_1.split(".")[1].split("_")[0]
+            info.update({"id1": gid_1, "name": self.name_1})
+
+        if self.level == 2:
+            gid_1 = self.gid_1.split(".")[1].split("_")[0]
+            gid_2 = self.gid_1.split(".")[1].split("_")[1]
+            info.update({"id1": gid_1, "id2": gid_2, "name": self.name_2})
+
+        return info
 
 
 @register_setting
-class CapSetting(BaseSiteSetting, ClusterableModel):
-    sender = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender"))
-    sender_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Name"))
-    contact = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Contact"))
+class CapSetting(BaseSiteSetting):
+    sender = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Identifier"),
+                              help_text=_("Can be the website link or email of the sending institution"))
+    sender_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Name"),
+                                   help_text=_("Name of the sending institution"))
+    contact = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Contact"),
+                               help_text=_("Contact details of the sending institution. Can be an official "
+                                           "email address of the institution or a link to the contact us form"))
+    hazard_types = StreamField([
+        ("hazard_type", HazardTypeBlock(label="Hazard Type"))
+    ], use_json_field=True, blank=True, null=True, verbose_name="Hazard Types",
+        help_text=_("Hazards monitored by the institution"))
+    audience_types = StreamField([
+        ("audience_type", AudienceTypeBlock(label="Audience Type"))
+    ], use_json_field=True, blank=True, null=True, verbose_name="Audience Types",
+        help_text=_("Target audiences for published alerts"))
 
     panels = [
-        FieldPanel("sender"),
         FieldPanel("sender_name"),
+        FieldPanel("sender"),
         FieldPanel("contact"),
+        FieldPanel("hazard_types"),
+        FieldPanel("audience_types"),
     ]
 
 
 def get_cap_setting():
-    site = Site.objects.get(is_default_site=True)
-    if site:
-        return CapSetting.for_site(site)
+    try:
+        site = Site.objects.get(is_default_site=True)
+        if site:
+            return CapSetting.for_site(site)
+    except Exception:
+        pass
     return None
 
 
@@ -49,38 +108,82 @@ class CapAlertPageForm(WagtailAdminPageForm):
 
         cap_setting = get_cap_setting()
 
-        default_sender_name = cap_setting.sender_name
-        default_contact = cap_setting.contact
+        if cap_setting:
+            default_sender_name = cap_setting.sender_name
+            default_contact = cap_setting.contact
+            hazard_types = cap_setting.hazard_types
+            audience_types = cap_setting.audience_types
 
-        if default_sender_name:
-            info_field = self.fields.get("info")
-            for block_type, block in info_field.block.child_blocks.items():
-                if block_type == "alert_info":
-                    field_name = "senderName"
-                    sender_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
+            if default_sender_name:
+                info_field = self.fields.get("info")
+                for block_type, block in info_field.block.child_blocks.items():
+                    if block_type == "alert_info":
+                        field_name = "senderName"
+                        sender_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
 
-                    label = sender_block.label or field_name
-                    name = sender_block.name
+                        label = sender_block.label or field_name
+                        name = sender_block.name
 
-                    info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.CharBlock(
-                        default=default_sender_name, required=False)
-                    info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
-                    info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
+                        info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.CharBlock(
+                            default=default_sender_name, required=False, help_text=SENDER_NAME_HELP_TEXT)
+                        info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
+                        info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
 
-        if default_contact:
-            info_field = self.fields.get("info")
-            for block_type, block in info_field.block.child_blocks.items():
-                if block_type == "alert_info":
-                    field_name = "contact"
-                    contact_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
+            if default_contact:
+                info_field = self.fields.get("info")
+                for block_type, block in info_field.block.child_blocks.items():
+                    if block_type == "alert_info":
+                        field_name = "contact"
+                        contact_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
 
-                    label = contact_block.label or field_name
-                    name = contact_block.name
+                        label = contact_block.label or field_name
+                        name = contact_block.name
 
-                    info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.CharBlock(
-                        default=default_contact, required=False)
-                    info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
-                    info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
+                        info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.CharBlock(
+                            default=default_contact, required=False, help_text=CONTACT_HELP_TEXT)
+                        info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
+                        info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
+
+            if hazard_types:
+                hazard_type_choices = []
+
+                for block in hazard_types:
+                    hazard = block.value.get("hazard")
+                    hazard_type_choices.append((hazard, hazard))
+
+                info_field = self.fields.get("info")
+                for block_type, block in info_field.block.child_blocks.items():
+                    if block_type == "alert_info":
+                        field_name = "event"
+                        event_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
+
+                        label = event_block.label or field_name
+                        name = event_block.name
+
+                        info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.ChoiceBlock(
+                            choices=hazard_type_choices, help_text=EVENT_HELP_TEXT)
+                        info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
+                        info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
+
+            if audience_types:
+                audience_type_choices = []
+
+                for block in audience_types:
+                    audience = block.value.get("audience")
+                    audience_type_choices.append((audience, audience))
+
+                info_field = self.fields.get("info")
+                for block_type, block in info_field.block.child_blocks.items():
+                    if block_type == "alert_info":
+                        field_name = "audience"
+                        audience_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
+                        label = audience_block.label or field_name
+                        name = audience_block.name
+
+                        info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.ChoiceBlock(
+                            choices=audience_type_choices)
+                        info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
+                        info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
 
 
 class AbstractCapAlertPage(Page):
@@ -115,16 +218,17 @@ class AbstractCapAlertPage(Page):
 
     identifier = models.UUIDField(default=uuid.uuid4, editable=False, verbose_name=_("Identifier"),
                                   help_text=_("Unique ID. Auto generated on creation."), )
-    sender = models.EmailField(max_length=255, verbose_name=_("Sender"), default=get_default_sender,
-                               help_text=_("Identifies the originator of an alert. "
-                                           "This can be an email of the institution for example"))
+    sender = models.CharField(max_length=255, verbose_name=_("Sender"), default=get_default_sender,
+                              help_text=_("Identifies the originator of an alert. "
+                                          "For example the website address of the institution"))
     sent = models.DateTimeField(default=timezone.now, verbose_name=_("Sent"),
                                 help_text=_("Time and date of origination of the alert"))
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, verbose_name=_("Status"),
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="Actual", verbose_name=_("Status"),
                               help_text=_("The code denoting the appropriate handling of the alert"))
-    msgType = models.CharField(max_length=100, choices=MESSAGE_TYPE_CHOICES, verbose_name=_("Message Type"),
+    msgType = models.CharField(max_length=100, choices=MESSAGE_TYPE_CHOICES, default="Alert",
+                               verbose_name=_("Message Type"),
                                help_text=_("The code denoting the nature of the alert message"))
-    scope = models.CharField(max_length=100, choices=SCOPE_CHOICES, verbose_name=_("Scope"),
+    scope = models.CharField(max_length=100, choices=SCOPE_CHOICES, default="Public", verbose_name=_("Scope"),
                              help_text=_("The code denoting the intended distribution of the alert message"))
     source = models.TextField(blank=True, null=True, verbose_name=_("Source"),
                               help_text=_("The text identifying the source of the alert message"))
@@ -141,16 +245,24 @@ class AbstractCapAlertPage(Page):
                                         "<status> 'Exercise' and <msgType> 'Error'"), verbose_name=_("Note"))
     info = StreamField([
         ("alert_info", AlertInfo(label="Alert Information"))
-    ], use_json_field=True, blank=True, null=True, verbose_name="Alert Information")
+    ], block_counts={
+        'alert_info': {'min_num': 1},
+    }, use_json_field=True, blank=True,
+        null=True, verbose_name="Alert Information", )
+
+    # default = [("alert_info", {"effective": None, "onset": None, "expires": None})]
+
+    class Meta:
+        abstract = True
 
     content_panels = [
         MultiFieldPanel([
             FieldPanel('sender'),
             FieldPanel('sent'),
-            FieldPanel('status', ),
-            FieldPanel('msgType', classname="message"),
-            FieldPanel('note', classname='note'),
-            FieldPanel('scope'),
+            FieldPanel('status'),
+            FieldPanel('msgType', ),
+            FieldPanel('note', classname="note"),
+            FieldPanel('scope', ),
             FieldPanel('restriction', classname="restriction"),
         ], heading=_("Alert Identification")),
         FieldPanel("info")

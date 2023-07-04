@@ -5,7 +5,8 @@ function PolygonWidget(options) {
     // initialize map
     this.map = L.map(options.map_id, {
         center: [2.7128726951001596, 23.379626859864345],
-        zoom: 5
+        zoom: 5,
+        zoomControl: false,
     })
 
     // add base layer
@@ -14,9 +15,40 @@ function PolygonWidget(options) {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
     }).addTo(this.map)
 
-    this.drawControl = null
 
-    this.initDrawControl()
+    // boundaries
+    L.vectorGrid.protobuf("http://127.0.0.1:8300/api/admin-boundary/tiles/{z}/{x}/{y}", {
+        vectorTileLayerStyles: {
+            default: {
+                weight: 0,
+                fillColor: '#fff',
+                fillOpacity: 0,
+            }
+        }
+    }).addTo(this.map);
+
+    // zoom control
+    L.control.zoom({
+        position: 'bottomright'
+    }).addTo(this.map);
+
+    // full screen control
+    this.map.addControl(new L.Control.Fullscreen({position: 'bottomright',}));
+
+    this.drawControl = null
+    this.uploadControl = null
+
+    // initialize feature group of drawn items
+    this.drawnItems = new L.FeatureGroup();
+    this.map.addLayer(this.drawnItems);
+
+    this.initControls()
+
+    setTimeout(() => {
+        this.map.invalidateSize()
+    }, 400);
+
+
 }
 
 PolygonWidget.prototype.setState = function (newState) {
@@ -35,18 +67,23 @@ PolygonWidget.prototype.focus = function () {
 }
 
 
-PolygonWidget.prototype.initDrawControl = function () {
-    // initialize feature group of drawn items
-    this.drawnItems = new L.FeatureGroup();
-    this.map.addLayer(this.drawnItems);
+PolygonWidget.prototype.initControls = function () {
+    // set file upload control
+    this.setUploadControl()
 
     // set draw control
     this.setDrawControl()
 
+
     this.map.on("draw:created", (e) => {
         this.drawnItems.addLayer(e.layer);
         const geomString = JSON.stringify(e.layer.toGeoJSON().geometry)
+
+        this.map.fitBounds(e.layer.getBounds())
+
         this.setState(geomString)
+        this.setDrawControl()
+        this.setUploadControl()
     });
 
     this.map.on("draw:edited", (e) => {
@@ -63,18 +100,31 @@ PolygonWidget.prototype.initDrawControl = function () {
             if (!isIntersecting) {
                 layer.setStyle({color: "blue"});
             }
+
+            const geomString = JSON.stringify(layer.toGeoJSON().geometry)
+            this.setState(geomString)
+
+            this.setDrawControl()
+            this.setUploadControl()
         });
     });
 
     this.map.on("draw:deleted", (e) => {
-        this.drawControl.setDrawingOptions({draw: true})
+        const deletedLayers = e.layers._layers
+        if (Object.keys(deletedLayers).length > 0) {
+            this.setState("")
+            this.setDrawControl()
+            this.setUploadControl()
+        }
     });
 }
 
 
 PolygonWidget.prototype.setDrawControl = function () {
-    const value = this.getValue()
-    const canCreate = !Boolean(value)
+    const value = this.getState()
+
+    const hasGeomValue = Boolean(value)
+
 
     if (this.drawControl) {
         this.map.removeControl(this.drawControl)
@@ -83,8 +133,8 @@ PolygonWidget.prototype.setDrawControl = function () {
     this.drawControl = new L.Control.Draw({
         edit: {
             featureGroup: this.drawnItems,
-            edit: !canCreate,
-            remove: !canCreate,
+            edit: hasGeomValue,
+            remove: hasGeomValue,
             poly: {
                 allowIntersection: true,
             },
@@ -95,8 +145,8 @@ PolygonWidget.prototype.setDrawControl = function () {
             marker: false,
             circle: false,
             circlemarker: false,
-            rectangle: canCreate,
-            polygon: canCreate,
+            rectangle: !hasGeomValue,
+            polygon: !hasGeomValue,
         },
     });
 
@@ -104,41 +154,84 @@ PolygonWidget.prototype.setDrawControl = function () {
 }
 
 
-PolygonWidget.prototype.initFromState = function () {
+PolygonWidget.prototype.setUploadControl = function () {
     const value = this.getState()
-    // const feature = JSON.parse(value)
+    const hasGeomValue = Boolean(value)
 
 
-    const feature = {
-        "type": "Polygon",
-        "coordinates": [[
-            [-109.05, 41.00],
-            [-102.06, 40.99],
-            [-102.03, 36.99],
-            [-109.04, 36.99],
-            [-109.05, 41.00]
-        ]]
+    if (this.uploadControl) {
+        this.map.removeControl(this.uploadControl)
     }
 
-    if (feature && feature.coordinates) {
 
-        // const revCoords = feature.coordinates.reduce((all, coord) => {
-        //     all.push([coord[1], coord[0]])
-        //     return all
-        // }, [])
+    const style = {
+        color: '#3288ff',
+        opacity: 1.0,
+        fillOpacity: 0.3,
+        weight: 3,
+        clickable: false
+    };
 
-        const myStyle = {
-            "color": "#ff7800",
-            "weight": 5,
-            "opacity": 0.65
-        };
+    L.Control.FileLayerLoad.LABEL = `<div class="upload-icon" title="Upload File" ><svg class="icon icon-upload" aria-hidden="true">
+                                        <use href="#icon-upload"></use>
+                                     </svg></div>`;
 
-        const polygon = L.polygon(feature.coordinates, myStyle).addTo(this.map)
+    this.uploadControl = L.Control.fileLayerLoad({
+        fitBounds: true,
+        addToMap: false,
+        layerOptions: {
+            style: style,
+            pointToLayer: function (data, latlng) {
+                return L.circleMarker(latlng, {style: style}
+                );
+            }
+        }
+    });
 
 
-        // fit to bounds
-        // this.map.fitBounds(polygon.getBounds());
+    if (!hasGeomValue) {
+        this.map.addControl(this.uploadControl);
+        this.uploadControl.loader.on('data:loaded', (e) => {
+            const geojson = e.layer.toGeoJSON()
+            if (geojson.features) {
+                const geojsonFeature = geojson.features[0]
 
-        // this.setDrawControl()
+
+                if (geojsonFeature.geometry.type !== "Polygon") {
+                    alert(`Uploaded type ${geojsonFeature.geometry.type} not supported`)
+                } else {
+                    const geojsonLayer = L.geoJSON(geojsonFeature)
+
+                    geojsonLayer.eachLayer((layer) => {
+                        this.drawnItems.addLayer(layer);
+                        this.setState(JSON.stringify(geojsonFeature.geometry))
+                    });
+
+                    this.setDrawControl()
+                    this.setUploadControl()
+                }
+            }
+        });
+    }
+}
+
+
+PolygonWidget.prototype.initFromState = function () {
+    const value = this.getState()
+
+    if (value) {
+        const geojsonFeature = JSON.parse(value)
+        const geojsonLayer = L.geoJSON(geojsonFeature)
+        geojsonLayer.eachLayer((layer) => {
+            this.drawnItems.addLayer(layer);
+        });
+
+        this.setDrawControl()
+        this.setUploadControl()
+
+        setTimeout(() => {
+            this.map.fitBounds(geojsonLayer.getBounds())
+        }, 400);
+
     }
 }

@@ -12,6 +12,8 @@ class CapAlertPage(AbstractCapAlertPage):
     template = "cap/cap_alert_page.html"
     parent_page_type = ["home.HomePage"]
 
+    subpage_types = []
+
     content_panels = Page.content_panels + [
         *AbstractCapAlertPage.content_panels
     ]
