@@ -269,6 +269,7 @@ class AlertAreaGeocodeBlock(blocks.StructBlock):
 SENDER_NAME_HELP_TEXT = _("The human-readable name of the agency or authority issuing this alert.")
 CONTACT_HELP_TEXT = _("The text describing the contact for follow-up and confirmation of the alert message")
 EVENT_HELP_TEXT = _("The text denoting the type of the subject event of the alert message")
+AUDIENCE_HELP_TEXT = _("The text describing the intended audience of the alert message")
 
 
 class FileResourceStructValue(StructValue):
@@ -444,7 +445,7 @@ class AlertInfo(blocks.StructBlock):
                                   help_text=SENDER_NAME_HELP_TEXT)
     contact = blocks.CharBlock(max_length=255, required=False, label=_("Contact"), help_text=CONTACT_HELP_TEXT)
     audience = blocks.CharBlock(max_length=255, required=False, label=_("Audience"),
-                                help_text=_("The text describing the intended audience of the alert message"))
+                                help_text=AUDIENCE_HELP_TEXT)
     area = blocks.StreamBlock([
         ("boundary_block", AlertAreaBoundaryBlock(label=_("Admin Boundary"))),
         ("polygon_block", AlertAreaPolygonBlock(label=_("Draw Polygon"))),
@@ -471,3 +472,7 @@ class HazardTypeBlock(blocks.StructBlock):
 
 class AudienceTypeBlock(blocks.StructBlock):
     audience = blocks.CharBlock(max_length=255, label=_("Audience"), help_text="Intended audience")
+
+
+class ContactBlock(blocks.StructBlock):
+    contact = blocks.CharBlock(max_length=255, label=_("Contact Detail"))

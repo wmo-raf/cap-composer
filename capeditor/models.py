@@ -17,7 +17,12 @@ from capeditor.blocks import (
     AudienceTypeBlock,
     SENDER_NAME_HELP_TEXT,
     CONTACT_HELP_TEXT,
-    EVENT_HELP_TEXT, AlertAddress, AlertReference, AlertIncident
+    EVENT_HELP_TEXT,
+    AUDIENCE_HELP_TEXT,
+    AlertAddress,
+    AlertReference,
+    AlertIncident,
+    ContactBlock
 )
 from capeditor.serializers import parse_tz
 
@@ -28,13 +33,17 @@ class CapSetting(BaseSiteSetting):
                               help_text=_("Can be the website link or email of the sending institution"))
     sender_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Name"),
                                    help_text=_("Name of the sending institution"))
-    contact = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Contact"),
-                               help_text=_("Contact details of the sending institution. Can be an official "
-                                           "email address of the institution or a link to the contact us form"))
+
+    contacts = StreamField([
+        ("contact", ContactBlock(label="Contact"))
+    ], use_json_field=True, blank=True, null=True, verbose_name="Contact Details",
+        help_text=_("Contact for follow-up and confirmation of the alert message"))
+
     hazard_types = StreamField([
         ("hazard_type", HazardTypeBlock(label="Hazard Type"))
     ], use_json_field=True, blank=True, null=True, verbose_name="Hazard Types",
         help_text=_("Hazards monitored by the institution"))
+
     audience_types = StreamField([
         ("audience_type", AudienceTypeBlock(label="Audience Type"))
     ], use_json_field=True, blank=True, null=True, verbose_name="Audience Types",
@@ -43,7 +52,7 @@ class CapSetting(BaseSiteSetting):
     panels = [
         FieldPanel("sender_name"),
         FieldPanel("sender"),
-        FieldPanel("contact"),
+        FieldPanel("contacts"),
         FieldPanel("hazard_types"),
         FieldPanel("audience_types"),
     ]
@@ -74,7 +83,7 @@ class CapAlertPageForm(WagtailAdminPageForm):
 
         if cap_setting:
             default_sender_name = cap_setting.sender_name
-            default_contact = cap_setting.contact
+            contacts = cap_setting.contacts
             hazard_types = cap_setting.hazard_types
             audience_types = cap_setting.audience_types
 
@@ -93,7 +102,12 @@ class CapAlertPageForm(WagtailAdminPageForm):
                         info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
                         info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
 
-            if default_contact:
+            if contacts:
+                contact_choices = []
+                for block in contacts:
+                    contact = block.value.get("contact")
+                    contact_choices.append((contact, contact))
+
                 info_field = self.fields.get("info")
                 for block_type, block in info_field.block.child_blocks.items():
                     if block_type == "alert_info":
@@ -103,8 +117,8 @@ class CapAlertPageForm(WagtailAdminPageForm):
                         label = contact_block.label or field_name
                         name = contact_block.name
 
-                        info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.CharBlock(
-                            default=default_contact, required=False, help_text=CONTACT_HELP_TEXT)
+                        info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.ChoiceBlock(
+                            choices=contact_choices, required=False, help_text=CONTACT_HELP_TEXT)
                         info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
                         info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
 
@@ -143,9 +157,8 @@ class CapAlertPageForm(WagtailAdminPageForm):
                         audience_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
                         label = audience_block.label or field_name
                         name = audience_block.name
-
                         info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.ChoiceBlock(
-                            choices=audience_type_choices)
+                            choices=audience_type_choices, required=False, help_text=AUDIENCE_HELP_TEXT)
                         info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
                         info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
 
