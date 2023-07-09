@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     "home",
     "search",
     "capeditor",
+    "adminboundarymanager",
+
     "wagtailiconchooser",
     "wagtailhumanitarianicons",
     "wagtail.contrib.forms",
@@ -53,8 +55,11 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
+
     "modelcluster",
     "taggit",
+    "wagtailcache",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -65,6 +70,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "wagtailcache.cache.UpdateCacheMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -73,6 +79,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "wagtailcache.cache.FetchFromCacheMiddleware",
 ]
 
 ROOT_URLCONF = "sandbox.urls"
@@ -173,3 +180,12 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache'),
+        'KEY_PREFIX': 'wagtailcache',
+        'TIMEOUT': 3600,  # one hour (in seconds)
+    }
+}

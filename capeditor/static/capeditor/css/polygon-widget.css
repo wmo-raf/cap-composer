@@ -50,10 +50,21 @@
 }
 
 .mapboxgl-draw-actions-btn_save {
-    background-color: var(--w-color-surface-button-default) !important;
+    background-color: var(--w-color-secondary) !important;
     margin-left: 4px;
 }
 
 .mapboxgl-draw-actions-btn_cancel {
-    background-color: var(--w-color-surface-alert-danger) !important;
+    background-color: var(--w-color-critical-200) !important;
+}
+
+.admin-level-selector {
+    position: absolute;
+    font-size: 12px;
+    top: 12px;
+    left: 20px;
+    background-color: #fff;
+    z-index: 10;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
+    padding: 12px;
 }

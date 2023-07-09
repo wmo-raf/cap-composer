@@ -1,0 +1,10 @@
+{% load i18n l10n %}
+
+<div id="{{ id }}_div_map" class="boundary_map_wrapper">
+    <div id="{{ id }}_map" class="boundary_map" style="height: 400px;width: 100%">
+    </div>
+    <textarea id="{{ id }}" class="vSerializedField required" name="{{ name }}" hidden
+              data-boundarytilesurl="{{ boundary_tiles_url }}"
+              data-boundarydetailurl="{{ boundary_detail_url }}"
+              data-bounds="{{ country_bounds }}">{{ serialized }}</textarea>
+</div>

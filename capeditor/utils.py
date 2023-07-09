@@ -1,3 +1,4 @@
+import magic
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
@@ -34,3 +35,8 @@ def query_param_to_list(query_param, as_int=False):
             pass
 
     return None
+
+
+def file_path_mime(file_path):
+    mimetype = magic.from_file(file_path, mime=True)
+    return mimetype

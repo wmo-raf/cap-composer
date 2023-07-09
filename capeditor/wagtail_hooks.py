@@ -6,5 +6,5 @@ from wagtail import hooks
 @hooks.register("insert_editor_js")
 def insert_editor_js():
     return format_html(
-        '<script src="{}"></script>', static("capeditor/js/hide_attributes.js"),
+        '<script src="{}"></script>', static("capeditor/js/conditional_fields.js"),
     )

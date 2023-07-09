@@ -1,15 +1,8 @@
 {% load i18n l10n %}
 
-<div id="{{ id }}_div_map" class="polygon_map_wrapper">
-    <div class="w-field__input geom-input-selector">
-        <select name="" id="">
-            <option value="" selected="">---------</option>
-            <option value="boundary_data">Use Boundary Data</option>
-            <option value="draw_upload">Draw/Upload Shape</option>
-        </select>
+<div id="{{ name }}_div_map" class="polygon_map_wrapper">
+    <div id="{{ name }}_map" class="polygon_map" style="height: 400px;width: 100%">
     </div>
-    <div class="w-field__input geom-input-selector">
-    </div>
-    <div id="{{ id }}_map" class="polygon_map" style="height: 400px;width: 100%"></div>
-    <textarea id="{{ id }}" class="vSerializedField required" name="{{ name }}" hidden>{{ serialized }}</textarea>
+    <textarea id="{{ name }}" class="vSerializedField required" name="{{ name }}" hidden
+              data-bounds="{{ country_bounds }}">{{ serialized }}</textarea>
 </div>

@@ -1,5 +1,3 @@
-# Create your views here.
-
 from rest_framework import generics
 
 from capeditor.renderers import CustomXMLRenderer

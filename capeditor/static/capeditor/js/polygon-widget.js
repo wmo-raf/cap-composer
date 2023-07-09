@@ -1,54 +1,105 @@
-function PolygonWidget(options) {
+function SaveCancelControl() {
+}
+
+SaveCancelControl.prototype.onAdd = function (map) {
+    this.map = map;
+    this._container = document.createElement('div');
+    this._container.className = 'mapboxgl-ctrl save-cancel-control';
+    this._container.style = 'display: none;';
+    this._container.innerHTML = `
+            <div class='label'>Editing Geometry</div>
+              <div class="actions">
+                <button class='mapboxgl-draw-actions-btn mapboxgl-draw-actions-btn_cancel' title="Cancel editing, discards all changes.">
+                  Cancel
+                </button>
+                <button class='mapboxgl-draw-actions-btn mapboxgl-draw-actions-btn_save' title="Save changes.">
+                  Save
+                </button>
+              </div>
+          `;
+
+    return this._container;
+};
+
+SaveCancelControl.prototype.hide = function () {
+    this._container.style = 'display: none;';
+};
+
+SaveCancelControl.prototype.show = function () {
+    this._container.style = 'display: block;';
+};
+
+
+SaveCancelControl.prototype.onRemove = function (map) {
+    this._container.parentNode.removeChild(this._container);
+    this.map = undefined;
+};
+
+function EditControl() {
+}
+
+EditControl.prototype.onAdd = function (map) {
+    this.map = map;
+    this._container = document.createElement('div');
+    this._container.className =
+        'mapboxgl-ctrl-group mapboxgl-ctrl edit-control';
+    this._container.style = 'display: none;';
+
+    this._container.innerHTML = `
+            <button class="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_edit control-icon" title="Edit geometries">
+                <svg class="icon" aria-hidden="true">
+                    <use href="#icon-edit"></use>
+                </svg>
+            </button>
+          `;
+    return this._container;
+};
+
+EditControl.prototype.hide = function () {
+    this._container.style = 'display: none;';
+};
+
+EditControl.prototype.show = function () {
+    this._container.style = 'display: block;';
+};
+
+EditControl.prototype.onRemove = function (map) {
+    this._container.parentNode.removeChild(this._container);
+    this.map = undefined;
+};
+
+
+function PolygonWidget(options, initialState) {
 
     this.geomInput = $('#' + options.id);
+    this.options = options
 
-    // initialize map
-    this.map = L.map(options.map_id, {
-        center: [2.7128726951001596, 23.379626859864345],
-        zoom: 5,
-        zoomControl: false,
-    })
+    this.countriesBounds = this.geomInput.data("bounds")
 
-    // add base layer
-    L.tileLayer("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png", {
-        maxZoom: 24,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-    }).addTo(this.map)
+    const id_parts = options.id.split("-area")
+    const info_id = id_parts[0]
+
+    this.severityInput = $('#' + info_id + "-severity");
+    this.emptyGeojsonData = {type: "Feature", "geometry": {type: "Polygon", coordinates: []}}
+
+    if (this.severityInput) {
+        this.severityInput.on("change", (e) => {
+            this.onSeverityChange()
+        })
+    }
 
 
-    // boundaries
-    L.vectorGrid.protobuf("http://127.0.0.1:8300/api/admin-boundary/tiles/{z}/{x}/{y}", {
-        vectorTileLayerStyles: {
-            default: {
-                weight: 0,
-                fillColor: '#fff',
-                fillOpacity: 0,
-            }
+    this.initMap().then(() => {
+        this.map.resize()
+
+        this.initLayer()
+        this.initDraw()
+
+        if (initialState) {
+            this.setState(initialState)
+            this.initFromState()
         }
-    }).addTo(this.map);
-
-    // zoom control
-    L.control.zoom({
-        position: 'bottomright'
-    }).addTo(this.map);
-
-    // full screen control
-    this.map.addControl(new L.Control.Fullscreen({position: 'bottomright',}));
-
-    this.drawControl = null
-    this.uploadControl = null
-
-    // initialize feature group of drawn items
-    this.drawnItems = new L.FeatureGroup();
-    this.map.addLayer(this.drawnItems);
-
-    this.initControls()
-
-    setTimeout(() => {
-        this.map.invalidateSize()
-    }, 400);
-
-
+    })
 }
 
 PolygonWidget.prototype.setState = function (newState) {
@@ -66,172 +117,287 @@ PolygonWidget.prototype.getValue = function () {
 PolygonWidget.prototype.focus = function () {
 }
 
+PolygonWidget.prototype.initMap = async function () {
+    const defaultStyle = {
+        'version': 8,
+        'sources': {
+            'carto-dark': {
+                'type': 'raster',
+                'tiles': [
+                    "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                    "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                    "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                    "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png"
+                ]
+            },
+            'carto-light': {
+                'type': 'raster',
+                'tiles': [
+                    "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                    "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                    "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                    "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"
+                ]
+            },
+            'wikimedia': {
+                'type': 'raster',
+                'tiles': [
+                    "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
+                ]
+            }
+        },
+        'layers': [{
+            'id': 'carto-light-layer',
+            'source': 'carto-light',
 
-PolygonWidget.prototype.initControls = function () {
-    // set file upload control
-    this.setUploadControl()
 
-    // set draw control
-    this.setDrawControl()
+            'type': 'raster',
+            'minzoom': 0,
+            'maxzoom': 22
+        }]
+    }
+
+    // initialize map
+    this.map = new maplibregl.Map({
+        container: this.options.map_id,
+        style: defaultStyle,
+        doubleClickZoom: false,
+    });
 
 
-    this.map.on("draw:created", (e) => {
-        this.drawnItems.addLayer(e.layer);
-        const geomString = JSON.stringify(e.layer.toGeoJSON().geometry)
+    this.map.addControl(
+        new maplibregl.NavigationControl({
+            visualizePitch: true,
+            showZoom: true,
+            showCompass: true,
+        }), "bottom-right"
+    );
 
-        this.map.fitBounds(e.layer.getBounds())
+    this.map.addControl(new maplibregl.FullscreenControl());
+
+    await new Promise((resolve) => this.map.on("load", resolve));
+
+    if (this.countriesBounds) {
+        const bounds = [[this.countriesBounds[0], this.countriesBounds[1]], [this.countriesBounds[2], this.countriesBounds[3]]]
+        this.map.fitBounds(bounds)
+    }
+}
+
+PolygonWidget.prototype.initLayer = function () {
+    const severityColor = this.getSeverityColor()
+
+    // add source
+    this.map.addSource("polygon", {
+            'type': 'geojson',
+            data: this.emptyGeojsonData
+        }
+    )
+
+    // add layer
+    this.map.addLayer({
+        'id': 'polygon',
+        'type': 'fill',
+        'source': 'polygon',
+        'layout': {},
+        'paint': {
+            'fill-color': severityColor,
+            'fill-opacity': 0.8,
+            "fill-outline-color": "#000",
+        }
+    });
+}
+
+
+PolygonWidget.prototype.initDraw = function () {
+    const value = this.getState()
+    const hasGeomValue = Boolean(value)
+
+    // remove
+    this.clearDraw()
+
+    this.draw = new MapboxDraw({
+        displayControlsDefault: false,
+        controls: {
+            polygon: !hasGeomValue,
+            trash: true
+        },
+    });
+
+    this.editControl = new EditControl();
+    this.saveCancelControl = new SaveCancelControl()
+
+    this.map.addControl(this.draw, 'top-left');
+    this.map.addControl(this.editControl, 'top-left');
+    this.map.addControl(this.saveCancelControl, 'top-left');
+
+    this.hideTrash()
+
+    this.maybeShowEditControl()
+
+    this.map.doubleClickZoom.disable()
+
+    const $geomEdit = $(".mapbox-gl-draw_edit")
+
+    $geomEdit.on("click", (e) => {
+        e.preventDefault()
+
+        this.showTrash()
+
+        this.map.setLayoutProperty("polygon", "visibility", "none")
+
+        const source = this.map.getSource("polygon")
+        const data = source._data
+        data.id = "feature_polygon"
+        const featureIds = this.draw.add(data)
+
+        this.draw.changeMode('simple_select', {featureIds});
+
+        this.editControl.hide()
+        this.saveCancelControl.show()
+    })
+
+
+    const $geomEditAction = $(".mapboxgl-draw-actions-btn")
+
+    $geomEditAction.on("click", (e) => {
+        e.preventDefault()
+        const isSaveButton = e.target.classList.contains("mapboxgl-draw-actions-btn_save")
+        if (isSaveButton) {
+            const FC = this.draw.getAll();
+            const feat = FC.features[0]
+
+            if (feat) {
+                const feature = feat.geometry
+                this.setDrawData(feature)
+            } else {
+                this.setDrawData(null)
+            }
+
+        } else {
+            this.map.setLayoutProperty("polygon", "visibility", "visible")
+
+            // clean up draw
+            this.draw.changeMode('simple_select');
+            this.draw.deleteAll();
+
+            this.initDraw()
+        }
+    })
+
+    this.map.on("draw.create", (e) => {
+        const feat = e.features[0]
+        const feature = feat.geometry
+        this.setDrawData(feature)
+    });
+}
+
+
+PolygonWidget.prototype.clearDraw = function () {
+    if (this.draw) {
+        this.map.removeControl(this.draw)
+        this.draw = null
+    }
+
+    if (this.editControl) {
+        this.map.removeControl(this.editControl)
+        this.editControl = null
+    }
+
+    if (this.saveCancelControl) {
+        this.map.removeControl(this.saveCancelControl)
+        this.saveCancelControl = null
+    }
+}
+
+
+PolygonWidget.prototype.setDrawData = function (feature) {
+    if (feature) {
+        const bbox = turf.bbox(feature)
+        const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
+
+        this.setSourceData(feature)
+        this.map.setLayoutProperty("polygon", "visibility", "visible")
+
+        this.map.fitBounds(bounds, {padding: 50})
+        const geomString = JSON.stringify(feature)
 
         this.setState(geomString)
-        this.setDrawControl()
-        this.setUploadControl()
-    });
-
-    this.map.on("draw:edited", (e) => {
-        e.layers.eachLayer((layer) => {
-            let isIntersecting = false;
-
-            this.drawnItems.eachLayer((existingLayer) => {
-                if (layer !== existingLayer && layer.intersects(existingLayer)) {
-                    this.drawnItems.removeLayer(layer);
-                    isIntersecting = true;
-                }
-            });
-
-            if (!isIntersecting) {
-                layer.setStyle({color: "blue"});
-            }
-
-            const geomString = JSON.stringify(layer.toGeoJSON().geometry)
-            this.setState(geomString)
-
-            this.setDrawControl()
-            this.setUploadControl()
-        });
-    });
-
-    this.map.on("draw:deleted", (e) => {
-        const deletedLayers = e.layers._layers
-        if (Object.keys(deletedLayers).length > 0) {
-            this.setState("")
-            this.setDrawControl()
-            this.setUploadControl()
-        }
-    });
-}
-
-
-PolygonWidget.prototype.setDrawControl = function () {
-    const value = this.getState()
-
-    const hasGeomValue = Boolean(value)
-
-
-    if (this.drawControl) {
-        this.map.removeControl(this.drawControl)
-    }
-
-    this.drawControl = new L.Control.Draw({
-        edit: {
-            featureGroup: this.drawnItems,
-            edit: hasGeomValue,
-            remove: hasGeomValue,
-            poly: {
-                allowIntersection: true,
-            },
-            allowIntersection: true,
-        },
-        draw: {
-            polyline: false,
-            marker: false,
-            circle: false,
-            circlemarker: false,
-            rectangle: !hasGeomValue,
-            polygon: !hasGeomValue,
-        },
-    });
-
-    this.map.addControl(this.drawControl);
-}
-
-
-PolygonWidget.prototype.setUploadControl = function () {
-    const value = this.getState()
-    const hasGeomValue = Boolean(value)
-
-
-    if (this.uploadControl) {
-        this.map.removeControl(this.uploadControl)
+    } else {
+        this.setSourceData(null)
+        this.setState("")
     }
 
 
-    const style = {
-        color: '#3288ff',
-        opacity: 1.0,
-        fillOpacity: 0.3,
-        weight: 3,
-        clickable: false
-    };
-
-    L.Control.FileLayerLoad.LABEL = `<div class="upload-icon" title="Upload File" ><svg class="icon icon-upload" aria-hidden="true">
-                                        <use href="#icon-upload"></use>
-                                     </svg></div>`;
-
-    this.uploadControl = L.Control.fileLayerLoad({
-        fitBounds: true,
-        addToMap: false,
-        layerOptions: {
-            style: style,
-            pointToLayer: function (data, latlng) {
-                return L.circleMarker(latlng, {style: style}
-                );
-            }
-        }
-    });
-
-
-    if (!hasGeomValue) {
-        this.map.addControl(this.uploadControl);
-        this.uploadControl.loader.on('data:loaded', (e) => {
-            const geojson = e.layer.toGeoJSON()
-            if (geojson.features) {
-                const geojsonFeature = geojson.features[0]
-
-
-                if (geojsonFeature.geometry.type !== "Polygon") {
-                    alert(`Uploaded type ${geojsonFeature.geometry.type} not supported`)
-                } else {
-                    const geojsonLayer = L.geoJSON(geojsonFeature)
-
-                    geojsonLayer.eachLayer((layer) => {
-                        this.drawnItems.addLayer(layer);
-                        this.setState(JSON.stringify(geojsonFeature.geometry))
-                    });
-
-                    this.setDrawControl()
-                    this.setUploadControl()
-                }
-            }
-        });
-    }
+    this.initDraw()
+    this.maybeShowEditControl()
 }
 
+
+PolygonWidget.prototype.setSourceData = function (data) {
+    if (data) {
+        this.map.getSource("polygon").setData(data)
+    } else {
+        this.map.getSource("polygon").setData(this.emptyGeojsonData)
+    }
+}
 
 PolygonWidget.prototype.initFromState = function () {
     const value = this.getState()
 
     if (value) {
-        const geojsonFeature = JSON.parse(value)
-        const geojsonLayer = L.geoJSON(geojsonFeature)
-        geojsonLayer.eachLayer((layer) => {
-            this.drawnItems.addLayer(layer);
-        });
+        const feature = JSON.parse(value)
+        this.setDrawData(feature)
+    }
+}
 
-        this.setDrawControl()
-        this.setUploadControl()
+PolygonWidget.prototype.onSeverityChange = function () {
+    const severityColor = this.getSeverityColor()
+    if (severityColor) {
+        this.map.setPaintProperty("polygon", "fill-color", severityColor)
+    }
+}
 
-        setTimeout(() => {
-            this.map.fitBounds(geojsonLayer.getBounds())
-        }, 400);
 
+PolygonWidget.prototype.getSeverityColor = function () {
+    const severity = this.severityInput.val()
+    switch (severity) {
+        case "Extreme":
+            return "#d72f2a"
+        case "Severe":
+            return "#fe9900"
+        case "Moderate":
+            return "#ffff00"
+        case "Minor":
+            return "#03ffff"
+        default:
+            return "#3366ff"
+    }
+}
+
+
+PolygonWidget.prototype.hideTrash = function () {
+    if (this.draw) {
+        const drawPolygon = $(".mapbox-gl-draw_trash")
+        if (!!drawPolygon.length) {
+            drawPolygon.hide()
+        }
+    }
+}
+
+PolygonWidget.prototype.showTrash = function () {
+    if (this.draw) {
+        const drawPolygon = $(".mapbox-gl-draw_trash")
+        if (!!drawPolygon.length) {
+            drawPolygon.show()
+        }
+    }
+}
+
+PolygonWidget.prototype.maybeShowEditControl = function () {
+    const source = this.map.getSource("polygon")
+    const data = source && source._data
+
+    if (data && data.coordinates && !!data.coordinates.length && this.editControl) {
+        this.editControl.show()
     }
 }

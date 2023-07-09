@@ -1,9 +1,9 @@
 (function () {
-    function PolygonInput(html) {
+    function BoundaryPolygonInput(html) {
         this.html = html;
     }
 
-    PolygonInput.prototype.render = function (placeholder, name, id, initialState) {
+    BoundaryPolygonInput.prototype.render = function (placeholder, name, id, initialState) {
         const html = this.html.replace(/__NAME__/g, name).replace(/__ID__/g, id);
         placeholder.outerHTML = html;
 
@@ -13,8 +13,8 @@
             name: name,
         };
 
-        return new PolygonWidget(options, initialState);
+        return new BoundaryPolygonWidget(options, initialState);
     };
 
-    window.telepath.register('capeditor.widgets.PolygonInput', PolygonInput);
+    window.telepath.register('capeditor.widgets.BoundaryPolygonInput', BoundaryPolygonInput);
 })();

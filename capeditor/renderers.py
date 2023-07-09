@@ -1,13 +1,12 @@
-# from io import StringIO
-# from rest_framework_xml.renderers import XMLRenderer
-import six
 import datetime
+from io import StringIO
+from xml.etree.ElementTree import Element, tostring, ElementTree
 
+import six
 from rest_framework_xml.renderers import XMLRenderer
-from xml.etree.ElementTree import Element, tostring
 
 
-class CustomXMLRenderer(XMLRenderer):
+class CapXMLRenderer(XMLRenderer):
     format = 'xml'
     root_tag_name = 'alert'
 
@@ -24,10 +23,7 @@ class CustomXMLRenderer(XMLRenderer):
                 xml.append(element)
 
     def _recursive_serialize(self, value, xml):
-
-        if isinstance(value, (list, tuple)):
-            self._recursive_serialize_list(value, xml)
-        elif isinstance(value, dict):
+        if isinstance(value, dict):
             self._recursive_serialize_dict(value, xml)
         elif isinstance(value, datetime.datetime):
             xml.text = value.isoformat()
@@ -44,24 +40,37 @@ class CustomXMLRenderer(XMLRenderer):
         """
         Render `data` into XML.
         """
+
+        tree = ElementTree()
+        stream = StringIO()
+
         if data is None:
             return ''
         elif isinstance(data, list):
             root = Element('feed')
-            root.set('xmlns', 'urn:oasis:names:tc:emergency:cap:1.2')
 
             for item in data:
                 element = Element('alert')
+                element.set('xmlns', 'urn:oasis:names:tc:emergency:cap:1.2')
                 self._recursive_serialize(item, element)
 
                 root.append(element)
 
-            return tostring(root, encoding='unicode')
+            tree._setroot(root)
+            tree.write(stream, encoding="unicode", xml_declaration=True)
+
+            return stream.getvalue()
+
         elif isinstance(data, dict):
+
             root = Element('alert')
             root.set('xmlns', 'urn:oasis:names:tc:emergency:cap:1.2')
 
             self._recursive_serialize_dict(data, root)
-            return tostring(root, encoding='unicode')
+
+            tree._setroot(root)
+            tree.write(stream, encoding="unicode", xml_declaration=True)
+
+            return stream.getvalue()
         else:
             return data

@@ -1,0 +1,41 @@
+.circle_map_wrapper {
+}
+
+.circle_map_wrapper .circle_map {
+    min-height: 400px;
+    width: 100%;
+}
+
+
+.circle_map_wrapper .circle-params {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    background-color: #fff;
+    padding: 12px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
+}
+
+.circle_map_wrapper .w-field__wrapper {
+    margin-bottom: 4px;
+    font-size: 12px !important;
+}
+
+
+.circle_map_wrapper .w-field__wrapper .w-field__label {
+    margin-bottom: 4px;
+    font-size: 12px !important;
+}
+
+.circle_map_wrapper .w-field__wrapper .w-field__input {
+    padding-inline-end: 0;
+}
+
+.circle_map_wrapper .w-field__wrapper .w-field__input input {
+    padding: 4px 10px;
+    height: 34px !important;
+    min-height: 34px !important;
+}
+
+
