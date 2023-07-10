@@ -1,9 +1,6 @@
-import json
-
 import pytz
 from dateutil.parser import isoparse
 from rest_framework import serializers
-from shapely.geometry import shape
 
 
 def parse_tz(date_str):
@@ -38,7 +35,6 @@ class AlertSerializer(serializers.ModelSerializer):
 
         for info in obj.info:
             info_obj = info.block.get_api_representation(info.value)
-
             if info.value.resource:
                 resources = []
                 for resource in info.value.resource:

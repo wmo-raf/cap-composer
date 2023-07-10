@@ -81,13 +81,13 @@ class BoundaryPolygonWidget(WidgetWithScript, BasePolygonWidget):
         css = {
             "all": [
                 "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.css",
-                "capeditor/css/boundary-widget.css",
+                "capeditor/css/widget/boundary-widget.css",
             ]
         }
         js = [
             "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.js",
             "https://unpkg.com/@turf/turf/turf.min.js",
-            "capeditor/js/boundary-polygon-widget.js",
+            "capeditor/js/widget/boundary-polygon-widget.js",
         ]
 
 
@@ -96,7 +96,7 @@ class BoundaryPolygonWidgetAdapter(WidgetAdapter):
 
     class Media:
         js = [
-            "capeditor/js/boundary-polygon-widget-telepath.js",
+            "capeditor/js/widget/boundary-polygon-widget-telepath.js",
         ]
 
 
@@ -121,14 +121,14 @@ class PolygonWidget(WidgetWithScript, BasePolygonWidget):
             "all": [
                 "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.css",
                 "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.css",
-                "capeditor/css/polygon-widget.css",
+                "capeditor/css/widget/polygon-widget.css",
             ]
         }
         js = [
             "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.js",
             "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.js",
             "https://unpkg.com/@turf/turf/turf.min.js",
-            "capeditor/js/polygon-widget.js",
+            "capeditor/js/widget/polygon-widget.js",
         ]
 
 
@@ -137,7 +137,7 @@ class PolygonWidgetAdapter(WidgetAdapter):
 
     class Media:
         js = [
-            "capeditor/js/polygon-widget-telepath.js",
+            "capeditor/js/widget/polygon-widget-telepath.js",
         ]
 
 
@@ -161,13 +161,13 @@ class CircleWidget(WidgetWithScript, BaseMapWidget, Textarea):
         css = {
             "all": [
                 "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.css",
-                "capeditor/css/circle-widget.css",
+                "capeditor/css/widget/circle-widget.css",
             ]
         }
         js = [
             "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.js",
             "https://unpkg.com/@turf/turf/turf.min.js",
-            "capeditor/js/circle-widget.js",
+            "capeditor/js/widget/circle-widget.js",
         ]
 
 
@@ -176,7 +176,7 @@ class CircleWidgetAdapter(WidgetAdapter):
 
     class Media:
         js = [
-            "capeditor/js/circle-widget-telepath.js",
+            "capeditor/js/widget/circle-widget-telepath.js",
         ]
 
 

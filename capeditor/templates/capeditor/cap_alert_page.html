@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+{% load static wagtailiconchooser_tags %}
+
+{% block body_class %}cap-alert-page{% endblock %}
+
+{% block extra_css %}
+    <link href="https://unpkg.com/maplibre-gl@3.1.0/dist/maplibre-gl.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'capeditor/css/cap_detail_page.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+    <main>
+        <div class="cap_content">
+            <section class="cap-header-section">
+                <div class="container cap-header-container">
+                    <div class="title">
+                        <h2>
+                            {% if page.alert_info.value.headline %}
+                                {{ page.alert_info.value.headline }}
+                            {% else %}
+                                {{ page.title }}
+                            {% endif %}
+                        </h2>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-full-mobile is-two-fifths-desktop cap-meta-wrapper">
+                            {% if page.alert_info %}
+                                <div class="cap-event">
+                                    <div class="cap-event-header">Event:</div>
+                                    <div class="cap-event-detail">
+                                        {% if page.alert_info.value.event_icon %}
+                                            <div class="c-icon">{% svg_icon name=page.alert_info.value.event_icon %}</div>
+                                        {% endif %}
+                                        <div class="cap-event-name">{{ page.alert_info.value.event }}</div>
+                                    </div>
+                                </div>
+                                <div class="cap-time-wrapper">
+                                    <div class="cap-time-effective" style="display: none"></div>
+                                    <div class="cap-time">
+                                        <ul>
+                                            <li>
+                                                <div class="list-dot"></div>
+                                                <div>
+                                                    <span class="time-type">Issued: </span>
+                                                    <span>{{ page.sent }}</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="list-dot"></div>
+                                                <div>
+                                                    <span class="time-type">Effective: </span>
+                                                    <span>
+                                                        {% if  page.alert_info.value.effective %}
+                                                            {{ page.alert_info.value.effective }}
+                                                        {% else %}
+                                                            {{ page.sent }}
+                                                        {% endif %}
+                                                    </span>
+                                                </div>
+                                            </li>
+                                            {% if page.alert_info.value.onset %}
+                                                <li>
+                                                    <div class="list-dot"></div>
+                                                    <div>
+                                                        <span class="time-type">Onset: </span>
+                                                        <span>{{ page.alert_info.value.onset }}</span></div>
+                                                </li>
+                                            {% endif %}
+                                            <li>
+                                                <div class="list-dot"></div>
+                                                <div>
+                                                    <span class="time-type">Expires: </span>
+                                                    <span>{{ page.alert_info.value.expires }}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="cap-info-summary-wrapper">
+                                    <div class="cap-info-summary-item">
+                                        <div class="cap-info-summary-icon">
+                                            {% svg_icon name="time" %}
+                                        </div>
+                                        <div class="cap-info-summary-type">Urgency:</div>
+                                        <div class="cap-info-summary-value">{{ page.alert_info.value.urgency }}</div>
+                                    </div>
+                                    <div class="cap-info-summary-item">
+                                        <div class="cap-info-summary-icon">
+                                            {% svg_icon name="warning" %}
+                                        </div>
+                                        <div class="cap-info-summary-type">Severity:</div>
+                                        <div class="cap-info-summary-value">{{ page.alert_info.value.severity }}</div>
+                                    </div>
+                                    <div class="cap-info-summary-item">
+                                        <div class="cap-info-summary-icon">
+                                            {% svg_icon name="crosshairs" %}
+                                        </div>
+                                        <div class="cap-info-summary-type">Certainty:</div>
+                                        <div class="cap-info-summary-value">{{ page.alert_info.value.certainty }}</div>
+                                    </div>
+
+                                </div>
+                            {% endif %}
+                            <div class="cap-share-wrapper">
+                                {% if page.xml_link and not request.is_preview %}
+                                    <div class="cap-share-item">
+                                        <div class="cap-share-icon">
+                                            {% svg_icon name="cap-alert" %}
+                                        </div>
+                                        <div class="cap-share-link">
+                                            <a target="_blank" rel="noopener norefferrer" href="{{ page.xml_link }}">
+                                                CAP XML Link
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>¬
+                        </div>
+                        <div class="column is-full-mobile is-three-fifths-desktop">
+                            <div class="cap-map-wrapper">
+                                <div id="cap-map"></div>
+                                <div class="map-legend">
+                                    <div>Alert Severity:</div>
+                                    <div class="legend-items">
+                                        <div class="legend-item">
+                                            <div class="legend-color" style="background-color: rgb(215, 47, 42);"></div>
+                                            <div class="legend-label">Extreme</div>
+                                        </div>
+                                        <div class="legend-item">
+                                            <div class="legend-color" style="background-color: rgb(254, 153, 0);"></div>
+                                            <div class="legend-label">Severe</div>
+                                        </div>
+                                        <div class="legend-item">
+                                            <div class="legend-color" style="background-color: rgb(255, 255, 0);"></div>
+                                            <div class="legend-label">Moderate</div>
+                                        </div>
+                                        <div class="legend-item">
+                                            <div class="legend-color" style="background-color: rgb(3, 255, 255);"></div>
+                                            <div class="legend-label">Minor</div>
+                                        </div>
+                                        <div class="legend-item">
+                                            <div class="legend-color"
+                                                 style="background-color: rgb(51, 102, 255);"></div>
+                                            <div class="legend-label">Unknown</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="affected-areas">
+                                <div class="affected-area-title">
+                                    <div class="c-icon">{% svg_icon name="location" %}</div>
+                                    <span>Affected area</span>
+                                </div>
+                                <div>{{ page.affected_area }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="cap-info-section">
+                <div class="container">
+                    <div class="columns">
+                        <div class="column">
+                            <div class="info-item">
+                                <div class="info-header">
+                                    Event
+                                </div>
+                                <div class="info-detail" style="display: flex">
+
+                                    {% if page.alert_info.value.event_icon %}
+                                        <div class="c-icon">{% svg_icon name=page.alert_info.value.event_icon %}</div>
+                                    {% endif %}
+                                    <div>
+                                        {{ page.alert_info.value.event }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-header">
+                                    Event Description
+                                </div>
+                                <div class="info-detail">
+                                    <p>
+                                        {{ page.alert_info.value.description }}
+                                    </p>
+                                </div>
+                            </div>
+                            {% if  page.alert_info.value.instruction %}
+                                <div class="info-item">
+                                    <div class="info-header">
+                                        Instructions
+                                    </div>
+                                    <div class="info-detail">
+                                        {{ page.alert_info.value.instruction }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="https://unpkg.com/maplibre-gl@3.1.0/dist/maplibre-gl.js"></script>
+
+    <script>
+
+        // alert area as geojson
+        const geojson = {{ page.geojson|safe }};
+
+        // alert area bounds
+        const bounds = {{ page.bounds|safe }};
+
+        // default MapLibre style
+        const defaultStyle = {
+            'version': 8,
+            'sources': {
+                'carto-dark': {
+                    'type': 'raster',
+                    'tiles': [
+                        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                        "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png"
+                    ]
+                },
+                'carto-light': {
+                    'type': 'raster',
+                    'tiles': [
+                        "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                        "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                        "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                        "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"
+                    ]
+                },
+                'wikimedia': {
+                    'type': 'raster',
+                    'tiles': [
+                        "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
+                    ]
+                }
+            },
+            'layers': [{
+                'id': 'carto-light-layer',
+                'source': 'carto-light',
+
+
+                'type': 'raster',
+                'minzoom': 0,
+                'maxzoom': 22
+            }]
+        }
+
+        // initialize map
+        const map = new maplibregl.Map({
+            container: "cap-map",
+            style: defaultStyle,
+        });
+
+        // add zoom control
+        map.addControl(
+            new maplibregl.NavigationControl({
+                visualizePitch: true,
+                showZoom: true,
+                showCompass: true,
+            })
+        );
+
+        map.on("load", () => {
+
+
+            // add source
+            map.addSource("polygon", {
+                    'type': 'geojson',
+                    data: geojson
+                }
+            )
+
+            // add layer
+            map.addLayer({
+                'id': 'polygon',
+                'type': 'fill',
+                'source': 'polygon',
+                'layout': {},
+                'paint': {
+                    'fill-color': "red",
+                    'fill-opacity': 0.8,
+                    "fill-outline-color": "#000",
+                }
+            });
+
+            // fit to bounds
+            if (bounds) {
+                const bbox = [[bounds[0], bounds[1]], [bounds[2], bounds[3]]]
+                map.fitBounds(bbox, {padding: 20})
+            }
+        })
+    </script>
+{% endblock %}

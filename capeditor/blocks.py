@@ -1,13 +1,16 @@
 import json
 
+import shapely
 from django import forms
 from django.contrib.gis.geos import GEOSGeometry
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
+from shapely import Point
 from shapely.geometry import shape
 from wagtail import blocks
 from wagtail.blocks import FieldBlock, StructValue
 from wagtail.documents.blocks import DocumentChooserBlock
+from wagtail.models import Site
 from wagtailiconchooser.blocks import IconChooserBlock
 
 from .forms.fields import PolygonField, BoundaryPolygonField
@@ -136,6 +139,11 @@ class AlertAreaBoundaryStructValue(StructValue):
 
         return area_data
 
+    @cached_property
+    def geojson(self):
+        polygon = self.get("boundary")
+        return json.loads(polygon)
+
 
 class AlertAreaBoundaryBlock(blocks.StructBlock):
     class Meta:
@@ -183,6 +191,11 @@ class AlertAreaPolygonStructValue(StructValue):
 
         return area_data
 
+    @cached_property
+    def geojson(self):
+        polygon = self.get("polygon")
+        return json.loads(polygon)
+
 
 class AlertAreaPolygonBlock(blocks.StructBlock):
     class Meta:
@@ -216,6 +229,25 @@ class AlertAreaCircleStructValue(StructValue):
 
         return area_data
 
+    @cached_property
+    def geojson(self):
+        circle_str = self.get("circle")
+        parts = circle_str.split()
+        coords = parts[0].split(',')
+
+        # Extract the longitude, latitude, and radius
+        longitude, latitude, radius_km = float(coords[0]), float(coords[1]), float(parts[1])
+
+        # Convert radius to degrees (approximation for small distances)
+        radius_deg = radius_km / 111.12
+
+        # Create a point for the center
+        center_point = Point(longitude, latitude)
+
+        circle = center_point.buffer(radius_deg)
+
+        return shapely.geometry.mapping(circle)
+
 
 class AlertAreaCircleBlock(blocks.StructBlock):
     class Meta:
@@ -247,6 +279,10 @@ class AlertAreaGeocodeStructValue(StructValue):
                 area_data.update({"ceiling": self.get("ceiling")})
 
         return area_data
+
+    @cached_property
+    def geojson(self):
+        return {}
 
 
 class AlertAreaGeocodeBlock(blocks.StructBlock):
@@ -337,6 +373,25 @@ class AlertEventCode(blocks.StructBlock):
 
 class AlertInfoStructValue(StructValue):
     @cached_property
+    def event_icon(self):
+        from .models import CapSetting
+        event = self.get("event")
+        try:
+            site = Site.objects.get(is_default_site=True)
+            if site:
+                cap_setting = CapSetting.for_site(site)
+
+                if cap_setting.hazard_types:
+                    for hazard in cap_setting.hazard_types:
+                        event_name = hazard.value.get("hazard")
+                        if event_name == event:
+                            return hazard.value.get("icon")
+        except Exception:
+            pass
+
+        return None
+
+    @cached_property
     def resource(self):
         resource = self.get("resource")
         resources = []
@@ -355,6 +410,27 @@ class AlertInfoStructValue(StructValue):
             for area in area_blocks:
                 areas.append(area.value.area)
             return areas
+
+    @cached_property
+    def geojson(self):
+        area_blocks = self.get("area")
+        features = []
+        if area_blocks:
+            for area in area_blocks:
+                features.append(area.value.geojson)
+            return features
+
+    @cached_property
+    def features(self):
+        area_blocks = self.get("area")
+        features = []
+
+        if area_blocks:
+            for feature in area_blocks:
+                if feature.value.geojson:
+                    features.append({"type": "Feature", "geometry": feature.value.geojson})
+
+        return features
 
 
 class AlertInfo(blocks.StructBlock):

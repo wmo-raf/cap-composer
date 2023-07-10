@@ -1,8 +1,11 @@
+import json
 import uuid
 
 from django.contrib.gis.db import models
 from django.utils import timezone
+from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
+from shapely.geometry import shape
 from wagtail import blocks
 from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
@@ -262,7 +265,57 @@ class AbstractCapAlertPage(Page):
         FieldPanel("incidents"),
     ]
 
-    @property
+    @cached_property
+    def alert_info(self):
+        if self.info:
+            return self.info[0]
+        return None
+
+    @cached_property
     def cap_reference_id(self):
         sent = parse_tz(self.sent.isoformat())
         return f"{self.sender},{self.identifier.hex},{sent}"
+
+    @cached_property
+    def feature_collection(self):
+        fc = {"type": "FeatureCollection", "features": []}
+        for info in self.info:
+            if info.value.features:
+                for feature in info.value.features:
+                    fc["features"].append(feature)
+        return fc
+
+    @cached_property
+    def geojson(self):
+        return json.dumps(self.feature_collection)
+
+    @cached_property
+    def bounds(self):
+        geojson_data = self.feature_collection
+        bounds = None
+        for feature in geojson_data['features']:
+            geometry = shape(feature['geometry'])
+            if bounds is None:
+                bounds = geometry.bounds
+            else:
+                bounds = (
+                    min(bounds[0], geometry.bounds[0]),
+                    min(bounds[1], geometry.bounds[1]),
+                    max(bounds[2], geometry.bounds[2]),
+                    max(bounds[3], geometry.bounds[3])
+                )
+
+        return list(bounds)
+
+    @cached_property
+    def affected_area(self):
+        areas = []
+        for info in self.info:
+            for area in info.value.area:
+                areas.append(area.get("areaDesc"))
+
+        return ", ".join(areas)
+
+    @property
+    def xml_link(self):
+        return None

@@ -3,6 +3,6 @@ from django.urls import path
 from home.views import AlertList, AlertDetail
 
 urlpatterns = [
-    path('caps.xml', AlertList.as_view(), name="alert_list"),
-    path("<uuid:identifier>.xml", AlertDetail.as_view(), name="alert_detail"),
+    path('api/cap/feed.xml', AlertList.as_view(), name="cap_alert_feed"),
+    path("api/cap/<uuid:identifier>.xml", AlertDetail.as_view(), name="cap_alert_detail"),
 ]

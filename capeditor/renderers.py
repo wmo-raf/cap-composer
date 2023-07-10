@@ -1,6 +1,6 @@
 import datetime
 from io import StringIO
-from xml.etree.ElementTree import Element, tostring, ElementTree
+from xml.etree.ElementTree import Element, ElementTree
 
 import six
 from rest_framework_xml.renderers import XMLRenderer

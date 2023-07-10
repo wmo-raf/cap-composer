@@ -8,3 +8,11 @@ def insert_editor_js():
     return format_html(
         '<script src="{}"></script>', static("capeditor/js/conditional_fields.js"),
     )
+
+
+@hooks.register("register_icons")
+def register_icons(icons):
+    return icons + [
+        'capeditor/icons/cap-alert.svg',
+        'capeditor/icons/cap-alert-full.svg',
+    ]
