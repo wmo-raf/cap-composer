@@ -1,0 +1,274 @@
+{% load wagtailcore_tags wagtailimages_tags lazyimages_tags %}
+
+{% for info in item_info %}
+
+    {% for alert_area in info.alert_areas.values%}
+        <input
+        name="alert-area"
+        class="alert-area"
+        id="area-{{ alert_area.id }}"
+        type="hidden"
+        value="{{info.severity}}~{{alert_area.areaDesc}}~{{ alert_area.area }}"
+        />
+
+    {% endfor %}
+
+{% endfor %}
+<div class="columns is-multiline featured-item-block" style="align-items: flex-start;">
+    <div class="column is-5-widescreen is-full-mobile featured-item-image mb-4">
+      
+
+      {% for info in item_info %}
+      {% for alert_area in info.alert_areas.values%}
+      <span class="tag is-dark" style="margin:1em 0"> <i class="fa fa-location-pin pr-1"> </i> {{alert_area.areaDesc}}</span>
+      {% endfor %}
+      {% endfor %}
+
+      <div id="alert-map" style="height:400px; border-radius:2em; background-color:#e9e8e8"></div>
+
+    </div>
+    
+    <div class="column is-6-widescreen is-full-mobile featured-item-detail">
+      <div class="featured-item-header">
+          <span class="featured-item-header-tag">
+              Latest
+          </span>
+          <div class="share-buttons">
+            <a class="button is-small is-rounded"
+            href="{{item_url}}"
+          >
+             
+              <span class="share-button-title">Read More</span>
+              <span class="icon">
+                <i class="fa fa-circle-info" aria-hidden="true"></i>
+            </span>
+          </a>
+            <a class="button is-small is-rounded"
+            href="{% url 'alert_by_id' item_identifier %}"
+            target="_blank" rel="noopener"
+          >
+             
+              <span class="share-button-title">View XML</span>
+              <span class="icon">
+                <i class="fa fa-code" aria-hidden="true"></i>
+            </span>
+          </a>
+          
+          </div>
+         
+      </div>
+      <div class="featured-item-body">
+          <h3 class="featured-item-title">
+              <a href="{{ item_url }}">
+                  {{ item_title }}
+                  
+              </a>
+          </h3>
+              <div class="featured-item-snippet format-text">
+                  {% for info in item_info %}
+              {% if info.is_expired %}
+          
+              Note: This alert has expired. 
+              {% endif %}
+
+              <h3 class="title" style="font-size: 20px !important">
+                  {% if info.event %}{{info.event}} event{% endif %} 
+                  {% if info.area%} at {% for alert_area in info.alert_areas.values%}
+                  {{alert_area.areaDesc}}, {% endfor %}{% endif %} 
+                  {% if info.onset %}effective on {{info.onset}}{% endif %} {% if info.expires %} and expires on
+                  {{info.expires}}{% endif %}
+              </h3>
+
+              <table class="table">
+                <tbody>
+                  <tr>
+                      <th>Urgency</th>
+                      <td>{{info.get_urgency_display}}</td>
+                  </tr>
+
+                  <tr>
+                      <th>Severity</th>
+
+
+                      {% if info.severity == 'Extreme'  %}
+                      <td><span class="is-medium" style="background-color:rgb(215, 48, 42, 0.4); color:#000 " >{{info.get_severity_display}}</span></td>
+
+                      {% elif info.severity == 'Severe'%}
+                      <td><span class="is-medium" style="background-color:rgb(248, 154, 4, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
+
+                      {% elif info.severity == 'Moderate'%}
+                      <td><span class="is-medium" style="background-color:rgb(227, 230, 22, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
+
+                      {% elif info.severity == 'Minor'%}
+                      <td><span class="is-medium" style="background-color:rgb(83, 255, 255,0.4); color:#000" >{{info.get_severity_display}}</span></td>
+
+                      {% elif info.severity == 'Unknown'%}
+                      <td><span class="is-medium" style="background-color:rgb(51, 102, 255, 0.4); color:#000" >{{info.get_severity_display}}</span></td>
+
+                                              
+                      {% endif %}
+                      
+
+                  </tr>
+
+                  <tr>
+                      <th>Certainity</th>
+                      <td>{{info.get_certainty_display}}</td>
+                  </tr>
+
+                  {% if info.audience %}
+                  <tr>
+                      <th>Audience</th>
+                      <td>{{info.audience}}</td>
+                  </tr>
+                  {% endif %}
+                  
+                  {% if info.instruction %}
+                  <tr>
+                      <th>Instructions</th>
+                      <td>{{info.instruction}}</td>
+                  </tr>
+                  {% endif %}
+
+                  {% if info.contact %}
+
+                  <tr>
+                      <th>Contact Information</th>
+                      <td>{{info.contact}}</td>
+                  </tr>
+
+                  {% endif %}
+                  </tbody>
+              </table>
+
+              {% endfor %}
+          </div>
+      </div>
+      
+  </div>
+</div>
+
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/db8ac3c257.js" crossorigin="anonymous"></script>
+<script src="https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+<script>
+    const latest_map = new maplibregl.Map({
+        container: "alert-map", // container ID
+        style: "https://api.maptiler.com/maps/basic-v2/style.json?key=uYCBTRo5fyHCkPvoa5Io", // style URL
+        center: [30.019531249998607, 16.130262012034265], // starting position [lng, lat]
+        zoom: 4.2, // starting zoom
+        scrollZoom: false,
+      });
+
+      var allAreas = $(".alert-area")
+    .map(function () {
+      return this.value;
+    })
+    .get();
+
+  if (allAreas.length > 0) {
+    var polyFeature = [];
+    allAreas.map((area) => {
+      // Remove the SRID prefix
+      const wktWithoutSrid = area.split("~")[2].replace(/^SRID=\d+;/, "");
+
+      // Extract the coordinates from the polygon string using a regex pattern
+      const match = /\((.*?)\)/.exec(wktWithoutSrid);
+
+      revCoords = [];
+
+      if (match) {
+        const coordinatePairs = match[1].split(", ");
+        const coordinates = coordinatePairs.map((pair) =>
+          pair.replace("(", "").split(" ").map(parseFloat)
+        );
+
+        polyFeature.push({
+          type: "Feature",
+          geometry: {
+            type: "Polygon",
+            coordinates: [coordinates],
+          },
+          properties: {
+            areaDesc: area.split("~")[1],
+            severity: area.split("~")[0],
+          },
+        });
+      }
+    });
+
+
+    latest_map.on("load", () => {
+      latest_map.addSource("alert-areas", {
+        type: "geojson",
+        data: {
+          type: "FeatureCollection",
+          features: polyFeature,
+        },
+      });
+
+      latest_map.addLayer({
+        id: "alert-areas-layer",
+        type: "fill",
+        source: "alert-areas",
+        paint: {
+          "fill-color": "#088",
+          "fill-opacity": 0.8,
+          "fill-color": [
+            "case",
+            ["==", ["get", "severity"], "Extreme"],
+            "#d72f2a",
+            ["==", ["get", "severity"], "Severe"],
+            "#f89904",
+            ["==", ["get", "severity"], "Moderate"],
+            "#e4e616",
+            ["==", ["get", "severity"], "Minor"],
+            "#53ffff",
+            ["==", ["get", "severity"], "Unknown"],
+            "#3366ff",
+            "black",
+          ],
+          "fill-opacity": 0.8,
+        },
+      });
+      var sourceBounds = new maplibregl.LngLatBounds();
+      latest_map.getSource("alert-areas")._data.features.forEach(function (feature) {
+        sourceBounds.extend(feature.geometry.coordinates[0]);
+      });
+
+      var bounds = turf.bbox({
+        type: "FeatureCollection",
+        features: polyFeature,
+      });
+      latest_map.fitBounds(bounds, { padding: 20 });
+
+      // When a click event occurs on a feature in the places layer, open a popup at the
+      // location of the feature, with description HTML from its properties.
+      latest_map.on("click", "alert-areas-layer", (e) => {
+        // Copy coordinates array.
+        const description = e.features[0].properties.areaDesc;
+
+        new maplibregl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML(`<h4>${description}</h4>`)
+          .addTo(latest_map);
+      });
+
+      // Change the cursor to a pointer when the mouse is over the places layer.
+      latest_map.on("mouseenter", "alert-areas-layer", () => {
+        latest_map.getCanvas().style.cursor = "pointer";
+      });
+
+      // Change it back to a pointer when it leaves.
+      latest_map.on("mouseleave", "alert-areas-layer", () => {
+        latest_map.getCanvas().style.cursor = "";
+      });
+    });
+  }
+</script>
+
+
+{% endblock extra_js %}
