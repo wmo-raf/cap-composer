@@ -431,11 +431,13 @@ class AlertInfoStructValue(StructValue):
         severity_blocks = self.get("severity")
         certainty_blocks = self.get("certainty")
         urgency_blocks = self.get("urgency")
+        event_blocks = self.get("event")
 
         return {
             'severity':severity_blocks,
             'certainty':certainty_blocks,
-            'urgency':urgency_blocks
+            'urgency':urgency_blocks,
+            'event':event_blocks
         }
 
     @cached_property
