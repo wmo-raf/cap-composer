@@ -1,0 +1,218 @@
+.cap_content {
+    margin-top: 40px;
+}
+
+.cap-header-section {
+    background-color: #f4f6f7;
+}
+
+.cap-header-container {
+    padding: 50px 0;
+}
+
+.cap-map-wrapper {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+#cap-map {
+    height: 400px;
+    width: 100%;
+}
+
+.c-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 4px;
+}
+
+.c-icon svg {
+    height: 100%;
+    width: 100%;
+}
+
+.map-legend {
+    display: flex;
+    padding: 4px 8px;
+    align-items: center;
+    background-color: rgba(78, 142, 203, .1);
+    font-size: 14px;
+    flex-wrap: wrap;
+}
+
+.legend-items {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.map-legend .legend-items .legend-item .legend-color {
+    margin-right: 4px;
+    height: 12px;
+    width: 12px;
+}
+
+.cap-meta-wrapper {
+    width: 100%;
+}
+
+.cap-event {
+    display: flex;
+}
+
+.cap-event-header {
+    font-weight: 600;
+    font-size: 16px;
+    padding-bottom: 10px;
+    margin-right: 10px;
+}
+
+.cap-event-detail {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.cap-event-name {
+    margin-left: 4px;
+}
+
+.cap-time-wrapper {
+    margin-bottom: 10px;
+    background-color: rgba(78, 142, 203, .1);
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.cap-time-wrapper .cap-time-effective {
+    font-size: 18px;
+    font-weight: 500;
+    color: #4e8ecb;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #4e8ecb;
+}
+
+.cap-time-wrapper .cap-time {
+    list-style: none;
+}
+
+.cap-time-wrapper .cap-time ul {
+    list-style: none;
+}
+
+
+.cap-time-wrapper .cap-time ul li {
+    position: relative;
+    margin: 0;
+    padding-bottom: 10px;
+    padding-left: 20px;
+}
+
+.cap-time-wrapper .cap-time ul li:before {
+    content: "";
+    background-color: #4e8ecb;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 6px;
+    width: 3px;
+}
+
+.cap-time-wrapper .cap-time ul li .list-dot {
+    border-width: 1px;
+    background-color: #4e8ecb;
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    left: 1px;
+    top: 4px;
+    border-radius: 50%;
+}
+
+.cap-time-wrapper .cap-time ul li .time-type {
+    font-weight: 500;
+    color: #555;
+}
+
+
+.cap-info-summary-wrapper {
+    padding: 20px;
+}
+
+.cap-info-summary-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cap-info-summary-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 4px;
+}
+
+.cap-info-summary-icon svg {
+    height: 100%;
+    width: 100%;
+}
+
+.cap-info-summary-type {
+    margin-left: 4px;
+    font-weight: 600;
+}
+
+.cap-info-summary-value {
+    margin-left: 4px;
+}
+
+.affected-areas {
+    padding: 20px 0;
+}
+
+.affected-area-title {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.cap-info-section {
+    padding: 20px 0;
+}
+
+.info-item {
+    padding: 10px 0;
+}
+
+.info-header {
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+.cap-share-wrapper {
+    padding: 20px;
+}
+
+.cap-share-item {
+    display: flex;
+    padding: 10px 0;
+}
+
+.cap-share-icon {
+    height: 24px;
+    width: 24px;
+    margin-right: 4px;
+}
+
+.cap-share-icon svg {
+    height: 100%;
+    width: 100%;
+}

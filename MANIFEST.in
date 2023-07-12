@@ -3,3 +3,4 @@ recursive-include capeditor *.html
 recursive-include capeditor *.py
 recursive-include capeditor/static *
 recursive-include capeditor/templates *
+recursive-include capeditor/locale *.po *.mo

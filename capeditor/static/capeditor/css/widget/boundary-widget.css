@@ -1,0 +1,7 @@
+.boundary_map_wrapper {
+}
+
+.boundary_map_wrapper .boundary_map {
+    min-height: 400px;
+    width: 100%;
+}

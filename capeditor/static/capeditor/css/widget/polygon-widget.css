@@ -1,0 +1,70 @@
+.polygon_map_wrapper {
+
+}
+
+.geom-input-selector {
+    margin-bottom: 20px;
+}
+
+.polygon_map_wrapper .polygon_map {
+    min-height: 400px;
+    width: 100%;
+}
+
+.control-icon {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-icon svg {
+    height: 60%;
+    width: 60%;
+    fill: #000;
+}
+
+.mapbox-gl-draw_edit {
+}
+
+.save-cancel-control {
+    display: flex;
+    flex-direction: column;
+    color: #222;
+    padding: 4px;
+    min-width: 110px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
+}
+
+.save-cancel-control .actions {
+    display: flex;
+}
+
+.save-cancel-control button {
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.mapboxgl-draw-actions-btn_save {
+    background-color: var(--w-color-secondary) !important;
+    margin-left: 4px;
+}
+
+.mapboxgl-draw-actions-btn_cancel {
+    background-color: var(--w-color-critical-200) !important;
+}
+
+.admin-level-selector {
+    position: absolute;
+    font-size: 12px;
+    top: 12px;
+    left: 20px;
+    background-color: #fff;
+    z-index: 10;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
+    padding: 12px;
+}
