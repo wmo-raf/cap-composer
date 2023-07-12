@@ -1,0 +1,52 @@
+{% extends 'base.html' %} 
+{% load wagtailcore_tags static %}
+
+{% block extra_css %}
+{{ block.super }}
+
+<link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'capeditor/css/cap_style.css' %}">
+
+{% endblock %} 
+
+{% block extra_js %} 
+
+{{ block.super }}
+<script src="https://kit.fontawesome.com/db8ac3c257.js" crossorigin="anonymous"></script>
+
+{% endblock %}
+
+{% block content %}
+<main class="is-index">
+
+{% if latest_alert %}
+      <section class="featured-event-section">
+          <div class="container">
+              <h2 class="section-title center">{{page.title}}</h2>
+
+              <h3 class="section-title center">Latest Alert</h3>
+              {% include 'capeditor/latest_alert_include.html' with item_title=latest_alert.title item_url=latest_alert.url item_info=latest_alert.alert_info.all item_identifier=latest_alert.identifier%}
+          </div>
+      </section>
+  {% endif %}
+
+  <section class="listing-section">
+    <h2 id="results" class="section-title has-text-centered">Browse CAP Alerts</h2>
+    <div class="container">
+      <div class="columns" style="width: 100%;margin: 0">
+        <div class="column is-3 is-full-mobile">
+          {% include 'capeditor/alert_filter_include.html' with filters=page.filters %}
+        </div>
+        <div class="column is-9 is-full-mobile">
+          {% include 'capeditor/alert_list_include.html' with alerts=alerts %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{% endblock content %} 
+
+
