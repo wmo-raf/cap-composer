@@ -143,6 +143,11 @@ class AlertAreaBoundaryStructValue(StructValue):
     def geojson(self):
         polygon = self.get("boundary")
         return json.loads(polygon)
+    
+    # @cached_property
+    # def aread_desc(self):
+    #     area_desc = self.get("areaDesc")
+    #     return json.loads(polygon)
 
 
 class AlertAreaBoundaryBlock(blocks.StructBlock):
@@ -414,6 +419,7 @@ class AlertInfoStructValue(StructValue):
     @cached_property
     def geojson(self):
         area_blocks = self.get("area")
+        
         features = []
         if area_blocks:
             for area in area_blocks:
@@ -421,15 +427,35 @@ class AlertInfoStructValue(StructValue):
             return features
 
     @cached_property
+    def area_properties(self):
+        severity_blocks = self.get("severity")
+        certainty_blocks = self.get("certainty")
+        urgency_blocks = self.get("urgency")
+        event_blocks = self.get("event")
+
+        return {
+            'severity':severity_blocks,
+            'certainty':certainty_blocks,
+            'urgency':urgency_blocks,
+            'event':event_blocks
+        }
+
+    @cached_property
     def features(self):
         area_blocks = self.get("area")
+        
         features = []
 
         if area_blocks:
             for feature in area_blocks:
                 if feature.value.geojson:
-                    features.append({"type": "Feature", "geometry": feature.value.geojson})
-
+                    features.append({
+                        "type": "Feature", 
+                        "geometry": feature.value.geojson,
+                        "properties":{
+                            "areaDesc":feature.value.area.get('areaDesc'),
+                                       **self.area_properties}
+                    })
         return features
 
 
