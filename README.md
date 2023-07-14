@@ -34,19 +34,13 @@ http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
     
 ## Quick start
 
-#### 1. Clone repository
+#### 1. Install in virualenvironment using pip
 
 ``` sh
-git clone https://github.com/wmo-raf/cap-editor.git
+pip install capeditor
 ```
 
-#### 2. Install in virualenvironment using pip
-
-``` sh
-pip install path_to/capeditor/dist/capeditor-{version}.tar.gz
-```
-
-#### 3. Configure settings
+#### 2. Configure settings
 
 In your `settings.py` or `settings/base.py`, within the installed apps,
 include the `rest_framework, rest_framework_xml` and `capeditor` as
@@ -75,23 +69,7 @@ REST_FRAMEWORK = {
 }
 ```
 
-#### 4. Include the cap urls
-
-In `urls.py`, include the cap urls as below. This is where the cap api
-for listed (`/cap/caps.xml`) and detailed(`/cap/{cap_id}.xml`) cap view
-will be hosted.
-
-``` py
-from capeditor import urls as cap_urls
-
-urlpatterns = [
-    # ...
-    path('cap', include(cap_urls))
-
-]
-```
-
-#### 5. Run model migrations
+#### 3. Run model migrations
 
 ``` sh
 python manage.py migrate
