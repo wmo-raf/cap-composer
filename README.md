@@ -225,50 +225,6 @@ URI (uri), Dereferenced URI (derefUri) and Digest (digest)**
 ## Integrations
 
 To integrate the alerts to another wagtail page and include in
-templates, for example in the home page follow the instructions below:
-
-Call the alerts in your models.py under the 'get_context' method:
-
-``` py
-from capeditor.models import Alert
-
-class HomePage(Page):
-
-    # ...
+templates, for example in the home page refer to sandbox folder for sample standalone.
 
 
-    def get_context(self, request, *args, **kwargs):
-        context =super().get_context(request, *args, **kwargs)
-       
-        context['alerts'] = Alert.objects.live().public()
-        context['latest_alerts'] = context['alerts'][:3]
-        return context  
-```
-
-Parse the alerts in the home template:
-
-``` django
-
-{% for alert in latest_alerts.all %}
-    
-    <p>{{alert.sent}}</p>
-
-    <!-- info list  -->
-    {% for info in alert.alert_info.all %}
-        {% if alerts %}
-
-            <p>{{info.event}}</p>
-            <p>{{info.get_severity_display}}</p>
-
-            <!-- area list  -->
-            {% for alert_area in info.alert_areas.values%}
-                <p>{{alert_area.areaDesc}}</p>
-                <p>{{ alert_area.area }}</p>
-            {% endfor %}
-
-            <!-- other fields  -->
-
-        {% endif %}
-    {% endfor %}
-{% endfor %}
-```
