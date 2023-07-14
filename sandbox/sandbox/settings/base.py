@@ -67,7 +67,18 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.gis",
+
+    "django_deep_translator"
 ]
+
+
+LOCALE_PATHS = (
+    'home/locale',
+    'capeditor/locale',
+)
+
+# PO_TRANSLATOR_SERVICE = 'django_deep_translator.services.GoogleAPITranslatorService'
+
 
 MIDDLEWARE = [
     "wagtailcache.cache.UpdateCacheMiddleware",

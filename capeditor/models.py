@@ -319,3 +319,5 @@ class AbstractCapAlertPage(Page):
     @property
     def xml_link(self):
         return None
+    
+ 

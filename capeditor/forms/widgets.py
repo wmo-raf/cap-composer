@@ -40,15 +40,14 @@ class BasePolygonWidget(BaseGeometryWidget, BaseMapWidget):
 
     def deserialize(self, value):
         geom = super().deserialize(value)
-        tolerance = 0.0002
+        tolerance = 0.05
 
         if geom.geom_type != "Polygon":
             # try to get the smallest Polygon that contains all the geometries in the MultiPolygon.
             geom = geom.unary_union
 
-        if geom.geom_type != "Polygon":
-            # still not a Polygon. Try initial simplification
-            geom = geom.simplify(tolerance)
+        # first simplification
+        geom = geom.simplify(tolerance)
 
         # still not a Polygon. Simplify with incrementing tolerance until we have a polygon
         while geom.geom_type != "Polygon":
