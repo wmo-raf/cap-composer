@@ -20,6 +20,8 @@ class CapAlertPage(AbstractCapAlertPage):
         *AbstractCapAlertPage.content_panels
     ]
 
+    
+
     @cached_property
     def xml_link(self):
         return reverse("cap_alert_detail", args=(self.identifier,))

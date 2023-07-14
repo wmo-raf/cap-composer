@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-12 14:01+0300\n"
+"POT-Creation-Date: 2023-07-14 12:05+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: capeditor/blocks.py:70 capeditor/blocks.py:98 capeditor/blocks.py:370
+#: capeditor/blocks.py:70 capeditor/blocks.py:98 capeditor/blocks.py:375
 msgid "Name"
 msgstr "Name"
 
@@ -56,7 +56,7 @@ msgstr "Incident"
 msgid "Referent incident to this alert message"
 msgstr "Referent incident to this alert message"
 
-#: capeditor/blocks.py:99 capeditor/blocks.py:295 capeditor/blocks.py:371
+#: capeditor/blocks.py:99 capeditor/blocks.py:300 capeditor/blocks.py:376
 msgid "Value"
 msgstr "Value"
 
@@ -114,25 +114,25 @@ msgid ""
 msgstr ""
 "The code denoting the type of action recommended for the target audience"
 
-#: capeditor/blocks.py:158 capeditor/blocks.py:204 capeditor/blocks.py:256
-#: capeditor/blocks.py:292
+#: capeditor/blocks.py:163 capeditor/blocks.py:209 capeditor/blocks.py:261
+#: capeditor/blocks.py:297
 msgid "Affected areas / Regions"
 msgstr "Affected areas / Regions"
 
-#: capeditor/blocks.py:159 capeditor/blocks.py:205 capeditor/blocks.py:257
-#: capeditor/blocks.py:293
+#: capeditor/blocks.py:164 capeditor/blocks.py:210 capeditor/blocks.py:262
+#: capeditor/blocks.py:298
 msgid "The text describing the affected area of the alert message"
 msgstr "The text describing the affected area of the alert message"
 
-#: capeditor/blocks.py:160
+#: capeditor/blocks.py:165
 msgid "Administrative Level"
 msgstr "Administrative Level"
 
-#: capeditor/blocks.py:161
+#: capeditor/blocks.py:166
 msgid "Boundary"
 msgstr "Boundary"
 
-#: capeditor/blocks.py:162 capeditor/blocks.py:207
+#: capeditor/blocks.py:167 capeditor/blocks.py:212
 msgid ""
 "The paired values of points defining a polygon that delineates the affected "
 "area of the alert message"
@@ -140,25 +140,25 @@ msgstr ""
 "The paired values of points defining a polygon that delineates the affected "
 "area of the alert message"
 
-#: capeditor/blocks.py:165 capeditor/blocks.py:209 capeditor/blocks.py:260
-#: capeditor/blocks.py:297
+#: capeditor/blocks.py:170 capeditor/blocks.py:214 capeditor/blocks.py:265
+#: capeditor/blocks.py:302
 msgid "Altitude"
 msgstr "Altitude"
 
-#: capeditor/blocks.py:166 capeditor/blocks.py:210 capeditor/blocks.py:261
-#: capeditor/blocks.py:298
+#: capeditor/blocks.py:171 capeditor/blocks.py:215 capeditor/blocks.py:266
+#: capeditor/blocks.py:303
 msgid ""
 "The specific or minimum altitude of the affected area of the alert message"
 msgstr ""
 "The specific or minimum altitude of the affected area of the alert message"
 
-#: capeditor/blocks.py:168 capeditor/blocks.py:212 capeditor/blocks.py:263
-#: capeditor/blocks.py:300
+#: capeditor/blocks.py:173 capeditor/blocks.py:217 capeditor/blocks.py:268
+#: capeditor/blocks.py:305
 msgid "Ceiling"
 msgstr "Ceiling"
 
-#: capeditor/blocks.py:169 capeditor/blocks.py:213 capeditor/blocks.py:264
-#: capeditor/blocks.py:301
+#: capeditor/blocks.py:174 capeditor/blocks.py:218 capeditor/blocks.py:269
+#: capeditor/blocks.py:306
 msgid ""
 "The maximum altitude of the affected area of the alert message.MUST NOT be "
 "used except in combination with the altitude element. "
@@ -166,24 +166,24 @@ msgstr ""
 "The maximum altitude of the affected area of the alert message.MUST NOT be "
 "used except in combination with the altitude element."
 
-#: capeditor/blocks.py:206
+#: capeditor/blocks.py:211
 msgid "Polygon"
 msgstr "Polygon"
 
-#: capeditor/blocks.py:258 capeditor/blocks.py:528
+#: capeditor/blocks.py:263 capeditor/blocks.py:555
 msgid "Circle"
 msgstr "Circle"
 
-#: capeditor/blocks.py:258
+#: capeditor/blocks.py:263
 msgid "Drag the marker to change position"
 msgstr "Drag the marker to change position"
 
-#: capeditor/blocks.py:305
+#: capeditor/blocks.py:310
 msgid "The human-readable name of the agency or authority issuing this alert."
 msgstr ""
 "The human-readable name of the agency or authority issuing this alert."
 
-#: capeditor/blocks.py:306
+#: capeditor/blocks.py:311
 msgid ""
 "The text describing the contact for follow-up and confirmation of the alert "
 "message"
@@ -191,31 +191,31 @@ msgstr ""
 "The text describing the contact for follow-up and confirmation of the alert "
 "message"
 
-#: capeditor/blocks.py:307
+#: capeditor/blocks.py:312
 msgid "The text denoting the type of the subject event of the alert message"
 msgstr "The text denoting the type of the subject event of the alert message"
 
-#: capeditor/blocks.py:308
+#: capeditor/blocks.py:313
 msgid "The text describing the intended audience of the alert message"
 msgstr "The text describing the intended audience of the alert message"
 
-#: capeditor/blocks.py:350 capeditor/blocks.py:359
+#: capeditor/blocks.py:355 capeditor/blocks.py:364
 #, fuzzy
 #| msgid "Description"
 msgid "Resource Description"
 msgstr "Resource Description"
 
-#: capeditor/blocks.py:351 capeditor/blocks.py:360
+#: capeditor/blocks.py:356 capeditor/blocks.py:365
 msgid "The text describing the type and content of the resource file"
 msgstr "The text describing the type and content of the resource file"
 
-#: capeditor/blocks.py:361
+#: capeditor/blocks.py:366
 #, fuzzy
 #| msgid "Alert Resources "
 msgid "External Resource Link"
 msgstr "External Resource Link"
 
-#: capeditor/blocks.py:362
+#: capeditor/blocks.py:367
 msgid ""
 "Link to external resource. This can be for example a link to related "
 "websites. "
@@ -223,59 +223,59 @@ msgstr ""
 "Link to external resource. This can be for example a link to related "
 "websites."
 
-#: capeditor/blocks.py:370
+#: capeditor/blocks.py:375
 msgid "Name for the event code"
 msgstr "Name for the event code"
 
-#: capeditor/blocks.py:371
+#: capeditor/blocks.py:376
 msgid "Value of the event code"
 msgstr "Value of the event code"
 
-#: capeditor/blocks.py:441
+#: capeditor/blocks.py:467
 msgid "English"
 msgstr "English"
 
-#: capeditor/blocks.py:445
+#: capeditor/blocks.py:471
 msgid "Geophysical"
 msgstr "Geophysical"
 
-#: capeditor/blocks.py:446
+#: capeditor/blocks.py:472
 msgid "Meteorological"
 msgstr "Meteorological"
 
-#: capeditor/blocks.py:447
+#: capeditor/blocks.py:473
 msgid "General emergency and public safety"
 msgstr "General emergency and public safety"
 
-#: capeditor/blocks.py:448
+#: capeditor/blocks.py:474
 msgid "Law enforcement, military, homeland and local/private security"
 msgstr "Law enforcement, military, homeland and local/private security"
 
-#: capeditor/blocks.py:449
+#: capeditor/blocks.py:475
 msgid "Rescue and recovery"
 msgstr "Rescue and recovery"
 
-#: capeditor/blocks.py:450
+#: capeditor/blocks.py:476
 msgid "Fire suppression and rescue"
 msgstr "Fire suppression and rescue"
 
-#: capeditor/blocks.py:451
+#: capeditor/blocks.py:477
 msgid "Medical and public health"
 msgstr "Medical and public health"
 
-#: capeditor/blocks.py:452
+#: capeditor/blocks.py:478
 msgid "Pollution and other environmental"
 msgstr "Pollution and other environmental"
 
-#: capeditor/blocks.py:453
+#: capeditor/blocks.py:479
 msgid "Public and private transportation"
 msgstr "Public and private transportation"
 
-#: capeditor/blocks.py:454
+#: capeditor/blocks.py:480
 msgid "Utility, telecommunication, other non-transport infrastructure"
 msgstr "Utility, telecommunication, other non-transport infrastructure"
 
-#: capeditor/blocks.py:455
+#: capeditor/blocks.py:481
 msgid ""
 "Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat "
 "or attack"
@@ -283,127 +283,127 @@ msgstr ""
 "Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat "
 "or attack"
 
-#: capeditor/blocks.py:456
+#: capeditor/blocks.py:482
 msgid "Other events"
 msgstr "Other events"
 
-#: capeditor/blocks.py:460
+#: capeditor/blocks.py:486
 msgid "Immediate - Responsive action SHOULD be taken immediately"
 msgstr "Immediate - Responsive action SHOULD be taken immediately"
 
-#: capeditor/blocks.py:461
+#: capeditor/blocks.py:487
 msgid "Expected - Responsive action SHOULD be taken soon (within next hour)"
 msgstr "Expected - Responsive action SHOULD be taken soon (within next hour)"
 
-#: capeditor/blocks.py:462
+#: capeditor/blocks.py:488
 msgid "Future - Responsive action SHOULD be taken in the near future"
 msgstr "Future - Responsive action SHOULD be taken in the near future"
 
-#: capeditor/blocks.py:463
+#: capeditor/blocks.py:489
 msgid "Past - Responsive action is no longer required"
 msgstr "Past - Responsive action is no longer required"
 
-#: capeditor/blocks.py:464
+#: capeditor/blocks.py:490
 msgid "Unknown - Urgency not known"
 msgstr "Unknown - Urgency not known"
 
-#: capeditor/blocks.py:468
+#: capeditor/blocks.py:494
 msgid "Extreme - Extraordinary threat to life or property"
 msgstr "Extreme - Extraordinary threat to life or property"
 
-#: capeditor/blocks.py:469
+#: capeditor/blocks.py:495
 msgid "Severe - Significant threat to life or property"
 msgstr "Severe - Significant threat to life or property"
 
-#: capeditor/blocks.py:470
+#: capeditor/blocks.py:496
 msgid "Moderate - Possible threat to life or property"
 msgstr "Moderate - Possible threat to life or property"
 
-#: capeditor/blocks.py:471
+#: capeditor/blocks.py:497
 msgid "Minor - Minimal to no known threat to life or property"
 msgstr "Minor - Minimal to no known threat to life or property"
 
-#: capeditor/blocks.py:472
+#: capeditor/blocks.py:498
 msgid "Unknown - Severity unknown"
 msgstr "Unknown - Severity unknown"
 
-#: capeditor/blocks.py:476
+#: capeditor/blocks.py:502
 msgid "Observed - Determined to have occurred or to be ongoing"
 msgstr "Observed - Determined to have occurred or to be ongoing"
 
-#: capeditor/blocks.py:477
+#: capeditor/blocks.py:503
 msgid "Likely - Likely (percentage > ~50%)"
 msgstr "Likely - Likely (percentage > ~50%)"
 
-#: capeditor/blocks.py:478
+#: capeditor/blocks.py:504
 msgid "Possible - Possible but not likely (percentage <= ~50%)"
 msgstr "Possible - Possible but not likely (percentage <= ~50%)"
 
-#: capeditor/blocks.py:479
+#: capeditor/blocks.py:505
 msgid "Unlikely - Not expected to occur (percentage ~ 0)"
 msgstr "Unlikely - Not expected to occur (percentage ~ 0)"
 
-#: capeditor/blocks.py:480
+#: capeditor/blocks.py:506
 msgid "Unknown - Certainty unknown"
 msgstr "Unknown - Certainty unknown"
 
-#: capeditor/blocks.py:483
-msgid "Language"
-msgstr "Language"
-
-#: capeditor/blocks.py:484
-msgid "The code denoting the language of the alert message"
-msgstr "The code denoting the language of the alert message"
-
-#: capeditor/blocks.py:485
-msgid "Category"
-msgstr "Category"
-
-#: capeditor/blocks.py:486
-msgid ""
-"The code denoting the category of the subject event of the alert message"
-msgstr ""
-"The code denoting the category of the subject event of the alert message"
-
-#: capeditor/blocks.py:488
+#: capeditor/blocks.py:508
 msgid "Event"
 msgstr "Event"
 
-#: capeditor/blocks.py:489
+#: capeditor/blocks.py:510
+msgid "Category"
+msgstr "Category"
+
+#: capeditor/blocks.py:511
+msgid ""
+"The code denoting the category of the subject event of the alert message"
+msgstr ""
+"The code denoting the category of the subject event of the alert message"
+
+#: capeditor/blocks.py:513
+msgid "Language"
+msgstr "Language"
+
+#: capeditor/blocks.py:514
+msgid "The code denoting the language of the alert message"
+msgstr "The code denoting the language of the alert message"
+
+#: capeditor/blocks.py:516
 msgid "Urgency"
 msgstr "Urgency"
 
-#: capeditor/blocks.py:490
+#: capeditor/blocks.py:517
 msgid ""
 "The code denoting the urgency of the subject event of the alert message"
 msgstr ""
 "The code denoting the urgency of the subject event of the alert message"
 
-#: capeditor/blocks.py:492
+#: capeditor/blocks.py:519
 msgid "Severity"
 msgstr "Severity"
 
-#: capeditor/blocks.py:493
+#: capeditor/blocks.py:520
 msgid ""
 "The code denoting the severity of the subject event of the alert message"
 msgstr ""
 "The code denoting the severity of the subject event of the alert message"
 
-#: capeditor/blocks.py:495
+#: capeditor/blocks.py:522
 msgid "Certainty"
 msgstr "Certainty"
 
-#: capeditor/blocks.py:496
+#: capeditor/blocks.py:523
 msgid ""
 "The code denoting the certainty of the subject event of the alert message"
 msgstr ""
 "The code denoting the certainty of the subject event of the alert message"
 
-#: capeditor/blocks.py:498
+#: capeditor/blocks.py:525
 msgid "Headline"
 msgstr "Headline"
 
-#: capeditor/blocks.py:499
+#: capeditor/blocks.py:526
 msgid ""
 "The text headline of the alert message. Make it direct and actionable as "
 "possible while remaining short"
@@ -411,11 +411,11 @@ msgstr ""
 "The text headline of the alert message. Make it direct and actionable as "
 "possible while remaining short"
 
-#: capeditor/blocks.py:501
+#: capeditor/blocks.py:528
 msgid "Description"
 msgstr "Description"
 
-#: capeditor/blocks.py:503
+#: capeditor/blocks.py:530
 #, fuzzy
 #| msgid "The text describing the subject event of the alert message"
 msgid ""
@@ -425,11 +425,11 @@ msgstr ""
 "The text describing the subject event of the alert message. An extended "
 "description of the hazard or event that occasioned this message"
 
-#: capeditor/blocks.py:505
+#: capeditor/blocks.py:532
 msgid "Instruction"
 msgstr "Instruction"
 
-#: capeditor/blocks.py:506
+#: capeditor/blocks.py:533
 msgid ""
 "The text describing the recommended action to be taken by recipients of the "
 "alert message"
@@ -437,11 +437,11 @@ msgstr ""
 "The text describing the recommended action to be taken by recipients of the "
 "alert message"
 
-#: capeditor/blocks.py:508
+#: capeditor/blocks.py:535
 msgid "Effective"
 msgstr "Effective"
 
-#: capeditor/blocks.py:509
+#: capeditor/blocks.py:536
 #, fuzzy
 #| msgid "The effective time of the information of the alert message"
 msgid ""
@@ -451,21 +451,21 @@ msgstr ""
 "The effective time of the information of the alert message. If not set, the "
 "sent date will be used"
 
-#: capeditor/blocks.py:511
+#: capeditor/blocks.py:538
 msgid "Onset"
 msgstr "Onset"
 
-#: capeditor/blocks.py:512
+#: capeditor/blocks.py:539
 msgid ""
 "The expected time of the beginning of the subject event of the alert message"
 msgstr ""
 "The expected time of the beginning of the subject event of the alert message"
 
-#: capeditor/blocks.py:514
+#: capeditor/blocks.py:541
 msgid "Expires"
 msgstr "Expires"
 
-#: capeditor/blocks.py:515
+#: capeditor/blocks.py:542
 msgid ""
 "The expiry time of the information of the alert message. If not set, each "
 "recipient is free to set its own policy as to when the message is no longer "
@@ -475,53 +475,53 @@ msgstr ""
 "recipient is free to set its own policy as to when the message is no longer "
 "in effect."
 
-#: capeditor/blocks.py:518
+#: capeditor/blocks.py:545
 #, fuzzy
 #| msgid "Response type"
 msgid "Response Types"
 msgstr "Response Types"
 
-#: capeditor/blocks.py:520
+#: capeditor/blocks.py:547
 #, fuzzy
 #| msgid "Sender"
 msgid "Sender name"
 msgstr "Sender name"
 
-#: capeditor/blocks.py:522
+#: capeditor/blocks.py:549
 msgid "Contact"
 msgstr "Contact"
 
-#: capeditor/blocks.py:523 capeditor/blocks.py:550
+#: capeditor/blocks.py:550 capeditor/blocks.py:580
 msgid "Audience"
 msgstr "Audience"
 
-#: capeditor/blocks.py:526
+#: capeditor/blocks.py:553
 msgid "Admin Boundary"
 msgstr "Admin Boundary"
 
-#: capeditor/blocks.py:527
+#: capeditor/blocks.py:554
 msgid "Draw Polygon"
 msgstr "Draw Polygon"
 
-#: capeditor/blocks.py:529
+#: capeditor/blocks.py:556
 msgid "Geocode"
 msgstr "Geocode"
 
-#: capeditor/blocks.py:530
+#: capeditor/blocks.py:557
 msgid "Alert Area"
 msgstr "Alert Area"
 
-#: capeditor/blocks.py:530
+#: capeditor/blocks.py:557
 msgid "Admin Boundary, Polygon, Circle or Geocode"
 msgstr "Admin Boundary, Polygon, Circle or Geocode"
 
-#: capeditor/blocks.py:535
+#: capeditor/blocks.py:562
 #, fuzzy
 #| msgid "Resource"
 msgid "Resources"
 msgstr "Resources"
 
-#: capeditor/blocks.py:535
+#: capeditor/blocks.py:562
 msgid ""
 "Additional file with supplemental information related to this alert "
 "information"
@@ -529,31 +529,31 @@ msgstr ""
 "Additional file with supplemental information related to this alert "
 "information"
 
-#: capeditor/blocks.py:538
+#: capeditor/blocks.py:565
 msgid "Parameter"
 msgstr "Parameter"
 
-#: capeditor/blocks.py:538
+#: capeditor/blocks.py:565
 msgid "Parameters"
 msgstr "Parameters"
 
-#: capeditor/blocks.py:539
+#: capeditor/blocks.py:566
 #, fuzzy
 #| msgid "Event"
 msgid "Event Code"
 msgstr "Event Code"
 
-#: capeditor/blocks.py:539
+#: capeditor/blocks.py:566
 #, fuzzy
 #| msgid "Event"
 msgid "Event codes"
 msgstr "Event codes"
 
-#: capeditor/blocks.py:545
+#: capeditor/blocks.py:575
 msgid "Hazard"
 msgstr "Hazard"
 
-#: capeditor/blocks.py:554
+#: capeditor/blocks.py:584
 #, fuzzy
 #| msgid "Contact"
 msgid "Contact Detail"

@@ -505,13 +505,14 @@ class AlertInfo(blocks.StructBlock):
         ('Unlikely', _("Unlikely - Not expected to occur (percentage ~ 0)")),
         ('Unknown', _("Unknown - Certainty unknown")),
     )
+    event = blocks.CharBlock(max_length=255, label=_("Event"), help_text=EVENT_HELP_TEXT)
 
-    language = blocks.ChoiceBlock(choices=LANGUAGE_CHOICES, default="en", required=False, label=_("Language"),
-                                  help_text=_("The code denoting the language of the alert message"), )
     category = blocks.ChoiceBlock(choices=CATEGORY_CHOICES, default="Met", label=_("Category"),
                                   help_text=_("The code denoting the category of the subject"
                                               " event of the alert message"))
-    event = blocks.CharBlock(max_length=255, label=_("Event"), help_text=EVENT_HELP_TEXT)
+    language = blocks.ChoiceBlock(choices=LANGUAGE_CHOICES, default="en", required=False, label=_("Language"),
+                                  help_text=_("The code denoting the language of the alert message"), )
+    
     urgency = blocks.ChoiceBlock(choices=URGENCY_CHOICES, label=_("Urgency"),
                                  help_text=_("The code denoting the urgency of the subject "
                                              "event of the alert message"))
@@ -566,6 +567,9 @@ class AlertInfo(blocks.StructBlock):
 
     # NOTE: web attribute is obtained from the url of the page
 
+    class Meta:
+        value_class = AlertInfoStructValue
+        label_format = "({language}) {event}"
 
 class HazardTypeBlock(blocks.StructBlock):
     hazard = blocks.CharBlock(max_length=255, label=_("Hazard"), help_text="Name of Hazard")
