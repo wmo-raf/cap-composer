@@ -169,6 +169,8 @@ class CapAlertPageForm(WagtailAdminPageForm):
 class AbstractCapAlertPage(Page):
     base_form_class = CapAlertPageForm
 
+    exclude_fields_in_copy = ["identifier"]
+
     STATUS_CHOICES = (
         ("Draft", _("Draft - A preliminary template or draft, not actionable in its current form")),
         ("Actual", _("Actual - Actionable by all targeted recipients")),
@@ -197,7 +199,7 @@ class AbstractCapAlertPage(Page):
     )
 
     identifier = models.UUIDField(default=uuid.uuid4, editable=False, verbose_name=_("Identifier"),
-                                  help_text=_("Unique ID. Auto generated on creation."), )
+                                  help_text=_("Unique ID. Auto generated on creation."), unique=True)
     sender = models.CharField(max_length=255, verbose_name=_("Sender"), default=get_default_sender,
                               help_text=_("Identifies the originator of an alert. "
                                           "For example the website address of the institution"))
@@ -319,5 +321,3 @@ class AbstractCapAlertPage(Page):
     @property
     def xml_link(self):
         return None
-    
- 

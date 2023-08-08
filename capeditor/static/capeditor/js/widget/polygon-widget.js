@@ -167,9 +167,7 @@ PolygonWidget.prototype.initMap = async function () {
 
     this.map.addControl(
         new maplibregl.NavigationControl({
-            visualizePitch: true,
-            showZoom: true,
-            showCompass: true,
+            showCompass: false,
         }), "bottom-right"
     );
 
