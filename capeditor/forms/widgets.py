@@ -2,6 +2,7 @@ from adminboundarymanager.models import AdminBoundarySettings
 from django.contrib.gis.forms import BaseGeometryWidget
 from django.contrib.gis.geos import GEOSGeometry
 from django.forms import Textarea, Widget
+from django.urls import reverse
 from shapely import wkt, Polygon
 from wagtail.models import Site
 from wagtail.telepath import register
@@ -19,7 +20,7 @@ class BaseMapWidget(Widget):
             boundary_tiles_url = abm_settings.boundary_tiles_url
             boundary_tiles_url = site.root_url + boundary_tiles_url
 
-            boundary_detail_url = abm_settings.boundary_detail_url
+            boundary_detail_url = reverse("admin_boundary_detail", args=[0]).replace("/0", "")
             boundary_detail_url = site.root_url + boundary_detail_url
 
             context.update({
