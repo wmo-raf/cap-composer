@@ -143,7 +143,7 @@ class AlertAreaBoundaryStructValue(StructValue):
     def geojson(self):
         polygon = self.get("boundary")
         return json.loads(polygon)
-    
+
     # @cached_property
     # def aread_desc(self):
     #     area_desc = self.get("areaDesc")
@@ -155,9 +155,9 @@ class AlertAreaBoundaryBlock(blocks.StructBlock):
         value_class = AlertAreaBoundaryStructValue
 
     ADMIN_LEVEL_CHOICES = (
-        (1, "Level 1"),
-        (2, "Level 2"),
-        (3, "Level 3")
+        (1, _("Level 1")),
+        (2, _("Level 2")),
+        (3, _("Level 3"))
     )
 
     areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
@@ -296,7 +296,7 @@ class AlertAreaGeocodeBlock(blocks.StructBlock):
 
     areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
                                 help_text=_("The text describing the affected area of the alert message"))
-    valueName = blocks.TextBlock(label="Name")
+    valueName = blocks.TextBlock(label=_("Name"))
     value = blocks.TextBlock(label=_("Value"))
 
     altitude = blocks.CharBlock(max_length=100, required=False, label=_("Altitude"),
@@ -419,7 +419,7 @@ class AlertInfoStructValue(StructValue):
     @cached_property
     def geojson(self):
         area_blocks = self.get("area")
-        
+
         features = []
         if area_blocks:
             for area in area_blocks:
@@ -434,27 +434,27 @@ class AlertInfoStructValue(StructValue):
         event_blocks = self.get("event")
 
         return {
-            'severity':severity_blocks,
-            'certainty':certainty_blocks,
-            'urgency':urgency_blocks,
-            'event':event_blocks
+            'severity': severity_blocks,
+            'certainty': certainty_blocks,
+            'urgency': urgency_blocks,
+            'event': event_blocks
         }
 
     @cached_property
     def features(self):
         area_blocks = self.get("area")
-        
+
         features = []
 
         if area_blocks:
             for feature in area_blocks:
                 if feature.value.geojson:
                     features.append({
-                        "type": "Feature", 
+                        "type": "Feature",
                         "geometry": feature.value.geojson,
-                        "properties":{
-                            "areaDesc":feature.value.area.get('areaDesc'),
-                                       **self.area_properties}
+                        "properties": {
+                            "areaDesc": feature.value.area.get('areaDesc'),
+                            **self.area_properties}
                     })
         return features
 
@@ -512,7 +512,7 @@ class AlertInfo(blocks.StructBlock):
                                               " event of the alert message"))
     language = blocks.ChoiceBlock(choices=LANGUAGE_CHOICES, default="en", required=False, label=_("Language"),
                                   help_text=_("The code denoting the language of the alert message"), )
-    
+
     urgency = blocks.ChoiceBlock(choices=URGENCY_CHOICES, label=_("Urgency"),
                                  help_text=_("The code denoting the urgency of the subject "
                                              "event of the alert message"))
@@ -571,13 +571,14 @@ class AlertInfo(blocks.StructBlock):
         value_class = AlertInfoStructValue
         label_format = "({language}) {event}"
 
+
 class HazardTypeBlock(blocks.StructBlock):
-    hazard = blocks.CharBlock(max_length=255, label=_("Hazard"), help_text="Name of Hazard")
+    hazard = blocks.CharBlock(max_length=255, label=_("Hazard"), help_text=_("Name of Hazard"))
     icon = IconChooserBlock(required=False)
 
 
 class AudienceTypeBlock(blocks.StructBlock):
-    audience = blocks.CharBlock(max_length=255, label=_("Audience"), help_text="Intended audience")
+    audience = blocks.CharBlock(max_length=255, label=_("Audience"), help_text=_("Intended audience"))
 
 
 class ContactBlock(blocks.StructBlock):
