@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-14 12:05+0300\n"
+"POT-Creation-Date: 2023-10-07 20:32+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: capeditor/blocks.py:70 capeditor/blocks.py:98 capeditor/blocks.py:375
+#: capeditor/blocks.py:70 capeditor/blocks.py:98 capeditor/blocks.py:299
+#: capeditor/blocks.py:375
 msgid "Name"
 msgstr "Name"
 
@@ -27,18 +28,14 @@ msgid "Name of the recipient"
 msgstr "Name of the recipient"
 
 #: capeditor/blocks.py:71
-#, fuzzy
-#| msgid "Email address"
 msgid "Address"
 msgstr "Address"
 
 #: capeditor/blocks.py:71
-#, fuzzy
-#| msgid "Description of the incident"
 msgid "Address Information of the recipient"
 msgstr "Address Information of the recipient"
 
-#: capeditor/blocks.py:89 capeditor/models.py:240
+#: capeditor/blocks.py:89 capeditor/models.py:245
 msgid "Reference Alert"
 msgstr "Reference Alert"
 
@@ -46,13 +43,11 @@ msgstr "Reference Alert"
 msgid "Earlier alert referenced by this alert"
 msgstr "Earlier alert referenced by this alert"
 
-#: capeditor/blocks.py:94 capeditor/models.py:245
+#: capeditor/blocks.py:94 capeditor/models.py:250
 msgid "Incident"
 msgstr "Incident"
 
 #: capeditor/blocks.py:94
-#, fuzzy
-#| msgid "The text headline of the alert message"
 msgid "Referent incident to this alert message"
 msgstr "Referent incident to this alert message"
 
@@ -113,6 +108,18 @@ msgid ""
 "The code denoting the type of action recommended for the target audience"
 msgstr ""
 "The code denoting the type of action recommended for the target audience"
+
+#: capeditor/blocks.py:158
+msgid "Level 1"
+msgstr "Level 1"
+
+#: capeditor/blocks.py:159
+msgid "Level 2"
+msgstr "Level 2"
+
+#: capeditor/blocks.py:160
+msgid "Level 3"
+msgstr "Level 3"
 
 #: capeditor/blocks.py:163 capeditor/blocks.py:209 capeditor/blocks.py:261
 #: capeditor/blocks.py:297
@@ -200,8 +207,6 @@ msgid "The text describing the intended audience of the alert message"
 msgstr "The text describing the intended audience of the alert message"
 
 #: capeditor/blocks.py:355 capeditor/blocks.py:364
-#, fuzzy
-#| msgid "Description"
 msgid "Resource Description"
 msgstr "Resource Description"
 
@@ -210,8 +215,6 @@ msgid "The text describing the type and content of the resource file"
 msgstr "The text describing the type and content of the resource file"
 
 #: capeditor/blocks.py:366
-#, fuzzy
-#| msgid "Alert Resources "
 msgid "External Resource Link"
 msgstr "External Resource Link"
 
@@ -348,6 +351,8 @@ msgid "Unknown - Certainty unknown"
 msgstr "Unknown - Certainty unknown"
 
 #: capeditor/blocks.py:508
+#: capeditor/templates/capeditor/cap_alert_page.html:30
+#: capeditor/templates/capeditor/cap_alert_page.html:195
 msgid "Event"
 msgstr "Event"
 
@@ -380,6 +385,7 @@ msgstr ""
 "The code denoting the urgency of the subject event of the alert message"
 
 #: capeditor/blocks.py:519
+#: capeditor/templates/capeditor/cap_alert_page.html:104
 msgid "Severity"
 msgstr "Severity"
 
@@ -390,6 +396,7 @@ msgstr ""
 "The code denoting the severity of the subject event of the alert message"
 
 #: capeditor/blocks.py:522
+#: capeditor/templates/capeditor/cap_alert_page.html:113
 msgid "Certainty"
 msgstr "Certainty"
 
@@ -416,8 +423,6 @@ msgid "Description"
 msgstr "Description"
 
 #: capeditor/blocks.py:530
-#, fuzzy
-#| msgid "The text describing the subject event of the alert message"
 msgid ""
 "The text describing the subject event of the alert message. An extended "
 "description of the hazard or event that occasioned this message"
@@ -438,12 +443,11 @@ msgstr ""
 "alert message"
 
 #: capeditor/blocks.py:535
+#: capeditor/templates/capeditor/cap_alert_page.html:56
 msgid "Effective"
 msgstr "Effective"
 
 #: capeditor/blocks.py:536
-#, fuzzy
-#| msgid "The effective time of the information of the alert message"
 msgid ""
 "The effective time of the information of the alert message. If not set, the "
 "sent date will be used"
@@ -452,6 +456,7 @@ msgstr ""
 "sent date will be used"
 
 #: capeditor/blocks.py:538
+#: capeditor/templates/capeditor/cap_alert_page.html:72
 msgid "Onset"
 msgstr "Onset"
 
@@ -462,6 +467,7 @@ msgstr ""
 "The expected time of the beginning of the subject event of the alert message"
 
 #: capeditor/blocks.py:541
+#: capeditor/templates/capeditor/cap_alert_page.html:81
 msgid "Expires"
 msgstr "Expires"
 
@@ -476,22 +482,18 @@ msgstr ""
 "in effect."
 
 #: capeditor/blocks.py:545
-#, fuzzy
-#| msgid "Response type"
 msgid "Response Types"
 msgstr "Response Types"
 
 #: capeditor/blocks.py:547
-#, fuzzy
-#| msgid "Sender"
 msgid "Sender name"
 msgstr "Sender name"
 
-#: capeditor/blocks.py:549
+#: capeditor/blocks.py:549 capeditor/models.py:41
 msgid "Contact"
 msgstr "Contact"
 
-#: capeditor/blocks.py:550 capeditor/blocks.py:580
+#: capeditor/blocks.py:550 capeditor/blocks.py:581
 msgid "Audience"
 msgstr "Audience"
 
@@ -516,8 +518,6 @@ msgid "Admin Boundary, Polygon, Circle or Geocode"
 msgstr "Admin Boundary, Polygon, Circle or Geocode"
 
 #: capeditor/blocks.py:562
-#, fuzzy
-#| msgid "Resource"
 msgid "Resources"
 msgstr "Resources"
 
@@ -538,30 +538,30 @@ msgid "Parameters"
 msgstr "Parameters"
 
 #: capeditor/blocks.py:566
-#, fuzzy
-#| msgid "Event"
 msgid "Event Code"
 msgstr "Event Code"
 
 #: capeditor/blocks.py:566
-#, fuzzy
-#| msgid "Event"
 msgid "Event codes"
 msgstr "Event codes"
 
-#: capeditor/blocks.py:575
+#: capeditor/blocks.py:576
 msgid "Hazard"
 msgstr "Hazard"
 
-#: capeditor/blocks.py:584
-#, fuzzy
-#| msgid "Contact"
+#: capeditor/blocks.py:576
+msgid "Name of Hazard"
+msgstr "Name of Hazard"
+
+#: capeditor/blocks.py:581
+msgid "Intended audience"
+msgstr "Intended audience"
+
+#: capeditor/blocks.py:585
 msgid "Contact Detail"
 msgstr "Contact Detail"
 
 #: capeditor/models.py:35
-#, fuzzy
-#| msgid "Identifier"
 msgid "CAP Sender Identifier"
 msgstr "CAP Sender Identifier"
 
@@ -574,42 +574,60 @@ msgid "CAP Sender Name"
 msgstr "CAP Sender Name"
 
 #: capeditor/models.py:38
-#, fuzzy
-#| msgid "Name of the recipient"
 msgid "Name of the sending institution"
 msgstr "Name of the sending institution"
 
+#: capeditor/models.py:42
+msgid "Contact Details"
+msgstr "Contact Details"
+
 #: capeditor/models.py:43
-#, fuzzy
-#| msgid ""
-#| "The text describing the contact for follow-up and confirmation of the alert "
-#| "message"
 msgid "Contact for follow-up and confirmation of the alert message"
 msgstr "Contact for follow-up and confirmation of the alert message"
+
+#: capeditor/models.py:46
+msgid "Hazard Type"
+msgstr "Hazard Type"
+
+#: capeditor/models.py:47
+msgid "Hazard Types"
+msgstr "Hazard Types"
 
 #: capeditor/models.py:48
 msgid "Hazards monitored by the institution"
 msgstr "Hazards monitored by the institution"
 
+#: capeditor/models.py:51
+msgid "Audience Type"
+msgstr "Audience Type"
+
+#: capeditor/models.py:52
+msgid "Audience Types"
+msgstr "Audience Types"
+
 #: capeditor/models.py:53
 msgid "Target audiences for published alerts"
 msgstr "Target audiences for published alerts"
 
-#: capeditor/models.py:173
+#: capeditor/models.py:56
+msgid "CAP Settings"
+msgstr "CAP Settings"
+
+#: capeditor/models.py:178
 msgid ""
 "Draft - A preliminary template or draft, not actionable in its current form"
 msgstr ""
 "Draft - A preliminary template or draft, not actionable in its current form"
 
-#: capeditor/models.py:174
+#: capeditor/models.py:179
 msgid "Actual - Actionable by all targeted recipients"
 msgstr "Actual - Actionable by all targeted recipients"
 
-#: capeditor/models.py:175
+#: capeditor/models.py:180
 msgid "Test - Technical testing only, all recipients disregard"
 msgstr "Test - Technical testing only, all recipients disregard"
 
-#: capeditor/models.py:176
+#: capeditor/models.py:181
 msgid ""
 "Exercise - Actionable only by designated exercise participants; exercise "
 "identifier SHOULD appear in note"
@@ -617,20 +635,16 @@ msgstr ""
 "Exercise - Actionable only by designated exercise participants; exercise "
 "identifier SHOULD appear in note"
 
-#: capeditor/models.py:178
+#: capeditor/models.py:183
 msgid "System - For messages that support alert network internal functions"
 msgstr "System - For messages that support alert network internal functions"
 
-#: capeditor/models.py:182
+#: capeditor/models.py:187
 msgid "Alert - Initial information requiring attention by targeted recipients"
 msgstr ""
 "Alert - Initial information requiring attention by targeted recipients"
 
-#: capeditor/models.py:183
-#, fuzzy
-#| msgid ""
-#| "Update - Updates and supercedes the earlier message(s) identified in "
-#| "referenced alerts"
+#: capeditor/models.py:188
 msgid ""
 "Update - Updates and supersedes the earlier message(s) identified in "
 "referenced alerts"
@@ -638,31 +652,31 @@ msgstr ""
 "Update - Updates and supersedes the earlier message(s) identified in "
 "referenced alerts"
 
-#: capeditor/models.py:184
+#: capeditor/models.py:189
 msgid "Cancel - Cancels the earlier message(s) identified in references"
 msgstr "Cancel - Cancels the earlier message(s) identified in references"
 
-#: capeditor/models.py:185
+#: capeditor/models.py:190
 msgid ""
 "Acknowledge - Acknowledges receipt and acceptance of the message(s) "
 "identified in references field"
 msgstr ""
 "Acknowledge - Acknowledges receipt and acceptance of the message(s) "
 "identified in references field"
-
-#: capeditor/models.py:187
-msgid ""
-"Error -  Indicates rejection of the message(s) identified in references; "
-"explanation SHOULD appear in note field"
-msgstr ""
-"Error -  Indicates rejection of the message(s) identified in references; "
-"explanation SHOULD appear in note field"
 
 #: capeditor/models.py:192
+msgid ""
+"Error -  Indicates rejection of the message(s) identified in references; "
+"explanation SHOULD appear in note field"
+msgstr ""
+"Error -  Indicates rejection of the message(s) identified in references; "
+"explanation SHOULD appear in note field"
+
+#: capeditor/models.py:197
 msgid "Public - For general dissemination to unrestricted audiences"
 msgstr "Public - For general dissemination to unrestricted audiences"
 
-#: capeditor/models.py:193
+#: capeditor/models.py:198
 msgid ""
 "Restricted - For dissemination only to users with a known operational "
 "requirement as in the restriction field"
@@ -670,7 +684,7 @@ msgstr ""
 "Restricted - For dissemination only to users with a known operational "
 "requirement as in the restriction field"
 
-#: capeditor/models.py:195
+#: capeditor/models.py:200
 msgid ""
 "Private - For dissemination only to specified addresses as in the addresses "
 "field in the alert"
@@ -678,23 +692,19 @@ msgstr ""
 "Private - For dissemination only to specified addresses as in the addresses "
 "field in the alert"
 
-#: capeditor/models.py:199
+#: capeditor/models.py:204
 msgid "Identifier"
 msgstr "Identifier"
 
-#: capeditor/models.py:200
+#: capeditor/models.py:205
 msgid "Unique ID. Auto generated on creation."
 msgstr "Unique ID. Auto generated on creation."
 
-#: capeditor/models.py:201
+#: capeditor/models.py:206
 msgid "Sender"
 msgstr "Sender"
 
-#: capeditor/models.py:202
-#, fuzzy
-#| msgid ""
-#| " Identifies the originator of an alert. This can be an email of the "
-#| "institution for example"
+#: capeditor/models.py:207
 msgid ""
 "Identifies the originator of an alert. For example the website address of "
 "the institution"
@@ -702,47 +712,47 @@ msgstr ""
 "Identifies the originator of an alert. For example the website address of "
 "the institution"
 
-#: capeditor/models.py:204
+#: capeditor/models.py:209
 msgid "Sent"
 msgstr "Sent"
 
-#: capeditor/models.py:205
+#: capeditor/models.py:210
 msgid "Time and date of origination of the alert"
 msgstr "Time and date of origination of the alert"
 
-#: capeditor/models.py:206
+#: capeditor/models.py:211
 msgid "Status"
 msgstr "Status"
 
-#: capeditor/models.py:207
+#: capeditor/models.py:212
 msgid "The code denoting the appropriate handling of the alert"
 msgstr "The code denoting the appropriate handling of the alert"
 
-#: capeditor/models.py:209
+#: capeditor/models.py:214
 msgid "Message Type"
 msgstr "Message Type"
 
-#: capeditor/models.py:210
+#: capeditor/models.py:215
 msgid "The code denoting the nature of the alert message"
 msgstr "The code denoting the nature of the alert message"
 
-#: capeditor/models.py:211
+#: capeditor/models.py:216
 msgid "Scope"
 msgstr "Scope"
 
-#: capeditor/models.py:212
+#: capeditor/models.py:217
 msgid "The code denoting the intended distribution of the alert message"
 msgstr "The code denoting the intended distribution of the alert message"
 
-#: capeditor/models.py:213
+#: capeditor/models.py:218
 msgid "Source"
 msgstr "Source"
 
-#: capeditor/models.py:214
+#: capeditor/models.py:219
 msgid "The text identifying the source of the alert message"
 msgstr "The text identifying the source of the alert message"
 
-#: capeditor/models.py:216
+#: capeditor/models.py:221
 msgid ""
 "The text describing the rule for limiting distribution of the restricted "
 "alert message. Used when scope value is Restricted"
@@ -750,19 +760,19 @@ msgstr ""
 "The text describing the rule for limiting distribution of the restricted "
 "alert message. Used when scope value is Restricted"
 
-#: capeditor/models.py:218
+#: capeditor/models.py:223
 msgid "Restriction"
 msgstr "Restriction"
 
-#: capeditor/models.py:220
+#: capeditor/models.py:225
 msgid "The code denoting the special handling of the alert message"
 msgstr "The code denoting the special handling of the alert message"
 
-#: capeditor/models.py:221
+#: capeditor/models.py:226
 msgid "Code"
 msgstr "Code"
 
-#: capeditor/models.py:223
+#: capeditor/models.py:228
 msgid ""
 "The text describing the purpose or significance of the alert message.The "
 "message note is primarily intended for use with <status> 'Exercise' and "
@@ -772,26 +782,23 @@ msgstr ""
 "message note is primarily intended for use with <status> 'Exercise' and "
 "<msgType> 'Error'"
 
-#: capeditor/models.py:225
+#: capeditor/models.py:230
 msgid "Note"
 msgstr "Note"
 
-#: capeditor/models.py:227 capeditor/models.py:231
+#: capeditor/models.py:232 capeditor/models.py:236
 msgid "Alert Information"
 msgstr "Alert Information"
 
-#: capeditor/models.py:234
+#: capeditor/models.py:239
 msgid "Recipient"
 msgstr "Recipient"
 
-#: capeditor/models.py:236
+#: capeditor/models.py:241
 msgid "Addresses"
 msgstr "Addresses"
 
-#: capeditor/models.py:237
-#, fuzzy
-#| msgid ""
-#| "The code denoting the intended distribution of the alert message"
+#: capeditor/models.py:242
 msgid ""
 "The group listing of intended recipients of the alert message, if scope is "
 "Private"
@@ -799,131 +806,74 @@ msgstr ""
 "The group listing of intended recipients of the alert message, if scope is "
 "Private"
 
-#: capeditor/models.py:242
-#, fuzzy
-#| msgid "Reference Alert"
+#: capeditor/models.py:247
 msgid "Reference Alerts"
 msgstr "Reference Alerts"
 
-#: capeditor/models.py:247
+#: capeditor/models.py:252
 msgid "Incidents"
 msgstr "Incidents"
 
-#: capeditor/models.py:262
-#, fuzzy
-#| msgid "Alert Information"
+#: capeditor/models.py:267
 msgid "Alert Identification"
 msgstr "Alert Identification"
 
-#~ msgid ""
-#~ "How many of this products should be visible on the landing page filter "
-#~ "section ?"
-#~ msgstr ""
-#~ "How many of this products should be visible on the landing page filter "
-#~ "section ?"
+#: capeditor/templates/capeditor/cap_alert_page.html:47
+msgid "Issued"
+msgstr "Issued"
 
-#~ msgid "Alerts Per Page"
-#~ msgstr "Alerts Per Page"
+#: capeditor/templates/capeditor/cap_alert_page.html:95
+msgid "Urgency:"
+msgstr "Urgency:"
 
-#~ msgid "Immediate"
-#~ msgstr "Immediate"
+#: capeditor/templates/capeditor/cap_alert_page.html:128
+msgid "CAP XML Link"
+msgstr "CAP XML Link"
 
-#~ msgid "Expected"
-#~ msgstr "Expected"
+#: capeditor/templates/capeditor/cap_alert_page.html:140
+msgid "Alert Severity"
+msgstr "Alert Severity"
 
-#~ msgid "Future"
-#~ msgstr "Future"
+#: capeditor/templates/capeditor/cap_alert_page.html:146
+msgid "Extreme"
+msgstr "Extreme"
 
-#~ msgid "Past"
-#~ msgstr "Past"
+#: capeditor/templates/capeditor/cap_alert_page.html:152
+msgid "Severe"
+msgstr "Severe"
 
-#~ msgid "Unknown"
-#~ msgstr "Unknown"
+#: capeditor/templates/capeditor/cap_alert_page.html:158
+msgid "Moderate"
+msgstr "Moderate"
 
-#~ msgid "Earlier Reference Alerts -  If applicable"
-#~ msgstr "Earlier Reference Alerts -  If applicable"
+#: capeditor/templates/capeditor/cap_alert_page.html:164
+msgid "Minor"
+msgstr "Minor"
 
-#~ msgid "Alert"
-#~ msgstr "Alert"
+#: capeditor/templates/capeditor/cap_alert_page.html:171
+msgid "Unknown"
+msgstr "Unknown"
 
-#~ msgid "Intended Recipients (If scope is Private) "
-#~ msgstr "Intended Recipients (If scope is Private)"
+#: capeditor/templates/capeditor/cap_alert_page.html:180
+msgid "Affected area"
+msgstr "Affected area"
 
-#~ msgid "Alert Identification (Sender, Message Type, Scope)"
-#~ msgstr "Alert Identification (Sender, Message Type, Scope)"
+#: capeditor/templates/capeditor/cap_alert_page.html:209
+msgid "Event Description"
+msgstr "Event Description"
 
-#~ msgid "Alert Info"
-#~ msgstr "Alert Info"
+#: capeditor/templates/capeditor/cap_alert_page.html:220
+msgid "Instructions"
+msgstr "Instructions"
 
-#~ msgid "Email"
-#~ msgstr "Email"
+#: capeditor/templates/capeditor/widgets/circle_widget.html:10
+msgid "Longitude"
+msgstr "Longitude"
 
-#~ msgid "Title of the incident referent of the alert"
-#~ msgstr "Title of the incident referent of the alert"
+#: capeditor/templates/capeditor/widgets/circle_widget.html:22
+msgid "Latitude"
+msgstr "Latitude"
 
-#~ msgid "Title"
-#~ msgstr "Title"
-
-#~ msgid "The expiry time of the information of the alert message"
-#~ msgstr "The expiry time of the information of the alert message"
-
-#~ msgid "Web"
-#~ msgstr "Web"
-
-#~ msgid ""
-#~ "The identifier of the hyperlink associating additional information with the "
-#~ "alert message"
-#~ msgstr ""
-#~ "The identifier of the hyperlink associating additional information with the "
-#~ "alert message"
-
-#~ msgid ""
-#~ "Alert Categorization (Category, Urgency, Severity, Certainity, Response & "
-#~ "Dates)"
-#~ msgstr ""
-#~ "Alert Categorization (Category, Urgency, Severity, Certainity, Response & "
-#~ "Dates)"
-
-#~ msgid ""
-#~ "Alert Delivery Message (Headline, Description, Intsructions, Contact & "
-#~ "Website)"
-#~ msgstr ""
-#~ "Alert Delivery Message (Headline, Description, Intsructions, Contact & "
-#~ "Website)"
-
-#~ msgid "Alert Areas "
-#~ msgstr "Alert Areas"
-
-#~ msgid "Resource type whether is image, file etc"
-#~ msgstr "Resource type whether is image, file etc"
-
-#~ msgid "File, Document etc"
-#~ msgstr "File, Document etc"
-
-#~ msgid "File"
-#~ msgstr "File"
-
-#~ msgid "The identifier of the hyperlink for the resource file"
-#~ msgstr "The identifier of the hyperlink for the resource file"
-
-#~ msgid "Link"
-#~ msgstr "Link"
-
-#~ msgid "The base-64 encoded data content of the resource file"
-#~ msgstr "The base-64 encoded data content of the resource file"
-
-#~ msgid ""
-#~ "The code representing the digital digest ('hash') computed from the resource"
-#~ " file"
-#~ msgstr ""
-#~ "The code representing the digital digest ('hash') computed from the resource"
-#~ " file"
-
-#~ msgid "Area"
-#~ msgstr "Area"
-
-#~ msgid "Name for the geocode"
-#~ msgstr "Name for the geocode"
-
-#~ msgid "Value of the geocode"
-#~ msgstr "Value of the geocode"
+#: capeditor/templates/capeditor/widgets/circle_widget.html:36
+msgid "Radius (in kilometers) "
+msgstr "Radius (in kilometers)"
