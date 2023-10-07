@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+import django.conf.locale
 import environ
 
 env = environ.Env(
@@ -70,15 +71,6 @@ INSTALLED_APPS = [
 
     "django_deep_translator"
 ]
-
-
-LOCALE_PATHS = (
-    'home/locale',
-    'capeditor/locale',
-)
-
-# PO_TRANSLATOR_SERVICE = 'django_deep_translator.services.GoogleAPITranslatorService'
-
 
 MIDDLEWARE = [
     "wagtailcache.cache.UpdateCacheMiddleware",
@@ -142,8 +134,33 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
+LANGUAGE_CODE = env.str("LANGUAGE_CODE", "en")
 
-LANGUAGE_CODE = "en-us"
+EXTRA_LANG_INFO = {
+    'am': {
+        'bidi': False,
+        'code': 'am',
+        'name': 'Amharic',
+        'name_local': "Amharic"
+    },
+}
+# Add custom languages not provided by Django
+LANG_INFO = dict(django.conf.locale.LANG_INFO, **EXTRA_LANG_INFO)
+django.conf.locale.LANG_INFO = LANG_INFO
+
+LOCALE_PATHS = (
+    'home/locale',
+    '../capeditor/locale',
+)
+
+LANGUAGES = WAGTAIL_CONTENT_LANGUAGES = WAGTAILADMIN_PERMITTED_LANGUAGES = [
+    ('en', 'English'),
+    ('es', 'Español'),
+    ('fr', 'French'),
+    ('ar', 'Arabic'),
+    ('am', 'Amharic'),
+    ('sw', 'Swahili'),
+]
 
 TIME_ZONE = "UTC"
 

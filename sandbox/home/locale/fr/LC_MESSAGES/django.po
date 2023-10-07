@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-12 14:01+0300\n"
+"POT-Creation-Date: 2023-10-07 20:32+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,45 +17,49 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: sandbox/home/templates/home/welcome_page.html:6
 msgid "Visit the Wagtail website"
-msgstr ""
+msgstr "Visitez le site Web de la Bergeronnette"
 
 #: sandbox/home/templates/home/welcome_page.html:15
 msgid "View the release notes"
-msgstr ""
+msgstr "Afficher les notes de version"
 
 #: sandbox/home/templates/home/welcome_page.html:27
 msgid "Welcome to your new Wagtail site!"
-msgstr ""
+msgstr "Bienvenue sur votre nouveau site Bergeronnette !"
 
 #: sandbox/home/templates/home/welcome_page.html:28
 msgid ""
-"Please feel free to <a href=\"https://github.com/wagtail/wagtail/wiki/"
-"Slack\">join our community on Slack</a>, or get started with one of the "
-"links below."
+"Please feel free to <a "
+"href=\"https://github.com/wagtail/wagtail/wiki/Slack\">join our community on"
+" Slack</a>, or get started with one of the links below."
 msgstr ""
+"N'hésitez pas à <a "
+"href=\"https://github.com/wagtail/wagtail/wiki/Slack\">rejoindre notre "
+"communauté sur Slack</a> ou à commencer avec l'un des liens ci-dessous."
 
 #: sandbox/home/templates/home/welcome_page.html:35
 msgid "Wagtail Documentation"
-msgstr ""
+msgstr "Documentation sur la bergeronnette"
 
 #: sandbox/home/templates/home/welcome_page.html:36
 msgid "Topics, references, & how-tos"
-msgstr ""
+msgstr "Sujets, références et procédures"
 
 #: sandbox/home/templates/home/welcome_page.html:42
 msgid "Tutorial"
-msgstr ""
+msgstr "Didacticiel"
 
 #: sandbox/home/templates/home/welcome_page.html:43
 msgid "Build your first Wagtail site"
-msgstr ""
+msgstr "Créez votre premier site Wagtail"
 
 #: sandbox/home/templates/home/welcome_page.html:49
 msgid "Admin Interface"
-msgstr ""
+msgstr "Interface d'administration"
 
 #: sandbox/home/templates/home/welcome_page.html:50
 msgid "Create your superuser first!"
-msgstr ""
+msgstr "Créez d'abord votre superutilisateur !"

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailiconchooser_tags %}
+{% load i18n static wagtailiconchooser_tags %}
 
 {% block body_class %}cap-alert-page{% endblock %}
 
@@ -26,7 +26,9 @@
                         <div class="column is-full-mobile is-two-fifths-desktop cap-meta-wrapper">
                             {% if page.alert_info %}
                                 <div class="cap-event">
-                                    <div class="cap-event-header">Event:</div>
+                                    <div class="cap-event-header">
+                                        {% translate "Event" %}:
+                                    </div>
                                     <div class="cap-event-detail">
                                         {% if page.alert_info.value.event_icon %}
                                             <div class="c-icon">{% svg_icon name=page.alert_info.value.event_icon %}</div>
@@ -41,14 +43,18 @@
                                             <li>
                                                 <div class="list-dot"></div>
                                                 <div>
-                                                    <span class="time-type">Issued: </span>
+                                                    <span class="time-type">
+                                                        {% translate "Issued" %}:
+                                                    </span>
                                                     <span>{{ page.sent }}</span>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div class="list-dot"></div>
                                                 <div>
-                                                    <span class="time-type">Effective: </span>
+                                                    <span class="time-type">
+                                                        {% translate "Effective" %}:
+                                                    </span>
                                                     <span>
                                                         {% if  page.alert_info.value.effective %}
                                                             {{ page.alert_info.value.effective }}
@@ -62,14 +68,18 @@
                                                 <li>
                                                     <div class="list-dot"></div>
                                                     <div>
-                                                        <span class="time-type">Onset: </span>
+                                                        <span class="time-type">
+                                                            {% translate "Onset" %}:
+                                                        </span>
                                                         <span>{{ page.alert_info.value.onset }}</span></div>
                                                 </li>
                                             {% endif %}
                                             <li>
                                                 <div class="list-dot"></div>
                                                 <div>
-                                                    <span class="time-type">Expires: </span>
+                                                    <span class="time-type">
+                                                        {% translate "Expires" %}:
+                                                    </span>
                                                     <span>{{ page.alert_info.value.expires }}</span>
                                                 </div>
                                             </li>
@@ -81,21 +91,27 @@
                                         <div class="cap-info-summary-icon">
                                             {% svg_icon name="time" %}
                                         </div>
-                                        <div class="cap-info-summary-type">Urgency:</div>
+                                        <div class="cap-info-summary-type">
+                                            {% translate "Urgency:" %}
+                                        </div>
                                         <div class="cap-info-summary-value">{{ page.alert_info.value.urgency }}</div>
                                     </div>
                                     <div class="cap-info-summary-item">
                                         <div class="cap-info-summary-icon">
                                             {% svg_icon name="warning" %}
                                         </div>
-                                        <div class="cap-info-summary-type">Severity:</div>
+                                        <div class="cap-info-summary-type">
+                                            {% translate "Severity" %}:
+                                        </div>
                                         <div class="cap-info-summary-value">{{ page.alert_info.value.severity }}</div>
                                     </div>
                                     <div class="cap-info-summary-item">
                                         <div class="cap-info-summary-icon">
                                             {% svg_icon name="crosshairs" %}
                                         </div>
-                                        <div class="cap-info-summary-type">Certainty:</div>
+                                        <div class="cap-info-summary-type">
+                                            {% translate "Certainty" %}:
+                                        </div>
                                         <div class="cap-info-summary-value">{{ page.alert_info.value.certainty }}</div>
                                     </div>
 
@@ -109,7 +125,7 @@
                                         </div>
                                         <div class="cap-share-link">
                                             <a target="_blank" rel="noopener norefferrer" href="{{ page.xml_link }}">
-                                                CAP XML Link
+                                                {% translate "CAP XML Link" %}
                                             </a>
                                         </div>
                                     </div>
@@ -120,28 +136,39 @@
                             <div class="cap-map-wrapper">
                                 <div id="cap-map"></div>
                                 <div class="map-legend">
-                                    <div>Alert Severity:</div>
+                                    <div>
+                                        {% translate "Alert Severity" %}:
+                                    </div>
                                     <div class="legend-items">
                                         <div class="legend-item">
                                             <div class="legend-color" style="background-color: rgb(215, 47, 42);"></div>
-                                            <div class="legend-label">Extreme</div>
+                                            <div class="legend-label">
+                                                {% translate "Extreme" %}
+                                            </div>
                                         </div>
                                         <div class="legend-item">
                                             <div class="legend-color" style="background-color: rgb(254, 153, 0);"></div>
-                                            <div class="legend-label">Severe</div>
+                                            <div class="legend-label">
+                                                {% translate "Severe" %}
+                                            </div>
                                         </div>
                                         <div class="legend-item">
                                             <div class="legend-color" style="background-color: rgb(255, 255, 0);"></div>
-                                            <div class="legend-label">Moderate</div>
+                                            <div class="legend-label">
+                                                {% translate "Moderate" %}
+                                            </div>
                                         </div>
                                         <div class="legend-item">
                                             <div class="legend-color" style="background-color: rgb(3, 255, 255);"></div>
-                                            <div class="legend-label">Minor</div>
+                                            <div class="legend-label">
+                                                {% translate "Minor" %}
+                                            </div>
                                         </div>
                                         <div class="legend-item">
                                             <div class="legend-color"
                                                  style="background-color: rgb(51, 102, 255);"></div>
-                                            <div class="legend-label">Unknown</div>
+                                            <div class="legend-label">
+                                                {% translate "Unknown" %} </div>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +176,9 @@
                             <div class="affected-areas">
                                 <div class="affected-area-title">
                                     <div class="c-icon">{% svg_icon name="location" %}</div>
-                                    <span>Affected area</span>
+                                    <span>
+                                        {% translate "Affected area" %}
+                                    </span>
                                 </div>
                                 <div>{{ page.affected_area }}</div>
                             </div>
@@ -163,7 +192,7 @@
                         <div class="column">
                             <div class="info-item">
                                 <div class="info-header">
-                                    Event
+                                    {% translate "Event" %}
                                 </div>
                                 <div class="info-detail" style="display: flex">
 
@@ -177,7 +206,7 @@
                             </div>
                             <div class="info-item">
                                 <div class="info-header">
-                                    Event Description
+                                    {% translate "Event Description" %}
                                 </div>
                                 <div class="info-detail">
                                     <p>
@@ -188,7 +217,7 @@
                             {% if  page.alert_info.value.instruction %}
                                 <div class="info-item">
                                     <div class="info-header">
-                                        Instructions
+                                        {% translate "Instructions" %}
                                     </div>
                                     <div class="info-detail">
                                         {{ page.alert_info.value.instruction }}
@@ -210,7 +239,6 @@
 
         // alert area as geojson
         const geojson = {{ page.geojson|safe }};
-        console.log(geojson)
 
         // alert area bounds
         const bounds = {{ page.bounds|safe }};
@@ -287,22 +315,9 @@
                 'source': 'polygon',
                 'layout': {},
                 'paint': {
-                    "fill-color": [
-                        "case",
-                        ["==", ["get", "severity"], "Extreme"],
-                        "#d72f2a",
-                        ["==", ["get", "severity"], "Severe"],
-                        "#f89904",
-                        ["==", ["get", "severity"], "Moderate"],
-                        "#e4e616",
-                        ["==", ["get", "severity"], "Minor"],
-                        "#53ffff",
-                        ["==", ["get", "severity"], "Unknown"],
-                        "#3366ff",
-                        "black",
-                    ],
-                    'fill-opacity': 0.7,
-                    "fill-outline-color":  'white'
+                    'fill-color': "red",
+                    'fill-opacity': 0.8,
+                    "fill-outline-color": "#000",
                 }
             });
 

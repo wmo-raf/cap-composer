@@ -38,19 +38,22 @@ class CapSetting(BaseSiteSetting):
                                    help_text=_("Name of the sending institution"))
 
     contacts = StreamField([
-        ("contact", ContactBlock(label="Contact"))
-    ], use_json_field=True, blank=True, null=True, verbose_name="Contact Details",
+        ("contact", ContactBlock(label=_("Contact")))
+    ], use_json_field=True, blank=True, null=True, verbose_name=_("Contact Details"),
         help_text=_("Contact for follow-up and confirmation of the alert message"))
 
     hazard_types = StreamField([
-        ("hazard_type", HazardTypeBlock(label="Hazard Type"))
-    ], use_json_field=True, blank=True, null=True, verbose_name="Hazard Types",
+        ("hazard_type", HazardTypeBlock(label=_("Hazard Type")))
+    ], use_json_field=True, blank=True, null=True, verbose_name=_("Hazard Types"),
         help_text=_("Hazards monitored by the institution"))
 
     audience_types = StreamField([
-        ("audience_type", AudienceTypeBlock(label="Audience Type"))
-    ], use_json_field=True, blank=True, null=True, verbose_name="Audience Types",
+        ("audience_type", AudienceTypeBlock(label=_("Audience Type")))
+    ], use_json_field=True, blank=True, null=True, verbose_name=_("Audience Types"),
         help_text=_("Target audiences for published alerts"))
+
+    class Meta:
+        verbose_name = _("CAP Settings")
 
     panels = [
         FieldPanel("sender_name"),
