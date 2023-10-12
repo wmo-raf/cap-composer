@@ -17,6 +17,7 @@ http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
 ## Contents
 
 - [CAP Editor](#cap-editor)
+    - [Features](#features)
     - [Quick start](#quick-start)
     - [Usage](#usage)
         - [Creating a CAP Alert](#creating-a-cap-alert)
@@ -26,6 +27,29 @@ http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
             - [C. Alert Area](#c.-alert-area)
             - [D. Alert Resource](#d.-alert-resource)
     - [Integrations](#integrations)
+
+## 🌟 Features
+
+- Modern user-friendly editor that follows [CAP 1.2](http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html)
+  standard. Built on top of the awesome [Wagtail CMS](https://wagtail.org)
+- Preview your CAP alert page as you edit. Save drafts for sharing with colleagues and collaborating
+- Inbuilt CAP validation. The page will not save if you have not input the required data according to CAP standard
+- User-friendly alert area map editor that allows multiple ways of constructing alert geographic areas, while keeping
+  the interface simple
+    - Select country official administrative boundaries for different levels (Admin 1, Admin 2, Admin 3), with in-built
+      simplification of complex boundaries
+    - Draw a polygon
+    - Draw a circle
+    - Use Geocode key values
+- Inbuilt publishing workflow using Wagtail's powerful page model, with automated emails to composers and approvers
+- Collaborate with team members using inbuilt comments (similar to how you could do in Word) with automated
+  notifications. Request for changes and approvals
+- Publish realtime notifications/messages to third party integrations using MQTT messaging protocol
+- Predefine a list of hazards types monitored by your institution, with intuitive icons
+  from [OCHA humanitarian icons](https://brand.unocha.org/d/xEPytAUjC3sH/icons#/humanitarian-icons)
+- Extendable to add your custom logic and functionality. The package provides an `abstract` django model that can be
+  inherited for customizations. It is all python code.
+- It is all open-source 🥳!
 
 ## Quick start
 
