@@ -1,5 +1,4 @@
-from wagtail.contrib.modeladmin.options import modeladmin_register
-
 from adminboundarymanager.wagtail_hooks import AdminBoundaryManagerAdminGroup
+from wagtail.contrib.modeladmin.options import modeladmin_register
 
 modeladmin_register(AdminBoundaryManagerAdminGroup)

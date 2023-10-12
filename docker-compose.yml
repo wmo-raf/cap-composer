@@ -1,0 +1,13 @@
+services:
+  mosquitto:
+    container_name: cap-mosquitto
+    restart: always
+    build:
+      context: ./cap-broker
+    environment:
+      - CAP_BROKER_USERNAME=${CAP_BROKER_USERNAME}
+      - CAP_BROKER_PASSWORD=${CAP_BROKER_PASSWORD}
+      - CAP_BROKER_QUEUE_MAX=${CAP_BROKER_QUEUE_MAX}
+    ports:
+      - 1883:1883
+      - 8884:8884

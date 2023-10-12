@@ -217,3 +217,5 @@ CACHES = {
         'TIMEOUT': 3600,  # one hour (in seconds)
     }
 }
+
+CAP_BROKER_URI = env.str("CAP_BROKER_URI", default="")
