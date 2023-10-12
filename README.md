@@ -236,6 +236,8 @@ Below is a sample snippet to achieve this in your `models.py`
 
 ```python
 # models.py
+from wagtail.signals import page_published
+
 from capeditor.models import AbstractCapAlertPage
 from capeditor.pubsub.publish import publish_cap_mqtt_message
 
