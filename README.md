@@ -17,7 +17,7 @@ http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
 ## Contents
 
 - [CAP Editor](#cap-editor)
-    - [Features](#features)
+    - [Features](#-features)
     - [Quick start](#quick-start)
     - [Usage](#usage)
         - [Creating a CAP Alert](#creating-a-cap-alert)
