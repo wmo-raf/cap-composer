@@ -5,33 +5,35 @@ from django.contrib.gis.db import models
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 from shapely.geometry import shape
 from wagtail import blocks
 from wagtail.admin.forms import WagtailAdminPageForm
-from wagtail.admin.panels import MultiFieldPanel, FieldPanel
+from wagtail.admin.panels import MultiFieldPanel, FieldPanel, InlinePanel
 from wagtail.contrib.settings.models import BaseSiteSetting
 from wagtail.contrib.settings.registry import register_setting
 from wagtail.fields import StreamField
-from wagtail.models import Page, Site
+from wagtail.models import Page, Site, Orderable
+from wagtailiconchooser.widgets import IconChooserWidget
 
 from capeditor.blocks import (
     AlertInfo,
-    HazardTypeBlock,
     AudienceTypeBlock,
     SENDER_NAME_HELP_TEXT,
     CONTACT_HELP_TEXT,
-    EVENT_HELP_TEXT,
     AUDIENCE_HELP_TEXT,
     AlertAddress,
     AlertReference,
     AlertIncident,
     ContactBlock
 )
+from capeditor.forms.widgets import HazardEventTypeWidget
 from capeditor.serializers import parse_tz
 
 
 @register_setting
-class CapSetting(BaseSiteSetting):
+class CapSetting(BaseSiteSetting, ClusterableModel):
     sender = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Identifier"),
                               help_text=_("Can be the website link or email of the sending institution"))
     sender_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Name"),
@@ -41,11 +43,6 @@ class CapSetting(BaseSiteSetting):
         ("contact", ContactBlock(label=_("Contact")))
     ], use_json_field=True, blank=True, null=True, verbose_name=_("Contact Details"),
         help_text=_("Contact for follow-up and confirmation of the alert message"))
-
-    hazard_types = StreamField([
-        ("hazard_type", HazardTypeBlock(label=_("Hazard Type")))
-    ], use_json_field=True, blank=True, null=True, verbose_name=_("Hazard Types"),
-        help_text=_("Hazards monitored by the institution"))
 
     audience_types = StreamField([
         ("audience_type", AudienceTypeBlock(label=_("Audience Type")))
@@ -59,9 +56,27 @@ class CapSetting(BaseSiteSetting):
         FieldPanel("sender_name"),
         FieldPanel("sender"),
         FieldPanel("contacts"),
-        FieldPanel("hazard_types"),
+        InlinePanel("hazard_event_types", heading=_("Hazard Types"), label=_("Hazard Type"),
+                    help_text=_("Hazards monitored by the institution")),
         FieldPanel("audience_types"),
     ]
+
+
+class HazardEventTypes(Orderable):
+    setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="hazard_event_types")
+    is_in_wmo_event_types_list = models.BooleanField(default=True,
+                                                     verbose_name=_("Select from WMO list of Hazards Event Types"))
+    event = models.CharField(max_length=255, unique=True, verbose_name=_("Hazard"), help_text=_("Name of Hazard"))
+    icon = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("Icon"), help_text=_("Matching icon"))
+
+    panels = [
+        FieldPanel("is_in_wmo_event_types_list"),
+        FieldPanel("event", widget=HazardEventTypeWidget),
+        FieldPanel("icon", widget=IconChooserWidget),
+    ]
+
+    def __str__(self):
+        return self.event
 
 
 def get_cap_setting():
@@ -87,10 +102,12 @@ class CapAlertPageForm(WagtailAdminPageForm):
 
         cap_setting = get_cap_setting()
 
+        # the following code gets pres-saved common options from settings and
+        # makes presents them as selectable dropdowns instead of the composer to type each time
+        # they are creating a new alert
         if cap_setting:
             default_sender_name = cap_setting.sender_name
             contacts = cap_setting.contacts
-            hazard_types = cap_setting.hazard_types
             audience_types = cap_setting.audience_types
 
             if default_sender_name:
@@ -125,27 +142,6 @@ class CapAlertPageForm(WagtailAdminPageForm):
 
                         info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.ChoiceBlock(
                             choices=contact_choices, required=False, help_text=CONTACT_HELP_TEXT)
-                        info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
-                        info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
-
-            if hazard_types:
-                hazard_type_choices = []
-
-                for block in hazard_types:
-                    hazard = block.value.get("hazard")
-                    hazard_type_choices.append((hazard, hazard))
-
-                info_field = self.fields.get("info")
-                for block_type, block in info_field.block.child_blocks.items():
-                    if block_type == "alert_info":
-                        field_name = "event"
-                        event_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
-
-                        label = event_block.label or field_name
-                        name = event_block.name
-
-                        info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.ChoiceBlock(
-                            choices=hazard_type_choices, help_text=EVENT_HELP_TEXT)
                         info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
                         info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
 

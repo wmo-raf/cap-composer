@@ -1,13 +1,17 @@
+import json
+
 from adminboundarymanager.models import AdminBoundarySettings
 from django.contrib.gis.forms import BaseGeometryWidget
 from django.contrib.gis.geos import GEOSGeometry
-from django.forms import Textarea, Widget
+from django.forms import Textarea, Widget, Select, TextInput
 from django.urls import reverse
 from shapely import wkt, Polygon
 from wagtail.models import Site
 from wagtail.telepath import register
 from wagtail.utils.widgets import WidgetWithScript
 from wagtail.widget_adapters import WidgetAdapter
+
+from capeditor.constants import WMO_HAZARD_EVENTS_TYPE_CHOICES
 
 
 class BaseMapWidget(Widget):
@@ -181,3 +185,40 @@ class CircleWidgetAdapter(WidgetAdapter):
 
 
 register(CircleWidgetAdapter(), CircleWidget)
+
+
+class HazardEventTypeWidget(WidgetWithScript, TextInput):
+    template_name = "capeditor/widgets/hazard_event_type_widget.html"
+
+    def __init__(self, attrs=None, **kwargs):
+        default_attrs = {}
+
+        if attrs:
+            default_attrs.update(attrs)
+
+        super().__init__(default_attrs)
+
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+
+        options = []
+
+        for choice in WMO_HAZARD_EVENTS_TYPE_CHOICES:
+            options.append({
+                "value": choice[0],
+                "label": choice[1],
+            })
+
+        context["widget"].update({
+            "event_type_list": options
+        })
+
+        return context
+
+    def render_js_init(self, id_, name, value):
+        return "new HazardEventTypeWidget({0},{1});".format(json.dumps(id_), json.dumps(value))
+
+    class Media:
+        js = [
+            "capeditor/js/widget/hazard-event-type-widget.js",
+        ]

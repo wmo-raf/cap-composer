@@ -1,0 +1,11 @@
+<input type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %}
+       value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}
+       style="display: none">
+
+<select style="display: none" id="{{ widget.attrs.id }}_wmo_list">
+    <option value="">-----------</option>
+    {% for option in widget.event_type_list %}
+        <option value="{{ option.value }}"
+                {% if widget.value and widget.value == option.value %}selected{% endif %}>{{ option.label }}</option>
+    {% endfor %}
+</select>
