@@ -155,6 +155,7 @@ class AlertAreaBoundaryBlock(blocks.StructBlock):
         value_class = AlertAreaBoundaryStructValue
 
     ADMIN_LEVEL_CHOICES = (
+        (0, "Level 0"),
         (1, "Level 1"),
         (2, "Level 2"),
         (3, "Level 3")
@@ -460,8 +461,6 @@ class AlertInfoStructValue(StructValue):
 
 
 class AlertInfo(blocks.StructBlock):
-    class Meta:
-        value_class = AlertInfoStructValue
 
     LANGUAGE_CHOICES = (
         ('en', _("English")),
