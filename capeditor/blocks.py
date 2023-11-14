@@ -154,6 +154,7 @@ class AlertAreaBoundaryBlock(blocks.StructBlock):
         value_class = AlertAreaBoundaryStructValue
 
     ADMIN_LEVEL_CHOICES = (
+        (0, _("Level 0")),
         (1, _("Level 1")),
         (2, _("Level 2")),
         (3, _("Level 3"))
@@ -471,11 +472,10 @@ def get_hazard_types():
 
 
 class AlertInfo(blocks.StructBlock):
-    class Meta:
-        value_class = AlertInfoStructValue
 
     LANGUAGE_CHOICES = (
         ('en', _("English")),
+        ('fr', _("French")),
     )
 
     CATEGORY_CHOICES = (
