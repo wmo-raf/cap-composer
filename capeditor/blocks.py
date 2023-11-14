@@ -475,6 +475,7 @@ class AlertInfo(blocks.StructBlock):
 
     LANGUAGE_CHOICES = (
         ('en', _("English")),
+        ('fr', _("French")),
     )
 
     CATEGORY_CHOICES = (
