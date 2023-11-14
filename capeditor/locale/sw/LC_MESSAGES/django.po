@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-14 12:05+0300\n"
+"POT-Creation-Date: 2023-10-13 17:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,76 +18,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: capeditor/blocks.py:70 capeditor/blocks.py:98 capeditor/blocks.py:375
+#: capeditor/blocks.py:69 capeditor/blocks.py:97 capeditor/blocks.py:298
+#: capeditor/blocks.py:373
 msgid "Name"
 msgstr "Jina"
 
-#: capeditor/blocks.py:70
+#: capeditor/blocks.py:69
 msgid "Name of the recipient"
 msgstr "Jina la mpokeaji"
 
-#: capeditor/blocks.py:71
-#, fuzzy
-#| msgid "Email address"
+#: capeditor/blocks.py:70
 msgid "Address"
 msgstr "Anwani"
 
-#: capeditor/blocks.py:71
-#, fuzzy
-#| msgid "Description of the incident"
+#: capeditor/blocks.py:70
 msgid "Address Information of the recipient"
 msgstr "Maelezo ya Anwani ya mpokeaji"
 
-#: capeditor/blocks.py:89 capeditor/models.py:240
+#: capeditor/blocks.py:88 capeditor/models.py:241
 msgid "Reference Alert"
 msgstr "Tahadhari ya Marejeleo"
 
-#: capeditor/blocks.py:90
+#: capeditor/blocks.py:89
 msgid "Earlier alert referenced by this alert"
 msgstr "Tahadhari ya awali iliyorejelewa na tahadhari hii"
 
-#: capeditor/blocks.py:94 capeditor/models.py:245
+#: capeditor/blocks.py:93 capeditor/models.py:246
 msgid "Incident"
 msgstr "Tukio"
 
-#: capeditor/blocks.py:94
-#, fuzzy
-#| msgid "The text headline of the alert message"
+#: capeditor/blocks.py:93
 msgid "Referent incident to this alert message"
 msgstr "Tukio linalorejelewa kwa ujumbe huu wa tahadhari"
 
-#: capeditor/blocks.py:99 capeditor/blocks.py:300 capeditor/blocks.py:376
+#: capeditor/blocks.py:98 capeditor/blocks.py:299 capeditor/blocks.py:374
 msgid "Value"
 msgstr "Thamani"
 
-#: capeditor/blocks.py:104
+#: capeditor/blocks.py:103
 msgid "Shelter - Take shelter in place or per instruction"
 msgstr "Makazi - Pata makazi mahali au kwa maagizo"
 
-#: capeditor/blocks.py:105
+#: capeditor/blocks.py:104
 msgid "Evacuate - Relocate as instructed in the instruction"
 msgstr "Ondoka - Hamisha kama ilivyoelekezwa katika maagizo"
 
-#: capeditor/blocks.py:106
+#: capeditor/blocks.py:105
 msgid "Prepare - Relocate as instructed in the instruction"
 msgstr "Jitayarishe - Hamisha kama ilivyoelekezwa katika maagizo"
 
-#: capeditor/blocks.py:107
+#: capeditor/blocks.py:106
 msgid "Execute - Execute a pre-planned activity identified in instruction"
 msgstr ""
 "Tekeleza - Tekeleza shughuli iliyopangwa mapema iliyotambuliwa katika "
 "maagizo"
 
-#: capeditor/blocks.py:108
+#: capeditor/blocks.py:107
 msgid "Avoid - Avoid the subject event as per the instruction"
 msgstr "Epuka - Epuka tukio la somo kulingana na maagizo"
 
-#: capeditor/blocks.py:109
+#: capeditor/blocks.py:108
 msgid "Monitor - Attend to information sources as described in instruction"
 msgstr ""
 "Monitor - Hudhuria vyanzo vya habari kama ilivyofafanuliwa katika maagizo"
 
-#: capeditor/blocks.py:110
+#: capeditor/blocks.py:109
 msgid ""
 "Assess - Evaluate the information in this message - DONT USE FOR PUBLIC "
 "ALERTS"
@@ -95,7 +90,7 @@ msgstr ""
 "Tathmini - Tathmini taarifa katika ujumbe huu - USITUMIE KWA TAARIFA KWA "
 "UMMA"
 
-#: capeditor/blocks.py:111
+#: capeditor/blocks.py:110
 msgid ""
 "All Clear - The subject event no longer poses a threat or concern and any "
 "follow on action is described in instruction"
@@ -103,39 +98,51 @@ msgstr ""
 "Yote Wazi - Tukio la somo halileti tishio au wasiwasi tena na ufuatiliaji "
 "wowote wa hatua unaelezwa katika maagizo"
 
-#: capeditor/blocks.py:113
+#: capeditor/blocks.py:112
 msgid "No action recommended"
 msgstr "Hakuna hatua inayopendekezwa"
 
-#: capeditor/blocks.py:116
+#: capeditor/blocks.py:115
 msgid "Response type"
 msgstr "Aina ya majibu"
 
-#: capeditor/blocks.py:117
+#: capeditor/blocks.py:116
 msgid ""
 "The code denoting the type of action recommended for the target audience"
 msgstr ""
 "Msimbo unaoashiria aina ya kitendo kinachopendekezwa kwa hadhira lengwa"
 
-#: capeditor/blocks.py:163 capeditor/blocks.py:209 capeditor/blocks.py:261
-#: capeditor/blocks.py:297
+#: capeditor/blocks.py:157
+msgid "Level 1"
+msgstr "Kiwango cha 1"
+
+#: capeditor/blocks.py:158
+msgid "Level 2"
+msgstr "Kiwango cha 2"
+
+#: capeditor/blocks.py:159
+msgid "Level 3"
+msgstr "Kiwango cha 3"
+
+#: capeditor/blocks.py:162 capeditor/blocks.py:208 capeditor/blocks.py:260
+#: capeditor/blocks.py:296
 msgid "Affected areas / Regions"
 msgstr "Maeneo / Mikoa iliyoathirika"
 
-#: capeditor/blocks.py:164 capeditor/blocks.py:210 capeditor/blocks.py:262
-#: capeditor/blocks.py:298
+#: capeditor/blocks.py:163 capeditor/blocks.py:209 capeditor/blocks.py:261
+#: capeditor/blocks.py:297
 msgid "The text describing the affected area of the alert message"
 msgstr "Maandishi yanayoelezea eneo lililoathiriwa la ujumbe wa tahadhari"
 
-#: capeditor/blocks.py:165
+#: capeditor/blocks.py:164
 msgid "Administrative Level"
 msgstr "Kiwango cha Utawala"
 
-#: capeditor/blocks.py:166
+#: capeditor/blocks.py:165
 msgid "Boundary"
 msgstr "Mpaka"
 
-#: capeditor/blocks.py:167 capeditor/blocks.py:212
+#: capeditor/blocks.py:166 capeditor/blocks.py:211
 msgid ""
 "The paired values of points defining a polygon that delineates the affected "
 "area of the alert message"
@@ -143,26 +150,26 @@ msgstr ""
 "Thamani zilizooanishwa za vidokezo vinavyofafanua poligoni ambayo hufafanua "
 "eneo lililoathiriwa la ujumbe wa tahadhari."
 
-#: capeditor/blocks.py:170 capeditor/blocks.py:214 capeditor/blocks.py:265
-#: capeditor/blocks.py:302
+#: capeditor/blocks.py:169 capeditor/blocks.py:213 capeditor/blocks.py:264
+#: capeditor/blocks.py:301
 msgid "Altitude"
 msgstr "Urefu"
 
-#: capeditor/blocks.py:171 capeditor/blocks.py:215 capeditor/blocks.py:266
-#: capeditor/blocks.py:303
+#: capeditor/blocks.py:170 capeditor/blocks.py:214 capeditor/blocks.py:265
+#: capeditor/blocks.py:302
 msgid ""
 "The specific or minimum altitude of the affected area of the alert message"
 msgstr ""
 "Urefu mahususi au wa chini kabisa wa eneo lililoathiriwa la ujumbe wa "
 "tahadhari"
 
-#: capeditor/blocks.py:173 capeditor/blocks.py:217 capeditor/blocks.py:268
-#: capeditor/blocks.py:305
+#: capeditor/blocks.py:172 capeditor/blocks.py:216 capeditor/blocks.py:267
+#: capeditor/blocks.py:304
 msgid "Ceiling"
 msgstr "Dari"
 
-#: capeditor/blocks.py:174 capeditor/blocks.py:218 capeditor/blocks.py:269
-#: capeditor/blocks.py:306
+#: capeditor/blocks.py:173 capeditor/blocks.py:217 capeditor/blocks.py:268
+#: capeditor/blocks.py:305
 msgid ""
 "The maximum altitude of the affected area of the alert message.MUST NOT be "
 "used except in combination with the altitude element. "
@@ -170,25 +177,25 @@ msgstr ""
 "Upeo wa mwinuko wa eneo lililoathiriwa la ujumbe wa tahadhari.LAZIMA "
 "USITUMIKE isipokuwa pamoja na kipengele cha mwinuko."
 
-#: capeditor/blocks.py:211
+#: capeditor/blocks.py:210
 msgid "Polygon"
 msgstr "Poligoni"
 
-#: capeditor/blocks.py:263 capeditor/blocks.py:555
+#: capeditor/blocks.py:262 capeditor/blocks.py:568
 msgid "Circle"
 msgstr "Mduara"
 
-#: capeditor/blocks.py:263
+#: capeditor/blocks.py:262
 msgid "Drag the marker to change position"
 msgstr "Buruta alama ili kubadilisha nafasi"
 
-#: capeditor/blocks.py:310
+#: capeditor/blocks.py:309
 msgid "The human-readable name of the agency or authority issuing this alert."
 msgstr ""
 "Jina linaloweza kusomeka na binadamu la wakala au mamlaka inayotoa arifa "
 "hii."
 
-#: capeditor/blocks.py:311
+#: capeditor/blocks.py:310
 msgid ""
 "The text describing the contact for follow-up and confirmation of the alert "
 "message"
@@ -196,31 +203,23 @@ msgstr ""
 "Maandishi yanayoelezea mwasiliani kwa ufuatiliaji na uthibitisho wa ujumbe "
 "wa tahadhari"
 
-#: capeditor/blocks.py:312
-msgid "The text denoting the type of the subject event of the alert message"
-msgstr "Maandishi yanayoashiria aina ya tukio la somo la ujumbe wa tahadhari"
-
-#: capeditor/blocks.py:313
+#: capeditor/blocks.py:311
 msgid "The text describing the intended audience of the alert message"
 msgstr "Maandishi yanayoelezea hadhira iliyokusudiwa ya ujumbe wa tahadhari"
 
-#: capeditor/blocks.py:355 capeditor/blocks.py:364
-#, fuzzy
-#| msgid "Description"
+#: capeditor/blocks.py:353 capeditor/blocks.py:362
 msgid "Resource Description"
 msgstr "Maelezo ya Rasilimali"
 
-#: capeditor/blocks.py:356 capeditor/blocks.py:365
+#: capeditor/blocks.py:354 capeditor/blocks.py:363
 msgid "The text describing the type and content of the resource file"
 msgstr "Maandishi yanayoelezea aina na maudhui ya faili ya rasilimali"
 
-#: capeditor/blocks.py:366
-#, fuzzy
-#| msgid "Alert Resources "
+#: capeditor/blocks.py:364
 msgid "External Resource Link"
 msgstr "Kiungo cha Rasilimali za Nje"
 
-#: capeditor/blocks.py:367
+#: capeditor/blocks.py:365
 msgid ""
 "Link to external resource. This can be for example a link to related "
 "websites. "
@@ -228,59 +227,59 @@ msgstr ""
 "Unganisha kwa rasilimali ya nje. Hii inaweza kuwa kwa mfano kiungo cha "
 "tovuti zinazohusiana."
 
-#: capeditor/blocks.py:375
+#: capeditor/blocks.py:373
 msgid "Name for the event code"
 msgstr "Jina la msimbo wa tukio"
 
-#: capeditor/blocks.py:376
+#: capeditor/blocks.py:374
 msgid "Value of the event code"
 msgstr "Thamani ya msimbo wa tukio"
 
-#: capeditor/blocks.py:467
+#: capeditor/blocks.py:478
 msgid "English"
 msgstr "Kiingereza"
 
-#: capeditor/blocks.py:471
+#: capeditor/blocks.py:482
 msgid "Geophysical"
 msgstr "Kijiofizikia"
 
-#: capeditor/blocks.py:472
+#: capeditor/blocks.py:483
 msgid "Meteorological"
 msgstr "Hali ya hewa"
 
-#: capeditor/blocks.py:473
+#: capeditor/blocks.py:484
 msgid "General emergency and public safety"
 msgstr "Dharura ya jumla na usalama wa umma"
 
-#: capeditor/blocks.py:474
+#: capeditor/blocks.py:485
 msgid "Law enforcement, military, homeland and local/private security"
 msgstr "Utekelezaji wa sheria, kijeshi, nchi na usalama wa ndani/binafsi"
 
-#: capeditor/blocks.py:475
+#: capeditor/blocks.py:486
 msgid "Rescue and recovery"
 msgstr "Kuokoa na kupona"
 
-#: capeditor/blocks.py:476
+#: capeditor/blocks.py:487
 msgid "Fire suppression and rescue"
 msgstr "Kuzuia moto na uokoaji"
 
-#: capeditor/blocks.py:477
+#: capeditor/blocks.py:488
 msgid "Medical and public health"
 msgstr "Afya ya matibabu na ya umma"
 
-#: capeditor/blocks.py:478
+#: capeditor/blocks.py:489
 msgid "Pollution and other environmental"
 msgstr "Uchafuzi na mazingira mengine"
 
-#: capeditor/blocks.py:479
+#: capeditor/blocks.py:490
 msgid "Public and private transportation"
 msgstr "Usafiri wa umma na wa kibinafsi"
 
-#: capeditor/blocks.py:480
+#: capeditor/blocks.py:491
 msgid "Utility, telecommunication, other non-transport infrastructure"
 msgstr "Huduma, mawasiliano ya simu, miundombinu mingine isiyo ya usafiri"
 
-#: capeditor/blocks.py:481
+#: capeditor/blocks.py:492
 msgid ""
 "Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat "
 "or attack"
@@ -288,127 +287,143 @@ msgstr ""
 "Tishio au mashambulizi ya Kemikali, Baiolojia, Radiolojia, Nyuklia au Mavuno"
 " ya Juu"
 
-#: capeditor/blocks.py:482
+#: capeditor/blocks.py:493
 msgid "Other events"
 msgstr "Matukio mengine"
 
-#: capeditor/blocks.py:486
+#: capeditor/blocks.py:497
 msgid "Immediate - Responsive action SHOULD be taken immediately"
 msgstr "Hapo Hapo - Hatua ya kuitikia INATAKIWA ichukuliwe mara moja"
 
-#: capeditor/blocks.py:487
+#: capeditor/blocks.py:498
 msgid "Expected - Responsive action SHOULD be taken soon (within next hour)"
 msgstr ""
 "Inatarajiwa - Hatua ya kujibu LAZIMA ichukuliwe hivi karibuni (ndani ya saa "
 "ijayo)"
 
-#: capeditor/blocks.py:488
+#: capeditor/blocks.py:499
 msgid "Future - Responsive action SHOULD be taken in the near future"
 msgstr ""
 "Wakati Ujao - Hatua ya kuitikia LAZIMA ichukuliwe katika siku za usoni"
 
-#: capeditor/blocks.py:489
+#: capeditor/blocks.py:500
 msgid "Past - Responsive action is no longer required"
 msgstr "Zamani - Hatua ya kujibu haihitajiki tena"
 
-#: capeditor/blocks.py:490
+#: capeditor/blocks.py:501
 msgid "Unknown - Urgency not known"
 msgstr "Haijulikani - Udharura haujulikani"
 
-#: capeditor/blocks.py:494
+#: capeditor/blocks.py:505
 msgid "Extreme - Extraordinary threat to life or property"
 msgstr "Uliokithiri - Tishio lisilo la kawaida kwa maisha au mali"
 
-#: capeditor/blocks.py:495
+#: capeditor/blocks.py:506
 msgid "Severe - Significant threat to life or property"
 msgstr "Kali - Tishio kubwa kwa maisha au mali"
 
-#: capeditor/blocks.py:496
+#: capeditor/blocks.py:507
 msgid "Moderate - Possible threat to life or property"
 msgstr "Wastani - Tishio linalowezekana kwa maisha au mali"
 
-#: capeditor/blocks.py:497
+#: capeditor/blocks.py:508
 msgid "Minor - Minimal to no known threat to life or property"
 msgstr ""
 "Ndogo - Kiwango cha chini kwa tishio lisilojulikana kwa maisha au mali"
 
-#: capeditor/blocks.py:498
+#: capeditor/blocks.py:509
 msgid "Unknown - Severity unknown"
 msgstr "Haijulikani - Ukali haujulikani"
 
-#: capeditor/blocks.py:502
+#: capeditor/blocks.py:513
 msgid "Observed - Determined to have occurred or to be ongoing"
 msgstr "Imezingatiwa - Imedhamiriwa kuwa imetokea au kuwa inaendelea"
 
-#: capeditor/blocks.py:503
+#: capeditor/blocks.py:514
 msgid "Likely - Likely (percentage > ~50%)"
 msgstr "Huenda - Huenda (asilimia> ~50%)"
 
-#: capeditor/blocks.py:504
+#: capeditor/blocks.py:515
 msgid "Possible - Possible but not likely (percentage <= ~50%)"
 msgstr "Inawezekana - Inawezekana lakini haiwezekani (asilimia <= ~50%)"
 
-#: capeditor/blocks.py:505
+#: capeditor/blocks.py:516
 msgid "Unlikely - Not expected to occur (percentage ~ 0)"
 msgstr "Haiwezekani - Haitarajiwi kutokea (asilimia ~ 0)"
 
-#: capeditor/blocks.py:506
+#: capeditor/blocks.py:517
 msgid "Unknown - Certainty unknown"
 msgstr "Haijulikani - Hakika haijulikani"
 
-#: capeditor/blocks.py:508
+#: capeditor/blocks.py:519
+#: capeditor/templates/capeditor/cap_alert_page.html:30
+#: capeditor/templates/capeditor/cap_alert_page.html:195
 msgid "Event"
 msgstr "Tukio"
 
-#: capeditor/blocks.py:510
+#: capeditor/blocks.py:520
+#, fuzzy
+#| msgid ""
+#| "The text denoting the type of the subject event of the alert message"
+msgid ""
+"The text denoting the type of the subject event of the alert message. You "
+"can define hazards events monitored by your institution from CAP settings"
+msgstr ""
+"Maandishi yanayoashiria aina ya tukio la somo la ujumbe wa tahadhari. "
+"Unaweza kufafanua matukio ya hatari yanayofuatiliwa na taasisi yako kutoka "
+"kwa mipangilio ya CAP"
+
+#: capeditor/blocks.py:523
 msgid "Category"
 msgstr "Kategoria"
 
-#: capeditor/blocks.py:511
+#: capeditor/blocks.py:524
 msgid ""
 "The code denoting the category of the subject event of the alert message"
 msgstr "Msimbo unaoashiria aina ya tukio la somo la ujumbe wa tahadhari"
 
-#: capeditor/blocks.py:513
+#: capeditor/blocks.py:526
 msgid "Language"
 msgstr "Lugha"
 
-#: capeditor/blocks.py:514
+#: capeditor/blocks.py:527
 msgid "The code denoting the language of the alert message"
 msgstr "Msimbo unaoashiria lugha ya ujumbe wa tahadhari"
 
-#: capeditor/blocks.py:516
+#: capeditor/blocks.py:529
 msgid "Urgency"
 msgstr "Uharaka"
 
-#: capeditor/blocks.py:517
+#: capeditor/blocks.py:530
 msgid ""
 "The code denoting the urgency of the subject event of the alert message"
 msgstr "Msimbo unaoashiria uharaka wa tukio la somo la ujumbe wa tahadhari"
 
-#: capeditor/blocks.py:519
+#: capeditor/blocks.py:532
+#: capeditor/templates/capeditor/cap_alert_page.html:104
 msgid "Severity"
 msgstr "Ukali"
 
-#: capeditor/blocks.py:520
+#: capeditor/blocks.py:533
 msgid ""
 "The code denoting the severity of the subject event of the alert message"
 msgstr "Msimbo unaoashiria ukali wa tukio la somo la ujumbe wa tahadhari"
 
-#: capeditor/blocks.py:522
+#: capeditor/blocks.py:535
+#: capeditor/templates/capeditor/cap_alert_page.html:113
 msgid "Certainty"
 msgstr "Uhakika"
 
-#: capeditor/blocks.py:523
+#: capeditor/blocks.py:536
 msgid ""
 "The code denoting the certainty of the subject event of the alert message"
 msgstr "Msimbo unaoashiria uhakika wa tukio la somo la ujumbe wa tahadhari"
 
-#: capeditor/blocks.py:525
+#: capeditor/blocks.py:538
 msgid "Headline"
 msgstr "Kichwa cha habari"
 
-#: capeditor/blocks.py:526
+#: capeditor/blocks.py:539
 msgid ""
 "The text headline of the alert message. Make it direct and actionable as "
 "possible while remaining short"
@@ -416,13 +431,11 @@ msgstr ""
 "Kichwa cha maandishi cha ujumbe wa tahadhari. Ifanye moja kwa moja na iweze "
 "kutekelezeka iwezekanavyo huku ikisalia kuwa fupi"
 
-#: capeditor/blocks.py:528
+#: capeditor/blocks.py:541
 msgid "Description"
 msgstr "Maelezo"
 
-#: capeditor/blocks.py:530
-#, fuzzy
-#| msgid "The text describing the subject event of the alert message"
+#: capeditor/blocks.py:543
 msgid ""
 "The text describing the subject event of the alert message. An extended "
 "description of the hazard or event that occasioned this message"
@@ -430,11 +443,11 @@ msgstr ""
 "Maandishi yanayoelezea tukio la somo la ujumbe wa tahadhari. Maelezo "
 "yaliyopanuliwa ya hatari au tukio lililosababisha ujumbe huu"
 
-#: capeditor/blocks.py:532
+#: capeditor/blocks.py:545
 msgid "Instruction"
 msgstr "Maagizo"
 
-#: capeditor/blocks.py:533
+#: capeditor/blocks.py:546
 msgid ""
 "The text describing the recommended action to be taken by recipients of the "
 "alert message"
@@ -442,34 +455,35 @@ msgstr ""
 "Maandishi yanayoelezea hatua iliyopendekezwa kuchukuliwa na wapokeaji wa "
 "ujumbe wa arifa"
 
-#: capeditor/blocks.py:535
+#: capeditor/blocks.py:548
+#: capeditor/templates/capeditor/cap_alert_page.html:56
 msgid "Effective"
 msgstr "Ufanisi"
 
-#: capeditor/blocks.py:536
-#, fuzzy
-#| msgid "The effective time of the information of the alert message"
+#: capeditor/blocks.py:549
 msgid ""
 "The effective time of the information of the alert message. If not set, the "
 "sent date will be used"
 msgstr ""
-"Wakati unaofaa wa taarifa ya ujumbe wa tahadhari. Ikiwa haijawekwa, tarehe "
+"Wakati mzuri wa taarifa ya ujumbe wa tahadhari. Ikiwa haijawekwa, tarehe "
 "iliyotumwa itatumika"
 
-#: capeditor/blocks.py:538
+#: capeditor/blocks.py:551
+#: capeditor/templates/capeditor/cap_alert_page.html:72
 msgid "Onset"
 msgstr "Kuanza"
 
-#: capeditor/blocks.py:539
+#: capeditor/blocks.py:552
 msgid ""
 "The expected time of the beginning of the subject event of the alert message"
 msgstr "Muda unaotarajiwa wa mwanzo wa tukio la somo la ujumbe wa tahadhari"
 
-#: capeditor/blocks.py:541
+#: capeditor/blocks.py:554
+#: capeditor/templates/capeditor/cap_alert_page.html:81
 msgid "Expires"
 msgstr "Muda wake unaisha"
 
-#: capeditor/blocks.py:542
+#: capeditor/blocks.py:555
 msgid ""
 "The expiry time of the information of the alert message. If not set, each "
 "recipient is free to set its own policy as to when the message is no longer "
@@ -479,53 +493,47 @@ msgstr ""
 "mpokeaji yuko huru kuweka sera yake mwenyewe kuhusu ni lini ujumbe haufanyi "
 "kazi tena."
 
-#: capeditor/blocks.py:545
-#, fuzzy
-#| msgid "Response type"
+#: capeditor/blocks.py:558
 msgid "Response Types"
 msgstr "Aina za Majibu"
 
-#: capeditor/blocks.py:547
-#, fuzzy
-#| msgid "Sender"
+#: capeditor/blocks.py:560
 msgid "Sender name"
 msgstr "Jina la mtumaji"
 
-#: capeditor/blocks.py:549
+#: capeditor/blocks.py:562 capeditor/models.py:43
 msgid "Contact"
 msgstr "Wasiliana"
 
-#: capeditor/blocks.py:550 capeditor/blocks.py:580
+#: capeditor/blocks.py:563 capeditor/blocks.py:589
 msgid "Audience"
 msgstr "Hadhira"
 
-#: capeditor/blocks.py:553
+#: capeditor/blocks.py:566
 msgid "Admin Boundary"
 msgstr "Mpaka wa Utawala"
 
-#: capeditor/blocks.py:554
+#: capeditor/blocks.py:567
 msgid "Draw Polygon"
 msgstr "Chora Polygon"
 
-#: capeditor/blocks.py:556
+#: capeditor/blocks.py:569
 msgid "Geocode"
 msgstr "Msimbo wa kijiografia"
 
-#: capeditor/blocks.py:557
+#: capeditor/blocks.py:570
 msgid "Alert Area"
 msgstr "Eneo la Tahadhari"
 
-#: capeditor/blocks.py:557
+#: capeditor/blocks.py:570
 msgid "Admin Boundary, Polygon, Circle or Geocode"
 msgstr "Mpaka wa Msimamizi, Poligoni, Mduara au Msimbo wa Jiografia"
 
-#: capeditor/blocks.py:562
-#, fuzzy
-#| msgid "Resource"
+#: capeditor/blocks.py:575
 msgid "Resources"
 msgstr "Rasilimali"
 
-#: capeditor/blocks.py:562
+#: capeditor/blocks.py:575
 msgid ""
 "Additional file with supplemental information related to this alert "
 "information"
@@ -533,109 +541,136 @@ msgstr ""
 "Faili ya ziada iliyo na maelezo ya ziada yanayohusiana na taarifa hii ya "
 "arifa"
 
-#: capeditor/blocks.py:565
+#: capeditor/blocks.py:578
 msgid "Parameter"
 msgstr "Kigezo"
 
-#: capeditor/blocks.py:565
+#: capeditor/blocks.py:578
 msgid "Parameters"
 msgstr "Vigezo"
 
-#: capeditor/blocks.py:566
-#, fuzzy
-#| msgid "Event"
+#: capeditor/blocks.py:579
 msgid "Event Code"
 msgstr "Msimbo wa Tukio"
 
-#: capeditor/blocks.py:566
-#, fuzzy
-#| msgid "Event"
+#: capeditor/blocks.py:579
 msgid "Event codes"
 msgstr "Misimbo ya tukio"
 
-#: capeditor/blocks.py:575
-msgid "Hazard"
-msgstr "Hatari"
+#: capeditor/blocks.py:589
+msgid "Intended audience"
+msgstr "Hadhira iliyokusudiwa"
 
-#: capeditor/blocks.py:584
-#, fuzzy
-#| msgid "Contact"
+#: capeditor/blocks.py:593
 msgid "Contact Detail"
 msgstr "Maelezo ya Mawasiliano"
 
-#: capeditor/models.py:35
-#, fuzzy
-#| msgid "Identifier"
+#: capeditor/models.py:37
 msgid "CAP Sender Identifier"
 msgstr "Kitambulisho cha Mtumaji wa CAP"
 
-#: capeditor/models.py:36
+#: capeditor/models.py:38
 msgid "Can be the website link or email of the sending institution"
 msgstr "Inaweza kuwa kiungo cha tovuti au barua pepe ya taasisi inayotuma"
 
-#: capeditor/models.py:37
+#: capeditor/models.py:39
 msgid "CAP Sender Name"
 msgstr "Jina la Mtumaji CAP"
 
-#: capeditor/models.py:38
-#, fuzzy
-#| msgid "Name of the recipient"
+#: capeditor/models.py:40
 msgid "Name of the sending institution"
 msgstr "Jina la taasisi ya kutuma"
 
-#: capeditor/models.py:43
-#, fuzzy
-#| msgid ""
-#| "The text describing the contact for follow-up and confirmation of the alert "
-#| "message"
+#: capeditor/models.py:44
+msgid "Contact Details"
+msgstr "Maelezo ya Mawasiliano"
+
+#: capeditor/models.py:45
 msgid "Contact for follow-up and confirmation of the alert message"
-msgstr "Wasiliana kwa ufuatiliaji na uthibitisho wa ujumbe wa tahadhari"
+msgstr ""
+"Maelezo ya mawasiliano kwa ufuatiliaji na uthibitisho wa ujumbe wa tahadhari"
 
 #: capeditor/models.py:48
-msgid "Hazards monitored by the institution"
-msgstr "Hatari zinazofuatiliwa na taasisi"
+msgid "Audience Type"
+msgstr "Aina ya Hadhira"
 
-#: capeditor/models.py:53
+#: capeditor/models.py:49
+msgid "Audience Types"
+msgstr "Aina za Hadhira"
+
+#: capeditor/models.py:50
 msgid "Target audiences for published alerts"
 msgstr "Hadhira inayolengwa kwa arifa zilizochapishwa"
 
-#: capeditor/models.py:173
+#: capeditor/models.py:53
+msgid "CAP Settings"
+msgstr "Mipangilio ya CAP"
+
+#: capeditor/models.py:59
+msgid "Hazard Types"
+msgstr "Aina za Hatari"
+
+#: capeditor/models.py:59
+msgid "Hazard Type"
+msgstr "Aina ya Hatari"
+
+#: capeditor/models.py:60
+msgid "Hazards monitored by the institution"
+msgstr "Hatari zinazofuatiliwa na taasisi"
+
+#: capeditor/models.py:68
+msgid "Select from WMO list of Hazards Event Types"
+msgstr "Chagua kutoka kwa orodha ya WMO ya Aina za Matukio ya Hatari"
+
+#: capeditor/models.py:69
+msgid "Hazard"
+msgstr "Hatari"
+
+#: capeditor/models.py:69
+msgid "Name of Hazard"
+msgstr "Jina la Hatari"
+
+#: capeditor/models.py:70
+msgid "Icon"
+msgstr "Aikoni"
+
+#: capeditor/models.py:70
+msgid "Matching icon"
+msgstr "Aikoni inayolingana"
+
+#: capeditor/models.py:174
 msgid ""
 "Draft - A preliminary template or draft, not actionable in its current form"
 msgstr ""
 "Rasimu - Kiolezo au rasimu ya awali, isiyoweza kutekelezeka katika umbo lake"
 " la sasa"
 
-#: capeditor/models.py:174
+#: capeditor/models.py:175
 msgid "Actual - Actionable by all targeted recipients"
 msgstr "Halisi - Inaweza kutekelezwa na wapokeaji wote wanaolengwa"
 
-#: capeditor/models.py:175
-msgid "Test - Technical testing only, all recipients disregard"
-msgstr "Jaribio - Jaribio la kiufundi pekee, wapokeaji wote hupuuza"
-
 #: capeditor/models.py:176
+msgid "Test - Technical testing only, all recipients disregard"
+msgstr "Jaribio - Jaribio la kiufundi pekee, wapokeaji wote wapuuze"
+
+#: capeditor/models.py:177
 msgid ""
 "Exercise - Actionable only by designated exercise participants; exercise "
 "identifier SHOULD appear in note"
 msgstr ""
-"Zoezi - Inaweza kutekelezwa tu na washiriki walioteuliwa wa mazoezi; "
+"Zoezi - Inaweza kutekelezwa tu na washiriki walioteuliwa kwa zoezi; "
 "kitambulisho cha zoezi LAZIMA kionekane kwenye dokezo"
 
-#: capeditor/models.py:178
+#: capeditor/models.py:179
 msgid "System - For messages that support alert network internal functions"
 msgstr "Mfumo - Kwa ujumbe unaoauni vitendaji vya ndani vya arifa"
 
-#: capeditor/models.py:182
+#: capeditor/models.py:183
 msgid "Alert - Initial information requiring attention by targeted recipients"
 msgstr ""
 "Tahadhari - Taarifa ya awali inayohitaji kushughulikiwa na wapokeaji lengwa"
 
-#: capeditor/models.py:183
-#, fuzzy
-#| msgid ""
-#| "Update - Updates and supercedes the earlier message(s) identified in "
-#| "referenced alerts"
+#: capeditor/models.py:184
 msgid ""
 "Update - Updates and supersedes the earlier message(s) identified in "
 "referenced alerts"
@@ -643,11 +678,11 @@ msgstr ""
 "Sasisha - Inasasisha na kuchukua nafasi ya ujumbe wa awali uliotambuliwa "
 "katika arifa zilizorejelewa"
 
-#: capeditor/models.py:184
+#: capeditor/models.py:185
 msgid "Cancel - Cancels the earlier message(s) identified in references"
 msgstr "Ghairi - Hughairi ujumbe wa awali uliotambuliwa katika marejeleo"
 
-#: capeditor/models.py:185
+#: capeditor/models.py:186
 msgid ""
 "Acknowledge - Acknowledges receipt and acceptance of the message(s) "
 "identified in references field"
@@ -655,7 +690,7 @@ msgstr ""
 "Thibitisha - Inakubali kupokea na kukubali ujumbe uliotambuliwa katika uga "
 "wa marejeleo"
 
-#: capeditor/models.py:187
+#: capeditor/models.py:188
 msgid ""
 "Error -  Indicates rejection of the message(s) identified in references; "
 "explanation SHOULD appear in note field"
@@ -663,11 +698,11 @@ msgstr ""
 "Hitilafu - Huonyesha kukataliwa kwa ujumbe uliotambuliwa katika marejeleo; "
 "maelezo LAZIMA yaonekane katika sehemu ya noti"
 
-#: capeditor/models.py:192
+#: capeditor/models.py:193
 msgid "Public - For general dissemination to unrestricted audiences"
 msgstr "Umma - Kwa usambazaji wa jumla kwa hadhira isiyo na kikomo"
 
-#: capeditor/models.py:193
+#: capeditor/models.py:194
 msgid ""
 "Restricted - For dissemination only to users with a known operational "
 "requirement as in the restriction field"
@@ -675,7 +710,7 @@ msgstr ""
 "Imezuiliwa - Kwa usambazaji tu kwa watumiaji walio na hitaji la kufanya kazi"
 " linalojulikana kama katika uga wa vizuizi"
 
-#: capeditor/models.py:195
+#: capeditor/models.py:196
 msgid ""
 "Private - For dissemination only to specified addresses as in the addresses "
 "field in the alert"
@@ -683,70 +718,67 @@ msgstr ""
 "Faragha - Kwa usambazaji tu kwa anwani maalum kama katika sehemu ya anwani "
 "katika tahadhari"
 
-#: capeditor/models.py:199
+#: capeditor/models.py:200
 msgid "Identifier"
 msgstr "Kitambulisho"
 
-#: capeditor/models.py:200
-msgid "Unique ID. Auto generated on creation."
-msgstr "Kitambulisho cha kipekee. Imetengenezwa kiotomatiki kwenye uundaji."
-
 #: capeditor/models.py:201
+msgid "Unique ID. Auto generated on creation."
+msgstr ""
+"Kitambulisho cha kipekee. Inatengenezwa kiotomatiki wakati wa uundaji."
+
+#: capeditor/models.py:202
 msgid "Sender"
 msgstr "Mtumaji"
 
-#: capeditor/models.py:202
-#, fuzzy
-#| msgid ""
-#| " Identifies the originator of an alert. This can be an email of the "
-#| "institution for example"
+#: capeditor/models.py:203
 msgid ""
 "Identifies the originator of an alert. For example the website address of "
 "the institution"
 msgstr ""
 "Hubainisha mwanzilishi wa arifa. Kwa mfano anwani ya tovuti ya taasisi"
 
-#: capeditor/models.py:204
-msgid "Sent"
-msgstr "Imetumwa"
-
 #: capeditor/models.py:205
+msgid "Sent"
+msgstr "Tarehe na wakati wa kutuma"
+
+#: capeditor/models.py:206
 msgid "Time and date of origination of the alert"
 msgstr "Wakati na tarehe ya asili ya arifa"
 
-#: capeditor/models.py:206
+#: capeditor/models.py:207
 msgid "Status"
 msgstr "Hali"
 
-#: capeditor/models.py:207
+#: capeditor/models.py:208
 msgid "The code denoting the appropriate handling of the alert"
-msgstr "Msimbo unaoashiria utunzaji unaofaa wa tahadhari"
+msgstr "Msimbo unaoashiria utekelezaji unaofaa wa tahadhari"
 
-#: capeditor/models.py:209
+#: capeditor/models.py:210
 msgid "Message Type"
 msgstr "Aina ya Ujumbe"
 
-#: capeditor/models.py:210
+#: capeditor/models.py:211
 msgid "The code denoting the nature of the alert message"
 msgstr "Msimbo unaoashiria asili ya ujumbe wa arifa"
 
-#: capeditor/models.py:211
+#: capeditor/models.py:212
 msgid "Scope"
 msgstr "Upeo"
 
-#: capeditor/models.py:212
+#: capeditor/models.py:213
 msgid "The code denoting the intended distribution of the alert message"
 msgstr "Msimbo unaoashiria usambazaji unaokusudiwa wa ujumbe wa tahadhari"
 
-#: capeditor/models.py:213
+#: capeditor/models.py:214
 msgid "Source"
 msgstr "Chanzo"
 
-#: capeditor/models.py:214
+#: capeditor/models.py:215
 msgid "The text identifying the source of the alert message"
 msgstr "Maandishi yanayotambulisha chanzo cha ujumbe wa arifa"
 
-#: capeditor/models.py:216
+#: capeditor/models.py:217
 msgid ""
 "The text describing the rule for limiting distribution of the restricted "
 "alert message. Used when scope value is Restricted"
@@ -754,19 +786,19 @@ msgstr ""
 "Maandishi yanayoelezea sheria ya kuzuia usambazaji wa ujumbe wa tahadhari "
 "uliowekewa vikwazo. Inatumika wakati thamani ya upeo imezuiwa"
 
-#: capeditor/models.py:218
+#: capeditor/models.py:219
 msgid "Restriction"
 msgstr "Kizuizi"
 
-#: capeditor/models.py:220
+#: capeditor/models.py:221
 msgid "The code denoting the special handling of the alert message"
 msgstr "Msimbo unaoashiria utunzaji maalum wa ujumbe wa tahadhari"
 
-#: capeditor/models.py:221
+#: capeditor/models.py:222
 msgid "Code"
 msgstr "Kanuni"
 
-#: capeditor/models.py:223
+#: capeditor/models.py:224
 msgid ""
 "The text describing the purpose or significance of the alert message.The "
 "message note is primarily intended for use with <status> 'Exercise' and "
@@ -775,156 +807,97 @@ msgstr ""
 "Maandishi yanayoelezea madhumuni au umuhimu wa ujumbe wa tahadhari. Ujumbe "
 "huu unakusudiwa kutumiwa na <status> 'Zoezi' na <msgType> 'Error'."
 
-#: capeditor/models.py:225
+#: capeditor/models.py:226
 msgid "Note"
 msgstr "Kumbuka"
 
-#: capeditor/models.py:227 capeditor/models.py:231
+#: capeditor/models.py:228 capeditor/models.py:232
 msgid "Alert Information"
 msgstr "Taarifa za Tahadhari"
 
-#: capeditor/models.py:234
+#: capeditor/models.py:235
 msgid "Recipient"
 msgstr "Mpokeaji"
 
-#: capeditor/models.py:236
+#: capeditor/models.py:237
 msgid "Addresses"
 msgstr "Anwani"
 
-#: capeditor/models.py:237
-#, fuzzy
-#| msgid ""
-#| "The code denoting the intended distribution of the alert message"
+#: capeditor/models.py:238
 msgid ""
 "The group listing of intended recipients of the alert message, if scope is "
 "Private"
 msgstr ""
 "Orodha ya kikundi ya walengwa wa ujumbe wa arifa, ikiwa upeo ni wa Faragha"
 
-#: capeditor/models.py:242
-#, fuzzy
-#| msgid "Reference Alert"
+#: capeditor/models.py:243
 msgid "Reference Alerts"
 msgstr "Tahadhari za Marejeleo"
 
-#: capeditor/models.py:247
+#: capeditor/models.py:248
 msgid "Incidents"
 msgstr "Matukio"
 
-#: capeditor/models.py:262
-#, fuzzy
-#| msgid "Alert Information"
+#: capeditor/models.py:263
 msgid "Alert Identification"
 msgstr "Kitambulisho cha Arifa"
 
-#~ msgid ""
-#~ "How many of this products should be visible on the landing page filter "
-#~ "section ?"
-#~ msgstr ""
-#~ "Je, ni bidhaa ngapi kati ya hizi zinazopaswa kuonekana kwenye sehemu ya "
-#~ "kichujio cha ukurasa wa kutua?"
+#: capeditor/templates/capeditor/cap_alert_page.html:47
+msgid "Issued"
+msgstr "Tarehe na wakati wa kuchapishwa"
 
-#~ msgid "Alerts Per Page"
-#~ msgstr "Tahadhari kwa Kila Ukurasa"
+#: capeditor/templates/capeditor/cap_alert_page.html:95
+msgid "Urgency:"
+msgstr "Dharura:"
 
-#~ msgid "Immediate"
-#~ msgstr "Mara moja"
+#: capeditor/templates/capeditor/cap_alert_page.html:128
+msgid "CAP XML Link"
+msgstr "Kiungo cha mtandao cha CAP XML"
 
-#~ msgid "Expected"
-#~ msgstr "Inatarajiwa"
+#: capeditor/templates/capeditor/cap_alert_page.html:140
+msgid "Alert Severity"
+msgstr "Ukali wa Tahadhari"
 
-#~ msgid "Future"
-#~ msgstr "Wakati ujao"
+#: capeditor/templates/capeditor/cap_alert_page.html:146
+msgid "Extreme"
+msgstr "Uliokithiri"
 
-#~ msgid "Past"
-#~ msgstr "Zamani"
+#: capeditor/templates/capeditor/cap_alert_page.html:152
+msgid "Severe"
+msgstr "Kali"
 
-#~ msgid "Unknown"
-#~ msgstr "Haijulikani"
+#: capeditor/templates/capeditor/cap_alert_page.html:158
+msgid "Moderate"
+msgstr "Wastani"
 
-#~ msgid "Earlier Reference Alerts -  If applicable"
-#~ msgstr "Arifa za Marejeleo za Awali - Ikitumika"
+#: capeditor/templates/capeditor/cap_alert_page.html:164
+msgid "Minor"
+msgstr "Ndogo"
 
-#~ msgid "Alert"
-#~ msgstr "Tahadhari"
+#: capeditor/templates/capeditor/cap_alert_page.html:171
+msgid "Unknown"
+msgstr "Haijulikani"
 
-#~ msgid "Intended Recipients (If scope is Private) "
-#~ msgstr "Wapokeaji Wanaotarajiwa (Ikiwa upeo ni wa Faragha)"
+#: capeditor/templates/capeditor/cap_alert_page.html:180
+msgid "Affected area"
+msgstr "Eneo lililoathiriwa"
 
-#~ msgid "Alert Identification (Sender, Message Type, Scope)"
-#~ msgstr "Kitambulisho cha Arifa (Mtumaji, Aina ya Ujumbe, Upeo)"
+#: capeditor/templates/capeditor/cap_alert_page.html:209
+msgid "Event Description"
+msgstr "Maelezo ya Tukio"
 
-#~ msgid "Alert Info"
-#~ msgstr "Taarifa za Tahadhari"
+#: capeditor/templates/capeditor/cap_alert_page.html:220
+msgid "Instructions"
+msgstr "Maagizo"
 
-#~ msgid "Email"
-#~ msgstr "Barua pepe"
+#: capeditor/templates/capeditor/widgets/circle_widget.html:10
+msgid "Longitude"
+msgstr "Longitude"
 
-#~ msgid "Title of the incident referent of the alert"
-#~ msgstr "Kichwa cha mrejeleaji wa tukio la arifa"
+#: capeditor/templates/capeditor/widgets/circle_widget.html:22
+msgid "Latitude"
+msgstr "Latitudo"
 
-#~ msgid "Title"
-#~ msgstr "Kichwa"
-
-#~ msgid "The expiry time of the information of the alert message"
-#~ msgstr "Muda wa mwisho wa taarifa ya ujumbe wa arifa"
-
-#~ msgid "Web"
-#~ msgstr "Mtandao"
-
-#~ msgid ""
-#~ "The identifier of the hyperlink associating additional information with the "
-#~ "alert message"
-#~ msgstr ""
-#~ "Kitambulisho cha kiungo kinachohusisha maelezo ya ziada na ujumbe wa "
-#~ "tahadhari"
-
-#~ msgid ""
-#~ "Alert Categorization (Category, Urgency, Severity, Certainity, Response & "
-#~ "Dates)"
-#~ msgstr ""
-#~ "Uainishaji wa Arifa (Kitengo, Udharura, Ukali, Uhakika, Majibu na Tarehe)"
-
-#~ msgid ""
-#~ "Alert Delivery Message (Headline, Description, Intsructions, Contact & "
-#~ "Website)"
-#~ msgstr ""
-#~ "Ujumbe wa Tahadhari (Kichwa cha Habari, Maelezo, Maagizo, Mawasiliano na "
-#~ "Tovuti)"
-
-#~ msgid "Alert Areas "
-#~ msgstr "Maeneo ya Tahadhari"
-
-#~ msgid "Resource type whether is image, file etc"
-#~ msgstr "Aina ya rasilimali iwe ni picha, faili n.k"
-
-#~ msgid "File, Document etc"
-#~ msgstr "Faili, Hati n.k"
-
-#~ msgid "File"
-#~ msgstr "Faili"
-
-#~ msgid "The identifier of the hyperlink for the resource file"
-#~ msgstr "Kitambulisho cha kiungo cha faili ya rasilimali"
-
-#~ msgid "Link"
-#~ msgstr "Kiungo"
-
-#~ msgid "The base-64 encoded data content of the resource file"
-#~ msgstr "Maudhui ya data iliyosimbwa ya base-64 ya faili ya rasilimali"
-
-#~ msgid ""
-#~ "The code representing the digital digest ('hash') computed from the resource"
-#~ " file"
-#~ msgstr ""
-#~ "Msimbo unaowakilisha muhtasari wa dijiti ('hash') uliokokotwa kutoka kwa "
-#~ "faili ya rasilimali"
-
-#~ msgid "Area"
-#~ msgstr "Eneo"
-
-#~ msgid "Name for the geocode"
-#~ msgstr "Jina la msimbo wa kijiografia"
-
-#~ msgid "Value of the geocode"
-#~ msgstr "Thamani ya msimbo wa kijiografia"
+#: capeditor/templates/capeditor/widgets/circle_widget.html:36
+msgid "Radius (in kilometers) "
+msgstr "Radius (katika kilomita)"

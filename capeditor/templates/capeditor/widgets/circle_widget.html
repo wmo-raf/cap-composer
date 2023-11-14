@@ -7,7 +7,8 @@
                 <div class="w-field__wrapper">
                     <label class="w-field__label" for="{{ widget.name }}_circle_lon"
                            id="{{ widget.name }}_circle_lon-label">
-                        Longitude<span class="w-required-mark">*</span>
+                        {% translate "Longitude" %}
+                        <span class="w-required-mark">*</span>
                     </label>
                     <div class="w-field w-field--char_field w-field--text_input">
                         <div class="w-field__input" data-field-input="">
@@ -18,7 +19,8 @@
                 </div>
                 <label class="w-field__label" for="{{ widget.name }}_circle_lat"
                        id="{{ widget.name }}_circle_lat-label">
-                    Latitude<span class="w-required-mark">*</span>
+                    {% translate "Latitude" %}
+                    <span class="w-required-mark">*</span>
                 </label>
                 <div class="w-field w-field--char_field w-field--text_input" data-field="" data-contentpath="text">
                     <div class="w-field__input" data-field-input="">
@@ -31,7 +33,8 @@
             <div class="w-field__wrapper">
                 <label class="w-field__label" for="{{ widget.name }}_circle_radius"
                        id="{{ widget.name }}_circle_radius-label">
-                    Radius (in kilometers) <span class="w-required-mark">*</span>
+                    {% translate "Radius (in kilometers) " %}
+                    <span class="w-required-mark">*</span>
                 </label>
                 <div class="w-field w-field--char_field w-field--text_input">
                     <div class="w-field__input" data-field-input="">

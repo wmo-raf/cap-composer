@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-12 14:01+0300\n"
+"POT-Creation-Date: 2023-10-13 17:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,47 +16,50 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
 #: sandbox/home/templates/home/welcome_page.html:6
 msgid "Visit the Wagtail website"
-msgstr ""
+msgstr "قم بزيارة موقع الذعرة"
 
 #: sandbox/home/templates/home/welcome_page.html:15
 msgid "View the release notes"
-msgstr ""
+msgstr "عرض ملاحظات الإصدار"
 
 #: sandbox/home/templates/home/welcome_page.html:27
 msgid "Welcome to your new Wagtail site!"
-msgstr ""
+msgstr "مرحبًا بك في موقع الذعرة الجديد!"
 
 #: sandbox/home/templates/home/welcome_page.html:28
 msgid ""
-"Please feel free to <a href=\"https://github.com/wagtail/wagtail/wiki/"
-"Slack\">join our community on Slack</a>, or get started with one of the "
-"links below."
+"Please feel free to <a "
+"href=\"https://github.com/wagtail/wagtail/wiki/Slack\">join our community on"
+" Slack</a>, or get started with one of the links below."
 msgstr ""
+"لا تتردد في <a "
+"href=\"https://github.com/wagtail/wagtail/wiki/Slack\">الانضمام إلى مجتمعنا "
+"على Slack</a>، أو البدء باستخدام أحد الروابط أدناه."
 
 #: sandbox/home/templates/home/welcome_page.html:35
 msgid "Wagtail Documentation"
-msgstr ""
+msgstr "توثيق الذعرة"
 
 #: sandbox/home/templates/home/welcome_page.html:36
 msgid "Topics, references, & how-tos"
-msgstr ""
+msgstr "المواضيع والمراجع والإرشادات"
 
 #: sandbox/home/templates/home/welcome_page.html:42
 msgid "Tutorial"
-msgstr ""
+msgstr "درس تعليمي"
 
 #: sandbox/home/templates/home/welcome_page.html:43
 msgid "Build your first Wagtail site"
-msgstr ""
+msgstr "أنشئ موقع الذعرة الأول الخاص بك"
 
 #: sandbox/home/templates/home/welcome_page.html:49
 msgid "Admin Interface"
-msgstr ""
+msgstr "واجهة المسؤول"
 
 #: sandbox/home/templates/home/welcome_page.html:50
 msgid "Create your superuser first!"
-msgstr ""
+msgstr "قم بإنشاء المستخدم المتميز الخاص بك أولاً!"

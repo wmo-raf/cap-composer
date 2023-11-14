@@ -11,7 +11,6 @@ from wagtail import blocks
 from wagtail.blocks import FieldBlock, StructValue
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.models import Site
-from wagtailiconchooser.blocks import IconChooserBlock
 
 from .forms.fields import PolygonField, BoundaryPolygonField
 from .forms.widgets import CircleWidget
@@ -143,7 +142,7 @@ class AlertAreaBoundaryStructValue(StructValue):
     def geojson(self):
         polygon = self.get("boundary")
         return json.loads(polygon)
-    
+
     # @cached_property
     # def aread_desc(self):
     #     area_desc = self.get("areaDesc")
@@ -155,10 +154,10 @@ class AlertAreaBoundaryBlock(blocks.StructBlock):
         value_class = AlertAreaBoundaryStructValue
 
     ADMIN_LEVEL_CHOICES = (
-        (0, "Level 0"),
-        (1, "Level 1"),
-        (2, "Level 2"),
-        (3, "Level 3")
+        (0, _("Level 0")),
+        (1, _("Level 1")),
+        (2, _("Level 2")),
+        (3, _("Level 3"))
     )
 
     areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
@@ -297,7 +296,7 @@ class AlertAreaGeocodeBlock(blocks.StructBlock):
 
     areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
                                 help_text=_("The text describing the affected area of the alert message"))
-    valueName = blocks.TextBlock(label="Name")
+    valueName = blocks.TextBlock(label=_("Name"))
     value = blocks.TextBlock(label=_("Value"))
 
     altitude = blocks.CharBlock(max_length=100, required=False, label=_("Altitude"),
@@ -310,7 +309,6 @@ class AlertAreaGeocodeBlock(blocks.StructBlock):
 
 SENDER_NAME_HELP_TEXT = _("The human-readable name of the agency or authority issuing this alert.")
 CONTACT_HELP_TEXT = _("The text describing the contact for follow-up and confirmation of the alert message")
-EVENT_HELP_TEXT = _("The text denoting the type of the subject event of the alert message")
 AUDIENCE_HELP_TEXT = _("The text describing the intended audience of the alert message")
 
 
@@ -420,7 +418,7 @@ class AlertInfoStructValue(StructValue):
     @cached_property
     def geojson(self):
         area_blocks = self.get("area")
-        
+
         features = []
         if area_blocks:
             for area in area_blocks:
@@ -435,29 +433,42 @@ class AlertInfoStructValue(StructValue):
         event_blocks = self.get("event")
 
         return {
-            'severity':severity_blocks,
-            'certainty':certainty_blocks,
-            'urgency':urgency_blocks,
-            'event':event_blocks
+            'severity': severity_blocks,
+            'certainty': certainty_blocks,
+            'urgency': urgency_blocks,
+            'event': event_blocks
         }
 
     @cached_property
     def features(self):
         area_blocks = self.get("area")
-        
+
         features = []
 
         if area_blocks:
             for feature in area_blocks:
                 if feature.value.geojson:
                     features.append({
-                        "type": "Feature", 
+                        "type": "Feature",
                         "geometry": feature.value.geojson,
-                        "properties":{
-                            "areaDesc":feature.value.area.get('areaDesc'),
-                                       **self.area_properties}
+                        "properties": {
+                            "areaDesc": feature.value.area.get('areaDesc'),
+                            **self.area_properties}
                     })
         return features
+
+
+# get list of institution defined hazards types as list of choices
+def get_hazard_types():
+    try:
+        from capeditor.models import CapSetting
+        site = Site.objects.get(is_default_site=True)
+        cap_setting = CapSetting.for_site(site)
+        hazard_event_types = cap_setting.hazard_event_types
+        choices = [(hazard_type.event, hazard_type.event) for hazard_type in hazard_event_types.all()]
+    except Exception:
+        choices = []
+    return choices
 
 
 class AlertInfo(blocks.StructBlock):
@@ -504,14 +515,16 @@ class AlertInfo(blocks.StructBlock):
         ('Unlikely', _("Unlikely - Not expected to occur (percentage ~ 0)")),
         ('Unknown', _("Unknown - Certainty unknown")),
     )
-    event = blocks.CharBlock(max_length=255, label=_("Event"), help_text=EVENT_HELP_TEXT)
+    event = blocks.ChoiceBlock(choices=get_hazard_types, label=_("Event"),
+                               help_text=_("The text denoting the type of the subject event of the alert message. You "
+                                           "can define hazards events monitored by your institution from CAP settings"))
 
     category = blocks.ChoiceBlock(choices=CATEGORY_CHOICES, default="Met", label=_("Category"),
                                   help_text=_("The code denoting the category of the subject"
                                               " event of the alert message"))
     language = blocks.ChoiceBlock(choices=LANGUAGE_CHOICES, default="en", required=False, label=_("Language"),
                                   help_text=_("The code denoting the language of the alert message"), )
-    
+
     urgency = blocks.ChoiceBlock(choices=URGENCY_CHOICES, label=_("Urgency"),
                                  help_text=_("The code denoting the urgency of the subject "
                                              "event of the alert message"))
@@ -570,13 +583,9 @@ class AlertInfo(blocks.StructBlock):
         value_class = AlertInfoStructValue
         label_format = "({language}) {event}"
 
-class HazardTypeBlock(blocks.StructBlock):
-    hazard = blocks.CharBlock(max_length=255, label=_("Hazard"), help_text="Name of Hazard")
-    icon = IconChooserBlock(required=False)
-
 
 class AudienceTypeBlock(blocks.StructBlock):
-    audience = blocks.CharBlock(max_length=255, label=_("Audience"), help_text="Intended audience")
+    audience = blocks.CharBlock(max_length=255, label=_("Audience"), help_text=_("Intended audience"))
 
 
 class ContactBlock(blocks.StructBlock):
