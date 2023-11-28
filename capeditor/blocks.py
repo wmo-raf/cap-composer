@@ -385,11 +385,12 @@ class AlertInfoStructValue(StructValue):
             if site:
                 cap_setting = CapSetting.for_site(site)
 
-                if cap_setting.hazard_types:
-                    for hazard in cap_setting.hazard_types:
-                        event_name = hazard.value.get("hazard")
+                hazard_event_types = cap_setting.hazard_event_types.all()
+                if hazard_event_types:
+                    for hazard in hazard_event_types:
+                        event_name = hazard.event
                         if event_name == event:
-                            return hazard.value.get("icon")
+                            return hazard.icon
         except Exception:
             pass
 
@@ -472,7 +473,6 @@ def get_hazard_types():
 
 
 class AlertInfo(blocks.StructBlock):
-
     LANGUAGE_CHOICES = (
         ('en', _("English")),
         ('fr', _("French")),
