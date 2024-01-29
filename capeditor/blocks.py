@@ -12,7 +12,7 @@ from wagtail.blocks import FieldBlock, StructValue
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.models import Site
 
-from .forms.fields import PolygonField, BoundaryPolygonField
+from .forms.fields import PolygonField, MultiPolygonField, BoundaryMultiPolygonField
 from .forms.widgets import CircleWidget
 from .utils import file_path_mime
 
@@ -29,7 +29,27 @@ class BoundaryFieldBlock(FieldBlock):
 
     @cached_property
     def field(self):
-        return BoundaryPolygonField(**self.field_options)
+        return BoundaryMultiPolygonField(**self.field_options)
+
+    def value_from_form(self, value):
+        if isinstance(value, GEOSGeometry):
+            value = value.json
+        return value
+
+
+class MultiPolygonFieldBlock(FieldBlock):
+    def __init__(self, required=True, help_text=None, srid=4326, **kwargs):
+        self.field_options = {
+            "required": required,
+            "help_text": help_text,
+            "srid": srid
+        }
+
+        super().__init__(**kwargs)
+
+    @cached_property
+    def field(self):
+        return MultiPolygonField(**self.field_options)
 
     def value_from_form(self, value):
         if isinstance(value, GEOSGeometry):
@@ -120,15 +140,20 @@ class AlertResponseType(blocks.StructBlock):
 class AlertAreaBoundaryStructValue(StructValue):
     @cached_property
     def area(self):
-        polygon_geojson_str = self.get("boundary")
-        polygon_geojson_dict = json.loads(polygon_geojson_str)
+        multi_polygon_geojson_str = self.get("boundary")
+        multi_polygon_geojson_dict = json.loads(multi_polygon_geojson_str)
+        multipolygon = shape(multi_polygon_geojson_dict)
 
-        polygon = shape(polygon_geojson_dict)
-        coords = " ".join(["{},{}".format(x, y) for x, y in list(polygon.exterior.coords)])
+        polygons = list(multipolygon.geoms)
+
+        polygons_data = []
+        for polygon in polygons:
+            coords = " ".join(["{},{}".format(x, y) for x, y in list(polygon.exterior.coords)])
+            polygons_data.append(coords)
 
         area_data = {
             "areaDesc": self.get("areaDesc"),
-            "polygon": coords,
+            "polygons": polygons_data
         }
 
         if self.get("altitude"):

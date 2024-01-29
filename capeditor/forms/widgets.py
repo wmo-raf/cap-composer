@@ -2,10 +2,8 @@ import json
 
 from adminboundarymanager.models import AdminBoundarySettings
 from django.contrib.gis.forms import BaseGeometryWidget
-from django.contrib.gis.geos import GEOSGeometry
-from django.forms import Textarea, Widget, Select, TextInput
+from django.forms import Textarea, Widget, TextInput
 from django.urls import reverse
-from shapely import wkt, Polygon
 from wagtail.models import Site
 from wagtail.telepath import register
 from wagtail.utils.widgets import WidgetWithScript
@@ -42,30 +40,6 @@ class BaseMapWidget(Widget):
 class BasePolygonWidget(BaseGeometryWidget, BaseMapWidget):
     def serialize(self, value):
         return value.json if value else ""
-
-    def deserialize(self, value):
-        geom = super().deserialize(value)
-        tolerance = 0.05
-
-        if geom.geom_type != "Polygon":
-            # try to get the smallest Polygon that contains all the geometries in the MultiPolygon.
-            geom = geom.unary_union
-
-        # first simplification
-        geom = geom.simplify(tolerance)
-
-        # still not a Polygon. Simplify with incrementing tolerance until we have a polygon
-        while geom.geom_type != "Polygon":
-            tolerance *= 2
-            geom = geom.simplify(tolerance)
-
-        # check for holes and close if any
-        shape_geom = wkt.loads(geom.wkt)
-        if shape_geom.interiors:
-            polygon_no_holes = Polygon(shape_geom.exterior)
-            geom = GEOSGeometry(polygon_no_holes.wkt)
-
-        return geom
 
 
 class BoundaryPolygonWidget(WidgetWithScript, BasePolygonWidget):
