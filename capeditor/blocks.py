@@ -5,7 +5,7 @@ from django import forms
 from django.contrib.gis.geos import GEOSGeometry
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
-from shapely import Point
+from shapely import Point, Polygon
 from shapely.geometry import shape
 from wagtail import blocks
 from wagtail.blocks import FieldBlock, StructValue
@@ -140,11 +140,16 @@ class AlertResponseType(blocks.StructBlock):
 class AlertAreaBoundaryStructValue(StructValue):
     @cached_property
     def area(self):
-        multi_polygon_geojson_str = self.get("boundary")
-        multi_polygon_geojson_dict = json.loads(multi_polygon_geojson_str)
-        multipolygon = shape(multi_polygon_geojson_dict)
+        geom_geojson_str = self.get("boundary")
+        geom_geojson_dict = json.loads(geom_geojson_str)
+        geom_shape = shape(geom_geojson_dict)
 
-        polygons = list(multipolygon.geoms)
+        polygons = []
+
+        if isinstance(geom_shape, Polygon):
+            polygons.append(geom_shape)
+        else:
+            polygons = list(geom_shape.geoms)
 
         polygons_data = []
         for polygon in polygons:
