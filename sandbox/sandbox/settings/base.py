@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "wagtailcache",
+    "django_countries",
 
     "django.contrib.admin",
     "django.contrib.auth",

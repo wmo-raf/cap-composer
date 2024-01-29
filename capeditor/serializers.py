@@ -2,6 +2,9 @@ import pytz
 from dateutil.parser import isoparse
 from rest_framework import serializers
 
+from capeditor.constants import CAP_MESSAGE_ORDER_SEQUENCE
+from capeditor.utils import order_dict_by_keys
+
 
 def parse_tz(date_str):
     dt = isoparse(date_str)
@@ -26,8 +29,22 @@ class AlertSerializer(serializers.ModelSerializer):
     incidents = serializers.SerializerMethodField()
 
     class Meta:
-        fields = ['identifier', 'sender', 'sent', 'status', 'msgType', 'scope', 'source', 'restriction', 'code', 'note',
-                  "references", "addresses", 'info', "incidents"]
+        fields = [
+            "identifier",
+            "sender",
+            "sent",
+            "status",
+            "msgType",
+            "source",
+            "scope",
+            "restriction",
+            "addresses",
+            "code",
+            "note",
+            "references",
+            "incidents",
+            "info",
+        ]
 
     def get_info(self, obj):
         request = self.context.get("request")
@@ -41,7 +58,9 @@ class AlertSerializer(serializers.ModelSerializer):
                     if resource.get("type") == "doc":
                         resource["uri"] = request.build_absolute_uri(resource.get("uri"))
                     resource.pop("type")
-                    resources.append(resource)
+                    # order resource according to CAP_MESSAGE_ORDER_SEQUENCE
+                    resource_obj = order_dict_by_keys(resource, CAP_MESSAGE_ORDER_SEQUENCE.get("resource"))
+                    resources.append(resource_obj)
                 info_obj["resource"] = resources
 
             # assign full url
@@ -62,9 +81,12 @@ class AlertSerializer(serializers.ModelSerializer):
             if info.value.area:
                 areas = []
                 for area in info.value.area:
-                    areas.append(area)
-
+                    area_obj = order_dict_by_keys(area, CAP_MESSAGE_ORDER_SEQUENCE.get("area"))
+                    areas.append(area_obj)
                 info_obj["area"] = areas
+
+            # order according to CAP_MESSAGE_ORDER_SEQUENCE
+            info_obj = order_dict_by_keys(info_obj, CAP_MESSAGE_ORDER_SEQUENCE.get("info"))
 
             info_values.append(info_obj)
 

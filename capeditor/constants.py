@@ -31,3 +31,62 @@ WMO_HAZARD_EVENTS_TYPE_CHOICES = (
     ("Wild land fire/Forest fire", "Wild land fire/Forest fire"),
     ("Wind", "Wind"),
 )
+
+CAP_MESSAGE_ORDER_SEQUENCE = {
+    "alert": [
+        "identifier",
+        "sender",
+        "sent",
+        "status",
+        "msgType",
+        "source",
+        "scope",
+        "restriction",
+        "addresses",
+        "code",
+        "note",
+        "references",
+        "incidents",
+        "info"
+    ],
+    "info": [
+        "language",
+        "category",
+        "event",
+        "responseType",
+        "urgency",
+        "severity",
+        "certainty",
+        "audience",
+        "eventCode",
+        "effective",
+        "onset",
+        "expires",
+        "senderName",
+        "headline",
+        "description",
+        "instruction",
+        "web",
+        "contact",
+        "parameter",
+        "resource",
+        "area"
+    ],
+    "resource": [
+        "resourceDesc",
+        "mimeType",
+        "size",
+        "uri",
+        "derefUri",
+        "digest",
+    ],
+    "area": [
+        "areaDesc",
+        "polygon",
+        "polygons",  # added to support multiple polygons. Not in CAP spec
+        "circle",
+        "geocode",
+        "altitude",
+        "ceiling"
+    ]
+}

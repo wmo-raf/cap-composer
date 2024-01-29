@@ -13,10 +13,17 @@ class CapXMLRenderer(XMLRenderer):
     def _recursive_serialize_dict(self, value, xml):
         for key, value in value.items():
             if isinstance(value, list):
-                for item in value:
-                    element = Element(key)
-                    self._recursive_serialize(item, element)
-                    xml.append(element)
+                # handle MULTIPOLYGONS
+                if key == 'polygons':
+                    for polygon_coords in value:
+                        element = Element("polygon")
+                        self._recursive_serialize(polygon_coords, element)
+                        xml.append(element)
+                else:
+                    for item in value:
+                        element = Element(key)
+                        self._recursive_serialize(item, element)
+                        xml.append(element)
             else:
                 element = Element(key)
                 self._recursive_serialize(value, element)
