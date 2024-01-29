@@ -153,7 +153,7 @@ class AlertAreaBoundaryStructValue(StructValue):
 
         polygons_data = []
         for polygon in polygons:
-            coords = " ".join(["{},{}".format(x, y) for x, y in list(polygon.exterior.coords)])
+            coords = " ".join(["{},{}".format(y, x) for x, y in list(polygon.exterior.reverse().coords)])
             polygons_data.append(coords)
 
         area_data = {
@@ -212,7 +212,7 @@ class AlertAreaPolygonStructValue(StructValue):
         polygon_geojson_dict = json.loads(polygon_geojson_str)
 
         polygon = shape(polygon_geojson_dict)
-        coords = " ".join(["{},{}".format(x, y) for x, y in list(polygon.exterior.coords)])
+        coords = " ".join(["{},{}".format(y, x) for x, y in list(polygon.exterior.coords)])
 
         area_data = {
             "areaDesc": self.get("areaDesc"),
@@ -252,9 +252,11 @@ class AlertAreaPolygonBlock(blocks.StructBlock):
 class AlertAreaCircleStructValue(StructValue):
     @cached_property
     def area(self):
+        center_point, radius_km = self.center_point_radius
+
         area_data = {
             "areaDesc": self.get("areaDesc"),
-            "circle": self.get("circle"),
+            "circle": "{},{} {}".format(center_point.y, center_point.x, radius_km),
         }
 
         if self.get("altitude"):
@@ -265,7 +267,7 @@ class AlertAreaCircleStructValue(StructValue):
         return area_data
 
     @cached_property
-    def geojson(self):
+    def center_point_radius(self):
         circle_str = self.get("circle")
         parts = circle_str.split()
         coords = parts[0].split(',')
@@ -273,11 +275,17 @@ class AlertAreaCircleStructValue(StructValue):
         # Extract the longitude, latitude, and radius
         longitude, latitude, radius_km = float(coords[0]), float(coords[1]), float(parts[1])
 
-        # Convert radius to degrees (approximation for small distances)
-        radius_deg = radius_km / 111.12
-
         # Create a point for the center
         center_point = Point(longitude, latitude)
+
+        return center_point, radius_km
+
+    @cached_property
+    def geojson(self):
+        center_point, radius_km = self.center_point_radius
+
+        # Convert radius to degrees (approximation for small distances)
+        radius_deg = radius_km / 111.12
 
         circle = center_point.buffer(radius_deg)
 
