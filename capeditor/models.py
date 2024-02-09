@@ -1,6 +1,10 @@
 import json
+import os
 import uuid
+from datetime import datetime
 
+from adminboundarymanager.models import AdminBoundarySettings
+from django.conf import settings
 from django.contrib.gis.db import models
 from django.utils import timezone
 from django.utils.functional import cached_property
@@ -28,8 +32,9 @@ from capeditor.blocks import (
     AlertIncident,
     ContactBlock
 )
+from capeditor.constants import SEVERITY_MAPPING, URGENCY_MAPPING, CERTAINTY_MAPPING
 from capeditor.forms.widgets import HazardEventTypeWidget
-from capeditor.serializers import parse_tz
+from capeditor.shareable.png import cap_geojson_to_image, CapAlertCardImage
 
 
 @register_setting
@@ -38,6 +43,8 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
                               help_text=_("Can be the website link or email of the sending institution"))
     sender_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Name"),
                                    help_text=_("Name of the sending institution"))
+    logo = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+                             verbose_name=_("Logo of the sending institution"))
 
     contacts = StreamField([
         ("contact", ContactBlock(label=_("Contact")))
@@ -55,6 +62,7 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
     panels = [
         FieldPanel("sender_name"),
         FieldPanel("sender"),
+        FieldPanel("logo"),
         FieldPanel("contacts"),
         InlinePanel("hazard_event_types", heading=_("Hazard Types"), label=_("Hazard Type"),
                     help_text=_("Hazards monitored by the institution")),
@@ -267,22 +275,12 @@ class AbstractCapAlertPage(Page):
     ]
 
     @cached_property
-    def alert_info(self):
-        if self.info:
-            return self.info[0]
-        return None
-
-    @cached_property
-    def cap_reference_id(self):
-        sent = parse_tz(self.sent.isoformat())
-        return f"{self.sender},{self.identifier.hex},{sent}"
-
-    @cached_property
     def feature_collection(self):
         fc = {"type": "FeatureCollection", "features": []}
         for info in self.info:
             if info.value.features:
                 for feature in info.value.features:
+                    feature.get("properties", {}).update({"info-id": info.id})
                     fc["features"].append(feature)
         return fc
 
@@ -308,15 +306,132 @@ class AbstractCapAlertPage(Page):
 
         return list(bounds)
 
-    @cached_property
-    def affected_area(self):
-        areas = []
-        for info in self.info:
-            for area in info.value.area:
-                areas.append(area.get("areaDesc"))
-
-        return ", ".join(areas)
-
     @property
     def xml_link(self):
+        return None
+
+    @cached_property
+    def infos(self):
+        alert_infos = []
+        for info in self.info:
+            start_time = info.value.get("effective") or self.sent
+
+            if info.value.get('expires').date() < datetime.today().date():
+                status = "Expired"
+            elif timezone.now() > start_time:
+                status = "Ongoing"
+            else:
+                status = "Expected"
+
+            area_desc = [area.get("areaDesc") for area in info.value.area]
+            area_desc = ", ".join(area_desc)
+
+            event = f"{info.value.get('event')} ({area_desc})"
+            severity = SEVERITY_MAPPING[info.value.get("severity")]
+            urgency = URGENCY_MAPPING[info.value.get("urgency")]
+            certainty = CERTAINTY_MAPPING[info.value.get("certainty")]
+
+            effective = start_time
+            expires = info.value.get('expires')
+            url = self.url
+            event_icon = info.value.event_icon
+
+            alert_info = {
+                "info": info,
+                "status": status,
+                "url": self.url,
+                "event": event,
+                "event_icon": event_icon,
+                "severity": severity,
+                "utc": start_time,
+                "urgency": urgency,
+                "certainty": certainty,
+                "effective": effective,
+                "expires": expires,
+                "properties": {
+                    "id": self.identifier,
+                    "event": event,
+                    "event_type": info.value.get('event'),
+                    "headline": info.value.get("headline"),
+                    "severity": info.value.get("severity"),
+                    "urgency": info.value.get("urgency"),
+                    "certainty": info.value.get("certainty"),
+                    "severity_color": severity.get("color"),
+                    "sent": self.sent,
+                    "onset": info.value.get("onset"),
+                    "expires": expires,
+                    "web": url,
+                    "description": info.value.get("description"),
+                    "instruction": info.value.get("instruction"),
+                    "event_icon": event_icon,
+                    "area_desc": area_desc,
+                }
+            }
+
+            alert_infos.append(alert_info)
+
+        return alert_infos
+
+    def get_geojson_features(self, request=None):
+        features = []
+        for info_item in self.infos:
+            info = info_item.get("info")
+            if info.value.geojson:
+                properties = info_item.get("properties")
+                if request:
+                    web = request.build_absolute_uri(properties.get("web"))
+                    properties.update({
+                        "web": web
+                    })
+
+                info_features = info.value.features
+                for feature in info_features:
+                    feature["properties"].update(**properties)
+                    features.append(feature)
+
+        return features
+
+    def generate_alert_card_image(self):
+
+        site = Site.objects.get(is_default_site=True)
+
+        abm_settings = AdminBoundarySettings.for_site(site)
+        cap_settings = CapSetting.for_site(site)
+        abm_extents = abm_settings.combined_countries_bounds
+
+        info = self.infos[0]
+
+        features = self.get_geojson_features()
+        if features:
+            feature_coll = {
+                "type": "FeatureCollection",
+                "features": features,
+            }
+
+            if abm_extents:
+                # format to what matplotlib expects
+                abm_extents = [abm_extents[0], abm_extents[2], abm_extents[1], abm_extents[3]]
+
+            cap_detail = {
+                "title": self.title,
+                "event": info.get("event"),
+                "sent_on": self.sent,
+                "org_name": cap_settings.sender_name,
+                "severity": info.get("severity"),
+                "properties": info.get("properties"),
+            }
+
+            org_logo = cap_settings.logo
+            if org_logo:
+                cap_detail.update({
+                    "org_logo_file": os.path.join(settings.MEDIA_ROOT, org_logo.file.path)
+                })
+
+                map_img_buffer = cap_geojson_to_image(feature_coll, abm_extents)
+
+                image_content_file = CapAlertCardImage(map_img_buffer, cap_detail,
+                                                       f"{self.identifier}.png").render()
+
+                return image_content_file
+
         return None
