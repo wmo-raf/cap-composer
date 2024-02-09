@@ -1,0 +1,6 @@
+{% extends "wagtailadmin/pages/listing/_page_title_explore.html" %}
+{% load wagtailimages_tags %}
+
+{% block pages_listing_title_extra %}
+    {% image page.search_image fill-100x200 %}
+{% endblock pages_listing_title_extra %}
