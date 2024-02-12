@@ -1,9 +1,10 @@
-# CAP Editor  <img style="float: right;" height="40" src="images/caplogo.jpeg" markdown="1">
+# CAP Composer  <img style="float: right;" height="40" src="images/caplogo.jpeg" markdown="1">
 
-[![Upload Python Package](https://github.com/wmo-raf/cap-editor/actions/workflows/publish.yml/badge.svg)](https://github.com/wmo-raf/cap-editor/actions/workflows/publish.yml)
+[![Upload Python Package](https://github.com/wmo-raf/cap-composer/actions/workflows/publish.yml/badge.svg)](https://github.com/wmo-raf/cap-composer/actions/workflows/publish.yml)
 
-A Wagtail Commmon Alerting Protocol (CAP) Editor python package installable as an app on any wagtail project (
-version\>=4.1).
+A [Wagtail](https://wagtail.io/) based Common Alerting Protocol (CAP) Warning Composer. This is a web-based tool for
+creating and managing CAP alerts. It is designed to be used by meteorological and hydrological services, disaster
+management agencies, and other organizations that need to create and disseminate CAP alerts.
 
 The **Common Alerting Protocol (CAP)** provides an open, non-proprietary digital message format for all types of alerts
 and notifications. It does not address any particular application or telecommunications method. The CAP format is
@@ -16,7 +17,7 @@ http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
 
 ## Contents
 
-- [CAP Editor](#cap-editor)
+- [CAP Composer](#cap-composer)
     - [Features](#-features)
     - [Quick start](#quick-start)
     - [Usage](#usage)
@@ -30,11 +31,11 @@ http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
 
 ## 🌟 Features
 
-- Modern user-friendly editor that follows [CAP 1.2](http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html)
+- Modern user-friendly composer that follows [CAP 1.2](http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html)
   standard. Built on top of the awesome [Wagtail CMS](https://wagtail.org)
-- Preview your CAP alert page as you edit. Save drafts for sharing with colleagues and collaborating
+- Preview a CAP alert as you edit. Save drafts for sharing with colleagues and collaborating
 - Inbuilt CAP validation. The page will not save if you have not input the required data according to CAP standard
-- User-friendly alert area map editor that allows multiple ways of constructing alert geographic areas, while keeping
+- User-friendly alert area map tool that allows multiple ways of constructing alert geographic areas, while keeping
   the interface simple
     - Select country official administrative boundaries for different levels (Admin 1, Admin 2, Admin 3), with in-built
       simplification of complex boundaries
@@ -49,11 +50,10 @@ http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
   from [OCHA humanitarian icons](https://brand.unocha.org/d/xEPytAUjC3sH/icons#/humanitarian-icons)
 - Extendable to add your custom logic and functionality. The package provides an `abstract` django model that can be
   inherited for customizations. It is all python code.
-- It is all open-source 🥳!
 
 ## Quick start
 
-#### 1. Install in virualenvironment using pip
+#### 1. Install in virtualenvironment using pip
 
 ``` sh
 pip install capeditor
@@ -97,7 +97,7 @@ python manage.py migrate
 
 ### Creating a CAP Alert
 
-With capeditor successfully installed, both the Alert Listing page and Alert Detail page will be available on wagtail
+With CAP composer successfully installed, both the Alert Listing page and Alert Detail page will be available on wagtail
 admin interface.
 
     - AlertList
@@ -122,95 +122,108 @@ The overall Document Object Model of an alert is as below:
 
 ![Alert DOM](images/alert_sections/dom.jpg "CAP Document Object Model")
 
-#### A. Alert Identification
+#### Alert Identification
 
-This is the root section of CAP corresponds to:
+It contains the following entities required for a valid CAP message:
 
-``` xml
-<alert>
-    <!-- ... -->
-</alert>
-```
+- Sender ID(sender),
+- Sent Dat/Time (sent),
+- Message Status (status),
+- Message Type (msgType),
+- Scope(scope),
+- Restriction (restriction),
+- Addresses (addresses),
+- Note (note),
+- Reference IDs (references) and
+- Incident ids (incidents).
 
-It contains the **Message ID (identifier), Sender ID(sender), Sent Dat/Time (sent), Message Status (status), Message
-Type (msgType), Scope
-(scope), Restriction (restriction), Addresses (addresses), Note (note), Reference IDs (references) and Incident ids (
-incidents)**.
+The alert identifier is generated automatically and is not editable.
 
 ***NOTE:*** Some fields are visible based on selection of different parameters.
 
 ![Alert Identification](images/alert_sections/alert_id.png "Alert Identification section")
 
-#### B. Alert Info
+#### Alert Info
 
-This is an optional child section of the Alert Identification Section i.e
+Corresponds to the `<info>` element in the CAP message. The <info> entity specifies the alert's details. At least
+one <info> block is required for an alert. If you support multiple languages, it is recommended that you use one <info>
+block for each language for the same <alert> entity.:
 
-``` xml
-<alert>
-    <!-- ... -->
-    <info></info>
-    <info></info>
-</alert>
-```
+A CAP message expects at least one `<info>` element to be present. Multiple `<info>` blocks should all have the
+same `<category>` and `<event>` element values.
 
-Multiple instances of this section are allowed. It contains the
-**Langauge (langauge), Event Category/Categories (category), Event Type
-(event), Response Type/Types (responseType), Urgency (urgency), Severity
-(severity), Certainty (certainty), Audience (audience), Event Code/Codes
-(eventCode), Effective Date/Time (effective), Onset Date/Time (onset), Expiration Date/Time (expires), Sender Name (
-senderName), Headline
-(headline), Event description (description), Instructions (instruction), Information URL (web), Contact Info (contact)
-and Parameter/Parameters
-(parameter)**.
+![Alert Info](images/alert_sections/alert_info.png "Alert Information section")
+
+Each `Information` block contains the following elements:
+
+- Language (Language)
+- Event Category/Categories (category)
+- Event Type (event)
+- Response Type/Types (responseType)
+- Urgency (urgency)
+- Severity (severity)
+- Certainty (certainty)
+- Audience (audience)
+- Event Code/Codes (eventCode)
+- Effective Date/Time (effective)
+- Onset Date/Time (onset)
+- Expiration Date/Time (expires)
+- Sender Name (senderName)
+- Headline(headline)
+- Event description (description)
+- Instructions (instruction)
+- Information URL (web),
+- Contact Info (contact) and
+- Parameter/Parameters(parameter)
 
 #### C. Alert Area
 
-This is an optional child section of the Alert Info Section i.e
+Information Entity that defines the geographic area to be notified. Multiple areas can be defined in the alert. Each
+area contains the following elements:
 
-``` xml
-<alert>
-    <!-- ... -->
-    <info>
-        <area></area>
-        <area></area>
-    </info>
-    <info>
-        <area></area>
-    </info>
-</alert>
-```
+- Area Description (areaDesc),
+- Area Polygon/Polygons (polygon),
+- Area Circle/Circles (circle),
+- Area Geocode/Geocodes (geocode),
+- Altitude (altitude),
+- Ceiling (ceiling)
 
-Multiple instances of this section are allowed. It contains the **Area Description (areaDesc), Area Polygon/Polygons (
-polygon), Area Circle/Circles (circle), Area Geocode/Geocodes (geocode), Altitude
-(altitude), Ceiling (ceiling)**.
+The Alert area input has 4 selector options:
 
-![Alert Area](images/alert_sections/alert_area.png "Alert Area section")
+- Admin Boundary (area is picked from predefined boundaries). To use this option, ensure that admin boundaries are
+  initially loaded. Refer to [Setting up boundaries](#setting-up-boundaries) section.
 
-#### D. Alert Resource
+![Alert Area boundary](images/alert_sections/alert_area_boundary.png "Alert Area Boundary")
 
-This is an optional child section of the Alert Info Section i.e
+- Polygon (drawing a polygon)
 
-``` xml
-<alert>
-    <!-- ... -->
-    <info>
-        <resource><resource>
-        <resource><resource>
-        <area></area>
-        <area></area>
-    </info>
-    <info>
-        <resource><resource>
-        <area></area>
-    </info>
-</alert>
-```
+![Alert Area polygon](images/alert_sections/alert_area_polygon.png "Alert Area Polygon")
 
-![Alert Resource](images/alert_sections/alert_resource.png "Alert Resource section")
+- Circle (drawing a circle which specifies the latitude, longitude and radius)
 
-Multiple instances of this section are allowed. It contains the
-**Description (resourceDesc), MIME Type (mimeType), File Size (size), URI (uri), Dereferenced URI (derefUri) and
-Digest (digest)**
+![Alert Area circle](images/alert_sections/alert_area_circle.png "Alert Area Circle")
+
+- Geocode (specifying area geocode name and value). Using this option presumes knowledge of the coding system
+
+![Alert Area geocode](images/alert_sections/alert_area_geocode.png "Alert Area Geocode")
+
+#### Alert Resource
+
+Entity that defines supplemental information related to an <info> object Multiple instances of this section are allowed.
+It contains:
+
+- Description (resourceDesc), MIME Type (mimeType), File Size (size), URI (uri), Dereferenced URI (derefUri) and
+  Digest (digest)**
+
+The Alert resource input has 2 selector options:
+
+- File resource (takes in a file and description)
+
+![Alert Resource](images/alert_sections/alert_resource_file.png "Alert Resource section")
+
+- External resource
+
+![Alert Resource](images/alert_sections/alert_resource_external.png "Alert Resource section")
 
 ## Integrations
 
