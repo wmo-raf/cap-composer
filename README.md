@@ -35,8 +35,8 @@ http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
   standard. Built on top of the awesome [Wagtail CMS](https://wagtail.org)
 - Preview a CAP alert as you edit. Save drafts for sharing with colleagues and collaborating
 - Inbuilt CAP validation. The page will not save if you have not input the required data according to CAP standard
-- User-friendly alert area map tool that allows multiple ways of constructing alert geographic areas, while keeping
-  the interface simple
+- User-friendly alert area map tool that allows multiple ways of constructing alert geographic areas, while keeping the
+  interface simple
     - Select country official administrative boundaries for different levels (Admin 1, Admin 2, Admin 3), with in-built
       simplification of complex boundaries
     - Draw a polygon
@@ -230,7 +230,7 @@ The Alert resource input has 2 selector options:
 To integrate the alerts to another wagtail page and include in templates, for example in the home page refer to sandbox
 folder for sample standalone.
 
-# MQTT Integration
+### MQTT Integration
 
 You can publish a mqtt message immediately after a CAP alert has been published. This allows connected clients to
 receive the CAP message using the MQTT protocol.
