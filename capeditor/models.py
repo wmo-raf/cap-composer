@@ -1,7 +1,6 @@
 import json
 import os
 import uuid
-from datetime import datetime
 
 from adminboundarymanager.models import AdminBoundarySettings
 from django.conf import settings
@@ -315,10 +314,12 @@ class AbstractCapAlertPage(Page):
         alert_infos = []
         for info in self.info:
             start_time = info.value.get("effective") or self.sent
+            expired = False
 
-            if info.value.get('expires').date() < datetime.today().date():
+            if info.value.get('expires') < timezone.localtime():
                 status = "Expired"
-            elif timezone.now() > start_time:
+                expired = True
+            elif timezone.localtime() > start_time:
                 status = "Ongoing"
             else:
                 status = "Expected"
@@ -346,8 +347,10 @@ class AbstractCapAlertPage(Page):
                 "utc": start_time,
                 "urgency": urgency,
                 "certainty": certainty,
+                "sent": self.sent,
                 "effective": effective,
                 "expires": expires,
+                "expired": expired,
                 "properties": {
                     "id": self.identifier,
                     "event": event,
@@ -360,6 +363,7 @@ class AbstractCapAlertPage(Page):
                     "sent": self.sent,
                     "onset": info.value.get("onset"),
                     "expires": expires,
+                    "expired": expired,
                     "web": url,
                     "description": info.value.get("description"),
                     "instruction": info.value.get("instruction"),
