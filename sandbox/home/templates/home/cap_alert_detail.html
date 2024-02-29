@@ -3,7 +3,7 @@
 {% load static wagtailcore_tags wagtailiconchooser_tags i18n %}
 
 {% block extra_css %}
-    <link href="https://unpkg.com/maplibre-gl@3.1.0/dist/maplibre-gl.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'capeditor/css/maplibre-gl.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/cap_detail_page.css' %}">
 
     <style>
@@ -292,8 +292,8 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="https://unpkg.com/maplibre-gl@3.1.0/dist/maplibre-gl.js"></script>
-    <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+    <script src="{% static 'capeditor/js/maplibre-gl.js' %}"></script>
+    <script src="{% static 'capeditor/js/turf.min.js' %}"></script>
     <script>
 
         document.addEventListener('DOMContentLoaded', () => {
