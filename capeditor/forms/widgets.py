@@ -58,13 +58,13 @@ class BoundaryPolygonWidget(WidgetWithScript, BasePolygonWidget):
     class Media:
         css = {
             "all": [
-                "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.css",
+                "capeditor/css/cap_detail_page.css",
                 "capeditor/css/widget/boundary-widget.css",
             ]
         }
         js = [
-            "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.js",
-            "https://unpkg.com/@turf/turf/turf.min.js",
+            "capeditor/js/maplibre-gl.js",
+            "capeditor/js/turf.min.js",
             "capeditor/js/widget/boundary-polygon-widget.js",
         ]
 
@@ -97,15 +97,15 @@ class PolygonWidget(WidgetWithScript, BasePolygonWidget):
     class Media:
         css = {
             "all": [
-                "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.css",
-                "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.css",
+                "capeditor/css/maplibre-gl.css",
+                "capeditor/css/mapbox-gl-draw.css",
                 "capeditor/css/widget/polygon-widget.css",
             ]
         }
         js = [
-            "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.js",
-            "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.js",
-            "https://unpkg.com/@turf/turf/turf.min.js",
+            "capeditor/js/maplibre-gl.js",
+            "capeditor/js/mapbox-gl-draw.js",
+            "capeditor/js/turf.min.js",
             "capeditor/js/widget/polygon-widget.js",
         ]
 
@@ -138,13 +138,13 @@ class CircleWidget(WidgetWithScript, BaseMapWidget, Textarea):
     class Media:
         css = {
             "all": [
-                "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.css",
+                "capeditor/css/maplibre-gl.css",
                 "capeditor/css/widget/circle-widget.css",
             ]
         }
         js = [
-            "https://unpkg.com/maplibre-gl@2.1.1/dist/maplibre-gl.js",
-            "https://unpkg.com/@turf/turf/turf.min.js",
+            "capeditor/js/maplibre-gl.js",
+            "capeditor/js/turf.min.js",
             "capeditor/js/widget/circle-widget.js",
         ]
 
