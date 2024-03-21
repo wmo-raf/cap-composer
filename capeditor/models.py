@@ -4,103 +4,27 @@ import uuid
 
 from adminboundarymanager.models import AdminBoundarySettings
 from django.conf import settings
-from django.contrib.gis.db import models
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
-from modelcluster.fields import ParentalKey
-from modelcluster.models import ClusterableModel
 from shapely.geometry import shape
 from wagtail import blocks
 from wagtail.admin.forms import WagtailAdminPageForm
-from wagtail.admin.panels import MultiFieldPanel, FieldPanel, InlinePanel
-from wagtail.contrib.settings.models import BaseSiteSetting
-from wagtail.contrib.settings.registry import register_setting
-from wagtail.fields import StreamField
-from wagtail.models import Page, Site, Orderable
-from wagtailiconchooser.widgets import IconChooserWidget
+from wagtail.admin.panels import MultiFieldPanel
+from wagtail.models import Page
 
 from capeditor.blocks import (
     AlertInfo,
-    AudienceTypeBlock,
     SENDER_NAME_HELP_TEXT,
     CONTACT_HELP_TEXT,
     AUDIENCE_HELP_TEXT,
     AlertAddress,
     AlertReference,
-    AlertIncident,
-    ContactBlock
+    AlertIncident
 )
 from capeditor.constants import SEVERITY_MAPPING, URGENCY_MAPPING, CERTAINTY_MAPPING
-from capeditor.forms.widgets import HazardEventTypeWidget
 from capeditor.shareable.png import cap_geojson_to_image, CapAlertCardImage
-
-
-@register_setting
-class CapSetting(BaseSiteSetting, ClusterableModel):
-    sender = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Identifier"),
-                              help_text=_("Can be the website link or email of the sending institution"))
-    sender_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Name"),
-                                   help_text=_("Name of the sending institution"))
-    logo = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
-                             verbose_name=_("Logo of the sending institution"))
-
-    contacts = StreamField([
-        ("contact", ContactBlock(label=_("Contact")))
-    ], use_json_field=True, blank=True, null=True, verbose_name=_("Contact Details"),
-        help_text=_("Contact for follow-up and confirmation of the alert message"))
-
-    audience_types = StreamField([
-        ("audience_type", AudienceTypeBlock(label=_("Audience Type")))
-    ], use_json_field=True, blank=True, null=True, verbose_name=_("Audience Types"),
-        help_text=_("Target audiences for published alerts"))
-
-    class Meta:
-        verbose_name = _("CAP Settings")
-
-    panels = [
-        FieldPanel("sender_name"),
-        FieldPanel("sender"),
-        FieldPanel("logo"),
-        FieldPanel("contacts"),
-        InlinePanel("hazard_event_types", heading=_("Hazard Types"), label=_("Hazard Type"),
-                    help_text=_("Hazards monitored by the institution")),
-        FieldPanel("audience_types"),
-    ]
-
-
-class HazardEventTypes(Orderable):
-    setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="hazard_event_types")
-    is_in_wmo_event_types_list = models.BooleanField(default=True,
-                                                     verbose_name=_("Select from WMO list of Hazards Event Types"))
-    event = models.CharField(max_length=255, unique=True, verbose_name=_("Hazard"), help_text=_("Name of Hazard"))
-    icon = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("Icon"), help_text=_("Matching icon"))
-
-    panels = [
-        FieldPanel("is_in_wmo_event_types_list"),
-        FieldPanel("event", widget=HazardEventTypeWidget),
-        FieldPanel("icon", widget=IconChooserWidget),
-    ]
-
-    def __str__(self):
-        return self.event
-
-
-def get_cap_setting():
-    try:
-        site = Site.objects.get(is_default_site=True)
-        if site:
-            return CapSetting.for_site(site)
-    except Exception:
-        pass
-    return None
-
-
-def get_default_sender():
-    cap_setting = get_cap_setting()
-    if cap_setting and cap_setting.sender:
-        return cap_setting.sender
-    return None
+from .cap_settings import *
 
 
 class CapAlertPageForm(WagtailAdminPageForm):
