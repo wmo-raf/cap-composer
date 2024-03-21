@@ -2,6 +2,7 @@ import json
 
 from adminboundarymanager.models import AdminBoundarySettings
 from django.contrib.gis.forms import BaseGeometryWidget
+from django.contrib.gis.geometry import json_regex
 from django.forms import Textarea, Widget, TextInput
 from django.urls import reverse
 from wagtail.models import Site
@@ -196,3 +197,42 @@ class HazardEventTypeWidget(WidgetWithScript, TextInput):
         js = [
             "capeditor/js/widget/hazard-event-type-widget.js",
         ]
+
+
+class PolygonDrawWidget(BaseGeometryWidget, BaseMapWidget):
+    template_name = "capeditor/widgets/polygon_draw_widget.html"
+    map_srid = 4326
+
+    def __init__(self, attrs=None):
+        default_attrs = {
+            "class": "capeditor-widget__polygon-draw-input",
+        }
+        attrs = attrs or {}
+        attrs = {**default_attrs, **attrs}
+
+        super().__init__(attrs=attrs)
+
+    class Media:
+        css = {
+            "all": [
+                "capeditor/css/maplibre-gl.css",
+                "capeditor/css/mapbox-gl-draw.css",
+                "capeditor/css/widget/polygon-draw-widget.css",
+            ]
+        }
+        js = [
+            "capeditor/js/maplibre-gl.js",
+            "capeditor/js/mapbox-gl-draw.js",
+            "capeditor/js/turf.min.js",
+            "capeditor/js/widget/polygon-draw-widget.js",
+        ]
+
+    def serialize(self, value):
+        return value.json if value else ""
+
+    def deserialize(self, value):
+        geom = super().deserialize(value)
+        # GeoJSON assumes WGS84 (4326). Use the map's SRID instead.
+        if geom and json_regex.match(value) and self.map_srid != 4326:
+            geom.srid = self.map_srid
+        return geom

@@ -11,6 +11,7 @@ from wagtail import blocks
 from wagtail.blocks import FieldBlock, StructValue
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.models import Site
+from wagtailmodelchooser.blocks import ModelChooserBlock
 
 from .forms.fields import PolygonField, MultiPolygonField, BoundaryMultiPolygonField
 from .forms.widgets import CircleWidget
@@ -300,6 +301,54 @@ class AlertAreaCircleBlock(blocks.StructBlock):
                                 help_text=_("The text describing the affected area of the alert message"))
     circle = CircleFieldBlock(label=_("Circle"), help_text=_("Drag the marker to change position"))
 
+    altitude = blocks.CharBlock(max_length=100, required=False, label=_("Altitude"),
+                                help_text=_("The specific or minimum altitude of the affected "
+                                            "area of the alert message"))
+    ceiling = blocks.CharBlock(max_length=100, required=False, label=_("Ceiling"),
+                               help_text=_("The maximum altitude of the affected area of the alert message."
+                                           "MUST NOT be used except in combination with the altitude element. "))
+
+
+class AlertAreaPredefinedStructValue(StructValue):
+    @cached_property
+    def area(self):
+        area = self.get("area")
+        geom_shape = shape(area.geojson)
+        polygons = []
+
+        if isinstance(geom_shape, Polygon):
+            polygons.append(geom_shape)
+        else:
+            polygons = list(geom_shape.geoms)
+
+        polygons_data = []
+        for polygon in polygons:
+            coords = " ".join(["{},{}".format(y, x) for x, y in list(polygon.exterior.reverse().coords)])
+            polygons_data.append(coords)
+
+        area_data = {
+            "areaDesc": area.name,
+            "polygons": polygons_data
+        }
+
+        if self.get("altitude"):
+            area_data.update({"altitude": self.get("altitude")})
+            if self.get("ceiling"):
+                area_data.update({"ceiling": self.get("ceiling")})
+
+        return area_data
+
+    @cached_property
+    def geojson(self):
+        area = self.get("area")
+        return area.geojson
+
+
+class AlertAreaPredefined(blocks.StructBlock):
+    class Meta:
+        value_class = AlertAreaPredefinedStructValue
+
+    area = ModelChooserBlock("capeditor.PredefinedAlertArea", label=_("Area"), )
     altitude = blocks.CharBlock(max_length=100, required=False, label=_("Altitude"),
                                 help_text=_("The specific or minimum altitude of the affected "
                                             "area of the alert message"))
@@ -605,6 +654,7 @@ class AlertInfo(blocks.StructBlock):
         ("polygon_block", AlertAreaPolygonBlock(label=_("Draw Polygon"))),
         ("circle_block", AlertAreaCircleBlock(label=_("Circle"))),
         ("geocode_block", AlertAreaGeocodeBlock(label=_("Geocode"))),
+        ("predefined_block", AlertAreaPredefined(label=_("Predefined Area"))),
     ], label=_("Alert Area"), help_text=_("Admin Boundary, Polygon, Circle or Geocode"))
 
     resource = blocks.StreamBlock([
@@ -617,7 +667,6 @@ class AlertInfo(blocks.StructBlock):
     eventCode = blocks.ListBlock(AlertEventCode(label=_("Event Code")), label=_("Event codes"), default=[])
 
     # NOTE: web attribute is obtained from the url of the page
-
     class Meta:
         value_class = AlertInfoStructValue
         label_format = "({language}) {event}"

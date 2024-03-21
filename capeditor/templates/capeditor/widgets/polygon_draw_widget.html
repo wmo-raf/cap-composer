@@ -1,0 +1,22 @@
+{% load i18n l10n %}
+
+<div id="{{ id }}_div_map" class="polygon_map_wrapper">
+    <div id="{{ id }}_map" class="polygon_map" style="height: 400px;width: 100%;min-height: 400px">
+    </div>
+    <textarea id="{{ id }}" class="vSerializedField required" name="{{ name }}" hidden
+              data-bounds="{{ country_bounds }}">{{ serialized }}</textarea>
+    <script>
+        {% block options %}
+            var options = {
+                geom_name: '{{ geom_type }}',
+                id: '{{ id }}',
+                map_id: '{{ id }}_map',
+                map_srid: {{ map_srid|unlocalize }},
+                name: '{{ name }}',
+                resize_trigger_class: '{{ resize_trigger_class }}',
+            };
+        {% endblock %}
+        var {{ module }} =
+        new PolygonDrawWidget(options);
+    </script>
+</div>

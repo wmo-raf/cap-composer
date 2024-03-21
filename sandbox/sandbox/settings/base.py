@@ -57,6 +57,9 @@ INSTALLED_APPS = [
     "wagtail.admin",
     "wagtail",
 
+    "wagtail_modeladmin",
+    'wagtailmodelchooser',
+
     "modelcluster",
     "taggit",
     "wagtailcache",
