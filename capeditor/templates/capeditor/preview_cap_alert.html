@@ -1,0 +1,48 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+{% load l10n %}
+{% load wagtailadmin_tags wagtailimages_tags static %}
+{% block titletag %}
+    {% blocktranslate trimmed with title=page.get_admin_display_title %}
+        Import CAP Alert {{ title }}
+    {% endblocktranslate %}
+{% endblock %}
+{% block extra_css %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    {% translate "Import CAP Alert - Preview" as header_str %}
+
+    {% include "wagtailadmin/shared/header.html" with title=header_str icon="map" %}
+
+    <div class="nice-padding">
+        {% if alert_data %}
+
+            <div>{{ alert_data.sender }}</div>
+            <div>{{ alert_data.sent }}</div>
+            <div>{{ alert_data.status }}</div>
+            <div>{{ alert_data.msgType }}</div>
+            <div>{{ alert_data.scope }}</div>
+
+
+
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+
+    <script>
+
+        $(document).ready(function () {
+
+
+        });
+
+
+    </script>
+
+
+{% endblock %}

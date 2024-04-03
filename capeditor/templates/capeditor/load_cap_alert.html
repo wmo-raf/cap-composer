@@ -1,0 +1,86 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+{% load l10n %}
+{% load wagtailadmin_tags wagtailimages_tags static %}
+{% block titletag %}
+    {% blocktranslate trimmed with title=page.get_admin_display_title %}
+        Import CAP Alert {{ title }}
+    {% endblocktranslate %}
+{% endblock %}
+{% block extra_css %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    {% translate "Import CAP Alert" as header_str %}
+
+    {% include "wagtailadmin/shared/header.html" with title=header_str icon="upload" %}
+
+    <div class="nice-padding">
+        <form action="{% url 'import_cap_alert' %}" method="POST" enctype="multipart/form-data">
+            {% if form.non_field_errors %}
+                <div class="non-field_errors" style="margin-bottom: 20px">
+                    {% include "wagtailadmin/shared/non_field_errors.html" with form=form %}
+                </div>
+            {% endif %}
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.is_hidden %}
+                    {{ field }}
+                {% else %}
+                    {% include "wagtailadmin/shared/field.html" %}
+                {% endif %}
+            {% endfor %}
+
+            <button type="submit" class="button button-longrunning">
+                {% icon name="spinner" %}
+                {% translate 'Load' %}
+            </button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+
+    <script>
+
+        $(document).ready(function () {
+            const $loadFromFileCheckbox = $("#id_from_file");
+
+            const $fileInput = $("#id_file");
+            const $fileInputWrapper = $fileInput.closest(".w-field__wrapper");
+
+
+            const $urlInput = $("#id_url");
+            $urlInput.prop('required', true);
+
+            const $urlInputWrapper = $urlInput.closest(".w-field__wrapper");
+
+
+            if (!!$fileInputWrapper.length) {
+                $fileInputWrapper.hide()
+            }
+
+            $loadFromFileCheckbox.on("change", function () {
+                if ($(this).is(":checked")) {
+                    $fileInputWrapper.show();
+                    $urlInputWrapper.hide()
+                    $urlInput.prop('required', false);
+                    $fileInput.prop('required', true);
+
+                } else {
+                    $fileInputWrapper.hide();
+                    $urlInputWrapper.show()
+                    $fileInput.prop('required', false);
+                    $urlInput.prop('required', true);
+                }
+            });
+
+        });
+
+
+    </script>
+
+
+{% endblock %}
