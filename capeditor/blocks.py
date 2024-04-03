@@ -576,7 +576,7 @@ class AlertInfo(blocks.StructBlock):
         ('Env', _("Pollution and other environmental")),
         ('Transport', _("Public and private transportation")),
         ('Infra', _("Utility, telecommunication, other non-transport infrastructure")),
-        ('Cbrne', _("Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat or attack")),
+        ('CBRNE', _("Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat or attack")),
         ('Other', _("Other events")),
     )
 
