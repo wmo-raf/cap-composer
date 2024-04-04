@@ -11,7 +11,7 @@ from wagtail.admin.forms.pages import CopyForm
 from wagtail.admin.utils import get_valid_next_url_from_request
 from wagtail.models import Page
 
-from capeditor.views import load_cap_alert
+from capeditor.views import load_cap_alert, import_cap_alert
 
 
 @hooks.register("insert_editor_js")
@@ -32,7 +32,8 @@ def register_icons(icons):
 @hooks.register('register_admin_urls')
 def urlconf_stations():
     return [
-        path('import-cap/', load_cap_alert, name='import_cap_alert'),
+        path('import-cap/load', load_cap_alert, name='load_cap_alert'),
+        path('import-cap/import', import_cap_alert, name='import_cap_alert'),
     ]
 
 

@@ -6,7 +6,7 @@ from capeditor.caputils import cap_xml_to_alert_data
 from capeditor.errors import CAPImportError
 
 
-class CAPImportForm(forms.Form):
+class CAPLoadForm(forms.Form):
     from_file = forms.BooleanField(required=False, label=_('Load from file'))
     url = forms.URLField(required=False, label=_('CAP Alert XML URL'))
     file = forms.FileField(required=False, label=_('CAP File'))
@@ -30,14 +30,25 @@ class CAPImportForm(forms.Form):
             if from_file:
                 file = cleaned_data.get('file')
                 content = file.read().decode('utf-8')
+                alert_source = {
+                    "name": file.name,
+                    "type": "File",
+                }
             else:
                 url = cleaned_data.get('url')
                 res = requests.get(url)
                 res.raise_for_status()
+                alert_source = {
+                    "name": url,
+                    "type": "URL",
+                }
 
                 content = res.text
 
             alert_data = cap_xml_to_alert_data(content)
+
+            alert_data['alert_source'] = alert_source
+
             cleaned_data['alert_data'] = alert_data
 
         except CAPImportError as e:
@@ -51,3 +62,7 @@ class CAPImportForm(forms.Form):
             return cleaned_data
 
         return cleaned_data
+
+
+class CAPImportForm(forms.Form):
+    alert_data = forms.JSONField(widget=forms.HiddenInput)

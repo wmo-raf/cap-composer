@@ -1,3 +1,7 @@
+from datetime import datetime
+
+import pytz
+from shapely import Point
 from xmltodict import parse as parse_xml_to_dict
 
 from capeditor.errors import CAPImportError
@@ -14,6 +18,7 @@ CAP_ALERT_ELEMENTS = [
     {
         "name": "sent",
         "required": True,
+        "datetime": True,
     },
     {
         "name": "status",
@@ -109,14 +114,17 @@ CAP_ALERT_ELEMENTS = [
             {
                 "name": "effective",
                 "required": False,
+                "datetime": True,
             },
             {
                 "name": "onset",
                 "required": False,
+                "datetime": True,
             },
             {
                 "name": "expires",
                 "required": False,
+                "datetime": True,
             },
             {
                 "name": "senderName",
@@ -257,6 +265,11 @@ def extract_element_data(element, data, validate=True):
     if not element_data:
         return None
 
+    if element.get("datetime"):
+        element_data = datetime.fromisoformat(element_data)
+        element_data = element_data.astimezone(pytz.utc)
+        element_data = element_data.isoformat()
+
     if element.get("many"):
         if not isinstance(element_data, list):
             element_data = [element_data]
@@ -280,6 +293,37 @@ def extract_element_data(element, data, validate=True):
                                 for point in polygon.split(" "):
                                     lat, lon = point.split(",")
                                     coordinates.append([float(lon), float(lat)])
+                                polygons.append([coordinates])
+
+                            if len(polygons) > 1:
+                                geometry = {
+                                    "type": "MultiPolygon",
+                                    "coordinates": polygons
+                                }
+                            else:
+                                geometry = {
+                                    "type": "Polygon",
+                                    "coordinates": polygons[0]
+                                }
+                            element_data[i]["geometry"] = geometry
+
+                    if sub_element_name == "circle":
+                        if sub_element_data:
+                            polygons = []
+                            for circle in sub_element_data:
+                                parts = circle.split()
+                                coords = parts[0].split(',')
+                                # Extract the longitude, latitude, and radius
+                                longitude, latitude, radius_km = float(coords[0]), float(coords[1]), float(parts[1])
+                                # Create a point for the center
+                                center_point = Point(longitude, latitude)
+
+                                # Convert radius to degrees (approximation for small distances)
+                                radius_deg = radius_km / 111.12
+
+                                circle = center_point.buffer(radius_deg)
+                                coordinates = [[y, x] for x, y in list(circle.exterior.coords)]
+
                                 polygons.append([coordinates])
 
                             if len(polygons) > 1:
