@@ -607,9 +607,10 @@ class AlertInfo(blocks.StructBlock):
                                help_text=_("The text denoting the type of the subject event of the alert message. You "
                                            "can define hazards events monitored by your institution from CAP settings"))
 
-    category = blocks.ChoiceBlock(choices=CATEGORY_CHOICES, default="Met", label=_("Category"),
-                                  help_text=_("The code denoting the category of the subject"
-                                              " event of the alert message"))
+    category = blocks.MultipleChoiceBlock(choices=CATEGORY_CHOICES, default="Met", label=_("Category"),
+                                          help_text=_("The code denoting the category of the subject"
+                                                      " event of the alert message"),
+                                          widget=forms.CheckboxSelectMultiple)
     language = blocks.ChoiceBlock(choices=LANGUAGE_CHOICES, default="en", required=False, label=_("Language"),
                                   help_text=_("The code denoting the language of the alert message"), )
 
