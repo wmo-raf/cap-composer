@@ -25,8 +25,8 @@
             {% endif %}
             {% csrf_token %}
             {% for field in form %}
-                {% if field.is_hidden %}
-                    {{ field }}
+                {% if field.name != "text" and field.name != "load_from" %}
+                    {% include "wagtailadmin/shared/field.html" with classname="w-hidden" %}
                 {% else %}
                     {% include "wagtailadmin/shared/field.html" %}
                 {% endif %}
@@ -43,39 +43,56 @@
 {% block extra_js %}
     {{ block.super }}
 
+
+
     <script>
 
         $(document).ready(function () {
-            const $loadFromFileCheckbox = $("#id_from_file");
+            const $loadFromRadioInput = $("#id_load_from");
+
+            const $textInput = $("#id_text");
+            $textInput.prop('required', true);
+
+            const $textInputWrapper = $textInput.closest(".w-field__wrapper");
+
+            const $urlInput = $("#id_url");
+            const $urlInputWrapper = $urlInput.closest(".w-field__wrapper");
 
             const $fileInput = $("#id_file");
             const $fileInputWrapper = $fileInput.closest(".w-field__wrapper");
 
 
-            const $urlInput = $("#id_url");
-            $urlInput.prop('required', true);
+            $loadFromRadioInput.on("change", function () {
+                const value = $(this).find("input:checked").val();
+                if (value === "text") {
+                    $textInputWrapper.show();
+                    $textInput.prop('required', true);
 
-            const $urlInputWrapper = $urlInput.closest(".w-field__wrapper");
-
-
-            if (!!$fileInputWrapper.length) {
-                $fileInputWrapper.hide()
-            }
-
-            $loadFromFileCheckbox.on("change", function () {
-                if ($(this).is(":checked")) {
-                    $fileInputWrapper.show();
-                    $urlInputWrapper.hide()
+                    $urlInputWrapper.hide();
                     $urlInput.prop('required', false);
+
+                    $fileInputWrapper.hide();
+                    $fileInput.prop('required', false);
+                } else if (value === "url") {
+                    $urlInputWrapper.show();
+                    $urlInput.prop('required', true);
+
+                    $textInputWrapper.hide();
+                    $textInput.prop('required', false);
+
+                    $fileInputWrapper.hide();
+                    $fileInput.prop('required', false);
+                } else if (value === "file") {
+                    $fileInputWrapper.show();
                     $fileInput.prop('required', true);
 
-                } else {
-                    $fileInputWrapper.hide();
-                    $urlInputWrapper.show()
-                    $fileInput.prop('required', false);
-                    $urlInput.prop('required', true);
+                    $textInputWrapper.hide();
+                    $textInput.prop('required', false);
+
+                    $urlInputWrapper.hide();
+                    $urlInput.prop('required', false);
                 }
-            });
+            })
 
         });
 
