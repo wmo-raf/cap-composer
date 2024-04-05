@@ -173,10 +173,6 @@ class PolygonDrawWidget {
         if (combinedFeatures) {
             const feature = combinedFeatures.features[0]
 
-            if (feature.properties) {
-                delete feature.properties
-            }
-
             this.setValue(JSON.stringify(feature.geometry))
 
         } else {

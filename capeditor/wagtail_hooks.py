@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.templatetags.static import static
+from django.urls import path
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
 from wagtail import hooks
@@ -9,6 +10,8 @@ from wagtail.admin import messages
 from wagtail.admin.forms.pages import CopyForm
 from wagtail.admin.utils import get_valid_next_url_from_request
 from wagtail.models import Page
+
+from capeditor.views import load_cap_alert, import_cap_alert
 
 
 @hooks.register("insert_editor_js")
@@ -23,6 +26,14 @@ def register_icons(icons):
     return icons + [
         'capeditor/icons/cap-alert.svg',
         'capeditor/icons/cap-alert-full.svg',
+    ]
+
+
+@hooks.register('register_admin_urls')
+def urlconf_stations():
+    return [
+        path('import-cap/', load_cap_alert, name='load_cap_alert'),
+        path('import-cap/import/', import_cap_alert, name='import_cap_alert'),
     ]
 
 

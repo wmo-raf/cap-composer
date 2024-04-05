@@ -1,0 +1,430 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+{% load l10n %}
+{% load wagtailadmin_tags wagtailimages_tags static %}
+{% block titletag %}
+    {% blocktranslate trimmed with title=page.get_admin_display_title %}
+        Import CAP Alert {{ title }}
+    {% endblocktranslate %}
+{% endblock %}
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'capeditor/css/maplibre-gl.css' %}">
+    <link rel="stylesheet" href="{% static 'capeditor/css/import_cap_preview.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% translate "Import CAP Alert - Preview" as header_str %}
+    {% include "wagtailadmin/shared/header.html" with title=header_str icon="map" %}
+
+    <div class="nice-padding">
+        {% if alert_data %}
+            <div class="alert-source w-shadow">
+                <div class="alert-source-item">
+                    <span class="alert-source-item-label">
+                        {% translate "Import Type:" %}
+                    </span>
+                    <span class="alert-source-item-value">
+                        {{ alert_data.alert_source.type }}
+                    </span>
+                </div>
+                <div class="alert-source-item">
+                    {% if alert_data.alert_source.type == "URL" %}
+                        <span class="alert-source-item-label">
+                            {% translate "Source URL:" %}
+                        </span>
+                        <span class="alert-source-item-value">
+                            <a href="{{ alert_data.alert_source.name }}"
+                               target="_blank">{{ alert_data.alert_source.name }}</a>
+                        </span>
+                    {% else %}
+                        {% if alert_data.alert_source.name %}
+                            <span class="alert-source-item-label">
+                                {% translate "Source File Name:" %}
+                            </span>
+                            <span class="alert-source-item-value">
+                                {{ alert_data.alert_source.name }}
+                            </span>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="w-mt-3">
+                    <a href="{% url 'import_cap_alert' %}"
+                       class="button button-small bicolor button--icon">
+                        <span class="icon-wrapper">
+                            <svg class="icon icon-upload icon" aria-hidden="true">
+                                <use href="#icon-upload"></use>
+                            </svg>
+                        </span>
+                        {% translate "Load different alert" %}
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="alert-meta-card w-shadow">
+                <div class="alert-meta-item">
+                    <span class="alert-meta-item-label">
+                        {% translate "Sender:" %}
+                    </span>
+                    <span class="alert-meta-item-value">
+                        {{ alert_data.sender }}
+                    </span>
+                </div>
+                <div class="alert-meta-item">
+                    <span class="alert-meta-item-label">
+                        {% translate "Sent:" %}
+                    </span>
+                    <span class="alert-meta-item-value">
+                        {{ alert_data.sent }} UTC
+                    </span>
+                </div>
+                <div class="alert-meta-item">
+                    <span class="alert-meta-item-label">
+                        {% translate "Status:" %}
+                    </span>
+                    <span class="alert-meta-item-value">
+                        {{ alert_data.status }}
+                    </span>
+                </div>
+                <div class="alert-meta-item">
+                    <span class="alert-meta-item-label">
+                        {% translate "Message Type:" %}
+                    </span>
+                    <span class="alert-meta-item-value">
+                        {{ alert_data.scope }}
+                    </span>
+                </div>
+                <div class="w-mt-5">
+                    <form action="{% url 'import_cap_alert' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {% if field.is_hidden %}
+                                {{ field }}
+                            {% endif %}
+                        {% endfor %}
+                        <button class="button bicolor button--icon" type="submit">
+                            <span class="icon-wrapper">
+                                <svg class="icon icon-draft icon" aria-hidden="true">
+                                    <use href="#icon-draft"></use>
+                                </svg>
+                            </span>
+                            {% translate "Create Draft Alert" %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row w-shadow alert-detail">
+                <div class="col5">
+                    <div id="cap-map"></div>
+                </div>
+                <div class="col7">
+                    <div class="w-tabs" data-tabs>
+                        <div class="w-tabs__wrapper">
+                            <div role="tablist" class="w-tabs__list">
+                                {% for info in alert_data.info %}
+                                    <a id="tab-label-{{ forloop.counter }}"
+                                       href="#tab-{{ forloop.counter }}"
+                                       role="tab"
+                                       class="w-tabs__tab"
+                                       aria-selected="{% if forloop.first %}true{% else %}{% endif %}"
+                                       aria-controls="tab-{{ forloop.counter }}">
+                                        {{ info.event }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            {% for info in alert_data.info %}
+                                <section id="tab-{{ forloop.counter }}"
+                                         class="w-tabs__panel" role="tabpanel"
+                                         aria-labelledby="tab-label-{{ forloop.counter }}"
+                                         {% if not forloop.first %}hidden{% endif %}>
+                                    <div>
+                                        <div class="info-item">
+                                            <span class="info-item-label">
+                                                {% translate "Language:" %}
+                                            </span>
+                                            <span class="info-item-value">
+                                                {{ info.language }}
+                                            </span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-item-label">
+                                                {% translate "Category:" %}
+                                            </span>
+                                            <span class="info-item-value">
+                                                {% for category in info.category %}
+                                                    {{ category }}{% if not forloop.last %}, {% endif %}
+                                                {% endfor %}
+                                            </span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-item-label">
+                                                {% translate "Event:" %}
+                                            </span>
+                                            <span class="info-item-value">
+                                                {{ info.event }}
+                                            </span>
+                                        </div>
+                                        <div class="info-item w-mt-5">
+                                            <span class="info-item-label">
+                                                {% translate "Urgency:" %}
+                                            </span>
+                                            <span class="info-item-value">
+                                                {{ info.urgency }}
+                                            </span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-item-label">
+                                                {% translate "Severity:" %}
+                                            </span>
+                                            <span class="info-item-value">
+                                                {{ info.severity }}
+                                            </span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-item-label">
+                                                {% translate "Certainty:" %}
+                                            </span>
+                                            <span class="info-item-value">
+                                                {{ info.certainty }}
+                                            </span>
+                                        </div>
+                                        {% if info.effective or info.onset or info.expires %}
+                                            <div class="w-mt-5">
+                                                {% if info.effective %}
+                                                    <div class="info-item">
+                                                        <span class="info-item-label">
+                                                            {% translate "Effective:" %}
+                                                        </span>
+                                                        <span class="info-item-value">
+                                                            {{ info.effective }} UTC
+                                                        </span>
+                                                    </div>
+                                                {% endif %}
+                                                {% if info.onset %}
+                                                    <div class="info-item">
+                                                        <span class="info-item-label">
+                                                            {% translate "Onset:" %}
+                                                        </span>
+                                                        <span class="info-item-value">
+                                                            {{ info.onset }} UTC
+                                                        </span>
+                                                    </div>
+                                                {% endif %}
+                                                {% if info.expires %}
+                                                    <div class="info-item">
+                                                        <span class="info-item-label">
+                                                            {% translate "Expires:" %}
+                                                        </span>
+                                                        <span class="info-item-value">
+                                                            {{ info.expires }} UTC
+                                                        </span>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="info-item w-mt-5">
+                                            <span class="info-item-label">
+                                                {% translate "Headline:" %}
+                                            </span>
+                                            <span class="info-item-value">
+                                                {{ info.headline }}
+                                            </span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-item-label">
+                                                {% translate "Description:" %}
+                                            </span>
+                                            <span class="info-item-value">
+                                                {{ info.description }}
+                                            </span>
+                                        </div>
+                                        {% if info.instruction %}
+                                            <div class="info-item">
+                                                <span class="info-item-label">
+                                                    {% translate "Instruction:" %}
+                                                </span>
+                                                <span class="info-item-value">
+                                                    {{ info.instruction }}
+                                                </span>
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="info-item w-mt-5">
+                                            <span class="info-item-label">
+                                                {% translate "Area:" %}
+                                            </span>
+                                            <span class="info-item-value">
+                                                {% for area in info.area %}
+                                                    {{ area.areaDesc }}{% if not forloop.last %}, {% endif %}
+                                                {% endfor %}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </section>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script src="{% static 'capeditor/js/maplibre-gl.js' %}"></script>
+    <script src="{% static 'capeditor/js/turf.min.js' %}"></script>
+    <script>
+
+        const alertData = {{ alert_data|safe }};
+
+        const geojson = {
+            'type': 'FeatureCollection',
+            'features': []
+        };
+
+
+        if (alertData && alertData.info && !!alertData.info.length) {
+            for (let i = 0; i < alertData.info.length; i++) {
+                const info = alertData.info[i];
+                const areas = info.area;
+
+                for (let j = 0; j < areas.length; j++) {
+                    const area = areas[j];
+                    const geometry = area.geometry
+
+                    if (geometry) {
+                        geojson.features.push({
+                            'type': 'Feature',
+                            'geometry': geometry,
+                            'properties': {
+                                'headline': info.headline,
+                                'description': info.description,
+                                'instruction': info.instruction,
+                                'language': info.language,
+                                'category': info.category,
+                                'event': info.event,
+                                'urgency': info.urgency,
+                                'severity': info.severity,
+                                'certainty': info.certainty,
+                                'effective': info.effective,
+                                'onset': info.onset,
+                                'expires': info.expires,
+                                'areaDesc': area.areaDesc
+                            }
+                        });
+                    }
+                }
+
+
+            }
+        }
+
+        console.log(geojson);
+
+        // default MapLibre style
+        const defaultStyle = {
+            'version': 8,
+            'sources': {
+                'carto-dark': {
+                    'type': 'raster',
+                    'tiles': [
+                        "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                        "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                        "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                        "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png"
+                    ]
+                },
+                'carto-light': {
+                    'type': 'raster',
+                    'tiles': [
+                        "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                        "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                        "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                        "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"
+                    ]
+                },
+                'wikimedia': {
+                    'type': 'raster',
+                    'tiles': [
+                        "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
+                    ]
+                }
+            },
+            'layers': [{
+                'id': 'carto-light-layer',
+                'source': 'carto-light',
+
+
+                'type': 'raster',
+                'minzoom': 0,
+                'maxzoom': 22
+            }]
+        }
+
+        $(document).ready(function () {
+
+            // initialize map
+            const map = new maplibregl.Map({
+                container: "cap-map",
+                style: defaultStyle,
+            });
+
+            map.on("load", () => {
+                if (!!geojson.features.length) {
+
+                    const bbox = turf.bbox(geojson);
+
+                    const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
+                    map.fitBounds(bounds, {padding: 20})
+
+
+                    // add source
+                    map.addSource("polygon", {
+                            'type': 'geojson',
+                            data: geojson
+                        }
+                    )
+
+                    // add layer
+                    map.addLayer({
+                        'id': 'polygon',
+                        'type': 'fill',
+                        'source': 'polygon',
+                        'layout': {},
+                        'paint': {
+                            "fill-color": [
+                                "case",
+                                ["==", ["get", "severity"], "Extreme"],
+                                "#d72f2a",
+                                ["==", ["get", "severity"], "Severe"],
+                                "#f89904",
+                                ["==", ["get", "severity"], "Moderate"],
+                                "#e4e616",
+                                ["==", ["get", "severity"], "Minor"],
+                                "#53ffff",
+                                ["==", ["get", "severity"], "Unknown"],
+                                "#3366ff",
+                                "black",
+                            ],
+                            "fill-opacity": 0.7,
+                            "fill-outline-color": "#000",
+                        },
+                    });
+                }
+
+
+            })
+
+
+        });
+
+
+    </script>
+
+
+{% endblock %}

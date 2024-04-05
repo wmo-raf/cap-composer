@@ -261,12 +261,18 @@ PolygonWidget.prototype.initDraw = function () {
         e.preventDefault()
         const isSaveButton = e.target.classList.contains("mapboxgl-draw-actions-btn_save")
         if (isSaveButton) {
-            const FC = this.draw.getAll();
-            const feat = FC.features[0]
 
-            if (feat) {
-                const feature = feat.geometry
-                this.setDrawData(feature)
+            let combinedFeatures
+
+            const featureCollection = this.draw.getAll()
+            if (featureCollection && featureCollection.features && !!featureCollection.features.length) {
+                combinedFeatures = turf.combine(featureCollection)
+            }
+
+            if (combinedFeatures) {
+                const feature = combinedFeatures.features[0]
+
+                this.setDrawData(feature.geometry)
             } else {
                 this.setDrawData(null)
             }
@@ -283,9 +289,18 @@ PolygonWidget.prototype.initDraw = function () {
     })
 
     this.map.on("draw.create", (e) => {
-        const feat = e.features[0]
-        const feature = feat.geometry
-        this.setDrawData(feature)
+        let combinedFeatures
+
+        const featureCollection = this.draw.getAll()
+        if (featureCollection && featureCollection.features && !!featureCollection.features.length) {
+            combinedFeatures = turf.combine(featureCollection)
+        }
+
+        if (combinedFeatures) {
+            const feature = combinedFeatures.features[0]
+
+            this.setDrawData(feature.geometry)
+        }
     });
 }
 
@@ -308,16 +323,17 @@ PolygonWidget.prototype.clearDraw = function () {
 }
 
 
-PolygonWidget.prototype.setDrawData = function (feature) {
-    if (feature) {
-        const bbox = turf.bbox(feature)
+PolygonWidget.prototype.setDrawData = function (geometry) {
+    if (geometry) {
+        const bbox = turf.bbox(geometry)
         const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
 
-        this.setSourceData(feature)
+        this.setSourceData(geometry)
         this.map.setLayoutProperty("polygon", "visibility", "visible")
 
         this.map.fitBounds(bounds, {padding: 50})
-        const geomString = JSON.stringify(feature)
+        const geomString = JSON.stringify(geometry)
+
 
         this.setState(geomString)
     } else {

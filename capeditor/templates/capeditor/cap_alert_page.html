@@ -314,11 +314,24 @@
                 'type': 'fill',
                 'source': 'polygon',
                 'layout': {},
-                'paint': {
-                    'fill-color': "red",
-                    'fill-opacity': 0.8,
+                paint: {
+                    "fill-color": [
+                        "case",
+                        ["==", ["get", "severity"], "Extreme"],
+                        "#d72f2a",
+                        ["==", ["get", "severity"], "Severe"],
+                        "#f89904",
+                        ["==", ["get", "severity"], "Moderate"],
+                        "#e4e616",
+                        ["==", ["get", "severity"], "Minor"],
+                        "#53ffff",
+                        ["==", ["get", "severity"], "Unknown"],
+                        "#3366ff",
+                        "black",
+                    ],
+                    "fill-opacity": 0.7,
                     "fill-outline-color": "#000",
-                }
+                },
             });
 
             // fit to bounds

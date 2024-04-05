@@ -1,0 +1,47 @@
+.alert-source {
+    margin: 20px 0;
+    padding: 20px;
+}
+
+.alert-source-item {
+    padding: 4px 0;
+    font-size: 14px;
+}
+
+.alert-source-item-label {
+    font-weight: bold;
+}
+
+.alert-meta-card {
+    margin: 20px 0;
+    padding: 20px;
+
+}
+
+.alert-meta-item {
+    padding: 4px 0;
+    font-size: 14px;
+}
+
+.alert-meta-item-label {
+    font-weight: bold;
+}
+
+.alert-detail {
+    padding: 40px 20px;
+}
+
+.info-item {
+    padding: 4px 0;
+    font-size: 14px;
+}
+
+.info-item-label {
+    font-weight: bold;
+}
+
+
+#cap-map {
+    height: 400px;
+    width: 100%;
+}

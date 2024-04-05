@@ -1,0 +1,113 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+{% load l10n %}
+{% load wagtailadmin_tags wagtailimages_tags static %}
+{% block titletag %}
+    {% blocktranslate trimmed with title=page.get_admin_display_title %}
+        Import CAP Alert {{ title }}
+    {% endblocktranslate %}
+{% endblock %}
+{% block extra_css %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    {% translate "Import CAP Alert" as header_str %}
+
+    {% include "wagtailadmin/shared/header.html" with title=header_str icon="upload" %}
+
+    <div class="nice-padding">
+        <form action="{% url 'load_cap_alert' %}" method="POST" enctype="multipart/form-data">
+            {% if form.non_field_errors %}
+                <div class="non-field_errors" style="margin-bottom: 20px">
+                    {% include "wagtailadmin/shared/non_field_errors.html" with form=form %}
+                </div>
+            {% endif %}
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.name != "text" and field.name != "load_from" %}
+                    {% include "wagtailadmin/shared/field.html" with classname="w-hidden" %}
+                {% else %}
+                    {% include "wagtailadmin/shared/field.html" %}
+                {% endif %}
+            {% endfor %}
+
+            <button type="submit" class="button button-longrunning">
+                {% icon name="spinner" %}
+                {% translate 'Load' %}
+            </button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            const $loadFromRadioInput = $("#id_load_from");
+
+            const $textInput = $("#id_text");
+
+            const $textInputWrapper = $textInput.closest(".w-field__wrapper");
+
+            const $urlInput = $("#id_url");
+            const $urlInputWrapper = $urlInput.closest(".w-field__wrapper");
+
+            const $fileInput = $("#id_file");
+            const $fileInputWrapper = $fileInput.closest(".w-field__wrapper");
+
+            const selected = $loadFromRadioInput.find("input:checked").val();
+
+
+            const handleChange = function (value) {
+                if (value === "text") {
+                    $textInputWrapper.show();
+                    $textInput.prop('required', true);
+
+                    $urlInputWrapper.hide();
+                    $urlInput.prop('required', false);
+
+                    $fileInputWrapper.hide();
+                    $fileInput.prop('required', false);
+                } else if (value === "url") {
+                    $urlInputWrapper.show();
+                    $urlInput.prop('required', true);
+
+                    $textInputWrapper.hide();
+                    $textInput.prop('required', false);
+
+                    $fileInputWrapper.hide();
+                    $fileInput.prop('required', false);
+                } else if (value === "file") {
+                    $fileInputWrapper.show();
+                    $fileInput.prop('required', true);
+
+                    $textInputWrapper.hide();
+                    $textInput.prop('required', false);
+
+                    $urlInputWrapper.hide();
+                    $urlInput.prop('required', false);
+                }
+            }
+
+            if (selected) {
+                handleChange(selected);
+            }
+
+            $loadFromRadioInput.on("change", function () {
+                const value = $(this).find("input:checked").val();
+
+                handleChange(value);
+            })
+
+        });
+
+
+    </script>
+
+
+{% endblock %}
