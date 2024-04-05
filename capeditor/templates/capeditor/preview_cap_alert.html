@@ -19,11 +19,10 @@
 
     <div class="nice-padding">
         {% if alert_data %}
-
-            <div class="alert-source">
+            <div class="alert-source w-shadow">
                 <div class="alert-source-item">
                     <span class="alert-source-item-label">
-                        Import Type:
+                        {% translate "Import Type:" %}
                     </span>
                     <span class="alert-source-item-value">
                         {{ alert_data.alert_source.type }}
@@ -32,22 +31,23 @@
                 <div class="alert-source-item">
                     {% if alert_data.alert_source.type == "URL" %}
                         <span class="alert-source-item-label">
-                            Source URL:
+                            {% translate "Source URL:" %}
                         </span>
                         <span class="alert-source-item-value">
                             <a href="{{ alert_data.alert_source.name }}"
                                target="_blank">{{ alert_data.alert_source.name }}</a>
                         </span>
                     {% else %}
-                        <span class="alert-source-item-label">
-                            Source File Name:
-                        </span>
-                        <span class="alert-source-item-value">
-                            {{ alert_data.alert_source.name }}
-                        </span>
+                        {% if alert_data.alert_source.name %}
+                            <span class="alert-source-item-label">
+                                {% translate "Source File Name:" %}
+                            </span>
+                            <span class="alert-source-item-value">
+                                {{ alert_data.alert_source.name }}
+                            </span>
+                        {% endif %}
                     {% endif %}
                 </div>
-
                 <div class="w-mt-3">
                     <a href="{% url 'import_cap_alert' %}"
                        class="button button-small bicolor button--icon">
@@ -56,68 +56,65 @@
                                 <use href="#icon-upload"></use>
                             </svg>
                         </span>
-                        Load different alert
+                        {% translate "Load different alert" %}
                     </a>
                 </div>
 
             </div>
 
-            <div class="row">
-                <div class="alert-meta-card">
-                    <div class="alert-meta-item">
-                        <span class="alert-meta-item-label">
-                            Sender:
-                        </span>
-                        <span class="alert-meta-item-value">
-                            {{ alert_data.sender }}
-                        </span>
-                    </div>
-                    <div class="alert-meta-item">
-                        <span class="alert-meta-item-label">
-                            Sent:
-                        </span>
-                        <span class="alert-meta-item-value">
-                            {{ alert_data.sent }}
-                        </span>
-                    </div>
-                    <div class="alert-meta-item">
-                        <span class="alert-meta-item-label">
-                            Status:
-                        </span>
-                        <span class="alert-meta-item-value">
-                            {{ alert_data.status }}
-                        </span>
-                    </div>
-                    <div class="alert-meta-item">
-                        <span class="alert-meta-item-label">
-                            Scope:
-                        </span>
-                        <span class="alert-meta-item-value">
-                            {{ alert_data.scope }}
-                        </span>
-                    </div>
-                    <div class="w-mt-5">
-                        <form action="{% url 'import_cap_alert' %}" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% for field in form %}
-                                {% if field.is_hidden %}
-                                    {{ field }}
-                                {% endif %}
-                            {% endfor %}
-                            <button class="button bicolor button--icon" type="submit">
-                                <span class="icon-wrapper">
-                                    <svg class="icon icon-draft icon" aria-hidden="true">
-                                        <use href="#icon-draft"></use>
-                                    </svg>
-                                </span>
-                                Create Draft Alert
-                            </button>
-                        </form>
-                    </div>
+            <div class="alert-meta-card w-shadow">
+                <div class="alert-meta-item">
+                    <span class="alert-meta-item-label">
+                        {% translate "Sender:" %}
+                    </span>
+                    <span class="alert-meta-item-value">
+                        {{ alert_data.sender }}
+                    </span>
                 </div>
-
+                <div class="alert-meta-item">
+                    <span class="alert-meta-item-label">
+                        {% translate "Sent:" %}
+                    </span>
+                    <span class="alert-meta-item-value">
+                        {{ alert_data.sent }} UTC
+                    </span>
+                </div>
+                <div class="alert-meta-item">
+                    <span class="alert-meta-item-label">
+                        {% translate "Status:" %}
+                    </span>
+                    <span class="alert-meta-item-value">
+                        {{ alert_data.status }}
+                    </span>
+                </div>
+                <div class="alert-meta-item">
+                    <span class="alert-meta-item-label">
+                        {% translate "Message Type:" %}
+                    </span>
+                    <span class="alert-meta-item-value">
+                        {{ alert_data.scope }}
+                    </span>
+                </div>
+                <div class="w-mt-5">
+                    <form action="{% url 'import_cap_alert' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {% if field.is_hidden %}
+                                {{ field }}
+                            {% endif %}
+                        {% endfor %}
+                        <button class="button bicolor button--icon" type="submit">
+                            <span class="icon-wrapper">
+                                <svg class="icon icon-draft icon" aria-hidden="true">
+                                    <use href="#icon-draft"></use>
+                                </svg>
+                            </span>
+                            {% translate "Create Draft Alert" %}
+                        </button>
+                    </form>
+                </div>
             </div>
-            <div class="row">
+            <div class="row w-shadow alert-detail">
                 <div class="col5">
                     <div id="cap-map"></div>
                 </div>
@@ -146,7 +143,7 @@
                                     <div>
                                         <div class="info-item">
                                             <span class="info-item-label">
-                                                Language:
+                                                {% translate "Language:" %}
                                             </span>
                                             <span class="info-item-value">
                                                 {{ info.language }}
@@ -154,7 +151,7 @@
                                         </div>
                                         <div class="info-item">
                                             <span class="info-item-label">
-                                                Category:
+                                                {% translate "Category:" %}
                                             </span>
                                             <span class="info-item-value">
                                                 {% for category in info.category %}
@@ -164,7 +161,7 @@
                                         </div>
                                         <div class="info-item">
                                             <span class="info-item-label">
-                                                Event:
+                                                {% translate "Event:" %}
                                             </span>
                                             <span class="info-item-value">
                                                 {{ info.event }}
@@ -172,7 +169,7 @@
                                         </div>
                                         <div class="info-item w-mt-5">
                                             <span class="info-item-label">
-                                                Urgency:
+                                                {% translate "Urgency:" %}
                                             </span>
                                             <span class="info-item-value">
                                                 {{ info.urgency }}
@@ -180,7 +177,7 @@
                                         </div>
                                         <div class="info-item">
                                             <span class="info-item-label">
-                                                Severity:
+                                                {% translate "Severity:" %}
                                             </span>
                                             <span class="info-item-value">
                                                 {{ info.severity }}
@@ -188,7 +185,7 @@
                                         </div>
                                         <div class="info-item">
                                             <span class="info-item-label">
-                                                Certainty:
+                                                {% translate "Certainty:" %}
                                             </span>
                                             <span class="info-item-value">
                                                 {{ info.certainty }}
@@ -199,30 +196,30 @@
                                                 {% if info.effective %}
                                                     <div class="info-item">
                                                         <span class="info-item-label">
-                                                            Effective:
+                                                            {% translate "Effective:" %}
                                                         </span>
                                                         <span class="info-item-value">
-                                                            {{ info.effective }}
+                                                            {{ info.effective }} UTC
                                                         </span>
                                                     </div>
                                                 {% endif %}
                                                 {% if info.onset %}
                                                     <div class="info-item">
                                                         <span class="info-item-label">
-                                                            Onset:
+                                                            {% translate "Onset:" %}
                                                         </span>
                                                         <span class="info-item-value">
-                                                            {{ info.onset }}
+                                                            {{ info.onset }} UTC
                                                         </span>
                                                     </div>
                                                 {% endif %}
                                                 {% if info.expires %}
                                                     <div class="info-item">
                                                         <span class="info-item-label">
-                                                            Expires:
+                                                            {% translate "Expires:" %}
                                                         </span>
                                                         <span class="info-item-value">
-                                                            {{ info.expires }}
+                                                            {{ info.expires }} UTC
                                                         </span>
                                                     </div>
                                                 {% endif %}
@@ -231,7 +228,7 @@
 
                                         <div class="info-item w-mt-5">
                                             <span class="info-item-label">
-                                                Headline:
+                                                {% translate "Headline:" %}
                                             </span>
                                             <span class="info-item-value">
                                                 {{ info.headline }}
@@ -239,7 +236,7 @@
                                         </div>
                                         <div class="info-item">
                                             <span class="info-item-label">
-                                                Description:
+                                                {% translate "Description:" %}
                                             </span>
                                             <span class="info-item-value">
                                                 {{ info.description }}
@@ -248,7 +245,7 @@
                                         {% if info.instruction %}
                                             <div class="info-item">
                                                 <span class="info-item-label">
-                                                    Instruction:
+                                                    {% translate "Instruction:" %}
                                                 </span>
                                                 <span class="info-item-value">
                                                     {{ info.instruction }}
@@ -258,7 +255,7 @@
 
                                         <div class="info-item w-mt-5">
                                             <span class="info-item-label">
-                                                Area:
+                                                {% translate "Area:" %}
                                             </span>
                                             <span class="info-item-value">
                                                 {% for area in info.area %}
@@ -267,24 +264,12 @@
                                             </span>
                                         </div>
                                     </div>
-
-
                                 </section>
-
                             {% endfor %}
                         </div>
-
-
                     </div>
                 </div>
-
             </div>
-
-
-
-
-
-
         {% endif %}
     </div>
 {% endblock %}
@@ -296,8 +281,6 @@
     <script>
 
         const alertData = {{ alert_data|safe }};
-
-        console.log(alertData)
 
         const geojson = {
             'type': 'FeatureCollection',
@@ -340,6 +323,8 @@
 
             }
         }
+
+        console.log(geojson);
 
         // default MapLibre style
         const defaultStyle = {
@@ -412,10 +397,23 @@
                         'source': 'polygon',
                         'layout': {},
                         'paint': {
-                            'fill-color': "red",
-                            'fill-opacity': 0.8,
+                            "fill-color": [
+                                "case",
+                                ["==", ["get", "severity"], "Extreme"],
+                                "#d72f2a",
+                                ["==", ["get", "severity"], "Severe"],
+                                "#f89904",
+                                ["==", ["get", "severity"], "Moderate"],
+                                "#e4e616",
+                                ["==", ["get", "severity"], "Minor"],
+                                "#53ffff",
+                                ["==", ["get", "severity"], "Unknown"],
+                                "#3366ff",
+                                "black",
+                            ],
+                            "fill-opacity": 0.7,
                             "fill-outline-color": "#000",
-                        }
+                        },
                     });
                 }
 

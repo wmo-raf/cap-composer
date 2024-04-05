@@ -1,7 +1,6 @@
 .alert-source {
     margin: 20px 0;
     padding: 20px;
-    background-color: #f8f9fb;
 }
 
 .alert-source-item {
@@ -16,7 +15,7 @@
 .alert-meta-card {
     margin: 20px 0;
     padding: 20px;
-    background-color: #f8f9fb;
+
 }
 
 .alert-meta-item {
@@ -26,6 +25,10 @@
 
 .alert-meta-item-label {
     font-weight: bold;
+}
+
+.alert-detail {
+    padding: 40px 20px;
 }
 
 .info-item {

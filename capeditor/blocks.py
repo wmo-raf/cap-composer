@@ -13,7 +13,7 @@ from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.models import Site
 from wagtailmodelchooser.blocks import ModelChooserBlock
 
-from .forms.fields import PolygonField, MultiPolygonField, BoundaryMultiPolygonField
+from .forms.fields import PolygonField, MultiPolygonField, BoundaryMultiPolygonField, PolygonOrMultiPolygonField
 from .forms.widgets import CircleWidget
 from .utils import file_path_mime
 
@@ -51,6 +51,26 @@ class MultiPolygonFieldBlock(FieldBlock):
     @cached_property
     def field(self):
         return MultiPolygonField(**self.field_options)
+
+    def value_from_form(self, value):
+        if isinstance(value, GEOSGeometry):
+            value = value.json
+        return value
+
+
+class PolygonOrMultiPolygonFieldBlock(FieldBlock):
+    def __init__(self, required=True, help_text=None, srid=4326, **kwargs):
+        self.field_options = {
+            "required": required,
+            "help_text": help_text,
+            "srid": srid
+        }
+
+        super().__init__(**kwargs)
+
+    @cached_property
+    def field(self):
+        return PolygonOrMultiPolygonField(**self.field_options)
 
     def value_from_form(self, value):
         if isinstance(value, GEOSGeometry):
@@ -174,11 +194,6 @@ class AlertAreaBoundaryStructValue(StructValue):
         polygon = self.get("boundary")
         return json.loads(polygon)
 
-    # @cached_property
-    # def aread_desc(self):
-    #     area_desc = self.get("areaDesc")
-    #     return json.loads(polygon)
-
 
 class AlertAreaBoundaryBlock(blocks.StructBlock):
     class Meta:
@@ -209,15 +224,25 @@ class AlertAreaBoundaryBlock(blocks.StructBlock):
 class AlertAreaPolygonStructValue(StructValue):
     @cached_property
     def area(self):
-        polygon_geojson_str = self.get("polygon")
-        polygon_geojson_dict = json.loads(polygon_geojson_str)
+        geom_geojson_str = self.get("polygon")
+        geom_geojson_dict = json.loads(geom_geojson_str)
+        geom_shape = shape(geom_geojson_dict)
 
-        polygon = shape(polygon_geojson_dict)
-        coords = " ".join(["{},{}".format(y, x) for x, y in list(polygon.exterior.coords)])
+        polygons = []
+
+        if isinstance(geom_shape, Polygon):
+            polygons.append(geom_shape)
+        else:
+            polygons = list(geom_shape.geoms)
+
+        polygons_data = []
+        for polygon in polygons:
+            coords = " ".join(["{},{}".format(y, x) for x, y in list(polygon.exterior.reverse().coords)])
+            polygons_data.append(coords)
 
         area_data = {
             "areaDesc": self.get("areaDesc"),
-            "polygon": coords,
+            "polygons": polygons_data
         }
 
         if self.get("altitude"):
@@ -239,9 +264,10 @@ class AlertAreaPolygonBlock(blocks.StructBlock):
 
     areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
                                 help_text=_("The text describing the affected area of the alert message"))
-    polygon = PolygonFieldBlock(label=_("Polygon"),
-                                help_text=_("The paired values of points defining a polygon that delineates "
-                                            "the affected area of the alert message"))
+    polygon = PolygonOrMultiPolygonFieldBlock(label=_("Polygon"),
+                                              help_text=_(
+                                                  "The paired values of points defining a polygon that delineates "
+                                                  "the affected area of the alert message"))
     altitude = blocks.CharBlock(max_length=100, required=False, label=_("Altitude"),
                                 help_text=_("The specific or minimum altitude of the affected "
                                             "area of the alert message"))

@@ -51,7 +51,6 @@
             const $loadFromRadioInput = $("#id_load_from");
 
             const $textInput = $("#id_text");
-            $textInput.prop('required', true);
 
             const $textInputWrapper = $textInput.closest(".w-field__wrapper");
 
@@ -61,9 +60,10 @@
             const $fileInput = $("#id_file");
             const $fileInputWrapper = $fileInput.closest(".w-field__wrapper");
 
+            const selected = $loadFromRadioInput.find("input:checked").val();
 
-            $loadFromRadioInput.on("change", function () {
-                const value = $(this).find("input:checked").val();
+
+            const handleChange = function (value) {
                 if (value === "text") {
                     $textInputWrapper.show();
                     $textInput.prop('required', true);
@@ -92,6 +92,16 @@
                     $urlInputWrapper.hide();
                     $urlInput.prop('required', false);
                 }
+            }
+
+            if (selected) {
+                handleChange(selected);
+            }
+
+            $loadFromRadioInput.on("change", function () {
+                const value = $(this).find("input:checked").val();
+
+                handleChange(value);
             })
 
         });

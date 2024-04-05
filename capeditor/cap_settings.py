@@ -61,6 +61,24 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
         ], heading=_("Predefined Areas"), classname="map-resize-trigger"),
     ])
 
+    @property
+    def contact_list(self):
+        contacts = []
+        for contact_block in self.contacts:
+            contact = contact_block.value.get("contact")
+            if contact:
+                contacts.append(contact)
+        return contacts
+
+    @property
+    def audience_list(self):
+        audiences = []
+        for audience_block in self.audience_types:
+            audience = audience_block.value.get("audience")
+            if audience:
+                audiences.append(audience)
+        return audiences
+
 
 class HazardEventTypes(Orderable):
     setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="hazard_event_types")
@@ -119,3 +137,15 @@ def get_default_sender():
     if cap_setting and cap_setting.sender:
         return cap_setting.sender
     return None
+
+
+def get_cap_contact_list(request):
+    cap_settings = CapSetting.for_request(request)
+    contacts_list = cap_settings.contact_list
+    return contacts_list
+
+
+def get_cap_audience_list(request):
+    cap_settings = CapSetting.for_request(request)
+    audience_list = cap_settings.audience_list
+    return audience_list

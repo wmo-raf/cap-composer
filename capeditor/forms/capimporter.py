@@ -72,7 +72,6 @@ class CAPLoadForm(forms.Form):
             return cleaned_data
 
         except Exception as e:
-            print(e)
             self.add_error(None, _("An error occurred while trying to load the CAP XML. "
                                    "Please check the data and try again."))
             return cleaned_data

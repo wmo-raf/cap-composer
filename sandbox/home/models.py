@@ -4,7 +4,6 @@ from datetime import datetime
 from django.db import models
 from django.urls import reverse
 from django.utils.functional import cached_property
-from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _, gettext_lazy
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.admin.widgets.slug import SlugInput
@@ -99,24 +98,30 @@ class CapAlertPage(AbstractCapAlertPage):
 def on_publish_cap_alert(sender, **kwargs):
     instance = kwargs['instance']
 
-    # publish to mqtt
-    topic = "cap/alerts/all"
-    publish_cap_mqtt_message(instance, topic)
+    try:
+        # publish to mqtt
+        topic = "cap/alerts/all"
+        publish_cap_mqtt_message(instance, topic)
+    except Exception as e:
+        pass
 
-    # create summary image
-    image_content_file = instance.generate_alert_card_image()
-    if image_content_file:
+    try:
+        # create summary image
+        image_content_file = instance.generate_alert_card_image()
+        if image_content_file:
 
-        # delete old image
-        if instance.search_image:
-            instance.search_image.delete()
+            # delete old image
+            if instance.search_image:
+                instance.search_image.delete()
 
-        # create new image
-        instance.search_image = Image(title=instance.title, file=image_content_file)
-        instance.search_image.save()
+            # create new image
+            instance.search_image = Image(title=instance.title, file=image_content_file)
+            instance.search_image.save()
 
-        # save the instance
-        instance.save()
+            # save the instance
+            instance.save()
+    except Exception as e:
+        pass
 
 
 page_published.connect(on_publish_cap_alert, sender=CapAlertPage)

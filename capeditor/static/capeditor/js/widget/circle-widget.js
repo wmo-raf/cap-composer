@@ -277,6 +277,8 @@ CircleWidget.prototype.setSourceData = function (feature) {
 CircleWidget.prototype.initFromState = function () {
     const circeValue = this.getState()
 
+    console.log(circeValue)
+
     if (circeValue) {
         const {lon, lat, radius} = this.parseCircleValue(circeValue) || {}
 

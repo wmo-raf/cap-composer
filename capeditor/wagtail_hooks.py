@@ -32,8 +32,8 @@ def register_icons(icons):
 @hooks.register('register_admin_urls')
 def urlconf_stations():
     return [
-        path('import-cap/load', load_cap_alert, name='load_cap_alert'),
-        path('import-cap/import', import_cap_alert, name='import_cap_alert'),
+        path('import-cap/', load_cap_alert, name='load_cap_alert'),
+        path('import-cap/import/', import_cap_alert, name='import_cap_alert'),
     ]
 
 

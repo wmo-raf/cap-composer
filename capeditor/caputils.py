@@ -288,8 +288,8 @@ def extract_element_data(element, data, validate=True):
                     if sub_element_name == "polygon":
                         if sub_element_data:
                             polygons = []
-                            coordinates = []
                             for polygon in sub_element_data:
+                                coordinates = []
                                 for point in polygon.split(" "):
                                     lat, lon = point.split(",")
                                     coordinates.append([float(lon), float(lat)])
