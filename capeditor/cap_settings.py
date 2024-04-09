@@ -21,8 +21,8 @@ from capeditor.forms.widgets import HazardEventTypeWidget, PolygonDrawWidget
 
 @register_setting
 class CapSetting(BaseSiteSetting, ClusterableModel):
-    sender = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Identifier"),
-                              help_text=_("Can be the website link or email of the sending institution"))
+    sender = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Email"),
+                              help_text=_("Email of the sending institution"))
     sender_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Name"),
                                    help_text=_("Name of the sending institution"))
     logo = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
