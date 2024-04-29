@@ -157,7 +157,7 @@ class AbstractCapAlertPage(Page):
     info = StreamField([
         ("alert_info", AlertInfo(label=_("Alert Information")))
     ], block_counts={
-        'alert_info': {'min_num': 1},
+        'alert_info': {'min_num': 1, 'max_num': 1},
     }, use_json_field=True, blank=True,
         null=True, verbose_name=_("Alert Information"), )
 
