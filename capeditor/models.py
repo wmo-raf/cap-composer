@@ -1,8 +1,5 @@
-import os
 import uuid
 
-from adminboundarymanager.models import AdminBoundarySettings
-from django.conf import settings
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
@@ -22,7 +19,6 @@ from capeditor.blocks import (
     AlertIncident
 )
 from capeditor.constants import SEVERITY_MAPPING, URGENCY_MAPPING, CERTAINTY_MAPPING
-from capeditor.shareable.png import cap_geojson_to_image, CapAlertCardImage
 from .cap_settings import *
 
 
@@ -314,48 +310,3 @@ class AbstractCapAlertPage(Page):
                     features.append(feature)
 
         return features
-
-    def generate_alert_card_image(self):
-
-        site = Site.objects.get(is_default_site=True)
-
-        abm_settings = AdminBoundarySettings.for_site(site)
-        cap_settings = CapSetting.for_site(site)
-        abm_extents = abm_settings.combined_countries_bounds
-
-        info = self.infos[0]
-
-        features = self.get_geojson_features()
-        if features:
-            feature_coll = {
-                "type": "FeatureCollection",
-                "features": features,
-            }
-
-            if abm_extents:
-                # format to what matplotlib expects
-                abm_extents = [abm_extents[0], abm_extents[2], abm_extents[1], abm_extents[3]]
-
-            cap_detail = {
-                "title": self.title,
-                "event": info.get("event"),
-                "sent_on": self.sent,
-                "org_name": cap_settings.sender_name,
-                "severity": info.get("severity"),
-                "properties": info.get("properties"),
-            }
-
-            org_logo = cap_settings.logo
-            if org_logo:
-                cap_detail.update({
-                    "org_logo_file": os.path.join(settings.MEDIA_ROOT, org_logo.file.path)
-                })
-
-                map_img_buffer = cap_geojson_to_image(feature_coll, abm_extents)
-
-                image_content_file = CapAlertCardImage(map_img_buffer, cap_detail,
-                                                       f"{self.identifier}.png").render()
-
-                return image_content_file
-
-        return None
