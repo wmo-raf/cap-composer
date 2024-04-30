@@ -15,6 +15,7 @@ from wagtailmodelchooser.blocks import ModelChooserBlock
 
 from .forms.fields import PolygonField, MultiPolygonField, BoundaryMultiPolygonField, PolygonOrMultiPolygonField
 from .forms.widgets import CircleWidget
+from .serializers import parse_tz
 from .utils import file_path_mime
 
 
@@ -115,9 +116,9 @@ class AlertReferenceStructValue(StructValue):
     @property
     def ref_alert_identifier(self):
         alert_page = self.get("ref_alert").specific
-
-        if hasattr(alert_page, "cap_reference_id"):
-            return alert_page.cap_reference_id
+        if hasattr(alert_page, "sender") and hasattr(alert_page, "identifier") and hasattr(alert_page, "sent"):
+            sent = parse_tz(alert_page.sent.isoformat())
+            return "{},{},{}".format(alert_page.sender, alert_page.identifier, sent)
 
         return None
 
