@@ -290,7 +290,14 @@ BoundaryPolygonWidget.prototype.addAdminBoundaryLayer = function () {
                     if (name) {
                         this.areaDescInput.val(name)
                     }
-                    this.setSourceData(feature)
+
+                    const truncatedFeature = turf.truncate(feature, {
+                        precision: 2,
+                        coordinates: 2,
+                        mutate: true
+                    })
+
+                    this.setSourceData(truncatedFeature)
                 })
             }
         }

@@ -138,7 +138,6 @@ class PolygonDrawWidget {
 
     initDraw() {
         const feature = this.getValue()
-
         this.draw = new MapboxDraw({
             displayControlsDefault: false,
             controls: {
@@ -173,7 +172,14 @@ class PolygonDrawWidget {
         if (combinedFeatures) {
             const feature = combinedFeatures.features[0]
 
-            this.setValue(JSON.stringify(feature.geometry))
+
+            const truncatedFeature = turf.truncate(feature, {
+                precision: 2,
+                coordinates: 2,
+                mutate: true
+            })
+
+            this.setValue(JSON.stringify(truncatedFeature.geometry))
 
         } else {
             this.setValue("")
