@@ -90,6 +90,18 @@ class CapAlertPageForm(WagtailAdminPageForm):
                         info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
                         info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
 
+    def clean(self):
+        cleaned_data = super().clean()
+        msgType = cleaned_data.get("msgType")
+
+        if msgType and msgType != 'Alert':
+            references = cleaned_data.get("references")
+            if not references:
+                self.add_error('references', _("You must select at least one reference alert for this message type. "
+                                               "Only 'Alert' Message Type can be saved without references."))
+
+        return cleaned_data
+
 
 class AbstractCapAlertPage(Page):
     base_form_class = CapAlertPageForm
