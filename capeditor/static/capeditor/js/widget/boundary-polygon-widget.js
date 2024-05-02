@@ -108,6 +108,7 @@ BoundaryPolygonWidget.prototype.initMap = async function () {
         container: this.options.map_id,
         style: defaultStyle,
         doubleClickZoom: false,
+        scrollZoom: false,
     });
 
 
@@ -290,7 +291,14 @@ BoundaryPolygonWidget.prototype.addAdminBoundaryLayer = function () {
                     if (name) {
                         this.areaDescInput.val(name)
                     }
-                    this.setSourceData(feature)
+
+                    const truncatedFeature = turf.truncate(feature, {
+                        precision: 2,
+                        coordinates: 2,
+                        mutate: true
+                    })
+
+                    this.setSourceData(truncatedFeature)
                 })
             }
         }

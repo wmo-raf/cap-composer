@@ -10,8 +10,8 @@ class PolygonDrawWidget {
         this.geomInput = document.getElementById(this.options.id)
 
 
-        if (this.options.resize_trigger_class) {
-            this.resizeTriggerEls = document.getElementsByClassName(this.options.resize_trigger_class)
+        if (this.options.resize_trigger_selector) {
+            this.resizeTriggerEls = document.querySelectorAll(this.options.resize_trigger_selector)
         }
 
         this.initalValue = this.geomInput.value
@@ -19,7 +19,6 @@ class PolygonDrawWidget {
 
         this.createMap().then((map) => {
             this.map = map;
-
             this.fitBounds()
 
             if (this.resizeTriggerEls && this.resizeTriggerEls.length > 0) {
@@ -30,7 +29,6 @@ class PolygonDrawWidget {
                     })
                 }
             }
-
 
             this.initDraw();
         });
@@ -83,6 +81,7 @@ class PolygonDrawWidget {
             container: this.options.map_id,
             style: defaultStyle,
             doubleClickZoom: false,
+            scrollZoom: false,
         });
 
 
@@ -138,7 +137,6 @@ class PolygonDrawWidget {
 
     initDraw() {
         const feature = this.getValue()
-
         this.draw = new MapboxDraw({
             displayControlsDefault: false,
             controls: {
@@ -173,7 +171,14 @@ class PolygonDrawWidget {
         if (combinedFeatures) {
             const feature = combinedFeatures.features[0]
 
-            this.setValue(JSON.stringify(feature.geometry))
+
+            const truncatedFeature = turf.truncate(feature, {
+                precision: 2,
+                coordinates: 2,
+                mutate: true
+            })
+
+            this.setValue(JSON.stringify(truncatedFeature.geometry))
 
         } else {
             this.setValue("")

@@ -90,6 +90,48 @@ class CapAlertPageForm(WagtailAdminPageForm):
                         info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
                         info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
 
+    def clean(self):
+        cleaned_data = super().clean()
+
+        # validata msgType
+        msgType = cleaned_data.get("msgType")
+        if msgType and msgType != 'Alert':
+            references = cleaned_data.get("references")
+            if not references:
+                # if the message type is not 'Alert' then references are required
+                self.add_error('references', _("You must select at least one reference alert for this message type. "
+                                               "Only 'Alert' Message Type can be saved without references."))
+            else:
+                alerts_ids = []
+                for reference in references:
+                    ref_alert_page = reference.value.get("ref_alert").specific
+                    if ref_alert_page:
+                        alerts_ids.append(ref_alert_page.identifier)
+
+                # check if the same alert is selected more than once
+                if len(alerts_ids) != len(set(alerts_ids)):
+                    self.add_error('references', _("You cannot select the same alert more than once."))
+
+        # validate dates
+        sent = cleaned_data.get("sent")
+        alert_infos = cleaned_data.get("info")
+        if alert_infos:
+            for info in alert_infos:
+                effective = info.value.get("effective")
+                onset = info.value.get("onset")
+                expires = info.value.get("expires")
+
+                if effective and sent and effective < sent:
+                    self.add_error('info', _("Effective date cannot be earlier than the alert sent date."))
+
+                if onset and sent and onset < sent:
+                    self.add_error('info', _("Onset date cannot be earlier than the alert sent date."))
+
+                if expires and sent and expires < sent:
+                    self.add_error('info', _("Expires date cannot be earlier than the alert sent date."))
+
+        return cleaned_data
+
 
 class AbstractCapAlertPage(Page):
     base_form_class = CapAlertPageForm

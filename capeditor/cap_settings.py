@@ -115,7 +115,8 @@ class PredefinedAlertArea(Orderable):
 
     panels = [
         FieldPanel("name"),
-        FieldPanel("geom", widget=PolygonDrawWidget(attrs={"resize_trigger_class": "map-resize-trigger"})),
+        FieldPanel("geom",
+                   widget=PolygonDrawWidget(attrs={"resize_trigger_selector": ".w-tabs__tab.map-resize-trigger"})),
     ]
 
 

@@ -129,6 +129,7 @@ CircleWidget.prototype.initMap = async function () {
         container: this.options.map_id,
         style: defaultStyle,
         doubleClickZoom: false,
+        scrollZoom: false,
     });
 
 
@@ -276,8 +277,6 @@ CircleWidget.prototype.setSourceData = function (feature) {
 
 CircleWidget.prototype.initFromState = function () {
     const circeValue = this.getState()
-
-    console.log(circeValue)
 
     if (circeValue) {
         const {lon, lat, radius} = this.parseCircleValue(circeValue) || {}

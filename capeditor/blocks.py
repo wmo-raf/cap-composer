@@ -3,18 +3,20 @@ import json
 import shapely
 from django import forms
 from django.contrib.gis.geos import GEOSGeometry
+from django.core.exceptions import ValidationError
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from shapely import Point, Polygon
 from shapely.geometry import shape
 from wagtail import blocks
-from wagtail.blocks import FieldBlock, StructValue
+from wagtail.blocks import FieldBlock, StructValue, StructBlockValidationError
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.models import Site
 from wagtailmodelchooser.blocks import ModelChooserBlock
 
 from .forms.fields import PolygonField, MultiPolygonField, BoundaryMultiPolygonField, PolygonOrMultiPolygonField
 from .forms.widgets import CircleWidget
+from .serializers import parse_tz
 from .utils import file_path_mime
 
 
@@ -115,9 +117,9 @@ class AlertReferenceStructValue(StructValue):
     @property
     def ref_alert_identifier(self):
         alert_page = self.get("ref_alert").specific
-
-        if hasattr(alert_page, "cap_reference_id"):
-            return alert_page.cap_reference_id
+        if hasattr(alert_page, "sender") and hasattr(alert_page, "identifier") and hasattr(alert_page, "sent"):
+            sent = parse_tz(alert_page.sent.isoformat())
+            return "{},{},{}".format(alert_page.sender, alert_page.identifier, sent)
 
         return None
 
@@ -697,6 +699,26 @@ class AlertInfo(blocks.StructBlock):
     class Meta:
         value_class = AlertInfoStructValue
         label_format = "({language}) {event}"
+
+    def clean(self, value):
+        result = super().clean(value)
+        effective = result.get("effective")
+        onset = result.get("onset")
+        expires = result.get("expires")
+
+        if expires:
+            if effective and expires < effective:
+                raise StructBlockValidationError(block_errors={
+                    "expires": ValidationError(
+                        _("The expiry time of the alert should be greater than the effective time"))
+                })
+
+            if onset and expires < onset:
+                raise StructBlockValidationError(block_errors={
+                    "expires": ValidationError(_("The expiry time of the alert should be greater than the onset time"))
+                })
+
+        return result
 
 
 class AudienceTypeBlock(blocks.StructBlock):

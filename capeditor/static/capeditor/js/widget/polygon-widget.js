@@ -162,6 +162,7 @@ PolygonWidget.prototype.initMap = async function () {
         container: this.options.map_id,
         style: defaultStyle,
         doubleClickZoom: false,
+        scrollZoom: false,
     });
 
 
@@ -323,8 +324,16 @@ PolygonWidget.prototype.clearDraw = function () {
 }
 
 
-PolygonWidget.prototype.setDrawData = function (geometry) {
-    if (geometry) {
+PolygonWidget.prototype.setDrawData = function (featureGeom) {
+    if (featureGeom) {
+
+        // truncate geometry
+        const geometry = turf.truncate(featureGeom, {
+            precision: 2,
+            coordinates: 2,
+            mutate: true
+        })
+
         const bbox = turf.bbox(geometry)
         const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
 
