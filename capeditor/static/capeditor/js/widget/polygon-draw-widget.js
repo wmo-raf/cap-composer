@@ -10,8 +10,8 @@ class PolygonDrawWidget {
         this.geomInput = document.getElementById(this.options.id)
 
 
-        if (this.options.resize_trigger_class) {
-            this.resizeTriggerEls = document.getElementsByClassName(this.options.resize_trigger_class)
+        if (this.options.resize_trigger_selector) {
+            this.resizeTriggerEls = document.querySelectorAll(this.options.resize_trigger_selector)
         }
 
         this.initalValue = this.geomInput.value
@@ -19,7 +19,6 @@ class PolygonDrawWidget {
 
         this.createMap().then((map) => {
             this.map = map;
-
             this.fitBounds()
 
             if (this.resizeTriggerEls && this.resizeTriggerEls.length > 0) {
@@ -30,7 +29,6 @@ class PolygonDrawWidget {
                     })
                 }
             }
-
 
             this.initDraw();
         });
