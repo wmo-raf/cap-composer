@@ -97,8 +97,19 @@ class CapAlertPageForm(WagtailAdminPageForm):
         if msgType and msgType != 'Alert':
             references = cleaned_data.get("references")
             if not references:
+                # if the message type is not 'Alert' then references are required
                 self.add_error('references', _("You must select at least one reference alert for this message type. "
                                                "Only 'Alert' Message Type can be saved without references."))
+            else:
+                alerts_ids = []
+                for reference in references:
+                    ref_alert_page = reference.value.get("ref_alert").specific
+                    if ref_alert_page:
+                        alerts_ids.append(ref_alert_page.identifier)
+
+                # check if the same alert is selected more than once
+                if len(alerts_ids) != len(set(alerts_ids)):
+                    self.add_error('references', _("You cannot select the same alert more than once."))
 
         return cleaned_data
 
