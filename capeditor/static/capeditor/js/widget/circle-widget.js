@@ -129,6 +129,7 @@ CircleWidget.prototype.initMap = async function () {
         container: this.options.map_id,
         style: defaultStyle,
         doubleClickZoom: false,
+        scrollZoom: false,
     });
 
 
