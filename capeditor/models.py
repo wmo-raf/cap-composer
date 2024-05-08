@@ -112,24 +112,6 @@ class CapAlertPageForm(WagtailAdminPageForm):
                 if len(alerts_ids) != len(set(alerts_ids)):
                     self.add_error('references', _("You cannot select the same alert more than once."))
 
-        # validate dates
-        sent = cleaned_data.get("sent")
-        alert_infos = cleaned_data.get("info")
-        if alert_infos:
-            for info in alert_infos:
-                effective = info.value.get("effective")
-                onset = info.value.get("onset")
-                expires = info.value.get("expires")
-
-                if effective and sent and effective < sent:
-                    self.add_error('info', _("Effective date cannot be earlier than the alert sent date."))
-
-                if onset and sent and onset < sent:
-                    self.add_error('info', _("Onset date cannot be earlier than the alert sent date."))
-
-                if expires and sent and expires < sent:
-                    self.add_error('info', _("Expires date cannot be earlier than the alert sent date."))
-
         return cleaned_data
 
 
