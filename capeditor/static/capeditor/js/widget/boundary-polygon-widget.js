@@ -67,22 +67,10 @@ BoundaryPolygonWidget.prototype.initMap = async function () {
     const defaultStyle = {
         'version': 8,
         'sources': {
-            'carto-dark': {
+            'osm': {
                 'type': 'raster',
                 'tiles': [
-                    "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-                    "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-                    "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-                    "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png"
-                ]
-            },
-            'carto-light': {
-                'type': 'raster',
-                'tiles': [
-                    "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
-                    "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
-                    "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
-                    "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"
+                    "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
                 ]
             },
             'wikimedia': {
@@ -93,16 +81,13 @@ BoundaryPolygonWidget.prototype.initMap = async function () {
             }
         },
         'layers': [{
-            'id': 'carto-light-layer',
-            'source': 'carto-light',
-
-
+            'id': 'osm',
+            'source': 'osm',
             'type': 'raster',
             'minzoom': 0,
             'maxzoom': 22
         }]
     }
-
     // initialize map
     this.map = new maplibregl.Map({
         container: this.options.map_id,
