@@ -329,7 +329,7 @@ PolygonWidget.prototype.setDrawData = function (featureGeom) {
 
         // truncate geometry
         const geometry = turf.truncate(featureGeom, {
-            precision: 2,
+            precision: 6,
             coordinates: 2,
             mutate: true
         })
