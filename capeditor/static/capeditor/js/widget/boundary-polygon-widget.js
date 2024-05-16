@@ -293,7 +293,7 @@ BoundaryPolygonWidget.prototype.addAdminBoundaryLayer = function () {
                     }
 
                     const truncatedFeature = turf.truncate(feature, {
-                        precision: 2,
+                        precision: 6,
                         coordinates: 2,
                         mutate: true
                     })
