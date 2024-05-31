@@ -106,7 +106,10 @@ class CapAlertPageForm(WagtailAdminPageForm):
                 for reference in references:
                     ref_alert_page = reference.value.get("ref_alert").specific
                     if ref_alert_page:
-                        alerts_ids.append(ref_alert_page.identifier)
+                        if hasattr(ref_alert_page, 'identifier'):
+                            alerts_ids.append(ref_alert_page.identifier)
+                        else:
+                            alerts_ids.append(ref_alert_page.id)
 
                 # check if the same alert is selected more than once
                 if len(alerts_ids) != len(set(alerts_ids)):
@@ -118,7 +121,7 @@ class CapAlertPageForm(WagtailAdminPageForm):
 class AbstractCapAlertPage(Page):
     base_form_class = CapAlertPageForm
 
-    exclude_fields_in_copy = ["identifier"]
+    exclude_fields_in_copy = ["guid"]
 
     STATUS_CHOICES = (
         ("Draft", _("Draft - A preliminary template or draft, not actionable in its current form")),
@@ -146,9 +149,8 @@ class AbstractCapAlertPage(Page):
         ('Private', _("Private - For dissemination only to specified addresses"
                       " as in the addresses field in the alert")),
     )
-
-    identifier = models.UUIDField(default=uuid.uuid4, editable=False, verbose_name=_("Identifier"),
-                                  help_text=_("Unique ID. Auto generated on creation."), unique=True)
+    guid = models.UUIDField(default=uuid.uuid4, editable=False, verbose_name=_("Id"),
+                            help_text=_("Unique ID. Auto generated on creation."), unique=True)
     sender = models.CharField(max_length=255, verbose_name=_("Sender"), default=get_default_sender,
                               help_text=_("Identifies the originator of an alert. "
                                           "For example the website address of the institution"))
@@ -292,7 +294,8 @@ class AbstractCapAlertPage(Page):
                 "expires": expires,
                 "expired": expired,
                 "properties": {
-                    "id": self.identifier,
+                    "id": self.guid,
+                    "identifier": self.identifier if hasattr(self, "identifier") else self.guid,
                     "event": event,
                     "event_type": info.value.get('event'),
                     "headline": info.value.get("headline"),

@@ -25,6 +25,12 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
                               help_text=_("Email of the sending institution"))
     sender_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Name"),
                                    help_text=_("Name of the sending institution"))
+    wmo_oid = models.CharField(max_length=255, blank=True, null=True,
+                               verbose_name=_("WMO Register of Alerting Authorities OID"),
+                               help_text=_("WMO Register of Alerting Authorities "
+                                           "Object Identifier (OID) of the sending institution. "
+                                           "This will be used to generate CAP messages identifiers"))
+
     logo = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
                              verbose_name=_("Logo of the sending institution"))
 
@@ -45,6 +51,7 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
         ObjectList([
             FieldPanel("sender_name"),
             FieldPanel("sender"),
+            FieldPanel("wmo_oid"),
             FieldPanel("logo"),
             FieldPanel("contacts"),
         ], heading=_("Sender Details")),

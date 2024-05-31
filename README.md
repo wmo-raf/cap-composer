@@ -37,10 +37,9 @@ http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
 - Inbuilt CAP validation. The page will not save if you have not input the required data according to CAP standard
 - User-friendly alert area map tool that allows multiple ways of constructing alert geographic areas, while keeping the
   interface simple
-    - Select country official administrative boundaries for different levels (Admin 1, Admin 2, Admin 3), with in-built
-      simplification of complex boundaries
     - Draw a polygon
     - Draw a circle
+    - Selecting predefined areas that you create beforehand for common alert areas
     - Use Geocode key values
 - Inbuilt publishing workflow using Wagtail's powerful page model, with automated emails to composers and approvers
 - Collaborate with team members using inbuilt comments (similar to how you could do in Word) with automated
@@ -188,12 +187,7 @@ area contains the following elements:
 - Altitude (altitude),
 - Ceiling (ceiling)
 
-The Alert area input has 4 selector options:
-
-- Admin Boundary (area is picked from predefined boundaries). To use this option, ensure that admin boundaries are
-  initially loaded. Refer to [Setting up boundaries](#setting-up-boundaries) section.
-
-![Alert Area boundary](images/alert_sections/alert_area_boundary.png "Alert Area Boundary")
+The Alert area input has multiple selector options:
 
 - Polygon (drawing a polygon)
 
@@ -202,6 +196,8 @@ The Alert area input has 4 selector options:
 - Circle (drawing a circle which specifies the latitude, longitude and radius)
 
 ![Alert Area circle](images/alert_sections/alert_area_circle.png "Alert Area Circle")
+
+- Predefined Area (selecting a predefined area that you create beforehand for common alert areas)
 
 - Geocode (specifying area geocode name and value). Using this option presumes knowledge of the coding system
 

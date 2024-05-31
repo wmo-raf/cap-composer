@@ -27,6 +27,7 @@ class AlertSerializer(serializers.ModelSerializer):
     references = serializers.SerializerMethodField()
     info = serializers.SerializerMethodField()
     incidents = serializers.SerializerMethodField()
+    identifier = serializers.SerializerMethodField()
 
     class Meta:
         fields = [
@@ -45,6 +46,11 @@ class AlertSerializer(serializers.ModelSerializer):
             "incidents",
             "info",
         ]
+
+    def get_identifier(self, obj):
+        if hasattr(obj, 'identifier'):
+            return obj.identifier
+        return obj.guid
 
     def get_info(self, obj):
         request = self.context.get("request")

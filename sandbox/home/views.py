@@ -20,4 +20,4 @@ class AlertDetail(generics.RetrieveAPIView):
     renderer_classes = (CapXMLRenderer,)
     queryset = CapAlertPage.objects.live()
 
-    lookup_field = "identifier"
+    lookup_field = "guid"
