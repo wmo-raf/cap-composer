@@ -51,7 +51,7 @@ class CapAlertPage(AbstractCapAlertPage):
 
     parent_page_type = ["home.HomePage"]
     subpage_types = []
-    exclude_fields_in_copy = ["identifier", ]
+    exclude_fields_in_copy = ["guid", ]
 
     """An implementation of MetadataMixin for Wagtail pages."""
     search_image = models.ForeignKey(
@@ -92,7 +92,7 @@ class CapAlertPage(AbstractCapAlertPage):
 
     @cached_property
     def xml_link(self):
-        return reverse("cap_alert_detail", args=(self.identifier,))
+        return reverse("cap_alert_detail", args=(self.guid,))
 
 
 def on_publish_cap_alert(sender, **kwargs):
