@@ -129,17 +129,20 @@ class AbstractCapAlertPage(Page):
         ("Test", _("Test - Technical testing only, all recipients disregard")),
         ("Exercise", _("Exercise - Actionable only by designated exercise participants; "
                        "exercise identifier SHOULD appear in note")),
-        ("system", _("System - For messages that support alert network internal functions")),
+        ("System", _("System - For messages that support alert network internal functions")),
     )
 
     MESSAGE_TYPE_CHOICES = (
         ('Alert', _("Alert - Initial information requiring attention by targeted recipients")),
         ('Update', _("Update - Updates and supersedes the earlier message(s) identified in referenced alerts")),
         ('Cancel', _("Cancel - Cancels the earlier message(s) identified in references")),
-        ('Ack', _("Acknowledge - Acknowledges receipt and acceptance of the message(s) "
-                  "identified in references field")),
-        ('Error', _("Error -  Indicates rejection of the message(s) identified in references; "
-                    "explanation SHOULD appear in note field")),
+
+        # Ack and Error are not applicable for this CAP tool implementation
+
+        # ('Ack', _("Acknowledge - Acknowledges receipt and acceptance of the message(s) "
+        #           "identified in references field")),
+        # ('Error', _("Error -  Indicates rejection of the message(s) identified in references; "
+        #             "explanation SHOULD appear in note field")),
     )
 
     SCOPE_CHOICES = (
