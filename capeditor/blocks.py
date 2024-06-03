@@ -550,7 +550,6 @@ class AlertInfo(blocks.StructBlock):
         ('Expected', _("Expected - Responsive action SHOULD be taken soon (within next hour)")),
         ('Future', _("Future - Responsive action SHOULD be taken in the near future")),
         ('Past', _("Past - Responsive action is no longer required")),
-        ('Unknown', _("Unknown - Urgency not known")),
     )
 
     SEVERITY_CHOICES = (
@@ -558,7 +557,6 @@ class AlertInfo(blocks.StructBlock):
         ('Severe', _("Severe - Significant threat to life or property")),
         ('Moderate', _("Moderate - Possible threat to life or property")),
         ('Minor', _("Minor - Minimal to no known threat to life or property")),
-        ('Unknown', _("Unknown - Severity unknown")),
     )
 
     CERTAINTY_CHOICES = (
@@ -566,7 +564,6 @@ class AlertInfo(blocks.StructBlock):
         ('Likely', _("Likely - Likely (percentage > ~50%)")),
         ('Possible', _("Possible - Possible but not likely (percentage <= ~50%)")),
         ('Unlikely', _("Unlikely - Not expected to occur (percentage ~ 0)")),
-        ('Unknown', _("Unknown - Certainty unknown")),
     )
     event = blocks.ChoiceBlock(choices=get_hazard_types, label=_("Event"),
                                help_text=_("The text denoting the type of the subject event of the alert message. You "
