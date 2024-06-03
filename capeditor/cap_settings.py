@@ -13,7 +13,6 @@ from wagtailiconchooser.widgets import IconChooserWidget
 from wagtailmodelchooser import register_model_chooser
 
 from capeditor.blocks import (
-    AudienceTypeBlock,
     ContactBlock
 )
 from capeditor.forms.widgets import HazardEventTypeWidget, PolygonDrawWidget
@@ -39,11 +38,6 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
     ], use_json_field=True, blank=True, null=True, verbose_name=_("Contact Details"),
         help_text=_("Contact for follow-up and confirmation of the alert message"))
 
-    audience_types = StreamField([
-        ("audience_type", AudienceTypeBlock(label=_("Audience Type")))
-    ], use_json_field=True, blank=True, null=True, verbose_name=_("Audience Types"),
-        help_text=_("Target audiences for published alerts"))
-
     class Meta:
         verbose_name = _("CAP Settings")
 
@@ -59,9 +53,6 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
             InlinePanel("hazard_event_types", heading=_("Hazard Types"), label=_("Hazard Type"),
                         help_text=_("Hazards monitored by the institution")),
         ], heading=_("Hazard Types")),
-        ObjectList([
-            FieldPanel("audience_types"),
-        ], heading=_("Audience Types")),
         ObjectList([
             InlinePanel("predefined_alert_areas", heading=_("Predefined Alert Areas"), label=_("Area"),
                         help_text=_("Predefined areas for alerts")),
@@ -91,7 +82,7 @@ class HazardEventTypes(Orderable):
     setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="hazard_event_types")
     is_in_wmo_event_types_list = models.BooleanField(default=True,
                                                      verbose_name=_("Select from WMO list of Hazards Event Types"))
-    event = models.CharField(max_length=255, unique=True, verbose_name=_("Hazard"), help_text=_("Name of Hazard"))
+    event = models.CharField(max_length=35, unique=True, verbose_name=_("Hazard"), help_text=_("Name of Hazard"))
     icon = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("Icon"), help_text=_("Matching icon"))
 
     panels = [

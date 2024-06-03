@@ -13,7 +13,6 @@ from capeditor.blocks import (
     AlertInfo,
     SENDER_NAME_HELP_TEXT,
     CONTACT_HELP_TEXT,
-    AUDIENCE_HELP_TEXT,
     AlertAddress,
     AlertReference,
     AlertIncident
@@ -34,7 +33,6 @@ class CapAlertPageForm(WagtailAdminPageForm):
         if cap_setting:
             default_sender_name = cap_setting.sender_name
             contacts = cap_setting.contacts
-            audience_types = cap_setting.audience_types
 
             if default_sender_name:
                 info_field = self.fields.get("info")
@@ -68,25 +66,6 @@ class CapAlertPageForm(WagtailAdminPageForm):
 
                         info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.ChoiceBlock(
                             choices=contact_choices, required=False, help_text=CONTACT_HELP_TEXT)
-                        info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
-                        info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
-
-            if audience_types:
-                audience_type_choices = []
-
-                for block in audience_types:
-                    audience = block.value.get("audience")
-                    audience_type_choices.append((audience, audience))
-
-                info_field = self.fields.get("info")
-                for block_type, block in info_field.block.child_blocks.items():
-                    if block_type == "alert_info":
-                        field_name = "audience"
-                        audience_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
-                        label = audience_block.label or field_name
-                        name = audience_block.name
-                        info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.ChoiceBlock(
-                            choices=audience_type_choices, required=False, help_text=AUDIENCE_HELP_TEXT)
                         info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
                         info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
 
