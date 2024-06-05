@@ -1,6 +1,7 @@
 import pytz
 from dateutil.parser import isoparse
 from rest_framework import serializers
+from wagtail.api.v2.utils import get_full_url
 
 from capeditor.constants import CAP_MESSAGE_ORDER_SEQUENCE
 from capeditor.utils import order_dict_by_keys
@@ -62,7 +63,7 @@ class AlertSerializer(serializers.ModelSerializer):
                 resources = []
                 for resource in info.value.resource:
                     if resource.get("type") == "doc":
-                        resource["uri"] = request.build_absolute_uri(resource.get("uri"))
+                        resource["uri"] = get_full_url(request, resource.get("uri"))
                     resource.pop("type")
                     # order resource according to CAP_MESSAGE_ORDER_SEQUENCE
                     resource_obj = order_dict_by_keys(resource, CAP_MESSAGE_ORDER_SEQUENCE.get("resource"))
