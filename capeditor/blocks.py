@@ -160,6 +160,18 @@ class AlertResponseType(blocks.StructBlock):
                                                    "target audience"))
 
 
+class AlertAreaGeocodeBlock(blocks.StructBlock):
+    valueName = blocks.TextBlock(label=_("Value Name"),
+                                 help_text=_(
+                                     "User-assigned string designating the domain of the code. Acronyms SHOULD be "
+                                     "represented in all capital letters without periods (e.g., SAME, FIPS, ZIP"))
+    value = blocks.TextBlock(label=_("Value"),
+                             help_text=_("A string (which may represent a number) denoting the value itself"))
+
+    class Meta:
+        help_text = _("Geographically-based code to describe a message target area")
+
+
 class AlertAreaPolygonStructValue(StructValue):
     @cached_property
     def area(self):
@@ -213,6 +225,7 @@ class AlertAreaPolygonBlock(blocks.StructBlock):
     ceiling = blocks.CharBlock(max_length=100, required=False, label=_("Ceiling"),
                                help_text=_("The maximum altitude of the affected area of the alert message."
                                            "MUST NOT be used except in combination with the altitude element. "))
+    geocode = blocks.ListBlock(AlertAreaGeocodeBlock(required=False, label=_("Geocode")), default=[])
 
 
 class AlertAreaCircleStructValue(StructValue):
@@ -265,13 +278,13 @@ class AlertAreaCircleBlock(blocks.StructBlock):
     areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
                                 help_text=_("The text describing the affected area of the alert message"))
     circle = CircleFieldBlock(label=_("Circle"), help_text=_("Drag the marker to change position"))
-
     altitude = blocks.CharBlock(max_length=100, required=False, label=_("Altitude"),
                                 help_text=_("The specific or minimum altitude of the affected "
                                             "area of the alert message"))
     ceiling = blocks.CharBlock(max_length=100, required=False, label=_("Ceiling"),
                                help_text=_("The maximum altitude of the affected area of the alert message."
                                            "MUST NOT be used except in combination with the altitude element. "))
+    geocode = blocks.ListBlock(AlertAreaGeocodeBlock(required=False, label=_("Geocode")), default=[])
 
 
 class AlertAreaPredefinedStructValue(StructValue):
@@ -320,48 +333,11 @@ class AlertAreaPredefined(blocks.StructBlock):
     ceiling = blocks.CharBlock(max_length=100, required=False, label=_("Ceiling"),
                                help_text=_("The maximum altitude of the affected area of the alert message."
                                            "MUST NOT be used except in combination with the altitude element. "))
-
-
-class AlertAreaGeocodeStructValue(StructValue):
-    @cached_property
-    def area(self):
-        area_data = {
-            "areaDesc": self.get("areaDesc"),
-            "geocode": {"valueName": self.get("valueName"), "value": self.get("value")},
-        }
-
-        if self.get("altitude"):
-            area_data.update({"altitude": self.get("altitude")})
-            if self.get("ceiling"):
-                area_data.update({"ceiling": self.get("ceiling")})
-
-        return area_data
-
-    @cached_property
-    def geojson(self):
-        return {}
-
-
-class AlertAreaGeocodeBlock(blocks.StructBlock):
-    class Meta:
-        value_class = AlertAreaGeocodeStructValue
-
-    areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
-                                help_text=_("The text describing the affected area of the alert message"))
-    valueName = blocks.TextBlock(label=_("Name"))
-    value = blocks.TextBlock(label=_("Value"))
-
-    altitude = blocks.CharBlock(max_length=100, required=False, label=_("Altitude"),
-                                help_text=_("The specific or minimum altitude of the affected "
-                                            "area of the alert message"))
-    ceiling = blocks.CharBlock(max_length=100, required=False, label=_("Ceiling"),
-                               help_text=_("The maximum altitude of the affected area of the alert message."
-                                           "MUST NOT be used except in combination with the altitude element. "))
+    geocode = blocks.ListBlock(AlertAreaGeocodeBlock(required=False, label=_("Geocode")), default=[])
 
 
 SENDER_NAME_HELP_TEXT = _("The human-readable name of the agency or authority issuing this alert.")
 CONTACT_HELP_TEXT = _("The text describing the contact for follow-up and confirmation of the alert message")
-AUDIENCE_HELP_TEXT = _("The text describing the intended audience of the alert message")
 
 
 class FileResourceStructValue(StructValue):
@@ -550,7 +526,7 @@ class AlertInfo(blocks.StructBlock):
         ('Expected', _("Expected - Responsive action SHOULD be taken soon (within next hour)")),
         ('Future', _("Future - Responsive action SHOULD be taken in the near future")),
         ('Past', _("Past - Responsive action is no longer required")),
-        ('Unknown', _("Unknown - Urgency not known")),
+        # ('Unknown', _("Unknown - Urgency not known")), Not recommended
     )
 
     SEVERITY_CHOICES = (
@@ -558,7 +534,7 @@ class AlertInfo(blocks.StructBlock):
         ('Severe', _("Severe - Significant threat to life or property")),
         ('Moderate', _("Moderate - Possible threat to life or property")),
         ('Minor', _("Minor - Minimal to no known threat to life or property")),
-        ('Unknown', _("Unknown - Severity unknown")),
+        # ('Unknown', _("Unknown - Severity unknown")),  Not recommended
     )
 
     CERTAINTY_CHOICES = (
@@ -566,16 +542,15 @@ class AlertInfo(blocks.StructBlock):
         ('Likely', _("Likely - Likely (percentage > ~50%)")),
         ('Possible', _("Possible - Possible but not likely (percentage <= ~50%)")),
         ('Unlikely', _("Unlikely - Not expected to occur (percentage ~ 0)")),
-        ('Unknown', _("Unknown - Certainty unknown")),
+        # ('Unknown', _("Unknown - Certainty unknown")),  Not recommended
     )
     event = blocks.ChoiceBlock(choices=get_hazard_types, label=_("Event"),
                                help_text=_("The text denoting the type of the subject event of the alert message. You "
                                            "can define hazards events monitored by your institution from CAP settings"))
 
-    category = blocks.MultipleChoiceBlock(choices=CATEGORY_CHOICES, default="Met", label=_("Category"),
-                                          help_text=_("The code denoting the category of the subject"
-                                                      " event of the alert message"),
-                                          widget=forms.CheckboxSelectMultiple)
+    category = blocks.ChoiceBlock(choices=CATEGORY_CHOICES, default="Met", label=_("Category"),
+                                  help_text=_("The code denoting the category of the subject"
+                                              " event of the alert message"))
     language = blocks.ChoiceBlock(choices=LANGUAGE_CHOICES, default="en", required=False, label=_("Language"),
                                   help_text=_("The code denoting the language of the alert message"), )
 
@@ -613,14 +588,13 @@ class AlertInfo(blocks.StructBlock):
     senderName = blocks.CharBlock(max_length=255, label=_("Sender name"), required=False,
                                   help_text=SENDER_NAME_HELP_TEXT)
     contact = blocks.CharBlock(max_length=255, required=False, label=_("Contact"), help_text=CONTACT_HELP_TEXT)
-    audience = blocks.CharBlock(max_length=255, required=False, label=_("Audience"),
-                                help_text=AUDIENCE_HELP_TEXT)
+    audience = blocks.TextBlock(required=False, label=_("Audience"),
+                                help_text=_("The text describing the intended audience of the alert message"))
     area = blocks.StreamBlock([
         ("polygon_block", AlertAreaPolygonBlock(label=_("Draw Polygon"))),
         ("circle_block", AlertAreaCircleBlock(label=_("Circle"))),
-        ("geocode_block", AlertAreaGeocodeBlock(label=_("Geocode"))),
         ("predefined_block", AlertAreaPredefined(label=_("Predefined Area"))),
-    ], label=_("Alert Area"), help_text=_("Polygon, Circle, Predefined area or Geocode"))
+    ], label=_("Alert Area"), help_text=_("Polygon, Circle, or Predefined area"))
 
     resource = blocks.StreamBlock([
         ("file_resource", FileResource()),
@@ -655,10 +629,6 @@ class AlertInfo(blocks.StructBlock):
                 })
 
         return result
-
-
-class AudienceTypeBlock(blocks.StructBlock):
-    audience = blocks.CharBlock(max_length=255, label=_("Audience"), help_text=_("Intended audience"))
 
 
 class ContactBlock(blocks.StructBlock):
