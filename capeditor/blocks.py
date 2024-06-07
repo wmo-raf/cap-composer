@@ -14,7 +14,12 @@ from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.models import Site
 from wagtailmodelchooser.blocks import ModelChooserBlock
 
-from .forms.fields import PolygonField, MultiPolygonField, BoundaryMultiPolygonField, PolygonOrMultiPolygonField
+from .forms.fields import (
+    PolygonField,
+    MultiPolygonField,
+    BoundaryMultiPolygonField,
+    PolygonOrMultiPolygonField
+)
 from .forms.widgets import CircleWidget
 from .serializers import parse_tz
 from .utils import file_path_mime
@@ -170,6 +175,81 @@ class AlertAreaGeocodeBlock(blocks.StructBlock):
 
     class Meta:
         help_text = _("Geographically-based code to describe a message target area")
+
+
+class AlertAreaBoundaryStructValue(StructValue):
+    @cached_property
+    def area(self):
+        geom_geojson_str = self.get("boundary")
+        geom_geojson_dict = json.loads(geom_geojson_str)
+        geom_shape = shape(geom_geojson_dict)
+
+        polygons = []
+
+        if isinstance(geom_shape, Polygon):
+            polygons.append(geom_shape)
+        else:
+            polygons = list(geom_shape.geoms)
+
+        polygons_data = []
+        for polygon in polygons:
+            coords = " ".join(["{},{}".format(y, x) for x, y in list(polygon.exterior.reverse().coords)])
+            polygons_data.append(coords)
+
+        area_data = {
+            "areaDesc": self.get("areaDesc"),
+            "polygons": polygons_data
+        }
+
+        if self.get("altitude"):
+            area_data.update({"altitude": self.get("altitude")})
+            if self.get("ceiling"):
+                area_data.update({"ceiling": self.get("ceiling")})
+
+        if self.get("geocode"):
+            geocode_data = []
+            for geocode in self.get("geocode"):
+                geocode_data.append({
+                    "valueName": geocode.get("valueName"),
+                    "value": geocode.get("value")
+                })
+
+            area_data.update({"geocode": geocode_data})
+
+        return area_data
+
+    @cached_property
+    def geojson(self):
+        polygon = self.get("boundary")
+        return json.loads(polygon)
+
+
+class AlertAreaBoundaryBlock(blocks.StructBlock):
+    class Meta:
+        value_class = AlertAreaBoundaryStructValue
+
+    ADMIN_LEVEL_CHOICES = (
+        (0, _("Level 0")),
+        (1, _("Level 1")),
+        (2, _("Level 2")),
+        (3, _("Level 3"))
+    )
+
+    areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
+                                help_text=_("The text describing the affected area of the alert message"))
+    admin_level = blocks.ChoiceBlock(choices=ADMIN_LEVEL_CHOICES, default=1, label=_("Administrative Level"))
+    boundary = BoundaryFieldBlock(label=_("Boundary"),
+                                  help_text=_("The paired values of points defining a polygon that delineates "
+                                              "the affected area of the alert message"))
+
+    altitude = blocks.CharBlock(max_length=100, required=False, label=_("Altitude"),
+                                help_text=_("The specific or minimum altitude of the affected "
+                                            "area of the alert message"))
+    ceiling = blocks.CharBlock(max_length=100, required=False, label=_("Ceiling"),
+                               help_text=_("The maximum altitude of the affected area of the alert message."
+                                           "MUST NOT be used except in combination with the altitude element. "))
+
+    geocode = blocks.ListBlock(AlertAreaGeocodeBlock(required=False, label=_("Geocode")), default=[])
 
 
 class AlertAreaPolygonStructValue(StructValue):
@@ -591,10 +671,11 @@ class AlertInfo(blocks.StructBlock):
     audience = blocks.TextBlock(required=False, label=_("Audience"),
                                 help_text=_("The text describing the intended audience of the alert message"))
     area = blocks.StreamBlock([
+        ("boundary_block", AlertAreaBoundaryBlock(label=_("Admin Boundary"))),
         ("polygon_block", AlertAreaPolygonBlock(label=_("Draw Polygon"))),
         ("circle_block", AlertAreaCircleBlock(label=_("Circle"))),
         ("predefined_block", AlertAreaPredefined(label=_("Predefined Area"))),
-    ], label=_("Alert Area"), help_text=_("Polygon, Circle, or Predefined area"))
+    ], label=_("Alert Area"), help_text=_("Admin Boundary, Polygon, Circle, or Predefined area"))
 
     resource = blocks.StreamBlock([
         ("file_resource", FileResource()),
