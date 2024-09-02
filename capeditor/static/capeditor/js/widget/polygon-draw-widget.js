@@ -14,7 +14,7 @@ class PolygonDrawWidget {
             this.resizeTriggerEls = document.querySelectorAll(this.options.resize_trigger_selector)
         }
 
-        this.initalValue = this.geomInput.value
+        this.initialValue = this.geomInput.value
         this.countriesBounds = this.geomInput.dataset.bounds ? JSON.parse(this.geomInput.dataset.bounds) : null
 
         this.createMap().then((map) => {
@@ -88,8 +88,8 @@ class PolygonDrawWidget {
         if (this.map) {
             this.map.resize()
             if (!window.document.fullscreenElement) {
-                if (this.initalValue) {
-                    const feature = JSON.parse(this.initalValue)
+                if (this.initialValue) {
+                    const feature = JSON.parse(this.initialValue)
                     const bounds = turf.bbox(feature)
                     this.map.fitBounds([[bounds[0], bounds[1]], [bounds[2], bounds[3]]], {padding: 20})
                 } else {
