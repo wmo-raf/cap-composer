@@ -236,3 +236,39 @@ class PolygonDrawWidget(BaseGeometryWidget, BaseMapWidget):
         if geom and json_regex.match(value) and self.map_srid != 4326:
             geom.srid = self.map_srid
         return geom
+
+
+class GeojsonFileLoaderWidget(BaseGeometryWidget, BaseMapWidget):
+    template_name = "capeditor/widgets/geojson_file_loader_widget.html"
+
+    def __init__(self, attrs=None):
+        default_attrs = {
+            "class": "capeditor-widget__polygon-draw-input",
+        }
+        attrs = attrs or {}
+        attrs = {**default_attrs, **attrs}
+
+        super().__init__(attrs=attrs)
+
+    class Media:
+        css = {
+            "all": [
+                "capeditor/css/maplibre-gl.css",
+                "capeditor/css/widget/geojson-file-loader-widget.css",
+            ]
+        }
+        js = [
+            "capeditor/js/maplibre-gl.js",
+            "capeditor/js/turf.min.js",
+            "capeditor/js/widget/geojson-file-loader-widget.js",
+        ]
+
+    def serialize(self, value):
+        return value.json if value else ""
+
+    def deserialize(self, value):
+        geom = super().deserialize(value)
+        # GeoJSON assumes WGS84 (4326). Use the map's SRID instead.
+        if geom and json_regex.match(value) and self.map_srid != 4326:
+            geom.srid = self.map_srid
+        return geom
