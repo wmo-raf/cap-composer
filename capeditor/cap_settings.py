@@ -43,7 +43,9 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
         help_text=_("Contact for follow-up and confirmation of the alert message"))
 
     un_country_boundary_geojson = models.JSONField(blank=True, null=True, verbose_name=_("UN Country Boundary"),
-                                                   help_text=_("GeoJSON file of the UN Country Boundary"))
+                                                   help_text=_("GeoJSON file of the UN Country Boundary. Setting this"
+                                                               " will enable the UN Country Boundary check in the alert"
+                                                               "drawing tools"))
 
     class Meta:
         verbose_name = _("CAP Settings")
