@@ -7,6 +7,12 @@ class BoundaryPolygonWidget {
         this.boundaryDetailUrl = this.geomInput.data("boundarydetailurl")
         this.countriesBounds = this.geomInput.data("bounds")
 
+        let UNGeojsonBoundaryGeojson = this.geomInput.data("un-geojson")
+
+        if (UNGeojsonBoundaryGeojson) {
+            this.UNGeojsonBoundaryGeojson = UNGeojsonBoundaryGeojson
+        }
+
         // Admin level selector
         const adminLevelInputId = options.id.replace("boundary", "admin_level")
         this.adminLevelSelector = $('#' + adminLevelInputId);
@@ -40,6 +46,10 @@ class BoundaryPolygonWidget {
 
             this.initLayer()
             this.addAdminBoundaryLayer()
+
+            if (this.UNGeojsonBoundaryGeojson) {
+                this.addUNBoundaryLayer()
+            }
 
 
             if (initialState) {
@@ -114,19 +124,31 @@ class BoundaryPolygonWidget {
         });
     }
 
-    setSourceData(feature) {
-        if (feature) {
+    setSourceData(featureGeom) {
+        if (featureGeom) {
             // add data to source
-            this.map.getSource("polygon").setData(feature)
+            this.map.getSource("polygon").setData(featureGeom)
 
             // fit map to bounds
-            const bbox = turf.bbox(feature)
+            const bbox = turf.bbox(featureGeom)
             const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
             this.map.fitBounds(bounds, {padding: 50})
 
             // set state
-            const geomString = JSON.stringify(feature)
+            const geomString = JSON.stringify(featureGeom)
             this.setState(geomString)
+
+
+            console.log(featureGeom)
+
+
+            // clear any map error
+            this.hideWarnings()
+
+            // check if the drawn feature has any issues with the UN boundary
+            this.checkUNBoundaryIssues(featureGeom)
+
+
         } else {
 
             // clear source data
@@ -250,6 +272,141 @@ class BoundaryPolygonWidget {
                 }
             }
         });
+    }
+
+    addUNBoundaryLayer() {
+        this.map.addSource("un-boundary", {
+            type: 'geojson', data: this.UNGeojsonBoundaryGeojson
+        })
+
+        this.map.addLayer({
+            id: 'un-boundary', source: 'un-boundary', type: 'line', paint: {
+                "line-color": "#C0FF24", "line-width": 1, "line-offset": 1,
+            }
+        });
+
+        this.map.addLayer({
+            id: "un-boundary-2", source: 'un-boundary', type: 'line', paint: {
+                "line-color": "#000", "line-width": 1.5,
+            }
+        });
+
+        this.addUNBoundaryLayerLegend()
+    }
+
+    addUNBoundaryLayerLegend() {
+        const legendEl = document.createElement("div")
+        legendEl.className = "un-map-legend"
+        legendEl.innerHTML = `
+        <div class="legend-item">
+            <div class="legend-item-colors">
+                <div class="legend-item-color" style="background-color: #C0FF24;height: 2px"></div>
+                <div class="legend-item-color" style="background-color: #000;height: 3px"></div>
+            </div>
+            <div class="legend-item-text">UN Boundary</div>
+        </div>
+    `
+        const mapContainer = this.map.getContainer()
+        mapContainer.appendChild(legendEl)
+    }
+
+    snapToUNBoundary() {
+        const source = this.map.getSource("polygon")
+        const data = source._data
+
+        if (data && data.coordinates && !!data.coordinates.length) {
+            const feature = turf.feature(data)
+            const UNBoundaryFeature = turf.feature(this.UNGeojsonBoundaryGeojson)
+
+            let snappedFeature = turf.intersect(turf.featureCollection([feature, UNBoundaryFeature]))
+
+            if (snappedFeature) {
+                // buffer the snapped feature by a small amount to prevent booleanWithin failing
+                snappedFeature = turf.buffer(snappedFeature, -0.0001)
+
+                // convert to multipolygon
+                if (snappedFeature.geometry.type === "Polygon") {
+                    snappedFeature.geometry = {
+                        type: "MultiPolygon", coordinates: [snappedFeature.geometry.coordinates]
+                    }
+                }
+
+                this.setSourceData(snappedFeature.geometry)
+            }
+        }
+    }
+
+    createWarningNotificationEl(message, options) {
+        const el = document.createElement("div")
+        el.className = "notification is-warning map-error"
+        el.innerHTML = `
+        <div class="notification-content">
+            <span class="icon">
+              <svg class="icon icon-warning messages-icon" aria-hidden="true">
+                <use href="#icon-warning"></use>
+               </svg>
+            </span>
+            <span class="message">${message}</span>
+        </div>
+    `
+
+        if (options && options.showSnapButton) {
+            const snapButton = document.createElement("button")
+            snapButton.className = "button button-small snap-to-boundary"
+            snapButton.textContent = "Snap to boundary"
+            el.appendChild(snapButton)
+
+            snapButton.onclick = (e) => {
+                e.preventDefault()
+                this.snapToUNBoundary()
+            }
+        }
+
+
+        return el
+    }
+
+    showWarning(message, options) {
+        const notificationEl = this.createWarningNotificationEl(message, options)
+        const mapContainer = this.map.getContainer()
+        mapContainer.appendChild(notificationEl)
+    }
+
+    hideWarnings() {
+        const mapContainer = this.map.getContainer()
+        mapContainer.querySelectorAll(".map-error").forEach((el) => {
+            el.remove()
+        })
+    }
+
+    checkUNBoundaryIssues(featureGeom) {
+        if (this.UNGeojsonBoundaryGeojson && featureGeom) {
+            const selectedFeature = turf.feature(featureGeom)
+            const UNBoundaryFeature = turf.feature(this.UNGeojsonBoundaryGeojson)
+
+            // First check if the drawn feature intersects with the UN boundary
+            const intersects = turf.booleanIntersects(selectedFeature, UNBoundaryFeature);
+            if (!intersects) {
+                const message = `The drawn area does not intersect with the country UN boundary. 
+            This might prevent the alert from being picked by other tools like SWIC`
+                this.showWarning(message)
+                return
+            }
+
+            for (let i = 0; i < selectedFeature.geometry.coordinates.length; i++) {
+                const polygon = turf.polygon(selectedFeature.geometry.coordinates[i])
+
+                // check if the UN boundary contains the selected feature
+                const isWithin = turf.booleanWithin(polygon, UNBoundaryFeature);
+
+                if (!isWithin) {
+                    const message = `The selected area is not completely within the country's UN boundary.
+                    This might prevent the alert from being picked by other tools like SWIC`
+                    this.showWarning(message, {showSnapButton: true})
+                    return;
+                }
+            }
+        }
     }
 }
 

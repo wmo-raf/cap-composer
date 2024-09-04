@@ -357,11 +357,6 @@ class CircleWidget {
     }
 
     checkUNBoundaryIssues(featureGeom) {
-
-
-        console.log(featureGeom)
-
-
         if (this.UNGeojsonBoundaryGeojson && featureGeom) {
             const drawnFeature = turf.feature(featureGeom)
             const UNBoundaryFeature = turf.feature(this.UNGeojsonBoundaryGeojson)
