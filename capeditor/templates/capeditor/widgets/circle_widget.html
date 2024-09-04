@@ -49,5 +49,6 @@
         </div>
     </div>
     <textarea id="{{ widget.name }}" class="vSerializedField required" name="{{ widget.name }}" hidden
-              data-bounds="{{ country_bounds }}">{% if widget.value %}{{ widget.value }}{% endif %}</textarea>
+              data-bounds="{{ country_bounds }}" data-un-geojson="{{ un_boundary_geojson }}">{% if widget.value %}
+        {{ widget.value }}{% endif %}</textarea>
 </div>

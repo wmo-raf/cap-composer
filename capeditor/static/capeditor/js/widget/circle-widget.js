@@ -8,6 +8,11 @@ class CircleWidget {
         this.radiusInput = $('#' + options.id + "_circle_radius");
 
         this.countriesBounds = this.circleInput.data("bounds")
+        let UNGeojsonBoundaryGeojson = this.circleInput.data("un-geojson")
+
+        if (UNGeojsonBoundaryGeojson) {
+            this.UNGeojsonBoundaryGeojson = UNGeojsonBoundaryGeojson
+        }
 
         const id_parts = options.id.split("-area")
         const info_id = id_parts[0]
@@ -87,44 +92,26 @@ class CircleWidget {
 
     async initMap() {
         const defaultStyle = {
-            'version': 8,
-            'sources': {
+            'version': 8, 'sources': {
                 'osm': {
-                    'type': 'raster',
-                    'tiles': [
-                        "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    ]
-                },
-                'wikimedia': {
-                    'type': 'raster',
-                    'tiles': [
-                        "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
-                    ]
+                    'type': 'raster', 'tiles': ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"]
+                }, 'wikimedia': {
+                    'type': 'raster', 'tiles': ["https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"]
                 }
-            },
-            'layers': [{
-                'id': 'osm',
-                'source': 'osm',
-                'type': 'raster',
-                'minzoom': 0,
-                'maxzoom': 22
+            }, 'layers': [{
+                'id': 'osm', 'source': 'osm', 'type': 'raster', 'minzoom': 0, 'maxzoom': 22
             }]
         }
 
         // initialize map
         this.map = new maplibregl.Map({
-            container: this.options.map_id,
-            style: defaultStyle,
-            doubleClickZoom: false,
-            scrollZoom: false,
+            container: this.options.map_id, style: defaultStyle, doubleClickZoom: false, scrollZoom: false,
         });
 
 
-        this.map.addControl(
-            new maplibregl.NavigationControl({
-                showCompass: false,
-            }), "bottom-right"
-        );
+        this.map.addControl(new maplibregl.NavigationControl({
+            showCompass: false,
+        }), "bottom-right");
 
         this.map.addControl(new maplibregl.FullscreenControl());
 
@@ -134,6 +121,10 @@ class CircleWidget {
         if (this.countriesBounds) {
             const bounds = [[this.countriesBounds[0], this.countriesBounds[1]], [this.countriesBounds[2], this.countriesBounds[3]]]
             this.map.fitBounds(bounds)
+        }
+
+        if (this.UNGeojsonBoundaryGeojson) {
+            this.addUNBoundaryLayer()
         }
 
     }
@@ -214,21 +205,13 @@ class CircleWidget {
 
         // add source
         this.map.addSource("polygon", {
-                'type': 'geojson',
-                data: this.emptyGeojsonData
-            }
-        )
+            'type': 'geojson', data: this.emptyGeojsonData
+        })
 
         // add layer
         this.map.addLayer({
-            'id': 'polygon',
-            'type': 'fill',
-            'source': 'polygon',
-            'layout': {},
-            'paint': {
-                'fill-color': severityColor,
-                'fill-opacity': 0.8,
-                "fill-outline-color": "#000",
+            'id': 'polygon', 'type': 'fill', 'source': 'polygon', 'layout': {}, 'paint': {
+                'fill-color': severityColor, 'fill-opacity': 0.8, "fill-outline-color": "#000",
             }
         });
     }
@@ -248,6 +231,12 @@ class CircleWidget {
 
             if (circleValue) {
                 this.setState(circleValue)
+
+                // clear any map error
+                this.hideWarnings()
+
+                // check if the drawn feature has any issues with the UN boundary
+                this.checkUNBoundaryIssues(feature.geometry)
             }
 
         } else {
@@ -299,6 +288,102 @@ class CircleWidget {
                 return "#03ffff"
             default:
                 return "#3366ff"
+        }
+    }
+
+    addUNBoundaryLayer() {
+        this.map.addSource("un-boundary", {
+            type: 'geojson', data: this.UNGeojsonBoundaryGeojson
+        })
+
+        this.map.addLayer({
+            id: 'un-boundary', source: 'un-boundary', type: 'line', paint: {
+                "line-color": "#C0FF24", "line-width": 1, "line-offset": 1,
+            }
+        });
+
+        this.map.addLayer({
+            id: "un-boundary-2", source: 'un-boundary', type: 'line', paint: {
+                "line-color": "#000", "line-width": 1.5,
+            }
+        });
+
+        this.addUNBoundaryLayerLegend()
+    }
+
+    addUNBoundaryLayerLegend() {
+        const legendEl = document.createElement("div")
+        legendEl.className = "un-map-legend"
+        legendEl.innerHTML = `
+        <div class="legend-item">
+            <div class="legend-item-colors">
+                <div class="legend-item-color" style="background-color: #C0FF24;height: 2px"></div>
+                <div class="legend-item-color" style="background-color: #000;height: 3px"></div>
+            </div>
+            <div class="legend-item-text">UN Boundary</div>
+        </div>
+    `
+        const mapContainer = this.map.getContainer()
+        mapContainer.appendChild(legendEl)
+    }
+
+    createWarningNotificationEl(message) {
+        const el = document.createElement("div")
+        el.className = "notification is-warning map-error"
+        el.innerHTML = `
+        <div class="notification-content">
+            <span class="icon">
+              <svg class="icon icon-warning messages-icon" aria-hidden="true">
+                <use href="#icon-warning"></use>
+               </svg>
+            </span>
+            <span class="message">${message}</span>
+        </div>
+    `
+        return el
+    }
+
+    showWarning(message) {
+        const notificationEl = this.createWarningNotificationEl(message)
+        const mapContainer = this.map.getContainer()
+        mapContainer.appendChild(notificationEl)
+    }
+
+    hideWarnings() {
+        const mapContainer = this.map.getContainer()
+        mapContainer.querySelectorAll(".map-error").forEach((el) => {
+            el.remove()
+        })
+    }
+
+    checkUNBoundaryIssues(featureGeom) {
+
+
+        console.log(featureGeom)
+
+
+        if (this.UNGeojsonBoundaryGeojson && featureGeom) {
+            const drawnFeature = turf.feature(featureGeom)
+            const UNBoundaryFeature = turf.feature(this.UNGeojsonBoundaryGeojson)
+
+            // First check if the drawn feature intersects with the UN boundary
+            const intersects = turf.booleanIntersects(drawnFeature, UNBoundaryFeature);
+            if (!intersects) {
+                const message = `The drawn area does not intersect with the country UN boundary. 
+            This might prevent the alert from being picked by other tools like SWIC`
+                this.showWarning(message)
+                return
+            }
+
+            // check if the UN boundary contains the drawn feature
+            const isWithin = turf.booleanWithin(drawnFeature, UNBoundaryFeature);
+
+            if (!isWithin) {
+                const message = `The drawn area is not contained within the country UN boundary.
+                This might prevent the alert from being picked by other tools like SWIC`
+                this.showWarning(message)
+            }
+
         }
     }
 }
