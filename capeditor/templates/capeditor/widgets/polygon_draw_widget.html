@@ -4,7 +4,7 @@
     <div id="{{ id }}_map" class="polygon_map" style="height: 400px;width: 100%;min-height: 400px">
     </div>
     <textarea id="{{ id }}" class="vSerializedField required" name="{{ name }}" hidden
-              data-bounds="{{ country_bounds }}">{{ serialized }}</textarea>
+              data-bounds="{{ country_bounds }}" data-un-geojson="{{ un_boundary_geojson }}">{{ serialized }}</textarea>
     <script>
         {% block options %}
             var options = {
@@ -17,6 +17,6 @@
             };
         {% endblock %}
         var {{ module }} =
-        new PolygonDrawWidget(options);
+            new PolygonDrawWidget(options);
     </script>
 </div>

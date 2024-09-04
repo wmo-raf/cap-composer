@@ -41,8 +41,7 @@ function EditControl() {
 EditControl.prototype.onAdd = function (map) {
     this.map = map;
     this._container = document.createElement('div');
-    this._container.className =
-        'mapboxgl-ctrl-group mapboxgl-ctrl edit-control';
+    this._container.className = 'mapboxgl-ctrl-group mapboxgl-ctrl edit-control';
     this._container.style = 'display: none;';
 
     this._container.innerHTML = `
@@ -75,6 +74,11 @@ function PolygonWidget(options, initialState) {
     this.options = options
 
     this.countriesBounds = this.geomInput.data("bounds")
+    let UNGeojsonBoundaryGeojson = this.geomInput.data("un-geojson")
+
+    if (UNGeojsonBoundaryGeojson) {
+        this.UNGeojsonBoundaryGeojson = UNGeojsonBoundaryGeojson
+    }
 
     const id_parts = options.id.split("-area")
     const info_id = id_parts[0]
@@ -119,44 +123,26 @@ PolygonWidget.prototype.focus = function () {
 
 PolygonWidget.prototype.initMap = async function () {
     const defaultStyle = {
-        'version': 8,
-        'sources': {
+        'version': 8, 'sources': {
             'osm': {
-                'type': 'raster',
-                'tiles': [
-                    "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                ]
-            },
-            'wikimedia': {
-                'type': 'raster',
-                'tiles': [
-                    "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
-                ]
+                'type': 'raster', 'tiles': ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"]
+            }, 'wikimedia': {
+                'type': 'raster', 'tiles': ["https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"]
             }
-        },
-        'layers': [{
-            'id': 'osm',
-            'source': 'osm',
-            'type': 'raster',
-            'minzoom': 0,
-            'maxzoom': 22
+        }, 'layers': [{
+            'id': 'osm', 'source': 'osm', 'type': 'raster', 'minzoom': 0, 'maxzoom': 22
         }]
     }
 
     // initialize map
     this.map = new maplibregl.Map({
-        container: this.options.map_id,
-        style: defaultStyle,
-        doubleClickZoom: false,
-        scrollZoom: false,
+        container: this.options.map_id, style: defaultStyle, doubleClickZoom: false, scrollZoom: false,
     });
 
 
-    this.map.addControl(
-        new maplibregl.NavigationControl({
-            showCompass: false,
-        }), "bottom-right"
-    );
+    this.map.addControl(new maplibregl.NavigationControl({
+        showCompass: false,
+    }), "bottom-right");
 
     this.map.addControl(new maplibregl.FullscreenControl());
 
@@ -166,6 +152,27 @@ PolygonWidget.prototype.initMap = async function () {
         const bounds = [[this.countriesBounds[0], this.countriesBounds[1]], [this.countriesBounds[2], this.countriesBounds[3]]]
         this.map.fitBounds(bounds)
     }
+
+    if (this.UNGeojsonBoundaryGeojson) {
+        this.addUNBoundaryLayer()
+    }
+}
+
+PolygonWidget.prototype.addUNBoundaryLayer = function () {
+    this.map.addSource("un-boundary", {
+        'type': 'geojson', data: this.UNGeojsonBoundaryGeojson
+    })
+
+    this.map.addLayer({
+        'id': 'un-boundary', 'type': 'line', 'source': 'un-boundary', 'layout': {}, 'paint': {
+            'line-color': '#000', 'line-width': 2,
+        }
+    });
+    this.map.addLayer({
+        'id': 'un-boundary-outline', 'type': 'line', 'source': 'un-boundary', 'layout': {}, 'paint': {
+            'line-color': '#5b92e5', 'line-width': 1,
+        }
+    });
 }
 
 PolygonWidget.prototype.initLayer = function () {
@@ -173,21 +180,13 @@ PolygonWidget.prototype.initLayer = function () {
 
     // add source
     this.map.addSource("polygon", {
-            'type': 'geojson',
-            data: this.emptyGeojsonData
-        }
-    )
+        'type': 'geojson', data: this.emptyGeojsonData
+    })
 
     // add layer
     this.map.addLayer({
-        'id': 'polygon',
-        'type': 'fill',
-        'source': 'polygon',
-        'layout': {},
-        'paint': {
-            'fill-color': severityColor,
-            'fill-opacity': 0.8,
-            "fill-outline-color": "#000",
+        'id': 'polygon', 'type': 'fill', 'source': 'polygon', 'layout': {}, 'paint': {
+            'fill-color': severityColor, 'fill-opacity': 0.8, "fill-outline-color": "#000",
         }
     });
 }
@@ -201,10 +200,8 @@ PolygonWidget.prototype.initDraw = function () {
     this.clearDraw()
 
     this.draw = new MapboxDraw({
-        displayControlsDefault: false,
-        controls: {
-            polygon: !hasGeomValue,
-            trash: true
+        displayControlsDefault: false, controls: {
+            polygon: !hasGeomValue, trash: true
         },
     });
 
@@ -226,6 +223,9 @@ PolygonWidget.prototype.initDraw = function () {
     $geomEdit.on("click", (e) => {
         e.preventDefault()
 
+        // clear any map error
+        this.clearMapErrors()
+
         this.showTrash()
 
         this.map.setLayoutProperty("polygon", "visibility", "none")
@@ -246,9 +246,9 @@ PolygonWidget.prototype.initDraw = function () {
 
     $geomEditAction.on("click", (e) => {
         e.preventDefault()
+
         const isSaveButton = e.target.classList.contains("mapboxgl-draw-actions-btn_save")
         if (isSaveButton) {
-
             let combinedFeatures
 
             const featureCollection = this.draw.getAll()
@@ -258,7 +258,6 @@ PolygonWidget.prototype.initDraw = function () {
 
             if (combinedFeatures) {
                 const feature = combinedFeatures.features[0]
-
                 this.setDrawData(feature.geometry)
             } else {
                 this.setDrawData(null)
@@ -266,6 +265,10 @@ PolygonWidget.prototype.initDraw = function () {
 
         } else {
             this.map.setLayoutProperty("polygon", "visibility", "visible")
+
+            const source = this.map.getSource("polygon")
+            const data = source._data
+            this.setDrawData(data)
 
             // clean up draw
             this.draw.changeMode('simple_select');
@@ -278,6 +281,7 @@ PolygonWidget.prototype.initDraw = function () {
     this.map.on("draw.create", (e) => {
         let combinedFeatures
 
+        // combine all features into one multi polygon
         const featureCollection = this.draw.getAll()
         if (featureCollection && featureCollection.features && !!featureCollection.features.length) {
             combinedFeatures = turf.combine(featureCollection)
@@ -285,10 +289,15 @@ PolygonWidget.prototype.initDraw = function () {
 
         if (combinedFeatures) {
             const feature = combinedFeatures.features[0]
-
             this.setDrawData(feature.geometry)
         }
     });
+}
+
+PolygonWidget.prototype.clearMapErrors = function () {
+    this.map.getContainer().querySelectorAll(".map-error").forEach((el) => {
+        el.remove()
+    })
 }
 
 
@@ -312,12 +321,9 @@ PolygonWidget.prototype.clearDraw = function () {
 
 PolygonWidget.prototype.setDrawData = function (featureGeom) {
     if (featureGeom) {
-
-        // truncate geometry
+        // truncate geometry to 6 decimal places
         const geometry = turf.truncate(featureGeom, {
-            precision: 6,
-            coordinates: 2,
-            mutate: true
+            precision: 6, coordinates: 2, mutate: true
         })
 
         const bbox = turf.bbox(geometry)
@@ -329,16 +335,124 @@ PolygonWidget.prototype.setDrawData = function (featureGeom) {
         this.map.fitBounds(bounds, {padding: 50})
         const geomString = JSON.stringify(geometry)
 
-
         this.setState(geomString)
+
+        // clear any map error
+        this.hideWarnings()
+
+        // check if the drawn feature has any issues with the UN boundary
+        this.checkUNBoundaryIssues(featureGeom)
+
     } else {
         this.setSourceData(null)
         this.setState("")
     }
 
-
     this.initDraw()
     this.maybeShowEditControl()
+}
+
+
+PolygonWidget.prototype.checkUNBoundaryIssues = function (featureGeom) {
+    if (this.UNGeojsonBoundaryGeojson && featureGeom) {
+        const drawnFeature = turf.feature(featureGeom)
+        const UNBoundaryFeature = turf.feature(this.UNGeojsonBoundaryGeojson)
+
+        // First check if the drawn feature intersects with the UN boundary
+        const intersects = turf.booleanIntersects(drawnFeature, UNBoundaryFeature);
+        if (!intersects) {
+            const message = `The drawn area does not intersect with the country UN boundary. 
+            This might prevent the alert from being picked by other tools like SWIC`
+            this.showWarning(message)
+            return
+        }
+
+
+        for (let i = 0; i < drawnFeature.geometry.coordinates.length; i++) {
+            const polygon = turf.polygon(drawnFeature.geometry.coordinates[i])
+
+            // check if the UN boundary contains the drawn feature
+            const isWithin = turf.booleanWithin(polygon, UNBoundaryFeature);
+
+
+            if (!isWithin) {
+                const message = `The drawn area is not contained within the country UN boundary.
+                This might prevent the alert from being picked by other tools like SWIC`
+                this.showWarning(message, {showSnapButton: true})
+                return;
+            }
+        }
+    }
+}
+
+
+PolygonWidget.prototype.showWarning = function (message, options) {
+    const notificationEl = this.createWarningNotificationEl(message, options)
+    const mapContainer = this.map.getContainer()
+    mapContainer.appendChild(notificationEl)
+}
+
+PolygonWidget.prototype.hideWarnings = function () {
+    const mapContainer = this.map.getContainer()
+    mapContainer.querySelectorAll(".map-error").forEach((el) => {
+        el.remove()
+    })
+}
+
+PolygonWidget.prototype.createWarningNotificationEl = function (message, options) {
+    const el = document.createElement("div")
+    el.className = "notification is-warning map-error"
+    el.innerHTML = `
+        <div class="notification-content">
+            <span class="icon">
+              <svg class="icon icon-warning messages-icon" aria-hidden="true">
+                <use href="#icon-warning"></use>
+               </svg>
+            </span>
+            <span class="message">${message}</span>
+        </div>
+    `
+
+    if (options && options.showSnapButton) {
+        const snapButton = document.createElement("button")
+        snapButton.className = "button button-small snap-to-boundary"
+        snapButton.textContent = "Snap to boundary"
+        el.appendChild(snapButton)
+
+        snapButton.onclick = (e) => {
+            e.preventDefault()
+            this.snapToUNBoundary()
+        }
+    }
+
+
+    return el
+}
+
+PolygonWidget.prototype.snapToUNBoundary = function () {
+    const source = this.map.getSource("polygon")
+    const data = source._data
+
+    if (data && data.coordinates && !!data.coordinates.length) {
+        const feature = turf.feature(data)
+        const UNBoundaryFeature = turf.feature(this.UNGeojsonBoundaryGeojson)
+
+        let snappedFeature = turf.intersect(turf.featureCollection([feature, UNBoundaryFeature]))
+
+        if (snappedFeature) {
+            // buffer the snapped feature by a small amount to prevent booleanWithin failing
+            snappedFeature = turf.buffer(snappedFeature, -0.0001)
+
+            // convert to multipolygon
+            if (snappedFeature.geometry.type === "Polygon") {
+                snappedFeature.geometry = {
+                    type: "MultiPolygon", coordinates: [snappedFeature.geometry.coordinates]
+                }
+            }
+
+            this.setDrawData(snappedFeature.geometry)
+        }
+    }
 }
 
 

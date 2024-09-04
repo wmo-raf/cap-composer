@@ -68,3 +68,38 @@
     box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
     padding: 12px;
 }
+
+.map-error {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    max-width: 600px;
+    min-width: 200px;
+    z-index: 2;
+    background-color: #faa500;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.map-error .notification-content {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.map-error .notification-content .icon {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+}
+
+.map-error .notification-content svg {
+    height: 100%;
+    width: 100%;
+}
+
+.map-error .snap-to-boundary {
+    margin-left: 30px;
+    margin-top: 8px;
+}

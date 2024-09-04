@@ -38,12 +38,31 @@ class BaseMapWidget(Widget):
         return context
 
 
+class UNBoundaryWidgetMixin(Widget):
+    def get_context(self, *args, **kwargs):
+        from capeditor.cap_settings import CapSetting
+        context = super().get_context(*args, **kwargs)
+
+        try:
+            site = Site.objects.get(is_default_site=True)
+            cap_settings = CapSetting.for_site(site)
+
+            un_country_boundary_geojson = cap_settings.un_country_boundary_geojson
+            context.update({
+                "un_boundary_geojson": json.dumps(un_country_boundary_geojson)
+            })
+        except Exception as e:
+            pass
+
+        return context
+
+
 class BasePolygonWidget(BaseGeometryWidget, BaseMapWidget):
     def serialize(self, value):
         return value.json if value else ""
 
 
-class BoundaryPolygonWidget(WidgetWithScript, BasePolygonWidget):
+class BoundaryPolygonWidget(WidgetWithScript, BasePolygonWidget, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/boundary_polygon_widget.html"
     map_srid = 4326
 
@@ -82,7 +101,7 @@ class BoundaryPolygonWidgetAdapter(WidgetAdapter):
 register(BoundaryPolygonWidgetAdapter(), BoundaryPolygonWidget)
 
 
-class PolygonWidget(WidgetWithScript, BasePolygonWidget):
+class PolygonWidget(WidgetWithScript, BasePolygonWidget, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/polygon_widget.html"
     map_srid = 4326
 
@@ -123,7 +142,7 @@ class PolygonWidgetAdapter(WidgetAdapter):
 register(PolygonWidgetAdapter(), PolygonWidget)
 
 
-class CircleWidget(WidgetWithScript, BaseMapWidget, Textarea):
+class CircleWidget(WidgetWithScript, BaseMapWidget, Textarea, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/circle_widget.html"
 
     def __init__(self, attrs=None):
@@ -199,7 +218,7 @@ class HazardEventTypeWidget(WidgetWithScript, TextInput):
         ]
 
 
-class PolygonDrawWidget(BaseGeometryWidget, BaseMapWidget):
+class PolygonDrawWidget(BaseGeometryWidget, BaseMapWidget, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/polygon_draw_widget.html"
     map_srid = 4326
 
