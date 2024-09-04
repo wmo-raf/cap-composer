@@ -17,7 +17,7 @@ from capeditor.blocks import (
 )
 from capeditor.forms.widgets import (
     HazardEventTypeWidget,
-    PolygonDrawWidget,
+    MultiPolygonWidget,
     GeojsonFileLoaderWidget
 )
 
@@ -128,7 +128,7 @@ class PredefinedAlertArea(Orderable):
     panels = [
         FieldPanel("name"),
         FieldPanel("geom",
-                   widget=PolygonDrawWidget(attrs={"resize_trigger_selector": ".w-tabs__tab.map-resize-trigger"})),
+                   widget=MultiPolygonWidget(attrs={"resize_trigger_selector": ".w-tabs__tab.map-resize-trigger"})),
     ]
 
 

@@ -1,0 +1,73 @@
+.multipolygon_map_wrapper {
+}
+
+.multipolygon_map_wrapper .multipolygon_map {
+    height: 400px;
+    width: 100%;
+    min-height: 400px
+}
+
+.multipolygon_map_wrapper .map-error {
+    position: absolute;
+    top: 10px;
+    left: 60px;
+    max-width: 600px;
+    min-width: 200px;
+    z-index: 2;
+    background-color: #faa500;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.multipolygon_map_wrapper .map-error .notification-content {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.multipolygon_map_wrapper .map-error .notification-content .icon {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+}
+
+.multipolygon_map_wrapper .map-error .notification-content svg {
+    height: 100%;
+    width: 100%;
+}
+
+.multipolygon_map_wrapper .map-error .snap-to-boundary {
+    margin-left: 30px;
+    margin-top: 8px;
+}
+
+.multipolygon_map_wrapper .un-map-legend {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
+    z-index: 2;
+    color: #000;
+}
+
+.multipolygon_map_wrapper .un-map-legend .legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.multipolygon_map_wrapper .un-map-legend .legend-item-colors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    margin-right: 4px;
+}
+
+.multipolygon_map_wrapper .un-map-legend .legend-item-colors .legend-item-color {
+    width: 100%;
+}

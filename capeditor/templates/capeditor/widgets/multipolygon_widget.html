@@ -1,7 +1,7 @@
 {% load i18n l10n %}
 
-<div id="{{ id }}_div_map" class="polygon_map_wrapper">
-    <div id="{{ id }}_map" class="polygon_map" style="height: 400px;width: 100%;min-height: 400px">
+<div id="{{ id }}_div_map" class="multipolygon_map_wrapper">
+    <div id="{{ id }}_map" class="multipolygon_map">
     </div>
     <textarea id="{{ id }}" class="vSerializedField required" name="{{ name }}" hidden
               data-bounds="{{ country_bounds }}" data-un-geojson="{{ un_boundary_geojson }}">{{ serialized }}</textarea>
@@ -16,7 +16,7 @@
                 resize_trigger_selector: '{{ resize_trigger_selector }}',
             };
         {% endblock %}
-        var {{ module }} =
-            new PolygonDrawWidget(options);
+        const {{ module }} =
+            new MultiPolygonWidget(options);
     </script>
 </div>

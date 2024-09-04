@@ -218,13 +218,13 @@ class HazardEventTypeWidget(WidgetWithScript, TextInput):
         ]
 
 
-class PolygonDrawWidget(BaseGeometryWidget, BaseMapWidget, UNBoundaryWidgetMixin):
-    template_name = "capeditor/widgets/polygon_draw_widget.html"
+class MultiPolygonWidget(BaseGeometryWidget, BaseMapWidget, UNBoundaryWidgetMixin):
+    template_name = "capeditor/widgets/multipolygon_widget.html"
     map_srid = 4326
 
     def __init__(self, attrs=None):
         default_attrs = {
-            "class": "capeditor-widget__polygon-draw-input",
+            "class": "capeditor-widget__multipolygon-input",
         }
         attrs = attrs or {}
         attrs = {**default_attrs, **attrs}
@@ -236,14 +236,14 @@ class PolygonDrawWidget(BaseGeometryWidget, BaseMapWidget, UNBoundaryWidgetMixin
             "all": [
                 "capeditor/css/maplibre-gl.css",
                 "capeditor/css/mapbox-gl-draw.css",
-                "capeditor/css/widget/polygon-draw-widget.css",
+                "capeditor/css/widget/multipolygon-widget.css",
             ]
         }
         js = [
             "capeditor/js/maplibre-gl.js",
             "capeditor/js/mapbox-gl-draw.js",
             "capeditor/js/turf.min.js",
-            "capeditor/js/widget/polygon-draw-widget.js",
+            "capeditor/js/widget/multipolygon-widget.js",
         ]
 
     def serialize(self, value):
