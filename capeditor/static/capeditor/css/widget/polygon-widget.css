@@ -11,7 +11,7 @@
     width: 100%;
 }
 
-.polygon_map_wrapper .control-icon {
+.control-icon {
     height: 100%;
     width: 100%;
     display: flex;
@@ -19,7 +19,7 @@
     justify-content: center;
 }
 
-.polygon_map_wrapper .control-icon svg {
+.control-icon svg {
     height: 60%;
     width: 60%;
     fill: #000;
@@ -49,12 +49,12 @@
     border-radius: 4px;
 }
 
-.polygon_map_wrapper .mapboxgl-draw-actions-btn_save {
+.mapboxgl-draw-actions-btn_save {
     background-color: var(--w-color-secondary) !important;
     margin-left: 4px;
 }
 
-.polygon_map_wrapper .mapboxgl-draw-actions-btn_cancel {
+.mapboxgl-draw-actions-btn_cancel {
     background-color: var(--w-color-critical-200) !important;
 }
 
