@@ -3,7 +3,6 @@ class FileUploadControl {
         this._options = Object.assign({}, this._options, options)
     }
 
-
     onAdd(map) {
         this.map = map;
         this._container = document.createElement('div');
@@ -36,6 +35,9 @@ class FileUploadControl {
             reader.onerror = function (e) {
                 console.error('File could not be read! Code ' + e)
             }
+
+            e.target.value = null;
+            return false;
         })
 
         return this._container;
@@ -82,9 +84,7 @@ class GeojsonFileLoaderDrawWidget {
                 this.addFileLayer(data)
             }
 
-
             this.addFileUploadControl()
-
         });
     }
 
@@ -93,15 +93,20 @@ class GeojsonFileLoaderDrawWidget {
             console.error('Invalid GeoJSON file');
         }
 
+        // take the first feature
         const feature = data.features[0];
+        // truncate coordinates to 6 decimal places
+        const truncatedFeature = turf.truncate(feature, {
+            precision: 6, coordinates: 2, mutate: true
+        })
 
-        const geomType = feature.geometry.type;
+        const geomType = truncatedFeature.geometry.type;
         if (!(geomType === 'Polygon' || geomType === 'MultiPolygon')) {
             console.error('Invalid geometry type');
         }
 
-        this.addFileLayer(feature);
-        this.setValue(JSON.stringify(feature.geometry));
+        this.addFileLayer(truncatedFeature);
+        this.setValue(JSON.stringify(truncatedFeature.geometry));
     }
 
     addFileLayer(data) {
@@ -111,22 +116,19 @@ class GeojsonFileLoaderDrawWidget {
             source.setData(data);
         } else {
             this.map.addSource('geojson', {
-                type: 'geojson',
-                data: data,
+                type: 'geojson', data: data,
             });
 
             this.map.addLayer({
-                id: 'geojson',
-                type: 'fill',
-                source: 'geojson',
-                paint: {
-                    'fill-color': '#088',
-                    'fill-opacity': 0.8,
+                id: 'geojson', type: 'fill', source: 'geojson', paint: {
+                    'fill-color': '#088', 'fill-opacity': 0.8,
                 },
             })
         }
         const bounds = turf.bbox(data);
         this.map.fitBounds([[bounds[0], bounds[1]], [bounds[2], bounds[3]]], {padding: 20});
+
+        this.showDeleteButton();
     }
 
     addFileUploadControl() {
@@ -199,5 +201,38 @@ class GeojsonFileLoaderDrawWidget {
 
     setValue(feature) {
         this.geomInput.value = feature;
+    }
+
+    createDeleteButton() {
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-geom-btn';
+        deleteButton.title = 'Delete';
+        deleteButton.addEventListener('click', (e) => {
+            e.preventDefault()
+
+            this.setValue('');
+            this.map.removeLayer('geojson');
+            this.map.removeSource('geojson');
+
+            this.hideDeleteButton();
+        });
+        this.map.getContainer().appendChild(deleteButton);
+    }
+
+
+    showDeleteButton() {
+        const deleteButton = this.map.getContainer().querySelector('.delete-geom-btn');
+        if (deleteButton) {
+            deleteButton.style.display = 'block';
+        } else {
+            this.createDeleteButton();
+        }
+    }
+
+    hideDeleteButton() {
+        const deleteButton = this.map.getContainer().querySelector('.delete-geom-btn');
+        if (deleteButton) {
+            deleteButton.style.display = 'none';
+        }
     }
 }
