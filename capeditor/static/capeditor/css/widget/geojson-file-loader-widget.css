@@ -1,0 +1,36 @@
+.maplibregl-ctrl.file-upload-ctrl {
+    display: flex;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.maplibregl-ctrl.file-upload-ctrl .file-upload-ctrl-icon {
+    height: 20px;
+    width: 20px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    display: block;
+    background-image: url("data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%3C!--%20License%3A%20PD.%20Made%20by%20owlling%3A%20https%3A%2F%2Fgithub.com%2Fowlling%2Folicons%20--%3E%3Csvg%20width%3D%2220px%22%20height%3D%2220px%22%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cpath%20d%3D%22m0%200h32v32h-32z%22%2F%3E%3Cpath%20d%3D%22m19.120106%200c1.8257724%200%203.5522076.83131873%204.6906771%202.25867017l4.8798939%206.11814718c.847677%201.06277155%201.309323%202.38190365%201.309323%203.74132985v13.8818528c0%203.3137085-2.6862915%206-6%206h-16c-3.3137085%200-6-2.6862915-6-6v-20c0-3.3137085%202.6862915-6%206-6zm0%202h-11.120106c-2.14219539%200-3.89107888%201.68396847-3.99510469%203.80035966l-.00489531.19964034v20c0%202.1421954%201.68396847%203.8910789%203.80035966%203.9951047l.19964034.0048953h16c2.1421954%200%203.8910789-1.6839685%203.9951047-3.8003597l.0048953-.1996403v-13.8818528c0-.8238947-.2543504-1.6255887-.7251774-2.29685957l-.1477046-.19736034-4.8798939-6.11814718c-.7115434-.89209465-1.767598-1.43495138-2.8997521-1.49932373zm-3.0359483%208c.2359046.0138648.4678334.1109181.6480753.2911601l4.2426407%204.2426407c.3905243.3905243.3905243%201.0236893%200%201.4142136s-1.0236892.3905243-1.4142135%200l-2.5598932-2.5598738-.000767%209.085c0%20.5522848-.4477153%201-1%201s-1-.4477152-1-1l.000767-9.085-2.5614272%202.5598738c-.3905243.3905243-1.0236892.3905243-1.4142135%200s-.3905243-1.0236893%200-1.4142136l4.2426407-4.2426407c.1802419-.180242.4121707-.2772953.6480753-.2911601z%22%20fill%3D%22%23000000%22%20fill-rule%3D%22nonzero%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")
+}
+
+
+.maplibregl-ctrl.file-upload-ctrl .file-upload-ctrl-label {
+    margin-left: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+}
+
+.delete-geom-btn {
+    position: absolute;
+    top: 50px;
+    right: 12px;
+    z-index: 2;
+    height: 20px;
+    width: 20px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
+    border-radius: 4px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20">%3Cpath d="M10,3.4 c-0.8,0-1.5,0.5-1.8,1.2H5l-1,1v1h12v-1l-1-1h-3.2C11.5,3.9,10.8,3.4,10,3.4z M5,8v7c0,1,1,2,2,2h6c1,0,2-1,2-2V8h-2v5.5h-1.5V8h-3 v5.5H7V8H5z"/>%3C/svg>');
+}

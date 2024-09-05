@@ -38,12 +38,31 @@ class BaseMapWidget(Widget):
         return context
 
 
+class UNBoundaryWidgetMixin(Widget):
+    def get_context(self, *args, **kwargs):
+        from capeditor.cap_settings import CapSetting
+        context = super().get_context(*args, **kwargs)
+
+        try:
+            site = Site.objects.get(is_default_site=True)
+            cap_settings = CapSetting.for_site(site)
+
+            un_country_boundary_geojson = cap_settings.un_country_boundary_geojson
+            context.update({
+                "un_boundary_geojson": json.dumps(un_country_boundary_geojson)
+            })
+        except Exception as e:
+            pass
+
+        return context
+
+
 class BasePolygonWidget(BaseGeometryWidget, BaseMapWidget):
     def serialize(self, value):
         return value.json if value else ""
 
 
-class BoundaryPolygonWidget(WidgetWithScript, BasePolygonWidget):
+class BoundaryPolygonWidget(WidgetWithScript, BasePolygonWidget, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/boundary_polygon_widget.html"
     map_srid = 4326
 
@@ -82,7 +101,7 @@ class BoundaryPolygonWidgetAdapter(WidgetAdapter):
 register(BoundaryPolygonWidgetAdapter(), BoundaryPolygonWidget)
 
 
-class PolygonWidget(WidgetWithScript, BasePolygonWidget):
+class PolygonWidget(WidgetWithScript, BasePolygonWidget, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/polygon_widget.html"
     map_srid = 4326
 
@@ -123,7 +142,7 @@ class PolygonWidgetAdapter(WidgetAdapter):
 register(PolygonWidgetAdapter(), PolygonWidget)
 
 
-class CircleWidget(WidgetWithScript, BaseMapWidget, Textarea):
+class CircleWidget(WidgetWithScript, BaseMapWidget, Textarea, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/circle_widget.html"
 
     def __init__(self, attrs=None):
@@ -199,9 +218,47 @@ class HazardEventTypeWidget(WidgetWithScript, TextInput):
         ]
 
 
-class PolygonDrawWidget(BaseGeometryWidget, BaseMapWidget):
-    template_name = "capeditor/widgets/polygon_draw_widget.html"
+class MultiPolygonWidget(BaseGeometryWidget, BaseMapWidget, UNBoundaryWidgetMixin):
+    template_name = "capeditor/widgets/multipolygon_widget.html"
     map_srid = 4326
+
+    def __init__(self, attrs=None):
+        default_attrs = {
+            "class": "capeditor-widget__multipolygon-input",
+        }
+        attrs = attrs or {}
+        attrs = {**default_attrs, **attrs}
+
+        super().__init__(attrs=attrs)
+
+    class Media:
+        css = {
+            "all": [
+                "capeditor/css/maplibre-gl.css",
+                "capeditor/css/mapbox-gl-draw.css",
+                "capeditor/css/widget/multipolygon-widget.css",
+            ]
+        }
+        js = [
+            "capeditor/js/maplibre-gl.js",
+            "capeditor/js/mapbox-gl-draw.js",
+            "capeditor/js/turf.min.js",
+            "capeditor/js/widget/multipolygon-widget.js",
+        ]
+
+    def serialize(self, value):
+        return value.json if value else ""
+
+    def deserialize(self, value):
+        geom = super().deserialize(value)
+        # GeoJSON assumes WGS84 (4326). Use the map's SRID instead.
+        if geom and json_regex.match(value) and self.map_srid != 4326:
+            geom.srid = self.map_srid
+        return geom
+
+
+class GeojsonFileLoaderWidget(BaseGeometryWidget, BaseMapWidget):
+    template_name = "capeditor/widgets/geojson_file_loader_widget.html"
 
     def __init__(self, attrs=None):
         default_attrs = {
@@ -216,15 +273,13 @@ class PolygonDrawWidget(BaseGeometryWidget, BaseMapWidget):
         css = {
             "all": [
                 "capeditor/css/maplibre-gl.css",
-                "capeditor/css/mapbox-gl-draw.css",
-                "capeditor/css/widget/polygon-draw-widget.css",
+                "capeditor/css/widget/geojson-file-loader-widget.css",
             ]
         }
         js = [
             "capeditor/js/maplibre-gl.js",
-            "capeditor/js/mapbox-gl-draw.js",
             "capeditor/js/turf.min.js",
-            "capeditor/js/widget/polygon-draw-widget.js",
+            "capeditor/js/widget/geojson-file-loader-widget.js",
         ]
 
     def serialize(self, value):

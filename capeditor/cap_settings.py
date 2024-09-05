@@ -15,7 +15,11 @@ from wagtailmodelchooser import register_model_chooser
 from capeditor.blocks import (
     ContactBlock
 )
-from capeditor.forms.widgets import HazardEventTypeWidget, PolygonDrawWidget
+from capeditor.forms.widgets import (
+    HazardEventTypeWidget,
+    MultiPolygonWidget,
+    GeojsonFileLoaderWidget
+)
 
 
 @register_setting
@@ -38,6 +42,11 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
     ], use_json_field=True, blank=True, null=True, verbose_name=_("Contact Details"),
         help_text=_("Contact for follow-up and confirmation of the alert message"))
 
+    un_country_boundary_geojson = models.JSONField(blank=True, null=True, verbose_name=_("UN Country Boundary"),
+                                                   help_text=_("GeoJSON file of the UN Country Boundary. Setting this"
+                                                               " will enable the UN Country Boundary check in the alert"
+                                                               "drawing tools"))
+
     class Meta:
         verbose_name = _("CAP Settings")
 
@@ -57,6 +66,11 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
             InlinePanel("predefined_alert_areas", heading=_("Predefined Alert Areas"), label=_("Area"),
                         help_text=_("Predefined areas for alerts")),
         ], heading=_("Predefined Areas"), classname="map-resize-trigger"),
+        ObjectList([
+            FieldPanel("un_country_boundary_geojson",
+                       widget=GeojsonFileLoaderWidget(
+                           attrs={"resize_trigger_selector": ".w-tabs__tab.map-resize-trigger"})),
+        ], heading=_("UN Boundary"), classname="map-resize-trigger"),
     ])
 
     @property
@@ -114,7 +128,7 @@ class PredefinedAlertArea(Orderable):
     panels = [
         FieldPanel("name"),
         FieldPanel("geom",
-                   widget=PolygonDrawWidget(attrs={"resize_trigger_selector": ".w-tabs__tab.map-resize-trigger"})),
+                   widget=MultiPolygonWidget(attrs={"resize_trigger_selector": ".w-tabs__tab.map-resize-trigger"})),
     ]
 
 

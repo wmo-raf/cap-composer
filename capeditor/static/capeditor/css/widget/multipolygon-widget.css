@@ -1,15 +1,16 @@
-.boundary_map_wrapper {
+.multipolygon_map_wrapper {
 }
 
-.boundary_map_wrapper .boundary_map {
-    min-height: 400px;
+.multipolygon_map_wrapper .multipolygon_map {
+    height: 400px;
     width: 100%;
+    min-height: 400px
 }
 
-.boundary_map_wrapper .map-error {
+.multipolygon_map_wrapper .map-error {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 10px;
+    left: 60px;
     max-width: 600px;
     min-width: 200px;
     z-index: 2;
@@ -18,30 +19,30 @@
     border-radius: 4px;
 }
 
-.boundary_map_wrapper .map-error .notification-content {
+.multipolygon_map_wrapper .map-error .notification-content {
     display: flex;
     align-items: center;
     font-size: 14px;
 }
 
-.boundary_map_wrapper .map-error .notification-content .icon {
+.multipolygon_map_wrapper .map-error .notification-content .icon {
     display: flex;
     align-items: center;
     height: 30px;
     width: 30px;
 }
 
-.boundary_map_wrapper .map-error .notification-content svg {
+.multipolygon_map_wrapper .map-error .notification-content svg {
     height: 100%;
     width: 100%;
 }
 
-.boundary_map_wrapper .map-error .snap-to-boundary {
+.multipolygon_map_wrapper .map-error .snap-to-boundary {
     margin-left: 30px;
     margin-top: 8px;
 }
 
-.boundary_map_wrapper .un-map-legend {
+.multipolygon_map_wrapper .un-map-legend {
     position: absolute;
     bottom: 20px;
     left: 20px;
@@ -53,12 +54,12 @@
     color: #000;
 }
 
-.boundary_map_wrapper .un-map-legend .legend-item {
+.multipolygon_map_wrapper .un-map-legend .legend-item {
     display: flex;
     align-items: center;
 }
 
-.boundary_map_wrapper .un-map-legend .legend-item-colors {
+.multipolygon_map_wrapper .un-map-legend .legend-item-colors {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,6 +68,6 @@
     margin-right: 4px;
 }
 
-.boundary_map_wrapper .un-map-legend .legend-item-colors .legend-item-color {
+.multipolygon_map_wrapper .un-map-legend .legend-item-colors .legend-item-color {
     width: 100%;
 }
