@@ -137,11 +137,6 @@ class BoundaryPolygonWidget {
             // set state
             const geomString = JSON.stringify(featureGeom)
             this.setState(geomString)
-
-
-            console.log(featureGeom)
-
-
             // clear any map error
             this.hideWarnings()
 
