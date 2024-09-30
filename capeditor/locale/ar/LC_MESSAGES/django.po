@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-13 17:20+0300\n"
+"POT-Creation-Date: 2024-09-30 20:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,75 +18,75 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: capeditor/blocks.py:69 capeditor/blocks.py:97 capeditor/blocks.py:298
-#: capeditor/blocks.py:373
+#: capeditor/blocks.py:117 capeditor/blocks.py:145 capeditor/blocks.py:482
+#: capeditor/cap_settings.py:114
 msgid "Name"
 msgstr "اسم"
 
-#: capeditor/blocks.py:69
+#: capeditor/blocks.py:117
 msgid "Name of the recipient"
 msgstr "اسم المستلم"
 
-#: capeditor/blocks.py:70
+#: capeditor/blocks.py:118
 msgid "Address"
 msgstr "عنوان"
 
-#: capeditor/blocks.py:70
+#: capeditor/blocks.py:118
 msgid "Address Information of the recipient"
 msgstr "معلومات عنوان المستلم"
 
-#: capeditor/blocks.py:88 capeditor/models.py:241
+#: capeditor/blocks.py:136 capeditor/models.py:172
 msgid "Reference Alert"
 msgstr "تنبيه مرجعي"
 
-#: capeditor/blocks.py:89
+#: capeditor/blocks.py:137
 msgid "Earlier alert referenced by this alert"
 msgstr "التنبيه السابق المشار إليه في هذا التنبيه"
 
-#: capeditor/blocks.py:93 capeditor/models.py:246
+#: capeditor/blocks.py:141 capeditor/models.py:177
 msgid "Incident"
 msgstr "حادثة"
 
-#: capeditor/blocks.py:93
+#: capeditor/blocks.py:141
 msgid "Referent incident to this alert message"
 msgstr "قم بإحالة الحادث إلى رسالة التنبيه هذه"
 
-#: capeditor/blocks.py:98 capeditor/blocks.py:299 capeditor/blocks.py:374
+#: capeditor/blocks.py:146 capeditor/blocks.py:173 capeditor/blocks.py:483
 msgid "Value"
 msgstr "قيمة"
 
-#: capeditor/blocks.py:103
+#: capeditor/blocks.py:151
 msgid "Shelter - Take shelter in place or per instruction"
 msgstr "المأوى - احتمي في المكان أو حسب التعليمات"
 
-#: capeditor/blocks.py:104
+#: capeditor/blocks.py:152
 msgid "Evacuate - Relocate as instructed in the instruction"
 msgstr "إخلاء - انقل كما هو موضح في التعليمات"
 
-#: capeditor/blocks.py:105
+#: capeditor/blocks.py:153
 msgid "Prepare - Relocate as instructed in the instruction"
 msgstr "الاستعداد - الانتقال كما هو موضح في التعليمات"
 
-#: capeditor/blocks.py:106
+#: capeditor/blocks.py:154
 msgid "Execute - Execute a pre-planned activity identified in instruction"
 msgstr "تنفيذ - تنفيذ نشاط مخطط مسبقًا تم تحديده في التعليمات"
 
-#: capeditor/blocks.py:107
+#: capeditor/blocks.py:155
 msgid "Avoid - Avoid the subject event as per the instruction"
 msgstr "تجنب - تجنب موضوع الحدث حسب التعليمات"
 
-#: capeditor/blocks.py:108
+#: capeditor/blocks.py:156
 msgid "Monitor - Attend to information sources as described in instruction"
 msgstr "مراقب - حضور إلى مصادر المعلومات كما هو موضح في التعليمات"
 
-#: capeditor/blocks.py:109
+#: capeditor/blocks.py:157
 msgid ""
 "Assess - Evaluate the information in this message - DONT USE FOR PUBLIC "
 "ALERTS"
 msgstr ""
 "قيم - قيم المعلومات الواردة في هذه الرسالة - لا تستخدم في التنبيهات العامة"
 
-#: capeditor/blocks.py:110
+#: capeditor/blocks.py:158
 msgid ""
 "All Clear - The subject event no longer poses a threat or concern and any "
 "follow on action is described in instruction"
@@ -94,50 +94,72 @@ msgstr ""
 "الكل واضح - لم يعد حدث الموضوع يمثل تهديدًا أو قلقًا وأي متابعة للإجراء "
 "موصوف في التعليمات"
 
-#: capeditor/blocks.py:112
+#: capeditor/blocks.py:160
 msgid "No action recommended"
 msgstr "لا يوجد إجراء موصى به"
 
-#: capeditor/blocks.py:115
+#: capeditor/blocks.py:163
 msgid "Response type"
 msgstr "نوع الاستجابة"
 
-#: capeditor/blocks.py:116
+#: capeditor/blocks.py:164
 msgid ""
 "The code denoting the type of action recommended for the target audience"
 msgstr "الرمز الذي يشير إلى نوع الإجراء الموصى به للجمهور المستهدف"
 
-#: capeditor/blocks.py:157
+#: capeditor/blocks.py:169
+msgid "Value Name"
+msgstr "اسم القيمة"
+
+#: capeditor/blocks.py:171
+msgid ""
+"User-assigned string designating the domain of the code. Acronyms SHOULD be "
+"represented in all capital letters without periods (e.g., SAME, FIPS, ZIP"
+msgstr ""
+"سلسلة مخصصة للمستخدم تشير إلى نطاق الكود. يجب تمثيل الاختصارات بأحرف كبيرة "
+"بدون نقاط (على سبيل المثال، SAME، FIPS، ZIP)"
+
+#: capeditor/blocks.py:174
+msgid "A string (which may represent a number) denoting the value itself"
+msgstr "سلسلة (قد تمثل رقمًا) تشير إلى القيمة نفسها"
+
+#: capeditor/blocks.py:177
+msgid "Geographically-based code to describe a message target area"
+msgstr "كود قائم على أساس جغرافي لوصف منطقة هدف الرسالة"
+
+#: capeditor/blocks.py:232
+msgid "Level 0"
+msgstr "المستوى 0"
+
+#: capeditor/blocks.py:233
 msgid "Level 1"
 msgstr "المستوى 1"
 
-#: capeditor/blocks.py:158
+#: capeditor/blocks.py:234
 msgid "Level 2"
 msgstr "المستوي 2"
 
-#: capeditor/blocks.py:159
+#: capeditor/blocks.py:235
 msgid "Level 3"
 msgstr "مستوى 3"
 
-#: capeditor/blocks.py:162 capeditor/blocks.py:208 capeditor/blocks.py:260
-#: capeditor/blocks.py:296
+#: capeditor/blocks.py:238 capeditor/blocks.py:296 capeditor/blocks.py:358
 msgid "Affected areas / Regions"
 msgstr "المناطق / المناطق المتضررة"
 
-#: capeditor/blocks.py:163 capeditor/blocks.py:209 capeditor/blocks.py:261
-#: capeditor/blocks.py:297
+#: capeditor/blocks.py:239 capeditor/blocks.py:297 capeditor/blocks.py:359
 msgid "The text describing the affected area of the alert message"
 msgstr "النص الذي يصف المنطقة المتأثرة برسالة التنبيه"
 
-#: capeditor/blocks.py:164
+#: capeditor/blocks.py:240
 msgid "Administrative Level"
 msgstr "المستوى الإداري"
 
-#: capeditor/blocks.py:165
+#: capeditor/blocks.py:241
 msgid "Boundary"
 msgstr "الحدود"
 
-#: capeditor/blocks.py:166 capeditor/blocks.py:211
+#: capeditor/blocks.py:242 capeditor/blocks.py:300
 msgid ""
 "The paired values of points defining a polygon that delineates the affected "
 "area of the alert message"
@@ -145,24 +167,24 @@ msgstr ""
 "القيم المزدوجة للنقاط التي تحدد مضلعًا يحدد المنطقة المتأثرة من رسالة "
 "التنبيه"
 
-#: capeditor/blocks.py:169 capeditor/blocks.py:213 capeditor/blocks.py:264
-#: capeditor/blocks.py:301
+#: capeditor/blocks.py:245 capeditor/blocks.py:302 capeditor/blocks.py:361
+#: capeditor/blocks.py:410
 msgid "Altitude"
 msgstr "ارتفاع"
 
-#: capeditor/blocks.py:170 capeditor/blocks.py:214 capeditor/blocks.py:265
-#: capeditor/blocks.py:302
+#: capeditor/blocks.py:246 capeditor/blocks.py:303 capeditor/blocks.py:362
+#: capeditor/blocks.py:411
 msgid ""
 "The specific or minimum altitude of the affected area of the alert message"
 msgstr "الارتفاع المحدد أو الأدنى للمنطقة المتأثرة برسالة التنبيه"
 
-#: capeditor/blocks.py:172 capeditor/blocks.py:216 capeditor/blocks.py:267
-#: capeditor/blocks.py:304
+#: capeditor/blocks.py:248 capeditor/blocks.py:305 capeditor/blocks.py:364
+#: capeditor/blocks.py:413
 msgid "Ceiling"
 msgstr "سقف"
 
-#: capeditor/blocks.py:173 capeditor/blocks.py:217 capeditor/blocks.py:268
-#: capeditor/blocks.py:305
+#: capeditor/blocks.py:249 capeditor/blocks.py:306 capeditor/blocks.py:365
+#: capeditor/blocks.py:414
 msgid ""
 "The maximum altitude of the affected area of the alert message.MUST NOT be "
 "used except in combination with the altitude element. "
@@ -170,46 +192,52 @@ msgstr ""
 "أقصى ارتفاع للمنطقة المتأثرة برسالة التنبيه. يجب عدم استخدامه إلا بالاقتران "
 "مع عنصر الارتفاع."
 
-#: capeditor/blocks.py:210
+#: capeditor/blocks.py:252 capeditor/blocks.py:308 capeditor/blocks.py:367
+#: capeditor/blocks.py:416
+msgid "Geocode"
+msgstr "تكويد جغرافيًا"
+
+#: capeditor/blocks.py:298
 msgid "Polygon"
 msgstr "مضلع"
 
-#: capeditor/blocks.py:262 capeditor/blocks.py:568
+#: capeditor/blocks.py:360 capeditor/blocks.py:676
 msgid "Circle"
 msgstr "دائرة"
 
-#: capeditor/blocks.py:262
+#: capeditor/blocks.py:360
 msgid "Drag the marker to change position"
 msgstr "اسحب العلامة لتغيير الموضع"
 
-#: capeditor/blocks.py:309
+#: capeditor/blocks.py:409 capeditor/cap_settings.py:66
+#: capeditor/cap_settings.py:115
+msgid "Area"
+msgstr "منطقة"
+
+#: capeditor/blocks.py:419
 msgid "The human-readable name of the agency or authority issuing this alert."
 msgstr ""
 "الاسم الذي يمكن للبشر قراءته للوكالة أو السلطة التي أصدرت هذا التنبيه."
 
-#: capeditor/blocks.py:310
+#: capeditor/blocks.py:420
 msgid ""
 "The text describing the contact for follow-up and confirmation of the alert "
 "message"
 msgstr "النص الذي يصف جهة الاتصال للمتابعة وتأكيد رسالة التنبيه"
 
-#: capeditor/blocks.py:311
-msgid "The text describing the intended audience of the alert message"
-msgstr "النص الذي يصف الجمهور المستهدف لرسالة التنبيه"
-
-#: capeditor/blocks.py:353 capeditor/blocks.py:362
+#: capeditor/blocks.py:462 capeditor/blocks.py:471
 msgid "Resource Description"
 msgstr "وصف الموارد"
 
-#: capeditor/blocks.py:354 capeditor/blocks.py:363
+#: capeditor/blocks.py:463 capeditor/blocks.py:472
 msgid "The text describing the type and content of the resource file"
 msgstr "النص الذي يصف نوع ومحتوى ملف المصدر"
 
-#: capeditor/blocks.py:364
+#: capeditor/blocks.py:473
 msgid "External Resource Link"
 msgstr "رابط الموارد الخارجية"
 
-#: capeditor/blocks.py:365
+#: capeditor/blocks.py:474
 msgid ""
 "Link to external resource. This can be for example a link to related "
 "websites. "
@@ -217,61 +245,65 @@ msgstr ""
 "ارتباط بمورد خارجي. يمكن أن يكون هذا على سبيل المثال رابطًا إلى مواقع الويب "
 "ذات الصلة."
 
-#: capeditor/blocks.py:373
+#: capeditor/blocks.py:482
 msgid "Name for the event code"
 msgstr "اسم رمز الحدث"
 
-#: capeditor/blocks.py:374
+#: capeditor/blocks.py:483
 msgid "Value of the event code"
 msgstr "قيمة رمز الحدث"
 
-#: capeditor/blocks.py:478
+#: capeditor/blocks.py:585
 msgid "English"
 msgstr "إنجليزي"
 
-#: capeditor/blocks.py:482
+#: capeditor/blocks.py:586
+msgid "French"
+msgstr "فرنسي"
+
+#: capeditor/blocks.py:590
 msgid "Geophysical"
 msgstr "الجيوفيزيائية"
 
-#: capeditor/blocks.py:483
+#: capeditor/blocks.py:591
 msgid "Meteorological"
 msgstr "الأرصاد الجوية"
 
-#: capeditor/blocks.py:484
+#: capeditor/blocks.py:592
 msgid "General emergency and public safety"
 msgstr "الطوارئ العامة والسلامة العامة"
 
-#: capeditor/blocks.py:485
+#: capeditor/blocks.py:593
 msgid "Law enforcement, military, homeland and local/private security"
 msgstr "إنفاذ القانون والجيش والوطن والأمن المحلي / الخاص"
 
-#: capeditor/blocks.py:486
+#: capeditor/blocks.py:594
 msgid "Rescue and recovery"
 msgstr "الإنقاذ والإنعاش"
 
-#: capeditor/blocks.py:487
+#: capeditor/blocks.py:595
 msgid "Fire suppression and rescue"
 msgstr "إخماد الحرائق والإنقاذ"
 
-#: capeditor/blocks.py:488
+#: capeditor/blocks.py:596
 msgid "Medical and public health"
 msgstr "الطب والصحة العامة"
 
-#: capeditor/blocks.py:489
+#: capeditor/blocks.py:597
 msgid "Pollution and other environmental"
 msgstr "التلوث والبيئية الأخرى"
 
-#: capeditor/blocks.py:490
+#: capeditor/blocks.py:598
 msgid "Public and private transportation"
 msgstr "المواصلات العامة والخاصة"
 
-#: capeditor/blocks.py:491
+#: capeditor/blocks.py:599
 msgid "Utility, telecommunication, other non-transport infrastructure"
 msgstr ""
 "المرافق والاتصالات السلكية واللاسلكية والبنية التحتية الأخرى غير المتعلقة "
 "بالنقل"
 
-#: capeditor/blocks.py:492
+#: capeditor/blocks.py:600
 msgid ""
 "Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat "
 "or attack"
@@ -279,80 +311,65 @@ msgstr ""
 "التهديد أو الهجوم الكيميائي أو البيولوجي أو الإشعاعي أو النووي أو بالمتفجرات"
 " عالية الإنتاجية"
 
-#: capeditor/blocks.py:493
+#: capeditor/blocks.py:601
 msgid "Other events"
 msgstr "أحداث أخرى"
 
-#: capeditor/blocks.py:497
+#: capeditor/blocks.py:605
 msgid "Immediate - Responsive action SHOULD be taken immediately"
 msgstr "فوري - يجب اتخاذ إجراء مستجيب على الفور"
 
-#: capeditor/blocks.py:498
+#: capeditor/blocks.py:606
 msgid "Expected - Responsive action SHOULD be taken soon (within next hour)"
 msgstr "متوقع - يجب اتخاذ إجراء مستجيب قريبًا (خلال الساعة القادمة)"
 
-#: capeditor/blocks.py:499
+#: capeditor/blocks.py:607
 msgid "Future - Responsive action SHOULD be taken in the near future"
 msgstr "المستقبل - يجب اتخاذ إجراءات استجابة في المستقبل القريب"
 
-#: capeditor/blocks.py:500
+#: capeditor/blocks.py:608
 msgid "Past - Responsive action is no longer required"
 msgstr "الماضي - لم يعد الإجراء المستجيب مطلوبًا"
 
-#: capeditor/blocks.py:501
-msgid "Unknown - Urgency not known"
-msgstr "غير معروف - الاستعجال غير معروف"
-
-#: capeditor/blocks.py:505
+#: capeditor/blocks.py:613
 msgid "Extreme - Extraordinary threat to life or property"
 msgstr "شديد - تهديد غير عادي للحياة أو الممتلكات"
 
-#: capeditor/blocks.py:506
+#: capeditor/blocks.py:614
 msgid "Severe - Significant threat to life or property"
 msgstr "خطير - تهديد خطير للحياة أو الممتلكات"
 
-#: capeditor/blocks.py:507
+#: capeditor/blocks.py:615
 msgid "Moderate - Possible threat to life or property"
 msgstr "معتدل - تهديد محتمل للحياة أو الممتلكات"
 
-#: capeditor/blocks.py:508
+#: capeditor/blocks.py:616
 msgid "Minor - Minimal to no known threat to life or property"
 msgstr "طفيف - من الحد الأدنى إلى عدم وجود تهديد معروف للحياة أو الممتلكات"
 
-#: capeditor/blocks.py:509
-msgid "Unknown - Severity unknown"
-msgstr "غير معروف - الخطورة غير معروفة"
-
-#: capeditor/blocks.py:513
+#: capeditor/blocks.py:621
 msgid "Observed - Determined to have occurred or to be ongoing"
 msgstr "تمت ملاحظته - تم العزم على حدوثه أو استمراره"
 
-#: capeditor/blocks.py:514
+#: capeditor/blocks.py:622
 msgid "Likely - Likely (percentage > ~50%)"
 msgstr "مرجح - مرجح (نسبة مئوية> ~ 50٪)"
 
-#: capeditor/blocks.py:515
+#: capeditor/blocks.py:623
 msgid "Possible - Possible but not likely (percentage <= ~50%)"
 msgstr "ممكن - ممكن لكن غير محتمل (النسبة المئوية <= ~ 50٪)"
 
-#: capeditor/blocks.py:516
+#: capeditor/blocks.py:624
 msgid "Unlikely - Not expected to occur (percentage ~ 0)"
 msgstr "غير محتمل - غير متوقع حدوثه (النسبة المئوية ~ 0)"
 
-#: capeditor/blocks.py:517
-msgid "Unknown - Certainty unknown"
-msgstr "غير معروف - اليقين غير معروف"
-
-#: capeditor/blocks.py:519
+#: capeditor/blocks.py:627
 #: capeditor/templates/capeditor/cap_alert_page.html:30
 #: capeditor/templates/capeditor/cap_alert_page.html:195
 msgid "Event"
 msgstr "حدث"
 
-#: capeditor/blocks.py:520
-#, fuzzy
-#| msgid ""
-#| "The text denoting the type of the subject event of the alert message"
+#: capeditor/blocks.py:628
 msgid ""
 "The text denoting the type of the subject event of the alert message. You "
 "can define hazards events monitored by your institution from CAP settings"
@@ -360,57 +377,57 @@ msgstr ""
 "النص الذي يشير إلى نوع الحدث الموضوعي لرسالة التنبيه. يمكنك تحديد أحداث "
 "المخاطر التي تراقبها مؤسستك من إعدادات CAP"
 
-#: capeditor/blocks.py:523
+#: capeditor/blocks.py:631
 msgid "Category"
 msgstr "فئة"
 
-#: capeditor/blocks.py:524
+#: capeditor/blocks.py:632
 msgid ""
 "The code denoting the category of the subject event of the alert message"
 msgstr "الرمز الذي يشير إلى فئة موضوع الحدث لرسالة التنبيه"
 
-#: capeditor/blocks.py:526
+#: capeditor/blocks.py:634
 msgid "Language"
 msgstr "لغة"
 
-#: capeditor/blocks.py:527
+#: capeditor/blocks.py:635
 msgid "The code denoting the language of the alert message"
 msgstr "الرمز الذي يشير إلى لغة رسالة التنبيه"
 
-#: capeditor/blocks.py:529
+#: capeditor/blocks.py:637
 msgid "Urgency"
 msgstr "الاستعجال"
 
-#: capeditor/blocks.py:530
+#: capeditor/blocks.py:638
 msgid ""
 "The code denoting the urgency of the subject event of the alert message"
 msgstr "رمز يشير إلى إلحاح موضوع الحدث لرسالة التنبيه"
 
-#: capeditor/blocks.py:532
+#: capeditor/blocks.py:640
 #: capeditor/templates/capeditor/cap_alert_page.html:104
 msgid "Severity"
 msgstr "خطورة"
 
-#: capeditor/blocks.py:533
+#: capeditor/blocks.py:641
 msgid ""
 "The code denoting the severity of the subject event of the alert message"
 msgstr "رمز يدل على خطورة الحدث موضوع رسالة التنبيه"
 
-#: capeditor/blocks.py:535
+#: capeditor/blocks.py:643
 #: capeditor/templates/capeditor/cap_alert_page.html:113
 msgid "Certainty"
 msgstr "بالتاكيد"
 
-#: capeditor/blocks.py:536
+#: capeditor/blocks.py:644
 msgid ""
 "The code denoting the certainty of the subject event of the alert message"
 msgstr "الرمز الذي يشير إلى يقين موضوع الحدث لرسالة التنبيه"
 
-#: capeditor/blocks.py:538
+#: capeditor/blocks.py:646
 msgid "Headline"
 msgstr "العنوان"
 
-#: capeditor/blocks.py:539
+#: capeditor/blocks.py:647
 msgid ""
 "The text headline of the alert message. Make it direct and actionable as "
 "possible while remaining short"
@@ -418,11 +435,11 @@ msgstr ""
 "العنوان النصي لرسالة التنبيه. اجعلها مباشرة وقابلة للتنفيذ قدر الإمكان مع "
 "البقاء قصيرًا"
 
-#: capeditor/blocks.py:541
+#: capeditor/blocks.py:649
 msgid "Description"
 msgstr "وصف"
 
-#: capeditor/blocks.py:543
+#: capeditor/blocks.py:651
 msgid ""
 "The text describing the subject event of the alert message. An extended "
 "description of the hazard or event that occasioned this message"
@@ -430,23 +447,23 @@ msgstr ""
 "النص الذي يصف حدث موضوع رسالة التنبيه. وصف موسع للخطر أو الحدث الذي تسبب في "
 "هذه الرسالة"
 
-#: capeditor/blocks.py:545
+#: capeditor/blocks.py:653
 msgid "Instruction"
 msgstr "تعليمات"
 
-#: capeditor/blocks.py:546
+#: capeditor/blocks.py:654
 msgid ""
 "The text describing the recommended action to be taken by recipients of the "
 "alert message"
 msgstr ""
 "النص الذي يصف الإجراء الموصى به الذي يتعين على مستلمي رسالة التنبيه اتخاذه"
 
-#: capeditor/blocks.py:548
+#: capeditor/blocks.py:656
 #: capeditor/templates/capeditor/cap_alert_page.html:56
 msgid "Effective"
 msgstr "فعال"
 
-#: capeditor/blocks.py:549
+#: capeditor/blocks.py:657
 msgid ""
 "The effective time of the information of the alert message. If not set, the "
 "sent date will be used"
@@ -454,22 +471,22 @@ msgstr ""
 "الوقت الفعلي لمعلومات رسالة التنبيه. إذا لم يتم تعيينه، سيتم استخدام تاريخ "
 "الإرسال"
 
-#: capeditor/blocks.py:551
+#: capeditor/blocks.py:659
 #: capeditor/templates/capeditor/cap_alert_page.html:72
 msgid "Onset"
 msgstr "بداية"
 
-#: capeditor/blocks.py:552
+#: capeditor/blocks.py:660
 msgid ""
 "The expected time of the beginning of the subject event of the alert message"
 msgstr "الوقت المتوقع لبداية موضوع الحدث لرسالة التنبيه"
 
-#: capeditor/blocks.py:554
+#: capeditor/blocks.py:662
 #: capeditor/templates/capeditor/cap_alert_page.html:81
 msgid "Expires"
 msgstr "تنتهي"
 
-#: capeditor/blocks.py:555
+#: capeditor/blocks.py:663
 msgid ""
 "The expiry time of the information of the alert message. If not set, each "
 "recipient is free to set its own policy as to when the message is no longer "
@@ -478,162 +495,546 @@ msgstr ""
 "وقت انتهاء صلاحية معلومات رسالة التنبيه. في حالة عدم التعيين ، يكون لكل "
 "مستلم الحرية في تعيين سياسته الخاصة عندما لا تكون الرسالة سارية المفعول."
 
-#: capeditor/blocks.py:558
+#: capeditor/blocks.py:666
 msgid "Response Types"
 msgstr "أنواع الاستجابة"
 
-#: capeditor/blocks.py:560
+#: capeditor/blocks.py:668
 msgid "Sender name"
 msgstr "اسم المرسل"
 
-#: capeditor/blocks.py:562 capeditor/models.py:43
+#: capeditor/blocks.py:670 capeditor/cap_settings.py:41
 msgid "Contact"
 msgstr "اتصال"
 
-#: capeditor/blocks.py:563 capeditor/blocks.py:589
+#: capeditor/blocks.py:671
 msgid "Audience"
 msgstr "جمهور"
 
-#: capeditor/blocks.py:566
+#: capeditor/blocks.py:672
+msgid "The text describing the intended audience of the alert message"
+msgstr "النص الذي يصف الجمهور المستهدف لرسالة التنبيه"
+
+#: capeditor/blocks.py:674
 msgid "Admin Boundary"
 msgstr "حدود الإدارة"
 
-#: capeditor/blocks.py:567
+#: capeditor/blocks.py:675
 msgid "Draw Polygon"
 msgstr "ارسم مضلع"
 
-#: capeditor/blocks.py:569
-msgid "Geocode"
-msgstr "تكويد جغرافيًا"
+#: capeditor/blocks.py:677 capeditor/cap_settings.py:118
+msgid "Predefined Area"
+msgstr "منطقة محددة مسبقًا"
 
-#: capeditor/blocks.py:570
+#: capeditor/blocks.py:678
 msgid "Alert Area"
 msgstr "منطقة التنبيه"
 
-#: capeditor/blocks.py:570
-msgid "Admin Boundary, Polygon, Circle or Geocode"
-msgstr "حدود الإدارة أو المضلع أو الدائرة أو الرمز الجغرافي"
+#: capeditor/blocks.py:678
+msgid "Admin Boundary, Polygon, Circle, or Predefined area"
+msgstr "حدود الإدارة، المضلع، الدائرة، أو المنطقة المحددة مسبقًا"
 
-#: capeditor/blocks.py:575
+#: capeditor/blocks.py:683
 msgid "Resources"
 msgstr "موارد"
 
-#: capeditor/blocks.py:575
+#: capeditor/blocks.py:683
 msgid ""
 "Additional file with supplemental information related to this alert "
 "information"
 msgstr "ملف إضافي بمعلومات تكميلية متعلقة بمعلومات التنبيه هذه"
 
-#: capeditor/blocks.py:578
+#: capeditor/blocks.py:686
 msgid "Parameter"
 msgstr "معامل"
 
-#: capeditor/blocks.py:578
+#: capeditor/blocks.py:686
 msgid "Parameters"
 msgstr "حدود"
 
-#: capeditor/blocks.py:579
+#: capeditor/blocks.py:687
 msgid "Event Code"
 msgstr "رمز الحدث"
 
-#: capeditor/blocks.py:579
+#: capeditor/blocks.py:687
 msgid "Event codes"
 msgstr "رموز الأحداث"
 
-#: capeditor/blocks.py:589
-msgid "Intended audience"
-msgstr "الجمهور المستهدف"
+#: capeditor/blocks.py:704
+msgid "The expiry time of the alert should be greater than the effective time"
+msgstr "يجب أن يكون وقت انتهاء صلاحية التنبيه أكبر من الوقت الفعلي"
 
-#: capeditor/blocks.py:593
+#: capeditor/blocks.py:709
+msgid "The expiry time of the alert should be greater than the onset time"
+msgstr "يجب أن يكون وقت انتهاء صلاحية التنبيه أكبر من وقت بدايته"
+
+#: capeditor/blocks.py:716
 msgid "Contact Detail"
 msgstr "تفاصيل الإتصال"
 
-#: capeditor/models.py:37
-msgid "CAP Sender Identifier"
-msgstr "معرف مرسل CAP"
+#: capeditor/cap_settings.py:27
+msgid "CAP Sender Email"
+msgstr "البريد الإلكتروني لمرسل CAP"
 
-#: capeditor/models.py:38
-msgid "Can be the website link or email of the sending institution"
-msgstr "يمكن أن يكون رابط موقع الويب أو البريد الإلكتروني للمؤسسة المرسلة"
+#: capeditor/cap_settings.py:28
+msgid "Email of the sending institution"
+msgstr "البريد الإلكتروني للمؤسسة المرسلة"
 
-#: capeditor/models.py:39
+#: capeditor/cap_settings.py:29
 msgid "CAP Sender Name"
 msgstr "اسم مرسل CAP"
 
-#: capeditor/models.py:40
+#: capeditor/cap_settings.py:30
 msgid "Name of the sending institution"
 msgstr "اسم المؤسسة المرسلة"
 
-#: capeditor/models.py:44
+#: capeditor/cap_settings.py:32
+msgid "WMO Register of Alerting Authorities OID"
+msgstr "سجل المنظمة العالمية للأرصاد الجوية للهيئات التنبيهية OID"
+
+#: capeditor/cap_settings.py:33
+msgid ""
+"WMO Register of Alerting Authorities Object Identifier (OID) of the sending "
+"institution. This will be used to generate CAP messages identifiers"
+msgstr ""
+"معرف كائن سجل هيئات التنبيه التابع للمنظمة العالمية للأرصاد الجوية (OID) "
+"للمؤسسة المرسلة. سيتم استخدامه لتوليد معرفات رسائل CAP"
+
+#: capeditor/cap_settings.py:38
+msgid "Logo of the sending institution"
+msgstr "شعار المؤسسة المرسلة"
+
+#: capeditor/cap_settings.py:42
 msgid "Contact Details"
 msgstr "بيانات المتصل"
 
-#: capeditor/models.py:45
+#: capeditor/cap_settings.py:43
 msgid "Contact for follow-up and confirmation of the alert message"
 msgstr "الاتصال للمتابعة والتأكيد على رسالة التنبيه"
 
-#: capeditor/models.py:48
-msgid "Audience Type"
-msgstr "نوع الجمهور"
+#: capeditor/cap_settings.py:45
+msgid "UN Country Boundary"
+msgstr "حدود الأمم المتحدة"
 
-#: capeditor/models.py:49
-msgid "Audience Types"
-msgstr "أنواع الجمهور"
+#: capeditor/cap_settings.py:46
+msgid ""
+"GeoJSON file of the UN Country Boundary. Setting this will enable the UN "
+"Country Boundary check in the alertdrawing tools"
+msgstr ""
+"ملف GeoJSON لحدود الدولة التابعة للأمم المتحدة. سيؤدي ضبط هذا إلى تمكين فحص "
+"حدود الدولة التابعة للأمم المتحدة في أدوات رسم التنبيهات"
 
-#: capeditor/models.py:50
-msgid "Target audiences for published alerts"
-msgstr "استهداف الجماهير للتنبيهات المنشورة"
-
-#: capeditor/models.py:53
+#: capeditor/cap_settings.py:51
 msgid "CAP Settings"
 msgstr "إعدادات كاب"
 
-#: capeditor/models.py:59
+#: capeditor/cap_settings.py:60
+msgid "Sender Details"
+msgstr "تفاصيل المرسل"
+
+#: capeditor/cap_settings.py:62 capeditor/cap_settings.py:64
 msgid "Hazard Types"
 msgstr "أنواع المخاطر"
 
-#: capeditor/models.py:59
+#: capeditor/cap_settings.py:62
 msgid "Hazard Type"
 msgstr "نوع الخطر"
 
-#: capeditor/models.py:60
+#: capeditor/cap_settings.py:63
 msgid "Hazards monitored by the institution"
 msgstr "الأخطار التي ترصدها المؤسسة"
 
-#: capeditor/models.py:68
+#: capeditor/cap_settings.py:66
+msgid "Predefined Alert Areas"
+msgstr "مناطق التنبيه المحددة مسبقًا"
+
+#: capeditor/cap_settings.py:67
+msgid "Predefined areas for alerts"
+msgstr "مناطق محددة مسبقًا للتنبيهات"
+
+#: capeditor/cap_settings.py:68 capeditor/cap_settings.py:119
+msgid "Predefined Areas"
+msgstr "المناطق المحددة مسبقًا"
+
+#: capeditor/cap_settings.py:73
+msgid "UN Boundary"
+msgstr "حدود الأمم المتحدة"
+
+#: capeditor/cap_settings.py:98
 msgid "Select from WMO list of Hazards Event Types"
 msgstr "اختر من قائمة المنظمة العالمية للأرصاد الجوية لأنواع أحداث المخاطر"
 
-#: capeditor/models.py:69
+#: capeditor/cap_settings.py:99
 msgid "Hazard"
 msgstr "خطر"
 
-#: capeditor/models.py:69
+#: capeditor/cap_settings.py:99
 msgid "Name of Hazard"
 msgstr "اسم الخطر"
 
-#: capeditor/models.py:70
+#: capeditor/cap_settings.py:100
 msgid "Icon"
 msgstr "أيقونة"
 
-#: capeditor/models.py:70
+#: capeditor/cap_settings.py:100
 msgid "Matching icon"
 msgstr "أيقونة المطابقة"
 
-#: capeditor/models.py:174
+#: capeditor/constants.py:4
+msgid "Geo"
+msgstr "جيو"
+
+#: capeditor/constants.py:5
+msgid "Met"
+msgstr "الأرصاد الجوية"
+
+#: capeditor/constants.py:6
+msgid "Safety"
+msgstr "أمان"
+
+#: capeditor/constants.py:7
+msgid "Security"
+msgstr "حماية"
+
+#: capeditor/constants.py:8
+msgid "Rescue"
+msgstr "ينقذ"
+
+#: capeditor/constants.py:9
+msgid "Fire"
+msgstr "نار"
+
+#: capeditor/constants.py:10
+msgid "Health"
+msgstr "صحة"
+
+#: capeditor/constants.py:11
+msgid "Env"
+msgstr "بيئة"
+
+#: capeditor/constants.py:12
+msgid "Transport"
+msgstr "ينقل"
+
+#: capeditor/constants.py:13
+msgid "Infra"
+msgstr "بنية تحتية"
+
+#: capeditor/constants.py:14
+msgid "CBRNE"
+msgstr "الأسلحة الكيميائية والبيولوجية والإشعاعية والنووية والنووية"
+
+#: capeditor/constants.py:15
+msgid "Other"
+msgstr "آخر"
+
+#: capeditor/constants.py:19 capeditor/constants.py:194
+msgid "Immediate"
+msgstr "مباشر"
+
+#: capeditor/constants.py:20 capeditor/constants.py:199
+#: capeditor/models.py:249
+msgid "Expected"
+msgstr "مُتوقع"
+
+#: capeditor/constants.py:21 capeditor/constants.py:204
+msgid "Future"
+msgstr "مستقبل"
+
+#: capeditor/constants.py:22 capeditor/constants.py:209
+msgid "Past"
+msgstr "ماضي"
+
+#: capeditor/constants.py:27
+#: capeditor/templates/capeditor/cap_alert_page.html:146
+msgid "Extreme"
+msgstr "أقصى"
+
+#: capeditor/constants.py:28
+#: capeditor/templates/capeditor/cap_alert_page.html:152
+msgid "Severe"
+msgstr "شديد"
+
+#: capeditor/constants.py:29
+#: capeditor/templates/capeditor/cap_alert_page.html:158
+msgid "Moderate"
+msgstr "معتدل"
+
+#: capeditor/constants.py:30
+#: capeditor/templates/capeditor/cap_alert_page.html:164
+msgid "Minor"
+msgstr "صغير"
+
+#: capeditor/constants.py:35 capeditor/constants.py:222
+msgid "Observed"
+msgstr "لاحظ"
+
+#: capeditor/constants.py:36 capeditor/constants.py:227
+msgid "Likely"
+msgstr "محتمل"
+
+#: capeditor/constants.py:37 capeditor/constants.py:232
+msgid "Possible"
+msgstr "ممكن"
+
+#: capeditor/constants.py:38 capeditor/constants.py:237
+msgid "Unlikely"
+msgstr "من غير المحتمل"
+
+#: capeditor/constants.py:43
+msgid "Shelter"
+msgstr "مَأوىً"
+
+#: capeditor/constants.py:44
+msgid "Evacuate"
+msgstr "إخلاء"
+
+#: capeditor/constants.py:45
+msgid "Prepare"
+msgstr "يحضر"
+
+#: capeditor/constants.py:46
+msgid "Execute"
+msgstr "ينفذ"
+
+#: capeditor/constants.py:47
+msgid "Avoid"
+msgstr "يتجنب"
+
+#: capeditor/constants.py:48
+msgid "Monitor"
+msgstr "شاشة"
+
+#: capeditor/constants.py:49
+msgid "Assess"
+msgstr "يٌقيِّم"
+
+#: capeditor/constants.py:50
+msgid "AllClear"
+msgstr "كل شيء واضح"
+
+#: capeditor/constants.py:51
+msgid "None"
+msgstr "لا أحد"
+
+#: capeditor/constants.py:56
+msgid "Avalanche"
+msgstr "انهيار جليدي"
+
+#: capeditor/constants.py:57
+msgid "Cold wave"
+msgstr "موجة باردة"
+
+#: capeditor/constants.py:58
+msgid "Drought/Dry spell"
+msgstr "الجفاف/الجفاف"
+
+#: capeditor/constants.py:59
+msgid "Dust storm/Sandstorm"
+msgstr "عاصفة الغبار/العاصفة الرملية"
+
+#: capeditor/constants.py:60
+msgid "Extra-tropical cyclone"
+msgstr "إعصار خارج المداري"
+
+#: capeditor/constants.py:61
+msgid "Flood"
+msgstr "فيضان"
+
+#: capeditor/constants.py:62
+msgid "Fog"
+msgstr "ضباب"
+
+#: capeditor/constants.py:63
+msgid "Haze/Smoke"
+msgstr "ضباب/دخان"
+
+#: capeditor/constants.py:64
+msgid "Frost"
+msgstr "الصقيع"
+
+#: capeditor/constants.py:65
+msgid "Hail"
+msgstr "يشيد"
+
+#: capeditor/constants.py:66
+msgid "Heat wave"
+msgstr "موجة حر"
+
+#: capeditor/constants.py:67
+msgid "High UV radiation"
+msgstr "الأشعة فوق البنفسجية العالية"
+
+#: capeditor/constants.py:68
+msgid "Icing"
+msgstr "التزيين بالثلج"
+
+#: capeditor/constants.py:69
+msgid "Freezing rain"
+msgstr "المطر المتجمد"
+
+#: capeditor/constants.py:70
+msgid "Landslide/Mudslide & Debris flow"
+msgstr "الانهيارات الأرضية/الانهيارات الطينية وتدفق الحطام"
+
+#: capeditor/constants.py:71
+msgid "Lighting"
+msgstr "إضاءة"
+
+#: capeditor/constants.py:72
+msgid "Pollen pollution/Polluted air"
+msgstr "تلوث حبوب اللقاح/الهواء الملوث"
+
+#: capeditor/constants.py:73
+msgid "Rain/Wet Spell"
+msgstr "المطر/الرطوبة"
+
+#: capeditor/constants.py:74
+msgid "Snow"
+msgstr "الثلج"
+
+#: capeditor/constants.py:75
+msgid "Snowstorm"
+msgstr "عاصفة ثلجية"
+
+#: capeditor/constants.py:76
+msgid "Space weather event"
+msgstr "حدث الطقس الفضائي"
+
+#: capeditor/constants.py:77
+msgid "High Seas/Rogue waves etc."
+msgstr "أعالي البحار/الأمواج العاتية وما إلى ذلك."
+
+#: capeditor/constants.py:78
+msgid "Storm surge/Coastal flood"
+msgstr "العواصف/الفيضانات الساحلية"
+
+#: capeditor/constants.py:79
+msgid "Thunderstorms/Squall lines"
+msgstr "العواصف الرعدية/خطوط العواصف"
+
+#: capeditor/constants.py:80
+msgid "Tornado"
+msgstr "إعصار"
+
+#: capeditor/constants.py:81
+msgid "Tropical cyclone"
+msgstr "إعصار استوائي"
+
+#: capeditor/constants.py:82
+msgid "Tsunami"
+msgstr "تسونامي"
+
+#: capeditor/constants.py:83
+msgid "Volcanic ash"
+msgstr "الرماد البركاني"
+
+#: capeditor/constants.py:84
+msgid "Wild land fire/Forest fire"
+msgstr "حرائق الأراضي البرية/حرائق الغابات"
+
+#: capeditor/constants.py:85
+msgid "Wind"
+msgstr "رياح"
+
+#: capeditor/constants.py:149
+#| msgid "Severity"
+msgid "Red severity"
+msgstr "شدة اللون الأحمر"
+
+#: capeditor/constants.py:158
+#| msgid "Alert Severity"
+msgid "Orange severity"
+msgstr "شدة اللون البرتقالي"
+
+#: capeditor/constants.py:166
+#| msgid "Alert Severity"
+msgid "Yellow severity"
+msgstr "شدة اللون الأصفر"
+
+#: capeditor/constants.py:174
+#| msgid "Alert Severity"
+msgid "Minor severity"
+msgstr "شدة بسيطة"
+
+#: capeditor/constants.py:182
+#| msgid "Unknown - Severity unknown"
+msgid "Unknown severity"
+msgstr "شدة غير معروفة"
+
+#: capeditor/constants.py:214 capeditor/constants.py:242
+#: capeditor/templates/capeditor/cap_alert_page.html:171
+msgid "Unknown"
+msgstr "مجهول"
+
+#: capeditor/forms/capimporter.py:11
+msgid "Copy Paste XML"
+msgstr "نسخ ولصق XML"
+
+#: capeditor/forms/capimporter.py:12
+msgid "URL"
+msgstr "عنوان URL"
+
+#: capeditor/forms/capimporter.py:13
+msgid "File"
+msgstr "ملف"
+
+#: capeditor/forms/capimporter.py:17
+msgid "Load from"
+msgstr "تحميل من"
+
+#: capeditor/forms/capimporter.py:18
+msgid "Paste your CAP XML here"
+msgstr "قم بلصق ملف CAP XML الخاص بك هنا"
+
+#: capeditor/forms/capimporter.py:19
+msgid "CAP Alert XML URL"
+msgstr "رابط XML لتنبيه CAP"
+
+#: capeditor/forms/capimporter.py:20
+msgid "CAP File"
+msgstr "ملف CAP"
+
+#: capeditor/forms/capimporter.py:35 capeditor/forms/capimporter.py:37
+#: capeditor/forms/capimporter.py:39
+msgid "This field is required."
+msgstr "هذه الخانة مطلوبه."
+
+#: capeditor/forms/capimporter.py:75
+msgid ""
+"An error occurred while trying to load the CAP XML. Please check the data "
+"and try again."
+msgstr ""
+"حدث خطأ أثناء محاولة تحميل CAP XML. يرجى التحقق من البيانات والمحاولة مرة "
+"أخرى."
+
+#: capeditor/models.py:81
+msgid ""
+"You must select at least one reference alert for this message type. Only "
+"'Alert' Message Type can be saved without references."
+msgstr ""
+"يجب عليك تحديد تنبيه مرجعي واحد على الأقل لهذا النوع من الرسائل. يمكن حفظ "
+"نوع الرسالة \"تنبيه\" فقط دون مراجع."
+
+#: capeditor/models.py:95
+msgid "You cannot select the same alert more than once."
+msgstr "لا يمكنك تحديد نفس التنبيه أكثر من مرة."
+
+#: capeditor/models.py:106
 msgid ""
 "Draft - A preliminary template or draft, not actionable in its current form"
 msgstr "مسودة - نموذج أو مسودة أولية ، غير قابلة للتنفيذ في شكلها الحالي"
 
-#: capeditor/models.py:175
+#: capeditor/models.py:107
 msgid "Actual - Actionable by all targeted recipients"
 msgstr "فعلي - قابل للتنفيذ من قبل جميع المستفيدين المستهدفين"
 
-#: capeditor/models.py:176
+#: capeditor/models.py:108
 msgid "Test - Technical testing only, all recipients disregard"
 msgstr "الاختبار - الاختبار الفني فقط ، يتجاهل جميع المتلقين"
 
-#: capeditor/models.py:177
+#: capeditor/models.py:109
 msgid ""
 "Exercise - Actionable only by designated exercise participants; exercise "
 "identifier SHOULD appear in note"
@@ -641,15 +1042,15 @@ msgstr ""
 "التمرين - قابل للتنفيذ فقط بواسطة مشاركين معينين في التمرين ؛ يجب أن يظهر "
 "معرف التمرين في الملاحظة"
 
-#: capeditor/models.py:179
+#: capeditor/models.py:111
 msgid "System - For messages that support alert network internal functions"
 msgstr "النظام - للرسائل التي تدعم وظائف شبكة التنبيه الداخلية"
 
-#: capeditor/models.py:183
+#: capeditor/models.py:115
 msgid "Alert - Initial information requiring attention by targeted recipients"
 msgstr "تنبيه - معلومات أولية تتطلب اهتمام المستلمين المستهدفين"
 
-#: capeditor/models.py:184
+#: capeditor/models.py:116
 msgid ""
 "Update - Updates and supersedes the earlier message(s) identified in "
 "referenced alerts"
@@ -657,29 +1058,15 @@ msgstr ""
 "تحديث - يقوم بتحديث الرسالة (الرسائل) السابقة المحددة في التنبيهات المشار "
 "إليها ويحل محلها"
 
-#: capeditor/models.py:185
+#: capeditor/models.py:117
 msgid "Cancel - Cancels the earlier message(s) identified in references"
 msgstr "إلغاء - يلغي الرسالة (الرسائل) السابقة المحددة في المراجع"
 
-#: capeditor/models.py:186
-msgid ""
-"Acknowledge - Acknowledges receipt and acceptance of the message(s) "
-"identified in references field"
-msgstr "إقرار - يقر باستلام وقبول الرسالة (الرسائل) المحددة في حقل المراجع"
-
-#: capeditor/models.py:188
-msgid ""
-"Error -  Indicates rejection of the message(s) identified in references; "
-"explanation SHOULD appear in note field"
-msgstr ""
-"خطأ - يشير إلى رفض الرسالة (الرسائل) المحددة في المراجع ؛ يجب أن يظهر "
-"التفسير في حقل الملاحظات"
-
-#: capeditor/models.py:193
+#: capeditor/models.py:128
 msgid "Public - For general dissemination to unrestricted audiences"
 msgstr "الجمهور - للنشر العام على جمهور غير مقيد"
 
-#: capeditor/models.py:194
+#: capeditor/models.py:129
 msgid ""
 "Restricted - For dissemination only to users with a known operational "
 "requirement as in the restriction field"
@@ -687,72 +1074,72 @@ msgstr ""
 "مقيد - للنشر فقط على المستخدمين الذين لديهم متطلبات تشغيلية معروفة كما هو "
 "الحال في مجال التقييد"
 
-#: capeditor/models.py:196
+#: capeditor/models.py:131
 msgid ""
 "Private - For dissemination only to specified addresses as in the addresses "
 "field in the alert"
 msgstr ""
 "خاص - للنشر فقط على عناوين محددة كما هو الحال في حقل العناوين في التنبيه"
 
-#: capeditor/models.py:200
-msgid "Identifier"
-msgstr "المعرف"
+#: capeditor/models.py:134
+msgid "Id"
+msgstr "بطاقة تعريف"
 
-#: capeditor/models.py:201
+#: capeditor/models.py:135
 msgid "Unique ID. Auto generated on creation."
 msgstr "معرف فريد. تم إنشاؤه تلقائيًا عند الإنشاء."
 
-#: capeditor/models.py:202
+#: capeditor/models.py:136
 msgid "Sender"
 msgstr "مرسل"
 
-#: capeditor/models.py:203
+#: capeditor/models.py:137
 msgid ""
 "Identifies the originator of an alert. For example the website address of "
 "the institution"
 msgstr "يحدد منشئ التنبيه. على سبيل المثال عنوان الموقع الإلكتروني للمؤسسة"
 
-#: capeditor/models.py:205
+#: capeditor/models.py:139
 msgid "Sent"
 msgstr "مرسل"
 
-#: capeditor/models.py:206
+#: capeditor/models.py:140
 msgid "Time and date of origination of the alert"
 msgstr "وقت وتاريخ إصدار التنبيه"
 
-#: capeditor/models.py:207
+#: capeditor/models.py:141
 msgid "Status"
 msgstr "حالة"
 
-#: capeditor/models.py:208
+#: capeditor/models.py:142
 msgid "The code denoting the appropriate handling of the alert"
 msgstr "الرمز الذي يشير إلى المعالجة المناسبة للتنبيه"
 
-#: capeditor/models.py:210
+#: capeditor/models.py:144
 msgid "Message Type"
 msgstr "نوع الرسالة"
 
-#: capeditor/models.py:211
+#: capeditor/models.py:145
 msgid "The code denoting the nature of the alert message"
 msgstr "الرمز الذي يشير إلى طبيعة رسالة التنبيه"
 
-#: capeditor/models.py:212
+#: capeditor/models.py:146
 msgid "Scope"
 msgstr "نِطَاق"
 
-#: capeditor/models.py:213
+#: capeditor/models.py:147
 msgid "The code denoting the intended distribution of the alert message"
 msgstr "الرمز الذي يشير إلى التوزيع المقصود لرسالة التنبيه"
 
-#: capeditor/models.py:214
+#: capeditor/models.py:148
 msgid "Source"
 msgstr "مصدر"
 
-#: capeditor/models.py:215
+#: capeditor/models.py:149
 msgid "The text identifying the source of the alert message"
 msgstr "النص الذي يحدد مصدر رسالة التنبيه"
 
-#: capeditor/models.py:217
+#: capeditor/models.py:151
 msgid ""
 "The text describing the rule for limiting distribution of the restricted "
 "alert message. Used when scope value is Restricted"
@@ -760,19 +1147,19 @@ msgstr ""
 "النص الذي يصف القاعدة للحد من توزيع رسالة التنبيه المقيدة. يُستخدم عندما "
 "تكون قيمة النطاق مقيدة"
 
-#: capeditor/models.py:219
+#: capeditor/models.py:153
 msgid "Restriction"
 msgstr "تقييد"
 
-#: capeditor/models.py:221
+#: capeditor/models.py:155
 msgid "The code denoting the special handling of the alert message"
 msgstr "الرمز الذي يشير إلى المعالجة الخاصة لرسالة التنبيه"
 
-#: capeditor/models.py:222
+#: capeditor/models.py:156
 msgid "Code"
 msgstr "شفرة"
 
-#: capeditor/models.py:224
+#: capeditor/models.py:158
 msgid ""
 "The text describing the purpose or significance of the alert message.The "
 "message note is primarily intended for use with <status> 'Exercise' and "
@@ -781,46 +1168,55 @@ msgstr ""
 "النص الذي يصف الغرض من رسالة التنبيه أو أهميتها. ملاحظة الرسالة مخصصة بشكل "
 "أساسي للاستخدام مع <status> \"التمرين\" و <msgType> \"خطأ\""
 
-#: capeditor/models.py:226
+#: capeditor/models.py:160
 msgid "Note"
 msgstr "ملحوظة"
 
-#: capeditor/models.py:228 capeditor/models.py:232
+#: capeditor/models.py:162 capeditor/models.py:164
 msgid "Alert Information"
 msgstr "معلومات التنبيه"
 
-#: capeditor/models.py:235
+#: capeditor/models.py:167
 msgid "Recipient"
 msgstr "متلقي"
 
-#: capeditor/models.py:237
+#: capeditor/models.py:168
 msgid "Addresses"
 msgstr "عناوين"
 
-#: capeditor/models.py:238
+#: capeditor/models.py:169
 msgid ""
 "The group listing of intended recipients of the alert message, if scope is "
 "Private"
 msgstr ""
 "قائمة المجموعة للمستلمين المقصودين لرسالة التنبيه، إذا كان النطاق خاصًا"
 
-#: capeditor/models.py:243
+#: capeditor/models.py:174
 msgid "Reference Alerts"
 msgstr "التنبيهات المرجعية"
 
-#: capeditor/models.py:248
+#: capeditor/models.py:179
 msgid "Incidents"
 msgstr "الحوادث"
 
-#: capeditor/models.py:263
+#: capeditor/models.py:194
 msgid "Alert Identification"
 msgstr "تحديد التنبيه"
+
+#: capeditor/models.py:244
+msgid "Expired"
+msgstr "منتهي الصلاحية"
+
+#: capeditor/models.py:247
+msgid "Ongoing"
+msgstr "جاري"
 
 #: capeditor/templates/capeditor/cap_alert_page.html:47
 msgid "Issued"
 msgstr "صادر"
 
 #: capeditor/templates/capeditor/cap_alert_page.html:95
+#: capeditor/templates/capeditor/preview_cap_alert.html:172
 msgid "Urgency:"
 msgstr "الاستعجال:"
 
@@ -831,26 +1227,6 @@ msgstr "رابط CAP XML"
 #: capeditor/templates/capeditor/cap_alert_page.html:140
 msgid "Alert Severity"
 msgstr "تنبيه الخطورة"
-
-#: capeditor/templates/capeditor/cap_alert_page.html:146
-msgid "Extreme"
-msgstr "أقصى"
-
-#: capeditor/templates/capeditor/cap_alert_page.html:152
-msgid "Severe"
-msgstr "شديد"
-
-#: capeditor/templates/capeditor/cap_alert_page.html:158
-msgid "Moderate"
-msgstr "معتدل"
-
-#: capeditor/templates/capeditor/cap_alert_page.html:164
-msgid "Minor"
-msgstr "صغير"
-
-#: capeditor/templates/capeditor/cap_alert_page.html:171
-msgid "Unknown"
-msgstr "مجهول"
 
 #: capeditor/templates/capeditor/cap_alert_page.html:180
 msgid "Affected area"
@@ -864,6 +1240,108 @@ msgstr "وصف الحدث"
 msgid "Instructions"
 msgstr "تعليمات"
 
+#: capeditor/templates/capeditor/load_cap_alert.html:6
+#: capeditor/templates/capeditor/preview_cap_alert.html:6
+#, python-format
+msgid "Import CAP Alert %(title)s"
+msgstr "تنبيه استيراد CAP %(title)s"
+
+#: capeditor/templates/capeditor/load_cap_alert.html:15
+msgid "Import CAP Alert"
+msgstr "تنبيه استيراد CAP"
+
+#: capeditor/templates/capeditor/load_cap_alert.html:37
+msgid "Load"
+msgstr "حمولة"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:17
+msgid "Import CAP Alert - Preview"
+msgstr "تنبيه استيراد CAP - معاينة"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:25
+msgid "Import Type:"
+msgstr "نوع الاستيراد:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:34
+msgid "Source URL:"
+msgstr "رابط المصدر:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:43
+msgid "Source File Name:"
+msgstr "اسم ملف المصدر:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:59
+msgid "Load different alert"
+msgstr "تحميل تنبيه مختلف"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:68
+msgid "Sender:"
+msgstr "مرسل:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:76
+msgid "Sent:"
+msgstr "مرسل:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:84
+msgid "Status:"
+msgstr "حالة:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:92
+msgid "Message Type:"
+msgstr "نوع الرسالة:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:112
+msgid "Create Draft Alert"
+msgstr "إنشاء تنبيه المسودة"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:146
+msgid "Language:"
+msgstr "لغة:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:154
+msgid "Category:"
+msgstr "فئة:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:164
+msgid "Event:"
+msgstr "حدث:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:180
+msgid "Severity:"
+msgstr "خطورة:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:188
+msgid "Certainty:"
+msgstr "بالتاكيد:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:199
+msgid "Effective:"
+msgstr "فعال:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:209
+msgid "Onset:"
+msgstr "بداية:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:219
+msgid "Expires:"
+msgstr "تنتهي صلاحيتها:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:231
+msgid "Headline:"
+msgstr "العنوان:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:239
+msgid "Description:"
+msgstr "وصف:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:248
+msgid "Instruction:"
+msgstr "تعليمات:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:258
+msgid "Area:"
+msgstr "منطقة:"
+
 #: capeditor/templates/capeditor/widgets/circle_widget.html:10
 msgid "Longitude"
 msgstr "خط الطول"
@@ -875,3 +1353,48 @@ msgstr "خط العرض"
 #: capeditor/templates/capeditor/widgets/circle_widget.html:36
 msgid "Radius (in kilometers) "
 msgstr "نصف القطر (بالكيلومترات)"
+
+#: capeditor/wagtail_hooks.py:88
+#, python-format
+msgid "Page '%(page_title)s' copied."
+msgstr "تم نسخ الصفحة '%(page_title)s'."
+
+#~ msgid "Unknown - Urgency not known"
+#~ msgstr "غير معروف - الاستعجال غير معروف"
+
+#~ msgid "Unknown - Certainty unknown"
+#~ msgstr "غير معروف - اليقين غير معروف"
+
+#~ msgid "Intended audience"
+#~ msgstr "الجمهور المستهدف"
+
+#~ msgid "CAP Sender Identifier"
+#~ msgstr "معرف مرسل CAP"
+
+#~ msgid "Can be the website link or email of the sending institution"
+#~ msgstr "يمكن أن يكون رابط الموقع أو البريد الإلكتروني للمؤسسة المرسلة"
+
+#~ msgid "Audience Type"
+#~ msgstr "نوع الجمهور"
+
+#~ msgid "Audience Types"
+#~ msgstr "أنواع الجمهور"
+
+#~ msgid "Target audiences for published alerts"
+#~ msgstr "الفئات المستهدفة للتنبيهات المنشورة"
+
+#~ msgid ""
+#~ "Acknowledge - Acknowledges receipt and acceptance of the message(s) "
+#~ "identified in references field"
+#~ msgstr ""
+#~ "الإقرار - الإقرار باستلام وقبول الرسالة (الرسائل) المحددة في حقل المراجع"
+
+#~ msgid ""
+#~ "Error -  Indicates rejection of the message(s) identified in references; "
+#~ "explanation SHOULD appear in note field"
+#~ msgstr ""
+#~ "خطأ - يشير إلى رفض الرسالة (الرسائل) المحددة في المراجع؛ يجب أن يظهر التفسير"
+#~ " في حقل الملاحظة"
+
+#~ msgid "Identifier"
+#~ msgstr "معرف"

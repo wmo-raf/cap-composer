@@ -1,35 +1,88 @@
+from django.utils.translation import gettext_lazy as _
+
+CATEGORY_TYPES = (
+    _('Geo'),
+    _('Met'),
+    _('Safety'),
+    _('Security'),
+    _('Rescue'),
+    _('Fire'),
+    _('Health'),
+    _('Env'),
+    _('Transport'),
+    _('Infra'),
+    _('CBRNE'),
+    _('Other'),
+)
+
+URGENCY_TYPES = (
+    _('Immediate'),
+    _('Expected'),
+    _('Future'),
+    _('Past'),
+    # ('Unknown') Not recommended
+)
+
+SEVERITY_TYPES = (
+    _('Extreme'),
+    _('Severe'),
+    _('Moderate'),
+    _('Minor'),
+    # ('Unknown', _("Unknown - Severity unknown")),  Not recommended
+)
+
+CERTAINTY_TYPES = (
+    _('Observed'),
+    _('Likely'),
+    _('Possible'),
+    _('Unlikely', ),
+    # ('Unknown', _("Unknown - Certainty unknown")),  Not recommended
+)
+
+RESPONSE_TYPES = (
+    _("Shelter"),
+    _("Evacuate"),
+    _("Prepare"),
+    _("Execute"),
+    _("Avoid", ),
+    _("Monitor"),
+    _("Assess"),
+    _("AllClear"),
+    _("None"),
+)
+
 # wmo event types list per Cg-18
 WMO_HAZARD_EVENTS_TYPE_CHOICES = (
-    ("Avalanche", "Avalanche"),
-    ("Cold wave", "Cold wave"),
-    ("Drought/Dry spell", "Drought/Dry spell"),
-    ("Dust storm/Sandstorm", "Dust storm/Sandstorm"),
-    ("Extra-tropical cyclone", "Extra-tropical cyclone"),
-    ("Flood", "Flood"),
-    ("Fog", "Fog"),
-    ("Haze/Smoke", "Haze/Smoke"),
-    ("Frost", "Frost"),
-    ("Hail", "Hail"),
-    ("Heat wave", "Heat wave"),
-    ("High UV radiation", "High UV radiation"),
-    ("Icing", "Icing"),
-    ("Freezing rain", "Freezing rain"),
-    ("Landslide/Mudslide & Debris flow", "Landslide/Mudslide & Debris flow"),
-    ("Lighting", "Lighting"),
-    ("Pollen pollution/Polluted air", "Pollen pollution/Polluted air"),
-    ("Rain/Wet Spell", "Rain/Wet Spell"),
-    ("Snow", "Snow"),
-    ("Snowstorm", "Snowstorm"),
-    ("Space weather event", "Space weather event"),
-    ("High Seas/Rogue waves etc.", "High Seas/Rogue waves etc."),
-    ("Storm surge/Coastal flood", "Storm surge/Coastal flood"),
-    ("Thunderstorms/Squall lines", "Thunderstorms/Squall lines"),
-    ("Tornado", "Tornado"),
-    ("Tropical cyclone", "Tropical cyclone"),
-    ("Tsunami", "Tsunami"),
-    ("Volcanic ash", "Volcanic ash"),
-    ("Wild land fire/Forest fire", "Wild land fire/Forest fire"),
-    ("Wind", "Wind"),
+    ("Avalanche", _("Avalanche")),
+    ("Cold wave", _("Cold wave")),
+    ("Drought/Dry spell", _("Drought/Dry spell")),
+    ("Dust storm/Sandstorm", _("Dust storm/Sandstorm")),
+    ("Extra-tropical cyclone", _("Extra-tropical cyclone")),
+    ("Flood", _("Flood")),
+    ("Fog", _("Fog")),
+    ("Haze/Smoke", _("Haze/Smoke")),
+    ("Frost", _("Frost")),
+    ("Hail", _("Hail")),
+    ("Heat wave", _("Heat wave")),
+    ("High UV radiation", _("High UV radiation")),
+    ("Icing", _("Icing")),
+    ("Freezing rain", _("Freezing rain")),
+    ("Landslide/Mudslide & Debris flow", _("Landslide/Mudslide & Debris flow")),
+    ("Lighting", _("Lighting")),
+    ("Pollen pollution/Polluted air", _("Pollen pollution/Polluted air")),
+    ("Rain/Wet Spell", _("Rain/Wet Spell")),
+    ("Snow", _("Snow")),
+    ("Snowstorm", _("Snowstorm")),
+    ("Space weather event", _("Space weather event")),
+    ("High Seas/Rogue waves etc.", _("High Seas/Rogue waves etc.")),
+    ("Storm surge/Coastal flood", _("Storm surge/Coastal flood")),
+    ("Thunderstorms/Squall lines", _("Thunderstorms/Squall lines")),
+    ("Tornado", _("Tornado")),
+    ("Tropical cyclone", _("Tropical cyclone")),
+    ("Tsunami", _("Tsunami")),
+    ("Volcanic ash", _("Volcanic ash")),
+    ("Wild land fire/Forest fire", _("Wild land fire/Forest fire")),
+    ("Wind", _("Wind")),
 )
 
 CAP_MESSAGE_ORDER_SEQUENCE = {
@@ -93,7 +146,7 @@ CAP_MESSAGE_ORDER_SEQUENCE = {
 
 SEVERITY_MAPPING = {
     "Extreme": {
-        "label": "Red severity",
+        "label": _("Red severity"),
         "color": "#d72f2a",
         "background_color": "#fcf2f2",
         "border_color": "#721515",
@@ -102,7 +155,7 @@ SEVERITY_MAPPING = {
         "id": 4
     },
     "Severe": {
-        "label": "Orange severity",
+        "label": _("Orange severity"),
         "color": "#fe9900",
         "background_color": "#fff9f2",
         "border_color": "#9a6100",
@@ -110,7 +163,7 @@ SEVERITY_MAPPING = {
         "id": 3
     },
     "Moderate": {
-        "label": "Yellow severity",
+        "label": _("Yellow severity"),
         "color": "#ffff00",
         "background_color": "#fffdf1",
         "border_color": "#938616",
@@ -118,7 +171,7 @@ SEVERITY_MAPPING = {
         "id": 2
     },
     "Minor": {
-        "label": "Minor severity",
+        "label": _("Minor severity"),
         "color": "#03ffff",
         "background_color": "#fffdf1",
         "border_color": "#938616",
@@ -126,7 +179,7 @@ SEVERITY_MAPPING = {
         "id": 1
     },
     "Unknown": {
-        "label": "Unknown severity",
+        "label": _("Unknown severity"),
         "color": "#3366ff",
         "background_color": "#fffdf1",
         "border_color": "#122663",
@@ -138,27 +191,27 @@ SEVERITY_MAPPING = {
 
 URGENCY_MAPPING = {
     "Immediate": {
-        "label": "Immediate",
+        "label": _("Immediate"),
         "certainty": "Immediate",
         "id": 4
     },
     "Expected": {
-        "label": "Expected",
+        "label": _("Expected"),
         "certainty": "Expected",
         "id": 3
     },
     "Future": {
-        "label": "Future",
+        "label": _("Future"),
         "certainty": "Future",
         "id": 2
     },
     "Past": {
-        "label": "Past",
+        "label": _("Past"),
         "certainty": "Past",
         "id": 1
     },
     "Unknown": {
-        "label": "Unknown",
+        "label": _("Unknown"),
         "certainty": "Unknown",
         "id": 0
     },
@@ -166,27 +219,27 @@ URGENCY_MAPPING = {
 
 CERTAINTY_MAPPING = {
     "Observed": {
-        "label": "Observed",
+        "label": _("Observed"),
         "certainty": "Observed",
         "id": 4
     },
     "Likely": {
-        "label": "Likely",
+        "label": _("Likely"),
         "certainty": "Likely",
         "id": 3
     },
     "Possible": {
-        "label": "Possible",
+        "label": _("Possible"),
         "certainty": "Possible",
         "id": 2
     },
     "Unlikely": {
-        "label": "Unlikely",
+        "label": _("Unlikely"),
         "certainty": "Unlikely",
         "id": 1
     },
     "Unknown": {
-        "label": "Unknown",
+        "label": _("Unknown"),
         "certainty": "Unknown",
         "id": 0
     },

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-13 17:20+0300\n"
+"POT-Creation-Date: 2024-09-30 20:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,94 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: sandbox/home/models.py:63
+msgid "Search image"
+msgstr "ምስል ይፈልጉ"
+
+#: sandbox/home/models.py:79
+msgid "For search engines"
+msgstr "ለፍለጋ ሞተሮች"
+
+#: sandbox/home/models.py:85
+msgid "For site menus"
+msgstr "ለጣቢያ ምናሌዎች"
+
+#: sandbox/home/models.py:90
+msgid "CAP Alert Page"
+msgstr "የ CAP ማንቂያ ገጽ"
+
+#: sandbox/home/models.py:91
+msgid "CAP Alert Pages"
+msgstr "CAP ማንቂያ ገጾች"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:59
+msgid "Alert Severity"
+msgstr "የማንቂያ ጥብቅነት"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:66
+msgid "Extreme"
+msgstr "ጽንፍ"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:73
+msgid "Severe"
+msgstr "ከባድ"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:80
+msgid "Moderate"
+msgstr "መጠነኛ"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:87
+msgid "Minor"
+msgstr "አናሳ"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:94
+msgid "Unknown"
+msgstr "ያልታወቀ"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:167
+msgid "Urgency"
+msgstr "አስቸኳይ"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:176
+msgid "Severity"
+msgstr "ከባድነት"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:185
+msgid "Certainty"
+msgstr "እርግጠኝነት"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:195
+msgid "Time period"
+msgstr "የጊዜ ወቅት"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:204
+msgid "Issued"
+msgstr "የተሰጠ"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:215
+msgid "Effective"
+msgstr "ውጤታማ"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:231
+msgid "Onset"
+msgstr "ጅምር"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:240
+msgid "Expires"
+msgstr "ጊዜው ያበቃል"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:251
+msgid "Area"
+msgstr "አካባቢ"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:263
+msgid "Event Description"
+msgstr "የክስተት መግለጫ"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:274
+msgid "Instructions"
+msgstr "መመሪያዎች"
 
 #: sandbox/home/templates/home/welcome_page.html:6
 msgid "Visit the Wagtail website"
@@ -38,26 +126,46 @@ msgstr ""
 "እባክዎ <a href=\"https://github.com/wagtail/wagtail/wiki/Slack\">በSlack ላይ "
 "ማህበረሰባችንን ለመቀላቀል</a>፣ ወይም ከታች ካሉት ማገናኛዎች በአንዱ ይጀምሩ።"
 
-#: sandbox/home/templates/home/welcome_page.html:35
+#: sandbox/home/templates/home/welcome_page.html:39
 msgid "Wagtail Documentation"
 msgstr "Wagtail ሰነድ"
 
-#: sandbox/home/templates/home/welcome_page.html:36
+#: sandbox/home/templates/home/welcome_page.html:40
 msgid "Topics, references, & how-tos"
 msgstr "ርዕሶች፣ ማጣቀሻዎች እና እንዴት እንደሚደረግ"
 
-#: sandbox/home/templates/home/welcome_page.html:42
+#: sandbox/home/templates/home/welcome_page.html:46
 msgid "Tutorial"
 msgstr "አጋዥ ስልጠና"
 
-#: sandbox/home/templates/home/welcome_page.html:43
+#: sandbox/home/templates/home/welcome_page.html:47
 msgid "Build your first Wagtail site"
 msgstr "የመጀመሪያውን የWagtail ጣቢያዎን ይገንቡ"
 
-#: sandbox/home/templates/home/welcome_page.html:49
+#: sandbox/home/templates/home/welcome_page.html:53
 msgid "Admin Interface"
 msgstr "የአስተዳዳሪ በይነገጽ"
 
-#: sandbox/home/templates/home/welcome_page.html:50
+#: sandbox/home/templates/home/welcome_page.html:54
 msgid "Create your superuser first!"
 msgstr "መጀመሪያ ሱፐር ተጠቃሚዎን ይፍጠሩ!"
+
+#: sandbox/home/wagtail_hooks.py:27
+msgid "Alerts"
+msgstr "ማንቂያዎች"
+
+#: sandbox/home/wagtail_hooks.py:40
+msgid "CAP Alerts"
+msgstr "የ CAP ማንቂያዎች"
+
+#: sandbox/home/wagtail_hooks.py:62
+msgid "Import CAP Alert"
+msgstr "የ CAP ማንቂያ አስመጣ"
+
+#: sandbox/home/wagtail_hooks.py:70
+msgid "CAP Base Settings"
+msgstr "CAP ቤዝ ቅንብሮች"
+
+#: sandbox/home/wagtail_hooks.py:282
+msgid "CAP Alert draft created. You can now edit the alert."
+msgstr "CAP ማንቂያ ረቂቅ ተፈጥሯል። አሁን ማንቂያውን ማርትዕ ይችላሉ።"

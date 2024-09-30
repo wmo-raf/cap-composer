@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-13 17:20+0300\n"
+"POT-Creation-Date: 2024-09-30 20:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,94 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: sandbox/home/models.py:63
+msgid "Search image"
+msgstr "Tafuta picha"
+
+#: sandbox/home/models.py:79
+msgid "For search engines"
+msgstr "Kwa injini za utafutaji"
+
+#: sandbox/home/models.py:85
+msgid "For site menus"
+msgstr "Kwa menyu ya tovuti"
+
+#: sandbox/home/models.py:90
+msgid "CAP Alert Page"
+msgstr "Ukurasa wa Tahadhari ya CAP"
+
+#: sandbox/home/models.py:91
+msgid "CAP Alert Pages"
+msgstr "Kurasa za Tahadhari za CAP"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:59
+msgid "Alert Severity"
+msgstr "Ukali wa Tahadhari"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:66
+msgid "Extreme"
+msgstr "Uliokithiri"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:73
+msgid "Severe"
+msgstr "Mkali"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:80
+msgid "Moderate"
+msgstr "Wastani"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:87
+msgid "Minor"
+msgstr "Ndogo"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:94
+msgid "Unknown"
+msgstr "Haijulikani"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:167
+msgid "Urgency"
+msgstr "Uharaka"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:176
+msgid "Severity"
+msgstr "Ukali"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:185
+msgid "Certainty"
+msgstr "Uhakika"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:195
+msgid "Time period"
+msgstr "Kipindi cha wakati"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:204
+msgid "Issued"
+msgstr "Imetolewa"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:215
+msgid "Effective"
+msgstr "Ufanisi"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:231
+msgid "Onset"
+msgstr "Kuanza"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:240
+msgid "Expires"
+msgstr "Muda wake unaisha"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:251
+msgid "Area"
+msgstr "Eneo"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:263
+msgid "Event Description"
+msgstr "Maelezo ya Tukio"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:274
+msgid "Instructions"
+msgstr "Maagizo"
 
 #: sandbox/home/templates/home/welcome_page.html:6
 msgid "Visit the Wagtail website"
@@ -40,26 +128,46 @@ msgstr ""
 "href=\"https://github.com/wagtail/wagtail/wiki/Slack\">kujiunga na jumuiya "
 "yetu kwenye Slack</a>, au anza na mojawapo ya viungo vilivyo hapa chini."
 
-#: sandbox/home/templates/home/welcome_page.html:35
+#: sandbox/home/templates/home/welcome_page.html:39
 msgid "Wagtail Documentation"
 msgstr "Nyaraka za Wagtail"
 
-#: sandbox/home/templates/home/welcome_page.html:36
+#: sandbox/home/templates/home/welcome_page.html:40
 msgid "Topics, references, & how-tos"
 msgstr "Mada, marejeleo na jinsi ya kufanya"
 
-#: sandbox/home/templates/home/welcome_page.html:42
+#: sandbox/home/templates/home/welcome_page.html:46
 msgid "Tutorial"
 msgstr "Mafunzo"
 
-#: sandbox/home/templates/home/welcome_page.html:43
+#: sandbox/home/templates/home/welcome_page.html:47
 msgid "Build your first Wagtail site"
 msgstr "Jenga tovuti yako ya kwanza ya Wagtail"
 
-#: sandbox/home/templates/home/welcome_page.html:49
+#: sandbox/home/templates/home/welcome_page.html:53
 msgid "Admin Interface"
 msgstr "Kiolesura cha Msimamizi"
 
-#: sandbox/home/templates/home/welcome_page.html:50
+#: sandbox/home/templates/home/welcome_page.html:54
 msgid "Create your superuser first!"
 msgstr "Unda mtumiaji wako mkuu kwanza!"
+
+#: sandbox/home/wagtail_hooks.py:27
+msgid "Alerts"
+msgstr "Tahadhari"
+
+#: sandbox/home/wagtail_hooks.py:40
+msgid "CAP Alerts"
+msgstr "Tahadhari za CAP"
+
+#: sandbox/home/wagtail_hooks.py:62
+msgid "Import CAP Alert"
+msgstr "Ingiza Arifa ya CAP"
+
+#: sandbox/home/wagtail_hooks.py:70
+msgid "CAP Base Settings"
+msgstr "Mipangilio ya Msingi ya CAP"
+
+#: sandbox/home/wagtail_hooks.py:282
+msgid "CAP Alert draft created. You can now edit the alert."
+msgstr "Rasimu ya Arifa ya CAP imeundwa. Sasa unaweza kuhariri arifa."

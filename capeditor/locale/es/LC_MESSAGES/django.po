@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-13 17:20+0300\n"
+"POT-Creation-Date: 2024-09-30 20:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,72 +18,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: capeditor/blocks.py:69 capeditor/blocks.py:97 capeditor/blocks.py:298
-#: capeditor/blocks.py:373
+#: capeditor/blocks.py:117 capeditor/blocks.py:145 capeditor/blocks.py:482
+#: capeditor/cap_settings.py:114
 msgid "Name"
 msgstr "Nombre"
 
-#: capeditor/blocks.py:69
+#: capeditor/blocks.py:117
 msgid "Name of the recipient"
 msgstr "Nombre del destinatario"
 
-#: capeditor/blocks.py:70
+#: capeditor/blocks.py:118
 msgid "Address"
 msgstr "DIRECCIÓN"
 
-#: capeditor/blocks.py:70
+#: capeditor/blocks.py:118
 msgid "Address Information of the recipient"
 msgstr "Información de dirección del destinatario"
 
-#: capeditor/blocks.py:88 capeditor/models.py:241
+#: capeditor/blocks.py:136 capeditor/models.py:172
 msgid "Reference Alert"
 msgstr "Alerta de referencia"
 
-#: capeditor/blocks.py:89
+#: capeditor/blocks.py:137
 msgid "Earlier alert referenced by this alert"
 msgstr "Alerta anterior a la que hace referencia esta alerta"
 
-#: capeditor/blocks.py:93 capeditor/models.py:246
+#: capeditor/blocks.py:141 capeditor/models.py:177
 msgid "Incident"
 msgstr "Incidente"
 
-#: capeditor/blocks.py:93
+#: capeditor/blocks.py:141
 msgid "Referent incident to this alert message"
 msgstr "Incidencia referente a este mensaje de alerta"
 
-#: capeditor/blocks.py:98 capeditor/blocks.py:299 capeditor/blocks.py:374
+#: capeditor/blocks.py:146 capeditor/blocks.py:173 capeditor/blocks.py:483
 msgid "Value"
 msgstr "Valor"
 
-#: capeditor/blocks.py:103
+#: capeditor/blocks.py:151
 msgid "Shelter - Take shelter in place or per instruction"
 msgstr "Refugio: refúgiese en el lugar o según las instrucciones"
 
-#: capeditor/blocks.py:104
+#: capeditor/blocks.py:152
 msgid "Evacuate - Relocate as instructed in the instruction"
 msgstr "Evacuar - Reubicar como se indica en las instrucciones"
 
-#: capeditor/blocks.py:105
+#: capeditor/blocks.py:153
 msgid "Prepare - Relocate as instructed in the instruction"
 msgstr "Preparar - Reubicar como se indica en las instrucciones"
 
-#: capeditor/blocks.py:106
+#: capeditor/blocks.py:154
 msgid "Execute - Execute a pre-planned activity identified in instruction"
 msgstr ""
 "Ejecutar: ejecutar una actividad planificada previamente identificada en la "
 "instrucción"
 
-#: capeditor/blocks.py:107
+#: capeditor/blocks.py:155
 msgid "Avoid - Avoid the subject event as per the instruction"
 msgstr "Evitar: evita el evento en cuestión según las instrucciones."
 
-#: capeditor/blocks.py:108
+#: capeditor/blocks.py:156
 msgid "Monitor - Attend to information sources as described in instruction"
 msgstr ""
 "Supervisar: prestar atención a las fuentes de información como se describe "
 "en las instrucciones"
 
-#: capeditor/blocks.py:109
+#: capeditor/blocks.py:157
 msgid ""
 "Assess - Evaluate the information in this message - DONT USE FOR PUBLIC "
 "ALERTS"
@@ -91,7 +91,7 @@ msgstr ""
 "Evaluar - Evaluar la información de este mensaje - NO UTILIZAR PARA ALERTAS "
 "PÚBLICAS"
 
-#: capeditor/blocks.py:110
+#: capeditor/blocks.py:158
 msgid ""
 "All Clear - The subject event no longer poses a threat or concern and any "
 "follow on action is described in instruction"
@@ -100,51 +100,76 @@ msgstr ""
 "preocupación y cualquier acción de seguimiento se describe en las "
 "instrucciones."
 
-#: capeditor/blocks.py:112
+#: capeditor/blocks.py:160
 msgid "No action recommended"
 msgstr "No se recomienda ninguna acción"
 
-#: capeditor/blocks.py:115
+#: capeditor/blocks.py:163
 msgid "Response type"
 msgstr "Tipo de respuesta"
 
-#: capeditor/blocks.py:116
+#: capeditor/blocks.py:164
 msgid ""
 "The code denoting the type of action recommended for the target audience"
 msgstr ""
 "El código que indica el tipo de acción recomendada para el público objetivo"
 
-#: capeditor/blocks.py:157
+#: capeditor/blocks.py:169
+msgid "Value Name"
+msgstr "Nombre del valor"
+
+#: capeditor/blocks.py:171
+msgid ""
+"User-assigned string designating the domain of the code. Acronyms SHOULD be "
+"represented in all capital letters without periods (e.g., SAME, FIPS, ZIP"
+msgstr ""
+"Cadena asignada por el usuario que designa el dominio del código. Los "
+"acrónimos DEBEN estar representados en letras mayúsculas sin puntos (por "
+"ejemplo, SAME, FIPS, ZIP)."
+
+#: capeditor/blocks.py:174
+msgid "A string (which may represent a number) denoting the value itself"
+msgstr ""
+"Una cadena (que puede representar un número) que denota el valor en sí."
+
+#: capeditor/blocks.py:177
+msgid "Geographically-based code to describe a message target area"
+msgstr ""
+"Código basado geográficamente para describir un área de destino del mensaje"
+
+#: capeditor/blocks.py:232
+msgid "Level 0"
+msgstr "Nivel 0"
+
+#: capeditor/blocks.py:233
 msgid "Level 1"
 msgstr "Nivel 1"
 
-#: capeditor/blocks.py:158
+#: capeditor/blocks.py:234
 msgid "Level 2"
 msgstr "Nivel 2"
 
-#: capeditor/blocks.py:159
+#: capeditor/blocks.py:235
 msgid "Level 3"
 msgstr "Nivel 3"
 
-#: capeditor/blocks.py:162 capeditor/blocks.py:208 capeditor/blocks.py:260
-#: capeditor/blocks.py:296
+#: capeditor/blocks.py:238 capeditor/blocks.py:296 capeditor/blocks.py:358
 msgid "Affected areas / Regions"
 msgstr "Áreas / Regiones afectadas"
 
-#: capeditor/blocks.py:163 capeditor/blocks.py:209 capeditor/blocks.py:261
-#: capeditor/blocks.py:297
+#: capeditor/blocks.py:239 capeditor/blocks.py:297 capeditor/blocks.py:359
 msgid "The text describing the affected area of the alert message"
 msgstr "El texto que describe el área afectada del mensaje de alerta."
 
-#: capeditor/blocks.py:164
+#: capeditor/blocks.py:240
 msgid "Administrative Level"
 msgstr "Nivel Administrativo"
 
-#: capeditor/blocks.py:165
+#: capeditor/blocks.py:241
 msgid "Boundary"
 msgstr "Perímetro"
 
-#: capeditor/blocks.py:166 capeditor/blocks.py:211
+#: capeditor/blocks.py:242 capeditor/blocks.py:300
 msgid ""
 "The paired values of points defining a polygon that delineates the affected "
 "area of the alert message"
@@ -152,25 +177,25 @@ msgstr ""
 "Los valores emparejados de puntos que definen un polígono que delimita el "
 "área afectada del mensaje de alerta"
 
-#: capeditor/blocks.py:169 capeditor/blocks.py:213 capeditor/blocks.py:264
-#: capeditor/blocks.py:301
+#: capeditor/blocks.py:245 capeditor/blocks.py:302 capeditor/blocks.py:361
+#: capeditor/blocks.py:410
 msgid "Altitude"
 msgstr "Altitud"
 
-#: capeditor/blocks.py:170 capeditor/blocks.py:214 capeditor/blocks.py:265
-#: capeditor/blocks.py:302
+#: capeditor/blocks.py:246 capeditor/blocks.py:303 capeditor/blocks.py:362
+#: capeditor/blocks.py:411
 msgid ""
 "The specific or minimum altitude of the affected area of the alert message"
 msgstr ""
 "La altitud específica o mínima del área afectada del mensaje de alerta."
 
-#: capeditor/blocks.py:172 capeditor/blocks.py:216 capeditor/blocks.py:267
-#: capeditor/blocks.py:304
+#: capeditor/blocks.py:248 capeditor/blocks.py:305 capeditor/blocks.py:364
+#: capeditor/blocks.py:413
 msgid "Ceiling"
 msgstr "Techo"
 
-#: capeditor/blocks.py:173 capeditor/blocks.py:217 capeditor/blocks.py:268
-#: capeditor/blocks.py:305
+#: capeditor/blocks.py:249 capeditor/blocks.py:306 capeditor/blocks.py:365
+#: capeditor/blocks.py:414
 msgid ""
 "The maximum altitude of the affected area of the alert message.MUST NOT be "
 "used except in combination with the altitude element. "
@@ -178,25 +203,35 @@ msgstr ""
 "La altitud máxima del área afectada del mensaje de alerta. NO DEBE usarse "
 "excepto en combinación con el elemento de altitud."
 
-#: capeditor/blocks.py:210
+#: capeditor/blocks.py:252 capeditor/blocks.py:308 capeditor/blocks.py:367
+#: capeditor/blocks.py:416
+msgid "Geocode"
+msgstr "Geocodificar"
+
+#: capeditor/blocks.py:298
 msgid "Polygon"
 msgstr "Polígono"
 
-#: capeditor/blocks.py:262 capeditor/blocks.py:568
+#: capeditor/blocks.py:360 capeditor/blocks.py:676
 msgid "Circle"
 msgstr "Círculo"
 
-#: capeditor/blocks.py:262
+#: capeditor/blocks.py:360
 msgid "Drag the marker to change position"
 msgstr "Arrastra el marcador para cambiar de posición"
 
-#: capeditor/blocks.py:309
+#: capeditor/blocks.py:409 capeditor/cap_settings.py:66
+#: capeditor/cap_settings.py:115
+msgid "Area"
+msgstr "Área"
+
+#: capeditor/blocks.py:419
 msgid "The human-readable name of the agency or authority issuing this alert."
 msgstr ""
 "El nombre legible por humanos de la agencia o autoridad que emite esta "
 "alerta."
 
-#: capeditor/blocks.py:310
+#: capeditor/blocks.py:420
 msgid ""
 "The text describing the contact for follow-up and confirmation of the alert "
 "message"
@@ -204,23 +239,19 @@ msgstr ""
 "El texto que describe el contacto para el seguimiento y confirmación del "
 "mensaje de alerta."
 
-#: capeditor/blocks.py:311
-msgid "The text describing the intended audience of the alert message"
-msgstr "El texto que describe la audiencia prevista del mensaje de alerta."
-
-#: capeditor/blocks.py:353 capeditor/blocks.py:362
+#: capeditor/blocks.py:462 capeditor/blocks.py:471
 msgid "Resource Description"
 msgstr "Descripción del recurso"
 
-#: capeditor/blocks.py:354 capeditor/blocks.py:363
+#: capeditor/blocks.py:463 capeditor/blocks.py:472
 msgid "The text describing the type and content of the resource file"
 msgstr "El texto que describe el tipo y el contenido del archivo de recursos."
 
-#: capeditor/blocks.py:364
+#: capeditor/blocks.py:473
 msgid "External Resource Link"
 msgstr "Enlace de recursos externos"
 
-#: capeditor/blocks.py:365
+#: capeditor/blocks.py:474
 msgid ""
 "Link to external resource. This can be for example a link to related "
 "websites. "
@@ -228,61 +259,65 @@ msgstr ""
 "Enlace a recurso externo. Esto puede ser, por ejemplo, un enlace a sitios "
 "web relacionados."
 
-#: capeditor/blocks.py:373
+#: capeditor/blocks.py:482
 msgid "Name for the event code"
 msgstr "Nombre para el código de evento"
 
-#: capeditor/blocks.py:374
+#: capeditor/blocks.py:483
 msgid "Value of the event code"
 msgstr "Valor del código de evento"
 
-#: capeditor/blocks.py:478
+#: capeditor/blocks.py:585
 msgid "English"
 msgstr "Inglés"
 
-#: capeditor/blocks.py:482
+#: capeditor/blocks.py:586
+msgid "French"
+msgstr "Francés"
+
+#: capeditor/blocks.py:590
 msgid "Geophysical"
 msgstr "Geofísico"
 
-#: capeditor/blocks.py:483
+#: capeditor/blocks.py:591
 msgid "Meteorological"
 msgstr "Meteorológico"
 
-#: capeditor/blocks.py:484
+#: capeditor/blocks.py:592
 msgid "General emergency and public safety"
 msgstr "Emergencia general y seguridad ciudadana"
 
-#: capeditor/blocks.py:485
+#: capeditor/blocks.py:593
 msgid "Law enforcement, military, homeland and local/private security"
 msgstr "Aplicación de la ley, militar, nacional y seguridad local/privada"
 
-#: capeditor/blocks.py:486
+#: capeditor/blocks.py:594
 msgid "Rescue and recovery"
 msgstr "Rescate y recuperación"
 
-#: capeditor/blocks.py:487
+#: capeditor/blocks.py:595
 msgid "Fire suppression and rescue"
 msgstr "Extinción de incendios y salvamento"
 
-#: capeditor/blocks.py:488
+#: capeditor/blocks.py:596
 msgid "Medical and public health"
 msgstr "Médico y salud pública"
 
-#: capeditor/blocks.py:489
+#: capeditor/blocks.py:597
 msgid "Pollution and other environmental"
 msgstr "Contaminación y otros ambientales."
 
-#: capeditor/blocks.py:490
+#: capeditor/blocks.py:598
 msgid "Public and private transportation"
 msgstr "Transporte publico y privado"
 
-#: capeditor/blocks.py:491
+#: capeditor/blocks.py:599
 msgid "Utility, telecommunication, other non-transport infrastructure"
 msgstr ""
 "Servicios públicos, telecomunicaciones, otra infraestructura no relacionada "
 "con el transporte"
 
-#: capeditor/blocks.py:492
+#: capeditor/blocks.py:600
 msgid ""
 "Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat "
 "or attack"
@@ -290,146 +325,131 @@ msgstr ""
 "Amenaza o ataque químico, biológico, radiológico, nuclear o explosivo de "
 "alto rendimiento"
 
-#: capeditor/blocks.py:493
+#: capeditor/blocks.py:601
 msgid "Other events"
 msgstr "Otros eventos"
 
-#: capeditor/blocks.py:497
+#: capeditor/blocks.py:605
 msgid "Immediate - Responsive action SHOULD be taken immediately"
 msgstr "Inmediato: la acción de respuesta DEBE tomarse de inmediato"
 
-#: capeditor/blocks.py:498
+#: capeditor/blocks.py:606
 msgid "Expected - Responsive action SHOULD be taken soon (within next hour)"
 msgstr ""
 "Esperado: la acción de respuesta DEBE tomarse pronto (dentro de la próxima "
 "hora)"
 
-#: capeditor/blocks.py:499
+#: capeditor/blocks.py:607
 msgid "Future - Responsive action SHOULD be taken in the near future"
 msgstr "Futuro: se DEBERÍA tomar medidas de respuesta en un futuro próximo"
 
-#: capeditor/blocks.py:500
+#: capeditor/blocks.py:608
 msgid "Past - Responsive action is no longer required"
 msgstr "Pasado: la acción de respuesta ya no es necesaria"
 
-#: capeditor/blocks.py:501
-msgid "Unknown - Urgency not known"
-msgstr "Desconocido - Urgencia no conocida"
-
-#: capeditor/blocks.py:505
+#: capeditor/blocks.py:613
 msgid "Extreme - Extraordinary threat to life or property"
 msgstr "Extremo: amenaza extraordinaria para la vida o la propiedad"
 
-#: capeditor/blocks.py:506
+#: capeditor/blocks.py:614
 msgid "Severe - Significant threat to life or property"
 msgstr "Grave: amenaza importante para la vida o la propiedad"
 
-#: capeditor/blocks.py:507
+#: capeditor/blocks.py:615
 msgid "Moderate - Possible threat to life or property"
 msgstr "Moderado: posible amenaza para la vida o la propiedad"
 
-#: capeditor/blocks.py:508
+#: capeditor/blocks.py:616
 msgid "Minor - Minimal to no known threat to life or property"
 msgstr "Menor: mínima o ninguna amenaza conocida para la vida o la propiedad"
 
-#: capeditor/blocks.py:509
-msgid "Unknown - Severity unknown"
-msgstr "Desconocido: gravedad desconocida"
-
-#: capeditor/blocks.py:513
+#: capeditor/blocks.py:621
 msgid "Observed - Determined to have occurred or to be ongoing"
 msgstr "Observado - Determinado que ha ocurrido o que está en curso"
 
-#: capeditor/blocks.py:514
+#: capeditor/blocks.py:622
 msgid "Likely - Likely (percentage > ~50%)"
 msgstr "Probable - Probable (porcentaje > ~50%)"
 
-#: capeditor/blocks.py:515
+#: capeditor/blocks.py:623
 msgid "Possible - Possible but not likely (percentage <= ~50%)"
 msgstr "Posible - Posible pero no probable (porcentaje <= ~50%)"
 
-#: capeditor/blocks.py:516
+#: capeditor/blocks.py:624
 msgid "Unlikely - Not expected to occur (percentage ~ 0)"
 msgstr "Improbable: no se espera que ocurra (porcentaje ~ 0)"
 
-#: capeditor/blocks.py:517
-msgid "Unknown - Certainty unknown"
-msgstr "Desconocido - Certeza desconocida"
-
-#: capeditor/blocks.py:519
+#: capeditor/blocks.py:627
 #: capeditor/templates/capeditor/cap_alert_page.html:30
 #: capeditor/templates/capeditor/cap_alert_page.html:195
 msgid "Event"
 msgstr "Evento"
 
-#: capeditor/blocks.py:520
-#, fuzzy
-#| msgid ""
-#| "The text denoting the type of the subject event of the alert message"
+#: capeditor/blocks.py:628
 msgid ""
 "The text denoting the type of the subject event of the alert message. You "
 "can define hazards events monitored by your institution from CAP settings"
 msgstr ""
-"El texto que indica el tipo de evento de asunto del mensaje de alerta. Puede"
-" definir eventos de peligros monitoreados por su institución desde la "
-"configuración de CAP"
+"El texto que indica el tipo de evento objeto del mensaje de alerta. Puede "
+"definir eventos de peligro monitoreados por su institución desde la "
+"configuración del CAP"
 
-#: capeditor/blocks.py:523
+#: capeditor/blocks.py:631
 msgid "Category"
 msgstr "Categoría"
 
-#: capeditor/blocks.py:524
+#: capeditor/blocks.py:632
 msgid ""
 "The code denoting the category of the subject event of the alert message"
 msgstr ""
 "El código que indica la categoría del evento sujeto del mensaje de alerta."
 
-#: capeditor/blocks.py:526
+#: capeditor/blocks.py:634
 msgid "Language"
 msgstr "Idioma"
 
-#: capeditor/blocks.py:527
+#: capeditor/blocks.py:635
 msgid "The code denoting the language of the alert message"
 msgstr "El código que indica el idioma del mensaje de alerta."
 
-#: capeditor/blocks.py:529
+#: capeditor/blocks.py:637
 msgid "Urgency"
 msgstr "Urgencia"
 
-#: capeditor/blocks.py:530
+#: capeditor/blocks.py:638
 msgid ""
 "The code denoting the urgency of the subject event of the alert message"
 msgstr ""
 "El código que indica la urgencia del evento sujeto del mensaje de alerta."
 
-#: capeditor/blocks.py:532
+#: capeditor/blocks.py:640
 #: capeditor/templates/capeditor/cap_alert_page.html:104
 msgid "Severity"
 msgstr "Gravedad"
 
-#: capeditor/blocks.py:533
+#: capeditor/blocks.py:641
 msgid ""
 "The code denoting the severity of the subject event of the alert message"
 msgstr ""
 "El código que indica la gravedad del evento en cuestión del mensaje de "
 "alerta."
 
-#: capeditor/blocks.py:535
+#: capeditor/blocks.py:643
 #: capeditor/templates/capeditor/cap_alert_page.html:113
 msgid "Certainty"
 msgstr "Certeza"
 
-#: capeditor/blocks.py:536
+#: capeditor/blocks.py:644
 msgid ""
 "The code denoting the certainty of the subject event of the alert message"
 msgstr ""
 "El código que indica la certeza del evento sujeto del mensaje de alerta."
 
-#: capeditor/blocks.py:538
+#: capeditor/blocks.py:646
 msgid "Headline"
 msgstr "Titular"
 
-#: capeditor/blocks.py:539
+#: capeditor/blocks.py:647
 msgid ""
 "The text headline of the alert message. Make it direct and actionable as "
 "possible while remaining short"
@@ -437,11 +457,11 @@ msgstr ""
 "El título de texto del mensaje de alerta. Hágalo lo más directo y procesable"
 " posible sin dejar de ser corto."
 
-#: capeditor/blocks.py:541
+#: capeditor/blocks.py:649
 msgid "Description"
 msgstr "Descripción"
 
-#: capeditor/blocks.py:543
+#: capeditor/blocks.py:651
 msgid ""
 "The text describing the subject event of the alert message. An extended "
 "description of the hazard or event that occasioned this message"
@@ -449,11 +469,11 @@ msgstr ""
 "El texto que describe el evento del asunto del mensaje de alerta. Una "
 "descripción ampliada del peligro o evento que provocó este mensaje."
 
-#: capeditor/blocks.py:545
+#: capeditor/blocks.py:653
 msgid "Instruction"
 msgstr "Instrucción"
 
-#: capeditor/blocks.py:546
+#: capeditor/blocks.py:654
 msgid ""
 "The text describing the recommended action to be taken by recipients of the "
 "alert message"
@@ -461,12 +481,12 @@ msgstr ""
 "El texto que describe la acción recomendada que deben tomar los "
 "destinatarios del mensaje de alerta."
 
-#: capeditor/blocks.py:548
+#: capeditor/blocks.py:656
 #: capeditor/templates/capeditor/cap_alert_page.html:56
 msgid "Effective"
 msgstr "Eficaz"
 
-#: capeditor/blocks.py:549
+#: capeditor/blocks.py:657
 msgid ""
 "The effective time of the information of the alert message. If not set, the "
 "sent date will be used"
@@ -474,23 +494,23 @@ msgstr ""
 "El tiempo efectivo de la información del mensaje de alerta. Si no se "
 "establece, se utilizará la fecha de envío."
 
-#: capeditor/blocks.py:551
+#: capeditor/blocks.py:659
 #: capeditor/templates/capeditor/cap_alert_page.html:72
 msgid "Onset"
 msgstr "Comienzo"
 
-#: capeditor/blocks.py:552
+#: capeditor/blocks.py:660
 msgid ""
 "The expected time of the beginning of the subject event of the alert message"
 msgstr ""
 "La hora prevista del comienzo del evento de asunto del mensaje de alerta."
 
-#: capeditor/blocks.py:554
+#: capeditor/blocks.py:662
 #: capeditor/templates/capeditor/cap_alert_page.html:81
 msgid "Expires"
 msgstr "Caduca"
 
-#: capeditor/blocks.py:555
+#: capeditor/blocks.py:663
 msgid ""
 "The expiry time of the information of the alert message. If not set, each "
 "recipient is free to set its own policy as to when the message is no longer "
@@ -500,47 +520,51 @@ msgstr ""
 "establece, cada destinatario es libre de establecer su propia política en "
 "cuanto a cuándo el mensaje ya no está en vigor."
 
-#: capeditor/blocks.py:558
+#: capeditor/blocks.py:666
 msgid "Response Types"
 msgstr "Tipos de respuesta"
 
-#: capeditor/blocks.py:560
+#: capeditor/blocks.py:668
 msgid "Sender name"
 msgstr "Nombre del remitente"
 
-#: capeditor/blocks.py:562 capeditor/models.py:43
+#: capeditor/blocks.py:670 capeditor/cap_settings.py:41
 msgid "Contact"
 msgstr "Contacto"
 
-#: capeditor/blocks.py:563 capeditor/blocks.py:589
+#: capeditor/blocks.py:671
 msgid "Audience"
 msgstr "Audiencia"
 
-#: capeditor/blocks.py:566
+#: capeditor/blocks.py:672
+msgid "The text describing the intended audience of the alert message"
+msgstr "El texto que describe la audiencia prevista del mensaje de alerta."
+
+#: capeditor/blocks.py:674
 msgid "Admin Boundary"
 msgstr "Límite de administración"
 
-#: capeditor/blocks.py:567
+#: capeditor/blocks.py:675
 msgid "Draw Polygon"
 msgstr "dibujar polígono"
 
-#: capeditor/blocks.py:569
-msgid "Geocode"
-msgstr "Geocodificar"
+#: capeditor/blocks.py:677 capeditor/cap_settings.py:118
+msgid "Predefined Area"
+msgstr "Área predefinida"
 
-#: capeditor/blocks.py:570
+#: capeditor/blocks.py:678
 msgid "Alert Area"
 msgstr "Área de alerta"
 
-#: capeditor/blocks.py:570
-msgid "Admin Boundary, Polygon, Circle or Geocode"
-msgstr "Límite de administrador, polígono, círculo o código geográfico"
+#: capeditor/blocks.py:678
+msgid "Admin Boundary, Polygon, Circle, or Predefined area"
+msgstr "Límite de administración, polígono, círculo o área predefinida"
 
-#: capeditor/blocks.py:575
+#: capeditor/blocks.py:683
 msgid "Resources"
 msgstr "Recursos"
 
-#: capeditor/blocks.py:575
+#: capeditor/blocks.py:683
 msgid ""
 "Additional file with supplemental information related to this alert "
 "information"
@@ -548,120 +572,505 @@ msgstr ""
 "Archivo adicional con información complementaria relacionada con esta "
 "información de alerta"
 
-#: capeditor/blocks.py:578
+#: capeditor/blocks.py:686
 msgid "Parameter"
 msgstr "Parámetro"
 
-#: capeditor/blocks.py:578
+#: capeditor/blocks.py:686
 msgid "Parameters"
 msgstr "Parámetros"
 
-#: capeditor/blocks.py:579
+#: capeditor/blocks.py:687
 msgid "Event Code"
 msgstr "Código de evento"
 
-#: capeditor/blocks.py:579
+#: capeditor/blocks.py:687
 msgid "Event codes"
 msgstr "Códigos de eventos"
 
-#: capeditor/blocks.py:589
-msgid "Intended audience"
-msgstr "Público objetivo"
+#: capeditor/blocks.py:704
+msgid "The expiry time of the alert should be greater than the effective time"
+msgstr ""
+"El tiempo de expiración de la alerta debe ser mayor que el tiempo efectivo"
 
-#: capeditor/blocks.py:593
+#: capeditor/blocks.py:709
+msgid "The expiry time of the alert should be greater than the onset time"
+msgstr ""
+"El tiempo de expiración de la alerta debe ser mayor que el tiempo de inicio."
+
+#: capeditor/blocks.py:716
 msgid "Contact Detail"
 msgstr "Detalles del contacto"
 
-#: capeditor/models.py:37
-msgid "CAP Sender Identifier"
-msgstr "Identificador del remitente de CAP"
+#: capeditor/cap_settings.py:27
+msgid "CAP Sender Email"
+msgstr "Correo electrónico del remitente de CAP"
 
-#: capeditor/models.py:38
-msgid "Can be the website link or email of the sending institution"
-msgstr ""
-"Puede ser el enlace del sitio web o el correo electrónico de la institución "
-"de envío"
+#: capeditor/cap_settings.py:28
+msgid "Email of the sending institution"
+msgstr "Correo electrónico de la institución remitente"
 
-#: capeditor/models.py:39
+#: capeditor/cap_settings.py:29
 msgid "CAP Sender Name"
 msgstr "Nombre del remitente CAP"
 
-#: capeditor/models.py:40
+#: capeditor/cap_settings.py:30
 msgid "Name of the sending institution"
 msgstr "Nombre de la institución de envío"
 
-#: capeditor/models.py:44
+#: capeditor/cap_settings.py:32
+msgid "WMO Register of Alerting Authorities OID"
+msgstr "Registro de Autoridades de Alerta de la OMM OID"
+
+#: capeditor/cap_settings.py:33
+msgid ""
+"WMO Register of Alerting Authorities Object Identifier (OID) of the sending "
+"institution. This will be used to generate CAP messages identifiers"
+msgstr ""
+"Identificador de objeto (OID) del Registro de Autoridades de Alerta de la "
+"OMM de la institución que envía. Se utilizará para generar identificadores "
+"de mensajes CAP"
+
+#: capeditor/cap_settings.py:38
+msgid "Logo of the sending institution"
+msgstr "Logotipo de la institución de envío"
+
+#: capeditor/cap_settings.py:42
 msgid "Contact Details"
 msgstr "Detalles de contacto"
 
-#: capeditor/models.py:45
+#: capeditor/cap_settings.py:43
 msgid "Contact for follow-up and confirmation of the alert message"
 msgstr "Contacto para seguimiento y confirmación del mensaje de alerta"
 
-#: capeditor/models.py:48
-msgid "Audience Type"
-msgstr "Tipo de audiencia"
+#: capeditor/cap_settings.py:45
+msgid "UN Country Boundary"
+msgstr "Límite de país de la ONU"
 
-#: capeditor/models.py:49
-msgid "Audience Types"
-msgstr "Tipos de audiencia"
+#: capeditor/cap_settings.py:46
+msgid ""
+"GeoJSON file of the UN Country Boundary. Setting this will enable the UN "
+"Country Boundary check in the alertdrawing tools"
+msgstr ""
+"Archivo GeoJSON de los límites de los países de las Naciones Unidas. Si se "
+"configura esta opción, se habilitará la verificación de los límites de los "
+"países de las Naciones Unidas en las herramientas de dibujo de alertas"
 
-#: capeditor/models.py:50
-msgid "Target audiences for published alerts"
-msgstr "Audiencias objetivo para las alertas publicadas"
-
-#: capeditor/models.py:53
+#: capeditor/cap_settings.py:51
 msgid "CAP Settings"
 msgstr "Configuración de CAP"
 
-#: capeditor/models.py:59
+#: capeditor/cap_settings.py:60
+msgid "Sender Details"
+msgstr "Datos del remitente"
+
+#: capeditor/cap_settings.py:62 capeditor/cap_settings.py:64
 msgid "Hazard Types"
 msgstr "Tipos de peligro"
 
-#: capeditor/models.py:59
+#: capeditor/cap_settings.py:62
 msgid "Hazard Type"
 msgstr "Tipo de peligro"
 
-#: capeditor/models.py:60
+#: capeditor/cap_settings.py:63
 msgid "Hazards monitored by the institution"
 msgstr "Peligros monitoreados por la institución"
 
-#: capeditor/models.py:68
+#: capeditor/cap_settings.py:66
+msgid "Predefined Alert Areas"
+msgstr "Áreas de alerta predefinidas"
+
+#: capeditor/cap_settings.py:67
+msgid "Predefined areas for alerts"
+msgstr "Áreas predefinidas para alertas"
+
+#: capeditor/cap_settings.py:68 capeditor/cap_settings.py:119
+msgid "Predefined Areas"
+msgstr "Áreas predefinidas"
+
+#: capeditor/cap_settings.py:73
+msgid "UN Boundary"
+msgstr "Frontera de la ONU"
+
+#: capeditor/cap_settings.py:98
 msgid "Select from WMO list of Hazards Event Types"
 msgstr "Seleccione de la lista de la OMM de tipos de eventos peligrosos"
 
-#: capeditor/models.py:69
+#: capeditor/cap_settings.py:99
 msgid "Hazard"
 msgstr "Peligro"
 
-#: capeditor/models.py:69
+#: capeditor/cap_settings.py:99
 msgid "Name of Hazard"
 msgstr "Nombre del peligro"
 
-#: capeditor/models.py:70
+#: capeditor/cap_settings.py:100
 msgid "Icon"
 msgstr "Icono"
 
-#: capeditor/models.py:70
+#: capeditor/cap_settings.py:100
 msgid "Matching icon"
 msgstr "Icono coincidente"
 
-#: capeditor/models.py:174
+#: capeditor/constants.py:4
+msgid "Geo"
+msgstr "Geo"
+
+#: capeditor/constants.py:5
+msgid "Met"
+msgstr "Meteorología"
+
+#: capeditor/constants.py:6
+msgid "Safety"
+msgstr "Seguridad"
+
+#: capeditor/constants.py:7
+msgid "Security"
+msgstr "Seguridad"
+
+#: capeditor/constants.py:8
+msgid "Rescue"
+msgstr "Rescate"
+
+#: capeditor/constants.py:9
+msgid "Fire"
+msgstr "Fuego"
+
+#: capeditor/constants.py:10
+msgid "Health"
+msgstr "Salud"
+
+#: capeditor/constants.py:11
+msgid "Env"
+msgstr "Ambiente"
+
+#: capeditor/constants.py:12
+msgid "Transport"
+msgstr "Transporte"
+
+#: capeditor/constants.py:13
+msgid "Infra"
+msgstr "Infraestructura"
+
+#: capeditor/constants.py:14
+msgid "CBRNE"
+msgstr ""
+"Amenaza o ataque químico, biológico, radiológico, nuclear o explosivo de "
+"alto rendimiento"
+
+#: capeditor/constants.py:15
+msgid "Other"
+msgstr "Otro"
+
+#: capeditor/constants.py:19 capeditor/constants.py:194
+msgid "Immediate"
+msgstr "Inmediato"
+
+#: capeditor/constants.py:20 capeditor/constants.py:199
+#: capeditor/models.py:249
+msgid "Expected"
+msgstr "Esperado"
+
+#: capeditor/constants.py:21 capeditor/constants.py:204
+msgid "Future"
+msgstr "Futuro"
+
+#: capeditor/constants.py:22 capeditor/constants.py:209
+msgid "Past"
+msgstr "Pasado"
+
+#: capeditor/constants.py:27
+#: capeditor/templates/capeditor/cap_alert_page.html:146
+msgid "Extreme"
+msgstr "Extremo"
+
+#: capeditor/constants.py:28
+#: capeditor/templates/capeditor/cap_alert_page.html:152
+msgid "Severe"
+msgstr "Severo"
+
+#: capeditor/constants.py:29
+#: capeditor/templates/capeditor/cap_alert_page.html:158
+msgid "Moderate"
+msgstr "Moderado"
+
+#: capeditor/constants.py:30
+#: capeditor/templates/capeditor/cap_alert_page.html:164
+msgid "Minor"
+msgstr "Menor"
+
+#: capeditor/constants.py:35 capeditor/constants.py:222
+msgid "Observed"
+msgstr "Observado"
+
+#: capeditor/constants.py:36 capeditor/constants.py:227
+msgid "Likely"
+msgstr "Probable"
+
+#: capeditor/constants.py:37 capeditor/constants.py:232
+msgid "Possible"
+msgstr "Posible"
+
+#: capeditor/constants.py:38 capeditor/constants.py:237
+msgid "Unlikely"
+msgstr "Improbable"
+
+#: capeditor/constants.py:43
+msgid "Shelter"
+msgstr "Refugio"
+
+#: capeditor/constants.py:44
+msgid "Evacuate"
+msgstr "Evacuar"
+
+#: capeditor/constants.py:45
+msgid "Prepare"
+msgstr "Preparar"
+
+#: capeditor/constants.py:46
+msgid "Execute"
+msgstr "Ejecutar"
+
+#: capeditor/constants.py:47
+msgid "Avoid"
+msgstr "Evitar"
+
+#: capeditor/constants.py:48
+msgid "Monitor"
+msgstr "Monitor"
+
+#: capeditor/constants.py:49
+msgid "Assess"
+msgstr "Evaluar"
+
+#: capeditor/constants.py:50
+msgid "AllClear"
+msgstr "Todo despejado"
+
+#: capeditor/constants.py:51
+msgid "None"
+msgstr "Ninguno"
+
+#: capeditor/constants.py:56
+msgid "Avalanche"
+msgstr "Avalancha"
+
+#: capeditor/constants.py:57
+msgid "Cold wave"
+msgstr "Ola de frío"
+
+#: capeditor/constants.py:58
+msgid "Drought/Dry spell"
+msgstr "Sequía/Período seco"
+
+#: capeditor/constants.py:59
+msgid "Dust storm/Sandstorm"
+msgstr "Tormenta de polvo/Tormenta de arena"
+
+#: capeditor/constants.py:60
+msgid "Extra-tropical cyclone"
+msgstr "Ciclón extratropical"
+
+#: capeditor/constants.py:61
+msgid "Flood"
+msgstr "Inundación"
+
+#: capeditor/constants.py:62
+msgid "Fog"
+msgstr "Niebla"
+
+#: capeditor/constants.py:63
+msgid "Haze/Smoke"
+msgstr "Niebla/humo"
+
+#: capeditor/constants.py:64
+msgid "Frost"
+msgstr "Helada"
+
+#: capeditor/constants.py:65
+msgid "Hail"
+msgstr "Granizo"
+
+#: capeditor/constants.py:66
+msgid "Heat wave"
+msgstr "Ola de calor"
+
+#: capeditor/constants.py:67
+msgid "High UV radiation"
+msgstr "Alta radiación ultravioleta"
+
+#: capeditor/constants.py:68
+msgid "Icing"
+msgstr "Formación de hielo"
+
+#: capeditor/constants.py:69
+msgid "Freezing rain"
+msgstr "Lluvia helada"
+
+#: capeditor/constants.py:70
+msgid "Landslide/Mudslide & Debris flow"
+msgstr "Deslizamiento de tierra/deslizamiento de lodo y flujo de escombros"
+
+#: capeditor/constants.py:71
+msgid "Lighting"
+msgstr "Iluminación"
+
+#: capeditor/constants.py:72
+msgid "Pollen pollution/Polluted air"
+msgstr "Contaminación por polen/Aire contaminado"
+
+#: capeditor/constants.py:73
+msgid "Rain/Wet Spell"
+msgstr "Lluvia/Período húmedo"
+
+#: capeditor/constants.py:74
+msgid "Snow"
+msgstr "Nieve"
+
+#: capeditor/constants.py:75
+msgid "Snowstorm"
+msgstr "Nevada"
+
+#: capeditor/constants.py:76
+msgid "Space weather event"
+msgstr "Evento meteorológico espacial"
+
+#: capeditor/constants.py:77
+msgid "High Seas/Rogue waves etc."
+msgstr "Alta mar/olas gigantescas, etc."
+
+#: capeditor/constants.py:78
+msgid "Storm surge/Coastal flood"
+msgstr "Marejada ciclónica/inundación costera"
+
+#: capeditor/constants.py:79
+msgid "Thunderstorms/Squall lines"
+msgstr "Tormentas eléctricas/líneas de turbonadas"
+
+#: capeditor/constants.py:80
+msgid "Tornado"
+msgstr "Tornado"
+
+#: capeditor/constants.py:81
+msgid "Tropical cyclone"
+msgstr "Ciclón tropical"
+
+#: capeditor/constants.py:82
+msgid "Tsunami"
+msgstr "Tsunami"
+
+#: capeditor/constants.py:83
+msgid "Volcanic ash"
+msgstr "Ceniza volcánica"
+
+#: capeditor/constants.py:84
+msgid "Wild land fire/Forest fire"
+msgstr "Incendio forestal/incendio forestal"
+
+#: capeditor/constants.py:85
+msgid "Wind"
+msgstr "Viento"
+
+#: capeditor/constants.py:149
+#| msgid "Severity"
+msgid "Red severity"
+msgstr "Severidad roja"
+
+#: capeditor/constants.py:158
+#| msgid "Alert Severity"
+msgid "Orange severity"
+msgstr "Gravedad naranja"
+
+#: capeditor/constants.py:166
+#| msgid "Alert Severity"
+msgid "Yellow severity"
+msgstr "Gravedad amarilla"
+
+#: capeditor/constants.py:174
+#| msgid "Alert Severity"
+msgid "Minor severity"
+msgstr "Gravedad menor"
+
+#: capeditor/constants.py:182
+#| msgid "Unknown - Severity unknown"
+msgid "Unknown severity"
+msgstr "Gravedad desconocida"
+
+#: capeditor/constants.py:214 capeditor/constants.py:242
+#: capeditor/templates/capeditor/cap_alert_page.html:171
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: capeditor/forms/capimporter.py:11
+msgid "Copy Paste XML"
+msgstr "Copiar y pegar XML"
+
+#: capeditor/forms/capimporter.py:12
+msgid "URL"
+msgstr "URL"
+
+#: capeditor/forms/capimporter.py:13
+msgid "File"
+msgstr "Archivo"
+
+#: capeditor/forms/capimporter.py:17
+msgid "Load from"
+msgstr "Cargar desde"
+
+#: capeditor/forms/capimporter.py:18
+msgid "Paste your CAP XML here"
+msgstr "Pegue su CAP XML aquí"
+
+#: capeditor/forms/capimporter.py:19
+msgid "CAP Alert XML URL"
+msgstr "URL XML de alerta CAP"
+
+#: capeditor/forms/capimporter.py:20
+msgid "CAP File"
+msgstr "Archivo CAP"
+
+#: capeditor/forms/capimporter.py:35 capeditor/forms/capimporter.py:37
+#: capeditor/forms/capimporter.py:39
+msgid "This field is required."
+msgstr "Este campo es obligatorio."
+
+#: capeditor/forms/capimporter.py:75
+msgid ""
+"An error occurred while trying to load the CAP XML. Please check the data "
+"and try again."
+msgstr ""
+"Se produjo un error al intentar cargar el XML del CAP. Verifique los datos y"
+" vuelva a intentarlo."
+
+#: capeditor/models.py:81
+msgid ""
+"You must select at least one reference alert for this message type. Only "
+"'Alert' Message Type can be saved without references."
+msgstr ""
+"Debe seleccionar al menos una alerta de referencia para este tipo de "
+"mensaje. Solo se puede guardar el tipo de mensaje \"Alerta\" sin "
+"referencias."
+
+#: capeditor/models.py:95
+msgid "You cannot select the same alert more than once."
+msgstr "No puede seleccionar la misma alerta más de una vez."
+
+#: capeditor/models.py:106
 msgid ""
 "Draft - A preliminary template or draft, not actionable in its current form"
 msgstr ""
 "Borrador: una plantilla o borrador preliminar, no procesable en su forma "
 "actual"
 
-#: capeditor/models.py:175
+#: capeditor/models.py:107
 msgid "Actual - Actionable by all targeted recipients"
 msgstr "Real: procesable por todos los destinatarios objetivo"
 
-#: capeditor/models.py:176
+#: capeditor/models.py:108
 msgid "Test - Technical testing only, all recipients disregard"
 msgstr "Prueba: solo prueba técnica, todos los destinatarios ignoran"
 
-#: capeditor/models.py:177
+#: capeditor/models.py:109
 msgid ""
 "Exercise - Actionable only by designated exercise participants; exercise "
 "identifier SHOULD appear in note"
@@ -669,18 +1078,18 @@ msgstr ""
 "Ejercicio: procesable solo por los participantes designados del ejercicio; "
 "el identificador del ejercicio DEBE aparecer en la nota"
 
-#: capeditor/models.py:179
+#: capeditor/models.py:111
 msgid "System - For messages that support alert network internal functions"
 msgstr ""
 "Sistema: para mensajes que admiten funciones internas de red de alerta"
 
-#: capeditor/models.py:183
+#: capeditor/models.py:115
 msgid "Alert - Initial information requiring attention by targeted recipients"
 msgstr ""
 "Alerta: información inicial que requiere atención por parte de los "
 "destinatarios específicos"
 
-#: capeditor/models.py:184
+#: capeditor/models.py:116
 msgid ""
 "Update - Updates and supersedes the earlier message(s) identified in "
 "referenced alerts"
@@ -688,32 +1097,16 @@ msgstr ""
 "Actualización: actualiza y reemplaza los mensajes anteriores identificados "
 "en las alertas a las que se hace referencia."
 
-#: capeditor/models.py:185
+#: capeditor/models.py:117
 msgid "Cancel - Cancels the earlier message(s) identified in references"
 msgstr ""
 "Cancelar: cancela los mensajes anteriores identificados en las referencias"
 
-#: capeditor/models.py:186
-msgid ""
-"Acknowledge - Acknowledges receipt and acceptance of the message(s) "
-"identified in references field"
-msgstr ""
-"Acuse de recibo: acusa recibo y aceptación de los mensajes identificados en "
-"el campo de referencias."
-
-#: capeditor/models.py:188
-msgid ""
-"Error -  Indicates rejection of the message(s) identified in references; "
-"explanation SHOULD appear in note field"
-msgstr ""
-"Error: indica el rechazo de los mensajes identificados en las referencias; "
-"la explicación DEBE aparecer en el campo de nota"
-
-#: capeditor/models.py:193
+#: capeditor/models.py:128
 msgid "Public - For general dissemination to unrestricted audiences"
 msgstr "Público: para difusión general a audiencias no restringidas"
 
-#: capeditor/models.py:194
+#: capeditor/models.py:129
 msgid ""
 "Restricted - For dissemination only to users with a known operational "
 "requirement as in the restriction field"
@@ -721,7 +1114,7 @@ msgstr ""
 "Restringido: para difusión solo a usuarios con un requisito operativo "
 "conocido como en el campo de restricción"
 
-#: capeditor/models.py:196
+#: capeditor/models.py:131
 msgid ""
 "Private - For dissemination only to specified addresses as in the addresses "
 "field in the alert"
@@ -729,19 +1122,19 @@ msgstr ""
 "Privado: para difusión solo a direcciones especificadas como en el campo de "
 "direcciones en la alerta"
 
-#: capeditor/models.py:200
-msgid "Identifier"
-msgstr "identificador"
+#: capeditor/models.py:134
+msgid "Id"
+msgstr "Identificación"
 
-#: capeditor/models.py:201
+#: capeditor/models.py:135
 msgid "Unique ID. Auto generated on creation."
 msgstr "Identificación única. Generado automáticamente en la creación."
 
-#: capeditor/models.py:202
+#: capeditor/models.py:136
 msgid "Sender"
 msgstr "Remitente"
 
-#: capeditor/models.py:203
+#: capeditor/models.py:137
 msgid ""
 "Identifies the originator of an alert. For example the website address of "
 "the institution"
@@ -749,47 +1142,47 @@ msgstr ""
 "Identifica al autor de una alerta. Por ejemplo, la dirección del sitio web "
 "de la institución."
 
-#: capeditor/models.py:205
+#: capeditor/models.py:139
 msgid "Sent"
 msgstr "Enviado"
 
-#: capeditor/models.py:206
+#: capeditor/models.py:140
 msgid "Time and date of origination of the alert"
 msgstr "Hora y fecha de origen de la alerta"
 
-#: capeditor/models.py:207
+#: capeditor/models.py:141
 msgid "Status"
 msgstr "Estado"
 
-#: capeditor/models.py:208
+#: capeditor/models.py:142
 msgid "The code denoting the appropriate handling of the alert"
 msgstr "El código que indica el manejo adecuado de la alerta."
 
-#: capeditor/models.py:210
+#: capeditor/models.py:144
 msgid "Message Type"
 msgstr "Tipo de mensaje"
 
-#: capeditor/models.py:211
+#: capeditor/models.py:145
 msgid "The code denoting the nature of the alert message"
 msgstr "El código que indica la naturaleza del mensaje de alerta."
 
-#: capeditor/models.py:212
+#: capeditor/models.py:146
 msgid "Scope"
 msgstr "Alcance"
 
-#: capeditor/models.py:213
+#: capeditor/models.py:147
 msgid "The code denoting the intended distribution of the alert message"
 msgstr "El código que indica la distribución prevista del mensaje de alerta."
 
-#: capeditor/models.py:214
+#: capeditor/models.py:148
 msgid "Source"
 msgstr "Fuente"
 
-#: capeditor/models.py:215
+#: capeditor/models.py:149
 msgid "The text identifying the source of the alert message"
 msgstr "El texto que identifica la fuente del mensaje de alerta."
 
-#: capeditor/models.py:217
+#: capeditor/models.py:151
 msgid ""
 "The text describing the rule for limiting distribution of the restricted "
 "alert message. Used when scope value is Restricted"
@@ -797,19 +1190,19 @@ msgstr ""
 "El texto que describe la regla para limitar la distribución del mensaje de "
 "alerta restringida. Se usa cuando el valor del alcance está restringido"
 
-#: capeditor/models.py:219
+#: capeditor/models.py:153
 msgid "Restriction"
 msgstr "Restricción"
 
-#: capeditor/models.py:221
+#: capeditor/models.py:155
 msgid "The code denoting the special handling of the alert message"
 msgstr "El código que indica el manejo especial del mensaje de alerta."
 
-#: capeditor/models.py:222
+#: capeditor/models.py:156
 msgid "Code"
 msgstr "Código"
 
-#: capeditor/models.py:224
+#: capeditor/models.py:158
 msgid ""
 "The text describing the purpose or significance of the alert message.The "
 "message note is primarily intended for use with <status> 'Exercise' and "
@@ -819,23 +1212,23 @@ msgstr ""
 "La nota del mensaje está pensada principalmente para usarse con <status> "
 "'Exercise' y <msgType> 'Error'"
 
-#: capeditor/models.py:226
+#: capeditor/models.py:160
 msgid "Note"
 msgstr "Nota"
 
-#: capeditor/models.py:228 capeditor/models.py:232
+#: capeditor/models.py:162 capeditor/models.py:164
 msgid "Alert Information"
 msgstr "Información de alerta"
 
-#: capeditor/models.py:235
+#: capeditor/models.py:167
 msgid "Recipient"
 msgstr "Recipiente"
 
-#: capeditor/models.py:237
+#: capeditor/models.py:168
 msgid "Addresses"
 msgstr "direcciones"
 
-#: capeditor/models.py:238
+#: capeditor/models.py:169
 msgid ""
 "The group listing of intended recipients of the alert message, if scope is "
 "Private"
@@ -843,23 +1236,32 @@ msgstr ""
 "La lista de grupos de destinatarios previstos del mensaje de alerta, si el "
 "alcance es Privado"
 
-#: capeditor/models.py:243
+#: capeditor/models.py:174
 msgid "Reference Alerts"
 msgstr "Alertas de referencia"
 
-#: capeditor/models.py:248
+#: capeditor/models.py:179
 msgid "Incidents"
 msgstr "incidentes"
 
-#: capeditor/models.py:263
+#: capeditor/models.py:194
 msgid "Alert Identification"
 msgstr "Identificación de alerta"
+
+#: capeditor/models.py:244
+msgid "Expired"
+msgstr "Venció"
+
+#: capeditor/models.py:247
+msgid "Ongoing"
+msgstr "En curso"
 
 #: capeditor/templates/capeditor/cap_alert_page.html:47
 msgid "Issued"
 msgstr "Emitido"
 
 #: capeditor/templates/capeditor/cap_alert_page.html:95
+#: capeditor/templates/capeditor/preview_cap_alert.html:172
 msgid "Urgency:"
 msgstr "Urgencia:"
 
@@ -870,26 +1272,6 @@ msgstr "Enlace XML de PAC"
 #: capeditor/templates/capeditor/cap_alert_page.html:140
 msgid "Alert Severity"
 msgstr "Gravedad de la alerta"
-
-#: capeditor/templates/capeditor/cap_alert_page.html:146
-msgid "Extreme"
-msgstr "Extremo"
-
-#: capeditor/templates/capeditor/cap_alert_page.html:152
-msgid "Severe"
-msgstr "Severo"
-
-#: capeditor/templates/capeditor/cap_alert_page.html:158
-msgid "Moderate"
-msgstr "Moderado"
-
-#: capeditor/templates/capeditor/cap_alert_page.html:164
-msgid "Minor"
-msgstr "Menor"
-
-#: capeditor/templates/capeditor/cap_alert_page.html:171
-msgid "Unknown"
-msgstr "Desconocido"
 
 #: capeditor/templates/capeditor/cap_alert_page.html:180
 msgid "Affected area"
@@ -903,6 +1285,108 @@ msgstr "descripción del evento"
 msgid "Instructions"
 msgstr "Instrucciones"
 
+#: capeditor/templates/capeditor/load_cap_alert.html:6
+#: capeditor/templates/capeditor/preview_cap_alert.html:6
+#, python-format
+msgid "Import CAP Alert %(title)s"
+msgstr "Alerta de importación CAP %(title)s"
+
+#: capeditor/templates/capeditor/load_cap_alert.html:15
+msgid "Import CAP Alert"
+msgstr "Alerta de importación de CAP"
+
+#: capeditor/templates/capeditor/load_cap_alert.html:37
+msgid "Load"
+msgstr "Carga"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:17
+msgid "Import CAP Alert - Preview"
+msgstr "Alerta de importación de CAP: vista previa"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:25
+msgid "Import Type:"
+msgstr "Tipo de importación:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:34
+msgid "Source URL:"
+msgstr "URL de origen:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:43
+msgid "Source File Name:"
+msgstr "Nombre del archivo de origen:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:59
+msgid "Load different alert"
+msgstr "Cargar alertas diferentes"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:68
+msgid "Sender:"
+msgstr "Remitente:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:76
+msgid "Sent:"
+msgstr "Enviado:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:84
+msgid "Status:"
+msgstr "Estado:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:92
+msgid "Message Type:"
+msgstr "Tipo de mensaje:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:112
+msgid "Create Draft Alert"
+msgstr "Crear alerta de borrador"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:146
+msgid "Language:"
+msgstr "Idioma:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:154
+msgid "Category:"
+msgstr "Categoría:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:164
+msgid "Event:"
+msgstr "Evento:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:180
+msgid "Severity:"
+msgstr "Gravedad:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:188
+msgid "Certainty:"
+msgstr "Certeza:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:199
+msgid "Effective:"
+msgstr "Eficaz:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:209
+msgid "Onset:"
+msgstr "Comienzo:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:219
+msgid "Expires:"
+msgstr "Caduca:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:231
+msgid "Headline:"
+msgstr "Titular:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:239
+msgid "Description:"
+msgstr "Descripción:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:248
+msgid "Instruction:"
+msgstr "Instrucción:"
+
+#: capeditor/templates/capeditor/preview_cap_alert.html:258
+msgid "Area:"
+msgstr "Área:"
+
 #: capeditor/templates/capeditor/widgets/circle_widget.html:10
 msgid "Longitude"
 msgstr "Longitud"
@@ -914,3 +1398,51 @@ msgstr "Latitud"
 #: capeditor/templates/capeditor/widgets/circle_widget.html:36
 msgid "Radius (in kilometers) "
 msgstr "Radio (en kilómetros)"
+
+#: capeditor/wagtail_hooks.py:88
+#, python-format
+msgid "Page '%(page_title)s' copied."
+msgstr "Página '%(page_title)s' copiada."
+
+#~ msgid "Unknown - Urgency not known"
+#~ msgstr "Desconocido - Urgencia no conocida"
+
+#~ msgid "Unknown - Certainty unknown"
+#~ msgstr "Desconocido - Certeza desconocida"
+
+#~ msgid "Intended audience"
+#~ msgstr "Público al que va dirigido"
+
+#~ msgid "CAP Sender Identifier"
+#~ msgstr "Identificador del remitente de CAP"
+
+#~ msgid "Can be the website link or email of the sending institution"
+#~ msgstr ""
+#~ "Puede ser el enlace del sitio web o el correo electrónico de la institución "
+#~ "remitente."
+
+#~ msgid "Audience Type"
+#~ msgstr "Tipo de audiencia"
+
+#~ msgid "Audience Types"
+#~ msgstr "Tipos de audiencia"
+
+#~ msgid "Target audiences for published alerts"
+#~ msgstr "Audiencias objetivo para las alertas publicadas"
+
+#~ msgid ""
+#~ "Acknowledge - Acknowledges receipt and acceptance of the message(s) "
+#~ "identified in references field"
+#~ msgstr ""
+#~ "Acusar recibo - Acusa recibo y aceptación de los mensajes identificados en "
+#~ "el campo de referencias"
+
+#~ msgid ""
+#~ "Error -  Indicates rejection of the message(s) identified in references; "
+#~ "explanation SHOULD appear in note field"
+#~ msgstr ""
+#~ "Error: indica rechazo del mensaje o mensajes identificados en las "
+#~ "referencias; la explicación DEBE aparecer en el campo de notas"
+
+#~ msgid "Identifier"
+#~ msgstr "Identificador"

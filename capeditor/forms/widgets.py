@@ -200,7 +200,7 @@ class HazardEventTypeWidget(WidgetWithScript, TextInput):
         for choice in WMO_HAZARD_EVENTS_TYPE_CHOICES:
             options.append({
                 "value": choice[0],
-                "label": choice[1],
+                "label": str(choice[1]),
             })
 
         context["widget"].update({
