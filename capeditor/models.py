@@ -2,7 +2,7 @@ import uuid
 
 from django.utils import timezone
 from django.utils.functional import cached_property
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, gettext
 from shapely.geometry import shape
 from wagtail import blocks
 from wagtail.admin.forms import WagtailAdminPageForm
@@ -241,17 +241,19 @@ class AbstractCapAlertPage(Page):
             expired = False
 
             if info.value.get('expires') < timezone.localtime():
-                status = "Expired"
+                status = gettext("Expired")
                 expired = True
             elif timezone.localtime() > start_time:
-                status = "Ongoing"
+                status = gettext("Ongoing")
             else:
-                status = "Expected"
+                status = gettext("Expected")
 
             area_desc = [area.get("areaDesc") for area in info.value.area]
             area_desc = ", ".join(area_desc)
 
-            event = f"{info.value.get('event')} ({area_desc})"
+            event = gettext(info.value.get('event'))
+
+            event_with_area = f"{event} ({area_desc})"
             severity = SEVERITY_MAPPING[info.value.get("severity")]
             urgency = URGENCY_MAPPING[info.value.get("urgency")]
             certainty = CERTAINTY_MAPPING[info.value.get("certainty")]
@@ -261,13 +263,21 @@ class AbstractCapAlertPage(Page):
             url = self.url
             event_icon = info.value.event_icon
 
+            category = info.value.get('category')
+            if isinstance(category, list):
+                # get the first category
+                category = category[0]
+            category = gettext(category)
+
             alert_info = {
                 "info": info,
                 "status": status,
                 "url": self.url,
                 "event": event,
+                "event_with_area": event_with_area,
                 "event_icon": event_icon,
                 "severity": severity,
+                "category": category,
                 "utc": start_time,
                 "urgency": urgency,
                 "certainty": certainty,
@@ -279,6 +289,7 @@ class AbstractCapAlertPage(Page):
                     "id": self.guid,
                     "identifier": self.identifier if hasattr(self, "identifier") else self.guid,
                     "event": event,
+                    "event_with_area": event_with_area,
                     "event_type": info.value.get('event'),
                     "headline": info.value.get("headline"),
                     "severity": info.value.get("severity"),

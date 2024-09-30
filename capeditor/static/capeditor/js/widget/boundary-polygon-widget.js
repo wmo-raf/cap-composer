@@ -126,6 +126,12 @@ class BoundaryPolygonWidget {
 
     setSourceData(featureGeom) {
         if (featureGeom) {
+
+            // truncate the coordinates to 6 decimal places
+            turf.truncate(featureGeom, {
+                precision: 6, coordinates: 2, mutate: true
+            })
+
             // add data to source
             this.map.getSource("polygon").setData(featureGeom)
 
@@ -142,7 +148,6 @@ class BoundaryPolygonWidget {
 
             // check if the drawn feature has any issues with the UN boundary
             this.checkUNBoundaryIssues(featureGeom)
-
 
         } else {
 
@@ -258,11 +263,7 @@ class BoundaryPolygonWidget {
                             this.areaDescInput.val(name)
                         }
 
-                        const truncatedFeature = turf.truncate(feature, {
-                            precision: 6, coordinates: 2, mutate: true
-                        })
-
-                        this.setSourceData(truncatedFeature)
+                        this.setSourceData(feature)
                     })
                 }
             }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-13 17:20+0300\n"
+"POT-Creation-Date: 2024-09-30 20:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,94 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: sandbox/home/models.py:63
+msgid "Search image"
+msgstr "Rechercher une image"
+
+#: sandbox/home/models.py:79
+msgid "For search engines"
+msgstr "Pour les moteurs de recherche"
+
+#: sandbox/home/models.py:85
+msgid "For site menus"
+msgstr "Pour les menus du site"
+
+#: sandbox/home/models.py:90
+msgid "CAP Alert Page"
+msgstr "Page d'alerte CAP"
+
+#: sandbox/home/models.py:91
+msgid "CAP Alert Pages"
+msgstr "Pages d'alerte CAP"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:59
+msgid "Alert Severity"
+msgstr "Gravité de l'alerte"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:66
+msgid "Extreme"
+msgstr "Extrême"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:73
+msgid "Severe"
+msgstr "Grave"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:80
+msgid "Moderate"
+msgstr "Modéré"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:87
+msgid "Minor"
+msgstr "Mineure"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:94
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:167
+msgid "Urgency"
+msgstr "Urgence"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:176
+msgid "Severity"
+msgstr "Gravité"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:185
+msgid "Certainty"
+msgstr "Certitude"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:195
+msgid "Time period"
+msgstr "Période de temps"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:204
+msgid "Issued"
+msgstr "Émis"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:215
+msgid "Effective"
+msgstr "Efficace"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:231
+msgid "Onset"
+msgstr "Début"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:240
+msgid "Expires"
+msgstr "Expire"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:251
+msgid "Area"
+msgstr "Zone"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:263
+msgid "Event Description"
+msgstr "Description de l'événement"
+
+#: sandbox/home/templates/home/cap_alert_detail.html:274
+msgid "Instructions"
+msgstr "Instructions"
 
 #: sandbox/home/templates/home/welcome_page.html:6
 msgid "Visit the Wagtail website"
@@ -40,26 +128,47 @@ msgstr ""
 "href=\"https://github.com/wagtail/wagtail/wiki/Slack\">rejoindre notre "
 "communauté sur Slack</a> ou à commencer avec l'un des liens ci-dessous."
 
-#: sandbox/home/templates/home/welcome_page.html:35
+#: sandbox/home/templates/home/welcome_page.html:39
 msgid "Wagtail Documentation"
 msgstr "Documentation sur la bergeronnette"
 
-#: sandbox/home/templates/home/welcome_page.html:36
+#: sandbox/home/templates/home/welcome_page.html:40
 msgid "Topics, references, & how-tos"
 msgstr "Sujets, références et procédures"
 
-#: sandbox/home/templates/home/welcome_page.html:42
+#: sandbox/home/templates/home/welcome_page.html:46
 msgid "Tutorial"
 msgstr "Didacticiel"
 
-#: sandbox/home/templates/home/welcome_page.html:43
+#: sandbox/home/templates/home/welcome_page.html:47
 msgid "Build your first Wagtail site"
 msgstr "Créez votre premier site Wagtail"
 
-#: sandbox/home/templates/home/welcome_page.html:49
+#: sandbox/home/templates/home/welcome_page.html:53
 msgid "Admin Interface"
 msgstr "Interface d'administration"
 
-#: sandbox/home/templates/home/welcome_page.html:50
+#: sandbox/home/templates/home/welcome_page.html:54
 msgid "Create your superuser first!"
 msgstr "Créez d'abord votre superutilisateur !"
+
+#: sandbox/home/wagtail_hooks.py:27
+msgid "Alerts"
+msgstr "Alertes"
+
+#: sandbox/home/wagtail_hooks.py:40
+msgid "CAP Alerts"
+msgstr "Alertes CAP"
+
+#: sandbox/home/wagtail_hooks.py:62
+msgid "Import CAP Alert"
+msgstr "Importer une alerte CAP"
+
+#: sandbox/home/wagtail_hooks.py:70
+msgid "CAP Base Settings"
+msgstr "Paramètres de base du CAP"
+
+#: sandbox/home/wagtail_hooks.py:282
+msgid "CAP Alert draft created. You can now edit the alert."
+msgstr ""
+"Brouillon d'alerte CAP créé. Vous pouvez maintenant modifier l'alerte."
