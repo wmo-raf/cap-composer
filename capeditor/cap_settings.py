@@ -67,6 +67,9 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
                         help_text=_("Predefined areas for alerts")),
         ], heading=_("Predefined Areas"), classname="map-resize-trigger"),
         ObjectList([
+            InlinePanel("alert_languages", heading=_("Allowed Alert Languages"), label=_("Language")),
+        ], heading=_("Languages")),
+        ObjectList([
             FieldPanel("un_country_boundary_geojson",
                        widget=GeojsonFileLoaderWidget(
                            attrs={"resize_trigger_selector": ".w-tabs__tab.map-resize-trigger"})),
@@ -133,6 +136,24 @@ class PredefinedAlertArea(Orderable):
 
 
 register_model_chooser(PredefinedAlertArea)
+
+
+class AlertLanguage(Orderable):
+    setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="alert_languages")
+    code = models.CharField(max_length=10, verbose_name=_("Language Code"), help_text=_("ISO 639-1 language code"))
+    name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Language Name"))
+
+    panels = [
+        FieldPanel("code"),
+        FieldPanel("name"),
+    ]
+
+    def __str__(self):
+        return self.code
+
+    def save(self, *args, **kwargs):
+        self.code = self.code.lower()
+        super().save(*args, **kwargs)
 
 
 def get_cap_setting():

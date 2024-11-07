@@ -2,6 +2,7 @@ import json
 
 import shapely
 from django import forms
+from django.conf import settings
 from django.contrib.gis.geos import GEOSGeometry
 from django.core.exceptions import ValidationError
 from django.utils.functional import cached_property
@@ -580,12 +581,31 @@ def get_hazard_types():
     return choices
 
 
-class AlertInfo(blocks.StructBlock):
-    LANGUAGE_CHOICES = (
-        ('en', _("English")),
-        ('fr', _("French")),
-    )
+def get_language_choices():
+    default_language_code = getattr(settings, "LANGUAGE_CODE", "en")
+    always_available_language_codes = ["en", "fr", "ar", "am", "es", "sw"]
 
+    try:
+        from capeditor.models import CapSetting
+        site = Site.objects.get(is_default_site=True)
+        cap_setting = CapSetting.for_site(site)
+        languages = cap_setting.alert_languages
+        choices = [(language.code, language.code) for language in languages.all()]
+    except Exception:
+        choices = []
+
+    # Add always available language codes
+    for code in always_available_language_codes:
+        if code not in [lan for lan, _ in choices]:
+            choices.append((code, code))
+
+    # default language to be first in the list
+    choices.sort(key=lambda x: x[0] == default_language_code, reverse=True)
+
+    return choices
+
+
+class AlertInfo(blocks.StructBlock):
     CATEGORY_CHOICES = (
         ('Geo', _("Geophysical")),
         ('Met', _("Meteorological")),
@@ -631,9 +651,9 @@ class AlertInfo(blocks.StructBlock):
     category = blocks.ChoiceBlock(choices=CATEGORY_CHOICES, default="Met", label=_("Category"),
                                   help_text=_("The code denoting the category of the subject"
                                               " event of the alert message"))
-    language = blocks.ChoiceBlock(choices=LANGUAGE_CHOICES, default="en", required=False, label=_("Language"),
-                                  help_text=_("The code denoting the language of the alert message"), )
-
+    language = blocks.ChoiceBlock(choices=get_language_choices, required=False, label=_("Language"),
+                                  help_text=_("The code denoting the language of the alert message."
+                                              "If not selected, 'en-US' will be used as default"), )
     urgency = blocks.ChoiceBlock(choices=URGENCY_CHOICES, label=_("Urgency"),
                                  help_text=_("The code denoting the urgency of the subject "
                                              "event of the alert message"))

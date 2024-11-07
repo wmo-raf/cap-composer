@@ -1,5 +1,6 @@
 import uuid
 
+from django.templatetags.i18n import language
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _, gettext
@@ -8,6 +9,7 @@ from wagtail import blocks
 from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import MultiFieldPanel
 from wagtail.models import Page
+from django.conf import settings
 
 from capeditor.blocks import (
     AlertInfo,
@@ -33,11 +35,20 @@ class CapAlertPageForm(WagtailAdminPageForm):
         if cap_setting:
             default_sender_name = cap_setting.sender_name
             contacts = cap_setting.contacts
+            default_language = getattr(settings, 'LANGUAGE_CODE', 'en')
 
-            if default_sender_name:
-                info_field = self.fields.get("info")
-                for block_type, block in info_field.block.child_blocks.items():
-                    if block_type == "alert_info":
+            contact_choices = []
+            if contacts:
+                for block in contacts:
+                    contact = block.value.get("contact")
+                    contact_choices.append((contact, contact))
+
+            info_field = self.fields.get("info")
+
+            for block_type, block in info_field.block.child_blocks.items():
+                if block_type == "alert_info":
+                    # set sender name
+                    if default_sender_name:
                         field_name = "senderName"
                         sender_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
 
@@ -49,15 +60,8 @@ class CapAlertPageForm(WagtailAdminPageForm):
                         info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
                         info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
 
-            if contacts:
-                contact_choices = []
-                for block in contacts:
-                    contact = block.value.get("contact")
-                    contact_choices.append((contact, contact))
-
-                info_field = self.fields.get("info")
-                for block_type, block in info_field.block.child_blocks.items():
-                    if block_type == "alert_info":
+                    # set contact choices
+                    if contact_choices:
                         field_name = "contact"
                         contact_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
 
@@ -68,6 +72,12 @@ class CapAlertPageForm(WagtailAdminPageForm):
                             choices=contact_choices, required=False, help_text=CONTACT_HELP_TEXT)
                         info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
                         info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
+
+                    # set default language
+                    if default_language:
+                        field_name = "language"
+                        info_field.block.child_blocks[block_type].child_blocks[
+                            field_name].meta.default = default_language
 
     def clean(self):
         cleaned_data = super().clean()
