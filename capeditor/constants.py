@@ -68,7 +68,7 @@ WMO_HAZARD_EVENTS_TYPE_CHOICES = (
     ("Icing", _("Icing")),
     ("Freezing rain", _("Freezing rain")),
     ("Landslide/Mudslide & Debris flow", _("Landslide/Mudslide & Debris flow")),
-    ("Lighting", _("Lighting")),
+    ("Lightning", _("Lightning")),
     ("Pollen pollution/Polluted air", _("Pollen pollution/Polluted air")),
     ("Rain/Wet Spell", _("Rain/Wet Spell")),
     ("Snow", _("Snow")),
