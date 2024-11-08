@@ -503,7 +503,8 @@ class AlertInfoStructValue(StructValue):
         except Exception:
             pass
 
-        return None
+        # return default icon
+        return "alert"
 
     @cached_property
     def resource(self):
