@@ -7,12 +7,16 @@ class CircleWidget {
         this.lonInput = $('#' + options.id + "_circle_lon");
         this.radiusInput = $('#' + options.id + "_circle_radius");
 
-        this.countriesBounds = this.circleInput.data("bounds")
-        let UNGeojsonBoundaryGeojson = this.circleInput.data("un-geojson")
 
-        if (UNGeojsonBoundaryGeojson) {
-            this.UNGeojsonBoundaryGeojson = UNGeojsonBoundaryGeojson
-        }
+        this.boundaryInfoUrl = this.circleInput.data("boundaryinfourl")
+        this.UNGeojsonUrl = this.circleInput.data("ungeojsonurl")
+
+        // this.countriesBounds = this.circleInput.data("bounds")
+        // let UNGeojsonBoundaryGeojson = this.circleInput.data("un-geojson")
+        //
+        // if (UNGeojsonBoundaryGeojson) {
+        //     this.UNGeojsonBoundaryGeojson = UNGeojsonBoundaryGeojson
+        // }
 
         const id_parts = options.id.split("-area")
         const info_id = id_parts[0]
@@ -31,6 +35,8 @@ class CircleWidget {
 
         this.initMap().then(() => {
             this.map.resize()
+
+            this.fetchAndFitBounds()
 
             this.initMarker()
 
@@ -126,25 +132,34 @@ class CircleWidget {
         if (this.UNGeojsonBoundaryGeojson) {
             this.addUNBoundaryLayer()
         }
+    }
 
+    fetchAndFitBounds() {
+        if (this.boundaryInfoUrl) {
+            fetch(this.boundaryInfoUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const {country_bounds} = data
+                    if (country_bounds) {
+                        this.countriesBounds = country_bounds
+                    }
+                    if (this.countriesBounds) {
+                        const bounds = [[this.countriesBounds[0], this.countriesBounds[1]], [this.countriesBounds[2], this.countriesBounds[3]]]
+                        this.map.fitBounds(bounds)
+
+                        this.centerMarkerToBounds()
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
     }
 
     initMarker() {
         this.marker = new maplibregl.Marker({
             draggable: true
         }).setLngLat([0, 0]).addTo(this.map);
-
-
-        if (this.countriesBounds) {
-            const bboxPolygon = turf.bboxPolygon(this.countriesBounds)
-            const center = turf.center(bboxPolygon)
-
-
-            if (center && center.geometry && !!center.geometry.coordinates.length) {
-                const {coordinates} = center.geometry
-                this.marker.setLngLat(coordinates)
-            }
-        }
 
 
         this.marker.on('dragend', () => {
@@ -155,6 +170,19 @@ class CircleWidget {
 
             this.onCoordsChange()
         });
+
+        this.centerMarkerToBounds()
+    }
+
+    centerMarkerToBounds() {
+        if (this.marker && this.countriesBounds) {
+            const bboxPolygon = turf.bboxPolygon(this.countriesBounds)
+            const center = turf.center(bboxPolygon)
+            if (center && center.geometry && !!center.geometry.coordinates.length) {
+                const {coordinates} = center.geometry
+                this.marker.setLngLat(coordinates)
+            }
+        }
     }
 
     onCoordsChange() {

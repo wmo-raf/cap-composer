@@ -3,6 +3,24 @@ from collections import OrderedDict
 from magic import from_file
 
 
+def get_event_icon(request, event):
+    from capeditor.cap_settings import CapSetting
+    try:
+        if request:
+            cap_setting = CapSetting.for_request(request)
+
+            hazard_event_types = cap_setting.hazard_event_types.all()
+            if hazard_event_types:
+                for hazard in hazard_event_types:
+                    event_name = hazard.event
+                    if event_name == event:
+                        return hazard.icon
+    except Exception:
+        pass
+
+    return "alert"
+
+
 def file_path_mime(file_path):
     mimetype = from_file(file_path, mime=True)
     return mimetype

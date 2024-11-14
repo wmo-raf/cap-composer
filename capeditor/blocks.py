@@ -486,27 +486,6 @@ class AlertEventCode(blocks.StructBlock):
 
 class AlertInfoStructValue(StructValue):
     @cached_property
-    def event_icon(self):
-        from .models import CapSetting
-        event = self.get("event")
-        try:
-            site = Site.objects.get(is_default_site=True)
-            if site:
-                cap_setting = CapSetting.for_site(site)
-
-                hazard_event_types = cap_setting.hazard_event_types.all()
-                if hazard_event_types:
-                    for hazard in hazard_event_types:
-                        event_name = hazard.event
-                        if event_name == event:
-                            return hazard.icon
-        except Exception:
-            pass
-
-        # return default icon
-        return "alert"
-
-    @cached_property
     def resource(self):
         resource = self.get("resource")
         resources = []
@@ -570,10 +549,11 @@ class AlertInfoStructValue(StructValue):
 
 
 # get list of institution defined hazards types as list of choices
-def get_hazard_types():
+def get_hazard_types(site=None):
+    if not site:
+        return []
     try:
         from capeditor.models import CapSetting
-        site = Site.objects.get(is_default_site=True)
         cap_setting = CapSetting.for_site(site)
         hazard_event_types = cap_setting.hazard_event_types
         choices = [(hazard_type.event, hazard_type.event) for hazard_type in hazard_event_types.all()]
@@ -582,13 +562,15 @@ def get_hazard_types():
     return choices
 
 
-def get_language_choices():
+def get_language_choices(site=None):
+    if not site:
+        return []
+
     default_language_code = getattr(settings, "LANGUAGE_CODE", "en")
     always_available_language_codes = ["en", "fr", "ar", "am", "es", "sw"]
 
     try:
         from capeditor.models import CapSetting
-        site = Site.objects.get(is_default_site=True)
         cap_setting = CapSetting.for_site(site)
         languages = cap_setting.alert_languages
         choices = [(language.code, language.code) for language in languages.all()]

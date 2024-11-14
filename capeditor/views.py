@@ -1,7 +1,9 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from wagtail import hooks
 
 from capeditor.forms.capimporter import CAPLoadForm, CAPImportForm
+from .models import CapSetting
 
 
 def load_cap_alert(request):
@@ -49,3 +51,12 @@ def import_cap_alert(request):
             return redirect("load_cap_alert")
 
     return redirect("load_cap_alert")
+
+
+def get_un_boundary_geojson(request):
+    cap_settings = CapSetting.for_request(request)
+    un_country_boundary_geojson = cap_settings.un_country_boundary_geojson
+    if not un_country_boundary_geojson:
+        return JsonResponse({})
+
+    return JsonResponse(un_country_boundary_geojson)

@@ -4,5 +4,8 @@
     <div id="{{ name }}_map" class="polygon_map" style="height: 400px;width: 100%">
     </div>
     <textarea id="{{ name }}" class="vSerializedField required" name="{{ name }}" hidden
-              data-bounds="{{ country_bounds }}" data-un-geojson="{{ un_boundary_geojson }}">{{ serialized }}</textarea>
+              data-boundaryinfourl="{{ boundary_info_url }}"
+              data-un-geojson-url="{{ un_geojson_url }}">
+        {{ serialized }}
+    </textarea>
 </div>

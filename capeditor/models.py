@@ -1,6 +1,7 @@
 import uuid
 
-from django.templatetags.i18n import language
+from django.conf import settings
+from django.core.serializers.json import DjangoJSONEncoder
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _, gettext
@@ -9,7 +10,6 @@ from wagtail import blocks
 from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import MultiFieldPanel
 from wagtail.models import Page
-from django.conf import settings
 
 from capeditor.blocks import (
     AlertInfo,
@@ -17,67 +17,92 @@ from capeditor.blocks import (
     CONTACT_HELP_TEXT,
     AlertAddress,
     AlertReference,
-    AlertIncident
+    AlertIncident,
+    get_hazard_types,
+    get_language_choices
 )
 from capeditor.constants import SEVERITY_MAPPING, URGENCY_MAPPING, CERTAINTY_MAPPING
 from .cap_settings import *
+from .utils import get_event_icon
 
 
 class CapAlertPageForm(WagtailAdminPageForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        cap_setting = get_cap_setting()
+        parent_page = kwargs.get("parent_page", None)
 
-        # the following code gets pres-saved common options from settings and
-        # makes presents them as selectable dropdowns instead of the composer to type each time
-        # they are creating a new alert
-        if cap_setting:
-            default_sender_name = cap_setting.sender_name
-            contacts = cap_setting.contacts
-            default_language = getattr(settings, 'LANGUAGE_CODE', 'en')
+        if parent_page:
+            # get site
+            site = parent_page.get_site()
+            cap_setting = CapSetting.for_site(site)
 
-            contact_choices = []
-            if contacts:
-                for block in contacts:
-                    contact = block.value.get("contact")
-                    contact_choices.append((contact, contact))
+            empty_choice = [("", "---------")]
 
-            info_field = self.fields.get("info")
+            # the following code gets pres-saved common options from settings and
+            # makes presents them as selectable dropdowns instead of the composer to type each time
+            # they are creating a new alert
+            if cap_setting:
+                default_sender_name = cap_setting.sender_name
+                contacts = cap_setting.contacts
+                default_language = getattr(settings, 'LANGUAGE_CODE', 'en')
 
-            for block_type, block in info_field.block.child_blocks.items():
-                if block_type == "alert_info":
-                    # set sender name
-                    if default_sender_name:
-                        field_name = "senderName"
-                        sender_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
+                contact_choices = []
+                if contacts:
+                    for block in contacts:
+                        contact = block.value.get("contact")
+                        contact_choices.append((contact, contact))
 
-                        label = sender_block.label or field_name
-                        name = sender_block.name
+                hazard_types = get_hazard_types(site)
+                hazard_types = empty_choice + hazard_types
+                language_choices = get_language_choices(site)
+                language_choices = empty_choice + language_choices
 
-                        info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.CharBlock(
-                            default=default_sender_name, required=False, help_text=SENDER_NAME_HELP_TEXT)
-                        info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
-                        info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
+                info_field = self.fields.get("info")
 
-                    # set contact choices
-                    if contact_choices:
-                        field_name = "contact"
-                        contact_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
+                for block_type, block in info_field.block.child_blocks.items():
+                    if block_type == "alert_info":
+                        # set hazard type choices
+                        if hazard_types:
+                            field_name = "event"
+                            info_field.block.child_blocks[block_type].child_blocks[
+                                field_name].field.choices = hazard_types
 
-                        label = contact_block.label or field_name
-                        name = contact_block.name
+                        # set sender name
+                        if default_sender_name:
+                            field_name = "senderName"
+                            sender_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
 
-                        info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.ChoiceBlock(
-                            choices=contact_choices, required=False, help_text=CONTACT_HELP_TEXT)
-                        info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
-                        info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
+                            label = sender_block.label or field_name
+                            name = sender_block.name
 
-                    # set default language
-                    if default_language:
-                        field_name = "language"
-                        info_field.block.child_blocks[block_type].child_blocks[
-                            field_name].meta.default = default_language
+                            info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.CharBlock(
+                                default=default_sender_name, required=False, help_text=SENDER_NAME_HELP_TEXT)
+                            info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
+                            info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
+
+                        # set contact choices
+                        if contact_choices:
+                            field_name = "contact"
+                            contact_block = info_field.block.child_blocks[block_type].child_blocks[field_name]
+
+                            label = contact_block.label or field_name
+                            name = contact_block.name
+
+                            info_field.block.child_blocks[block_type].child_blocks[field_name] = blocks.ChoiceBlock(
+                                choices=contact_choices, required=False, help_text=CONTACT_HELP_TEXT)
+                            info_field.block.child_blocks[block_type].child_blocks[field_name].name = name
+                            info_field.block.child_blocks[block_type].child_blocks[field_name].label = label
+
+                        if language_choices:
+                            field_name = "language"
+                            info_field.block.child_blocks[block_type].child_blocks[
+                                field_name].field.choices = language_choices
+
+                            # set default language
+                            if default_language:
+                                info_field.block.child_blocks[block_type].child_blocks[
+                                    field_name].meta.default = default_language
 
     def clean(self):
         cleaned_data = super().clean()
@@ -219,7 +244,7 @@ class AbstractCapAlertPage(Page):
 
     @cached_property
     def geojson(self):
-        return json.dumps(self.feature_collection)
+        return json.dumps(self.feature_collection, cls=DjangoJSONEncoder)
 
     @cached_property
     def bounds(self):
@@ -243,8 +268,7 @@ class AbstractCapAlertPage(Page):
     def xml_link(self):
         return None
 
-    @cached_property
-    def infos(self):
+    def get_infos(self, request=None):
         alert_infos = []
         for info in self.info:
             start_time = info.value.get("effective") or self.sent
@@ -271,7 +295,10 @@ class AbstractCapAlertPage(Page):
             effective = start_time
             expires = info.value.get('expires')
             url = self.url
-            event_icon = info.value.event_icon
+
+            event_icon = "alert"
+            if request:
+                event_icon = get_event_icon(request, event)
 
             category = info.value.get('category')
             if isinstance(category, list):
@@ -296,8 +323,8 @@ class AbstractCapAlertPage(Page):
                 "expires": expires,
                 "expired": expired,
                 "properties": {
-                    "id": self.guid,
-                    "identifier": self.identifier if hasattr(self, "identifier") else self.guid,
+                    "id": str(self.guid),
+                    "identifier": self.identifier if hasattr(self, "identifier") else str(self.guid),
                     "event": event,
                     "event_with_area": event_with_area,
                     "event_type": info.value.get('event'),
@@ -324,7 +351,7 @@ class AbstractCapAlertPage(Page):
 
     def get_geojson_features(self, request=None):
         features = []
-        for info_item in self.infos:
+        for info_item in self.get_infos(request):
             info = info_item.get("info")
             if info.value.geojson:
                 properties = info_item.get("properties")
@@ -340,3 +367,12 @@ class AbstractCapAlertPage(Page):
                     features.append(feature)
 
         return features
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        infos = self.get_infos(request)
+        page = context.get("page")
+        setattr(page, "infos", infos)
+
+        context["geojson_features"] = self.get_geojson_features(request)
+        return context

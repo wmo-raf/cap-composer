@@ -33,23 +33,23 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
                                help_text=_("WMO Register of Alerting Authorities "
                                            "Object Identifier (OID) of the sending institution. "
                                            "This will be used to generate CAP messages identifiers"))
-
+    
     logo = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
                              verbose_name=_("Logo of the sending institution"))
-
+    
     contacts = StreamField([
         ("contact", ContactBlock(label=_("Contact")))
     ], use_json_field=True, blank=True, null=True, verbose_name=_("Contact Details"),
         help_text=_("Contact for follow-up and confirmation of the alert message"))
-
+    
     un_country_boundary_geojson = models.JSONField(blank=True, null=True, verbose_name=_("UN Country Boundary"),
                                                    help_text=_("GeoJSON file of the UN Country Boundary. Setting this"
                                                                " will enable the UN Country Boundary check in the alert"
                                                                "drawing tools"))
-
+    
     class Meta:
         verbose_name = _("CAP Settings")
-
+    
     edit_handler = TabbedInterface([
         ObjectList([
             FieldPanel("sender_name"),
@@ -75,7 +75,7 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
                            attrs={"resize_trigger_selector": ".w-tabs__tab.map-resize-trigger"})),
         ], heading=_("UN Boundary"), classname="map-resize-trigger"),
     ])
-
+    
     @property
     def contact_list(self):
         contacts = []
@@ -84,7 +84,7 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
             if contact:
                 contacts.append(contact)
         return contacts
-
+    
     @property
     def audience_list(self):
         audiences = []
@@ -101,13 +101,13 @@ class HazardEventTypes(Orderable):
                                                      verbose_name=_("Select from WMO list of Hazards Event Types"))
     event = models.CharField(max_length=35, unique=True, verbose_name=_("Hazard"), help_text=_("Name of Hazard"))
     icon = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("Icon"), help_text=_("Matching icon"))
-
+    
     panels = [
         FieldPanel("is_in_wmo_event_types_list"),
         FieldPanel("event", widget=HazardEventTypeWidget),
         FieldPanel("icon", widget=IconChooserWidget),
     ]
-
+    
     def __str__(self):
         return self.event
 
@@ -116,18 +116,18 @@ class PredefinedAlertArea(Orderable):
     setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="predefined_alert_areas")
     name = models.CharField(max_length=255, verbose_name=_("Name"))
     geom = models.MultiPolygonField(srid=4326, verbose_name=_("Area"))
-
+    
     class Meta:
         verbose_name = _("Predefined Area")
         verbose_name_plural = _("Predefined Areas")
-
+    
     def __str__(self):
         return self.name
-
+    
     @property
     def geojson(self):
         return json.loads(self.geom.geojson)
-
+    
     panels = [
         FieldPanel("name"),
         FieldPanel("geom",
@@ -142,34 +142,21 @@ class AlertLanguage(Orderable):
     setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="alert_languages")
     code = models.CharField(max_length=10, verbose_name=_("Language Code"), help_text=_("ISO 639-1 language code"))
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Language Name"))
-
+    
     panels = [
         FieldPanel("code"),
         FieldPanel("name"),
     ]
-
+    
     def __str__(self):
         return self.code
-
+    
     def save(self, *args, **kwargs):
         self.code = self.code.lower()
         super().save(*args, **kwargs)
 
 
-def get_cap_setting():
-    try:
-        site = Site.objects.get(is_default_site=True)
-        if site:
-            return CapSetting.for_site(site)
-    except Exception:
-        pass
-    return None
-
-
 def get_default_sender():
-    cap_setting = get_cap_setting()
-    if cap_setting and cap_setting.sender:
-        return cap_setting.sender
     return None
 
 

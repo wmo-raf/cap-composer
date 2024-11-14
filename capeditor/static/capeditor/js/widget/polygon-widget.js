@@ -66,16 +66,18 @@ class EditControl {
 
 class PolygonWidget {
     constructor(options, initialState) {
-
         this.geomInput = $('#' + options.id);
         this.options = options
 
-        this.countriesBounds = this.geomInput.data("bounds")
-        let UNGeojsonBoundaryGeojson = this.geomInput.data("un-geojson")
 
-        if (UNGeojsonBoundaryGeojson) {
-            this.UNGeojsonBoundaryGeojson = UNGeojsonBoundaryGeojson
-        }
+        this.boundaryInfoUrl = this.geomInput.data("boundaryinfourl")
+
+        // this.countriesBounds = this.geomInput.data("bounds")
+        // let UNGeojsonBoundaryGeojson = this.geomInput.data("un-geojson")
+        //
+        // if (UNGeojsonBoundaryGeojson) {
+        //     this.UNGeojsonBoundaryGeojson = UNGeojsonBoundaryGeojson
+        // }
 
         const id_parts = options.id.split("-area")
         const info_id = id_parts[0]
@@ -93,6 +95,8 @@ class PolygonWidget {
         this.initMap().then(() => {
             this.map.resize()
 
+            this.fetchAndFitBounds()
+
             this.initLayer()
             this.initDraw()
 
@@ -102,6 +106,27 @@ class PolygonWidget {
             }
         })
     }
+
+    fetchAndFitBounds() {
+        if (this.boundaryInfoUrl) {
+            fetch(this.boundaryInfoUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const {country_bounds} = data
+                    if (country_bounds) {
+                        this.countriesBounds = country_bounds
+                    }
+                    if (this.countriesBounds) {
+                        const bounds = [[this.countriesBounds[0], this.countriesBounds[1]], [this.countriesBounds[2], this.countriesBounds[3]]]
+                        this.map.fitBounds(bounds)
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    }
+
 
     setState(newState) {
         this.geomInput.val(newState);

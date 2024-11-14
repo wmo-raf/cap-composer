@@ -2,11 +2,14 @@ class BoundaryPolygonWidget {
     constructor(options, initialState) {
         this.geomInput = $('#' + options.id);
         this.options = options
+        this.initialState = initialState
 
-        this.boundaryTilesUrl = this.geomInput.data("boundarytilesurl")
-        this.boundaryDetailUrl = this.geomInput.data("boundarydetailurl")
-        this.countriesBounds = this.geomInput.data("bounds")
+        this.boundaryInfoUrl = this.geomInput.data("boundaryinfourl")
 
+        this.init()
+    }
+
+    init() {
         let UNGeojsonBoundaryGeojson = this.geomInput.data("un-geojson")
 
         if (UNGeojsonBoundaryGeojson) {
@@ -14,7 +17,7 @@ class BoundaryPolygonWidget {
         }
 
         // Admin level selector
-        const adminLevelInputId = options.id.replace("boundary", "admin_level")
+        const adminLevelInputId = this.options.id.replace("boundary", "admin_level")
         this.adminLevelSelector = $('#' + adminLevelInputId);
         if (this.adminLevelSelector) {
             this.adminLevelSelector.on("change", (e) => {
@@ -23,10 +26,10 @@ class BoundaryPolygonWidget {
         }
 
         // area description input selector
-        const areaDescInputId = options.id.replace("boundary", "areaDesc")
+        const areaDescInputId = this.options.id.replace("boundary", "areaDesc")
         this.areaDescInput = $('#' + areaDescInputId);
 
-        const id_parts = options.id.split("-area")
+        const id_parts = this.options.id.split("-area")
         const info_id = id_parts[0]
 
         const severityInputId = `#${info_id}-severity`
@@ -45,19 +48,46 @@ class BoundaryPolygonWidget {
             this.map.resize()
 
             this.initLayer()
-            this.addAdminBoundaryLayer()
+            this.initAdmBoundary()
 
-            if (this.UNGeojsonBoundaryGeojson) {
-                this.addUNBoundaryLayer()
-            }
+            this.initUNBoundary()
 
-
-            if (initialState) {
-                this.setState(initialState)
+            if (this.initialState) {
+                this.setState(this.initialState)
                 this.initFromState()
             }
         })
     }
+
+    initAdmBoundary() {
+        if (this.boundaryInfoUrl) {
+            fetch(this.boundaryInfoUrl).then(res => res.json()).then(boundaryInfo => {
+                const {tiles_url, detail_url, country_bounds} = boundaryInfo
+
+                if (!tiles_url || !detail_url || !country_bounds) {
+                    return
+                }
+
+                this.boundaryTilesUrl = tiles_url
+                this.boundaryDetailUrl = detail_url
+                this.countriesBounds = country_bounds
+
+                this.addAdminBoundaryLayer()
+
+                if (this.countriesBounds) {
+                    const bounds = [[this.countriesBounds[0], this.countriesBounds[1]], [this.countriesBounds[2], this.countriesBounds[3]]]
+                    this.map.fitBounds(bounds)
+                }
+            })
+        }
+    }
+
+    initUNBoundary() {
+        if (this.UNGeojsonBoundaryGeojson) {
+            this.addUNBoundaryLayer()
+        }
+    }
+
 
     setState(newState) {
         this.geomInput.val(newState);
@@ -99,13 +129,6 @@ class BoundaryPolygonWidget {
         this.map.addControl(new maplibregl.FullscreenControl());
 
         await new Promise((resolve) => this.map.on("load", resolve));
-
-
-        if (this.countriesBounds) {
-            const bounds = [[this.countriesBounds[0], this.countriesBounds[1]], [this.countriesBounds[2], this.countriesBounds[3]]]
-            this.map.fitBounds(bounds)
-        }
-
     }
 
     initLayer() {

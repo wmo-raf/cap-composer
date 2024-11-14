@@ -4,7 +4,7 @@
     <div id="{{ id }}_map" class="geojson_map" style="height: 400px;width: 100%;min-height: 400px">
     </div>
     <textarea id="{{ id }}" class="vSerializedField required" name="{{ name }}" hidden
-              data-bounds="{{ country_bounds }}">{{ serialized }}</textarea>
+              data-boundaryinfourl="{{ boundary_info_url }}">{{ serialized }}</textarea>
     <script>
         {% block options %}
             var options = {
