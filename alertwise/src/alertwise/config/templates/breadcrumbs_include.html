@@ -1,0 +1,14 @@
+<section class="breadcrumb center">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="breadcrumbs" style="overflow: hidden">
+            <ul>
+                {% for page in self.get_ancestors %}
+                    {% if page.is_root == False %}
+                        <li><a href={{ page.url }}> {{ page.title }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                <li class=”active”><b style="padding-left: 8px"> {{ self.title }}</b></li>
+            </ul>
+        </nav>
+    </div>
+</section>

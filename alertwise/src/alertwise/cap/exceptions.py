@@ -1,0 +1,2 @@
+class CAPAlertImportError(Exception):
+    pass

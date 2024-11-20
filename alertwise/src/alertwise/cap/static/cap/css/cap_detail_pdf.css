@@ -1,0 +1,150 @@
+@page {
+    size: A4;
+    margin: 10mm;
+}
+
+@page {
+    @top-left {
+        content: element(heading);
+    }
+
+    @top-right {
+        content: "Page " counter(page) " of " counter(pages);
+        font-size: 11px;
+    }
+
+    @bottom-left {
+        content: element(footer);
+    }
+}
+
+html, body {
+    margin: 0;
+}
+
+.alert-page-header {
+    position: running(heading);
+    font-size: 11px;
+}
+
+.alert-page-header .icon {
+    width: 11px;
+    height: 11px;
+}
+
+.alert-page-header .icon svg {
+    height: 100%;
+    width: 100%;
+}
+
+
+.logo {
+    height: 50px;
+    text-align: center
+}
+
+.logo img {
+    height: 100%;
+    display: inline-block;
+}
+
+.alert-title-container {
+    margin-top: 20px;
+    padding: 10px 20px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+
+.alert-title-container svg {
+    width: 24px;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.alert-title {
+    font-size: 20px;
+    font-weight: 700;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.alert-level-info {
+    background-color: #f3f6f9;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.alert-level-info-item {
+    display: inline-block;
+    margin: 0 20px;
+    text-align: left;
+}
+
+.alert-level-info-item svg {
+    width: 24px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.alert-level-info-item .item-label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.alert-time-info {
+    text-align: center;
+}
+
+.alert-time-info-item {
+    display: inline-block;
+    margin: 0 20px;
+    text-align: center;
+}
+
+.alert-time-info-item .time {
+    font-size: 15px;
+}
+
+.alert-area-info {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.alert-area-map {
+    width: 400px;
+    height: 400px;
+
+    margin-right: 30px;
+}
+
+.alert-area-map img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.alert-area-description {
+    display: inline-block;
+    width: 300px;
+}
+
+.alert-description {
+    margin-bottom: 30px;
+}
+
+.alert-instruction {
+    margin-bottom: 30px;
+}
+
+.alert-page-footer {
+    position: running(footer);
+    font-size: 11px;
+}

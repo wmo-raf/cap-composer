@@ -1,7 +1,0 @@
-django
-djangorestframework-xml
-six
-wagtail==5.0.0
-wagtail-cache @ https://github.com/coderedcorp/wagtail-cache/archive/41113d0a14ec42785e15a0909c6784f2b1fdcfc5.zip
-psycopg2-binary
-wagtail-lazyimages

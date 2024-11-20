@@ -1,0 +1,633 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-30 21:19+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: pages/cap/models.py:55
+msgid "CAP Alerts Heading"
+msgstr "عنوان تنبيهات CAP"
+
+#: pages/cap/models.py:172
+msgid "Effective date cannot be earlier than the alert sent date."
+msgstr "لا يمكن أن يكون تاريخ السريان أقدم من تاريخ إرسال التنبيه."
+
+#: pages/cap/models.py:175
+msgid "Expires date cannot be earlier than the alert sent date."
+msgstr "لا يمكن أن يكون تاريخ انتهاء الصلاحية أقدم من تاريخ إرسال التنبيه."
+
+#: pages/cap/models.py:220
+msgid "CAP Alert"
+msgstr "تنبيه CAP"
+
+#: pages/cap/models.py:369
+msgid "Show on MapViewer"
+msgstr "عرض على MapViewer"
+
+#: pages/cap/models.py:370
+msgid "Check to show cap alerts on MapViewer"
+msgstr "تحقق لإظهار تنبيهات الحد الأقصى على MapViewer"
+
+#: pages/cap/models.py:372
+msgid "CAP Alerts Layer Title"
+msgstr "عنوان طبقة تنبيهات CAP"
+
+#: pages/cap/models.py:374
+msgid "CAP Alerts Layer SubCategory"
+msgstr "فئة فرعية لطبقة تنبيهات CAP"
+
+#: pages/cap/models.py:377
+msgid "CAP Layer Metadata"
+msgstr "البيانات التعريفية لطبقة CAP"
+
+#: pages/cap/models.py:379
+msgid "Auto Refresh interval in minutes"
+msgstr "الفاصل الزمني للتحديث التلقائي في دقائق"
+
+#: pages/cap/models.py:381
+msgid ""
+"Refresh cap alerts on the map after this minutes. Leave blank to disable "
+"auto refreshing"
+msgstr ""
+"قم بتحديث تنبيهات الحد الأقصى على الخريطة بعد هذه الدقائق. اتركه فارغًا "
+"لتعطيل التحديث التلقائي"
+
+#: pages/cap/models.py:405
+msgid "Left of the Navbar"
+msgstr "يسار شريط التنقل"
+
+#: pages/cap/models.py:406
+msgid "Top of the Navbar"
+msgstr "أعلى شريط التنقل"
+
+#: pages/cap/models.py:410
+msgid "Active Alert Style"
+msgstr "نمط التنبيه النشط"
+
+#: pages/cap/models.py:411
+msgid "Choose the style of active alerts"
+msgstr "اختر نمط التنبيهات النشطة"
+
+#: pages/cap/models.py:418 pages/cap/models.py:419
+#: pages/cap/wagtail_hooks.py:240
+msgid "Other Settings"
+msgstr "الإعدادات الأخرى"
+
+#: pages/cap/mqtt/models.py:14 pages/cap/webhook/models.py:8
+msgid "Name"
+msgstr "اسم"
+
+#: pages/cap/mqtt/models.py:15
+msgid "Provide a name to identify the broker"
+msgstr "توفير اسم لتحديد الوسيط"
+
+#: pages/cap/mqtt/models.py:16
+msgid "Broker Host"
+msgstr "وسيط مضيف"
+
+#: pages/cap/mqtt/models.py:17
+msgid "Provide the broker host name or IP address"
+msgstr "توفير اسم مضيف الوسيط أو عنوان IP"
+
+#: pages/cap/mqtt/models.py:18
+msgid "Broker Port"
+msgstr "وسيط الميناء"
+
+#: pages/cap/mqtt/models.py:18
+msgid "Provide the broker port number"
+msgstr "توفير رقم منفذ الوسيط"
+
+#: pages/cap/mqtt/models.py:21
+msgid "Broker Username"
+msgstr "اسم المستخدم للوسيط"
+
+#: pages/cap/mqtt/models.py:22
+msgid "Broker Password"
+msgstr "كلمة مرور الوسيط"
+
+#: pages/cap/mqtt/models.py:23
+msgid "Enter a password. If a password already exists, it will be updated"
+msgstr "أدخل كلمة مرور. إذا كانت كلمة المرور موجودة بالفعل، فسيتم تحديثها"
+
+#: pages/cap/mqtt/models.py:27
+msgid "Is WIS2Box Node"
+msgstr "هل عقدة WIS2Box"
+
+#: pages/cap/mqtt/models.py:28
+msgid "Check this box if you are providing the broker details of a wis2box."
+msgstr "قم بتحديد هذا المربع إذا كنت تقوم بتوفير تفاصيل الوسيط لـ wis2box."
+
+#: pages/cap/mqtt/models.py:30
+msgid "Topic"
+msgstr "عنوان"
+
+#: pages/cap/mqtt/models.py:31
+msgid "Provide the MQTT topic to publish the CAP alerts."
+msgstr "توفير موضوع MQTT لنشر تنبيهات CAP."
+
+#: pages/cap/mqtt/models.py:33
+msgid "Dataset ID"
+msgstr "معرف مجموعة البيانات"
+
+#: pages/cap/mqtt/models.py:35
+msgid ""
+"Provide the metadata ID for your dataset registered in the wis2box. If you "
+"do not have this, please create a dataset in the wis2box before proceeding."
+msgstr ""
+"قم بتوفير معرف البيانات الوصفية لمجموعة البيانات المسجلة في wis2box. إذا لم "
+"يكن لديك هذا المعرف، فيرجى إنشاء مجموعة بيانات في wis2box قبل المتابعة."
+
+#: pages/cap/mqtt/models.py:38 pages/cap/webhook/models.py:10
+msgid "Active"
+msgstr "نشيط"
+
+#: pages/cap/mqtt/models.py:39
+msgid "Automatically publish CAP alerts to this broker"
+msgstr "نشر تنبيهات CAP تلقائيًا إلى هذا الوسيط"
+
+#: pages/cap/mqtt/models.py:42 pages/cap/webhook/models.py:13
+msgid "Retry on failure"
+msgstr "إعادة المحاولة عند الفشل"
+
+#: pages/cap/mqtt/models.py:49
+msgid "Broker Information"
+msgstr "معلومات الوسيط"
+
+#: pages/cap/mqtt/models.py:53
+msgid "Authentication"
+msgstr "المصادقة"
+
+#: pages/cap/mqtt/models.py:70
+msgid "Dataset ID is required for a WIS2Box Broker"
+msgstr "معرف مجموعة البيانات مطلوب لسمسار WIS2Box"
+
+#: pages/cap/mqtt/models.py:75
+msgid "Topic is required"
+msgstr "الموضوع مطلوب"
+
+#: pages/cap/mqtt/models.py:80
+msgid ""
+"Secret key for encrypting passwords is not set. Please ensure the "
+"CAP_MQTT_SECRET_KEY is set "
+msgstr ""
+"لم يتم تعيين المفتاح السري لتشفير كلمات المرور. يرجى التأكد من تعيين "
+"CAP_MQTT_SECRET_KEY"
+
+#: pages/cap/mqtt/models.py:85
+msgid "Password is required if creating a new broker"
+msgstr "كلمة المرور مطلوبة عند إنشاء وسيط جديد"
+
+#: pages/cap/mqtt/models.py:106
+msgid "MQTT Broker"
+msgstr "وسيط MQTT"
+
+#: pages/cap/mqtt/models.py:107
+msgid "MQTT Brokers"
+msgstr "وسطاء MQTT"
+
+#: pages/cap/mqtt/models.py:114 pages/cap/webhook/models.py:30
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+#: pages/cap/mqtt/models.py:115 pages/cap/webhook/models.py:31
+msgid "Failure"
+msgstr "فشل"
+
+#: pages/cap/mqtt/models.py:116 pages/cap/webhook/models.py:32
+msgid "Success"
+msgstr "نجاح"
+
+#: pages/cap/mqtt/models.py:123
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:245
+#: pages/cap/webhook/models.py:39
+msgid "Status"
+msgstr "حالة"
+
+#: pages/cap/mqtt/models.py:125 pages/cap/webhook/models.py:41
+msgid "Retries"
+msgstr "إعادة المحاولة"
+
+#: pages/cap/mqtt/models.py:126 pages/cap/webhook/models.py:42
+msgid "Last Error Message"
+msgstr "رسالة الخطأ الأخيرة"
+
+#: pages/cap/mqtt/models.py:131
+msgid "MQTT Broker Event"
+msgstr "حدث وسيط MQTT"
+
+#: pages/cap/mqtt/models.py:132
+msgid "MQTT Broker Events"
+msgstr "أحداث وسيط MQTT"
+
+#: pages/cap/templates/cap/alert_detail.html:77
+msgid "View PNG"
+msgstr "عرض PNG"
+
+#: pages/cap/templates/cap/alert_detail.html:92
+msgid "View PDF"
+msgstr "عرض قوات الدفاع الشعبي"
+
+#: pages/cap/templates/cap/alert_detail.html:103
+msgid "Warning: This is not an Actual alert"
+msgstr "تحذير: هذا ليس تنبيهًا فعليًا"
+
+#: pages/cap/templates/cap/alert_detail.html:106
+msgid "The alert below is marked as"
+msgstr "تم وضع علامة على التنبيه أدناه كـ"
+
+#: pages/cap/templates/cap/alert_detail.html:108
+msgid ""
+"This means it is not an Actual alert and therefore not actionable to the "
+"general public"
+msgstr ""
+"وهذا يعني أنه ليس تنبيهًا فعليًا، وبالتالي لا يمكن اتخاذ قرار بشأنه لعامة "
+"الناس"
+
+#: pages/cap/templates/cap/alert_detail.html:116
+msgid "This alert is an update to the previously published alerts below:"
+msgstr "يعد هذا التنبيه تحديثًا للتنبيهات المنشورة مسبقًا أدناه:"
+
+#: pages/cap/templates/cap/alert_detail.html:121
+msgid "This alert cancels the previously published alerts below:"
+msgstr "يلغي هذا التنبيه التنبيهات المنشورة سابقًا أدناه:"
+
+#: pages/cap/templates/cap/alert_detail.html:154
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:434
+msgid "Alert Severity"
+msgstr "تنبيه الخطورة"
+
+#: pages/cap/templates/cap/alert_detail.html:161
+#: pages/cap/templates/cap/alert_detail.html:303
+#: pages/cap/templates/cap/alert_detail_pdf.html:69
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:441
+msgid "Extreme"
+msgstr "أقصى"
+
+#: pages/cap/templates/cap/alert_detail.html:168
+#: pages/cap/templates/cap/alert_detail.html:305
+#: pages/cap/templates/cap/alert_detail_pdf.html:71
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:448
+msgid "Severe"
+msgstr "شديد"
+
+#: pages/cap/templates/cap/alert_detail.html:175
+#: pages/cap/templates/cap/alert_detail.html:307
+#: pages/cap/templates/cap/alert_detail_pdf.html:73
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:455
+msgid "Moderate"
+msgstr "معتدل"
+
+#: pages/cap/templates/cap/alert_detail.html:182
+#: pages/cap/templates/cap/alert_detail.html:309
+#: pages/cap/templates/cap/alert_detail_pdf.html:75
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:462
+msgid "Minor"
+msgstr "صغير"
+
+#: pages/cap/templates/cap/alert_detail.html:255
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:508
+msgid "Language"
+msgstr "لغة"
+
+#: pages/cap/templates/cap/alert_detail.html:264
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:519
+msgid "Category"
+msgstr "فئة"
+
+#: pages/cap/templates/cap/alert_detail.html:277
+#: pages/cap/templates/cap/alert_detail_pdf.html:46
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:553
+msgid "Urgency"
+msgstr "الاستعجال"
+
+#: pages/cap/templates/cap/alert_detail.html:282
+#: pages/cap/templates/cap/alert_detail_pdf.html:50
+msgid "Immediate"
+msgstr "مباشر"
+
+#: pages/cap/templates/cap/alert_detail.html:284
+#: pages/cap/templates/cap/alert_detail_pdf.html:52
+msgid "Expected"
+msgstr "مُتوقع"
+
+#: pages/cap/templates/cap/alert_detail.html:286
+#: pages/cap/templates/cap/alert_detail_pdf.html:54
+msgid "Future"
+msgstr "مستقبل"
+
+#: pages/cap/templates/cap/alert_detail.html:288
+#: pages/cap/templates/cap/alert_detail_pdf.html:56
+msgid "Past"
+msgstr "ماضي"
+
+#: pages/cap/templates/cap/alert_detail.html:298
+#: pages/cap/templates/cap/alert_detail_pdf.html:65
+#: pages/cap/templates/cap/alert_list.html:69
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:564
+msgid "Severity"
+msgstr "خطورة"
+
+#: pages/cap/templates/cap/alert_detail.html:319
+#: pages/cap/templates/cap/alert_detail_pdf.html:84
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:575
+msgid "Certainty"
+msgstr "بالتاكيد"
+
+#: pages/cap/templates/cap/alert_detail.html:324
+#: pages/cap/templates/cap/alert_detail_pdf.html:88
+msgid "Observed"
+msgstr "لاحظ"
+
+#: pages/cap/templates/cap/alert_detail.html:326
+#: pages/cap/templates/cap/alert_detail_pdf.html:90
+msgid "Likely"
+msgstr "محتمل"
+
+#: pages/cap/templates/cap/alert_detail.html:328
+#: pages/cap/templates/cap/alert_detail_pdf.html:92
+msgid "Possible"
+msgstr "ممكن"
+
+#: pages/cap/templates/cap/alert_detail.html:330
+#: pages/cap/templates/cap/alert_detail_pdf.html:94
+msgid "Unlikely"
+msgstr "من غير المحتمل"
+
+#: pages/cap/templates/cap/alert_detail.html:345
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:535
+msgid "Response Types"
+msgstr "أنواع الاستجابة"
+
+#: pages/cap/templates/cap/alert_detail.html:351
+msgid "Shelter"
+msgstr "مَأوىً"
+
+#: pages/cap/templates/cap/alert_detail.html:353
+msgid "Evacuate"
+msgstr "إخلاء"
+
+#: pages/cap/templates/cap/alert_detail.html:355
+msgid "Prepare"
+msgstr "يحضر"
+
+#: pages/cap/templates/cap/alert_detail.html:357
+msgid "Execute"
+msgstr "ينفذ"
+
+#: pages/cap/templates/cap/alert_detail.html:359
+msgid "Avoid"
+msgstr "يتجنب"
+
+#: pages/cap/templates/cap/alert_detail.html:361
+msgid "Monitor"
+msgstr "شاشة"
+
+#: pages/cap/templates/cap/alert_detail.html:363
+msgid "Assess"
+msgstr "يٌقيِّم"
+
+#: pages/cap/templates/cap/alert_detail.html:365
+msgid "AllClear"
+msgstr "كل شيء واضح"
+
+#: pages/cap/templates/cap/alert_detail.html:367
+msgid "None"
+msgstr "لا أحد"
+
+#: pages/cap/templates/cap/alert_detail.html:380
+msgid "Time period"
+msgstr "فترة زمنية"
+
+#: pages/cap/templates/cap/alert_detail.html:389
+#: pages/cap/templates/cap/alert_detail_pdf.html:104
+msgid "Issued"
+msgstr "صادر"
+
+#: pages/cap/templates/cap/alert_detail.html:400
+#: pages/cap/templates/cap/alert_detail_pdf.html:119
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:594
+msgid "Effective"
+msgstr "فعال"
+
+#: pages/cap/templates/cap/alert_detail.html:416
+#: pages/cap/templates/cap/alert_detail_pdf.html:144
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:607
+msgid "Onset"
+msgstr "بداية"
+
+#: pages/cap/templates/cap/alert_detail.html:425
+#: pages/cap/templates/cap/alert_detail_pdf.html:160
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:619
+msgid "Expires"
+msgstr "تنتهي"
+
+#: pages/cap/templates/cap/alert_detail.html:436
+#: pages/cap/templates/cap/alert_detail_pdf.html:183
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:654
+msgid "Area"
+msgstr "منطقة"
+
+#: pages/cap/templates/cap/alert_detail.html:448
+msgid "Event Description"
+msgstr "وصف الحدث"
+
+#: pages/cap/templates/cap/alert_detail.html:459
+msgid "Instructions"
+msgstr "تعليمات"
+
+#: pages/cap/templates/cap/alert_detail_pdf.html:196
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:638
+msgid "Description"
+msgstr "وصف"
+
+#: pages/cap/templates/cap/alert_detail_pdf.html:209
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:646
+msgid "Instruction"
+msgstr "تعليمات"
+
+#: pages/cap/templates/cap/alert_list.html:33
+msgid "Active Alerts"
+msgstr "التنبيهات النشطة"
+
+#: pages/cap/templates/cap/alert_list.html:46
+msgid "No active alerts currently"
+msgstr "لا توجد تنبيهات نشطة حاليا"
+
+#: pages/cap/templates/cap/alert_list.html:55
+msgid "Past Alerts"
+msgstr "التنبيهات السابقة"
+
+#: pages/cap/templates/cap/alert_list.html:97
+msgid "Event type"
+msgstr "نوع الحدث"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:224
+msgid "Identifier"
+msgstr "المعرف"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:232
+msgid "Sender"
+msgstr "مرسل"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:239
+msgid "Sent"
+msgstr "مرسل"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:251
+msgid "Message Type"
+msgstr "نوع الرسالة"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:257
+msgid "Scope"
+msgstr "نِطَاق"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:267
+msgid "Reference Alerts"
+msgstr "التنبيهات المرجعية"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:584
+msgid "Time"
+msgstr "وقت"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:630
+msgid "Headline"
+msgstr "العنوان"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:682
+msgid "Contact"
+msgstr "اتصال"
+
+#: pages/cap/templates/cap/include_alert_list_item.html:32
+msgid "Issued on:"
+msgstr "صدر في:"
+
+#: pages/cap/templates/cap/include_alert_list_item.html:35
+#, python-format
+msgid "%(issued_on)s"
+msgstr "%(issued_on)s"
+
+#: pages/cap/templates/cap/widgets/nav_left_alert.html:97
+#: pages/cap/templates/cap/widgets/nav_top_alert.html:69
+msgid "Alert"
+msgstr "يُحذًِر"
+
+#: pages/cap/utils.py:44
+msgid "Go to warnings list"
+msgstr "انتقل إلى قائمة التحذيرات"
+
+#: pages/cap/views.py:129 pages/cap/views.py:143
+msgid "Latest alerts"
+msgstr "أحدث التنبيهات"
+
+#: pages/cap/views.py:136 pages/cap/views.py:150
+#, python-format
+msgid "Latest alerts from %(sender_name)s"
+msgstr "أحدث التنبيهات من %(sender_name)s"
+
+#: pages/cap/wagtail_hooks.py:100
+msgid "LIVE"
+msgstr "يعيش"
+
+#: pages/cap/wagtail_hooks.py:102
+msgid "Visit the live page"
+msgstr "قم بزيارة الصفحة المباشرة"
+
+#: pages/cap/wagtail_hooks.py:112
+msgid "Alerts"
+msgstr "التنبيهات"
+
+#: pages/cap/wagtail_hooks.py:123
+msgid "Webhooks"
+msgstr "خطافات الويب"
+
+#: pages/cap/wagtail_hooks.py:143
+msgid "Webhook Events"
+msgstr "أحداث الويب هوك"
+
+#: pages/cap/wagtail_hooks.py:192
+msgid "CAP Alerts"
+msgstr "تنبيهات CAP"
+
+#: pages/cap/wagtail_hooks.py:214
+msgid "Import CAP Alert"
+msgstr "تنبيه استيراد CAP"
+
+#: pages/cap/wagtail_hooks.py:222
+msgid "CAP Base Settings"
+msgstr "إعدادات قاعدة CAP"
+
+#: pages/cap/wagtail_hooks.py:230
+msgid "CAP Mapviewer Settings"
+msgstr "إعدادات عارض الخرائط CAP"
+
+#: pages/cap/wagtail_hooks.py:325
+#, python-format
+msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
+msgstr "تم نسخ التنبيه '%(page_title)s'. يمكنك تعديل التنبيه الجديد أدناه."
+
+#: pages/cap/wagtail_hooks.py:360
+msgid ""
+"Actual Alerts cannot be edited after they have been published. To publish an"
+" update to this alert, create a new alert of Message Type 'Update' and "
+"reference this alert"
+msgstr ""
+"لا يمكن تعديل التنبيهات الفعلية بعد نشرها. لنشر تحديث لهذا التنبيه، قم "
+"بإنشاء تنبيه جديد من نوع الرسالة \"تحديث\" وقم بالإشارة إلى هذا التنبيه"
+
+#: pages/cap/wagtail_hooks.py:371
+msgid "Actual Alerts cannot be Unpublished after they have been published"
+msgstr "لا يمكن إلغاء نشر التنبيهات الفعلية بعد نشرها"
+
+#: pages/cap/wagtail_hooks.py:382
+msgid ""
+"Actual Alerts cannot be deleted after they have been published. To cancel or"
+" publish an update to this alert, create a new alert of Message Type "
+"'Cancel' or 'Update' and reference this alert"
+msgstr ""
+"لا يمكن حذف التنبيهات الفعلية بعد نشرها. لإلغاء أو نشر تحديث لهذا التنبيه، "
+"قم بإنشاء تنبيه جديد من نوع الرسالة \"إلغاء\" أو \"تحديث\" وقم بالإشارة إلى "
+"هذا التنبيه"
+
+#: pages/cap/wagtail_hooks.py:581
+msgid "CAP Alert draft created. You can now edit the alert."
+msgstr "تم إنشاء مسودة تنبيه CAP. يمكنك الآن تعديل التنبيه."
+
+#: pages/cap/webhook/models.py:9
+msgid "Webhook URL"
+msgstr "عنوان URL لـ Webhook"
+
+#: pages/cap/webhook/models.py:22
+msgid "CAP Alert Webhook"
+msgstr "CAP Alert Webhook"
+
+#: pages/cap/webhook/models.py:23
+msgid "CAP Alert Webhooks"
+msgstr "تنبيهات CAP Webhooks"
+
+#: pages/cap/webhook/models.py:47
+msgid "CAP Alert Webhook Event"
+msgstr "حدث CAP Alert Webhook"
+
+#: pages/cap/webhook/models.py:48
+msgid "CAP Alert Webhook Events"
+msgstr "أحداث CAP Alert Webhook"
+
+#~ msgid "Unknown"
+#~ msgstr "مجهول"
+
+#~ msgid "Stations Layer SubCategory"
+#~ msgstr "فئة فرعية لطبقة المحطات"

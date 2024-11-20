@@ -1,0 +1,55 @@
+{% load i18n l10n %}
+
+<div id="{{ widget.name }}_div_map" class="circle_map_wrapper">
+    <div id="{{ widget.name }}_map" class="circle_map" style="height: 400px;width: 100%">
+        <div class="circle-params">
+            <div class="w-field__wrapper">
+                <div class="w-field__wrapper">
+                    <label class="w-field__label" for="{{ widget.name }}_circle_lon"
+                           id="{{ widget.name }}_circle_lon-label">
+                        {% translate "Longitude" %}
+                        <span class="w-required-mark">*</span>
+                    </label>
+                    <div class="w-field w-field--char_field w-field--text_input">
+                        <div class="w-field__input" data-field-input="">
+                            <input type="number" name="{{ widget.name }}_circle_lon" required=""
+                                   id="{{ widget.name }}_circle_lon">
+                        </div>
+                    </div>
+                </div>
+                <label class="w-field__label" for="{{ widget.name }}_circle_lat"
+                       id="{{ widget.name }}_circle_lat-label">
+                    {% translate "Latitude" %}
+                    <span class="w-required-mark">*</span>
+                </label>
+                <div class="w-field w-field--char_field w-field--text_input" data-field="" data-contentpath="text">
+                    <div class="w-field__input" data-field-input="">
+                        <input type="number" name="{{ widget.name }}_circle_lat" required=""
+                               id="{{ widget.name }}_circle_lat">
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-field__wrapper">
+                <label class="w-field__label" for="{{ widget.name }}_circle_radius"
+                       id="{{ widget.name }}_circle_radius-label">
+                    {% translate "Radius (in kilometers) " %}
+                    <span class="w-required-mark">*</span>
+                </label>
+                <div class="w-field w-field--char_field w-field--text_input">
+                    <div class="w-field__input" data-field-input="">
+                        <input type="number" name="{{ widget.name }}_circle_radius" required=""
+                               id="{{ widget.name }}_circle_radius">
+                    </div>
+                    <div data-field-help="">
+                        <div class="help"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <textarea id="{{ widget.name }}" class="vSerializedField required" name="{{ widget.name }}" hidden
+              data-boundaryinfourl="{{ boundary_info_url }}"
+              data-ungeojsonurl="{{ un_geojson_url }}">{% if widget.value %}
+        {{ widget.value }}{% endif %}</textarea>
+</div>

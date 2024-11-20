@@ -1,0 +1,266 @@
+.reference-alerts {
+    background-color: #f8f9fb;
+    padding: 20px 40px;
+    margin-bottom: 40px;
+}
+
+.ref-header {
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: -4px;
+}
+
+.cap-map-wrapper {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+#cap-map {
+    height: 500px;
+    width: 100%;
+}
+
+.c-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 4px;
+}
+
+.c-icon svg {
+    height: 100%;
+    width: 100%;
+}
+
+.map-legend {
+    display: flex;
+    padding: 4px 8px;
+    align-items: center;
+    width: 100%;
+    font-size: 14px;
+    flex-wrap: wrap;
+    border-top: 1px solid #f0f0f0;
+}
+
+.legend-items {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.map-legend .legend-items .legend-item .legend-color {
+    margin-right: 4px;
+    height: 12px;
+    width: 12px;
+}
+
+.cap-meta-wrapper {
+    width: 100%;
+}
+
+.cap-event {
+    display: flex;
+}
+
+.cap-event-header {
+    font-weight: 600;
+    font-size: 16px;
+    padding-bottom: 10px;
+    margin-right: 10px;
+}
+
+.cap-event-detail {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.cap-event-name {
+    margin-left: 4px;
+}
+
+.cap-time-wrapper {
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.cap-time-wrapper .time-type {
+    font-weight: 600;
+    color: #555;
+}
+
+.warning-timeline {
+    position: relative;
+    z-index: 0;
+    list-style: none;
+}
+
+.warning-timeline .warning-timeline__item {
+    position: relative;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+.warning-timeline__item:not(:last-child):before {
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(60%, #56616c), color-stop(25%, transparent));
+    background-image: -webkit-linear-gradient(bottom, #56616c 60%, transparent 25%);
+    background-image: linear-gradient(0deg, #56616c 60%, transparent 25%);
+    background-size: 1px 5px;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    left: 5px;
+    top: 17px;
+    bottom: -6.5px;
+}
+
+.warning-timeline__circle {
+    border-radius: 50%;
+    -webkit-box-shadow: rgb(86, 97, 108) 0px 0px 0px 1px inset;
+    box-shadow: rgb(86, 97, 108) 0px 0px 0px 1px inset;
+    height: 11px;
+    left: 0;
+    position: absolute;
+    width: 11px;
+    top: 6.5px;
+}
+
+.warning-timeline__circle:after {
+    background-color: #56616c;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 7px;
+    width: 7px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+
+}
+
+
+.cap-info-summary-item {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.cap-info-summary-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 4px;
+}
+
+.cap-info-summary-icon svg {
+    height: 100%;
+    width: 100%;
+}
+
+.cap-info-summary-type {
+    margin-left: 4px;
+    font-weight: 600;
+}
+
+.cap-info-summary-value {
+    margin-left: 4px;
+}
+
+.affected-areas {
+    padding: 20px 0;
+}
+
+.affected-area-title {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.cap-info-section {
+    padding: 20px 0;
+}
+
+.info-item {
+    padding-top: 10px;
+}
+
+.info-header {
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+.cap-share-wrapper {
+    padding: 20px 20px 40px 0;
+}
+
+.cap-share-item {
+    display: flex;
+    padding: 10px 0;
+}
+
+.cap-share-icon {
+    height: 24px;
+    width: 24px;
+    margin-right: 4px;
+}
+
+.cap-share-icon svg {
+    height: 100%;
+    width: 100%;
+}
+
+/*768px and lower*/
+@media screen and (max-width: 768px) {
+    #cap-map {
+        height: 400px;
+    }
+}
+
+
+.alert-item {
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding: 8px 16px;
+    position: relative;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.alert-item-icon {
+    margin-right: 10px;
+}
+
+.alert-icon-wrapper {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-icon-wrapper svg {
+    height: 80%;
+    width: 80%;
+    fill: currentColor;
+}
+
+
+.alert-item-title {
+    font-weight: 600;
+    font-size: 15px;
+
+}
+
+.alert-severity-label {
+    font-size: 13px;
+}
