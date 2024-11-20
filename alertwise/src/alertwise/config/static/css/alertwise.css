@@ -51,3 +51,25 @@ section.breadcrumb {
     padding: 1.25rem 0;
     background-color: #f8f9fb;
 }
+
+.share-buttons > a {
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.share-buttons .icon {
+    height: 14px;
+    width: 14px;
+}
+
+.share-buttons .icon svg {
+    height: 100%;
+    width: 100%;
+    fill: currentColor;
+}
+
+.featured-item-title {
+    padding-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}

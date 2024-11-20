@@ -18,7 +18,7 @@ def format_date_to_oid(oid_prefix, date):
     return f"urn:oid:{oid_prefix}.{oid_date}"
 
 
-def get_event_icon(request, event):
+def get_event_icon(event, request=None):
     from alertwise.capeditor.cap_settings import CapSetting
     try:
         if request:
@@ -28,7 +28,7 @@ def get_event_icon(request, event):
             if hazard_event_types:
                 for hazard in hazard_event_types:
                     event_name = hazard.event
-                    if event_name == event:
+                    if event_name == event and hazard.icon:
                         return hazard.icon
     except Exception:
         pass

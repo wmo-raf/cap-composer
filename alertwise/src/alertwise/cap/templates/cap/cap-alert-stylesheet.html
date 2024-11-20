@@ -1,5 +1,4 @@
-{% load i18n wagtailsettings_tags wagtailimages_tags static wagtailiconchooser_tags %}
-{% get_settings use_default_site=True %}
+{% load i18n wagtailimages_tags static wagtailiconchooser_tags %}
 
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -201,10 +200,10 @@
             </style>
         </head>
         <body class="container">
-        {% if settings.capeditor.CapSetting.logo %}
-            {% image settings.capeditor.CapSetting.logo original as logo %}
+        {% if logo %}
+            {% image logo original as logo_img %}
             <div style="display: flex;justify-content: center;margin-bottom: 20px">
-                <img style="height: 70px" src="{{ logo.url }}" alt="Logo"/>
+                <img style="height: 70px" src="{{ logo_img.url }}" alt="Logo"/>
             </div>
         {% endif %}
         <!-- To customize the Web page, insert here the HTML code for a page header  -->

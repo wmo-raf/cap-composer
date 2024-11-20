@@ -105,6 +105,6 @@ crashlytics.properties
 crashlytics-build.properties
 .env
 cache
-sandbox/media
-sandbox/static
+media
+alertwise/src/alertwise/static
 .DS_Store

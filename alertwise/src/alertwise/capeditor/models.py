@@ -1,14 +1,17 @@
+import json
 import uuid
 
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
+from django.db import models
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _, gettext
 from shapely.geometry import shape
 from wagtail import blocks
 from wagtail.admin.forms import WagtailAdminPageForm
-from wagtail.admin.panels import MultiFieldPanel
+from wagtail.admin.panels import MultiFieldPanel, FieldPanel
+from wagtail.fields import StreamField
 from wagtail.models import Page
 
 from alertwise.capeditor.blocks import (
@@ -22,8 +25,17 @@ from alertwise.capeditor.blocks import (
     get_language_choices
 )
 from alertwise.capeditor.constants import SEVERITY_MAPPING, URGENCY_MAPPING, CERTAINTY_MAPPING
-from .cap_settings import *
+from .cap_settings import (CapSetting, HazardEventTypes, PredefinedAlertArea, AlertLanguage)
 from .utils import get_event_icon, format_date_to_oid
+
+__all__ = [
+    "AbstractCapAlertPage",
+    "CapAlertPageForm",
+    "CapSetting",
+    "HazardEventTypes",
+    "PredefinedAlertArea",
+    "AlertLanguage"
+]
 
 
 class CapAlertPageForm(WagtailAdminPageForm):
@@ -268,7 +280,20 @@ class AbstractCapAlertPage(Page):
     def xml_link(self):
         return None
     
-    def get_infos(self, request=None, identifier=None):
+    @property
+    def identifier(self):
+        site = self.get_site()
+        cap_setting = CapSetting.for_site(site)
+        
+        if cap_setting.wmo_oid:
+            return format_date_to_oid(cap_setting.wmo_oid, self.sent)
+        
+        return str(self.guid)
+    
+    @cached_property
+    def infos(self):
+        site = self.get_site()
+        
         alert_infos = []
         for info in self.info:
             start_time = info.value.get("effective") or self.sent
@@ -296,17 +321,12 @@ class AbstractCapAlertPage(Page):
             expires = info.value.get('expires')
             url = self.url
             
-            event_icon = "alert"
-            if request:
-                event_icon = get_event_icon(request, event)
-            
+            event_icon = get_event_icon(event, site)
             category = info.value.get('category')
             if isinstance(category, list):
                 # get the first category
                 category = category[0]
             category = gettext(category)
-            
-            guid = str(self.guid)
             
             alert_info = {
                 "info": info,
@@ -325,8 +345,8 @@ class AbstractCapAlertPage(Page):
                 "expires": expires,
                 "expired": expired,
                 "properties": {
-                    "id": guid,
-                    "identifier": identifier if identifier else guid,
+                    "id": self.identifier,
+                    "identifier": self.identifier,
                     "event": event,
                     "event_with_area": event_with_area,
                     "event_type": info.value.get('event'),
@@ -353,7 +373,7 @@ class AbstractCapAlertPage(Page):
     
     def get_geojson_features(self, request=None):
         features = []
-        for info_item in self.get_infos(request):
+        for info_item in self.infos:
             info = info_item.get("info")
             if info.value.geojson:
                 properties = info_item.get("properties")
@@ -372,17 +392,5 @@ class AbstractCapAlertPage(Page):
     
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        
-        cap_setting = CapSetting.for_request(request)
-        identifier = str(self.guid)
-        if cap_setting.wmo_oid:
-            identifier = format_date_to_oid(cap_setting.wmo_oid, self.sent)
-        
-        infos = self.get_infos(request, identifier)
-        
-        page = context.get("page")
-        setattr(page, "infos", infos)
-        setattr(page, "identifier", identifier)
-        
         context["geojson_features"] = self.get_geojson_features(request)
         return context

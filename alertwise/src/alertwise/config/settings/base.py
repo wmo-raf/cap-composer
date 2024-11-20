@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     
     "wagtail_modeladmin",
     'wagtailmodelchooser',
+    "wagtailfontawesomesvg",
     
     "modelcluster",
     "taggit",

@@ -12,7 +12,6 @@ from shapely.geometry import shape
 from wagtail import blocks
 from wagtail.blocks import FieldBlock, StructValue, StructBlockValidationError
 from wagtail.documents.blocks import DocumentChooserBlock
-from wagtail.models import Site
 from wagtailmodelchooser.blocks import ModelChooserBlock
 
 from .forms.fields import (

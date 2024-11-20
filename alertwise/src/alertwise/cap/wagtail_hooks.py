@@ -407,6 +407,14 @@ def import_cap_alert(request, alert_data):
 
 @hooks.register("register_icons")
 def register_icons(icons):
+    brands = [
+        'wagtailfontawesomesvg/brands/facebook.svg',
+        'wagtailfontawesomesvg/brands/twitter.svg',
+        'wagtailfontawesomesvg/brands/linkedin.svg',
+        'wagtailfontawesomesvg/brands/telegram.svg',
+        'wagtailfontawesomesvg/brands/whatsapp.svg',
+    ]
+    
     return icons + [
         'cap/icons/category.svg',
         'cap/icons/certainty.svg',
@@ -415,7 +423,8 @@ def register_icons(icons):
         'cap/icons/response.svg',
         'cap/icons/warning.svg',
         'cap/icons/warning-outline.svg',
-    ]
+        'cap/icons/x-twitter.svg',
+    ] + brands
 
 
 @hooks.register("register_permissions")

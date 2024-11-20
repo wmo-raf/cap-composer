@@ -4,7 +4,7 @@ from rest_framework import serializers
 from wagtail.api.v2.utils import get_full_url
 
 from alertwise.capeditor.constants import CAP_MESSAGE_ORDER_SEQUENCE
-from alertwise.capeditor.utils import order_dict_by_keys, format_date_to_oid
+from alertwise.capeditor.utils import order_dict_by_keys
 
 
 def parse_tz(date_str):
@@ -49,15 +49,7 @@ class AlertSerializer(serializers.ModelSerializer):
         ]
     
     def get_identifier(self, obj):
-        identifier = obj.guid
-        request = self.context.get("request")
-        if request:
-            from alertwise.capeditor.models import CapSetting
-            cap_setting = CapSetting.for_request(request)
-            if cap_setting.wmo_oid:
-                identifier = format_date_to_oid(cap_setting.wmo_oid, obj.sent)
-        
-        return identifier
+        return obj.identifier
     
     def get_info(self, obj):
         request = self.context.get("request")
@@ -77,10 +69,18 @@ class AlertSerializer(serializers.ModelSerializer):
                 info_obj["resource"] = resources
             
             # assign full url
-            info_obj["web"] = obj.get_full_url(request)
+            info_obj["web"] = obj.url
+            
+            if not info_obj["headline"]:
+                info_obj["headline"] = obj.title
+            
+            if not info_obj["effective"]:
+                info_obj["effective"] = obj.sent
+            
             for field in list(info_obj):
                 if not info_obj[field]:
                     info_obj.pop(field)
+            
             area_values = []
             
             # format responseTypes

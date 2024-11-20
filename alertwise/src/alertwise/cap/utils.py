@@ -7,11 +7,6 @@ from importlib import import_module
 import pytz
 import requests
 import weasyprint
-from alertwise.capeditor.cap_settings import (
-    get_cap_contact_list
-)
-from alertwise.capeditor.models import CapSetting
-from alertwise.capeditor.renderers import CapXMLRenderer
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.files.base import ContentFile
@@ -27,10 +22,13 @@ from wagtail.images import get_image_model
 from wagtail.models import Site
 from wagtailcache.cache import clear_cache
 
+from alertwise.capeditor.models import CapSetting
+from alertwise.capeditor.renderers import CapXMLRenderer
 from .constants import DEFAULT_STYLE, CAP_LAYERS
 from .exceptions import CAPAlertImportError
 from .sign import sign_cap_xml
 from .weasyprint_utils import django_url_fetcher
+from ..utils import get_object_or_none
 
 
 def get_celery_app():
@@ -71,11 +69,6 @@ def create_cap_pdf_document(cap_alert, template_name):
         "sender_contact": cap_settings.sender,
         "alerts_url": cap_alert.get_parent().get_full_url().strip("/"),
     }
-    
-    infos = cap_alert.get_infos()
-    setattr(cap_alert, "infos", infos)
-    
-    context.update({"page": cap_alert})
     
     html_string = render_to_string(template_name, context)
     
@@ -180,6 +173,18 @@ def serialize_and_sign_cap_alert(alert, request=None):
     xml = etree.tostring(tree, xml_declaration=True, encoding='utf-8')
     
     return xml, signed
+
+
+def get_cap_contact_list(request):
+    cap_settings = CapSetting.for_request(request)
+    contacts_list = cap_settings.contact_list
+    return contacts_list
+
+
+def get_cap_audience_list(request):
+    cap_settings = CapSetting.for_request(request)
+    audience_list = cap_settings.audience_list
+    return audience_list
 
 
 def create_cap_alert_multi_media(cap_alert_page_id, clear_cache_on_success=False):

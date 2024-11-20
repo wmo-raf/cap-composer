@@ -163,19 +163,3 @@ class AlertLanguage(Orderable):
     def save(self, *args, **kwargs):
         self.code = self.code.lower()
         super().save(*args, **kwargs)
-
-
-def get_default_sender():
-    return None
-
-
-def get_cap_contact_list(request):
-    cap_settings = CapSetting.for_request(request)
-    contacts_list = cap_settings.contact_list
-    return contacts_list
-
-
-def get_cap_audience_list(request):
-    cap_settings = CapSetting.for_request(request)
-    audience_list = cap_settings.audience_list
-    return audience_list

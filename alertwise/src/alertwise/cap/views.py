@@ -1,8 +1,6 @@
 import json
+from lib2to3.fixes.fix_input import context
 
-from alertwise.capeditor.constants import SEVERITY_MAPPING
-from alertwise.capeditor.models import CapSetting
-from alertwise.capeditor.utils import format_date_to_oid, get_event_icon
 from django.contrib.syndication.views import Feed
 from django.core.validators import validate_email
 from django.http import JsonResponse, HttpResponse
@@ -15,9 +13,13 @@ from django.utils.feedgenerator import rfc2822_date
 from django.utils.translation import gettext as _
 from django.utils.xmlutils import SimplerXMLGenerator
 
+from alertwise.capeditor.constants import SEVERITY_MAPPING
+from alertwise.capeditor.models import CapSetting
+from alertwise.capeditor.utils import get_event_icon
 from .cache import wagcache
 from .models import (
     CapAlertPage,
+    CapAlertListPage,
     OtherCAPSettings,
 )
 from .utils import (
@@ -104,7 +106,12 @@ class AlertListFeed(Feed):
     
     def items(self):
         site = self.cap_setting.site
-        alerts = get_all_published_alerts().child_of(site.root_page)
+        
+        alerts = get_all_published_alerts()
+        
+        if site.root_page.specific_class == CapAlertListPage:
+            alerts = alerts.child_of(site.root_page)
+        
         return alerts
     
     def item_title(self, item):
@@ -123,11 +130,7 @@ class AlertListFeed(Feed):
         return super().item_enclosures(item)
     
     def item_guid(self, item):
-        identifier = str(item.guid)
-        if self.cap_setting.wmo_oid:
-            identifier = format_date_to_oid(self.cap_setting.wmo_oid, item.sent)
-        
-        return identifier
+        return item.identifier
     
     def item_author_name(self, item):
         if self.cap_setting.sender_name:
@@ -185,10 +188,18 @@ def get_cap_feed_stylesheet(request):
 
 
 def get_cap_alert_stylesheet(request):
+    context = {}
+    cap_settings = CapSetting.for_request(request)
+    if cap_settings.logo:
+        context.update({
+            "logo": cap_settings.logo,
+            "sender_name": cap_settings.sender_name
+        })
+    
     stylesheet = wagcache.get("cap_alert_stylesheet")
     
     if not stylesheet:
-        stylesheet = render_to_string("cap/cap-alert-stylesheet.html").strip()
+        stylesheet = render_to_string("cap/cap-alert-stylesheet.html", context=context).strip()
         # cache for 5 days
         wagcache.set("cap_alert_stylesheet", stylesheet, 60 * 60 * 24 * 5)
     
@@ -247,7 +258,7 @@ def get_home_map_alerts(request):
             "status": status,
             "url": alert.url,
             "event": f"{event} ({area_desc})",
-            "event_icon": get_event_icon(request, event),
+            "event_icon": get_event_icon(event, request),
             "severity": SEVERITY_MAPPING[info.value.get("severity")]
         }
         
@@ -276,8 +287,7 @@ def get_latest_active_alert(request):
     context = {}
     
     for alert in alerts:
-        alert_infos = alert.get_infos(request)
-        default_alert_info = alert_infos[0]
+        default_alert_info = alert.infos[0]
         
         if default_alert_display_language and len(alert.info) > 1:
             for info_item in alert.infos:

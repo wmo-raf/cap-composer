@@ -22,7 +22,6 @@ from wagtail.signals import page_published
 
 from alertwise.capeditor.cap_settings import CapSetting
 from alertwise.capeditor.models import AbstractCapAlertPage, CapAlertPageForm
-from alertwise.capeditor.utils import format_date_to_oid
 from .external_feed.models import ExternalAlertFeed, ExternalAlertFeedEntry
 from .mixins import MetadataPageMixin
 from .mqtt.models import CAPAlertMQTTBroker, CAPAlertMQTTBrokerEvent
@@ -69,26 +68,20 @@ class CapAlertListPage(MetadataPageMixin, Page):
         context = super().get_context(request, *args, **kwargs)
         cap_rss_feed_url = get_full_url(request, reverse("cap_alert_feed"))
         
+        site = self.get_site()
+        
         context.update({
             "cap_rss_feed_url": cap_rss_feed_url,
         })
         
-        other_cap_settings = OtherCAPSettings.for_request(request)
+        other_cap_settings = OtherCAPSettings.for_site(site)
         default_alert_display_language = other_cap_settings.default_alert_display_language
-        
-        cap_setting = CapSetting.for_request(request)
         
         alerts = get_all_published_alerts().child_of(self)
         alert_infos = []
         
         for alert in alerts:
-            identifier = str(alert.guid)
-            if cap_setting.wmo_oid:
-                identifier = format_date_to_oid(cap_setting.wmo_oid, alert.sent)
-            
-            # get alert inofs
-            infos = alert.get_infos(request=request, identifier=identifier)
-            
+            infos = alert.infos
             default_info = infos[0]
             
             # try to get the info in the default language
@@ -98,7 +91,7 @@ class CapAlertListPage(MetadataPageMixin, Page):
                     if default_info:
                         if info_lang == default_alert_display_language.code or info_lang.startswith(
                                 default_alert_display_language.code):
-                            info = info_item
+                            default_info = info_item
                             break
             
             # take first alert by default
@@ -342,9 +335,7 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
     def get_geojson_features(self, request=None):
         features = []
         
-        infos = self.get_infos(request)
-        
-        for info_item in infos:
+        for info_item in self.infos:
             info = info_item.get("info")
             if info.value.geojson:
                 web = info_item.get("url")
@@ -352,7 +343,7 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
                     web = get_full_url(request, web)
                 
                 properties = {
-                    "id": str(self.guid),
+                    "id": self.identifier,
                     "event": info_item.get("event"),
                     "headline": info.value.get("headline"),
                     "severity": info.value.get("severity"),
