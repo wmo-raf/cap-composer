@@ -6,9 +6,10 @@ from celery_singleton import Singleton, clear_locks
 from django.utils.text import slugify
 from django_celery_beat.models import IntervalSchedule, PeriodicTask
 
+from alertwise.utils import get_celery_app
 from .external_feed.utils import fetch_and_process_feed
 from .models import ExternalAlertFeed
-from .utils import get_object_or_none, get_celery_app
+from .utils import get_object_or_none
 
 logger = logging.getLogger(__name__)
 

@@ -1,6 +1,13 @@
-include README.md
-recursive-include capeditor *.html
-recursive-include capeditor *.py
-recursive-include capeditor/static *
-recursive-include capeditor/templates *
-recursive-include capeditor/locale *.po *.mo
+prune .idea/
+prune **/__pycache__
+prune cache/
+prune media/
+
+global-exclude .env
+global-exclude *.py[cod]
+global-exclude .gitignore
+
+recursive-include src/ *.py
+recursive-include src/**/templates *
+recursive-include src/**/static *
+recursive-include src/**/locale *.po *.mo

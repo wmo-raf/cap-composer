@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n wagtailcore_tags %}
+
+{% block title %}Internal server error{% endblock %}
+
+{% block body_class %}template-500{% endblock %}
+
+{% block content %}
+    <main>
+        <section style="margin-top: 50px">
+            <div class="container has-text-centered">
+                <div>
+                    <div style="padding-left: 20px; align-items: center;
+                display: flex;
+                flex-direction: column">
+                        <h3 class="py-2">
+                            {% translate "Internal server error" %}
+                        </h3>
+                        <h5 class="py-4" style="color: grey">
+                            {% translate "Sorry, there seems to be an error. Please try again soon" %}.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}

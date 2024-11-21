@@ -10,13 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-import importlib
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from email.utils import getaddresses
 
 import dj_database_url
 import environ
-from django.core.exceptions import ImproperlyConfigured
+
+from alertwise import VERSION
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -77,7 +78,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.gis",
     
-    "django_deep_translator"
+    "django_deep_translator",
+    "dbbackup",
 ]
 
 MIDDLEWARE = [
@@ -145,9 +147,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = env.str("LANGUAGE_CODE", default="en")
 
-TIME_ZONE = "UTC"
+TIME_ZONE = env.str("TIME_ZONE", "UTC")
 
 USE_I18N = True
 
@@ -182,13 +184,24 @@ STORAGES = {
     # (e.g. after a Wagtail upgrade).
     # See https://docs.djangoproject.com/en/5.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+        "BACKEND": "alertwise.config.storage.ManifestStaticFilesStorageNotStrict",
     },
 }
 
-# Wagtail settings
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': os.path.join(BASE_DIR, "backup")}
+DBBACKUP_CLEANUP_KEEP_MEDIA = 1
+DBBACKUP_CLEANUP_KEEP = 1
+DBBACKUP_CONNECTORS = {
+    "default": {
+        "CONNECTOR": "dbbackup.db.postgresql.PgDumpBinaryConnector",  # Use pg_dump binary
+        "DUMP_SUFFIX": "-e plpgsql",  # dump only system extensions
+        "RESTORE_SUFFIX": "--if-exists"  # Drop only if exists
+    }
+}
 
-WAGTAIL_SITE_NAME = "AlertWise"
+# Wagtail settings
+WAGTAIL_SITE_NAME = env.str("WAGTAIL_SITE_NAME", "AlertWise")
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
@@ -227,8 +240,10 @@ CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
 CELERY_SINGLETON_BACKEND_CLASS = (
-    "alertwise.celery_singleton_backend.RedisBackendForSingleton"
+    "alertwise.config.celery_singleton_backend.RedisBackendForSingleton"
 )
+
+CELERY_APP = "alertwise.config.celery:app"
 
 CACHES = {
     "default": {
@@ -236,6 +251,8 @@ CACHES = {
         "LOCATION": REDIS_URL,
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
         "KEY_PREFIX": "alertwise-default-cache",
+        "VERSION": VERSION,
+        "TIMEOUT": 60 * 60 * 4,  # 4 hours
     },
 }
 
@@ -269,3 +286,19 @@ MAX_CAP_LIST_PAGE_COUNT = env("MAX_CAP_LIST_PAGE_COUNT", default=None)
 CAP_ALLOW_EDITING = env.bool("CAP_ALLOW_EDITING", default=False)
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = env.int("DATA_UPLOAD_MAX_MEMORY_SIZE", default=26214400)  # 25MB
+
+# EMAIL SETTINGS
+# Default email address used to send messages from the website.
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
+
+# A list of people who get error notifications.
+ADMINS = getaddresses([env('DJANGO_ADMINS', default="")])
+
+# A list in the same format as ADMINS that specifies who should get some content management errors
+MANAGERS = ADMINS + getaddresses([env('DJANGO_MANAGERS', default="")])
+
+# A list in the same format as DEVELOPERS for receiving developer aimed messages
+DEVELOPERS = getaddresses([env('DJANGO_APP_DEVELOPERS', default="")])
+
+# Email address used to send error messages to ADMINS.
+SERVER_EMAIL = DEFAULT_FROM_EMAIL

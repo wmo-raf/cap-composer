@@ -31,21 +31,6 @@ from .weasyprint_utils import django_url_fetcher
 from ..utils import get_object_or_none
 
 
-def get_celery_app():
-    """
-    Dynamically imports the Celery app defined in settings.
-    """
-    
-    CELERY_APP = getattr(settings, "CELERY_APP", None)
-    
-    if not CELERY_APP:
-        raise ImproperlyConfigured("CELERY_APP is not defined in your settings")
-    
-    module_path, app_name = CELERY_APP.split(":")
-    module = import_module(module_path)
-    return getattr(module, app_name)
-
-
 def get_all_published_alerts():
     from .models import CapAlertPage
     return CapAlertPage.objects.all().live().filter(status="Actual", scope="Public").order_by('-sent')

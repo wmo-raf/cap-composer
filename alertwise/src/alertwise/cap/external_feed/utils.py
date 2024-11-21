@@ -2,10 +2,10 @@ import logging
 
 import feedparser
 import requests
-from climalert.capeditor.caputils import cap_xml_to_alert_data
+from alertwise.capeditor.caputils import cap_xml_to_alert_data
 from capvalidator import validate_cap_message
 
-from climalert.cap.utils import create_draft_alert_from_alert_data
+from alertwise.cap.utils import create_draft_alert_from_alert_data
 from .models import ExternalAlertFeed, ExternalAlertFeedEntry
 
 logger = logging.getLogger(__name__)
