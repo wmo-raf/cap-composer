@@ -151,8 +151,6 @@ LANGUAGE_CODE = env.str("LANGUAGE_CODE", default="en")
 
 TIME_ZONE = env.str("TIME_ZONE", "UTC")
 
-print(env.str("DB_NAME"), LANGUAGE_CODE)
-
 USE_I18N = True
 
 USE_TZ = True
