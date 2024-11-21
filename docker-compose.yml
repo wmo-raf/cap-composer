@@ -129,3 +129,9 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - ${ALERTWISE_WEB_PROXY_PORT:-80}:80
+
+
+networks:
+  default:
+    external: true
+    name: ${NETWORK_NAME:-alertwise}
