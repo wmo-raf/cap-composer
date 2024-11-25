@@ -119,8 +119,11 @@ ASGI_APPLICATION = "alertwise.config.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+DB_ENGINE = 'alertwise.config.db_engine'
+
 DATABASES = {
     "default": dj_database_url.config(
+        engine=DB_ENGINE,
         conn_max_age=600,
         conn_health_checks=True,
     )
