@@ -221,7 +221,7 @@ class CAPMenuGroupAdminMenuItem(GroupMenuItem):
 
 
 class CAPMenuGroup(ModelAdminGroup):
-    menu_label = _('AlertWise')
+    menu_label = _('CAP Alerts')
     menu_icon = 'warning'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
     items = (
