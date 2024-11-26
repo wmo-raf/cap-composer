@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=base.txt base.in
 #
-adm-boundary-manager==0.2.3
+adm-boundary-manager==0.2.4
     # via -r base.in
 amqp==5.3.1
     # via kombu

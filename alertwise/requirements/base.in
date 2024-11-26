@@ -5,7 +5,7 @@ django-deep-translator
 python-magic
 shapely>=2.0.1
 wagtail-icon-chooser>=0.0.4
-adm-boundary-manager>=0.2.3
+adm-boundary-manager>=0.2.4
 wagtail-humanitarian-icons>=2.0.0
 wagtail-modelchooser>=4.0.1
 paho-mqtt
