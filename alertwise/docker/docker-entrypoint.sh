@@ -120,6 +120,24 @@ run_server() {
         "${@:2}"
 }
 
+setup_otel_vars(){
+  # These key value pairs will be exported on every log/metric/trace by any otel
+  # exporters running in subprocesses launched by this script.
+  EXTRA_OTEL_RESOURCE_ATTRIBUTES="service.namespace=AlertWise,"
+  EXTRA_OTEL_RESOURCE_ATTRIBUTES+="deployment.environment=${ALERTWISE_DEPLOYMENT_ENV:-unknown}"
+
+  if [[ -n "${OTEL_RESOURCE_ATTRIBUTES:-}" ]]; then
+    # If the container has been launched with some extra otel attributes, make sure not
+    # to override them with our Climtech specific ones.
+    OTEL_RESOURCE_ATTRIBUTES="${EXTRA_OTEL_RESOURCE_ATTRIBUTES},${OTEL_RESOURCE_ATTRIBUTES}"
+  else
+    OTEL_RESOURCE_ATTRIBUTES="$EXTRA_OTEL_RESOURCE_ATTRIBUTES"
+  fi
+  export OTEL_RESOURCE_ATTRIBUTES
+  echo "OTEL_RESOURCE_ATTRIBUTES=$OTEL_RESOURCE_ATTRIBUTES"
+}
+
+
 # ======================================================
 # COMMANDS
 # ======================================================
@@ -141,34 +159,44 @@ show_startup_banner
 # wait for required services to be available, using docker-compose-wait
 /wait
 
+setup_otel_vars
+
 case "$1" in
 django-dev)
     run_setup_commands_if_configured
     echo "Running Development Server on 0.0.0.0:${ALERTWISE_PORT}"
     echo "Press CTRL-p CTRL-q to close this session without stopping the container."
+    export OTEL_SERVICE_NAME=alertwise-dev
     attachable_exec python3 /alertwise/app/src/alertwise/manage.py runserver "0.0.0.0:${ALERTWISE_PORT}"
     ;;
 django-dev-no-attach)
     run_setup_commands_if_configured
     echo "Running Development Server on 0.0.0.0:${ALERTWISE_PORT}"
+    export OTEL_SERVICE_NAME=alertwise-dev
     python /alertwise/app/src/alertwise/manage.py runserver "0.0.0.0:${ALERTWISE_PORT}"
     ;;
 gunicorn)
+    export OTEL_SERVICE_NAME="alertwise-asgi"
     run_server asgi "${@:2}"
     ;;
 gunicorn-wsgi)
+    export OTEL_SERVICE_NAME="alertwise-wsgi"
     run_server wsgi "${@:2}"
     ;;
 manage)
+    export OTEL_SERVICE_NAME=alertwise-manage
     exec python3 /alertwise/app/src/alertwise/manage.py "${@:2}"
     ;;
 shell)
+    export OTEL_SERVICE_NAME=alertwise-shell
     exec python3 /alertwise/app/src/alertwise/manage.py shell
     ;;
 celery-worker)
+    export OTEL_SERVICE_NAME="alertwise-celery-worker"
     start_celery_worker -Q celery -n default-worker@%h "${@:2}"
     ;;
 celery-beat)
+    export OTEL_SERVICE_NAME="alertwise-celery-beat"
     exec celery -A alertwise beat -l "${ALERTWISE_CELERY_BEAT_DEBUG_LEVEL}" -S django_celery_beat.schedulers:DatabaseScheduler "${@:2}"
     ;;
 *)

@@ -69,7 +69,7 @@ RUN python3 -m venv /alertwise/venv
 ENV PIP_CACHE_DIR=/tmp/alertwise_pip_cache
 # hadolint ignore=SC1091,DL3042
 RUN --mount=type=cache,mode=777,target=$PIP_CACHE_DIR,uid=$UID,gid=$GID . /alertwise/venv/bin/activate && \
-     pip3 install  -r /alertwise/requirements/base.txt
+     pip3 install  -r /alertwise/requirements/standalone.txt
 
 COPY --chown=$UID:$GID ./alertwise /alertwise/app
 

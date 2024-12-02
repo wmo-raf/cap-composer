@@ -259,28 +259,34 @@ CACHES = {
     },
 }
 
+ALERTWISE_LOG_LEVEL = env.str("ALERTWISE_LOG_LEVEL", "INFO")
+ALERTWISE_DATABASE_LOG_LEVEL = env.str("ALERTWISE_DATABASE_LOG_LEVEL", "ERROR")
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {
-        # Send logs with at least INFO level to the console.
+    "formatters": {
         "console": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
+            "format": "%(levelname)s %(asctime)s %(name)s.%(funcName)s:%(lineno)s- %("
+                      "message)s "
         },
     },
-    "formatters": {
-        "verbose": {
-            "format": "[%(asctime)s][%(process)d][%(levelname)s][%(name)s] %(message)s"
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "console",
         },
     },
     "loggers": {
-        "": {
+        "django.db.backends": {
             "handlers": ["console"],
-            "level": "INFO",
-            "propagate": False,
+            "level": ALERTWISE_DATABASE_LOG_LEVEL,
+            "propagate": True,
         },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": ALERTWISE_LOG_LEVEL,
     },
 }
 
