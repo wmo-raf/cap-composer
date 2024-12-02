@@ -84,6 +84,7 @@ services:
       - ${STATIC_VOLUME_PATH}:/alertwise/app/src/alertwise/static
       - ${MEDIA_VOLUME_PATH}:/alertwise/app/src/alertwise/media
       - ${BACKUP_VOLUME_PATH}:/alertwise/app/src/alertwise/backup
+      - ${SSL_VOLUME_PATH:-./ssl}:/etc/ssl:ro
 
   alertwise_celery_worker:
     image: alertwise_celery_worker
