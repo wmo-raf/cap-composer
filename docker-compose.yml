@@ -31,7 +31,7 @@ services:
     container_name: alertwise_db
     image: postgis/postgis:15-master
     restart: unless-stopped
-    command: postgres -c max_connections=300 -c shared_buffers=512MB
+    command: postgres -c max_connections=${POSTGRES_MAX_CONNECTIONS:-300} -c shared_buffers=${POSTGRES_SHARED_BUFFERS:-2GB}
     environment:
       - POSTGRES_USER=${DB_USER:-alertwise}
       - POSTGRES_DB=${DB_NAME:-alertwise}
