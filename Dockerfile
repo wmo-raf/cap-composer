@@ -62,7 +62,7 @@ RUN mkdir -p /alertwise/app && chown -R $UID:$GID /alertwise
 
 USER $UID:$GID
 
-COPY ./alertwise/requirements/base.txt /alertwise/requirements/
+COPY ./alertwise/requirements/standalone.txt /alertwise/requirements/
 RUN python3 -m venv /alertwise/venv
 
 
