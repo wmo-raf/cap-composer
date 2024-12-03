@@ -449,7 +449,7 @@ def create_draft_alert_from_alert_data(alert_data, request=None, update_event_li
     
     if cap_list_page:
         cap_list_page.add_child(instance=new_cap_alert_page)
-        new_cap_alert_page.save_revision(submitted_for_moderation=submit_for_moderation)
+        new_cap_alert_page.save_revision()
         
         return new_cap_alert_page
     

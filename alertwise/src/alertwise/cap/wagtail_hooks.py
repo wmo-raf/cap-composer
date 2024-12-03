@@ -115,27 +115,27 @@ class CAPAdmin(ModelAdmin):
     def __init__(self, parent=None):
         super().__init__(parent)
         
-        self.list_display = ["publish_status"] + list(self.list_display)
+        # self.list_display = ["publish_status"] + list(self.list_display)
         
-        self.publish_status.__func__.short_description = _('Publish Status')
+        # self.publish_status.__func__.short_description = _('Publish Status')
     
-    def publish_status(self, obj):
-        if obj.live:
-            return format_html(
-                '<span class="w-status w-status--primary">{}</span>',
-                _("Live"),
-            )
-        
-        if obj.latest_revision and obj.latest_revision.submitted_for_moderation:
-            return format_html(
-                '<span class="w-status">{}</span>',
-                _("In moderation"),
-            )
-        
-        return format_html(
-            '<span class="w-status">{}</span>',
-            _("Draft"),
-        )
+    # def publish_status(self, obj):
+    #     if obj.live:
+    #         return format_html(
+    #             '<span class="w-status w-status--primary">{}</span>',
+    #             _("Live"),
+    #         )
+    #
+    #     if obj.latest_revision and obj.latest_revision.submitted_for_moderation:
+    #         return format_html(
+    #             '<span class="w-status">{}</span>',
+    #             _("In moderation"),
+    #         )
+    #
+    #     return format_html(
+    #         '<span class="w-status">{}</span>',
+    #         _("Draft"),
+    #     )
     
     def get_extra_class_names_for_field_col(self, obj, field_name):
         if field_name == '__str__':
