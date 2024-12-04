@@ -71,7 +71,7 @@
                                 {% image page.search_image original as alert_png_preview %}
                                 <a class="button is-rounded is-small" href="{{ alert_png_preview.url }}">
                                     <span class="icon">
-                                        <i class="fas fa-image"></i>
+                                        {% svg_icon name="image" %}
                                     </span>
                                     <span class="share-button-title">
                                         {% translate "View PNG" %}
@@ -86,7 +86,7 @@
                                    data-ga-value="{{ page.alert_pdf_preview.url }}"
                                 >
                                     <span class="icon">
-                                        <i class="fas fa-file-pdf"></i>
+                                        {% svg_icon name="doc-full-inverse" %}
                                     </span>
                                     <span class="share-button-title">
                                         {% translate "View PDF" %}
