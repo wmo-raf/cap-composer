@@ -43,13 +43,6 @@ from .utils import (
 )
 
 
-@hooks.register("insert_editor_js")
-def insert_editor_js():
-    return format_html(
-        '<script src="{}"></script>', static("cap/js/mqtt_collapse_panels.js"),
-    )
-
-
 class CAPPagePermissionHelper(PagePermissionHelper):
     def user_can_edit_obj(self, user, obj):
         can_edit = super().user_can_edit_obj(user, obj)
@@ -196,6 +189,8 @@ class CAPAlertMQTTAdmin(ModelAdmin):
     list_display = ('name', 'host', 'port', 'created', 'modified')
     list_filter = ('wis2box_metadata_id', 'active')
     search_fields = ('name', 'wis2box_metadata_id')
+    
+    form_view_extra_js = ['cap/js/mqtt_collapse_panels.js']
 
 
 class CAPAlertMQTTEventPermissionHelper(PermissionHelper):

@@ -16,7 +16,5 @@ document.addEventListener('DOMContentLoaded', function () {
     if (wis2BoxCheckbox) {
         toggleFields();
         wis2BoxCheckbox.addEventListener('change', toggleFields);
-    } else {
-        console.error('wis2BoxCheckbox not found');
     }
 });
