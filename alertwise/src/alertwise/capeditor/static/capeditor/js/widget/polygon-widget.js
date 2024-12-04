@@ -40,6 +40,7 @@ class EditControl {
         this._container.className = 'mapboxgl-ctrl-group mapboxgl-ctrl edit-control';
         this._container.style = 'display: none;';
 
+
         this._container.innerHTML = `
             <button class="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_edit control-icon" title="Edit geometries">
                 <svg class="icon" aria-hidden="true">
@@ -69,10 +70,8 @@ class PolygonWidget {
         this.geomInput = $('#' + options.id);
         this.options = options
 
-
         this.boundaryInfoUrl = this.geomInput.data("boundaryinfourl")
         this.UNGeojsonBoundaryUrl = this.geomInput.data("ungeojsonurl")
-
 
         const id_parts = options.id.split("-area")
         const info_id = id_parts[0]
@@ -131,11 +130,18 @@ class PolygonWidget {
     };
 
     getState() {
-        return this.geomInput.val();
+        const val = this.geomInput.val();
+
+        if (val) {
+            return val.trim()
+        }
+
+        return null
     };
 
     initFromState() {
         const value = this.getState()
+
 
         if (value) {
             const feature = JSON.parse(value)
@@ -143,9 +149,6 @@ class PolygonWidget {
         }
     }
 
-    getValue() {
-        return this.geomInput.val();
-    };
 
     focus() {
     }
@@ -201,19 +204,23 @@ class PolygonWidget {
 
     initDraw() {
         const value = this.getState()
-        const hasGeomValue = Boolean(value)
+
+        const hasGeomValue = value && value !== ""
 
         // remove
         this.clearDraw()
 
         this.draw = new MapboxDraw({
-            displayControlsDefault: false, controls: {
-                polygon: !hasGeomValue, trash: true
+            displayControlsDefault: false,
+            controls: {
+                polygon: !hasGeomValue,
+                trash: true
             },
         });
 
         this.editControl = new EditControl();
         this.saveCancelControl = new SaveCancelControl()
+
 
         this.map.addControl(this.draw, 'top-left');
         this.map.addControl(this.editControl, 'top-left');
