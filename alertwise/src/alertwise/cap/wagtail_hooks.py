@@ -12,7 +12,7 @@ from wagtail.actions.copy_page import CopyPageAction
 from wagtail.admin import messages
 from wagtail.admin.forms.pages import CopyForm
 from wagtail.admin.menu import MenuItem, Menu
-from wagtail.models import Page
+from wagtail.models import Page, Site
 from wagtail_modeladmin.helpers import AdminURLHelper
 from wagtail_modeladmin.helpers import (
     PagePermissionHelper,
@@ -29,6 +29,7 @@ from wagtail_modeladmin.options import (
 from alertwise.capeditor.models import CapSetting
 from .models import (
     CapAlertPage,
+    CapAlertListPage,
     CAPAlertWebhook,
     CAPAlertWebhookEvent,
     OtherCAPSettings,
@@ -118,6 +119,19 @@ class CAPAdmin(ModelAdmin):
         # self.list_display = ["publish_status"] + list(self.list_display)
         
         # self.publish_status.__func__.short_description = _('Publish Status')
+    
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        
+        if self.is_pagemodel:
+            site = Site.find_for_request(request)
+            root_page = site.root_page
+            
+            # filter only alerts that are children of this specific CapAlertListPage
+            if isinstance(root_page.specific, CapAlertListPage):
+                qs = qs.child_of(root_page.specific)
+        
+        return qs
     
     # def publish_status(self, obj):
     #     if obj.live:
