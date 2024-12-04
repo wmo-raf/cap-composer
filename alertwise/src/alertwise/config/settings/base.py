@@ -311,3 +311,6 @@ DEVELOPERS = getaddresses([env('DJANGO_APP_DEVELOPERS', default="")])
 
 # Email address used to send error messages to ADMINS.
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+# for rendering the map in the CAP PDFs
+MBGL_RENDERER_URL = env("MBGL_RENDERER_URL", default=None)

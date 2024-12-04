@@ -232,7 +232,7 @@ class CapPageForm(CapAlertPageForm):
 class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
     base_form_class = CapPageForm
     
-    template = "cap/alert_detail.html"
+    template = "cap/alert_detail_pdf.html"
     
     parent_page_types = ["cap.CapAlertListPage"]
     subpage_types = []

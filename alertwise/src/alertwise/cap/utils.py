@@ -48,11 +48,16 @@ def create_cap_pdf_document(cap_alert, template_name):
     # TODO: handle case where logo is not set
     org_logo = cap_settings.logo
     
+    infos = cap_alert.infos
+    infos = sorted(infos, key=lambda x: x.get("severity", {}).get("id"), reverse=True)
+    cap_alert.infos = infos
+    
     context = {
         "org_logo": org_logo,
         "sender_name": cap_settings.sender_name,
         "sender_contact": cap_settings.sender,
         "alerts_url": cap_alert.get_parent().get_full_url().strip("/"),
+        "page": cap_alert
     }
     
     html_string = render_to_string(template_name, context)
