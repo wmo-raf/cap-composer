@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     "wagtailcache",
     "django_countries",
     "django_celery_beat",
+    "wagtailmetadata",
     
     "django.contrib.admin",
     "django.contrib.auth",
