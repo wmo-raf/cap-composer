@@ -51,11 +51,14 @@ RUN apt-get update \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
 
-ENV DOCKER_COMPOSE_WAIT_VERSION=2.12.1
+ARG DOCKER_COMPOSE_WAIT_VERSION
+ENV DOCKER_COMPOSE_WAIT_VERSION=${DOCKER_COMPOSE_WAIT_VERSION:-2.12.1}
+ARG DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX
+ENV DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX=${DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX:-}
 
 # Install docker-compose wait
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/$DOCKER_COMPOSE_WAIT_VERSION/wait /wait
-RUN chmod +x /wait
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/$DOCKER_COMPOSE_WAIT_VERSION/wait${DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX} /wait
+RUN chown $UID:$GID /wait &&  chmod +x /wait
 
 # Create directories and set correct permissions
 RUN mkdir -p /alertwise/app && chown -R $UID:$GID /alertwise

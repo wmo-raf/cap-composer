@@ -39,7 +39,7 @@ x-alertwise-variables: &alertwise-variables
 services:
   alertwise_db:
     container_name: alertwise_db
-    image: postgis/postgis:15-master
+    image: ${DB_IMAGE:-postgis/postgis:15-master}
     restart: unless-stopped
     command: postgres -c max_connections=${POSTGRES_MAX_CONNECTIONS:-300} -c shared_buffers=${POSTGRES_SHARED_BUFFERS:-2GB}
     environment:
@@ -67,13 +67,13 @@ services:
   alertwise:
     image: alertwise
     container_name: alertwise
-    platform: linux/x86_64
     build:
       context: .
       dockerfile: Dockerfile
       args:
         - UID=${UID}
         - GID=${GID}
+        - DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX=${DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX:-}
     restart: unless-stopped
     expose:
       - 8000
@@ -90,7 +90,6 @@ services:
   alertwise_celery_worker:
     image: alertwise_celery_worker
     container_name: alertwise_celery_worker
-    platform: linux/x86_64
     build:
       context: .
       dockerfile: Dockerfile
@@ -112,7 +111,6 @@ services:
   alertwise_celery_beat:
     image: alertwise_celery_beat
     container_name: alertwise_celery_beat
-    platform: linux/x86_64
     build:
       context: .
       dockerfile: Dockerfile
