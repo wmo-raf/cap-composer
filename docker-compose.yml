@@ -96,6 +96,7 @@ services:
       args:
         - UID=${UID}
         - GID=${GID}
+        - DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX=${DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX:-}
     command: celery-worker
     restart: unless-stopped
     environment:
@@ -117,6 +118,7 @@ services:
       args:
         - UID=${UID}
         - GID=${GID}
+        - DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX=${DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX:-}
     init: true
     command: celery-beat
     restart: unless-stopped
