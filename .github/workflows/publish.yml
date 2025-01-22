@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: release
-      url: https://pypi.org/p/capeditor
+      url: https://pypi.org/p/alertwise
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
@@ -30,6 +30,7 @@ jobs:
           pip install build
 
       - name: Build package
+        working-directory: alertwise
         run: python -m build
 
       - name: Publish package distributions to PyPI
