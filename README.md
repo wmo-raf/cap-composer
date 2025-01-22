@@ -5,7 +5,7 @@ based [Common Alerting Protocol](https://docs.oasis-open.org/emergency/cap/v1.2/
 Composer.
 
 This is a web-based tool for creating and managing CAP alerts. It is designed to be used by National Meteorological and
-Hydrological Services (NMHSs) , disaster management agencies, and other organizations that have the authority to publish
+Hydrological Services (NMHSs) ,disaster management agencies, and other organizations that have the authority to publish
 and disseminate CAP alerts.
 
 The **Common Alerting Protocol (CAP)** provides an open, non-proprietary digital message format for all types of alerts
@@ -34,3 +34,11 @@ at http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
   from [OCHA humanitarian icons](https://brand.unocha.org/d/xEPytAUjC3sH/icons#/humanitarian-icons)
 - Extendable to add your custom logic and functionality. The package provides an `abstract` django model that can be
   inherited for customizations.
+
+## 🚀 Quick Start
+
+Coming soon ..
+
+## Legal Disclaimer
+
+See [LEGAL.md](LEGAL.md)
