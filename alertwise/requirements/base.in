@@ -1,4 +1,4 @@
-wagtail>=4.2.2
+wagtail>=5.2
 djangorestframework-xml
 python-magic
 shapely>=2.0.1

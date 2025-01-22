@@ -1,11 +1,8 @@
-import json
-
 from django.contrib.gis.forms import BaseGeometryWidget
 from django.contrib.gis.geometry import json_regex
-from django.forms import Textarea, Widget, TextInput
+from django.forms import Textarea, Widget, TextInput, Media
 from django.urls import reverse
 from wagtail.telepath import register
-from wagtail.utils.widgets import WidgetWithScript
 from wagtail.widget_adapters import WidgetAdapter
 
 from alertwise.capeditor.constants import WMO_HAZARD_EVENTS_TYPE_CHOICES
@@ -36,7 +33,7 @@ class BasePolygonWidget(BaseGeometryWidget, BaseMapWidget):
         return value.json if value else ""
 
 
-class BoundaryPolygonWidget(WidgetWithScript, BasePolygonWidget, UNBoundaryWidgetMixin):
+class BoundaryPolygonWidget(BasePolygonWidget, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/boundary_polygon_widget.html"
     map_srid = 4326
     
@@ -49,18 +46,22 @@ class BoundaryPolygonWidget(WidgetWithScript, BasePolygonWidget, UNBoundaryWidge
         
         super().__init__(attrs=attrs)
     
-    class Media:
+    @property
+    def media(self):
         css = {
             "all": [
                 "capeditor/css/cap_detail_page.css",
                 "capeditor/css/widget/boundary-widget.css",
             ]
         }
+        
         js = [
             "capeditor/js/maplibre-gl.js",
             "capeditor/js/turf.min.js",
             "capeditor/js/widget/boundary-polygon-widget.js",
         ]
+        
+        return Media(js=js, css=css)
 
 
 class BoundaryPolygonWidgetAdapter(WidgetAdapter):
@@ -75,7 +76,7 @@ class BoundaryPolygonWidgetAdapter(WidgetAdapter):
 register(BoundaryPolygonWidgetAdapter(), BoundaryPolygonWidget)
 
 
-class PolygonWidget(WidgetWithScript, BasePolygonWidget, UNBoundaryWidgetMixin):
+class PolygonWidget(BasePolygonWidget, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/polygon_widget.html"
     map_srid = 4326
     
@@ -88,20 +89,23 @@ class PolygonWidget(WidgetWithScript, BasePolygonWidget, UNBoundaryWidgetMixin):
         
         super().__init__(attrs=attrs)
     
-    class Media:
-        css = {
-            "all": [
-                "capeditor/css/maplibre-gl.css",
-                "capeditor/css/mapbox-gl-draw.css",
-                "capeditor/css/widget/polygon-widget.css",
+    @property
+    def media(self):
+        return Media(
+            css={
+                "all": [
+                    "capeditor/css/maplibre-gl.css",
+                    "capeditor/css/mapbox-gl-draw.css",
+                    "capeditor/css/widget/polygon-widget.css",
+                ]
+            },
+            js=[
+                "capeditor/js/maplibre-gl.js",
+                "capeditor/js/mapbox-gl-draw.js",
+                "capeditor/js/turf.min.js",
+                "capeditor/js/widget/polygon-widget.js",
             ]
-        }
-        js = [
-            "capeditor/js/maplibre-gl.js",
-            "capeditor/js/mapbox-gl-draw.js",
-            "capeditor/js/turf.min.js",
-            "capeditor/js/widget/polygon-widget.js",
-        ]
+        )
 
 
 class PolygonWidgetAdapter(WidgetAdapter):
@@ -116,7 +120,7 @@ class PolygonWidgetAdapter(WidgetAdapter):
 register(PolygonWidgetAdapter(), PolygonWidget)
 
 
-class CircleWidget(WidgetWithScript, BaseMapWidget, Textarea, UNBoundaryWidgetMixin):
+class CircleWidget(BaseMapWidget, Textarea, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/circle_widget.html"
     
     def __init__(self, attrs=None):
@@ -129,18 +133,21 @@ class CircleWidget(WidgetWithScript, BaseMapWidget, Textarea, UNBoundaryWidgetMi
         
         super().__init__(default_attrs)
     
-    class Media:
-        css = {
-            "all": [
-                "capeditor/css/maplibre-gl.css",
-                "capeditor/css/widget/circle-widget.css",
+    @property
+    def media(self):
+        return Media(
+            css={
+                "all": [
+                    "capeditor/css/maplibre-gl.css",
+                    "capeditor/css/widget/circle-widget.css",
+                ]
+            },
+            js=[
+                "capeditor/js/maplibre-gl.js",
+                "capeditor/js/turf.min.js",
+                "capeditor/js/widget/circle-widget.js",
             ]
-        }
-        js = [
-            "capeditor/js/maplibre-gl.js",
-            "capeditor/js/turf.min.js",
-            "capeditor/js/widget/circle-widget.js",
-        ]
+        )
 
 
 class CircleWidgetAdapter(WidgetAdapter):
@@ -155,7 +162,7 @@ class CircleWidgetAdapter(WidgetAdapter):
 register(CircleWidgetAdapter(), CircleWidget)
 
 
-class HazardEventTypeWidget(WidgetWithScript, TextInput):
+class HazardEventTypeWidget(TextInput):
     template_name = "capeditor/widgets/hazard_event_type_widget.html"
     
     def __init__(self, attrs=None, **kwargs):
@@ -165,6 +172,12 @@ class HazardEventTypeWidget(WidgetWithScript, TextInput):
             default_attrs.update(attrs)
         
         super().__init__(default_attrs)
+    
+    def build_attrs(self, *args, **kwargs):
+        attrs = super().build_attrs(*args, **kwargs)
+        attrs['data-controller'] = 'hazard-event-type-widget'
+        
+        return attrs
     
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
@@ -183,13 +196,14 @@ class HazardEventTypeWidget(WidgetWithScript, TextInput):
         
         return context
     
-    def render_js_init(self, id_, name, value):
-        return "new HazardEventTypeWidget({0},{1});".format(json.dumps(id_), json.dumps(value))
-    
-    class Media:
-        js = [
-            "capeditor/js/widget/hazard-event-type-widget.js",
-        ]
+    @property
+    def media(self):
+        return Media(
+            js=[
+                "capeditor/js/widget/hazard-event-type-widget.js",
+                "capeditor/js/widget/hazard-event-type-widget-controller.js",
+            ]
+        )
 
 
 class MultiPolygonWidget(BaseGeometryWidget, BaseMapWidget, UNBoundaryWidgetMixin):
@@ -205,21 +219,6 @@ class MultiPolygonWidget(BaseGeometryWidget, BaseMapWidget, UNBoundaryWidgetMixi
         
         super().__init__(attrs=attrs)
     
-    class Media:
-        css = {
-            "all": [
-                "capeditor/css/maplibre-gl.css",
-                "capeditor/css/mapbox-gl-draw.css",
-                "capeditor/css/widget/multipolygon-widget.css",
-            ]
-        }
-        js = [
-            "capeditor/js/maplibre-gl.js",
-            "capeditor/js/mapbox-gl-draw.js",
-            "capeditor/js/turf.min.js",
-            "capeditor/js/widget/multipolygon-widget.js",
-        ]
-    
     def serialize(self, value):
         return value.json if value else ""
     
@@ -229,6 +228,24 @@ class MultiPolygonWidget(BaseGeometryWidget, BaseMapWidget, UNBoundaryWidgetMixi
         if geom and json_regex.match(value) and self.map_srid != 4326:
             geom.srid = self.map_srid
         return geom
+    
+    @property
+    def media(self):
+        return Media(
+            css={
+                "all": [
+                    "capeditor/css/maplibre-gl.css",
+                    "capeditor/css/mapbox-gl-draw.css",
+                    "capeditor/css/widget/multipolygon-widget.css",
+                ]
+            },
+            js=[
+                "capeditor/js/maplibre-gl.js",
+                "capeditor/js/mapbox-gl-draw.js",
+                "capeditor/js/turf.min.js",
+                "capeditor/js/widget/multipolygon-widget.js",
+            ]
+        )
 
 
 class GeojsonFileLoaderWidget(BaseGeometryWidget, BaseMapWidget):
@@ -243,7 +260,18 @@ class GeojsonFileLoaderWidget(BaseGeometryWidget, BaseMapWidget):
         
         super().__init__(attrs=attrs)
     
-    class Media:
+    def serialize(self, value):
+        return value.json if value else ""
+    
+    def deserialize(self, value):
+        geom = super().deserialize(value)
+        # GeoJSON assumes WGS84 (4326). Use the map's SRID instead.
+        if geom and json_regex.match(value) and self.map_srid != 4326:
+            geom.srid = self.map_srid
+        return geom
+    
+    @property
+    def media(self):
         css = {
             "all": [
                 "capeditor/css/maplibre-gl.css",
@@ -255,13 +283,5 @@ class GeojsonFileLoaderWidget(BaseGeometryWidget, BaseMapWidget):
             "capeditor/js/turf.min.js",
             "capeditor/js/widget/geojson-file-loader-widget.js",
         ]
-    
-    def serialize(self, value):
-        return value.json if value else ""
-    
-    def deserialize(self, value):
-        geom = super().deserialize(value)
-        # GeoJSON assumes WGS84 (4326). Use the map's SRID instead.
-        if geom and json_regex.match(value) and self.map_srid != 4326:
-            geom.srid = self.map_srid
-        return geom
+        
+        return Media(js=js, css=css)
