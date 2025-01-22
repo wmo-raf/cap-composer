@@ -1,3 +1,8 @@
-# AlertWise
+## ⚠️ Important Note
 
-Wagtail based Common Alerting Protocol (CAP) compliant warnings composer and publishing system.
+This package has been deprecated in favor of [Alertwise](https://github.com/wmo-raf/alertwise).
+
+Please follow the instructions in the [Alertwise](https://github.com/wmo-raf/alertwise) repository to install the new
+package.
+
+
