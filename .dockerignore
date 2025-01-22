@@ -107,5 +107,9 @@ crashlytics-build.properties
 cache
 media
 alertwise/src/alertwise/static
+
 .DS_Store
 docker/volumes
+images/
+README.md
+.github

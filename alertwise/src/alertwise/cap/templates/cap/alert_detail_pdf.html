@@ -1,0 +1,235 @@
+{% load static wagtailcore_tags wagtailimages_tags lazyimages_tags wagtailiconchooser_tags i18n %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ page.title }}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'cap/css/cap_detail_pdf.css' %}">
+</head>
+<body>
+
+<div class="alert-page-header">
+    <span>
+        {{ alerts_url }}
+    </span>
+    {% if sender_contact %}
+        <span>| {{ sender_contact }}</span>
+    {% endif %}
+</div>
+
+<main class="container">
+    <div class="logo">
+        {% image org_logo original as logo %}
+        <img src="{{ logo.url }}" alt="">
+    </div>
+
+    {% for info in page.infos %}
+        <div class="alert-title-container"
+             style="background-color: {{ info.severity.color }};{% if info.severity.icon_color %}color:{{ info.severity.icon_color }};{% endif %}">
+            {% svg_icon name="warning-outline" %}
+            <span class="alert-title">
+                {{ page.title }}
+            </span>
+        </div>
+        {% with item=info.info %}
+            <div class="alert-level-info">
+                <div class="alert-level-info-item">
+                    {% svg_icon name="time" %}
+                    <span class="item-label">
+                        <b>
+                            {% translate "Urgency" %}:
+                        </b>
+                        {% with urgency=item.value.urgency %}
+                            {% if urgency == "Immediate" %}
+                                {% translate "Immediate" %}
+                            {% elif urgency == "Expected" %}
+                                {% translate "Expected" %}
+                            {% elif urgency == "Future" %}
+                                {% translate "Future" %}
+                            {% elif urgency == "Past" %}
+                                {% translate "Past" %}
+                            {% endif %}
+                        {% endwith %}
+                    </span>
+                </div>
+                <div class="alert-level-info-item">
+                    {% svg_icon name="warning" %}
+                    <span class="item-label">
+                        <b>
+                            {% translate "Severity" %}:
+                        </b>
+                        {% with severity=item.value.severity %}
+                            {% if severity == "Extreme" %}
+                                {% translate "Extreme" %}
+                            {% elif severity == "Severe" %}
+                                {% translate "Severe" %}
+                            {% elif severity == "Moderate" %}
+                                {% translate "Moderate" %}
+                            {% elif severity == "Minor" %}
+                                {% translate "Minor" %}
+                            {% endif %}
+                        {% endwith %}
+                    </span>
+                </div>
+                <div class="alert-level-info-item">
+                    {% svg_icon name="crosshairs" %}
+                    <span class="item-label">
+                        <b>
+                            {% translate "Certainty" %}:
+                        </b>
+                        {% with certainty=item.value.certainty %}
+                            {% if certainty == "Observed" %}
+                                {% translate "Observed" %}
+                            {% elif certainty == "Likely" %}
+                                {% translate "Likely" %}
+                            {% elif certainty == "Possible" %}
+                                {% translate "Possible" %}
+                            {% elif certainty == "Unlikely" %}
+                                {% translate "Unlikely" %}
+                            {% endif %}
+                        {% endwith %}
+                    </span>
+                </div>
+            </div>
+            <div class="alert-time-info">
+                <div class="alert-time-info-item">
+                    <div class="item-label">
+                        <b>
+                            {% translate "Issued" %}:
+                        </b>
+                    </div>
+                    <div class="item-value">
+                        <div>
+                            {{ page.sent|date:"D d M Y" }}
+                        </div>
+                        <div class="time">
+                            {{ page.sent|date:"f A" }}
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-time-info-item">
+                    <div class="item-label">
+                        <b>
+                            {% translate "Effective" %}:
+                        </b>
+                    </div>
+                    <div class="item-value">
+                        {% if  item.value.effective %}
+                            <div>
+                                {{ item.value.effective|date:"D d M Y" }}
+                            </div>
+                            <div class="time">
+                                {{ item.value.effective|date:"f A" }}
+                            </div>
+                        {% else %}
+                            <div>
+                                {{ page.sent|date:"D d M Y" }}
+                            </div>
+                            <div class="time">
+                                {{ page.sent|date:"f A" }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if item.value.onset %}
+                    <div class="alert-time-info-item">
+                        <div class="item-label">
+                            <b>
+                                {% translate "Onset" %}:
+                            </b>
+                        </div>
+                        <div class="item-value">
+                            <div>
+                                {{ item.value.onset|date:"D d M Y" }}
+                            </div>
+                            <div class="time">
+                                {{ item.value.onset|date:"f A" }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="alert-time-info-item">
+                    <div class="item-label">
+                        <b>
+                            {% translate "Expires" %}:
+                        </b>
+                    </div>
+                    <div class="item-value">
+                        <div>
+                            {{ item.value.expires|date:"D d M Y" }}
+                        </div>
+                        <div class="time">
+                            {{ item.value.expires|date:"f A" }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert-area-info">
+                <div class="alert-area-map">
+                    {% if page.alert_area_map_image %}
+                        {% image page.alert_area_map_image original as map_image %}
+                        <img src="{{ map_image.url }}" alt="">
+                    {% endif %}
+                </div>
+                <div class="alert-area-description">
+                    <div>
+                        <b>
+                            {% translate "Area" %}:
+                        </b>
+                    </div>
+                    <div>
+                        <p>
+                            {{ info.properties.area_desc|truncatechars:500 }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="alert-description">
+                <div>
+                    <b>
+                        {% translate "Description" %}:
+                    </b>
+                </div>
+                <div>
+                    <p>
+                        {{ item.value.description }}
+                    </p>
+                </div>
+
+            </div>
+            <div class="alert-instruction">
+                <div>
+                    <b>
+                        {% translate "Instruction" %}:
+                    </b>
+                </div>
+                <div>
+                    <p>
+                        {{ item.value.instruction }}
+                    </p>
+                </div>
+            </div>
+        {% endwith %}
+        {% if page.infos|length > 1 and not forloop.last %}
+            <p style="page-break-before: always"></p>
+        {% endif %}
+    {% endfor %}
+</main>
+
+<div class="alert-page-footer">
+    {% if sender_name %}
+        <span>{{ sender_name }}</span>
+    {% endif %}
+</div>
+</body>
+</html>
+
+
+
+

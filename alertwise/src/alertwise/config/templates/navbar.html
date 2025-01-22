@@ -1,0 +1,26 @@
+{% load static alertwise_tags %}
+{% wagtail_default_site as default_site %}
+
+<div class="" style="border-bottom: 1px solid rgba(195, 192, 192, 0.37);padding: 10px 0">
+    <div class="container">
+        <nav class="navbar" role="navigation" aria-label="main navigation"
+             style="display: flex;align-items: center;">
+            <div class="navbar-brand" style="min-height: 30px">
+                <a href="{{ default_site.root_url }}">
+                    <figure style="height: 30px">
+                        <img src="{% static 'cap/images/caplogo.jpeg' %}" alt="AlertWise" style="height: 100%">
+                    </figure>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="{{ default_site.root_url }}">
+                        Home
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+</div>

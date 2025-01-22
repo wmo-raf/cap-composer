@@ -1,0 +1,48 @@
+{% load static wagtailcore_tags wagtailimages_tags lazyimages_tags wagtailiconchooser_tags i18n %}
+
+<a href="{{ alert_info.url }}" class="alert-link">
+    <div class="alert-item"
+         data-severity="{{ alert_info.severity.severity }}"
+         data-event="{{ alert_info.event }}"
+         style="background-color: {{ alert_info.severity.background_color }};border: 1px solid {{ alert_info.severity.border_color }}">
+        <div class="alert-item-left">
+            <div class="alert-item-icon">
+                <div class="alert-icon-wrapper"
+                     style="background-color: {{ alert_info.severity.color }};border-color: {{ alert_info.severity.border_color }};
+                             {% if alert_info.severity.icon_color %}color:{{ alert_info.severity.icon_color }};{% endif %} ">
+                    {% if alert_info.event_icon %}
+                        {% svg_icon name=alert_info.event_icon %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="alert-item-info">
+                <div class="alert-item-title">
+                    {{ alert_info.status }}: {{ alert_info.event_with_area|truncatechars:60 }}
+                </div>
+                {% if alert_info.properties.headline %}
+                    <div class="alert-info-headline">
+                        {{ alert_info.properties.headline|truncatechars:60 }}
+                    </div>
+                {% endif %}
+                <div class="alert-time-info">
+                    <span class="time-icon">
+                        {% svg_icon name="calendar-alt" %}
+                    </span>
+                    <span class="time-em">
+                        {% translate "Issued on:" %}
+                    </span>
+                    <span>
+                        {% blocktranslate trimmed with issued_on=alert_info.properties.sent|date:"d M Y h:i a" %}
+                            {{ issued_on }}
+                        {% endblocktranslate %}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <span class="icon">
+                <i class="fa fa-arrow-right"></i>
+            </span>
+        </div>
+    </div>
+</a>

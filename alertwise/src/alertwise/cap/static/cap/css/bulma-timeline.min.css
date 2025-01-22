@@ -1,0 +1,135 @@
+.timeline {
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline .timeline-header {
+    width: 4em;
+    min-width: 4em;
+    max-width: 8em;
+    word-wrap: normal;
+    text-align: center;
+    display: flex;
+    justify-content: center
+}
+
+.timeline .timeline-item {
+    display: flex;
+    display: -webkit-flex;
+    position: relative;
+    padding-bottom: 2em
+}
+
+.timeline .timeline-item::before {
+    content: "";
+    background-color: #dbdbdb;
+    display: block;
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    left: -.5px;
+    top: 0
+}
+
+.timeline .timeline-item .timeline-marker {
+    position: absolute;
+    background: #dbdbdb;
+    border: 1px solid #dbdbdb;
+    border-radius: 100%;
+    content: "";
+    display: block;
+    height: 12px;
+    transform: translateX(-50%);
+    top: 1.2rem;
+    width: 12px
+}
+
+
+.timeline .timeline-item .timeline-marker.is-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+    background: #dbdbdb;
+    border-radius: 100%;
+    padding: 2px;
+}
+
+.timeline .timeline-item .timeline-marker.is-icon .marker-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.timeline .timeline-item .timeline-marker.is-icon .marker-icon svg {
+    height: 16px;
+    width: 16px;
+}
+
+.timeline .timeline-item .timeline-marker.is-icon > * {
+    font-size: .75rem !important
+}
+
+
+.timeline .timeline-item .timeline-content {
+    padding: 1em 0 0 2em
+}
+
+.timeline .timeline-item .timeline-content .heading {
+    font-weight: 600
+}
+
+.timeline .timeline-item.is-white::before {
+    background-color: #fff
+}
+
+
+.timeline.is-centered .timeline-header {
+    display: flex;
+    width: 100%;
+    align-self: center
+}
+
+.timeline.is-centered .timeline-item {
+    width: 50%;
+    align-self: flex-end;
+    flex-direction: row
+}
+
+.timeline.is-centered .timeline-item:nth-of-type(2n) {
+    align-self: flex-start;
+    flex-direction: row-reverse;
+    margin-left: 0;
+    margin-right: 2em
+}
+
+.timeline.is-centered .timeline-item:nth-of-type(2n)::before {
+    right: -.5px;
+    left: auto
+}
+
+.timeline.is-centered .timeline-item:nth-of-type(2n) .timeline-marker {
+    transform: translateX(50%)
+}
+
+.timeline.is-centered .timeline-item:nth-of-type(2n) .timeline-content {
+    padding: 1em 2em 0 0;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-basis: 100%
+}
+
+.timeline.is-centered .timeline-item:nth-of-type(2n+1)::before {
+    content: "";
+    background-color: #dbdbdb;
+    display: block;
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: 0
+}

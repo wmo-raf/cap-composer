@@ -1,0 +1,69 @@
+{% load static wagtailcore_tags wagtailuserbar i18n wagtailmetadata_tags %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        {% block title %}
+            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+            {% wagtail_site as current_site %}
+            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+        {% endblock %}
+    </title>
+    {% if page.search_description %}
+        <meta name="description" content="{{ page.search_description }}"/>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    {% block page_meta %}
+        {% if page.get_meta_title %}
+            {% meta_tags %}
+        {% endif %}
+    {% endblock %}
+
+    {# Force all links in the live preview panel to be opened in a new tab #}
+    {% if request.in_preview_panel %}
+        <base target="_blank">
+    {% endif %}
+
+    {# Global stylesheets #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/alertwise.css' %}">
+
+    {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+    {% endblock %}
+</head>
+<body>
+{% wagtailuserbar %}
+
+<div class="page-wrapper">
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+
+    <div class="body-wrapper">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer class="alertwise-footer">
+        {% include 'footer.html' %}
+    </footer>
+</div>
+
+{# Global javascript #}
+<script type="text/javascript" src="{% static 'js/alertwise.js' %}"></script>
+
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+{% block extra_js %}
+    {# Override this in templates to add extra javascript #}
+{% endblock %}
+</body>
+</html>

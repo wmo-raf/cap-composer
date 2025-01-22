@@ -1,0 +1,631 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-30 21:19+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: pages/cap/models.py:55
+msgid "CAP Alerts Heading"
+msgstr "CAP Alerts Heading"
+
+#: pages/cap/models.py:172
+msgid "Effective date cannot be earlier than the alert sent date."
+msgstr "Effective date cannot be earlier than the alert sent date."
+
+#: pages/cap/models.py:175
+msgid "Expires date cannot be earlier than the alert sent date."
+msgstr "Expires date cannot be earlier than the alert sent date."
+
+#: pages/cap/models.py:220
+msgid "CAP Alert"
+msgstr "CAP Alert"
+
+#: pages/cap/models.py:369
+msgid "Show on MapViewer"
+msgstr "Show on MapViewer"
+
+#: pages/cap/models.py:370
+msgid "Check to show cap alerts on MapViewer"
+msgstr "Check to show cap alerts on MapViewer"
+
+#: pages/cap/models.py:372
+msgid "CAP Alerts Layer Title"
+msgstr "CAP Alerts Layer Title"
+
+#: pages/cap/models.py:374
+msgid "CAP Alerts Layer SubCategory"
+msgstr "CAP Alerts Layer SubCategory"
+
+#: pages/cap/models.py:377
+msgid "CAP Layer Metadata"
+msgstr "CAP Layer Metadata"
+
+#: pages/cap/models.py:379
+msgid "Auto Refresh interval in minutes"
+msgstr "Auto Refresh interval in minutes"
+
+#: pages/cap/models.py:381
+msgid ""
+"Refresh cap alerts on the map after this minutes. Leave blank to disable "
+"auto refreshing"
+msgstr ""
+"Refresh cap alerts on the map after this minutes. Leave blank to disable "
+"auto refreshing"
+
+#: pages/cap/models.py:405
+msgid "Left of the Navbar"
+msgstr "Left of the Navbar"
+
+#: pages/cap/models.py:406
+msgid "Top of the Navbar"
+msgstr "Top of the Navbar"
+
+#: pages/cap/models.py:410
+msgid "Active Alert Style"
+msgstr "Active Alert Style"
+
+#: pages/cap/models.py:411
+msgid "Choose the style of active alerts"
+msgstr "Choose the style of active alerts"
+
+#: pages/cap/models.py:418 pages/cap/models.py:419
+#: pages/cap/wagtail_hooks.py:240
+msgid "Other Settings"
+msgstr "Other Settings"
+
+#: pages/cap/mqtt/models.py:14 pages/cap/webhook/models.py:8
+msgid "Name"
+msgstr "Name"
+
+#: pages/cap/mqtt/models.py:15
+msgid "Provide a name to identify the broker"
+msgstr "Provide a name to identify the broker"
+
+#: pages/cap/mqtt/models.py:16
+msgid "Broker Host"
+msgstr "Broker Host"
+
+#: pages/cap/mqtt/models.py:17
+msgid "Provide the broker host name or IP address"
+msgstr "Provide the broker host name or IP address"
+
+#: pages/cap/mqtt/models.py:18
+msgid "Broker Port"
+msgstr "Broker Port"
+
+#: pages/cap/mqtt/models.py:18
+msgid "Provide the broker port number"
+msgstr "Provide the broker port number"
+
+#: pages/cap/mqtt/models.py:21
+msgid "Broker Username"
+msgstr "Broker Username"
+
+#: pages/cap/mqtt/models.py:22
+msgid "Broker Password"
+msgstr "Broker Password"
+
+#: pages/cap/mqtt/models.py:23
+msgid "Enter a password. If a password already exists, it will be updated"
+msgstr "Enter a password. If a password already exists, it will be updated"
+
+#: pages/cap/mqtt/models.py:27
+msgid "Is WIS2Box Node"
+msgstr "Is WIS2Box Node"
+
+#: pages/cap/mqtt/models.py:28
+msgid "Check this box if you are providing the broker details of a wis2box."
+msgstr "Check this box if you are providing the broker details of a wis2box."
+
+#: pages/cap/mqtt/models.py:30
+msgid "Topic"
+msgstr "Topic"
+
+#: pages/cap/mqtt/models.py:31
+msgid "Provide the MQTT topic to publish the CAP alerts."
+msgstr "Provide the MQTT topic to publish the CAP alerts."
+
+#: pages/cap/mqtt/models.py:33
+msgid "Dataset ID"
+msgstr "Dataset ID"
+
+#: pages/cap/mqtt/models.py:35
+msgid ""
+"Provide the metadata ID for your dataset registered in the wis2box. If you "
+"do not have this, please create a dataset in the wis2box before proceeding."
+msgstr ""
+"Provide the metadata ID for your dataset registered in the wis2box. If you "
+"do not have this, please create a dataset in the wis2box before proceeding."
+
+#: pages/cap/mqtt/models.py:38 pages/cap/webhook/models.py:10
+msgid "Active"
+msgstr "Active"
+
+#: pages/cap/mqtt/models.py:39
+msgid "Automatically publish CAP alerts to this broker"
+msgstr "Automatically publish CAP alerts to this broker"
+
+#: pages/cap/mqtt/models.py:42 pages/cap/webhook/models.py:13
+msgid "Retry on failure"
+msgstr "Retry on failure"
+
+#: pages/cap/mqtt/models.py:49
+msgid "Broker Information"
+msgstr "Broker Information"
+
+#: pages/cap/mqtt/models.py:53
+msgid "Authentication"
+msgstr "Authentication"
+
+#: pages/cap/mqtt/models.py:70
+msgid "Dataset ID is required for a WIS2Box Broker"
+msgstr "Dataset ID is required for a WIS2Box Broker"
+
+#: pages/cap/mqtt/models.py:75
+msgid "Topic is required"
+msgstr "Topic is required"
+
+#: pages/cap/mqtt/models.py:80
+msgid ""
+"Secret key for encrypting passwords is not set. Please ensure the "
+"CAP_MQTT_SECRET_KEY is set "
+msgstr ""
+"Secret key for encrypting passwords is not set. Please ensure the "
+"CAP_MQTT_SECRET_KEY is set"
+
+#: pages/cap/mqtt/models.py:85
+msgid "Password is required if creating a new broker"
+msgstr "Password is required if creating a new broker"
+
+#: pages/cap/mqtt/models.py:106
+msgid "MQTT Broker"
+msgstr "MQTT Broker"
+
+#: pages/cap/mqtt/models.py:107
+msgid "MQTT Brokers"
+msgstr "MQTT Brokers"
+
+#: pages/cap/mqtt/models.py:114 pages/cap/webhook/models.py:30
+msgid "Pending"
+msgstr "Pending"
+
+#: pages/cap/mqtt/models.py:115 pages/cap/webhook/models.py:31
+msgid "Failure"
+msgstr "Failure"
+
+#: pages/cap/mqtt/models.py:116 pages/cap/webhook/models.py:32
+msgid "Success"
+msgstr "Success"
+
+#: pages/cap/mqtt/models.py:123
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:245
+#: pages/cap/webhook/models.py:39
+msgid "Status"
+msgstr "Status"
+
+#: pages/cap/mqtt/models.py:125 pages/cap/webhook/models.py:41
+msgid "Retries"
+msgstr "Retries"
+
+#: pages/cap/mqtt/models.py:126 pages/cap/webhook/models.py:42
+msgid "Last Error Message"
+msgstr "Last Error Message"
+
+#: pages/cap/mqtt/models.py:131
+msgid "MQTT Broker Event"
+msgstr "MQTT Broker Event"
+
+#: pages/cap/mqtt/models.py:132
+msgid "MQTT Broker Events"
+msgstr "MQTT Broker Events"
+
+#: pages/cap/templates/cap/alert_detail.html:77
+msgid "View PNG"
+msgstr "View PNG"
+
+#: pages/cap/templates/cap/alert_detail.html:92
+msgid "View PDF"
+msgstr "View PDF"
+
+#: pages/cap/templates/cap/alert_detail.html:103
+msgid "Warning: This is not an Actual alert"
+msgstr "Warning: This is not an Actual alert"
+
+#: pages/cap/templates/cap/alert_detail.html:106
+msgid "The alert below is marked as"
+msgstr "The alert below is marked as"
+
+#: pages/cap/templates/cap/alert_detail.html:108
+msgid ""
+"This means it is not an Actual alert and therefore not actionable to the "
+"general public"
+msgstr ""
+"This means it is not an Actual alert and therefore not actionable to the "
+"general public"
+
+#: pages/cap/templates/cap/alert_detail.html:116
+msgid "This alert is an update to the previously published alerts below:"
+msgstr "This alert is an update to the previously published alerts below:"
+
+#: pages/cap/templates/cap/alert_detail.html:121
+msgid "This alert cancels the previously published alerts below:"
+msgstr "This alert cancels the previously published alerts below:"
+
+#: pages/cap/templates/cap/alert_detail.html:154
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:434
+msgid "Alert Severity"
+msgstr "Alert Severity"
+
+#: pages/cap/templates/cap/alert_detail.html:161
+#: pages/cap/templates/cap/alert_detail.html:303
+#: pages/cap/templates/cap/alert_detail_pdf.html:69
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:441
+msgid "Extreme"
+msgstr "Extreme"
+
+#: pages/cap/templates/cap/alert_detail.html:168
+#: pages/cap/templates/cap/alert_detail.html:305
+#: pages/cap/templates/cap/alert_detail_pdf.html:71
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:448
+msgid "Severe"
+msgstr "Severe"
+
+#: pages/cap/templates/cap/alert_detail.html:175
+#: pages/cap/templates/cap/alert_detail.html:307
+#: pages/cap/templates/cap/alert_detail_pdf.html:73
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:455
+msgid "Moderate"
+msgstr "Moderate"
+
+#: pages/cap/templates/cap/alert_detail.html:182
+#: pages/cap/templates/cap/alert_detail.html:309
+#: pages/cap/templates/cap/alert_detail_pdf.html:75
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:462
+msgid "Minor"
+msgstr "Minor"
+
+#: pages/cap/templates/cap/alert_detail.html:255
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:508
+msgid "Language"
+msgstr "Language"
+
+#: pages/cap/templates/cap/alert_detail.html:264
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:519
+msgid "Category"
+msgstr "Category"
+
+#: pages/cap/templates/cap/alert_detail.html:277
+#: pages/cap/templates/cap/alert_detail_pdf.html:46
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:553
+msgid "Urgency"
+msgstr "Urgency"
+
+#: pages/cap/templates/cap/alert_detail.html:282
+#: pages/cap/templates/cap/alert_detail_pdf.html:50
+msgid "Immediate"
+msgstr "Immediate"
+
+#: pages/cap/templates/cap/alert_detail.html:284
+#: pages/cap/templates/cap/alert_detail_pdf.html:52
+msgid "Expected"
+msgstr "Expected"
+
+#: pages/cap/templates/cap/alert_detail.html:286
+#: pages/cap/templates/cap/alert_detail_pdf.html:54
+msgid "Future"
+msgstr "Future"
+
+#: pages/cap/templates/cap/alert_detail.html:288
+#: pages/cap/templates/cap/alert_detail_pdf.html:56
+msgid "Past"
+msgstr "Past"
+
+#: pages/cap/templates/cap/alert_detail.html:298
+#: pages/cap/templates/cap/alert_detail_pdf.html:65
+#: pages/cap/templates/cap/alert_list.html:69
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:564
+msgid "Severity"
+msgstr "Severity"
+
+#: pages/cap/templates/cap/alert_detail.html:319
+#: pages/cap/templates/cap/alert_detail_pdf.html:84
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:575
+msgid "Certainty"
+msgstr "Certainty"
+
+#: pages/cap/templates/cap/alert_detail.html:324
+#: pages/cap/templates/cap/alert_detail_pdf.html:88
+msgid "Observed"
+msgstr "Observed"
+
+#: pages/cap/templates/cap/alert_detail.html:326
+#: pages/cap/templates/cap/alert_detail_pdf.html:90
+msgid "Likely"
+msgstr "Likely"
+
+#: pages/cap/templates/cap/alert_detail.html:328
+#: pages/cap/templates/cap/alert_detail_pdf.html:92
+msgid "Possible"
+msgstr "Possible"
+
+#: pages/cap/templates/cap/alert_detail.html:330
+#: pages/cap/templates/cap/alert_detail_pdf.html:94
+msgid "Unlikely"
+msgstr "Unlikely"
+
+#: pages/cap/templates/cap/alert_detail.html:345
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:535
+msgid "Response Types"
+msgstr "Response Types"
+
+#: pages/cap/templates/cap/alert_detail.html:351
+msgid "Shelter"
+msgstr "Shelter"
+
+#: pages/cap/templates/cap/alert_detail.html:353
+msgid "Evacuate"
+msgstr "Evacuate"
+
+#: pages/cap/templates/cap/alert_detail.html:355
+msgid "Prepare"
+msgstr "Prepare"
+
+#: pages/cap/templates/cap/alert_detail.html:357
+msgid "Execute"
+msgstr "Execute"
+
+#: pages/cap/templates/cap/alert_detail.html:359
+msgid "Avoid"
+msgstr "Avoid"
+
+#: pages/cap/templates/cap/alert_detail.html:361
+msgid "Monitor"
+msgstr "Monitor"
+
+#: pages/cap/templates/cap/alert_detail.html:363
+msgid "Assess"
+msgstr "Assess"
+
+#: pages/cap/templates/cap/alert_detail.html:365
+msgid "AllClear"
+msgstr "AllClear"
+
+#: pages/cap/templates/cap/alert_detail.html:367
+msgid "None"
+msgstr "None"
+
+#: pages/cap/templates/cap/alert_detail.html:380
+msgid "Time period"
+msgstr "Time period"
+
+#: pages/cap/templates/cap/alert_detail.html:389
+#: pages/cap/templates/cap/alert_detail_pdf.html:104
+msgid "Issued"
+msgstr "Issued"
+
+#: pages/cap/templates/cap/alert_detail.html:400
+#: pages/cap/templates/cap/alert_detail_pdf.html:119
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:594
+msgid "Effective"
+msgstr "Effective"
+
+#: pages/cap/templates/cap/alert_detail.html:416
+#: pages/cap/templates/cap/alert_detail_pdf.html:144
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:607
+msgid "Onset"
+msgstr "Onset"
+
+#: pages/cap/templates/cap/alert_detail.html:425
+#: pages/cap/templates/cap/alert_detail_pdf.html:160
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:619
+msgid "Expires"
+msgstr "Expires"
+
+#: pages/cap/templates/cap/alert_detail.html:436
+#: pages/cap/templates/cap/alert_detail_pdf.html:183
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:654
+msgid "Area"
+msgstr "Area"
+
+#: pages/cap/templates/cap/alert_detail.html:448
+msgid "Event Description"
+msgstr "Event Description"
+
+#: pages/cap/templates/cap/alert_detail.html:459
+msgid "Instructions"
+msgstr "Instructions"
+
+#: pages/cap/templates/cap/alert_detail_pdf.html:196
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:638
+msgid "Description"
+msgstr "Description"
+
+#: pages/cap/templates/cap/alert_detail_pdf.html:209
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:646
+msgid "Instruction"
+msgstr "Instruction"
+
+#: pages/cap/templates/cap/alert_list.html:33
+msgid "Active Alerts"
+msgstr "Active Alerts"
+
+#: pages/cap/templates/cap/alert_list.html:46
+msgid "No active alerts currently"
+msgstr "No active alerts currently"
+
+#: pages/cap/templates/cap/alert_list.html:55
+msgid "Past Alerts"
+msgstr "Past Alerts"
+
+#: pages/cap/templates/cap/alert_list.html:97
+msgid "Event type"
+msgstr "Event type"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:224
+msgid "Identifier"
+msgstr "Identifier"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:232
+msgid "Sender"
+msgstr "Sender"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:239
+msgid "Sent"
+msgstr "Sent"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:251
+msgid "Message Type"
+msgstr "Message Type"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:257
+msgid "Scope"
+msgstr "Scope"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:267
+msgid "Reference Alerts"
+msgstr "Reference Alerts"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:584
+msgid "Time"
+msgstr "Time"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:630
+msgid "Headline"
+msgstr "Headline"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:682
+msgid "Contact"
+msgstr "Contact"
+
+#: pages/cap/templates/cap/include_alert_list_item.html:32
+msgid "Issued on:"
+msgstr "Issued on:"
+
+#: pages/cap/templates/cap/include_alert_list_item.html:35
+#, python-format
+msgid "%(issued_on)s"
+msgstr "%(issued_on)s"
+
+#: pages/cap/templates/cap/widgets/nav_left_alert.html:97
+#: pages/cap/templates/cap/widgets/nav_top_alert.html:69
+msgid "Alert"
+msgstr "Alert"
+
+#: pages/cap/utils.py:44
+msgid "Go to warnings list"
+msgstr "Go to warnings list"
+
+#: pages/cap/views.py:129 pages/cap/views.py:143
+msgid "Latest alerts"
+msgstr "Latest alerts"
+
+#: pages/cap/views.py:136 pages/cap/views.py:150
+#, python-format
+msgid "Latest alerts from %(sender_name)s"
+msgstr "Latest alerts from %(sender_name)s"
+
+#: pages/cap/wagtail_hooks.py:100
+msgid "LIVE"
+msgstr "LIVE"
+
+#: pages/cap/wagtail_hooks.py:102
+msgid "Visit the live page"
+msgstr "Visit the live page"
+
+#: pages/cap/wagtail_hooks.py:112
+msgid "Alerts"
+msgstr "Alerts"
+
+#: pages/cap/wagtail_hooks.py:123
+msgid "Webhooks"
+msgstr "Webhooks"
+
+#: pages/cap/wagtail_hooks.py:143
+msgid "Webhook Events"
+msgstr "Webhook Events"
+
+#: pages/cap/wagtail_hooks.py:192
+msgid "CAP Alerts"
+msgstr "CAP Alerts"
+
+#: pages/cap/wagtail_hooks.py:214
+msgid "Import CAP Alert"
+msgstr "Import CAP Alert"
+
+#: pages/cap/wagtail_hooks.py:222
+msgid "CAP Base Settings"
+msgstr "CAP Base Settings"
+
+#: pages/cap/wagtail_hooks.py:230
+msgid "CAP Mapviewer Settings"
+msgstr "CAP Mapviewer Settings"
+
+#: pages/cap/wagtail_hooks.py:325
+#, python-format
+msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
+msgstr "Alert '%(page_title)s' copied. You can edit the new alert below."
+
+#: pages/cap/wagtail_hooks.py:360
+msgid ""
+"Actual Alerts cannot be edited after they have been published. To publish an"
+" update to this alert, create a new alert of Message Type 'Update' and "
+"reference this alert"
+msgstr ""
+"Actual Alerts cannot be edited after they have been published. To publish an"
+" update to this alert, create a new alert of Message Type 'Update' and "
+"reference this alert"
+
+#: pages/cap/wagtail_hooks.py:371
+msgid "Actual Alerts cannot be Unpublished after they have been published"
+msgstr "Actual Alerts cannot be Unpublished after they have been published"
+
+#: pages/cap/wagtail_hooks.py:382
+msgid ""
+"Actual Alerts cannot be deleted after they have been published. To cancel or"
+" publish an update to this alert, create a new alert of Message Type "
+"'Cancel' or 'Update' and reference this alert"
+msgstr ""
+"Actual Alerts cannot be deleted after they have been published. To cancel or"
+" publish an update to this alert, create a new alert of Message Type "
+"'Cancel' or 'Update' and reference this alert"
+
+#: pages/cap/wagtail_hooks.py:581
+msgid "CAP Alert draft created. You can now edit the alert."
+msgstr "CAP Alert draft created. You can now edit the alert."
+
+#: pages/cap/webhook/models.py:9
+msgid "Webhook URL"
+msgstr "Webhook URL"
+
+#: pages/cap/webhook/models.py:22
+msgid "CAP Alert Webhook"
+msgstr "CAP Alert Webhook"
+
+#: pages/cap/webhook/models.py:23
+msgid "CAP Alert Webhooks"
+msgstr "CAP Alert Webhooks"
+
+#: pages/cap/webhook/models.py:47
+msgid "CAP Alert Webhook Event"
+msgstr "CAP Alert Webhook Event"
+
+#: pages/cap/webhook/models.py:48
+msgid "CAP Alert Webhook Events"
+msgstr "CAP Alert Webhook Events"
+
+#~ msgid "Unknown"
+#~ msgstr "Unknown"

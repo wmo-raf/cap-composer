@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+    <main style="margin-top: 50px">
+        <section class="container">
+            <h2 class="title">{{ page.title }}</h2>
+            {% if page.subtitle %}
+                <h3 class="subtitle" style="margin-top: 20px">
+                    {{ page.subtitle }}
+                </h3>
+            {% endif %}
+            <div style="margin-top: 40px">
+                {% for linked_site in linked_sites %}
+                    <div class="box" style="padding:20px;display: flex;align-items: center">
+                        {% if linked_site.country %}
+                            <figure style="height: 30px;width: 30px;margin-right: 10px">
+                                <img src="{{ linked_site.country.country.flag }}" alt=""
+                                     style="height: 100%;width: 100%">
+                            </figure>
+                        {% endif %}
+                        <h3 class="subtitle">
+                            <a href="{{ linked_site.site.root_url }}" class="subtitle">
+                                {{ linked_site.cap_list_page.specific.title }}
+                            </a>
+                        </h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock content %}

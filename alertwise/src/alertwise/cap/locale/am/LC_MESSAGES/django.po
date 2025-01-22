@@ -1,0 +1,626 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-30 21:19+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: pages/cap/models.py:55
+msgid "CAP Alerts Heading"
+msgstr "የ CAP ማንቂያዎች ርዕስ"
+
+#: pages/cap/models.py:172
+msgid "Effective date cannot be earlier than the alert sent date."
+msgstr "የሚፀናበት ቀን ከማንቂያው ቀን በፊት መሆን አይችልም።"
+
+#: pages/cap/models.py:175
+msgid "Expires date cannot be earlier than the alert sent date."
+msgstr "ጊዜው የሚያበቃበት ቀን ማንቂያ ከተላከው ቀን ቀደም ብሎ መሆን አይችልም።"
+
+#: pages/cap/models.py:220
+msgid "CAP Alert"
+msgstr "CAP ማንቂያ"
+
+#: pages/cap/models.py:369
+msgid "Show on MapViewer"
+msgstr "በ MapViewer ላይ አሳይ"
+
+#: pages/cap/models.py:370
+msgid "Check to show cap alerts on MapViewer"
+msgstr "የካፒታል ማንቂያዎችን በ MapViewer ላይ ለማሳየት ያረጋግጡ"
+
+#: pages/cap/models.py:372
+msgid "CAP Alerts Layer Title"
+msgstr "የ CAP ማንቂያዎች የንብርብር ርዕስ"
+
+#: pages/cap/models.py:374
+msgid "CAP Alerts Layer SubCategory"
+msgstr "የ CAP ማንቂያዎች ንብርብር ንዑስ ምድብ"
+
+#: pages/cap/models.py:377
+msgid "CAP Layer Metadata"
+msgstr "CAP ንብርብር ሜታዳታ"
+
+#: pages/cap/models.py:379
+msgid "Auto Refresh interval in minutes"
+msgstr "በደቂቃዎች ውስጥ በራስ-አድስ ክፍተት"
+
+#: pages/cap/models.py:381
+msgid ""
+"Refresh cap alerts on the map after this minutes. Leave blank to disable "
+"auto refreshing"
+msgstr "ከዚህ ደቂቃዎች በኋላ በካርታው ላይ የካፕ ማንቂያዎችን ያድሱ። ራስ-አድስን ለማሰናከል ባዶ ይተውት።"
+
+#: pages/cap/models.py:405
+msgid "Left of the Navbar"
+msgstr "ከናቭባር በስተግራ"
+
+#: pages/cap/models.py:406
+msgid "Top of the Navbar"
+msgstr "የ Navbar አናት"
+
+#: pages/cap/models.py:410
+msgid "Active Alert Style"
+msgstr "ንቁ የማንቂያ ዘይቤ"
+
+#: pages/cap/models.py:411
+msgid "Choose the style of active alerts"
+msgstr "የንቁ ማንቂያዎችን ዘይቤ ይምረጡ"
+
+#: pages/cap/models.py:418 pages/cap/models.py:419
+#: pages/cap/wagtail_hooks.py:240
+msgid "Other Settings"
+msgstr "ሌሎች ቅንብሮች"
+
+#: pages/cap/mqtt/models.py:14 pages/cap/webhook/models.py:8
+msgid "Name"
+msgstr "ስም"
+
+#: pages/cap/mqtt/models.py:15
+msgid "Provide a name to identify the broker"
+msgstr "ደላላውን ለመለየት ስም ያቅርቡ"
+
+#: pages/cap/mqtt/models.py:16
+msgid "Broker Host"
+msgstr "ደላላ አስተናጋጅ"
+
+#: pages/cap/mqtt/models.py:17
+msgid "Provide the broker host name or IP address"
+msgstr "የደላላው አስተናጋጅ ስም ወይም አይፒ አድራሻ ያቅርቡ"
+
+#: pages/cap/mqtt/models.py:18
+msgid "Broker Port"
+msgstr "ደላላ ወደብ"
+
+#: pages/cap/mqtt/models.py:18
+msgid "Provide the broker port number"
+msgstr "የደላላው ወደብ ቁጥር ያቅርቡ"
+
+#: pages/cap/mqtt/models.py:21
+msgid "Broker Username"
+msgstr "ደላላ የተጠቃሚ ስም"
+
+#: pages/cap/mqtt/models.py:22
+msgid "Broker Password"
+msgstr "የደላላ የይለፍ ቃል"
+
+#: pages/cap/mqtt/models.py:23
+msgid "Enter a password. If a password already exists, it will be updated"
+msgstr "የይለፍ ቃል አስገባ። የይለፍ ቃል አስቀድሞ ካለ ይዘምናል።"
+
+#: pages/cap/mqtt/models.py:27
+msgid "Is WIS2Box Node"
+msgstr "WIS2Box Node ነው።"
+
+#: pages/cap/mqtt/models.py:28
+msgid "Check this box if you are providing the broker details of a wis2box."
+msgstr "የ wis2box ደላላ ዝርዝሮችን እያቀረቡ ከሆነ በዚህ ሳጥን ላይ ምልክት ያድርጉ።"
+
+#: pages/cap/mqtt/models.py:30
+msgid "Topic"
+msgstr "ርዕስ"
+
+#: pages/cap/mqtt/models.py:31
+msgid "Provide the MQTT topic to publish the CAP alerts."
+msgstr "የCAP ማንቂያዎችን ለማተም የMQTT ርዕስ ያቅርቡ።"
+
+#: pages/cap/mqtt/models.py:33
+msgid "Dataset ID"
+msgstr "የውሂብ ስብስብ መታወቂያ"
+
+#: pages/cap/mqtt/models.py:35
+msgid ""
+"Provide the metadata ID for your dataset registered in the wis2box. If you "
+"do not have this, please create a dataset in the wis2box before proceeding."
+msgstr ""
+"በ wis2box ውስጥ ለተመዘገበው የውሂብ ስብስብዎ የሜታዳታ መታወቂያ ያቅርቡ። ይህ ከሌለዎት ከመቀጠልዎ በፊት እባክዎ "
+"በ wis2box ውስጥ የውሂብ ስብስብ ይፍጠሩ።"
+
+#: pages/cap/mqtt/models.py:38 pages/cap/webhook/models.py:10
+msgid "Active"
+msgstr "ንቁ"
+
+#: pages/cap/mqtt/models.py:39
+msgid "Automatically publish CAP alerts to this broker"
+msgstr "ለዚህ ደላላ የCAP ማንቂያዎችን በራስ-ሰር ያትሙ"
+
+#: pages/cap/mqtt/models.py:42 pages/cap/webhook/models.py:13
+msgid "Retry on failure"
+msgstr "ውድቀት ላይ እንደገና ይሞክሩ"
+
+#: pages/cap/mqtt/models.py:49
+msgid "Broker Information"
+msgstr "ደላላ መረጃ"
+
+#: pages/cap/mqtt/models.py:53
+msgid "Authentication"
+msgstr "ማረጋገጫ"
+
+#: pages/cap/mqtt/models.py:70
+msgid "Dataset ID is required for a WIS2Box Broker"
+msgstr "የውሂብ ስብስብ መታወቂያ ለWIS2Box ደላላ ያስፈልጋል"
+
+#: pages/cap/mqtt/models.py:75
+msgid "Topic is required"
+msgstr "ርዕስ ያስፈልጋል"
+
+#: pages/cap/mqtt/models.py:80
+msgid ""
+"Secret key for encrypting passwords is not set. Please ensure the "
+"CAP_MQTT_SECRET_KEY is set "
+msgstr ""
+"የይለፍ ቃላትን ለማመስጠር የሚስጥር ቁልፍ አልተዘጋጀም። እባክዎ CAP_MQTT_SECRET_KEY መዘጋጀቱን ያረጋግጡ"
+
+#: pages/cap/mqtt/models.py:85
+msgid "Password is required if creating a new broker"
+msgstr "አዲስ ደላላ ከፈጠሩ የይለፍ ቃል ያስፈልጋል"
+
+#: pages/cap/mqtt/models.py:106
+msgid "MQTT Broker"
+msgstr "MQTT ደላላ"
+
+#: pages/cap/mqtt/models.py:107
+msgid "MQTT Brokers"
+msgstr "MQTT ደላላዎች"
+
+#: pages/cap/mqtt/models.py:114 pages/cap/webhook/models.py:30
+msgid "Pending"
+msgstr "በመጠባበቅ ላይ"
+
+#: pages/cap/mqtt/models.py:115 pages/cap/webhook/models.py:31
+msgid "Failure"
+msgstr "ውድቀት"
+
+#: pages/cap/mqtt/models.py:116 pages/cap/webhook/models.py:32
+msgid "Success"
+msgstr "ስኬት"
+
+#: pages/cap/mqtt/models.py:123
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:245
+#: pages/cap/webhook/models.py:39
+msgid "Status"
+msgstr "ሁኔታ"
+
+#: pages/cap/mqtt/models.py:125 pages/cap/webhook/models.py:41
+msgid "Retries"
+msgstr "እንደገና ይሞክራል።"
+
+#: pages/cap/mqtt/models.py:126 pages/cap/webhook/models.py:42
+msgid "Last Error Message"
+msgstr "የመጨረሻው የስህተት መልእክት"
+
+#: pages/cap/mqtt/models.py:131
+msgid "MQTT Broker Event"
+msgstr "MQTT ደላላ ክስተት"
+
+#: pages/cap/mqtt/models.py:132
+msgid "MQTT Broker Events"
+msgstr "MQTT ደላላ ክስተቶች"
+
+#: pages/cap/templates/cap/alert_detail.html:77
+msgid "View PNG"
+msgstr "PNG ይመልከቱ"
+
+#: pages/cap/templates/cap/alert_detail.html:92
+msgid "View PDF"
+msgstr "ፒዲኤፍ ይመልከቱ"
+
+#: pages/cap/templates/cap/alert_detail.html:103
+msgid "Warning: This is not an Actual alert"
+msgstr "ማስጠንቀቂያ፡ ይህ ትክክለኛ ማንቂያ አይደለም።"
+
+#: pages/cap/templates/cap/alert_detail.html:106
+msgid "The alert below is marked as"
+msgstr "ከታች ያለው ማንቂያ እንደ ምልክት ተደርጎበታል።"
+
+#: pages/cap/templates/cap/alert_detail.html:108
+msgid ""
+"This means it is not an Actual alert and therefore not actionable to the "
+"general public"
+msgstr "ይህ ማለት ትክክለኛ ማንቂያ አይደለም እና ስለዚህ ለሰፊው ህዝብ የማይተገበር ነው።"
+
+#: pages/cap/templates/cap/alert_detail.html:116
+msgid "This alert is an update to the previously published alerts below:"
+msgstr "ይህ ማንቂያ ከዚህ ቀደም ለታተሙት ማንቂያዎች ማሻሻያ ነው፡-"
+
+#: pages/cap/templates/cap/alert_detail.html:121
+msgid "This alert cancels the previously published alerts below:"
+msgstr "ይህ ማንቂያ ከዚህ ቀደም የታተሙትን ማንቂያዎችን ይሰርዛል፡-"
+
+#: pages/cap/templates/cap/alert_detail.html:154
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:434
+msgid "Alert Severity"
+msgstr "የማንቂያ ጥብቅነት"
+
+#: pages/cap/templates/cap/alert_detail.html:161
+#: pages/cap/templates/cap/alert_detail.html:303
+#: pages/cap/templates/cap/alert_detail_pdf.html:69
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:441
+msgid "Extreme"
+msgstr "ጽንፍ"
+
+#: pages/cap/templates/cap/alert_detail.html:168
+#: pages/cap/templates/cap/alert_detail.html:305
+#: pages/cap/templates/cap/alert_detail_pdf.html:71
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:448
+msgid "Severe"
+msgstr "ከባድ"
+
+#: pages/cap/templates/cap/alert_detail.html:175
+#: pages/cap/templates/cap/alert_detail.html:307
+#: pages/cap/templates/cap/alert_detail_pdf.html:73
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:455
+msgid "Moderate"
+msgstr "መጠነኛ"
+
+#: pages/cap/templates/cap/alert_detail.html:182
+#: pages/cap/templates/cap/alert_detail.html:309
+#: pages/cap/templates/cap/alert_detail_pdf.html:75
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:462
+msgid "Minor"
+msgstr "አናሳ"
+
+#: pages/cap/templates/cap/alert_detail.html:255
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:508
+msgid "Language"
+msgstr "ቋንቋ"
+
+#: pages/cap/templates/cap/alert_detail.html:264
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:519
+msgid "Category"
+msgstr "ምድብ"
+
+#: pages/cap/templates/cap/alert_detail.html:277
+#: pages/cap/templates/cap/alert_detail_pdf.html:46
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:553
+msgid "Urgency"
+msgstr "አስቸኳይ"
+
+#: pages/cap/templates/cap/alert_detail.html:282
+#: pages/cap/templates/cap/alert_detail_pdf.html:50
+msgid "Immediate"
+msgstr "ወዲያውኑ"
+
+#: pages/cap/templates/cap/alert_detail.html:284
+#: pages/cap/templates/cap/alert_detail_pdf.html:52
+msgid "Expected"
+msgstr "የሚጠበቀው"
+
+#: pages/cap/templates/cap/alert_detail.html:286
+#: pages/cap/templates/cap/alert_detail_pdf.html:54
+msgid "Future"
+msgstr "ወደፊት"
+
+#: pages/cap/templates/cap/alert_detail.html:288
+#: pages/cap/templates/cap/alert_detail_pdf.html:56
+msgid "Past"
+msgstr "ያለፈው"
+
+#: pages/cap/templates/cap/alert_detail.html:298
+#: pages/cap/templates/cap/alert_detail_pdf.html:65
+#: pages/cap/templates/cap/alert_list.html:69
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:564
+msgid "Severity"
+msgstr "ከባድነት"
+
+#: pages/cap/templates/cap/alert_detail.html:319
+#: pages/cap/templates/cap/alert_detail_pdf.html:84
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:575
+msgid "Certainty"
+msgstr "እርግጠኝነት"
+
+#: pages/cap/templates/cap/alert_detail.html:324
+#: pages/cap/templates/cap/alert_detail_pdf.html:88
+msgid "Observed"
+msgstr "ተስተውሏል።"
+
+#: pages/cap/templates/cap/alert_detail.html:326
+#: pages/cap/templates/cap/alert_detail_pdf.html:90
+msgid "Likely"
+msgstr "ሊሆን ይችላል።"
+
+#: pages/cap/templates/cap/alert_detail.html:328
+#: pages/cap/templates/cap/alert_detail_pdf.html:92
+msgid "Possible"
+msgstr "ይቻላል"
+
+#: pages/cap/templates/cap/alert_detail.html:330
+#: pages/cap/templates/cap/alert_detail_pdf.html:94
+msgid "Unlikely"
+msgstr "የማይመስል ነገር"
+
+#: pages/cap/templates/cap/alert_detail.html:345
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:535
+msgid "Response Types"
+msgstr "የምላሽ ዓይነቶች"
+
+#: pages/cap/templates/cap/alert_detail.html:351
+msgid "Shelter"
+msgstr "መጠለያ"
+
+#: pages/cap/templates/cap/alert_detail.html:353
+msgid "Evacuate"
+msgstr "ለቆ መውጣት"
+
+#: pages/cap/templates/cap/alert_detail.html:355
+msgid "Prepare"
+msgstr "አዘጋጅ"
+
+#: pages/cap/templates/cap/alert_detail.html:357
+msgid "Execute"
+msgstr "ማስፈጸም"
+
+#: pages/cap/templates/cap/alert_detail.html:359
+msgid "Avoid"
+msgstr "ራቅ"
+
+#: pages/cap/templates/cap/alert_detail.html:361
+msgid "Monitor"
+msgstr "ተቆጣጠር"
+
+#: pages/cap/templates/cap/alert_detail.html:363
+msgid "Assess"
+msgstr "ይገምግሙ"
+
+#: pages/cap/templates/cap/alert_detail.html:365
+msgid "AllClear"
+msgstr "AllClear"
+
+#: pages/cap/templates/cap/alert_detail.html:367
+msgid "None"
+msgstr "ምንም"
+
+#: pages/cap/templates/cap/alert_detail.html:380
+msgid "Time period"
+msgstr "ጊዜ"
+
+#: pages/cap/templates/cap/alert_detail.html:389
+#: pages/cap/templates/cap/alert_detail_pdf.html:104
+msgid "Issued"
+msgstr "የተሰጠበት"
+
+#: pages/cap/templates/cap/alert_detail.html:400
+#: pages/cap/templates/cap/alert_detail_pdf.html:119
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:594
+msgid "Effective"
+msgstr "ውጤታማ"
+
+#: pages/cap/templates/cap/alert_detail.html:416
+#: pages/cap/templates/cap/alert_detail_pdf.html:144
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:607
+msgid "Onset"
+msgstr "ጅምር"
+
+#: pages/cap/templates/cap/alert_detail.html:425
+#: pages/cap/templates/cap/alert_detail_pdf.html:160
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:619
+msgid "Expires"
+msgstr "ጊዜው ያበቃል"
+
+#: pages/cap/templates/cap/alert_detail.html:436
+#: pages/cap/templates/cap/alert_detail_pdf.html:183
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:654
+msgid "Area"
+msgstr "አካባቢ"
+
+#: pages/cap/templates/cap/alert_detail.html:448
+msgid "Event Description"
+msgstr "የክስተት መግለጫ"
+
+#: pages/cap/templates/cap/alert_detail.html:459
+msgid "Instructions"
+msgstr "መመሪያዎች"
+
+#: pages/cap/templates/cap/alert_detail_pdf.html:196
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:638
+msgid "Description"
+msgstr "መግለጫ"
+
+#: pages/cap/templates/cap/alert_detail_pdf.html:209
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:646
+msgid "Instruction"
+msgstr "መመሪያ"
+
+#: pages/cap/templates/cap/alert_list.html:33
+msgid "Active Alerts"
+msgstr "ንቁ ማንቂያዎች"
+
+#: pages/cap/templates/cap/alert_list.html:46
+msgid "No active alerts currently"
+msgstr "በአሁኑ ጊዜ ምንም ንቁ ማንቂያዎች የሉም"
+
+#: pages/cap/templates/cap/alert_list.html:55
+msgid "Past Alerts"
+msgstr "ያለፉ ማንቂያዎች"
+
+#: pages/cap/templates/cap/alert_list.html:97
+msgid "Event type"
+msgstr "የክስተት አይነት"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:224
+msgid "Identifier"
+msgstr "መለያ"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:232
+msgid "Sender"
+msgstr "ላኪ"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:239
+msgid "Sent"
+msgstr "ተልኳል።"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:251
+msgid "Message Type"
+msgstr "የመልእክት አይነት"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:257
+msgid "Scope"
+msgstr "ወሰን"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:267
+msgid "Reference Alerts"
+msgstr "የማጣቀሻ ማንቂያዎች"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:584
+msgid "Time"
+msgstr "ጊዜ"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:630
+msgid "Headline"
+msgstr "ርዕስ"
+
+#: pages/cap/templates/cap/cap-alert-stylesheet.html:682
+msgid "Contact"
+msgstr "ተገናኝ"
+
+#: pages/cap/templates/cap/include_alert_list_item.html:32
+msgid "Issued on:"
+msgstr "የተሰጠው በ፡"
+
+#: pages/cap/templates/cap/include_alert_list_item.html:35
+#, python-format
+msgid "%(issued_on)s"
+msgstr "%(issued_on)s"
+
+#: pages/cap/templates/cap/widgets/nav_left_alert.html:97
+#: pages/cap/templates/cap/widgets/nav_top_alert.html:69
+msgid "Alert"
+msgstr "ማንቂያ"
+
+#: pages/cap/utils.py:44
+msgid "Go to warnings list"
+msgstr "ወደ ማስጠንቀቂያዎች ዝርዝር ይሂዱ"
+
+#: pages/cap/views.py:129 pages/cap/views.py:143
+msgid "Latest alerts"
+msgstr "የቅርብ ጊዜ ማንቂያዎች"
+
+#: pages/cap/views.py:136 pages/cap/views.py:150
+#, python-format
+msgid "Latest alerts from %(sender_name)s"
+msgstr "የቅርብ ጊዜ ማንቂያዎች ከ %(sender_name)s ዎች"
+
+#: pages/cap/wagtail_hooks.py:100
+msgid "LIVE"
+msgstr "ቀጥታ ስርጭት"
+
+#: pages/cap/wagtail_hooks.py:102
+msgid "Visit the live page"
+msgstr "የቀጥታ ገጹን ይጎብኙ"
+
+#: pages/cap/wagtail_hooks.py:112
+msgid "Alerts"
+msgstr "ማንቂያዎች"
+
+#: pages/cap/wagtail_hooks.py:123
+msgid "Webhooks"
+msgstr "የድር መንጠቆዎች"
+
+#: pages/cap/wagtail_hooks.py:143
+msgid "Webhook Events"
+msgstr "Webhook ክስተቶች"
+
+#: pages/cap/wagtail_hooks.py:192
+msgid "CAP Alerts"
+msgstr "የ CAP ማንቂያዎች"
+
+#: pages/cap/wagtail_hooks.py:214
+msgid "Import CAP Alert"
+msgstr "የ CAP ማንቂያ አስመጣ"
+
+#: pages/cap/wagtail_hooks.py:222
+msgid "CAP Base Settings"
+msgstr "CAP ቤዝ ቅንብሮች"
+
+#: pages/cap/wagtail_hooks.py:230
+msgid "CAP Mapviewer Settings"
+msgstr "የ CAP ካርታ መመልከቻ ቅንጅቶች"
+
+#: pages/cap/wagtail_hooks.py:325
+#, python-format
+msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
+msgstr "ማንቂያ '%(page_title)s' ተቀድቷል። አዲሱን ማንቂያ ከዚህ በታች ማርትዕ ይችላሉ።"
+
+#: pages/cap/wagtail_hooks.py:360
+msgid ""
+"Actual Alerts cannot be edited after they have been published. To publish an"
+" update to this alert, create a new alert of Message Type 'Update' and "
+"reference this alert"
+msgstr ""
+"ትክክለኛ ማንቂያዎች ከታተሙ በኋላ ማርትዕ አይችሉም። የዚህን ማንቂያ ዝማኔ ለማተም አዲስ የመልእክት አይነት 'አዘምን' "
+"ማንቂያ ይፍጠሩ እና ይህን ማንቂያ ያጣቅሱ"
+
+#: pages/cap/wagtail_hooks.py:371
+msgid "Actual Alerts cannot be Unpublished after they have been published"
+msgstr "ትክክለኛ ማንቂያዎች ከታተሙ በኋላ ሊታተሙ አይችሉም"
+
+#: pages/cap/wagtail_hooks.py:382
+msgid ""
+"Actual Alerts cannot be deleted after they have been published. To cancel or"
+" publish an update to this alert, create a new alert of Message Type "
+"'Cancel' or 'Update' and reference this alert"
+msgstr ""
+"ትክክለኛ ማንቂያዎች ከታተሙ በኋላ ሊሰረዙ አይችሉም። የዚህን ማንቂያ ዝማኔ ለመሰረዝ ወይም ለማተም አዲስ የመልእክት "
+"አይነት 'ሰርዝ' ወይም 'አዘምን' የሚል ማንቂያ ይፍጠሩ እና ይህን ማንቂያ ያጣቅሱ።"
+
+#: pages/cap/wagtail_hooks.py:581
+msgid "CAP Alert draft created. You can now edit the alert."
+msgstr "CAP ማንቂያ ረቂቅ ተፈጥሯል። አሁን ማንቂያውን ማርትዕ ይችላሉ።"
+
+#: pages/cap/webhook/models.py:9
+msgid "Webhook URL"
+msgstr "Webhook URL"
+
+#: pages/cap/webhook/models.py:22
+msgid "CAP Alert Webhook"
+msgstr "CAP ማንቂያ Webhook"
+
+#: pages/cap/webhook/models.py:23
+msgid "CAP Alert Webhooks"
+msgstr "CAP ማንቂያ Webhooks"
+
+#: pages/cap/webhook/models.py:47
+msgid "CAP Alert Webhook Event"
+msgstr "CAP ማንቂያ Webhook ክስተት"
+
+#: pages/cap/webhook/models.py:48
+msgid "CAP Alert Webhook Events"
+msgstr "CAP ማንቂያ Webhook ክስተቶች"
+
+#~ msgid "Unknown"
+#~ msgstr "ያልታወቀ"
+
+#~ msgid "Stations Layer SubCategory"
+#~ msgstr "ጣቢያዎች ንብርብር ንዑስ ምድብ"

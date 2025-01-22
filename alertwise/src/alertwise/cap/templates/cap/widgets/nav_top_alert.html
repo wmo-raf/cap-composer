@@ -1,0 +1,82 @@
+{% load static wagtailiconchooser_tags i18n %}
+
+<style>
+
+    .top-alert-wrapper {
+        height: 60px;
+        background-color: #f8f9fb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .top-alert-wrapper .top-alert-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .top-alert-wrapper .alert-icon-wrapper {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border: 3px solid #fff;
+        padding: 10px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: pulse 2s infinite;
+    }
+
+    .top-alert-wrapper .alert-icon svg {
+        height: 80%;
+        width: 80%;
+    }
+
+    .top-alert-wrapper .alert-title {
+        margin-left: 10px;
+    }
+
+    .top-alert-wrapper .alert-warning {
+        font-weight: 600;
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+        }
+        100% {
+            box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+        }
+    }
+
+
+</style>
+
+<div class="top-alert-wrapper" data-alert-style="{{ alert_style }}">
+    <div class="container top-alert-container">
+        <div class="alert-icon-wrapper"
+             style="background-color: {{ latest_active_alert.severity.color }}; border-color: {{ latest_active_alert.severity.border_color }};
+                     {% if latest_active_alert.severity.icon_color %}color:{{ latest_active_alert.severity.icon_color }};{% endif %} ">
+            {% if latest_active_alert.event_icon %}
+                {% svg_icon name=latest_active_alert.event_icon %}
+            {% endif %}
+        </div>
+        <div class="alert-title">
+            <div class="alert-warning">
+                {% translate "Alert" %}
+            </div>
+            <a href="{{ latest_active_alert.url }}">
+                {% if latest_active_alert.properties.headline %}
+                    {{ latest_active_alert.properties.headline }}
+                {% else %}
+                    {{ latest_active_alert.title }}
+                {% endif %}
+            </a>
+        </div>
+
+    </div>
+
+</div>

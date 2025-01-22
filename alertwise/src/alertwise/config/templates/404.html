@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load i18n wagtailcore_tags %}
+
+{% block title %}template-404{% endblock %}
+
+{% block body_class %}template-404{% endblock %}
+
+
+{% block content %}
+    <main>
+        <section style="margin-top: 50px">
+            <div class="container has-text-centered">
+                <div>
+                    <div style="padding-left: 20px; align-items: center;
+                display: flex;
+                flex-direction: column">
+                        <h3 class="py-2">
+                            {% translate "Page not found" %}
+                        </h3>
+                        <h5 class="py-4"
+                            style="color: grey">
+                            {% translate "Sorry, this page could not be found" %}.
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}

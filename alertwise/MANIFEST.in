@@ -1,0 +1,13 @@
+prune .idea/
+prune **/__pycache__
+prune cache/
+prune media/
+
+global-exclude .env
+global-exclude *.py[cod]
+global-exclude .gitignore
+
+recursive-include src/ *.py
+recursive-include src/**/templates *
+recursive-include src/**/static *
+recursive-include src/**/locale *.po *.mo

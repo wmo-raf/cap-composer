@@ -1,0 +1,75 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.page-wrapper {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.body-wrapper {
+    margin: 0 0 40px;
+    flex-grow: 1;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .navbar-brand {
+        margin-left: 20px;
+    }
+
+
+    .body-wrapper {
+        padding: 0 20px;
+    }
+}
+
+
+section.breadcrumb {
+    padding: 20px 0;
+    background-color: #f8f9fb;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 0 !important;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 40px 0 20px;
+}
+
+.cap-header .title {
+    margin-top: 40px;
+}
+
+.alertwise-footer {
+    border-top: 1px solid rgba(0, 40, 100, 0.12);
+    font-size: 0.875rem;
+    padding: 1.25rem 0;
+    background-color: #f8f9fb;
+}
+
+.share-buttons > a {
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.share-buttons .icon {
+    height: 14px;
+    width: 14px;
+}
+
+.share-buttons .icon svg {
+    height: 100%;
+    width: 100%;
+    fill: currentColor;
+}
+
+.featured-item-title {
+    padding-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}

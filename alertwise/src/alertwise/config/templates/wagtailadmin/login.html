@@ -1,0 +1,18 @@
+{% extends "wagtailadmin/login.html" %}
+{% load static alertwise_tags %}
+
+{% block branding_login %}
+    {% if 'WAGTAIL_SITE_NAME'|django_settings %}
+        Sign in to {{ 'WAGTAIL_SITE_NAME'|django_settings }}
+    {% else %}
+        Sign in
+    {% endif %}
+{% endblock %}
+
+{% block branding_logo %}
+    <div style="display: flex;justify-content: center;margin-top: 20px">
+        <figure style="max-height: 80px;max-width: 80px;">
+            <img src="{% static 'images/alertwise_red.png' %}" alt="AlertWise Logo"
+                 style="height: 100%;width: 100%;object-fit: contain"/>
+        </figure>
+{% endblock %}

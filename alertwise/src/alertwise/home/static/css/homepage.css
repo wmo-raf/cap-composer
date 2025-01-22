@@ -1,0 +1,120 @@
+.header {
+    margin: 40px 0;
+}
+
+.rss-feed a {
+    display: flex;
+    align-items: center;
+}
+
+
+.alert-item {
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding: 8px 16px;
+    position: relative;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alert-item-left {
+    display: flex;
+    align-items: center;
+}
+
+.alert-item-icon {
+    margin-right: 10px;
+}
+
+.alert-icon-wrapper {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-icon-wrapper svg {
+    height: 80%;
+    width: 80%;
+    fill: currentColor;
+}
+
+.alert-item-title {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.alert-severity-label {
+    font-size: 13px;
+}
+
+.alert-time-info {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.alert-info-headline {
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.alert-time-info .time-icon {
+    width: 10px;
+    margin-right: 4px;
+}
+
+.alert-time-info .time-icon svg {
+    height: 100%;
+    width: 100%;
+}
+
+
+.alert-time-info .time-em {
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+
+.alert-effective {
+}
+
+.alert-category-filter {
+    padding-bottom: 40px;
+}
+
+.alerts-group {
+    margin-bottom: 50px;
+}
+
+.alerts-group .group-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.empty-alerts-state {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #f8f9fb;
+    padding: 20px;
+}
+
+.empty-alerts-icon {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+}
+
+.empty-alerts-icon svg {
+    height: 100%;
+    width: 100%;
+    fill: green;
+}

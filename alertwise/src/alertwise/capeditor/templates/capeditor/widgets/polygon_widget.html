@@ -1,0 +1,11 @@
+{% load i18n l10n %}
+
+<div id="{{ name }}_div_map" class="polygon_map_wrapper">
+    <div id="{{ name }}_map" class="polygon_map" style="height: 400px;width: 100%">
+    </div>
+    <textarea id="{{ name }}" class="vSerializedField required" name="{{ name }}" hidden
+              data-boundaryinfourl="{{ boundary_info_url }}"
+              data-ungeojsonurl="{{ un_geojson_url }}">
+        {{ serialized }}
+    </textarea>
+</div>

@@ -1,0 +1,725 @@
+{% load i18n wagtailimages_tags static wagtailiconchooser_tags %}
+
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" doctype-system="about:legacy-compat"/>
+    <xsl:template match="*[local-name()='alert']">
+        <html lang="en" dir="ltr">
+        <head>
+            <title>
+                <xsl:value-of select="*[local-name()='info'][1]/*[local-name()='headline']" />
+            </title>
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <meta name="description" content="Emergency alert in Common Alerting Protocol (CAP) format"/>
+            <meta name="keywords" content="alert, warning, emergency"/>
+            <meta name="revisit" content="1 days"/>
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.min.css' %}"/>
+            <link rel="stylesheet" href="{% static 'css/maplibre-gl.css' %}"/>
+            <script type="text/javascript" src="{% static 'js/maplibre-gl.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/turf.min.js' %}"></script>
+
+            <style>
+                html, body {
+                    height: 100%;
+                    margin: 20px;
+                }
+
+                .alert-meta {
+                    display: flex;
+                    margin: 20px 0;
+                    flex-wrap: wrap;
+                }
+
+                .alert-meta .alert-meta-item {
+                    margin-right: 20px;
+                }
+
+                .alert-meta .alert-meta-item b {
+                    margin-right: 8px;
+                }
+
+                .reference-alerts {
+                    margin-bottom: 20px;
+                }
+
+                .ref-title {
+                    font-weight: bold;
+                }
+
+                .cap-map-wrapper {
+                    box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.06) 0 1px 2px 0;
+                }
+
+                .map {
+                    height: 500px;
+                    width: 100%;
+                    position: relative;
+                }
+
+                .map-legend {
+                    display: flex;
+                    padding: 4px 8px;
+                    align-items: center;
+                    background-color: #fff;
+                    font-size: 14px;
+                    flex-wrap: wrap;
+                    width: 100%;
+                    border-top: 1px solid #f0f0f0;
+                }
+
+                .legend-items {
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                }
+
+                .legend-item {
+                    display: flex;
+                    align-items: center;
+                    margin-left: 10px;
+                }
+
+                .map-legend .legend-items .legend-item .legend-color {
+                    margin-right: 4px;
+                    height: 12px;
+                    width: 12px;
+                }
+
+                .alert-icon-wrapper {
+                    position: relative;
+                    width: 32px;
+                    height: 32px;
+                    border: 1px solid;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 10px;
+                }
+
+                .alert-icon-wrapper svg {
+                    height: 80%;
+                    width: 80%;
+                    fill: currentColor;
+                }
+
+                .info-item {
+                    padding-top: 10px;
+                }
+
+                .info-header {
+                    font-weight: 600;
+                    font-size: 18px;
+                    padding: 10px 0;
+                }
+
+                .cap-info-summary-item {
+                    display: flex;
+                    align-items: center;
+                    padding-bottom: 10px;
+                }
+
+                .cap-info-summary-icon {
+                    height: 20px;
+                    width: 20px;
+                    margin-right: 4px;
+                }
+
+                .cap-info-summary-icon svg {
+                    height: 100%;
+                    width: 100%;
+                }
+
+                .cap-info-summary-type {
+                    margin-left: 4px;
+                    font-weight: 600;
+                }
+
+                .cap-info-summary-value {
+                    margin-left: 4px;
+                }
+
+                .cap-time-wrapper {
+                    margin-bottom: 10px;
+                    border-radius: 4px;
+                }
+
+                .cap-time-wrapper .time-type {
+                    font-weight: 600;
+                    color: #555;
+                }
+
+                .warning-timeline {
+                    position: relative;
+                    z-index: 0;
+                    list-style: none;
+                }
+
+                .warning-timeline .warning-timeline__item {
+                    position: relative;
+                    padding-left: 20px;
+                    padding-bottom: 10px;
+                }
+
+                .warning-timeline__item:not(:last-child):before {
+                    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(60%, #56616c), color-stop(25%, transparent));
+                    background-image: -webkit-linear-gradient(bottom, #56616c 60%, transparent 25%);
+                    background-image: linear-gradient(0deg, #56616c 60%, transparent 25%);
+                    background-size: 1px 5px;
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 1px;
+                    left: 5px;
+                    top: 17px;
+                    bottom: -6.5px;
+                }
+
+                .warning-timeline__circle {
+                    border-radius: 50%;
+                    -webkit-box-shadow: rgb(86, 97, 108) 0px 0px 0px 1px inset;
+                    box-shadow: rgb(86, 97, 108) 0px 0px 0px 1px inset;
+                    height: 11px;
+                    left: 0;
+                    position: absolute;
+                    width: 11px;
+                    top: 6.5px;
+                }
+
+                .warning-timeline__circle:after {
+                    background-color: #56616c;
+                    border-radius: 50%;
+                    content: "";
+                    display: block;
+                    height: 7px;
+                    width: 7px;
+                    left: 2px;
+                    position: absolute;
+                    top: 2px;
+                }
+            </style>
+        </head>
+        <body class="container">
+        {% if logo %}
+            {% image logo original as logo_img %}
+            <div style="display: flex;justify-content: center;margin-bottom: 20px">
+                <img style="height: 70px" src="{{ logo_img.url }}" alt="Logo"/>
+            </div>
+        {% endif %}
+        <!-- To customize the Web page, insert here the HTML code for a page header  -->
+        <!-- CAP Headline -->
+        <h2 class="title" style="margin: 20px 0">
+            <a style="text-decoration: underline">
+                <xsl:attribute name="href">
+                    <xsl:value-of select="*[local-name()='info'][1]/*[local-name()='web']"/>
+                </xsl:attribute>
+                <xsl:value-of select="*[local-name()='info'][1]/*[local-name()='headline']"/>
+            </a>
+        </h2>
+
+        <div class="alert-meta">
+            <div class="alert-meta-item">
+                <b>
+                    {% translate "Identifier" %}:
+                </b>
+                <span>
+                    <xsl:value-of select="*[local-name()='identifier']"/>
+                </span>
+            </div>
+            <div class="alert-meta-item">
+                <b>
+                    {% translate "Sender" %}:
+                </b>
+                <span>
+                    <xsl:value-of select="*[local-name()='sender']"/>
+                </span>
+            </div>
+            <div class="alert-meta-item">
+                <b>{% translate "Sent" %}:</b>
+                <span>
+                    <xsl:value-of select="*[local-name()='sent']"/>
+                </span>
+            </div>
+            <div class="alert-meta-item">
+                <b>{% translate "Status" %}:</b>
+                <span>
+                    <xsl:value-of select="*[local-name()='status']"/>
+                </span>
+            </div>
+            <div class="alert-meta-item">
+                <b>{% translate "Message Type" %}:</b>
+                <span>
+                    <xsl:value-of select="*[local-name()='msgType']"/>
+                </span>
+            </div>
+            <div class="alert-meta-item">
+                <b>{% translate "Scope" %}:</b>
+                <span>
+                    <xsl:value-of select="*[local-name()='scope']"/>
+                </span>
+            </div>
+        </div>
+
+        <xsl:if test="*[local-name()='references']">
+            <div class="reference-alerts">
+                <div class="ref-title">
+                    {% translate "Reference Alerts" %}:
+                </div>
+                <ul>
+                    <xsl:for-each select="*[local-name()='references']">
+                        <li>
+                            <xsl:value-of select="."/>
+                        </li>
+                    </xsl:for-each>
+                </ul>
+            </div>
+        </xsl:if>
+        <div class="columns is-multiline" style="padding-bottom: 100px">
+            <div class="column is-two-fifths-widescreen is-full-touch">
+                <div class="cap-map-wrapper">
+                    <div id="map" class="map">
+                        <script type="text/javascript">
+                            // default base style
+                            const defaultStyle = {
+                                'version': 8,
+                                'sources': {
+                                    'carto-dark': {
+                                        'type': 'raster',
+                                        'tiles': [
+                                            "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                                            "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                                            "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+                                            "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png"
+                                        ]
+                                    },
+                                    'carto-light': {
+                                        'type': 'raster',
+                                        'tiles': [
+                                            "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                                            "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                                            "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
+                                            "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"
+                                        ]
+                                    },
+                                    'wikimedia': {
+                                        'type': 'raster',
+                                        'tiles': [
+                                            "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
+                                        ]
+                                    }
+                                },
+                                'layers': [{
+                                    'id': 'carto-light-layer',
+                                    'source': 'carto-light',
+                                    'type': 'raster',
+                                    'minzoom': 0,
+                                    'maxzoom': 22
+                                }]
+                            }
+
+                            const capData = {
+                                'type': 'FeatureCollection',
+                                'features': []
+                            };
+
+                            let layerAddedToMap = false;
+
+                            // initialize map
+                            const map = new maplibregl.Map({
+                                container: "map",
+                                style: defaultStyle,
+                                center: [0, 0],
+                                zoom: 1,
+                            });
+
+                            // add zoom control
+                            map.addControl(
+                                new maplibregl.NavigationControl({
+                                    showCompass: false,
+                                })
+                            );
+
+                            map.on("load", () => {
+                                // add cap source
+                                map.addSource('cap', {
+                                    'type': 'geojson',
+                                    'data': capData
+                                });
+
+                                // add cap layer
+                                map.addLayer({
+                                    'id': 'cap-layer',
+                                    'type': 'fill',
+                                    'source': 'cap',
+                                    'paint': {
+                                        'fill-color': [
+                                            'match',
+                                            ['get', 'severity'],
+                                            'Extreme', '#d72f2a',
+                                            'Severe', '#f89904',
+                                            'Moderate', '#e4e616',
+                                            'Minor', '#53ffff',
+                                            '#3366ff'
+                                        ],
+                                        'fill-opacity': 0.7,
+                                        'fill-outline-color': '#000000'
+                                    }
+                                });
+
+                                layerAddedToMap = true;
+                            });
+
+                            // create cap layer
+                            const addAreaPolygon = (capPolygonString, severity, featureId) => {
+                                const parts = capPolygonString.split(" ");
+                                const coordinates = parts.map((part) => {
+                                    const [lat, lng] = part.split(",");
+                                    return [parseFloat(lng), parseFloat(lat)];
+                                });
+
+                                const feature = {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'id': featureId,
+                                        'severity': severity
+                                    },
+                                    'geometry': {
+                                        'type': 'Polygon',
+                                        'coordinates': [coordinates]
+                                    }
+                                };
+
+                                capData.features.push(feature);
+                            }
+
+                            const addAreaCircle = (capCircleString, severity, featureId) => {
+                                const parts = capCircleString.split(" ");
+                                const [lat, lng] = parts[0].split(",");
+                                const center = [parseFloat(lng), parseFloat(lat)];
+                                const radius = parseFloat(parts[1]);
+
+                                const options = {
+                                    units: 'kilometers',
+                                    properties: {"severity": severity, "id": featureId}
+                                };
+                                const circle = turf.circle(center, radius, options);
+                                capData.features.push(circle);
+                            };
+
+                            let timerId
+                            const loadLayer = () => {
+                                if (layerAddedToMap) {
+                                    console.log("Map Loaded...")
+                                    console.log("Adding CAP data to map...")
+                                    map.getSource('cap').setData(capData);
+
+                                    const bounds = turf.bbox(capData);
+                                    map.fitBounds(bounds, {
+                                        padding: 100
+                                    });
+
+                                    if (timerId) {
+                                        clearTimeout(timerId);
+                                    }
+                                } else {
+                                    console.log("Waiting for map to load....")
+                                    timerId = setTimeout(loadLayer, 1000);
+                                }
+                            }
+                        </script>
+                    </div>
+                    <div class="map-legend">
+                        <div>
+                            {% translate "Alert Severity" %}:
+                        </div>
+                        <div class="legend-items">
+                            <div class="legend-item">
+                                <div class="legend-color"
+                                     style="background-color: rgb(215, 47, 42);"></div>
+                                <div class="legend-label">
+                                    {% translate "Extreme" %}
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color"
+                                     style="background-color: rgb(254, 153, 0);"></div>
+                                <div class="legend-label">
+                                    {% translate "Severe" %}
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color"
+                                     style="background-color: rgb(255, 255, 0);"></div>
+                                <div class="legend-label">
+                                    {% translate "Moderate" %}
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color"
+                                     style="background-color: rgb(3, 255, 255);"></div>
+                                <div class="legend-label">
+                                    {% translate "Minor" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-three-fifths-widescreen is-full-touch featured-item-detail">
+                <div class="tabs is-boxed ">
+                    <ul>
+                        <xsl:for-each select="*[local-name()='info']">
+                            <li>
+                                <xsl:if test="position()=1">
+                                    <xsl:attribute name="class">is-active</xsl:attribute>
+                                </xsl:if>
+                                <xsl:attribute name="data-target">
+                                    <xsl:value-of select="concat('info-',position())"/>
+                                </xsl:attribute>
+                                <a>
+                                    <span class="alert-icon-wrapper">
+                                        {% svg_icon name="cap-warning" %}
+                                    </span>
+                                    <span>
+                                        <xsl:value-of select="*[local-name()='event'][1]"/>
+                                    </span>
+                                </a>
+                            </li>
+                        </xsl:for-each>
+                    </ul>
+                </div>
+                <div id="tab-content">
+                    <xsl:for-each select="*[local-name()='info']">
+                        <xsl:variable name="infoPosition" select="concat('info-', position())"/>
+                        <div>
+                            <xsl:if test="not(position()=1)">
+                                <xsl:attribute name="class">is-hidden</xsl:attribute>
+                            </xsl:if>
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="concat('info-',position())"/>
+                            </xsl:attribute>
+                            <div class="info-item">
+                                <div class="cap-info-summary-item">
+                                    <span class="cap-info-summary-icon">
+                                        {% svg_icon name="cap-language" %}
+                                    </span>
+                                    <div class="cap-info-summary-type">
+                                        {% translate "Language" %}:
+                                    </div>
+                                    <div class="cap-info-summary-value">
+                                        <xsl:value-of select="*[local-name()='language'][1]"/>
+                                    </div>
+                                </div>
+                                <div class="cap-info-summary-item">
+                                    <span class="cap-info-summary-icon">
+                                        {% svg_icon name="cap-category" %}
+                                    </span>
+                                    <div class="cap-info-summary-type">
+                                        {% translate "Category" %}:
+                                    </div>
+                                    <div class="cap-info-summary-value">
+                                        <xsl:for-each select="*[local-name()='category']">
+                                            <xsl:value-of select="."/>
+                                        </xsl:for-each>
+                                    </div>
+                                </div>
+                            </div>
+                            <xsl:if test="*[local-name()='responseType']">
+                                <div class="info-item">
+                                    <div class="cap-info-summary-item">
+                                        <span class="cap-info-summary-icon">
+                                            {% svg_icon name="cap-response" %}
+                                        </span>
+                                        <div class="cap-info-summary-type">
+                                            {% translate "Response Types" %}:
+                                        </div>
+                                        <div class="cap-info-summary-value">
+                                            <xsl:for-each select="*[local-name()='responseType']">
+                                                <xsl:if test="position() > 1">,</xsl:if>
+                                                <xsl:value-of select="."/>
+                                            </xsl:for-each>
+                                        </div>
+                                    </div>
+                                </div>
+                            </xsl:if>
+                            <xsl:variable name="severity" select="*[local-name()='severity'][1]"/>
+                            <div class="info-item">
+                                <div class="cap-info-summary-item">
+                                    <span class="cap-info-summary-icon">
+                                        {% svg_icon name="cap-clock" %}
+                                    </span>
+                                    <div class="cap-info-summary-type">
+                                        {% translate "Urgency" %}:
+                                    </div>
+                                    <div class="cap-info-summary-value">
+                                        <xsl:value-of select="*[local-name()='urgency'][1]"/>
+                                    </div>
+                                </div>
+                                <div class="cap-info-summary-item">
+                                    <span class="cap-info-summary-icon">
+                                        {% svg_icon name="cap-warning" %}
+                                    </span>
+                                    <div class="cap-info-summary-type">
+                                        {% translate "Severity" %}:
+                                    </div>
+                                    <div class="cap-info-summary-value">
+                                        <xsl:value-of select="$severity"/>
+                                    </div>
+                                </div>
+                                <div class="cap-info-summary-item">
+                                    <span class="cap-info-summary-icon">
+                                        {% svg_icon name="cap-certainty" %}
+                                    </span>
+                                    <div class="cap-info-summary-type">
+                                        {% translate "Certainty" %}:
+                                    </div>
+                                    <div class="cap-info-summary-value">
+                                        <xsl:value-of select="*[local-name()='certainty'][1]"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-header">
+                                    {% translate "Time" %}
+                                </div>
+                                <div class="info-detail">
+                                    <div class="cap-time-wrapper">
+                                        <ul class="warning-timeline">
+                                            <xsl:if test="*[local-name()='effective'][1]">
+                                                <li class="warning-timeline__item">
+                                                    <div class="warning-timeline__circle"></div>
+                                                    <div>
+                                                        <span class="time-type">
+                                                            {% translate "Effective" %}:
+                                                        </span>
+                                                        <span>
+                                                            <xsl:value-of select="*[local-name()='effective'][1]"/>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </xsl:if>
+                                            <xsl:if test="*[local-name()='onset'][1]">
+                                                <li class="warning-timeline__item">
+                                                    <div class="warning-timeline__circle"></div>
+                                                    <div>
+                                                        <span class="time-type">
+                                                            {% translate "Onset" %}:
+                                                        </span>
+                                                        <span>
+                                                            <xsl:value-of select="*[local-name()='onset'][1]"/>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </xsl:if>
+                                            <li class="warning-timeline__item">
+                                                <div class="warning-timeline__circle"></div>
+                                                <div>
+                                                    <span class="time-type">
+                                                        {% translate "Expires" %}:
+                                                    </span>
+                                                    <xsl:value-of select="*[local-name()='expires'][1]"/>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-header">
+                                    {% translate "Headline" %}
+                                </div>
+                                <div class="info-detail">
+                                    <xsl:value-of select="*[local-name()='headline'][1]"/>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-header">
+                                    {% translate "Description" %}
+                                </div>
+                                <div class="info-detail">
+                                    <xsl:value-of select="*[local-name()='description'][1]"/>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-header">
+                                    {% translate "Instruction" %}
+                                </div>
+                                <div class="info-detail">
+                                    <xsl:value-of select="*[local-name()='instruction'][1]"/>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-header">
+                                    {% translate "Area" %}
+                                </div>
+                                <div class="info-detail">
+                                    <xsl:for-each select="*[local-name()='area']">
+                                        <xsl:variable name="areaPosition"
+                                                      select="concat($infoPosition,'-area-', position())"/>
+                                        <div style="margin-bottom: 8px">
+                                            <xsl:value-of select="*[local-name()='areaDesc'][1]"/>
+                                        </div>
+                                        <xsl:for-each select="*[local-name()='polygon']">
+                                            <xsl:variable name="polyPosition"
+                                                          select="concat($areaPosition,'-poly-', position())"/>
+                                            <script>
+                                                addAreaPolygon('<xsl:value-of select="."/>', '<xsl:value-of select="$severity"/>', '<xsl:value-of select="$polyPosition"/>');
+                                            </script>
+                                        </xsl:for-each>
+                                        <xsl:for-each select="*[local-name()='circle']">
+                                            <xsl:variable name="circlePosition"
+                                                          select="concat($areaPosition,'-circle-', position())"/>
+                                            <script>
+                                                addAreaCircle('<xsl:value-of select="."/>', '<xsl:value-of select="$severity"/>', '<xsl:value-of select="$circlePosition"/>');
+                                            </script>
+                                        </xsl:for-each>
+                                    </xsl:for-each>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-header">
+                                    {% translate "Contact" %}
+                                </div>
+                                <div class="info-detail">
+                                    <xsl:value-of select="*[local-name()='contact'][1]"/>
+                                </div>
+                            </div>
+                        </div>
+                    </xsl:for-each>
+                    <script>
+                        loadLayer();
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!-- CAP Elements -->
+        <!-- To customize the Web page, insert here the HTML code for a page footer  -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Tabs
+                const tabs = document.querySelectorAll('.tabs li')
+                const tabContentBoxes = document.querySelectorAll('#tab-content > div')
+
+                tabs.forEach((tab) => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(item => item.classList.remove('is-active'))
+
+                        tab.classList.add('is-active')
+
+                        const target = tab.dataset.target;
+
+                        tabContentBoxes.forEach(box => {
+                            if (box.getAttribute('id') === target) {
+                                box.classList.remove('is-hidden')
+                            } else {
+                                box.classList.add('is-hidden')
+                            }
+                        })
+                    })
+                })
+            });
+        </script>
+        </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>

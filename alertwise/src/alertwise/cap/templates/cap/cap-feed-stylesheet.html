@@ -1,0 +1,107 @@
+{% load static wagtailiconchooser_tags %}
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html"/>
+    <xsl:template match="/">
+        <xsl:apply-templates select="/rss/channel"/>
+    </xsl:template>
+    <xsl:template match="/rss/channel">
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <meta name="keywords" content="emergency, alert, warning"/>
+            <title>
+                <xsl:value-of select="title" />
+            </title>
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.min.css' %}"/>
+            <style>
+                html, body {
+                    height: 100%;
+                    margin: 10px;
+                }
+
+                main {
+                    padding-bottom: 100px;
+                }
+
+                .sender-logo {
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 20px
+                }
+
+                .alert-item {
+                    padding: 10px 0;
+                }
+
+
+                .alert-item-title {
+                    display: flex;
+                    align-items: center;
+                    font-size: 18px;
+                }
+
+                .alert-item-title .icon {
+                    height: 20px;
+                    width: 20px;
+                    margin-right: 10px;
+                }
+
+                .alert-item-title .icon svg {
+                    height: 100%;
+                    width: 100%;
+                }
+
+                .alert-item-title a {
+                    text-decoration: underline;
+                    font-weight: bold
+                }
+
+                .alert-item-date {
+                    font-weight: bold;
+                    font-size: 14px;
+                    padding: 10px 0;
+                }
+            </style>
+        </head>
+        <body>
+        <main>
+            <div class="container">
+                <xsl:if test="image">
+                    <div class="sender-logo">
+                        <a href="{image/link}" target="_blank" rel="noreferrer noopener">
+                            <img src="{image/url}" style="height: 70px" alt="logo"/>
+                        </a>
+                    </div>
+                </xsl:if>
+                <h2 class="title" style="text-align: center">
+                    <xsl:value-of select="title"/>
+                </h2>
+                <div>
+                    <xsl:apply-templates select="item"/>
+                </div>
+            </div>
+        </main>
+        </body>
+        </html>
+    </xsl:template>
+
+    <xsl:template match="rss/channel/item">
+        <div class="alert-item">
+            <div class="alert-item-title">
+                <span class="icon">
+                    {% svg_icon name="warning-outline" %}
+                </span>
+                <a href="{link}">
+                    <xsl:value-of select="title"/>
+                </a>
+            </div>
+            <div class="alert-item-date">
+                <xsl:value-of select="pubDate"/>
+            </div>
+            <p>
+                <xsl:value-of select="description"/>
+            </p>
+        </div>
+    </xsl:template>
+</xsl:stylesheet>

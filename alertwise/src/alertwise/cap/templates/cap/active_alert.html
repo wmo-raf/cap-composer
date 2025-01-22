@@ -1,0 +1,109 @@
+{% load static wagtailiconchooser_tags i18n %}
+
+{% if latest_active_alert %}
+    <style>
+
+        .banner-alert-container {
+            width: 100%;
+        }
+
+        .banner-alert-item {
+            position: relative;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-alert-item-icon {
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-alert-icon-wrapper {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border: 3px solid #fff;
+            padding: 10px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+            }
+            100% {
+                box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+            }
+        }
+
+        .banner-alert-icon-wrapper svg {
+            height: 80%;
+            width: 80%;
+            fill: currentColor;
+        }
+
+        .banner-alert-item-title {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .banner-alert-event {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .banner-alert-severity-label {
+            font-size: 11px;
+        }
+
+        /*768px and lower*/
+        @media screen and (max-width: 1023px) {
+            .banner-alert-container {
+                background-color: #f3f5fa;
+                padding: 4px 0;
+            }
+        }
+
+        @media only screen and (min-width: 1024px) and (max-width: 1150px) {
+            .banner-alert-item-info {
+                display: none;
+            }
+        }
+
+    </style>
+    <div class="banner-alert-container">
+        <a href="{{ latest_active_alert.url }}">
+            <div class="banner-alert-item">
+                <div class="banner-alert-item-icon">
+                    <div class="banner-alert-icon-wrapper"
+                         style="background-color: {{ latest_active_alert.severity.color }}; border-color: {{ latest_active_alert.severity.border_color }};
+                                 {% if latest_active_alert.severity.icon_color %}color:{{ latest_active_alert.severity.icon_color }};{% endif %} ">
+                        {% if latest_active_alert.event_icon %}
+                            {% svg_icon name=latest_active_alert.event_icon %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="banner-alert-item-info">
+                    <div class="banner-alert-item-title">
+                        Warning
+                    </div>
+                    <div class="banner-alert-event">
+                        {{ latest_active_alert.event|truncatechars:20 }}
+                    </div>
+                    <div class="banner-alert-severity-label">
+                        {{ latest_active_alert.severity.label }}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endif %}

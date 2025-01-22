@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% load static wagtailcore_tags wagtailimages_tags lazyimages_tags wagtailiconchooser_tags i18n %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cap/css/cap_list_page.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+    <main>
+        {% include "breadcrumbs_include.html" %}
+        <section>
+            <div class="container">
+                {% if page.heading %}
+                    <div style="margin-bottom: 50px">
+                        <h2 class="section-title" style="padding-bottom: 0">{{ page.heading }}</h2>
+                        {% if  cap_rss_feed_url %}
+                            <div class="rss-feed" style="">
+                                <a href="{{ cap_rss_feed_url }}" style="display: flex;align-items: center">
+                                    <span style="margin-right: 10px">CAP RSS</span>
+                                    <img src="{% static 'cap/images/caplogo.jpeg' %}" alt="CAP Alerts"
+                                         style="height: 18px;border-radius:4px">
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <div class="columns is-multiline is-mobile">
+                    <div class="column is-three-fifths-desktop is-full-touch alerts-list">
+                        <div class="alerts-group">
+                            <div class="group-title">
+                                {% translate "Active Alerts" %}
+                            </div>
+
+                            {% if alerts_by_expiry.active_alerts %}
+                                {% for alert_info in alerts_by_expiry.active_alerts %}
+                                    {% include "cap/include_alert_list_item.html" with alert_info=alert_info %}
+                                {% endfor %}
+                            {% else %}
+                                <div class="empty-alerts-state">
+                                    <div class="empty-alerts-icon">
+                                        {% svg_icon name="alert" %}
+                                    </div>
+                                    <div>
+                                        {% translate "No active alerts currently" %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        {% if  alerts_by_expiry.past_alerts %}
+                            <div class="alerts-group">
+                                <div class="group-title">
+                                    {% translate "Past Alerts" %}
+                                </div>
+                                {% for alert_info in alerts_by_expiry.past_alerts %}
+                                    {% include "cap/include_alert_list_item.html" with alert_info=alert_info %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="column is-offset-1-desktop is-one-fifth-widescreen is-full-touch is-hidden-touch">
+                        {% if filters.severity %}
+                            <div class="alert-category-filter">
+                                <div class="w-field__wrapper " data-field-wrapper="">
+                                    <label class="w-field__label" for="" id="-label"
+                                           style="font-weight: 600;">
+                                        {% translate "Severity" %}
+                                    </label>
+                                    {% for key,value in filters.severity.items %}
+                                        <div class="w-field w-field--multiple_choice_field w-field--checkbox_select_multiple"
+                                             data-field="" data-contentpath="multiple_checkbox"
+                                             style="padding-top: 10px">
+                                            <div class="w-field__input" data-field-input="">
+                                                <div id="id_severity">
+                                                    <div>
+                                                        <label for="id_severity_{{ key }}">
+                                                            <input type="checkbox" name="severity" value="{{ key }}"
+                                                                   id="id_severity_{{ key }}">
+                                                            {{ value.label }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if filters.event_types %}
+                            <div class="alert-category-filter">
+                                <div class="w-field__wrapper " data-field-wrapper="">
+                                    <label class="w-field__label" for="" id="-label"
+                                           style="font-weight: 600;">
+                                        {% translate "Event type" %}
+                                    </label>
+                                    {% for key,value in filters.event_types.items %}
+                                        <div class="w-field w-field--multiple_choice_field w-field--checkbox_select_multiple"
+                                             data-field="" data-contentpath="multiple_checkbox"
+                                             style="padding-top: 10px">
+                                            <div class="w-field__input" data-field-input="">
+                                                <div id="id_event">
+                                                    <div>
+                                                        <label for="id_event_{{ key }}">
+                                                            <input type="checkbox" name="event" value="{{ key }}"
+                                                                   id="id_event_{{ key }}">
+                                                            {{ value.label }}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}
+
+{% block extra_js %}
+
+    <script>
+
+
+        $(document).ready(function () {
+
+                $('input[name="severity"]').change(function () {
+                    filterAlerts()
+                });
+
+
+                $('input[name="event"]').change(function () {
+                    filterAlerts()
+                });
+
+
+                function filterAlerts() {
+                    const checkedSeverity = getFilterValues("severity");
+                    const checkedEventTypes = getFilterValues("event");
+
+                    $(".alert-item").filter(function () {
+                        const severity = $(this).data("severity")
+                        const eventType = $(this).data("event")
+
+                        let bySeverity
+                        let byEventType
+
+                        if (checkedSeverity && !!checkedSeverity.length) {
+                            bySeverity = checkedSeverity.includes(severity)
+                        } else {
+                            bySeverity = true
+                        }
+
+                        if (checkedEventTypes && !!checkedEventTypes.length) {
+                            byEventType = checkedEventTypes.includes(eventType)
+                        } else {
+                            byEventType = true
+                        }
+
+                        if (byEventType && bySeverity) {
+                            $(this).show()
+                        } else {
+                            $(this).hide()
+                        }
+
+                    });
+
+                }
+
+                function getFilterValues(name) {
+                    const input = `input[name='${name}']:checked`
+                    const checkedCheckboxes = $(input);
+                    const checkedValues = [];
+
+                    // Iterate through the checked checkboxes and push their values to the array
+                    checkedCheckboxes.each(function () {
+                        checkedValues.push($(this).val());
+                    });
+
+                    return checkedValues
+
+                }
+
+
+            }
+        )
+
+
+    </script>
+
+{% endblock extra_js %}
