@@ -34,4 +34,5 @@ jobs:
         run: python -m build
 
       - name: Publish package distributions to PyPI
+        working-directory: alertwise
         uses: pypa/gh-action-pypi-publish@release/v1
