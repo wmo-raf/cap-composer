@@ -10,6 +10,10 @@ jobs:
   publish:
 
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: alertwise
     environment:
       name: release
       url: https://pypi.org/p/alertwise
@@ -30,9 +34,7 @@ jobs:
           pip install build
 
       - name: Build package
-        working-directory: alertwise
         run: python -m build
 
       - name: Publish package distributions to PyPI
-        working-directory: alertwise
         uses: pypa/gh-action-pypi-publish@release/v1
