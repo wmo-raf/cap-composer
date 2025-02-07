@@ -35,7 +35,7 @@ celery-worker       : Start the celery worker queue which runs async tasks
 celery-beat         : Start the celery beat service used to schedule periodic jobs
 
 DEV COMMANDS:
-django-dev      : Start a normal Baserow backend django development server, performs
+django-dev      : Start a normal django development server, performs
                   the same checks and setup as the gunicorn command above.
 
 """
