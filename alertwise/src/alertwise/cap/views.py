@@ -108,12 +108,16 @@ class AlertListFeed(Feed):
         return description
     
     def items(self):
+        num_of_latest_alerts_in_feed = self.cap_setting.num_of_latest_alerts_in_feed
         site = self.cap_setting.site
         
+        # get latest alerts, limit to num_of_latest_alerts_in_feed
         alerts = get_all_published_alerts()
         
         if site.root_page.specific_class == CapAlertListPage:
             alerts = alerts.child_of(site.root_page)
+        
+        alerts = alerts[:num_of_latest_alerts_in_feed]
         
         return alerts
     
