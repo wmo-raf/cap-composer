@@ -82,13 +82,13 @@ cp nginx/nginx.conf.sample nginx/nginx.conf
 6. **Copy the docker-compose file**
 
 ```shell
-cp docker-compose.sample.yml docker-compose.yml
+cp docker compose.sample.yml docker-compose.yml
 ```
 
 7. **Build the Docker containers**
 
 ```shell
-docker-compose build
+docker compose build
 ```
 
 This may take some time to download and build the required Docker images, depending on your internet connection.
@@ -96,13 +96,13 @@ This may take some time to download and build the required Docker images, depend
 8. **Run the Docker containers**
 
 ```shell
-docker-compose up -d
+docker compose up -d
 ```
 
 9. **Check the logs to ensure everything is running correctly**
 
 ```shell
-docker-compose logs -f
+docker compose logs -f
 ```
 
 In case of any errors, see the troubleshooting section below for some helpful
@@ -116,7 +116,7 @@ tips [Troubleshooting standalone installation](#troubleshooting-standalone-insta
 11. **Create a superuser to access the admin dashboard**
 
 ```shell
-docker-compose exec alertwise alertwise createsuperuser
+docker compose exec alertwise alertwise createsuperuser
 ```
 
 `alertwise` is a shortcut command to `python manage.py` in the Docker container.
@@ -181,7 +181,7 @@ rest are optional and can be configured as required.
 
 #### Troubleshooting standalone installation
 
-1. **Docker containers not starting**: Check the logs for any errors. Run `docker-compose logs -f` to see the logs.
+1. **Docker containers not starting**: Check the logs for any errors. Run `docker compose logs -f` to see the logs.
 2. **Docker compose file parsing errors**: Ensure the `docker-compose.yml` file is correctly formatted. Check for any
    syntax errors. Use `docker compose config` to validate the file. Some symbols like dollar signs `($)` or `@` might be
    the culprit in password variables, especially `DB_PASSWORD`. Check your password and other variables for any special
