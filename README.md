@@ -91,17 +91,22 @@ cp docker-compose.sample.yml docker-compose.yml
 docker-compose build
 ```
 
+This may take some time to download and build the required Docker images, depending on your internet connection.
+
 8. Run the Docker containers
 
 ```shell
 docker-compose up -d
 ```
 
-9. Check the logs to ensure everything is running
+9. Check the logs to ensure everything is running correctly
 
 ```shell
 docker-compose logs -f
 ```
+
+In case of any errors, see the troubleshooting section below for some helpful
+tips [Troubleshooting standalone installation](#troubleshooting-standalone-installation)
 
 10. Access the application at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>`. Replace `<ip_or_domain>` with the IP
     address or domain name of your server, and `<ALERTWISE_WEB_PROXY_PORT>` with the port set in the `.env` file or `80`
@@ -172,6 +177,22 @@ rest are optional and can be configured as required.
 3. **Debug Mode**: Never set DEBUG=True in production.
 4. **Time Zone**: Set TIME_ZONE to your local time zone for accurate timestamps.
 5. **SMTP**: Configure email settings if your app needs to send emails.
+
+#### Troubleshooting standalone installation
+
+1. **Docker containers not starting**: Check the logs for any errors. Run `docker-compose logs -f` to see the logs.
+2. **Docker compose file parsing errors**: Ensure the `docker-compose.yml` file is correctly formatted. Check for any
+   syntax errors. Use `docker compose config` to validate the file. Some symbols like dollar signs `($)` or `@` might be
+   the culprit in password variables, especially `DB_PASSWORD`. Check your password and other variables for any special
+   characters that might be causing issues.
+3. **Database volume permission errors**: Ensure the `DB_VOLUME_PATH` is correctly set and the user running the
+   database containers has the correct permissions to read and write to the volume path. The default user id and group
+   for the db container is `1000:1000`. You can assign the correct permissions to the volume path by running:
+   `sudo chown -R 1000:1000  ./docker/volumes/db`, or the custom path if changed.
+4. **Static/media/backup volume permission errors**: The same as above, ensure the `STATIC_VOLUME_PATH`,
+   `MEDIA_VOLUME_PATH`, and `BACKUP_VOLUME_PATH` are correctly set and the user running the web container has the
+   correct permissions to read and write to the volume path. This is the user set by the `UID` and `GID` environment.
+   Set the permissions by running `sudo chown -R <UID>:<GID>  ./path/to/volume` for all the volumes.
 
 ## Legal Disclaimer
 
