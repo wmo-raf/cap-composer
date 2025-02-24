@@ -47,6 +47,7 @@
                                     </div>
                                 </div>
                             {% endif %}
+                            {% include 'cap/pagination_include.html' with items=pagination %}
                         </div>
 
                         {% if  alerts_by_expiry.past_alerts %}
@@ -60,6 +61,8 @@
                             </div>
                         {% endif %}
                     </div>
+
+
                     <div class="column is-offset-1-desktop is-one-fifth-widescreen is-full-touch is-hidden-touch">
                         {% if filters.severity %}
                             <div class="alert-category-filter">
@@ -120,15 +123,14 @@
                 </div>
             </div>
         </section>
+
     </main>
 
 {% endblock %}
 
 {% block extra_js %}
-
+    <script type="text/javascript" src="{% static 'cap/js/jquery-3.7.1.min.js' %}"></script>
     <script>
-
-
         $(document).ready(function () {
 
                 $('input[name="severity"]').change(function () {
