@@ -6,20 +6,21 @@
 #
 amqp==5.3.1
     # via kombu
+anyascii==0.3.2
+    # via wagtail
 anyio==4.6.2.post1
     # via watchfiles
 asgiref==3.8.1
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   channels
     #   daphne
     #   django
+    #   django-axes
     #   opentelemetry-instrumentation-asgi
 async-timeout==5.0.1
     # via redis
 attrs==24.2.0
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   service-identity
     #   twisted
 autobahn==24.4.2
@@ -28,8 +29,8 @@ automat==24.8.1
     # via twisted
 beautifulsoup4==4.12.3
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   deep-translator
+    #   wagtail
 billiard==4.2.1
     # via celery
 celery==5.4.0
@@ -40,22 +41,15 @@ celery==5.4.0
 celery-singleton==0.3.1
     # via -r standalone.in
 certifi==2024.8.30
-    # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
-    #   requests
+    # via requests
 cffi==1.17.1
-    # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
-    #   cryptography
+    # via cryptography
 channels==4.2.0
     # via -r standalone.in
 charset-normalizer==3.4.0
-    # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
-    #   requests
+    # via requests
 click==8.1.7
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   celery
     #   click-didyoumean
     #   click-plugins
@@ -64,9 +58,7 @@ click==8.1.7
 click-didyoumean==0.3.1
     # via celery
 click-plugins==1.1.1
-    # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
-    #   celery
+    # via celery
 click-repl==0.3.0
     # via celery
 constantly==23.10.4
@@ -75,7 +67,6 @@ cron-descriptor==1.4.5
     # via django-celery-beat
 cryptography==43.0.3
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   autobahn
     #   pyopenssl
     #   service-identity
@@ -83,6 +74,8 @@ daphne==4.1.2
     # via -r standalone.in
 deep-translator==1.11.4
     # via django-deep-translator
+defusedxml==0.7.1
+    # via willow
 deprecated==1.2.15
     # via
     #   opentelemetry-api
@@ -93,14 +86,28 @@ dj-database-url==2.3.0
     # via -r standalone.in
 django==4.2.16
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   channels
     #   dj-database-url
+    #   django-axes
     #   django-celery-beat
     #   django-dbbackup
     #   django-deep-translator
+    #   django-filter
+    #   django-modelcluster
+    #   django-otp
+    #   django-permissionedforms
     #   django-redis
+    #   django-stubs-ext
+    #   django-taggit
+    #   django-tasks
     #   django-timezone-field
+    #   django-treebeard
+    #   djangorestframework
+    #   laces
+    #   wagtail
+    #   wagtail-2fa
+django-axes==7.0.2
+    # via -r standalone.in
 django-celery-beat==2.7.0
     # via -r standalone.in
 django-dbbackup==4.2.1
@@ -109,12 +116,38 @@ django-deep-translator==1.5.1
     # via -r standalone.in
 django-environ==0.11.2
     # via -r standalone.in
+django-filter==25.1
+    # via wagtail
+django-ipware==7.0.1
+    # via -r standalone.in
+django-modelcluster==6.4
+    # via wagtail
+django-otp==1.5.4
+    # via wagtail-2fa
+django-permissionedforms==0.1
+    # via wagtail
 django-redis==5.4.0
     # via -r standalone.in
+django-stubs-ext==5.1.3
+    # via django-tasks
+django-taggit==6.1.0
+    # via wagtail
+django-tasks==0.6.1
+    # via wagtail
 django-timezone-field==7.0
     # via django-celery-beat
+django-treebeard==4.7.1
+    # via wagtail
+djangorestframework==3.15.2
+    # via wagtail
+draftjs-exporter==5.1.0
+    # via wagtail
+et-xmlfile==2.0.0
+    # via openpyxl
 exceptiongroup==1.2.2
     # via anyio
+filetype==1.2.0
+    # via willow
 googleapis-common-protos==1.66.0
     # via
     #   opentelemetry-exporter-otlp-proto-grpc
@@ -133,19 +166,20 @@ hyperlink==21.0.0
     #   twisted
 idna==3.10
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   anyio
     #   hyperlink
     #   requests
     #   twisted
 importlib-metadata==8.5.0
-    # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
-    #   opentelemetry-api
+    # via opentelemetry-api
 incremental==24.7.2
     # via twisted
 kombu==5.4.2
     # via celery
+laces==0.1.2
+    # via wagtail
+openpyxl==3.1.5
+    # via wagtail
 opentelemetry-api==1.28.2
     # via
     #   -r standalone.in
@@ -239,9 +273,14 @@ opentelemetry-util-http==0.49b2
     #   opentelemetry-instrumentation-wsgi
 packaging==24.2
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   gunicorn
     #   opentelemetry-instrumentation
+pillow==11.1.0
+    # via
+    #   pillow-heif
+    #   wagtail
+pillow-heif==0.21.0
+    # via willow
 polib==1.2.0
     # via django-deep-translator
 prompt-toolkit==3.0.48
@@ -259,26 +298,27 @@ pyasn1==0.6.1
 pyasn1-modules==0.4.1
     # via service-identity
 pycparser==2.22
-    # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
-    #   cffi
+    # via cffi
 pyopenssl==24.2.1
     # via twisted
 python-crontab==3.2.0
     # via django-celery-beat
 python-dateutil==2.9.0.post0
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   celery
     #   python-crontab
 python-dotenv==1.0.1
     # via uvicorn
+python-ipware==3.0.0
+    # via django-ipware
 pytz==2024.2
     # via
     #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   django-dbbackup
 pyyaml==6.0.2
     # via uvicorn
+qrcode==8.0
+    # via wagtail-2fa
 redis==5.2.0
     # via
     #   celery-singleton
@@ -288,23 +328,22 @@ requests==2.32.3
     #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   deep-translator
     #   opentelemetry-exporter-otlp-proto-http
+    #   wagtail
 service-identity==24.2.0
     # via twisted
 six==1.16.0
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   django-deep-translator
     #   python-dateutil
+    #   wagtail-2fa
 sniffio==1.3.1
     # via anyio
 soupsieve==2.6
-    # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
-    #   beautifulsoup4
+    # via beautifulsoup4
 sqlparse==0.5.2
-    # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
-    #   django
+    # via django
+telepath==0.3.1
+    # via wagtail
 tomli==2.1.0
     # via incremental
 twisted[tls]==24.10.0
@@ -313,25 +352,23 @@ txaio==23.1.1
     # via autobahn
 typing-extensions==4.12.2
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   anyio
     #   asgiref
     #   automat
     #   dj-database-url
+    #   django-stubs-ext
+    #   django-tasks
     #   kombu
     #   opentelemetry-sdk
     #   twisted
     #   uvicorn
 tzdata==2024.2
     # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   celery
     #   django-celery-beat
     #   kombu
 urllib3==2.2.3
-    # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
-    #   requests
+    # via requests
 uvicorn[standard]==0.32.1
     # via -r standalone.in
 uvloop==0.21.0
@@ -341,12 +378,23 @@ vine==5.1.0
     #   amqp
     #   celery
     #   kombu
+wagtail==6.4.1
+    # via
+    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
+    #   -r standalone.in
+    #   wagtail-2fa
+wagtail-2fa==1.6.9
+    # via -r standalone.in
 watchfiles==0.24.0
     # via uvicorn
 wcwidth==0.2.13
     # via prompt-toolkit
 websockets==14.1
     # via uvicorn
+willow[heif]==1.9.0
+    # via
+    #   wagtail
+    #   willow
 wrapt==1.17.0
     # via
     #   deprecated
@@ -354,9 +402,7 @@ wrapt==1.17.0
     #   opentelemetry-instrumentation-dbapi
     #   opentelemetry-instrumentation-redis
 zipp==3.21.0
-    # via
-    #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
-    #   importlib-metadata
+    # via importlib-metadata
 zope-interface==7.1.1
     # via twisted
 

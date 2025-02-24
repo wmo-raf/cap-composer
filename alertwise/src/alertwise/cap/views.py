@@ -1,5 +1,8 @@
 import json
 
+from alertwise.capeditor.constants import SEVERITY_MAPPING
+from alertwise.capeditor.models import CapSetting
+from alertwise.capeditor.utils import get_event_icon
 from django.contrib.syndication.views import Feed
 from django.core.validators import validate_email
 from django.http import JsonResponse, HttpResponse
@@ -12,15 +15,13 @@ from django.utils.feedgenerator import rfc2822_date
 from django.utils.translation import gettext as _
 from django.utils.xmlutils import SimplerXMLGenerator
 
-from alertwise.capeditor.constants import SEVERITY_MAPPING
-from alertwise.capeditor.models import CapSetting
-from alertwise.capeditor.utils import get_event_icon
 from .cache import wagcache
 from .models import (
     CapAlertPage,
     CapAlertListPage,
     OtherCAPSettings,
 )
+from .utils import get_full_url_by_site
 from .utils import (
     serialize_and_sign_cap_alert,
     get_currently_active_alerts,
@@ -33,6 +34,9 @@ class CustomCAPFeed(Rss201rev2Feed):
     
     def __init__(self, *args, **kwargs):
         self.cap_setting = kwargs.pop("cap_setting")
+        
+        self.cap_feed_stylesheet_full_url = get_full_url_by_site(self.cap_setting.site, reverse("cap_feed_stylesheet"))
+        
         super().__init__(*args, **kwargs)
     
     def write(self, outfile, encoding):
@@ -40,7 +44,7 @@ class CustomCAPFeed(Rss201rev2Feed):
         handler.startDocument()
         
         # add stylesheet
-        handler.processingInstruction('xml-stylesheet', f'type="text/xsl" href="{reverse("cap_feed_stylesheet")}"')
+        handler.processingInstruction('xml-stylesheet', f'type="text/xsl" href="{self.cap_feed_stylesheet_full_url}"')
         
         handler.startElement("rss", self.rss_attributes())
         handler.startElement("channel", self.root_attributes())
@@ -104,12 +108,16 @@ class AlertListFeed(Feed):
         return description
     
     def items(self):
+        num_of_latest_alerts_in_feed = self.cap_setting.num_of_latest_alerts_in_feed
         site = self.cap_setting.site
         
+        # get latest alerts, limit to num_of_latest_alerts_in_feed
         alerts = get_all_published_alerts()
         
         if site.root_page.specific_class == CapAlertListPage:
             alerts = alerts.child_of(site.root_page)
+        
+        alerts = alerts[:num_of_latest_alerts_in_feed]
         
         return alerts
     

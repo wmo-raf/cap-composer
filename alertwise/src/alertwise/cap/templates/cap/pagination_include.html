@@ -1,0 +1,40 @@
+{% if items.paginator.num_pages > 1 %}
+    <div class="center">
+        <div class="pagination" style="justify-content: center">
+            {% if items.has_previous %}
+                <a href="?page={{ items.previous_page_number }}"
+                   style="margin: 0 10px"
+                   title="Previous Page"
+                >
+                    <span>&laquo;</span>
+                </a>
+            {% endif %}
+            {% for page_num in items.paginator.page_range %}
+                {% if page_num == items.number %}
+                    <a href="?page={{ page_num }}"
+                       style="margin: 0 10px"
+                       class="active"
+                    >
+                        {{ page_num }}
+                    </a>
+                {% elif page_num > items.number|add:'-3' and page_num < items.number|add:'3' %}
+                    <a href="?page={{ page_num }}"
+                       style="margin: 0 10px"
+                    >
+                        {{ page_num }}
+                    </a>
+                {% endif %}
+
+            {% endfor %}
+
+            {% if items.has_next %}
+                <a href="?page={{ items.next_page_number }}"
+                   style="margin: 0 10px"
+                   title="Next Page"
+                >
+                    <span>&raquo;</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

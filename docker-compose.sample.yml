@@ -79,6 +79,7 @@ services:
       - 8000
     environment:
       <<: *alertwise-variables
+      WAGTAIL_2FA_REQUIRED: ${WAGTAIL_2FA_REQUIRED:-False}
     ports:
       - "8000:8000"
     volumes:
