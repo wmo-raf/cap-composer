@@ -62,7 +62,7 @@ cd alertwise
 3. **Copy the sample environment file**
 
 ```shell
-cp .env.sample .env
+cp .env.standalone.sample .env
 ```
 
 4. **Edit the `.env` file to set your environment variables.** See
@@ -108,7 +108,8 @@ docker-compose logs -f
 In case of any errors, see the troubleshooting section below for some helpful
 tips [Troubleshooting standalone installation](#troubleshooting-standalone-installation)
 
-10. **Access the application at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>`**. Replace `<ip_or_domain>` with the IP
+10. **Access the application at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>`**. Replace `<ip_or_domain>` with the
+    IP
     address or domain name of your server, and `<ALERTWISE_WEB_PROXY_PORT>` with the port set in the `.env` file or `80`
     if not set.
 
