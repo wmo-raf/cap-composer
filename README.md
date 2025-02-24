@@ -47,25 +47,25 @@ Alertwise can be installed in two ways:
 This option will set up a Wagtail project together with the complete components required to run Alertwise. Use this when
 you want to have Alertwise as a standalone project, and not a component in a bigger project.
 
-1. Clone the repository
+1. **Clone the repository**
 
 ```shell
 git clone https://github.com/wmo-raf/alertwise.git
 ```
 
-2. Change into the project directory
+2. **Change into the project directory**
 
 ```shell
 cd alertwise
 ```
 
-3. Copy the sample environment file
+3. **Copy the sample environment file**
 
 ```shell
 cp .env.sample .env
 ```
 
-4. Edit the `.env` file to set your environment variables. See
+4. **Edit the `.env` file to set your environment variables.** See
    the [Standalone Environment Variables](#standalone-environment-variables)
    below for more information. Use your favourite text editor to edit the file. For example, using `nano`:
 
@@ -73,19 +73,19 @@ cp .env.sample .env
 nano .env
 ```
 
-5. Copy the nginx configuration file
+5. **Copy the nginx configuration file**
 
 ```shell
 cp nginx/nginx.conf.sample nginx/nginx.conf
 ```
 
-6. Copy the docker-compose file
+6. **Copy the docker-compose file**
 
 ```shell
 cp docker-compose.sample.yml docker-compose.yml
 ```
 
-7. Build the Docker containers
+7. **Build the Docker containers**
 
 ```shell
 docker-compose build
@@ -93,13 +93,13 @@ docker-compose build
 
 This may take some time to download and build the required Docker images, depending on your internet connection.
 
-8. Run the Docker containers
+8. **Run the Docker containers**
 
 ```shell
 docker-compose up -d
 ```
 
-9. Check the logs to ensure everything is running correctly
+9. **Check the logs to ensure everything is running correctly**
 
 ```shell
 docker-compose logs -f
@@ -108,11 +108,11 @@ docker-compose logs -f
 In case of any errors, see the troubleshooting section below for some helpful
 tips [Troubleshooting standalone installation](#troubleshooting-standalone-installation)
 
-10. Access the application at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>`. Replace `<ip_or_domain>` with the IP
+10. **Access the application at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>`**. Replace `<ip_or_domain>` with the IP
     address or domain name of your server, and `<ALERTWISE_WEB_PROXY_PORT>` with the port set in the `.env` file or `80`
     if not set.
 
-11. Create a superuser to access the admin dashboard
+11. **Create a superuser to access the admin dashboard**
 
 ```shell
 docker-compose exec alertwise alertwise createsuperuser
@@ -120,7 +120,7 @@ docker-compose exec alertwise alertwise createsuperuser
 
 `alertwise` is a shortcut command to `python manage.py` in the Docker container.
 
-12. Access the admin dashboard at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>/<ADMIN_URL_PATH>`. Replace
+12. **Access the admin dashboard at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>/<ADMIN_URL_PATH>`**. Replace
     `<ADMIN_URL_PATH>` with the path set in the `.env` file or `alertwise-admin` if not set.
 
 #### Standalone Environment Variables
