@@ -84,7 +84,10 @@ INSTALLED_APPS = [
     
     "django_deep_translator",
     "dbbackup",
-    "axes"
+    "axes",
+    "wagtail_2fa",
+    "django_otp",
+    "django_otp.plugins.otp_totp",
 ]
 
 MIDDLEWARE = [
@@ -92,6 +95,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    'wagtail_2fa.middleware.VerifyUserPermissionsMiddleware',
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -349,3 +353,5 @@ MBGL_RENDERER_URL = env("MBGL_RENDERER_URL", default=None)
 AXES_LOCKOUT_PARAMETERS = [["username", "ip_address"]]
 AXES_IPWARE_PROXY_COUNT = env.int("AXES_IPWARE_PROXY_COUNT", default=2)
 AXES_LOCKOUT_TEMPLATE = "axes/lockout.html"
+
+WAGTAIL_2FA_REQUIRED = env.bool("WAGTAIL_2FA_REQUIRED", default=False)

@@ -94,6 +94,7 @@ django==4.2.16
     #   django-deep-translator
     #   django-filter
     #   django-modelcluster
+    #   django-otp
     #   django-permissionedforms
     #   django-redis
     #   django-stubs-ext
@@ -104,6 +105,7 @@ django==4.2.16
     #   djangorestframework
     #   laces
     #   wagtail
+    #   wagtail-2fa
 django-axes==7.0.2
     # via -r standalone.in
 django-celery-beat==2.7.0
@@ -120,6 +122,8 @@ django-ipware==7.0.1
     # via -r standalone.in
 django-modelcluster==6.4
     # via wagtail
+django-otp==1.5.4
+    # via wagtail-2fa
 django-permissionedforms==0.1
     # via wagtail
 django-redis==5.4.0
@@ -313,6 +317,8 @@ pytz==2024.2
     #   django-dbbackup
 pyyaml==6.0.2
     # via uvicorn
+qrcode==8.0
+    # via wagtail-2fa
 redis==5.2.0
     # via
     #   celery-singleton
@@ -329,6 +335,7 @@ six==1.16.0
     # via
     #   django-deep-translator
     #   python-dateutil
+    #   wagtail-2fa
 sniffio==1.3.1
     # via anyio
 soupsieve==2.6
@@ -375,6 +382,9 @@ wagtail==6.4.1
     # via
     #   -c /Users/otenyo/Projects/wmo/cap-editor/alertwise/requirements/base.txt
     #   -r standalone.in
+    #   wagtail-2fa
+wagtail-2fa==1.6.9
+    # via -r standalone.in
 watchfiles==0.24.0
     # via uvicorn
 wcwidth==0.2.13
