@@ -80,10 +80,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.gis",
-    'django.contrib.sitemaps',
+    "django.contrib.sitemaps",
     
     "django_deep_translator",
     "dbbackup",
+    "axes"
 ]
 
 MIDDLEWARE = [
@@ -95,6 +96,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    
+    # AxesMiddleware should be the last middleware in the MIDDLEWARE list.
+    # It only formats user lockout messages and renders Axes lockout responses
+    # on failed user authentication attempts from login views.
+    # If you do not want Axes to override the authentication response
+    # you can skip installing the middleware and use your own views.
+    'axes.middleware.AxesMiddleware',
 ]
 
 if otel_is_enabled():
@@ -152,6 +160,14 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesStandaloneBackend',
+    
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 # Internationalization
@@ -256,6 +272,9 @@ CELERY_SINGLETON_BACKEND_CLASS = (
     "alertwise.config.celery_singleton_backend.RedisBackendForSingleton"
 )
 
+# Set max memory per child process (in kilobytes, e.g., default 200000 KB = 200 MB)
+CELERY_WORKER_MAX_MEMORY_PER_CHILD = env.int("CELERY_WORKER_MAX_MEMORY_PER_CHILD", default=200000)
+
 CELERY_APP = "alertwise.config.celery:app"
 
 CACHES = {
@@ -325,3 +344,8 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # for rendering the map in the CAP PDFs
 MBGL_RENDERER_URL = env("MBGL_RENDERER_URL", default=None)
+
+# Django AXES settings
+AXES_LOCKOUT_PARAMETERS = [["username", "ip_address"]]
+AXES_IPWARE_PROXY_COUNT = env.int("AXES_IPWARE_PROXY_COUNT", default=2)
+AXES_LOCKOUT_TEMPLATE = "axes/lockout.html"

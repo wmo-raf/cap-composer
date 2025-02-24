@@ -1,0 +1,29 @@
+{% extends "wagtailadmin/admin_base.html" %}
+{% load i18n wagtailadmin_tags static wagtailimages_tags wagtailsettings_tags %}
+{% get_settings use_default_site=True %}
+{% block titletag %}{% trans "Sign in" %}{% endblock %}
+{% block bodyclass %}login{% endblock %}
+
+{% block furniture %}
+    <main class="content-wrapper" id="main">
+        <h1 style="color:red ">
+            {% block branding_login %}{% trans "Account Locked" %}{% endblock %}
+        </h1>
+        <div>
+            <p style="font-size: 14px">
+                {% if cooloff_time %}
+                    {% translate "Your account has been locked due to multiple failed login attempts. Please try again later." %}
+                {% else %}
+                    {% translate "You account has been locked due to multiple failed login attempts. Please contact our support team for assistance." %}
+                {% endif %}
+            </p>
+        </div>
+        {% block branding_logo %}
+            <div style="display: flex;justify-content: center;margin-top: 20px">
+            <figure style="max-height: 80px;max-width: 80px;">
+                <img src="{% static 'images/alertwise_red.png' %}" alt="AlertWise Logo"
+                     style="height: 100%;width: 100%;object-fit: contain"/>
+            </figure>
+        {% endblock %}
+    </main>
+{% endblock %}
