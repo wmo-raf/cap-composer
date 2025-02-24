@@ -3,7 +3,10 @@ from django.contrib import admin
 from django.urls import include, path
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
+
+from alertwise.config.views import humans
 
 handler500 = 'alertwise.config.views.handler500'
 
@@ -14,6 +17,8 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("", include("alertwise.cap.urls")),
     path("", include("adminboundarymanager.urls")),
+    path("sitemap.xml", sitemap),
+    path("humans.txt", humans),
 ]
 
 if ADMIN_URL_PATH:
