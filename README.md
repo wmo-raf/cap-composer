@@ -126,8 +126,15 @@ docker compose exec alertwise alertwise createsuperuser
 
 #### Standalone Environment Variables
 
-For a quick start, only 3 environment variables are required: `SECRET_KEY`, `DB_PASSWORD`, and `REDIS_PASSWORD`. The
-rest are optional and can be configured as required.
+**Note**: For a quick start, **5 environment variables are required**:
+
+- **SECRET_KEY**
+- **DB_PASSWORD**
+- **REDIS_PASSWORD**
+- **UID**
+- **GID**
+
+The rest are optional and can be configured as required.
 
 | Variable                          | Description                                                                                                                                                                                                                      | Required | Default                                        | More Details                                                                                            |
 |-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------|---------------------------------------------------------------------------------------------------------|
@@ -141,8 +148,8 @@ rest are optional and can be configured as required.
 | WAGTAIL_SITE_NAME                 | The human-readable name of your installation which welcomes users upon login to the Wagtail admin.                                                                                                                               | NO       | AlertWise                                      |                                                                                                         |
 | ADMIN_URL_PATH                    | Custom URL path for the admin dashboard. Do not use admin or an easy to guess path. Should be one word and can include an hyphen. DO NOT include any slashes at the start or the end.                                            | NO       | alertwise-admin                                |                                                                                                         |
 | TIME_ZONE                         | A string representing the time zone for this installation. See the list of time zones. Set this to your country timezone                                                                                                         | NO       | UTC                                            | [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)          |
-| ALLOWED_HOSTS                     | A list of strings representing the host/domain names that this Django site can serve. This is a security measure to prevent HTTP Host header attacks, which are possible even under many seemingly-safe web server configuration | NO       | *                                              | [Django Allowed Hosts](https://docs.djangoproject.com/en/4.2/ref/settings/#std-setting-ALLOWED_HOSTS)   |
-| CSRF_TRUSTED_ORIGINS              | A list of trusted origins for unsafe requests (e.g. POST).                                                                                                                                                                       | NO       | []                                             | [Django CSRF_TRUSTED_ORIGINS](https://docs.djangoproject.com/en/dev/ref/settings/#csrf-trusted-origins) |
+| ALLOWED_HOSTS                     | A list of strings representing the host/domain names that this Django site can serve. This is a security measure to prevent HTTP Host header attacks, which are possible even under many seemingly-safe web server configuration | NO       | 127.0.0.1,localhost                            | [Django Allowed Hosts](https://docs.djangoproject.com/en/4.2/ref/settings/#std-setting-ALLOWED_HOSTS)   |
+| CSRF_TRUSTED_ORIGINS              | A list of trusted origins for unsafe requests (e.g. POST).                                                                                                                                                                       | NO       | http://127.0.0.1,http://localhost              | [Django CSRF_TRUSTED_ORIGINS](https://docs.djangoproject.com/en/dev/ref/settings/#csrf-trusted-origins) |
 | DJANGO_ADMINS                     | A list of all the people who get alertwise error notifications, in format "Name <name@example.com>, Another Name <another@example.com>"                                                                                          | NO       |                                                |                                                                                                         |
 | WAGTAILADMIN_BASE_URL             | This is the base URL used by the Wagtail admin site. It is typically used for generating URLs to include in notification emails.                                                                                                 | NO       |                                                |                                                                                                         |
 | LANGUAGE_CODE                     | The language code for the system. Available codes are `en` for English, `fr` from French, `ar` for Arabic, `am` for Amharic, `es` for Spanish, `sw` for Swahili. Default is `en` if not set                                      | NO       | en                                             |                                                                                                         |
