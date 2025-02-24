@@ -1,8 +1,12 @@
 import json
 import logging
 
+from alertwise.capeditor.cap_settings import CapSetting
+from alertwise.capeditor.models import AbstractCapAlertPage, CapAlertPageForm
 from django.conf import settings
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.serializers.json import DjangoJSONEncoder
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.template.defaultfilters import truncatechars
 from django.urls import reverse
@@ -20,8 +24,6 @@ from wagtail.images import get_image_model
 from wagtail.models import Page
 from wagtail.signals import page_published
 
-from alertwise.capeditor.cap_settings import CapSetting
-from alertwise.capeditor.models import AbstractCapAlertPage, CapAlertPageForm
 from .external_feed.models import ExternalAlertFeed, ExternalAlertFeedEntry
 from .mixins import MetadataPageMixin
 from .mqtt.models import CAPAlertMQTTBroker, CAPAlertMQTTBrokerEvent
@@ -63,13 +65,21 @@ class CapAlertListPage(MetadataPageMixin, Page):
     
     heading = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Alerts Heading"))
     
+    alerts_infos_per_page = models.PositiveIntegerField(default=10, validators=[
+        MinValueValidator(6),
+        MaxValueValidator(20),
+    ], help_text=_("Number of alerts to show per page"))
+    
     content_panels = Page.content_panels + [
         FieldPanel("heading"),
+        FieldPanel("alerts_infos_per_page"),
     ]
     
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         cap_rss_feed_url = get_full_url(request, reverse("cap_alert_feed"))
+        
+        current_page = request.GET.get("page", 1)
         
         site = self.get_site()
         
@@ -80,10 +90,20 @@ class CapAlertListPage(MetadataPageMixin, Page):
         other_cap_settings = OtherCAPSettings.for_site(site)
         default_alert_display_language = other_cap_settings.default_alert_display_language
         
-        alerts = get_all_published_alerts().child_of(self)
+        queryset = get_all_published_alerts().child_of(self)
+        
+        paginator = Paginator(queryset, self.alerts_infos_per_page)
+        
+        try:
+            page_obj = paginator.page(current_page)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+        
         alert_infos = []
         
-        for alert in alerts:
+        for alert in page_obj.object_list:
             infos = alert.infos
             default_info = infos[0]
             
@@ -113,12 +133,13 @@ class CapAlertListPage(MetadataPageMixin, Page):
         
         alerts_by_expiry = {
             "active_alerts": active_alerts,
-            "past_alerts": past_alerts
+            "past_alerts": past_alerts,
         }
         
         context.update({
             "alerts_by_expiry": alerts_by_expiry,
             "filters": self.get_filters(alert_infos),
+            "pagination": page_obj,
         })
         
         return context
