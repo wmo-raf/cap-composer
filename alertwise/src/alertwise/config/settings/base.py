@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.gis",
+    'django.contrib.sitemaps',
     
     "django_deep_translator",
     "dbbackup",
