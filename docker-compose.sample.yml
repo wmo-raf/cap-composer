@@ -1,15 +1,15 @@
 x-alertwise-variables: &alertwise-variables
   WAIT_HOSTS: alertwise_db:5432,alertwise_redis:6379
   WAIT_TIMEOUT: 120
-  GUNICORN_NUM_OF_WORKERS: ${GUNICORN_NUM_OF_WORKERS:-4}
-  GUNICORN_TIMEOUT: ${CMS_GUNICORN_TIMEOUT:-300}
+  ALERTWISE_NUM_OF_GUNICORN_WORKERS: ${GUNICORN_NUM_OF_WORKERS:-4}
+  ALERTWISE_NUM_OF_CELERY_WORKERS: ${CELERY_NUM_OF_WORKERS:-4}
   DEBUG: ${ALERTWISE_DEBUG:-False}
   WAGTAIL_SITE_NAME: ${SITE_NAME:-}
-  ADMIN_URL_PATH: ${ADMIN_URL_PATH:-admin}
+  ADMIN_URL_PATH: ${ADMIN_URL_PATH:-alertwise-admin}
   TIME_ZONE: ${TIME_ZONE:-UTC}
   SECRET_KEY: ${SECRET_KEY:?}
-  ALLOWED_HOSTS: ${ALLOWED_HOSTS:-*}
-  CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS}
+  ALLOWED_HOSTS: ${ALLOWED_HOSTS:-127.0.0.1,localhost}
+  CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-http://127.0.0.1,http://localhost}
   DATABASE_URL: postgis://${DB_USER}:${DB_PASSWORD}@alertwise_db:5432/${DB_NAME}
   REDIS_URL: redis://:${REDIS_PASSWORD:?}@alertwise_redis:6379/0
   EMAIL_SMTP: ${EMAIL_SMTP:-}
@@ -85,7 +85,6 @@ services:
       - ${STATIC_VOLUME_PATH}:/alertwise/app/src/alertwise/static
       - ${MEDIA_VOLUME_PATH}:/alertwise/app/src/alertwise/media
       - ${BACKUP_VOLUME_PATH}:/alertwise/app/src/alertwise/backup
-      - ${SSL_VOLUME_PATH:-./ssl}:/etc/ssl:ro
 
   alertwise_celery_worker:
     image: alertwise_celery_worker
@@ -141,9 +140,3 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - ${ALERTWISE_WEB_PROXY_PORT:-80}:80
-
-
-networks:
-  default:
-    external: true
-    name: ${DOCKER_NETWORK_NAME:-alertwise}

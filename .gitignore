@@ -109,3 +109,6 @@ media
 alertwise/src/alertwise/static
 .DS_Store
 docker/volumes
+docker-compose.yml
+nginx/nginx.conf
+nginx/ssl/ssl.conf

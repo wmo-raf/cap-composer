@@ -9,12 +9,16 @@ set -euo pipefail
 MIGRATE_ON_STARTUP=${MIGRATE_ON_STARTUP:-true}
 COLLECT_STATICFILES_ON_STARTUP=${COLLECT_STATICFILES_ON_STARTUP:-true}
 
-ALERTWISE_LOG_LEVEL=${ALERTWISE_LOG_LEVEL:-INFO}
-GUNICORN_NUM_OF_WORKERS=${GUNICORN_NUM_OF_WORKERS:-}
+ALERTWISE_NUM_OF_GUNICORN_WORKERS=${ALERTWISE_NUM_OF_GUNICORN_WORKERS:-}
+ALERTWISE_NUM_OF_CELERY_WORKERS=${ALERTWISE_NUM_OF_CELERY_WORKERS:-}
 
+ALERTWISE_LOG_LEVEL=${ALERTWISE_LOG_LEVEL:-INFO}
 ALERTWISE_CELERY_BEAT_DEBUG_LEVEL=${ALERTWISE_CELERY_BEAT_DEBUG_LEVEL:-INFO}
 
 ALERTWISE_PORT="${ALERTWISE_PORT:-8000}"
+
+# get the current version of the app
+ALERTWISE_APP_VERSION=$(PYTHONPATH=/alertwise/app/src/alertwise python -c "import version; print(version.__version__)")
 
 show_help() {
     echo """
@@ -77,8 +81,8 @@ start_celery_worker() {
 
     EXTRA_CELERY_ARGS=()
 
-    if [[ -n "$GUNICORN_NUM_OF_WORKERS" ]]; then
-        EXTRA_CELERY_ARGS+=(--concurrency "$GUNICORN_NUM_OF_WORKERS")
+    if [[ -n "$ALERTWISE_NUM_OF_CELERY_WORKERS" ]]; then
+        EXTRA_CELERY_ARGS+=(--concurrency "$ALERTWISE_NUM_OF_CELERY_WORKERS")
     fi
     exec celery -A alertwise worker "${EXTRA_CELERY_ARGS[@]}" -l INFO "$@"
 }
@@ -109,7 +113,7 @@ run_server() {
     #    why we set worker-tmp-dir to /dev/shm by default.
     # 2. Log to stdout
     # 3. Log requests to stdout
-    exec gunicorn --workers="$GUNICORN_NUM_OF_WORKERS" \
+    exec gunicorn --workers="$ALERTWISE_NUM_OF_GUNICORN_WORKERS" \
         --worker-tmp-dir "${TMPDIR:-/dev/shm}" \
         --log-file=- \
         --access-logfile=- \
@@ -128,7 +132,7 @@ setup_otel_vars(){
 
   if [[ -n "${OTEL_RESOURCE_ATTRIBUTES:-}" ]]; then
     # If the container has been launched with some extra otel attributes, make sure not
-    # to override them with our Climtech specific ones.
+    # to override them with our Alertwise specific ones.
     OTEL_RESOURCE_ATTRIBUTES="${EXTRA_OTEL_RESOURCE_ATTRIBUTES},${OTEL_RESOURCE_ATTRIBUTES}"
   else
     OTEL_RESOURCE_ATTRIBUTES="$EXTRA_OTEL_RESOURCE_ATTRIBUTES"
@@ -150,9 +154,6 @@ fi
 
 # activate virtualenv
 source /alertwise/venv/bin/activate
-
-# get the current version of the app
-ALERTWISE_APP_VERSION=$(python /alertwise/app/src/alertwise/manage.py get_alertwise_version)
 
 show_startup_banner
 
@@ -194,6 +195,10 @@ shell)
 celery-worker)
     export OTEL_SERVICE_NAME="alertwise-celery-worker"
     start_celery_worker -Q celery -n default-worker@%h "${@:2}"
+    ;;
+celery-worker-healthcheck)
+    echo "Running celery worker healthcheck..."
+    exec celery -A alertwise inspect ping -d "default-worker@$HOSTNAME" -t 10 "${@:2}"
     ;;
 celery-beat)
     export OTEL_SERVICE_NAME="alertwise-celery-beat"

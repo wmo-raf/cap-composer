@@ -18,6 +18,7 @@ import dj_database_url
 import environ
 
 from alertwise import VERSION
+from alertwise.config.telemetry.utils import otel_is_enabled
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
     "wagtail.contrib.styleguide",
+    "wagtail.contrib.sitemaps",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -78,6 +80,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.gis",
+    'django.contrib.sitemaps',
     
     "django_deep_translator",
     "dbbackup",
@@ -93,6 +96,9 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
+
+if otel_is_enabled():
+    MIDDLEWARE += ["alertwise.config.telemetry.middleware.OTELMiddleware"]
 
 ROOT_URLCONF = "alertwise.config.urls"
 
@@ -217,7 +223,10 @@ WAGTAILSEARCH_BACKENDS = {
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-WAGTAILADMIN_BASE_URL = "http://example.com"
+WAGTAILADMIN_BASE_URL = env.str("WAGTAILADMIN_BASE_URL", "http://localhost")
+
+ADMIN_URL_PATH = env.str("ADMIN_URL_PATH", "alertwise-admin")
+DJANGO_ADMIN_URL_PATH = env.str("DJANGO_ADMIN_URL_PATH", default="alertwise-django-admin")
 
 # Allowed file extensions for documents in the document library.
 # This can be omitted to allow all files, but note that this may present a security risk

@@ -42,9 +42,26 @@ http {
     proxy_send_timeout 600s;
     proxy_read_timeout 600s;
 
+    ### uncomment below for ssl
+    #server {
+    #    listen 80;
+    #    server_name domain.tld www.domain.tld;
+    #    return 301 https://www.domain.tld$request_uri;
+    #}
+
+    #server {
+    #    listen 443 ssl;
+    #    server_name domain.tld;
+    #   include /etc/nginx/ssl/ssl.conf;
+    #   return 301 https://www.domain.tld$request_uri;
+    #}
+
+
     server {
         listen 80;
         server_name _;
+
+        # include /etc/nginx/ssl/ssl.conf;
 
         proxy_busy_buffers_size 512k;
         proxy_buffers 4 512k;
