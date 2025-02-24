@@ -120,6 +120,9 @@ docker-compose exec alertwise alertwise createsuperuser
 
 #### Standalone Environment Variables
 
+For a quick start, only 3 environment variables are required: `SECRET_KEY`, `DB_PASSWORD`, and `REDIS_PASSWORD`. The
+rest are optional and can be configured as required.
+
 | Variable                          | Description                                                                                                                                                                                                                      | Required | Default                                        | More Details                                                                                            |
 |-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------|---------------------------------------------------------------------------------------------------------|
 | SECRET_KEY                        | A unique secret key for securing your Django application. It’s used for encryption and signing. Do not share this key!                                                                                                           | YES      |                                                |                                                                                                         |
