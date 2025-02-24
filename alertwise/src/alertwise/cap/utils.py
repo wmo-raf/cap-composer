@@ -2,17 +2,19 @@ import io
 import json
 import tempfile
 from datetime import datetime
-from importlib import import_module
+from urllib.parse import urlsplit
 
 import pytz
 import requests
 import weasyprint
+from alertwise.capeditor.models import CapSetting
+from alertwise.capeditor.renderers import CapXMLRenderer
 from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
 from django.core.files.base import ContentFile
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.encoding import force_str
 from lxml import etree
 from pdf2image import convert_from_path
 from wagtail.api.v2.utils import get_full_url
@@ -22,8 +24,6 @@ from wagtail.images import get_image_model
 from wagtail.models import Site
 from wagtailcache.cache import clear_cache
 
-from alertwise.capeditor.models import CapSetting
-from alertwise.capeditor.renderers import CapXMLRenderer
 from .constants import DEFAULT_STYLE, CAP_LAYERS
 from .exceptions import CAPAlertImportError
 from .sign import sign_cap_xml
@@ -474,3 +474,14 @@ def get_first_page_of_pdf_as_image(file_path, title, file_name):
             return image
     
     return None
+
+
+def get_full_url_by_site(site, path):
+    base_url = site.root_url
+    
+    # We only want the scheme and netloc
+    base_url_parsed = urlsplit(force_str(base_url))
+    
+    base_url = base_url_parsed.scheme + "://" + base_url_parsed.netloc
+    
+    return base_url + path
