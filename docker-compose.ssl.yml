@@ -84,6 +84,7 @@ services:
       - ${STATIC_VOLUME_PATH}:/alertwise/app/src/alertwise/static
       - ${MEDIA_VOLUME_PATH}:/alertwise/app/src/alertwise/media
       - ${BACKUP_VOLUME_PATH}:/alertwise/app/src/alertwise/backup
+      - ${SSL_VOLUME_PATH:-./ssl}:/etc/ssl:ro
 
   alertwise_celery_worker:
     image: alertwise_celery_worker
@@ -134,8 +135,10 @@ services:
     image: nginx:1.20.2-alpine
     restart: unless-stopped
     volumes:
+      - ./nginx/nginx.ssl.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
       - ${STATIC_VOLUME_PATH}:/wagtail_static
       - ${MEDIA_VOLUME_PATH}:/wagtail_media
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ${SSL_VOLUME_PATH:-./ssl}:/etc/ssl:ro
     ports:
       - ${ALERTWISE_WEB_PROXY_PORT:-80}:80

@@ -196,6 +196,10 @@ celery-worker)
     export OTEL_SERVICE_NAME="alertwise-celery-worker"
     start_celery_worker -Q celery -n default-worker@%h "${@:2}"
     ;;
+celery-worker-healthcheck)
+    echo "Running celery worker healthcheck..."
+    exec celery -A alertwise inspect ping -d "default-worker@$HOSTNAME" -t 10 "${@:2}"
+    ;;
 celery-beat)
     export OTEL_SERVICE_NAME="alertwise-celery-beat"
     exec celery -A alertwise beat -l "${ALERTWISE_CELERY_BEAT_DEBUG_LEVEL}" -S django_celery_beat.schedulers:DatabaseScheduler "${@:2}"
