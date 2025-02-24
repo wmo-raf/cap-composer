@@ -82,7 +82,7 @@ cp nginx/nginx.conf.sample nginx/nginx.conf
 6. **Copy the docker-compose file**
 
 ```shell
-cp docker compose.sample.yml docker-compose.yml
+cp docker-compose.sample.yml docker-compose.yml
 ```
 
 7. **Build the Docker containers**
