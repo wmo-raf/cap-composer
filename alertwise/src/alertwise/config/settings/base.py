@@ -18,6 +18,7 @@ import dj_database_url
 import environ
 
 from alertwise import VERSION
+from alertwise.config.telemetry.utils import otel_is_enabled
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -93,6 +94,9 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
+
+if otel_is_enabled():
+    MIDDLEWARE += ["alertwise.config.telemetry.middleware.OTELMiddleware"]
 
 ROOT_URLCONF = "alertwise.config.urls"
 
