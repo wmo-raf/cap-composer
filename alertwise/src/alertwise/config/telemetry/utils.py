@@ -157,10 +157,10 @@ def alertwise_trace(tracer):
 def add_alertwise_trace_attrs(**kwargs):
     """
     Simple helper function for quickly adding attributes to the current span. The
-    attribute names will be prefixed with the baserow. to namespace them properly.
+    attribute names will be prefixed with alertwise. to namespace them properly.
 
     :param kwargs: Key value pairs, the key will be the attr name prefixed with
-        baserow. and the value will be the span attribute value.
+        alertwise. and the value will be the span attribute value.
     """
     
     span = get_current_span()
