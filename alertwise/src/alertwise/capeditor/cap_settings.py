@@ -1,6 +1,15 @@
 import json
 
+from alertwise.capeditor.blocks import (
+    ContactBlock
+)
+from alertwise.capeditor.forms.widgets import (
+    HazardEventTypeWidget,
+    MultiPolygonWidget,
+    GeojsonFileLoaderWidget
+)
 from django.contrib.gis.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
@@ -11,15 +20,6 @@ from wagtail.fields import StreamField
 from wagtail.models import Orderable
 from wagtailiconchooser.widgets import IconChooserWidget
 from wagtailmodelchooser import register_model_chooser
-
-from alertwise.capeditor.blocks import (
-    ContactBlock
-)
-from alertwise.capeditor.forms.widgets import (
-    HazardEventTypeWidget,
-    MultiPolygonWidget,
-    GeojsonFileLoaderWidget
-)
 
 
 @register_setting
@@ -46,6 +46,11 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
                                                    help_text=_("GeoJSON file of the UN Country Boundary. Setting this"
                                                                " will enable the UN Country Boundary check in the alert"
                                                                "drawing tools"))
+    num_of_latest_alerts_in_feed = models.PositiveIntegerField(default=5, validators=[
+        MinValueValidator(1),
+        MaxValueValidator(50),
+    ], verbose_name=_("Number of latest Alerts to show in the XML CAP Feed"), help_text=_("Set a smaller number to "
+                                                                                          "improve perfomance for aggregators"))
     
     class Meta:
         verbose_name = _("CAP Settings")
@@ -74,6 +79,9 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
                        widget=GeojsonFileLoaderWidget(
                            attrs={"resize_trigger_selector": ".w-tabs__tab.map-resize-trigger"})),
         ], heading=_("UN Boundary"), classname="map-resize-trigger"),
+        ObjectList([
+            FieldPanel("num_of_latest_alerts_in_feed"),
+        ], heading=_("Other Settings")),
     ])
     
     @property
