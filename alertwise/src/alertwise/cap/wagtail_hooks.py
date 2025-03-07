@@ -309,9 +309,22 @@ def copy_cap_alert_page(request, page):
             request.POST or None, user=request.user, page=page, can_publish=can_publish
         )
         
-        # Remove the publish_copies and alias fields from the form
-        form.fields.pop("publish_copies")
-        form.fields.pop("alias")
+        copy_form_fields_to_exclude = [
+            "publish_copies",
+            "alias",
+        ]
+        
+        for field in copy_form_fields_to_exclude:
+            if form.fields.get(field):
+                form.fields.pop(field)
+        
+        alert_page_fields_to_exclude = [
+            "alert_area_map_image",
+            "alert_pdf_preview",
+            "expires",
+            "search_image",
+            "search_description",
+        ]
         
         # Check if user is submitting
         if request.method == "POST":
@@ -336,7 +349,9 @@ def copy_cap_alert_page(request, page):
                     keep_live=False,
                     copy_revisions=False,
                     user=request.user,
+                    exclude_fields=alert_page_fields_to_exclude,
                 )
+                
                 new_page = action.execute()
                 
                 messages.success(
