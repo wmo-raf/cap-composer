@@ -1,0 +1,30 @@
+name: test docker deployment ⚙️
+
+on: [ push, pull_request ]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: setup environment
+      run: |
+        echo "UID=1000" > .env
+        echo "GID=1000" >> .env
+        echo "SECRET_KEY=testing123" >> .env
+        echo "DB_PASSWORD=testing123" >> .env
+        echo "REDIS_PASSWORD=testing123" >> .env
+        echo "CAP_COMPOSER_WEB_PROXY_PORT=8765" >> .env
+        cp docker-compose.sample.yml docker-compose.yml
+    - name: docker compose build
+      run: |
+        docker compose build
+    - name: docker compose up, sleep 60 seconds and check status
+      run: |
+        docker compose up -d
+        sleep 60
+        docker ps
+    - name: check if the web server is running
+      run: |
+        curl -s http://localhost:8785

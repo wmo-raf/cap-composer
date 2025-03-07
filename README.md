@@ -1,4 +1,4 @@
-# Alertwise
+# cap_composer
 
 A [Wagtail](https://wagtail.io/)
 based [Common Alerting Protocol](https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html) (CAP) Warning
@@ -37,26 +37,26 @@ at http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
 
 ## 🛠️ Installation
 
-Alertwise can be installed in two ways:
+The WMO CAP Composer can be installed in two ways:
 
 1. As a standalone complete Wagtail project
-2. As a set of Wagtail apps that can be integrated into an existing Wagtail project
+2. As a set of Wagtail apps that can be integrated into an existing Wagtail project (such as ClimWeb)
 
 ### Standalone Installation
 
-This option will set up a Wagtail project together with the complete components required to run Alertwise. Use this when
-you want to have Alertwise as a standalone project, and not a component in a bigger project.
+This option will set up a Wagtail project together with the complete components required to run the WMO CAP Composer. Use this when
+you want to use the WMP CAP composer outside of an existing Wagtail project such as ClimWeb.
 
 1. **Clone the repository**
 
 ```shell
-git clone https://github.com/wmo-raf/alertwise.git
+git clone https://github.com/World-Meteorological-Organization/cap_composer.git
 ```
 
 2. **Change into the project directory**
 
 ```shell
-cd alertwise
+cd cap_composer
 ```
 
 3. **Copy the sample environment file**
@@ -108,21 +108,21 @@ docker compose logs -f
 In case of any errors, see the troubleshooting section below for some helpful
 tips [Troubleshooting standalone installation](#troubleshooting-standalone-installation)
 
-10. **Access the application at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>`**. Replace `<ip_or_domain>` with the
+10. **Access the application at `http://<ip_or_doman>:<CAP_COMPOSER_WEB_PROXY_PORT>`**. Replace `<ip_or_domain>` with the
     IP
-    address or domain name of your server, and `<ALERTWISE_WEB_PROXY_PORT>` with the port set in the `.env` file or `80`
+    address or domain name of your server, and `<CAP_COMPOSER_WEB_PROXY_PORT>` with the port set in the `.env` file or `80`
     if not set.
 
 11. **Create a superuser to access the admin dashboard**
 
 ```shell
-docker compose exec alertwise alertwise createsuperuser
+docker compose exec cap_composer cap_composer createsuperuser
 ```
 
-`alertwise` is a shortcut command to `python manage.py` in the Docker container.
+`cap_composer` is a shortcut command to `python manage.py` in the Docker container.
 
-12. **Access the admin dashboard at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>/<ADMIN_URL_PATH>`**. Replace
-    `<ADMIN_URL_PATH>` with the path set in the `.env` file or `alertwise-admin` if not set.
+12. **Access the admin dashboard at `http://<ip_or_doman>:<CAP_COMPOSER_WEB_PROXY_PORT>/<ADMIN_URL_PATH>`**. Replace
+    `<ADMIN_URL_PATH>` with the path set in the `.env` file or `cap_composer-admin` if not set.
 
 #### Standalone Environment Variables
 
@@ -139,25 +139,25 @@ The rest are optional and can be configured as required.
 | Variable                          | Description                                                                                                                                                                                                                      | Required | Default                                        | More Details                                                                                            |
 |-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------|---------------------------------------------------------------------------------------------------------|
 | SECRET_KEY                        | A unique secret key for securing your Django application. It’s used for encryption and signing. Do not share this key!                                                                                                           | YES      |                                                |                                                                                                         |
-| DB_PASSWORD                       | Password for Alertwise database                                                                                                                                                                                                  | YES      |                                                |                                                                                                         |
-| DB_USER                           | Username for Alertwise database                                                                                                                                                                                                  | NO       | alertwise                                      |                                                                                                         |
-| DB_NAME                           | Name of the Alertwise database                                                                                                                                                                                                   | NO       | alertwise                                      |                                                                                                         |
-| REDIS_PASSWORD                    | Password for Alertwise Redis Server                                                                                                                                                                                              | YES      |                                                |                                                                                                         |
+| DB_PASSWORD                       | Password for cap_composer database                                                                                                                                                                                                  | YES      |                                                |                                                                                                         |
+| DB_USER                           | Username for cap_composer database                                                                                                                                                                                                  | NO       | cap_composer                                      |                                                                                                         |
+| DB_NAME                           | Name of the cap_composer database                                                                                                                                                                                                   | NO       | cap_composer                                      |                                                                                                         |
+| REDIS_PASSWORD                    | Password for cap_composer Redis Server                                                                                                                                                                                              | YES      |                                                |                                                                                                         |
 | GUNICORN_NUM_OF_WORKERS           | Number of workers for Gunicorn. Recommended value should be `(2 x $num_cores) + 1` . For example, if your server has `4 CPU Cores`, this value should be set to `9`, which is the result of `(2 x 4) + 1 = 9`                    | NO       | 4                                              |                                                                                                         |
 | CELERY_NUM_OF_WORKERS             | Number of worker processes for Celery.                                                                                                                                                                                           | NO       | 4                                              |                                                                                                         |
 | DEBUG                             | A boolean that turns on/off debug mode. Never deploy a site into production with DEBUG turned on                                                                                                                                 | NO       | False                                          |                                                                                                         |
-| WAGTAIL_SITE_NAME                 | The human-readable name of your installation which welcomes users upon login to the Wagtail admin.                                                                                                                               | NO       | AlertWise                                      |                                                                                                         |
-| ADMIN_URL_PATH                    | Custom URL path for the admin dashboard. Do not use admin or an easy to guess path. Should be one word and can include an hyphen. DO NOT include any slashes at the start or the end.                                            | NO       | alertwise-admin                                |                                                                                                         |
+| WAGTAIL_SITE_NAME                 | The human-readable name of your installation which welcomes users upon login to the Wagtail admin.                                                                                                                               | NO       | cap_composer                                      |                                                                                                         |
+| ADMIN_URL_PATH                    | Custom URL path for the admin dashboard. Do not use admin or an easy to guess path. Should be one word and can include an hyphen. DO NOT include any slashes at the start or the end.                                            | NO       | cap_composer-admin                                |                                                                                                         |
 | TIME_ZONE                         | A string representing the time zone for this installation. See the list of time zones. Set this to your country timezone                                                                                                         | NO       | UTC                                            | [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)          |
 | ALLOWED_HOSTS                     | A list of strings representing the host/domain names that this Django site can serve. This is a security measure to prevent HTTP Host header attacks, which are possible even under many seemingly-safe web server configuration | NO       | 127.0.0.1,localhost                            | [Django Allowed Hosts](https://docs.djangoproject.com/en/4.2/ref/settings/#std-setting-ALLOWED_HOSTS)   |
 | CSRF_TRUSTED_ORIGINS              | A list of trusted origins for unsafe requests (e.g. POST).                                                                                                                                                                       | NO       | http://127.0.0.1,http://localhost              | [Django CSRF_TRUSTED_ORIGINS](https://docs.djangoproject.com/en/dev/ref/settings/#csrf-trusted-origins) |
-| DJANGO_ADMINS                     | A list of all the people who get alertwise error notifications, in format "Name <name@example.com>, Another Name <another@example.com>"                                                                                          | NO       |                                                |                                                                                                         |
+| DJANGO_ADMINS                     | A list of all the people who get cap_composer error notifications, in format "Name <name@example.com>, Another Name <another@example.com>"                                                                                          | NO       |                                                |                                                                                                         |
 | WAGTAILADMIN_BASE_URL             | This is the base URL used by the Wagtail admin site. It is typically used for generating URLs to include in notification emails.                                                                                                 | NO       |                                                |                                                                                                         |
 | LANGUAGE_CODE                     | The language code for the system. Available codes are `en` for English, `fr` from French, `ar` for Arabic, `am` for Amharic, `es` for Spanish, `sw` for Swahili. Default is `en` if not set                                      | NO       | en                                             |                                                                                                         |
 | CAP_CERT_PATH                     | 	Path to the CAP XML signing certificate                                                                                                                                                                                         | NO       |                                                |                                                                                                         |
 | CAP_PRIVATE_KEY_PATH              | Path to the CAP XML signing private key                                                                                                                                                                                          | NO       |                                                |                                                                                                         |
 | CAP_SIGNATURE_METHOD              | Method used for CAP XML signing                                                                                                                                                                                                  | NO       | ECDSA_SHA256                                   |                                                                                                         |
-| ALERTWISE_WEB_PROXY_PORT          | External Docker port for the Alertwise Nginx web server                                                                                                                                                                          | NO       | 80                                             |                                                                                                         |
+| CAP_COMPOSER_WEB_PROXY_PORT          | External Docker port for the cap_composer Nginx web server                                                                                                                                                                          | NO       | 80                                             |                                                                                                         |
 | EMAIL_SMTP                        | Enables SMTP for sending emails. If set to a non empty variable, configure the `EMAIL_SMTP_*` variables below                                                                                                                    | NO       |                                                |                                                                                                         |
 | EMAIL_SMTP_HOST                   | SMTP server host for sending emails                                                                                                                                                                                              | NO       |                                                |                                                                                                         |
 | EMAIL_SMTP_PORT                   | SMTP email port                                                                                                                                                                                                                  | NO       |                                                |                                                                                                         |
@@ -169,13 +169,13 @@ The rest are optional and can be configured as required.
 | BACKUP_VOLUME_PATH                | Path to the mounted volume for backups                                                                                                                                                                                           | NO       | ./docker/volumes/backup                        |                                                                                                         |
 | STATIC_VOLUME_PATH                | Path to the mounted volume for static files                                                                                                                                                                                      | NO       | ./docker/volumes/static                        |                                                                                                         |
 | MEDIA_VOLUME_PATH                 | Path to the mounted volume for media files                                                                                                                                                                                       | NO       | ./docker/volumes/media                         |                                                                                                         |
-| ALERTWISE_ENABLE_OTEL             | Enables OpenTelemetry for monitoring and tracing                                                                                                                                                                                 | NO       |                                                |                                                                                                         |
+| CAP_COMPOSER_ENABLE_OTEL             | Enables OpenTelemetry for monitoring and tracing                                                                                                                                                                                 | NO       |                                                |                                                                                                         |
 | OTEL_EXPORTER_OTLP_ENDPOINT       | Endpoint for OpenTelemetry data export                                                                                                                                                                                           | NO       |                                                |                                                                                                         |
 | OTEL_RESOURCE_ATTRIBUTES          | Attributes for OpenTelemetry resources                                                                                                                                                                                           | NO       |                                                |                                                                                                         |
 | OTEL_TRACES_SAMPLER               | Sampling method for OpenTelemetry traces                                                                                                                                                                                         | NO       | traceidratio                                   |                                                                                                         |
 | OTEL_TRACES_SAMPLER_ARG           | Specifies the sampling rate or configuration for the chosen sampler. The value depends on the sampler type defined in `OTEL_TRACES_SAMPLER`                                                                                      | NO       | 0.1                                            |                                                                                                         |
 | OTEL_PER_MODULE_SAMPLER_OVERRIDES | Custom sampling rules for specific modules                                                                                                                                                                                       | NO       | opentelemetry.instrumentation.django=always_on |                                                                                                         |
-| ALERTWISE_DEPLOYMENT_ENV          | Deployment environment (e.g., production, staging)                                                                                                                                                                               | NO       | production                                     |                                                                                                         |
+| CAP_COMPOSER_DEPLOYMENT_ENV          | Deployment environment (e.g., production, staging)                                                                                                                                                                               | NO       | production                                     |                                                                                                         |
 | UID                               | User ID for the Docker container                                                                                                                                                                                                 | NO       | User ID for the Docker container               |                                                                                                         |U
 | GID                               | Group ID for the Docker container                                                                                                                                                                                                | NO       | Group ID for the Docker container              |                                                                                                         |
 | WAGTAIL_2FA_REQUIRED              | Enforces Two-Factor Authentication (2FA). When enabled, admin users must setup 2FA to login. Administrators can also enforce 2FA for a specific group                                                                            | NO       | False                                          |                                                                                                         |
@@ -200,7 +200,7 @@ The rest are optional and can be configured as required.
    for the db container is `1000:1000`. You can assign the correct permissions to the volume path by running:
    `sudo chown -R 1000:1000  ./docker/volumes/db`, or the custom path if changed.
 4. **Static/media/backup volume permission errors**: The same as above, ensure the `STATIC_VOLUME_PATH`,
-   `MEDIA_VOLUME_PATH`, and `BACKUP_VOLUME_PATH` are correctly set and the user running the alertwise containers has the
+   `MEDIA_VOLUME_PATH`, and `BACKUP_VOLUME_PATH` are correctly set and the user running the cap_composer containers has the
    correct permissions to read and write to these volume paths. This is the user set by the `UID` and `GID` environment.
    Set the correct permissions by running `sudo chown -R <UID>:<GID>  ./path/to/volume`, for all the volumes.
 

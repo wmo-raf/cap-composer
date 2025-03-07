@@ -12,9 +12,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # We might be running as a user which already exists in this image. In that situation
 # Everything is OK and we should just continue on.
-RUN groupadd -g $GID alertwise_docker_group || exit 0
-RUN useradd --shell /bin/bash -u $UID -g $GID -o -c "" -m alertwise_docker_user -l || exit 0
-ENV DOCKER_USER=alertwise_docker_user
+RUN groupadd -g $GID cap_composer_docker_group || exit 0
+RUN useradd --shell /bin/bash -u $UID -g $GID -o -c "" -m cap_composer_docker_user -l || exit 0
+ENV DOCKER_USER=cap_composer_docker_user
 
 ENV POSTGRES_VERSION=15
 
@@ -61,40 +61,40 @@ ADD https://github.com/ufoscout/docker-compose-wait/releases/download/$DOCKER_CO
 RUN chown $UID:$GID /wait &&  chmod +x /wait
 
 # Create directories and set correct permissions
-RUN mkdir -p /alertwise/app && chown -R $UID:$GID /alertwise
+RUN mkdir -p /cap_composer/app && chown -R $UID:$GID /cap_composer
 
 USER $UID:$GID
 
-COPY ./alertwise/requirements/standalone.txt /alertwise/requirements/
-RUN python3 -m venv /alertwise/venv
+COPY ./cap_composer/requirements/standalone.txt /cap_composer/requirements/
+RUN python3 -m venv /cap_composer/venv
 
 
-ENV PIP_CACHE_DIR=/tmp/alertwise_pip_cache
+ENV PIP_CACHE_DIR=/tmp/cap_composer_pip_cache
 # hadolint ignore=SC1091,DL3042
-RUN --mount=type=cache,mode=777,target=$PIP_CACHE_DIR,uid=$UID,gid=$GID . /alertwise/venv/bin/activate && \
-     pip3 install  -r /alertwise/requirements/standalone.txt
+RUN --mount=type=cache,mode=777,target=$PIP_CACHE_DIR,uid=$UID,gid=$GID . /cap_composer/venv/bin/activate && \
+     pip3 install  -r /cap_composer/requirements/standalone.txt
 
-COPY --chown=$UID:$GID ./alertwise /alertwise/app
+COPY --chown=$UID:$GID ./cap_composer /cap_composer/app
 
 # Create a tmp directory for the django to use
-RUN mkdir -p /alertwise/tmp && chown -R $UID:$GID /alertwise/tmp
+RUN mkdir -p /cap_composer/tmp && chown -R $UID:$GID /cap_composer/tmp
 
-WORKDIR /alertwise/app
+WORKDIR /cap_composer/app
 
 # Ensure that Python outputs everything that's printed inside
 # the application rather than buffering it.
 ENV PYTHONUNBUFFERED 1
 
-# install alertwise as a package
-RUN chmod a+x /alertwise/app/docker/docker-entrypoint.sh && \
-    /alertwise/venv/bin/pip install --no-cache-dir -e /alertwise/app/
+# install cap_composer as a package
+RUN chmod a+x /cap_composer/app/docker/docker-entrypoint.sh && \
+    /cap_composer/venv/bin/pip install --no-cache-dir -e /cap_composer/app/
 
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/bin/bash", "/alertwise/app/docker/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/bin/bash", "/cap_composer/app/docker/docker-entrypoint.sh"]
 
 # Add the venv to the path. This ensures that the venv is always activated when the container starts.
-ENV PATH="/alertwise/venv/bin:$PATH"
+ENV PATH="/cap_composer/venv/bin:$PATH"
 
-ENV DJANGO_SETTINGS_MODULE='alertwise.config.settings.production'
+ENV DJANGO_SETTINGS_MODULE='cap_composer.config.settings.production'
 
 CMD ["gunicorn"]
