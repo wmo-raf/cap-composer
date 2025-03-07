@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Build docker image cap_composer
         run: |
-          docker build -t cap_composer:test cap_composer
+          docker build -t cap_composer:test .
       - name: Run Trivy vulnerability scanner on cap_composer
         if: always()
         uses: aquasecurity/trivy-action@0.20.0

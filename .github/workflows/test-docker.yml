@@ -16,6 +16,8 @@ jobs:
         echo "DB_PASSWORD=testing123" >> .env
         echo "REDIS_PASSWORD=testing123" >> .env
         echo "CAP_COMPOSER_WEB_PROXY_PORT=8765" >> .env
+        echo "DB_USER=cap_composer" >> .env
+        echo "DB_NAME=cap_composer" >> .env
         cp docker-compose.sample.yml docker-compose.yml
     - name: docker compose build
       run: |
