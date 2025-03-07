@@ -25,31 +25,30 @@
                         {% endif %}
                     </div>
                 {% endif %}
-
                 <div class="columns is-multiline is-mobile">
                     <div class="column is-three-fifths-desktop is-full-touch alerts-list">
-                        <div class="alerts-group">
-                            <div class="group-title">
-                                {% translate "Active Alerts" %}
-                            </div>
-
-                            {% if alerts_by_expiry.active_alerts %}
-                                {% for alert_info in alerts_by_expiry.active_alerts %}
-                                    {% include "cap/include_alert_list_item.html" with alert_info=alert_info %}
-                                {% endfor %}
-                            {% else %}
-                                <div class="empty-alerts-state">
-                                    <div class="empty-alerts-icon">
-                                        {% svg_icon name="alert" %}
-                                    </div>
-                                    <div>
-                                        {% translate "No active alerts currently" %}
-                                    </div>
+                        {% if alerts_by_expiry.active_alerts or pagination.number == 1 %}
+                            <div class="alerts-group">
+                                <div class="group-title">
+                                    {% translate "Active Alerts" %}
                                 </div>
-                            {% endif %}
-                            {% include 'cap/pagination_include.html' with items=pagination %}
-                        </div>
 
+                                {% if alerts_by_expiry.active_alerts %}
+                                    {% for alert_info in alerts_by_expiry.active_alerts %}
+                                        {% include "cap/include_alert_list_item.html" with alert_info=alert_info %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="empty-alerts-state">
+                                        <div class="empty-alerts-icon">
+                                            {% svg_icon name="alert" %}
+                                        </div>
+                                        <div>
+                                            {% translate "No active alerts currently" %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
                         {% if  alerts_by_expiry.past_alerts %}
                             <div class="alerts-group">
                                 <div class="group-title">
@@ -60,9 +59,9 @@
                                 {% endfor %}
                             </div>
                         {% endif %}
+
+                        {% include 'cap/pagination_include.html' with items=pagination %}
                     </div>
-
-
                     <div class="column is-offset-1-desktop is-one-fifth-widescreen is-full-touch is-hidden-touch">
                         {% if filters.severity %}
                             <div class="alert-category-filter">
@@ -123,7 +122,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
 {% endblock %}
