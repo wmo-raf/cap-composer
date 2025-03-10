@@ -20,7 +20,8 @@ from .forms.fields import (
     BoundaryMultiPolygonField,
     PolygonOrMultiPolygonField
 )
-from .forms.widgets import CircleWidget
+from .forms.widgets import CircleWidget, EventCodeWidget
+from .oet_v1_2 import OASIS_EVENT_TERMS_AS_CHOICES
 from .serializers import parse_tz
 from .utils import file_path_mime
 
@@ -587,22 +588,19 @@ def get_language_choices(site=None):
     return choices
 
 
-class AlertInfo(blocks.StructBlock):
-    CATEGORY_CHOICES = (
-        ('Geo', _("Geophysical")),
-        ('Met', _("Meteorological")),
-        ('Safety', _("General emergency and public safety")),
-        ('Security', _("Law enforcement, military, homeland and local/private security")),
-        ('Rescue', _("Rescue and recovery")),
-        ('Fire', _("Fire suppression and rescue")),
-        ('Health', _("Medical and public health")),
-        ('Env', _("Pollution and other environmental")),
-        ('Transport', _("Public and private transportation")),
-        ('Infra', _("Utility, telecommunication, other non-transport infrastructure")),
-        ('CBRNE', _("Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat or attack")),
-        ('Other', _("Other events")),
-    )
+class EventCodeBlock(blocks.TextBlock):
+    def __init__(self, **kwargs):
+        self.choices = kwargs.pop('choices', [])
+        super().__init__(**kwargs)
     
+    @cached_property
+    def field(self):
+        field_kwargs = {"widget": EventCodeWidget(choices=self.choices)}
+        field_kwargs.update(self.field_options)
+        return forms.CharField(**field_kwargs)
+
+
+class AlertInfo(blocks.StructBlock):
     URGENCY_CHOICES = (
         ('Immediate', _("Immediate - Responsive action SHOULD be taken immediately")),
         ('Expected', _("Expected - Responsive action SHOULD be taken soon (within next hour)")),
@@ -626,13 +624,11 @@ class AlertInfo(blocks.StructBlock):
         ('Unlikely', _("Unlikely - Not expected to occur (percentage ~ 0)")),
         # ('Unknown', _("Unknown - Certainty unknown")),  Not recommended
     )
+    
     event = blocks.ChoiceBlock(choices=get_hazard_types, label=_("Event"),
                                help_text=_("The text denoting the type of the subject event of the alert message. You "
                                            "can define hazards events monitored by your institution from CAP settings"))
     
-    category = blocks.ChoiceBlock(choices=CATEGORY_CHOICES, default="Met", label=_("Category"),
-                                  help_text=_("The code denoting the category of the subject"
-                                              " event of the alert message"))
     language = blocks.ChoiceBlock(choices=get_language_choices, required=False, label=_("Language"),
                                   help_text=_("The code denoting the language of the alert message."
                                               "If not selected, 'en-US' will be used as default"), )
@@ -686,12 +682,14 @@ class AlertInfo(blocks.StructBlock):
                                                          "related to this alert information"))
     
     parameter = blocks.ListBlock(AlertInfoParameter(label=_("Parameter")), label=_("Parameters"), default=[])
-    eventCode = blocks.ListBlock(AlertEventCode(label=_("Event Code")), label=_("Event codes"), default=[])
     
     # NOTE: web attribute is obtained from the url of the page
     class Meta:
         value_class = AlertInfoStructValue
         label_format = "({language}) {event}"
+    
+    class Media:
+        js = ("capeditor/js/alert_info.js",)
     
     def clean(self, value):
         result = super().clean(value)
