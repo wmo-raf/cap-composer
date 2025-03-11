@@ -26,7 +26,7 @@ from alertwise.capeditor.blocks import (
 )
 from alertwise.capeditor.constants import SEVERITY_MAPPING, URGENCY_MAPPING, CERTAINTY_MAPPING
 from .cap_settings import (CapSetting, HazardEventTypes, PredefinedAlertArea, AlertLanguage)
-from .utils import get_event_icon, format_date_to_oid
+from .utils import format_date_to_oid, get_event_info
 
 __all__ = [
     "AbstractCapAlertPage",
@@ -293,7 +293,6 @@ class AbstractCapAlertPage(Page):
     @cached_property
     def infos(self):
         site = self.get_site()
-        
         alert_infos = []
         for info in self.info:
             start_time = info.value.get("effective") or self.sent
@@ -321,8 +320,9 @@ class AbstractCapAlertPage(Page):
             expires = info.value.get('expires')
             url = self.url
             
-            event_icon = get_event_icon(event, site)
-            category = info.value.get('category')
+            event_info = get_event_info(event, site)
+            event_icon = event_info.get("icon")
+            category = event_info.get('category')
             if isinstance(category, list):
                 # get the first category
                 category = category[0]

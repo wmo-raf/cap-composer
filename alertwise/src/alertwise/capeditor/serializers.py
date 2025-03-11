@@ -4,7 +4,7 @@ from rest_framework import serializers
 from wagtail.api.v2.utils import get_full_url
 
 from alertwise.capeditor.constants import CAP_MESSAGE_ORDER_SEQUENCE
-from alertwise.capeditor.utils import order_dict_by_keys
+from alertwise.capeditor.utils import order_dict_by_keys, get_event_info
 
 
 def parse_tz(date_str):
@@ -57,6 +57,18 @@ class AlertSerializer(serializers.ModelSerializer):
         
         for info in obj.info:
             info_obj = info.block.get_api_representation(info.value)
+            
+            event = info_obj.get("event")
+            event_info = get_event_info(event, request=request)
+            
+            event_term = event_info.get("event_term")
+            
+            if event_term:
+                info_obj.update({"eventCode": {
+                    "valueName": event_term.get("term"),
+                    "value": event_term.get("code"),
+                }})
+            
             if info.value.resource:
                 resources = []
                 for resource in info.value.resource:

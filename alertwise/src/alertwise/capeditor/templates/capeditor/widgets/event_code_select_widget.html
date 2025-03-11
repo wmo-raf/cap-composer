@@ -1,0 +1,6 @@
+<div style="display: flex;align-items: center">
+    <select name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}
+            {% if widget.value != None %} data-value="{{ widget.value }}"{% endif %}
+            data-choices="{{ choices }}">
+    </select>
+</div>

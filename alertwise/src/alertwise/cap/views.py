@@ -2,7 +2,7 @@ import json
 
 from alertwise.capeditor.constants import SEVERITY_MAPPING
 from alertwise.capeditor.models import CapSetting
-from alertwise.capeditor.utils import get_event_icon
+from alertwise.capeditor.utils import get_event_info
 from django.contrib.syndication.views import Feed
 from django.core.validators import validate_email
 from django.http import JsonResponse, HttpResponse
@@ -261,11 +261,15 @@ def get_home_map_alerts(request):
         
         event = info.value.get('event')
         
+        event_info = get_event_info(event, request=request)
+        
+        event_icon = event_info.get("icon")
+        
         alert_info = {
             "status": status,
             "url": alert.url,
             "event": f"{event} ({area_desc})",
-            "event_icon": get_event_icon(event, request),
+            "event_icon": event_icon,
             "severity": SEVERITY_MAPPING[info.value.get("severity")]
         }
         

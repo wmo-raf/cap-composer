@@ -1,3 +1,6 @@
+import json
+from unicodedata import category
+
 from django.contrib.gis.forms import BaseGeometryWidget
 from django.contrib.gis.geometry import json_regex
 from django.forms import Textarea, Widget, TextInput, Media
@@ -6,6 +9,7 @@ from wagtail.telepath import register
 from wagtail.widget_adapters import WidgetAdapter
 
 from alertwise.capeditor.constants import WMO_HAZARD_EVENTS_TYPE_CHOICES
+from alertwise.capeditor.oet_v1_2 import OASIS_EVENT_TERMS_AS_CHOICES
 
 
 class BaseMapWidget(Widget):
@@ -15,6 +19,7 @@ class BaseMapWidget(Widget):
         context.update({
             "boundary_info_url": boundary_info_url
         })
+        
         return context
 
 
@@ -285,3 +290,31 @@ class GeojsonFileLoaderWidget(BaseGeometryWidget, BaseMapWidget):
         ]
         
         return Media(js=js, css=css)
+
+
+class EventCodeWidget(Textarea):
+    template_name = 'capeditor/widgets/event_code_select_widget.html'
+    
+    def build_attrs(self, *args, **kwargs):
+        attrs = super().build_attrs(*args, **kwargs)
+        attrs['data-controller'] = 'event-code'
+        
+        return attrs
+    
+    def get_context(self, *args, **kwargs):
+        context = super().get_context(*args, **kwargs)
+        
+        event_term_choices = OASIS_EVENT_TERMS_AS_CHOICES
+        choices = [{"value": value, "label": label, "cats": categories} for value, label, categories in
+                   event_term_choices]
+        context['choices'] = json.dumps(choices)
+        return context
+    
+    @property
+    def media(self):
+        return Media(
+            js=[
+                "capeditor/js/widget/event-code-widget.js",
+                "capeditor/js/widget/event-code-widget-controller.js",
+            ]
+        )

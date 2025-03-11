@@ -2,6 +2,8 @@ from collections import OrderedDict
 
 from magic import from_file
 
+from alertwise.capeditor.oet_v1_2 import OASIS_EVENT_TERMS_BY_CODE
+
 
 def format_date_to_oid(oid_prefix, date):
     # Extract date components
@@ -18,22 +20,41 @@ def format_date_to_oid(oid_prefix, date):
     return f"urn:oid:{oid_prefix}.{oid_date}"
 
 
-def get_event_icon(event, request=None):
+def get_event_info(event, site=None, request=None):
     from alertwise.capeditor.cap_settings import CapSetting
+    
+    cap_setting = None
+    
+    if site:
+        cap_setting = CapSetting.for_site(site)
+    if request:
+        cap_setting = CapSetting.for_request(request)
+    
     try:
-        if request:
-            cap_setting = CapSetting.for_request(request)
-            
+        if cap_setting:
             hazard_event_types = cap_setting.hazard_event_types.all()
             if hazard_event_types:
                 for hazard in hazard_event_types:
                     event_name = hazard.event
                     if event_name == event and hazard.icon:
-                        return hazard.icon
+                        event_info = {
+                            "icon": hazard.icon,
+                            "category": hazard.category,
+                        }
+                        if hazard.event_code:
+                            event_info.update({
+                                "event_term": get_event_term(hazard.event_code),
+                            })
+                        
+                        return event_info
     except Exception:
         pass
     
-    return "alert"
+    return {"icon": "alert", "category": "Met"}
+
+
+def get_event_term(event_code):
+    return OASIS_EVENT_TERMS_BY_CODE.get(event_code)
 
 
 def file_path_mime(file_path):

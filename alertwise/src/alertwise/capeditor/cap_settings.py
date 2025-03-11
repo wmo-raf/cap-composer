@@ -1,14 +1,7 @@
 import json
 
-from alertwise.capeditor.blocks import (
-    ContactBlock
-)
-from alertwise.capeditor.forms.widgets import (
-    HazardEventTypeWidget,
-    MultiPolygonWidget,
-    GeojsonFileLoaderWidget
-)
 from django.contrib.gis.db import models
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from modelcluster.fields import ParentalKey
@@ -20,6 +13,15 @@ from wagtail.fields import StreamField
 from wagtail.models import Orderable
 from wagtailiconchooser.widgets import IconChooserWidget
 from wagtailmodelchooser import register_model_chooser
+
+from alertwise.capeditor.blocks import (
+    ContactBlock
+)
+from alertwise.capeditor.forms.widgets import (
+    HazardEventTypeWidget,
+    MultiPolygonWidget,
+    GeojsonFileLoaderWidget, EventCodeWidget
+)
 
 
 @register_setting
@@ -104,17 +106,44 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
 
 
 class HazardEventTypes(Orderable):
+    CATEGORY_CHOICES = (
+        ('Geo', _("Geophysical")),
+        ('Met', _("Meteorological")),
+        ('Safety', _("General emergency and public safety")),
+        ('Security', _("Law enforcement, military, homeland and local/private security")),
+        ('Rescue', _("Rescue and recovery")),
+        ('Fire', _("Fire suppression and rescue")),
+        ('Health', _("Medical and public health")),
+        ('Env', _("Pollution and other environmental")),
+        ('Transport', _("Public and private transportation")),
+        ('Infra', _("Utility, telecommunication, other non-transport infrastructure")),
+        ('CBRNE', _("Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat or attack")),
+        ('Other', _("Other events")),
+    )
+    
     setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="hazard_event_types")
     is_in_wmo_event_types_list = models.BooleanField(default=True,
                                                      verbose_name=_("Select from WMO list of Hazards Event Types"))
     event = models.CharField(max_length=35, verbose_name=_("Hazard"), help_text=_("Name of Hazard"))
+    category = models.CharField(max_length=35, default="Met", verbose_name=_("Category"),
+                                choices=CATEGORY_CHOICES,
+                                help_text=_("Category of Hazard"))
+    event_code = models.CharField(max_length=10, blank=True, null=True, verbose_name=_("Event Code"))
     icon = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("Icon"), help_text=_("Matching icon"))
     
     panels = [
         FieldPanel("is_in_wmo_event_types_list"),
         FieldPanel("event", widget=HazardEventTypeWidget),
+        FieldPanel("category"),
+        FieldPanel("event_code", widget=EventCodeWidget),
         FieldPanel("icon", widget=IconChooserWidget),
     ]
+    
+    def clean(self):
+        if self.event_code is None:
+            raise ValidationError({
+                "event_code": ValidationError(_("Event Code is required"), code="required")
+            })
     
     class Meta:
         constraints = [
