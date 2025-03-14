@@ -11,9 +11,25 @@ jobs:
     - name: setup environment
       run: |
         source create-initial-config.sh /home/$USER/mydata
+        cp docker-compose.sample.yml docker-compose.yml
+        cp nginx/nginx.conf.sample nginx/nginx.conf
+    - name: check .env file exists after setup
+      run: |
+        if [ ! -f .env ]; then
+            echo ".env file not found!"
+            exit 1
+        fi
+        less .env
+    - name: check directories were created
+      run: |
+        if [ ! -d /home/$USER/mydata/db ]; then
+            echo "/home/$USER/mydata/db directory not found!"
+            exit 1
+        fi
+        ls -l /home/$USER/mydata
     - name: docker compose build
       run: |
-        docker compose build
+        docker compose -f docker-compose.yml --env-file .env build
     - name: docker compose up, sleep 60 seconds and check status
       run: |
         docker compose up -d
@@ -21,8 +37,8 @@ jobs:
         docker ps
     - name: check if the web server is running
       run: |
-        run: |
-        status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8765)
+        curl http://localhost:8080
+        status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
         if [[ $status_code -ne 200 ]]; then
             echo "Request failed with status code:"
             echo ${status_code}
@@ -32,4 +48,4 @@ jobs:
       if: ${{ failure() }}
       run: |
           echo "check docker logs"
-          docker compose -f logs
+          docker compose logs
