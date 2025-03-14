@@ -37,7 +37,7 @@ This option will set up a Wagtail project together with the complete components 
 
       sed -i 's/localhost/<your_ip_or_domain>/g' .env
 
-   Or use your favourite text editor to edit the .env file. 
+   Or use your favorite text editor to edit the .env file and update the `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS` variables.
 
 5. **Copy the nginx configuration file**
 
@@ -103,3 +103,7 @@ This option will set up a Wagtail project together with the complete components 
 Your installation is now complete. 
 
 You can now proceed with the configuration of the Wagtail site and the CAP Composer components, see :ref:`configuration`
+
+Please note that you should not expose port 8080 of your host on the public internet. 
+
+To make your CAP Composer available over the public internet, see :ref:`securing-your-installation`.

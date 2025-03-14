@@ -23,6 +23,7 @@ The user guide provides information on how to install and configure the WMO CAP 
    user/getting-started
    user/installation
    user/configuration
+   user/securing-your-installation
    user/user-management
    user/creating-alerts
 
