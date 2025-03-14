@@ -1,0 +1,36 @@
+name: Run Trivy vulnerability scanner
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: setup environment
+        run: |
+          source create-initial-config.sh /home/$USER/mydata
+      - name: Build docker image cap_composer
+        run: |
+          docker build -t cap_composer:test .
+      - name: Run Trivy vulnerability scanner on cap_composer
+        uses: aquasecurity/trivy-action@0.20.0
+        env:
+          TRIVY_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-db:2
+          TRIVY_JAVA_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-java-db:1
+        with:
+          image-ref: cap_composer:test
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          security-checks: 'vuln'
+          skip-dirs: '/cap_composer/venv'

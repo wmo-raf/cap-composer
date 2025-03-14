@@ -70,7 +70,7 @@ http {
         resolver 127.0.0.11 valid=30s;
 
         location / {
-            set $upstream alertwise:8000;
+            set $upstream cap_composer:8000;
 
             proxy_pass http://$upstream;
             proxy_redirect off;

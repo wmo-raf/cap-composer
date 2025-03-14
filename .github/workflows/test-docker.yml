@@ -1,0 +1,35 @@
+name: test docker deployment ⚙️
+
+on: [ push, pull_request ]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: setup environment
+      run: |
+        source create-initial-config.sh /home/$USER/mydata
+    - name: docker compose build
+      run: |
+        docker compose build
+    - name: docker compose up, sleep 60 seconds and check status
+      run: |
+        docker compose up -d
+        sleep 60
+        docker ps
+    - name: check if the web server is running
+      run: |
+        run: |
+        status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8765)
+        if [[ $status_code -ne 200 ]]; then
+            echo "Request failed with status code:"
+            echo ${status_code}
+            exit 1
+        fi
+    - name: failed tests 🚩
+      if: ${{ failure() }}
+      run: |
+          echo "check docker logs"
+          docker compose -f logs
