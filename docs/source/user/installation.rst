@@ -65,14 +65,28 @@ This option will set up a Wagtail project together with the complete components 
 
       docker compose up -d
 
-9. **Check the logs to ensure everything is running correctly**
+9. **Check if the docker container are starting **
 
    .. code-block:: shell
 
-      docker compose logs -f
+      docker ps -a
 
-   In case of any errors, see the troubleshooting section below for some helpful
-   tips: `Troubleshooting standalone installation`_
+   You should see the following containers running:
+
+   - cap_composer
+   - cap_composer_celery_worker
+   - cap_composer_celery_beat
+   - cap_composer_mbgl_renderer
+   - cap_composer_web_proxy
+   - cap_composer_db
+   - cap_composer_redis
+   - nginx_proxy_manager
+
+   If any of the containers are not starting, you can check the logs for the container by running:
+
+   .. code-block:: shell
+
+      docker logs <container_name>
 
 10. **Check the CAP Composer homepage at** ``http://<your_ip_or_domain>:8080``.
 
@@ -81,7 +95,21 @@ This option will set up a Wagtail project together with the complete components 
    .. image:: ../_static/images/cap_composer_homepage.png
       :alt: WMO CAP Composer Homepage
 
-12. **Create a superuser**
+   If you see the message **Bad Request (400)**, check the logs for the ``cap_composer`` container for any errors:
+
+   .. code-block:: shell
+
+      docker logs cap_composer
+
+   The logs might indicate that `ALLOWED_HOSTS` is not set correctly in the .env file.
+   If so update the .env file and restart the docker containers:
+
+   .. code-block:: shell
+
+      docker compose down
+      docker compose up -d
+
+12. After confirming the stack is running, **create a superuser** with the following command:
 
     .. code-block:: shell
 
