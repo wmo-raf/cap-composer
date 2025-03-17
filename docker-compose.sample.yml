@@ -46,6 +46,7 @@ services:
       - POSTGRES_USER=${DB_USER:-alertwise}
       - POSTGRES_DB=${DB_NAME:-alertwise}
       - POSTGRES_PASSWORD=${DB_PASSWORD:?}
+    user: "${UID}:${GID}"
     ports:
       - "5432"
     healthcheck:
