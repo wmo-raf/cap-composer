@@ -85,7 +85,29 @@ cp nginx/nginx.conf.sample nginx/nginx.conf
 cp docker-compose.sample.yml docker-compose.yml
 ```
 
-7. **Build the Docker containers**
+7. **Create volumes and set permissions**
+
+Alertwise uses mounted Docker volumes to store persistent data. The following default directories are used, if not
+changed in the `.env` file:
+
+- `./docker/volumes/db` for the database
+- `./docker/volumes/static` for static files
+- `./docker/volumes/media` for media files
+- `./docker/volumes/backup` for backups
+
+Create the directories and set the correct permissions:
+
+```shell
+mkdir -p ./docker/volumes/db ./docker/volumes/static ./docker/volumes/media ./docker/volumes/backup
+
+sudo chown -R <UID>:<GID> ./docker/volumes/db ./docker/volumes/static ./docker/volumes/media ./docker/volumes/backup
+````
+
+Replace `<UID>` and `<GID>` with the user id and group id to be used by the Docker containers.
+This is set in the `.env` file as `UID` and `GID`. See
+the [Standalone Environment Variables](#standalone-environment-variables) section for more details.
+
+8. **Build the Docker containers**
 
 ```shell
 docker compose build
@@ -93,13 +115,13 @@ docker compose build
 
 This may take some time to download and build the required Docker images, depending on your internet connection.
 
-8. **Run the Docker containers**
+9. **Run the Docker containers**
 
 ```shell
 docker compose up -d
 ```
 
-9. **Check the logs to ensure everything is running correctly**
+10. **Check the logs to ensure everything is running correctly**
 
 ```shell
 docker compose logs -f
@@ -108,12 +130,12 @@ docker compose logs -f
 In case of any errors, see the troubleshooting section below for some helpful
 tips [Troubleshooting standalone installation](#troubleshooting-standalone-installation)
 
-10. **Access the application at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>`**. Replace `<ip_or_domain>` with the
+11. **Access the application at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>`**. Replace `<ip_or_domain>` with the
     IP
     address or domain name of your server, and `<ALERTWISE_WEB_PROXY_PORT>` with the port set in the `.env` file or `80`
     if not set.
 
-11. **Create a superuser to access the admin dashboard**
+12. **Create a superuser to access the admin dashboard**
 
 ```shell
 docker compose exec alertwise alertwise createsuperuser
@@ -121,7 +143,7 @@ docker compose exec alertwise alertwise createsuperuser
 
 `alertwise` is a shortcut command to `python manage.py` in the Docker container.
 
-12. **Access the admin dashboard at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>/<ADMIN_URL_PATH>`**. Replace
+13. **Access the admin dashboard at `http://<ip_or_doman>:<ALERTWISE_WEB_PROXY_PORT>/<ADMIN_URL_PATH>`**. Replace
     `<ADMIN_URL_PATH>` with the path set in the `.env` file or `alertwise-admin` if not set.
 
 #### Standalone Environment Variables
@@ -176,17 +198,19 @@ The rest are optional and can be configured as required.
 | OTEL_TRACES_SAMPLER_ARG           | Specifies the sampling rate or configuration for the chosen sampler. The value depends on the sampler type defined in `OTEL_TRACES_SAMPLER`                                                                                      | NO       | 0.1                                            |                                                                                                         |
 | OTEL_PER_MODULE_SAMPLER_OVERRIDES | Custom sampling rules for specific modules                                                                                                                                                                                       | NO       | opentelemetry.instrumentation.django=always_on |                                                                                                         |
 | ALERTWISE_DEPLOYMENT_ENV          | Deployment environment (e.g., production, staging)                                                                                                                                                                               | NO       | production                                     |                                                                                                         |
-| UID                               | User ID for the Docker container                                                                                                                                                                                                 | NO       | User ID for the Docker container               |                                                                                                         |U
+| UID                               | User ID for the Docker container. You can find out the current uid and gid values by typing `id` on the terminal                                                                                                                 | NO       | User ID for the Docker container               |                                                                                                         |U
 | GID                               | Group ID for the Docker container                                                                                                                                                                                                | NO       | Group ID for the Docker container              |                                                                                                         |
 | WAGTAIL_2FA_REQUIRED              | Enforces Two-Factor Authentication (2FA). When enabled, admin users must setup 2FA to login. Administrators can also enforce 2FA for a specific group                                                                            | NO       | False                                          |                                                                                                         |
 
 #### Important Notes:
 
-1. **Required Variables**: Ensure SECRET_KEY, DB_PASSWORD, and REDIS_PASSWORD are always set.
-2. **Security**: Avoid using default values for sensitive variables like SECRET_KEY or ADMIN_URL_PATH.
-3. **Debug Mode**: Never set DEBUG=True in production.
-4. **Time Zone**: Set TIME_ZONE to your local time zone for accurate timestamps.
-5. **SMTP**: Configure email settings if your app needs to send emails.
+1. **Required Variables**: Ensure `SECRET_KEY`, `DB_PASSWORD`, `REDIS_PASSWORD`, `UID` and `GID` are set, for the
+   minimal
+   configuration.
+2. **Security**: Avoid using default values for sensitive variables like `SECRET_KEY` or `ADMIN_URL_PATH`.
+3. **Debug Mode**: Never set `DEBUG=True` in production.
+4. **Time Zone**: Set `TIME_ZONE` to your local time zone for accurate timestamps.
+5. **SMTP**: Configure email settings to be able to send emails from the system.
 
 #### Troubleshooting standalone installation
 
