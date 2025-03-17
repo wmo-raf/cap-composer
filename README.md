@@ -219,14 +219,11 @@ The rest are optional and can be configured as required.
    syntax errors. Use `docker compose config` to validate the file. Some symbols like dollar signs `($)` or `@` might be
    the culprit in password variables, especially `DB_PASSWORD`. Check your password and other variables for any special
    characters that might be causing issues.
-3. **Database volume permission errors**: Ensure the `DB_VOLUME_PATH` is correctly set and the user running the
-   database container has the correct permissions to read and write to the volume path. The default user id and group
-   for the db container is `1000:1000`. You can assign the correct permissions to the volume path by running:
-   `sudo chown -R 1000:1000  ./docker/volumes/db`, or the custom path if changed.
-4. **Static/media/backup volume permission errors**: The same as above, ensure the `STATIC_VOLUME_PATH`,
-   `MEDIA_VOLUME_PATH`, and `BACKUP_VOLUME_PATH` are correctly set and the user running the alertwise containers has the
-   correct permissions to read and write to these volume paths. This is the user set by the `UID` and `GID` environment.
-   Set the correct permissions by running `sudo chown -R <UID>:<GID>  ./path/to/volume`, for all the volumes.
+3. **Database/Static/media/backup volume permission errors**: Ensure the `DB_VOLUME_PATH`,`STATIC_VOLUME_PATH`,
+   `MEDIA_VOLUME_PATH`and `BACKUP_VOLUME_PATH` env variables are correctly set. Ensure the user running the alertwise
+   containers has the correct permissions to read and write to these volume paths. This is the user set by the `UID` and
+   `GID`environment variables. Set the correct permissions by running `sudo chown -R <UID>:<GID>  ./path/to/volume`, for
+   all the volumes. Replace `<UID>` and `<GID>` with the values set in the `.env` file.
 
 ## Legal Disclaimer
 
