@@ -71,11 +71,11 @@ class ExternalAlertFeedEntry(models.Model):
 
 @receiver(post_save, sender=ExternalAlertFeed)
 def update_external_feed_periodic_task(sender, instance, **kwargs):
-    from cap.tasks import create_or_update_alert_feed_periodic_tasks
+    from alertwise.cap.tasks import create_or_update_alert_feed_periodic_tasks
     create_or_update_alert_feed_periodic_tasks(instance)
 
 
 @receiver(post_delete, sender=ExternalAlertFeed)
 def update_external_feed_periodic_task(sender, instance, **kwargs):
-    from cap.tasks import create_or_update_alert_feed_periodic_tasks
+    from alertwise.cap.tasks import create_or_update_alert_feed_periodic_tasks
     create_or_update_alert_feed_periodic_tasks(instance, delete=True)

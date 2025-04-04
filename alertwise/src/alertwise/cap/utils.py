@@ -7,8 +7,6 @@ from urllib.parse import urlsplit
 import pytz
 import requests
 import weasyprint
-from alertwise.capeditor.models import CapSetting
-from alertwise.capeditor.renderers import CapXMLRenderer
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.template.loader import render_to_string
@@ -24,6 +22,8 @@ from wagtail.images import get_image_model
 from wagtail.models import Site
 from wagtailcache.cache import clear_cache
 
+from alertwise.capeditor.models import CapSetting
+from alertwise.capeditor.renderers import CapXMLRenderer
 from .constants import DEFAULT_STYLE, CAP_LAYERS
 from .exceptions import CAPAlertImportError
 from .sign import sign_cap_xml
@@ -250,7 +250,9 @@ def create_draft_alert_from_alert_data(alert_data, request=None, update_event_li
         site = Site.objects.get(is_default_site=True)
         cap_settings = CapSetting.for_site(site)
     
-    base_data = {}
+    base_data = {
+        "imported": True,  # mark this alert page as imported
+    }
     
     # an alert page requires a title
     # here we use the headline of the first info block

@@ -1,8 +1,6 @@
 import json
 import logging
 
-from alertwise.capeditor.cap_settings import CapSetting
-from alertwise.capeditor.models import AbstractCapAlertPage, CapAlertPageForm
 from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.serializers.json import DjangoJSONEncoder
@@ -10,6 +8,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.template.defaultfilters import truncatechars
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _, gettext
 from shapely.geometry import shape
@@ -22,8 +21,9 @@ from wagtail.contrib.settings.registry import register_setting
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Page
-from wagtail.signals import page_published
 
+from alertwise.capeditor.cap_settings import CapSetting
+from alertwise.capeditor.models import AbstractCapAlertPage, CapAlertPageForm
 from .external_feed.models import ExternalAlertFeed, ExternalAlertFeedEntry
 from .mixins import MetadataPageMixin
 from .mqtt.models import CAPAlertMQTTBroker, CAPAlertMQTTBrokerEvent
@@ -277,6 +277,7 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
         blank=True,
         related_name='+',
     )
+    imported = models.BooleanField(default=False, verbose_name=_("Imported"))
     
     content_panels = Page.content_panels + [
         *AbstractCapAlertPage.content_panels,
@@ -420,6 +421,15 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
         })
         
         return context
+    
+    def save(self, *args, **kwargs):
+        # if not imported, set the sent date as now
+        if not self.imported:
+            # use current time. Replace seconds and microseconds to 0
+            sent = timezone.now().replace(second=0, microsecond=0)
+            self.sent = sent
+        
+        return super().save(*args, **kwargs)
 
 
 @register_setting(name="other-cap-settings")
@@ -478,5 +488,4 @@ def on_publish_cap_alert(sender, **kwargs):
     except Exception as e:
         logger.error(f"Error creating cap alert multimedia: {e}")
 
-
-page_published.connect(on_publish_cap_alert, sender=CapAlertPage)
+# page_published.connect(on_publish_cap_alert, sender=CapAlertPage)
