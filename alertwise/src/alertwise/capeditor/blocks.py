@@ -237,6 +237,7 @@ class AlertAreaBoundaryBlock(blocks.StructBlock):
     )
     
     areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
+                                max_length=50,
                                 help_text=_("The text describing the affected area of the alert message"))
     admin_level = blocks.ChoiceBlock(choices=ADMIN_LEVEL_CHOICES, default=1, label=_("Administrative Level"))
     boundary = BoundaryFieldBlock(label=_("Boundary"),
@@ -295,6 +296,7 @@ class AlertAreaPolygonBlock(blocks.StructBlock):
         value_class = AlertAreaPolygonStructValue
     
     areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
+                                max_length=50,
                                 help_text=_("The text describing the affected area of the alert message"))
     polygon = PolygonOrMultiPolygonFieldBlock(label=_("Polygon"),
                                               help_text=_(
@@ -357,6 +359,7 @@ class AlertAreaCircleBlock(blocks.StructBlock):
         value_class = AlertAreaCircleStructValue
     
     areaDesc = blocks.TextBlock(label=_("Affected areas / Regions"),
+                                max_length=50,
                                 help_text=_("The text describing the affected area of the alert message"))
     circle = CircleFieldBlock(label=_("Circle"), help_text=_("Drag the marker to change position"))
     altitude = blocks.CharBlock(max_length=100, required=False, label=_("Altitude"),

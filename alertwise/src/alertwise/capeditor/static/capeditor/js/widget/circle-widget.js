@@ -30,7 +30,7 @@ class CircleWidget {
         this.initMap().then(() => {
             this.map.resize()
 
-            this.fetchAndFitBounds()
+            this.fetchAndFitBounds(initialState)
 
             this.initMarker()
 
@@ -127,7 +127,7 @@ class CircleWidget {
 
     }
 
-    fetchAndFitBounds() {
+    fetchAndFitBounds(initialState) {
         if (this.boundaryInfoUrl) {
             fetch(this.boundaryInfoUrl)
                 .then(response => response.json())
@@ -140,7 +140,9 @@ class CircleWidget {
                         const bounds = [[this.countriesBounds[0], this.countriesBounds[1]], [this.countriesBounds[2], this.countriesBounds[3]]]
                         this.map.fitBounds(bounds)
 
-                        this.centerMarkerToBounds()
+                        if (!initialState) {
+                            this.centerMarkerToBounds()
+                        }
                     }
                 })
                 .catch((error) => {
@@ -154,17 +156,19 @@ class CircleWidget {
             draggable: true
         }).setLngLat([0, 0]).addTo(this.map);
 
+        this.centerMarkerToBounds()
 
         this.marker.on('dragend', () => {
             const lngLat = this.marker.getLngLat();
             const {lat, lng} = lngLat
-            this.latInput.val(lat)
-            this.lonInput.val(lng)
+
+            // limit the coordinates to 6 decimal places
+            this.latInput.val(lat.toFixed(6))
+            this.lonInput.val(lng.toFixed(6))
 
             this.onCoordsChange()
         });
 
-        this.centerMarkerToBounds()
     }
 
     centerMarkerToBounds() {
@@ -186,7 +190,6 @@ class CircleWidget {
         if (lat && lon && radius) {
             const options = {steps: 64, units: 'kilometers'}
             const circle = turf.circle([lon, lat], radius, options);
-
             this.setSourceData(circle)
         }
     }
@@ -275,7 +278,6 @@ class CircleWidget {
         if (circeValue) {
             const {lon, lat, radius} = this.parseCircleValue(circeValue) || {}
 
-
             if (lon && lat && radius) {
                 this.lonInput.val(lon)
                 this.latInput.val(lat)
@@ -283,6 +285,7 @@ class CircleWidget {
 
                 // set marker
                 this.marker.setLngLat([lon, lat])
+
 
                 this.onCoordsChange()
             }

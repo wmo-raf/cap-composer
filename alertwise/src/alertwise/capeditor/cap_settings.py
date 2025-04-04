@@ -160,7 +160,7 @@ class HazardEventTypes(Orderable):
 
 class PredefinedAlertArea(Orderable):
     setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="predefined_alert_areas")
-    name = models.CharField(max_length=255, verbose_name=_("Name"))
+    name = models.CharField(max_length=50, verbose_name=_("Name"))
     geom = models.MultiPolygonField(srid=4326, verbose_name=_("Area"))
     
     class Meta:

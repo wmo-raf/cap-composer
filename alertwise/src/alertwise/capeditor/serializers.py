@@ -61,6 +61,9 @@ class AlertSerializer(serializers.ModelSerializer):
             event = info_obj.get("event")
             event_info = get_event_info(event, request=request)
             
+            category = event_info.get("category")
+            info_obj["category"] = category
+            
             event_term = event_info.get("event_term")
             
             if event_term:
