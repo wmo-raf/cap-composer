@@ -8,8 +8,10 @@ from django_celery_beat.models import IntervalSchedule, PeriodicTask
 
 from alertwise.utils import get_celery_app
 from .external_feed.utils import fetch_and_process_feed
-from .models import ExternalAlertFeed
-from .utils import get_object_or_none
+from .models import CapAlertPage, ExternalAlertFeed
+from .mqtt.publish import publish_cap_to_all_mqtt_brokers
+from .utils import create_cap_alert_multi_media
+from .webhook.utils import fire_alert_webhooks
 
 logger = logging.getLogger(__name__)
 
@@ -21,20 +23,45 @@ def unlock_all(**kwargs):
     clear_locks(app)
 
 
-@app.task(
-    base=Singleton,
-    bind=True
-)
+@app.task(base=Singleton, bind=True)
 def check_alert_feed(self, feed_id):
-    feed = get_object_or_none(ExternalAlertFeed, id=feed_id)
+    feed = ExternalAlertFeed.objects.get(id=feed_id)
     
-    if not feed:
-        logger.error(f"ExternalAlertFeed with id {feed_id} does not exist. Skipping...")
-        return
-    
-    logger.info(f"Checking feed {feed.name}...")
+    logger.info(f"Checking external feed {feed.name}...")
     
     fetch_and_process_feed(feed_id)
+
+
+@app.task(base=Singleton, bind=True)
+def handle_publish_alert_to_mqtt(self, alert_id):
+    alert = CapAlertPage.objects.get(id=alert_id)
+    logger.info(f"Publishing alert '{alert}' to MQTT brokers...")
+    publish_cap_to_all_mqtt_brokers(alert.id)
+
+
+@app.task(base=Singleton, bind=True)
+def handle_publish_alert_to_webhook(self, alert_id):
+    alert = CapAlertPage.objects.get(id=alert_id)
+    logger.info(f"Publishing alert '{alert}' to HTTP webhooks...")
+    fire_alert_webhooks(alert.id)
+
+
+@app.task(base=Singleton, bind=True)
+def handle_generate_multimedia(self, alert_id):
+    alert = CapAlertPage.objects.get(id=alert_id)
+    logger.info(f"Generating CAP multimedia for alert '{alert}'...")
+    
+    # delete previous pdf preview if exists
+    if alert.alert_pdf_preview:
+        alert.alert_pdf_preview.delete()
+    
+    if alert.search_image:
+        alert.search_image.delete()
+    
+    if alert.alert_area_map_image:
+        alert.alert_area_map_image.delete()
+    
+    create_cap_alert_multi_media(alert.pk, clear_cache_on_success=True)
 
 
 def create_or_update_alert_feed_periodic_tasks(external_feed, delete=False):

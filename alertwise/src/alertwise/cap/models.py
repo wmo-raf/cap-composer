@@ -21,21 +21,19 @@ from wagtail.contrib.settings.registry import register_setting
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Page
+from wagtail.signals import page_published
 
 from alertwise.capeditor.cap_settings import CapSetting
 from alertwise.capeditor.models import AbstractCapAlertPage, CapAlertPageForm
 from .external_feed.models import ExternalAlertFeed, ExternalAlertFeedEntry
 from .mixins import MetadataPageMixin
 from .mqtt.models import CAPAlertMQTTBroker, CAPAlertMQTTBrokerEvent
-from .mqtt.publish import publish_cap_to_all_mqtt_brokers
 from .permissions import CAPMenuPermission
 from .utils import (
     get_cap_map_style,
-    get_all_published_alerts,
-    create_cap_alert_multi_media
+    get_all_published_alerts
 )
 from .webhook.models import CAPAlertWebhook, CAPAlertWebhookEvent
-from .webhook.utils import fire_alert_webhooks
 
 __all__ = [
     "CapAlertListPage",
@@ -456,36 +454,21 @@ class OtherCAPSettings(BaseSiteSetting):
 
 
 def on_publish_cap_alert(sender, **kwargs):
-    instance = kwargs['instance']
+    from .tasks import (
+        handle_publish_alert_to_mqtt,
+        handle_publish_alert_to_webhook,
+        handle_generate_multimedia
+    )
     
-    if instance.status == "Actual" and instance.scope == "Public":
-        try:
-            # publish cap alert to mqtt
-            publish_cap_to_all_mqtt_brokers(instance.id)
-        except Exception as e:
-            logger.error(f"Error publishing cap alert to mqtt: {e}")
-            pass
-        
-        # publish cap alert to webhook
-        try:
-            fire_alert_webhooks(instance.id)
-        except Exception as e:
-            logger.error(f"Error publishing cap alert to webhook: {e}")
+    alert = kwargs['instance']
     
-    # create cap alert multimedia (PNG and PDF)
-    try:
-        # delete previous pdf preview if exists
-        if instance.alert_pdf_preview:
-            instance.alert_pdf_preview.delete()
-        
-        if instance.search_image:
-            instance.search_image.delete()
-        
-        if instance.alert_area_map_image:
-            instance.alert_area_map_image.delete()
-        
-        create_cap_alert_multi_media(instance.pk, clear_cache_on_success=True)
-    except Exception as e:
-        logger.error(f"Error creating cap alert multimedia: {e}")
+    if alert.status == "Actual" and alert.scope == "Public":
+        # publish to mqtt
+        handle_publish_alert_to_mqtt.delay(alert.id)
+        # publish to webhook
+        handle_publish_alert_to_webhook.delay(alert.id)
+        # generate multimedia
+        handle_generate_multimedia.delay(alert.id)
 
-# page_published.connect(on_publish_cap_alert, sender=CapAlertPage)
+
+page_published.connect(on_publish_cap_alert, sender=CapAlertPage)
