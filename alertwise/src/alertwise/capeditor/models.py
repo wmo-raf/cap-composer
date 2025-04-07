@@ -136,6 +136,11 @@ class CapAlertPageForm(WagtailAdminPageForm):
                 alerts_ids = []
                 for reference in references:
                     ref_alert_page = reference.value.get("ref_alert").specific
+                    
+                    if ref_alert_page.id == self.instance.id:
+                        self.add_error('references',
+                                       _("You cannot reference an alert to itself. Please select a previously published alert."))
+                    
                     if ref_alert_page:
                         alerts_ids.append(ref_alert_page.id)
                 # check if the same alert is selected more than once
