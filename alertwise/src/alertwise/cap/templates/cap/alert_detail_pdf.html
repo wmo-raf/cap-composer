@@ -114,7 +114,7 @@
                             {{ page.sent|date:"D d M Y" }}
                         </div>
                         <div class="time">
-                            {{ page.sent|date:"f A" }}
+                            {{ page.sent|date:"H:i" }}
                         </div>
                     </div>
                 </div>
@@ -130,14 +130,14 @@
                                 {{ item.value.effective|date:"D d M Y" }}
                             </div>
                             <div class="time">
-                                {{ item.value.effective|date:"f A" }}
+                                {{ item.value.effective|date:"H:i" }}
                             </div>
                         {% else %}
                             <div>
                                 {{ page.sent|date:"D d M Y" }}
                             </div>
                             <div class="time">
-                                {{ page.sent|date:"f A" }}
+                                {{ page.sent|date:"H:i" }}
                             </div>
                         {% endif %}
                     </div>
@@ -154,7 +154,7 @@
                                 {{ item.value.onset|date:"D d M Y" }}
                             </div>
                             <div class="time">
-                                {{ item.value.onset|date:"f A" }}
+                                {{ item.value.onset|date:"H:i" }}
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
                             {{ item.value.expires|date:"D d M Y" }}
                         </div>
                         <div class="time">
-                            {{ item.value.expires|date:"f A" }}
+                            {{ item.value.expires|date:"H:i" }}
                         </div>
                     </div>
                 </div>
