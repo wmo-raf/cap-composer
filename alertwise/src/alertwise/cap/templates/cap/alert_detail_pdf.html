@@ -11,13 +11,18 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'cap/css/cap_detail_pdf.css' %}">
-</head>
-<body>
 
+    {% if request.is_preview %}
+        <link rel="stylesheet" href="{% static 'css/maplibre-gl.css' %}">
+    {% endif %}
+
+</head>
+
+<body class="{% if request.is_preview %}container pdf-preview{% endif %}">
 <div class="alert-page-header">
-    <span>
-        {{ alerts_url }}
-    </span>
+        <span>
+            {{ alerts_url }}
+        </span>
     {% if sender_contact %}
         <span>| {{ sender_contact }}</span>
     {% endif %}
@@ -34,17 +39,17 @@
              style="background-color: {{ info.severity.color }};{% if info.severity.icon_color %}color:{{ info.severity.icon_color }};{% endif %}">
             {% svg_icon name="warning-outline" %}
             <span class="alert-title">
-                {{ page.title }}
-            </span>
+                    {{ page.title }}
+                </span>
         </div>
         {% with item=info.info %}
             <div class="alert-level-info">
                 <div class="alert-level-info-item">
                     {% svg_icon name="time" %}
                     <span class="item-label">
-                        <b>
-                            {% translate "Urgency" %}:
-                        </b>
+                            <b>
+                                {% translate "Urgency" %}:
+                            </b>
                         {% with urgency=item.value.urgency %}
                             {% if urgency == "Immediate" %}
                                 {% translate "Immediate" %}
@@ -56,14 +61,14 @@
                                 {% translate "Past" %}
                             {% endif %}
                         {% endwith %}
-                    </span>
+                        </span>
                 </div>
                 <div class="alert-level-info-item">
                     {% svg_icon name="warning" %}
                     <span class="item-label">
-                        <b>
-                            {% translate "Severity" %}:
-                        </b>
+                            <b>
+                                {% translate "Severity" %}:
+                            </b>
                         {% with severity=item.value.severity %}
                             {% if severity == "Extreme" %}
                                 {% translate "Extreme" %}
@@ -75,14 +80,14 @@
                                 {% translate "Minor" %}
                             {% endif %}
                         {% endwith %}
-                    </span>
+                        </span>
                 </div>
                 <div class="alert-level-info-item">
                     {% svg_icon name="crosshairs" %}
                     <span class="item-label">
-                        <b>
-                            {% translate "Certainty" %}:
-                        </b>
+                            <b>
+                                {% translate "Certainty" %}:
+                            </b>
                         {% with certainty=item.value.certainty %}
                             {% if certainty == "Observed" %}
                                 {% translate "Observed" %}
@@ -94,7 +99,7 @@
                                 {% translate "Unlikely" %}
                             {% endif %}
                         {% endwith %}
-                    </span>
+                        </span>
                 </div>
             </div>
             <div class="alert-time-info">
@@ -171,10 +176,76 @@
                 </div>
             </div>
             <div class="alert-area-info">
-                <div class="alert-area-map">
+                <div class="alert-area-map{% if request.is_preview %} pdf-preview-map{% endif %}" id="cap-map">
                     {% if page.alert_area_map_image %}
                         {% image page.alert_area_map_image original as map_image %}
                         <img src="{{ map_image.url }}" alt="">
+                    {% else %}
+                        <script type="text/javascript" src="{% static 'js/maplibre-gl.js' %}"></script>
+                        <script type="text/javascript" src="{% static 'js/turf.min.js' %}"></script>
+                        <script>
+                            // alert area as geojson
+                            const geojson = {{ page.geojson|safe }};
+                            // alert area bounds
+                            const bounds = {{ page.bounds|safe }};
+
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const map = new maplibregl.Map({
+                                    container: "cap-map", // container ID
+                                    style: "https://tiles.basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+                                    center: [0, 0], // starting position [lng, lat]
+                                    zoom: 2, // starting zoom
+                                    scrollZoom: false,
+                                    dragRotate: false,
+                                    boxZoom: false,
+                                    dragPan: false,
+                                    keyboard: false,
+                                    doubleClickZoom: false,
+                                    attributionControl: false,
+                                });
+
+                                map.on("load", () => {
+                                    map.resize();
+
+                                    map.addSource("alert-areas", {
+                                        type: "geojson",
+                                        data: geojson,
+                                    });
+
+                                    map.addLayer({
+                                        id: "alert-areas-layer",
+                                        type: "fill",
+                                        source: "alert-areas",
+                                        paint: {
+                                            "fill-color": [
+                                                "case",
+                                                ["==", ["get", "severity"], "Extreme"],
+                                                "#d72f2a",
+                                                ["==", ["get", "severity"], "Severe"],
+                                                "#f89904",
+                                                ["==", ["get", "severity"], "Moderate"],
+                                                "#e4e616",
+                                                ["==", ["get", "severity"], "Minor"],
+                                                "#53ffff",
+                                                ["==", ["get", "severity"], "Unknown"],
+                                                "#3366ff",
+                                                "black",
+                                            ],
+                                            "fill-opacity": 0.7,
+                                            "fill-outline-color": "#000",
+                                        },
+                                    });
+
+                                    // fit to bounds
+                                    if (bounds) {
+                                        const bbox = [[bounds[0], bounds[1]], [bounds[2], bounds[3]]]
+                                        map.resize();
+                                        map.fitBounds(bbox, {padding: 100})
+                                    }
+                                })
+                            });
+                        </script>
+
                     {% endif %}
                 </div>
                 <div class="alert-area-description">

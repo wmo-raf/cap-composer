@@ -20,7 +20,7 @@ from wagtail.contrib.settings.models import BaseSiteSetting
 from wagtail.contrib.settings.registry import register_setting
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
-from wagtail.models import Page
+from wagtail.models import Page, PreviewableMixin
 from wagtail.signals import page_published
 
 from alertwise.capeditor.cap_settings import CapSetting
@@ -253,9 +253,7 @@ class CapPageForm(CapAlertPageForm):
 
 class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
     base_form_class = CapPageForm
-    
     template = "cap/alert_detail.html"
-    
     parent_page_types = ["cap.CapAlertListPage"]
     subpage_types = []
     
@@ -293,6 +291,17 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
     
     def __str__(self):
         return self.display_title
+    
+    @property
+    def preview_modes(self):
+        return PreviewableMixin.DEFAULT_PREVIEW_MODES + [("pdf", _("PDF"))]
+    
+    def get_preview_template(self, request, mode_name):
+        templates = {
+            "": "cap/alert_detail.html",  # Default preview mode
+            "pdf": "cap/alert_detail_pdf.html",  # PDF preview mode
+        }
+        return templates.get(mode_name, templates[""])
     
     @property
     def is_published_publicly(self):
