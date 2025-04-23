@@ -21,7 +21,6 @@ from .forms.fields import (
     PolygonOrMultiPolygonField
 )
 from .forms.widgets import CircleWidget, EventCodeWidget
-from .oet_v1_2 import OASIS_EVENT_TERMS_AS_CHOICES
 from .serializers import parse_tz
 from .utils import file_path_mime
 
@@ -198,6 +197,7 @@ class AlertAreaBoundaryStructValue(StructValue):
             polygons_data.append(coords)
         
         area_data = {
+            "type": "polygon",
             "areaDesc": self.get("areaDesc"),
             "polygons": polygons_data
         }
@@ -274,6 +274,7 @@ class AlertAreaPolygonStructValue(StructValue):
             polygons_data.append(coords)
         
         area_data = {
+            "type": "polygon",
             "areaDesc": self.get("areaDesc"),
             "polygons": polygons_data
         }
@@ -315,9 +316,24 @@ class AlertAreaCircleStructValue(StructValue):
     @cached_property
     def area(self):
         center_point, radius_km = self.center_point_radius
+        geom_shape = shape(self.geojson)
+        
+        polygons = []
+        
+        if isinstance(geom_shape, Polygon):
+            polygons.append(geom_shape)
+        else:
+            polygons = list(geom_shape.geoms)
+        
+        polygons_data = []
+        for polygon in polygons:
+            coords = " ".join(["{},{}".format(y, x) for x, y in list(polygon.exterior.reverse().coords)])
+            polygons_data.append(coords)
         
         area_data = {
+            "type": "circle",
             "areaDesc": self.get("areaDesc"),
+            "polygons": polygons_data,
             "circle": "{},{} {}".format(center_point.y, center_point.x, radius_km),
         }
         

@@ -1,9 +1,7 @@
-import json
 import logging
 
 from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.template.defaultfilters import truncatechars
@@ -11,8 +9,6 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _, gettext
-from shapely.geometry import shape
-from shapely.ops import unary_union
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel
 from wagtail.api.v2.utils import get_full_url
@@ -29,10 +25,7 @@ from .external_feed.models import ExternalAlertFeed, ExternalAlertFeedEntry
 from .mixins import MetadataPageMixin
 from .mqtt.models import CAPAlertMQTTBroker, CAPAlertMQTTBrokerEvent
 from .permissions import CAPMenuPermission
-from .utils import (
-    get_cap_map_style,
-    get_all_published_alerts
-)
+from .utils import get_all_published_alerts
 from .webhook.models import CAPAlertWebhook, CAPAlertWebhookEvent
 
 __all__ = [
@@ -284,6 +277,10 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
         verbose_name = _("CAP Alert")
     
     @property
+    def has_png_and_pdf(self):
+        return self.alert_area_map_image and self.alert_pdf_preview
+    
+    @property
     def display_title(self):
         title = self.draft_title or self.title
         sent = self.sent.strftime("%Y-%m-%d %H:%M")
@@ -339,30 +336,6 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
         alerts = sorted(alerts, key=lambda x: x.sent)
         
         return alerts
-    
-    @property
-    def mbgl_renderer_payload(self):
-        features = self.get_geojson_features()
-        shapely_polygons = [shape(feature["geometry"]) for feature in features]
-        combined = unary_union(shapely_polygons)
-        bounding_box = list(combined.bounds)
-        
-        geojson = {
-            "type": "FeatureCollection",
-            "features": features
-        }
-        
-        style = get_cap_map_style(geojson)
-        
-        payload = {
-            "width": 400,
-            "height": 400,
-            "padding": 6,
-            "style": style,
-            "bounds": bounding_box,
-        }
-        
-        return json.dumps(payload, cls=DjangoJSONEncoder)
     
     def get_geojson_features(self, request=None):
         features = []

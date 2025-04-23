@@ -20,3 +20,4 @@ wagtail-lazyimages==0.1.5
 wagtail-font-awesome-svg>=1.0.1
 capvalidator==0.1.0.dev4
 feedparser>=6.0.11
+staticmap==0.5.7
