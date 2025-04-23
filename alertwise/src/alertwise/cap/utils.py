@@ -5,14 +5,13 @@ from datetime import datetime
 from urllib.parse import urlsplit
 
 import pytz
-import requests
 import weasyprint
-from django.conf import settings
 from django.core.files.base import ContentFile
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.encoding import force_str
+from loguru import logger
 from lxml import etree
 from pdf2image import convert_from_path
 from wagtail.api.v2.utils import get_full_url
@@ -24,9 +23,9 @@ from wagtailcache.cache import clear_cache
 
 from alertwise.capeditor.models import CapSetting
 from alertwise.capeditor.renderers import CapXMLRenderer
-from .constants import DEFAULT_STYLE, CAP_LAYERS
 from .exceptions import CAPAlertImportError
 from .sign import sign_cap_xml
+from .static_map import create_alert_area_image
 from .weasyprint_utils import django_url_fetcher
 from ..utils import get_object_or_none
 
@@ -69,60 +68,11 @@ def create_cap_pdf_document(cap_alert, template_name):
     
     buff_val = buffer.getvalue()
     
-    content_file = ContentFile(buff_val, f"{cap_alert.id}.pdf")
-    
-    document = get_document_model().objects.create(title=cap_alert.title, file=content_file)
+    content_file = ContentFile(buff_val, f"{cap_alert.slug}.pdf")
+    doc_title = f"{cap_alert.title}_{cap_alert.last_published_at.strftime('%s')}.pdf"
+    document = get_document_model().objects.create(title=doc_title, file=content_file)
     
     return document
-
-
-def get_cap_map_style(geojson):
-    style = DEFAULT_STYLE
-    style["sources"].update({"cap_alert": {"type": "geojson", "data": geojson}})
-    layers = CAP_LAYERS
-    for layer in layers:
-        layer_type = layer.get("type")
-        layer["source"] = "cap_alert"
-        
-        if layer_type == "fill":
-            layer["id"] = "cap_alert_fill"
-        
-        if layer_type == "line":
-            layer["id"] = "cap_alert_line"
-        
-        if layer.get("filter"):
-            del layer["filter"]
-    
-    style["layers"].extend(layers)
-    
-    return style
-
-
-def create_cap_area_map_image(cap_alert):
-    MBGL_RENDERER_URL = getattr(settings, "MBGL_RENDERER_URL", None)
-    
-    if not MBGL_RENDERER_URL:
-        print("MBGL_RENDERER_URL is not set in settings")
-        return None
-    
-    mbgl_payload = cap_alert.mbgl_renderer_payload
-    
-    headers = {'Content-type': 'application/json'}
-    r = requests.post(MBGL_RENDERER_URL, data=mbgl_payload, headers=headers, stream=True)
-    
-    r.raise_for_status()
-    
-    file_id = cap_alert.last_published_at.strftime("%s")
-    filename = f"{cap_alert.id}_{file_id}_map.png"
-    
-    sent = cap_alert.sent.strftime("%Y-%m-%d-%H-%M")
-    image_title = f"{sent} - Alert Area Map"
-    
-    # create content file from response
-    content_file = ContentFile(r.content, filename)
-    area_image = get_image_model().objects.create(title=image_title, file=content_file)
-    
-    return area_image
 
 
 def get_cap_settings():
@@ -184,12 +134,12 @@ def create_cap_alert_multi_media(cap_alert_page_id, clear_cache_on_success=False
         cap_alert = get_object_or_none(CapAlertPage, id=cap_alert_page_id)
         
         if cap_alert:
-            print("[CAP] Generating CAP Alert MultiMedia content for: ", cap_alert.title)
+            logger.info(f"[CAP] Generating CAP Alert MultiMedia content for: {cap_alert.title} ")
             # create alert area map image
-            cap_alert_area_map_image = create_cap_area_map_image(cap_alert)
+            cap_alert_area_map_image = create_alert_area_image(cap_alert.id)
             
             if cap_alert_area_map_image:
-                print("[CAP] 1. CAP Alert Area Map Image created for: ", cap_alert.title)
+                logger.info(f"[CAP] CAP Alert Area Map Image created for: {cap_alert.title}")
                 cap_alert.alert_area_map_image = cap_alert_area_map_image
                 cap_alert.save()
                 
@@ -198,7 +148,7 @@ def create_cap_alert_multi_media(cap_alert_page_id, clear_cache_on_success=False
                 cap_alert.alert_pdf_preview = cap_preview_document
                 cap_alert.save()
                 
-                print("[CAP] 2. CAP Alert PDF Document created for: ", cap_alert.title)
+                logger.info(f"[CAP] CAP Alert PDF Document created for: {cap_alert.title}")
                 
                 file_id = cap_alert.last_published_at.strftime("%s")
                 preview_image_filename = f"{cap_alert.id}_{file_id}_preview.jpg"
@@ -211,20 +161,20 @@ def create_cap_alert_multi_media(cap_alert_page_id, clear_cache_on_success=False
                                                                    title=preview_image_title,
                                                                    file_name=preview_image_filename)
                 
-                print("[CAP] 3. CAP Alert Preview Image created for: ", cap_alert.title)
+                logger.info(f"[CAP] CAP Alert Preview Image created for: {cap_alert.title}", )
                 
                 if cap_preview_image:
                     cap_alert.search_image = cap_preview_image
                     cap_alert.save()
                 
-                print("[CAP] CAP Alert MultiMedia content saved for: ", cap_alert.title)
+                logger.info(f"[CAP] CAP Alert MultiMedia content saved for: {cap_alert.title}")
                 
                 if clear_cache_on_success:
                     clear_cache()
         else:
-            print("[CAP] CAP Alert not found for ID: ", cap_alert_page_id)
+            logger.error(f"[CAP] CAP Alert not found for ID: {cap_alert_page_id} ")
     except Exception as e:
-        print("[CAP] Error in create_cap_alert_multi_media: ", e)
+        logger.error(f"[CAP] Error in create_cap_alert_multi_media: {e} ")
         pass
 
 
