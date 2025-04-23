@@ -2,10 +2,8 @@ from django.conf import settings
 from django.contrib.auth.models import Permission
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
-from django.templatetags.static import static
-from django.urls import reverse
+from django.urls import reverse, path
 from django.utils import timezone
-from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _, gettext
 from wagtail import hooks
 from wagtail.actions.copy_page import CopyPageAction
@@ -41,6 +39,14 @@ from .models import (
 from .utils import (
     create_draft_alert_from_alert_data
 )
+from .views import create_cap_png_pdf
+
+
+@hooks.register('register_admin_urls')
+def urlconf_cap():
+    return [
+        path('import-cap/<int:alert_id>/', create_cap_png_pdf, name='create_cap_png_pdf'),
+    ]
 
 
 class CAPPagePermissionHelper(PagePermissionHelper):
@@ -90,6 +96,17 @@ class CAPAlertPageButtonHelper(PageButtonHelper):
             }
             
             buttons = [live_button] + buttons
+        
+        if not obj.has_png_and_pdf:
+            label = _("Create PNG/PDF")
+            pdf_button = {
+                "url": reverse("create_cap_png_pdf", args=[obj.pk]),
+                "label": label,
+                "classname": cn,
+                "title": label
+            }
+            
+            buttons = [pdf_button] + buttons
         
         return buttons
 

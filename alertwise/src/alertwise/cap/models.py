@@ -277,6 +277,10 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
         verbose_name = _("CAP Alert")
     
     @property
+    def has_png_and_pdf(self):
+        return self.alert_area_map_image and self.alert_pdf_preview
+    
+    @property
     def display_title(self):
         title = self.draft_title or self.title
         sent = self.sent.strftime("%Y-%m-%d %H:%M")
