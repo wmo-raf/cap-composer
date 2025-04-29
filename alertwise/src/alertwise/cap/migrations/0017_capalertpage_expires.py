@@ -7,9 +7,9 @@ from alertwise.cap.models import CapAlertPage
 
 def add_expiry_dates(apps, schema_editor):
     alerts = CapAlertPage.objects.all()
-
+    
     print(f"Found {len(alerts)} alerts")
-
+    
     for i, cap_alert_page in enumerate(alerts):
         print(f"Updating alert {i + 1} of {len(alerts)}")
         alert_infos = cap_alert_page.info
@@ -29,12 +29,12 @@ class Migration(migrations.Migration):
     dependencies = [
         ('cap', '0016_auto_20240530_1637'),
     ]
-
+    
     operations = [
         migrations.AddField(
             model_name='capalertpage',
             name='expires',
             field=models.DateTimeField(blank=True, null=True),
         ),
-        migrations.RunPython(add_expiry_dates, backwards),
+        # migrations.RunPython(add_expiry_dates, backwards),
     ]
