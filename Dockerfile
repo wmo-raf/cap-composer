@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1.5
 
 # use osgeo gdal ubuntu small 3.10.0 image.
-FROM ghcr.io/osgeo/gdal:ubuntu-small-3.10.0
+FROM ghcr.io/osgeo/gdal:ubuntu-small-3.10.0 as base
 
 ARG UID
 ENV UID=${UID:-9999}
@@ -98,3 +98,8 @@ ENV PATH="/alertwise/venv/bin:$PATH"
 ENV DJANGO_SETTINGS_MODULE='alertwise.config.settings.production'
 
 CMD ["gunicorn"]
+
+FROM base as dev
+
+ENV DJANGO_SETTINGS_MODULE='alertwise.config.settings.dev'
+CMD ["django-dev-no-attach"]

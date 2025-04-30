@@ -4,7 +4,7 @@ x-alertwise-variables: &alertwise-variables
   ALERTWISE_NUM_OF_GUNICORN_WORKERS: ${GUNICORN_NUM_OF_WORKERS:-4}
   ALERTWISE_NUM_OF_CELERY_WORKERS: ${CELERY_NUM_OF_WORKERS:-4}
   DEBUG: ${ALERTWISE_DEBUG:-False}
-  WAGTAIL_SITE_NAME: ${WAGTAIL_SITE_NAME:-AlertWise}
+  WAGTAIL_SITE_NAME: ${SITE_NAME:-}
   ADMIN_URL_PATH: ${ADMIN_URL_PATH:-alertwise-admin}
   TIME_ZONE: ${TIME_ZONE:-UTC}
   SECRET_KEY: ${SECRET_KEY:?}
@@ -34,6 +34,7 @@ x-alertwise-variables: &alertwise-variables
   OTEL_TRACES_SAMPLER_ARG: ${OTEL_TRACES_SAMPLER_ARG:-0.1}
   OTEL_PER_MODULE_SAMPLER_OVERRIDES: ${OTEL_PER_MODULE_SAMPLER_OVERRIDES:-}
   ALERTWISE_DEPLOYMENT_ENV: ${ALERTWISE_DEPLOYMENT_ENV:-production}
+  CAP_ALLOW_EDITING: ${CAP_ALLOW_EDITING:-False}
   WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY: ${WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY:-}
   WAGTAIL_NEWSLETTER_FROM_NAME: ${WAGTAIL_NEWSLETTER_FROM_NAME:-}
   WAGTAIL_NEWSLETTER_REPLY_TO: ${WAGTAIL_NEWSLETTER_REPLY_TO:-}
@@ -73,6 +74,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: dev
       args:
         - UID=${UID}
         - GID=${GID}
@@ -86,6 +88,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      - ./alertwise:/alertwise/app/
       - ${STATIC_VOLUME_PATH}:/alertwise/app/src/alertwise/static
       - ${MEDIA_VOLUME_PATH}:/alertwise/app/src/alertwise/media
       - ${BACKUP_VOLUME_PATH}:/alertwise/app/src/alertwise/backup
@@ -108,6 +111,7 @@ services:
     healthcheck:
       test: [ "CMD-SHELL", "/alertwise/app/docker/docker-entrypoint.sh celery-worker-healthcheck" ]
     volumes:
+      - ./alertwise:/alertwise/app/
       - ${STATIC_VOLUME_PATH}:/alertwise/app/src/alertwise/static
       - ${MEDIA_VOLUME_PATH}:/alertwise/app/src/alertwise/media
       - ${BACKUP_VOLUME_PATH}:/alertwise/app/src/alertwise/backup
@@ -130,6 +134,7 @@ services:
       <<: *alertwise-variables
       WAIT_HOSTS: alertwise_db:5432,alertwise_redis:6379,alertwise:8000
     volumes:
+      - ./alertwise:/alertwise/app/
       - ${STATIC_VOLUME_PATH}:/alertwise/app/src/alertwise/static
       - ${MEDIA_VOLUME_PATH}:/alertwise/app/src/alertwise/media
       - ${BACKUP_VOLUME_PATH}:/alertwise/app/src/alertwise/backup

@@ -1,0 +1,208 @@
+{% load static wagtailimages_tags %}
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f9f9f9; padding: 20px 0;">
+    <tr>
+        <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" border="0"
+                   style="background-color:#ffffff; padding:20px; font-family:Arial, sans-serif; color:#4a4a4a;">
+                <tr>
+                    {% block organisation_logo %}
+                        <td align="left" style="text-align:center; padding-bottom: 20px;">
+                            {% image org_logo original as logo %}
+                            <img src="{{ logo.full_url }}" alt="Organization Logo"
+                                 style="max-width: 150px; display: inline-block;">
+                        </td>
+                    {% endblock %}
+                </tr>
+
+                {% for info in page.infos %}
+                    <tr>
+                        <td style="background-color:{{ info.severity.color }}; color:
+                                {{ info.severity.icon_color|default:'#4a4a4a' }}; padding: 10px 15px;text-align: center;">
+                            <strong style="font-size: 20px;">⚠️ {{ page.title }}</strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 15px;">
+                            <table width="100%" cellpadding="5" cellspacing="0" border="0">
+                                <tr>
+                                    <td><strong>🕒 Urgency:</strong></td>
+                                    <td>{{ info.info.value.urgency }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>⚠️ Severity:</strong></td>
+                                    <td>{{ info.info.value.severity }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>🎯 Certainty:</strong></td>
+                                    <td>{{ info.info.value.certainty }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>📅 Issued:</strong></td>
+                                    <td>{{ page.sent|date:"D d M Y H:i" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>📅 Effective:</strong></td>
+                                    <td>
+                                        {% if info.info.value.effective %}
+                                            {{ info.info.value.effective|date:"D d M Y H:i" }}
+                                        {% else %}
+                                            {{ page.sent|date:"D d M Y H:i" }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% if info.info.value.onset %}
+                                    <tr>
+                                        <td><strong>⏱️ Onset:</strong></td>
+                                        <td>{{ info.info.value.onset|date:"D d M Y H:i" }}</td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td><strong>⏳ Expires:</strong></td>
+                                    <td>{{ info.info.value.expires|date:"D d M Y H:i" }}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    {% if page.alert_area_map_image %}
+                        <tr>
+                            {% block map_image %}
+                                <td align="center" style="padding: 10px;">
+                                    {% image page.alert_area_map_image original as map_image %}
+                                    <img src="{{ map_image.full_url }}" alt="Alert Area Map"
+                                         style="width:100%; max-width:560px; height:auto; border:1px solid #ccc;">
+                                </td>
+                            {% endblock %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>
+                                <div id="cap-map"
+                                     style="width:100%;max-width:560px; height:400px; border:1px solid #ccc;"></div>
+                            </td>
+                        </tr>
+                        <script type="text/javascript" src="{% static 'js/maplibre-gl.js' %}"></script>
+                        <script type="text/javascript" src="{% static 'js/turf.min.js' %}"></script>
+                        <script>
+                            // alert area as geojson
+                            const geojson = {{ page.geojson|safe }};
+                            // alert area bounds
+                            const bounds = {{ page.bounds|safe }};
+
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const map = new maplibregl.Map({
+                                    container: "cap-map", // container ID
+                                    style: "https://tiles.basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+                                    center: [0, 0], // starting position [lng, lat]
+                                    zoom: 2, // starting zoom
+                                    scrollZoom: false,
+                                    dragRotate: false,
+                                    boxZoom: false,
+                                    dragPan: false,
+                                    keyboard: false,
+                                    doubleClickZoom: false,
+                                    attributionControl: false,
+                                });
+
+                                map.on("load", () => {
+                                    map.resize();
+
+                                    map.addSource("alert-areas", {
+                                        type: "geojson",
+                                        data: geojson,
+                                    });
+
+                                    map.addLayer({
+                                        id: "alert-areas-layer",
+                                        type: "fill",
+                                        source: "alert-areas",
+                                        paint: {
+                                            "fill-color": [
+                                                "case",
+                                                ["==", ["get", "severity"], "Extreme"],
+                                                "#d72f2a",
+                                                ["==", ["get", "severity"], "Severe"],
+                                                "#f89904",
+                                                ["==", ["get", "severity"], "Moderate"],
+                                                "#e4e616",
+                                                ["==", ["get", "severity"], "Minor"],
+                                                "#53ffff",
+                                                ["==", ["get", "severity"], "Unknown"],
+                                                "#3366ff",
+                                                "black",
+                                            ],
+                                            "fill-opacity": 0.7,
+                                            "fill-outline-color": "#000",
+                                        },
+                                    });
+
+                                    // fit to bounds
+                                    if (bounds) {
+                                        const bbox = [[bounds[0], bounds[1]], [bounds[2], bounds[3]]]
+                                        map.resize();
+                                        map.fitBounds(bbox, {padding: 20})
+                                    }
+                                })
+                            });
+                        </script>
+                    {% endif %}
+                    <tr>
+                        <td style="padding: 15px;">
+                            <strong>📍 Area:</strong>
+                            <p>{{ info.properties.area_desc|truncatechars:500 }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px;">
+                            <strong>📝 Description:</strong>
+                            <p>{{ info.info.value.description }}</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 15px;">
+                            <strong>📢 Instruction:</strong>
+                            <p>{{ info.info.value.instruction }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        {% block read_more %}
+                            <td align="center" style="padding: 20px;">
+
+                                <a href="{{ page.full_url }}"
+                                   style="display: inline-block; background-color: #41b1f7; color: #ffffff; text-decoration: none;
+                                                           padding: 12px 24px; font-size: 16px; border-radius: 4px; font-weight: bold;">
+                                    Read More
+                                </a>
+                            </td>
+                        {% endblock %}
+                    </tr>
+
+                    {% if page.infos|length > 1 and not forloop.last %}
+                        <tr>
+                            <td style="padding-top: 20px; border-top: 1px dashed #ccc;"></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+                <tr>
+                    <td style="text-align:center; padding-top: 30px; font-size: 14px; color: #888;">
+                        {% if sender_name %}
+                            Sent by: {{ sender_name }}
+                        {% endif %}
+                        <br>
+                        {% if sender_contact %}
+                            Contact: {{ sender_contact }}
+                        {% endif %}
+                        <br>
+                    </td>
+                </tr>
+                {% block extra_context %}
+
+                {% endblock %}
+            </table>
+        </td>
+    </tr>
+</table>

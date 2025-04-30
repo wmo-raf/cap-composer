@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     "django_countries",
     "django_celery_beat",
     "wagtailmetadata",
+    "wagtail_newsletter",
     
     "django.contrib.admin",
     "django.contrib.auth",
@@ -354,3 +355,7 @@ AXES_IPWARE_PROXY_COUNT = env.int("AXES_IPWARE_PROXY_COUNT", default=2)
 AXES_LOCKOUT_TEMPLATE = "axes/lockout.html"
 
 WAGTAIL_2FA_REQUIRED = env.bool("WAGTAIL_2FA_REQUIRED", default=False)
+
+WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY = env("WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY", default="")
+WAGTAIL_NEWSLETTER_FROM_NAME = env("WAGTAIL_NEWSLETTER_FROM_NAME", default="")
+WAGTAIL_NEWSLETTER_REPLY_TO = env("WAGTAIL_NEWSLETTER_REPLY_TO", default="")

@@ -18,6 +18,7 @@ from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Page, PreviewableMixin
 from wagtail.signals import page_published
+from wagtail_newsletter.models import NewsletterPageMixin
 
 from alertwise.capeditor.cap_settings import CapSetting
 from alertwise.capeditor.models import AbstractCapAlertPage, CapAlertPageForm
@@ -244,7 +245,7 @@ class CapPageForm(CapAlertPageForm):
         return super().save(commit=commit)
 
 
-class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
+class CapAlertPage(MetadataPageMixin, NewsletterPageMixin, AbstractCapAlertPage):
     base_form_class = CapPageForm
     template = "cap/alert_detail.html"
     parent_page_types = ["cap.CapAlertListPage"]
@@ -272,6 +273,8 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
         *AbstractCapAlertPage.content_panels,
     ]
     
+    newsletter_template = "cap/alert_detail_email.html"
+    
     class Meta:
         ordering = ["-sent"]
         verbose_name = _("CAP Alert")
@@ -291,7 +294,11 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
     
     @property
     def preview_modes(self):
-        return PreviewableMixin.DEFAULT_PREVIEW_MODES + [("pdf", _("PDF"))]
+        custom_modes = [
+            ("pdf", _("PDF")),
+            ("newsletter", _("Email")),
+        ]
+        return PreviewableMixin.DEFAULT_PREVIEW_MODES + custom_modes
     
     def get_preview_template(self, request, mode_name):
         templates = {
@@ -372,9 +379,18 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
         features = sorted(features, key=lambda x: x.get("order"))
         return features
     
+    def get_cap_setting_context(self):
+        site = self.get_site()
+        cap_setting = CapSetting.for_site(site)
+        
+        return {
+            "org_logo": cap_setting.logo,
+            "sender_name": cap_setting.sender_name,
+            "sender_contact": cap_setting.sender,
+        }
+    
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        cap_setting = CapSetting.for_request(request)
         
         other_cap_settings = OtherCAPSettings.for_request(request)
         default_alert_display_language = other_cap_settings.default_alert_display_language
@@ -392,13 +408,21 @@ class CapAlertPage(MetadataPageMixin, AbstractCapAlertPage):
             infos = sorted(infos, key=lambda x: sort_key(x, default_alert_display_language.code), reverse=True)
         
         context.update({
-            "org_logo": cap_setting.logo,
-            "sender_name": cap_setting.sender_name,
-            "sender_contact": cap_setting.sender,
             "alerts_url": self.get_parent().get_full_url(),
             "show_languages": len(self.info) > 1,
             "sorted_infos": infos,
         })
+        
+        cap_setting_context = self.get_cap_setting_context()
+        
+        context.update(cap_setting_context)
+        
+        return context
+    
+    def get_newsletter_context(self):
+        context = super().get_newsletter_context()
+        cap_setting_context = self.get_cap_setting_context()
+        context.update(cap_setting_context)
         
         return context
     
