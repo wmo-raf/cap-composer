@@ -1,0 +1,151 @@
+x-alertwise-variables: &alertwise-variables
+  WAIT_HOSTS: alertwise_db:5432,alertwise_redis:6379
+  WAIT_TIMEOUT: 120
+  ALERTWISE_NUM_OF_GUNICORN_WORKERS: ${GUNICORN_NUM_OF_WORKERS:-4}
+  ALERTWISE_NUM_OF_CELERY_WORKERS: ${CELERY_NUM_OF_WORKERS:-4}
+  DEBUG: ${ALERTWISE_DEBUG:-False}
+  WAGTAIL_SITE_NAME: ${SITE_NAME:-}
+  ADMIN_URL_PATH: ${ADMIN_URL_PATH:-alertwise-admin}
+  TIME_ZONE: ${TIME_ZONE:-UTC}
+  SECRET_KEY: ${SECRET_KEY:?}
+  ALLOWED_HOSTS: ${ALLOWED_HOSTS:-127.0.0.1,localhost}
+  CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-http://127.0.0.1,http://localhost}
+  DATABASE_URL: postgis://${DB_USER}:${DB_PASSWORD}@alertwise_db:5432/${DB_NAME}
+  REDIS_URL: redis://:${REDIS_PASSWORD:?}@alertwise_redis:6379/0
+  EMAIL_SMTP: ${EMAIL_SMTP:-}
+  EMAIL_SMTP_HOST: ${EMAIL_SMTP_HOST:-}
+  EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT:-}
+  EMAIL_SMTP_USE_TLS: ${EMAIL_SMTP_USE_TLS:-}
+  EMAIL_SMTP_USER: ${EMAIL_SMTP_USER:-}
+  EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD:-}
+  DJANGO_ADMINS: ${ALERTWISE_ADMINS:-}
+  DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-}
+  WAGTAILADMIN_BASE_URL: ${ALERTWISE_BASE_URL:-}
+  LANGUAGE_CODE: ${LANGUAGE_CODE:-en}
+  CAP_CERT_PATH: ${CAP_CERT_PATH:-}
+  CAP_PRIVATE_KEY_PATH: ${CAP_PRIVATE_KEY_PATH:-}
+  CAP_SIGNATURE_METHOD: ${CAP_SIGNATURE_METHOD:-ECDSA_SHA256}
+
+  # OpenTelemetry
+  ALERTWISE_ENABLE_OTEL: ${ALERTWISE_ENABLE_OTEL:-}
+  OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+  OTEL_RESOURCE_ATTRIBUTES: ${OTEL_RESOURCE_ATTRIBUTES:-}
+  OTEL_TRACES_SAMPLER: ${OTEL_TRACES_SAMPLER:-traceidratio}
+  OTEL_TRACES_SAMPLER_ARG: ${OTEL_TRACES_SAMPLER_ARG:-0.1}
+  OTEL_PER_MODULE_SAMPLER_OVERRIDES: ${OTEL_PER_MODULE_SAMPLER_OVERRIDES:-}
+  ALERTWISE_DEPLOYMENT_ENV: ${ALERTWISE_DEPLOYMENT_ENV:-production}
+  CAP_ALLOW_EDITING: ${CAP_ALLOW_EDITING:-False}
+  WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY: ${WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY:-}
+  WAGTAIL_NEWSLETTER_FROM_NAME: ${WAGTAIL_NEWSLETTER_FROM_NAME:-}
+  WAGTAIL_NEWSLETTER_REPLY_TO: ${WAGTAIL_NEWSLETTER_REPLY_TO:-}
+
+services:
+  alertwise_db:
+    container_name: alertwise_db
+    image: ${DB_IMAGE:-postgis/postgis:15-master}
+    restart: unless-stopped
+    command: postgres -c max_connections=${POSTGRES_MAX_CONNECTIONS:-300} -c shared_buffers=${POSTGRES_SHARED_BUFFERS:-2GB}
+    environment:
+      - POSTGRES_USER=${DB_USER:-alertwise}
+      - POSTGRES_DB=${DB_NAME:-alertwise}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:?}
+    user: "${UID}:${GID}"
+    ports:
+      - "5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "su postgres -c \"pg_isready -U ${DB_USER}\"" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ${DB_VOLUME_PATH}:/var/lib/postgresql/data/
+
+  alertwise_redis:
+    image: redis:alpine
+    container_name: alertwise_redis
+    command: redis-server --requirepass ${REDIS_PASSWORD:?}
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+
+  alertwise:
+    image: alertwise
+    container_name: alertwise
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+      args:
+        - UID=${UID}
+        - GID=${GID}
+        - DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX=${DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX:-}
+    restart: unless-stopped
+    expose:
+      - 8000
+    environment:
+      <<: *alertwise-variables
+      WAGTAIL_2FA_REQUIRED: ${WAGTAIL_2FA_REQUIRED:-False}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./alertwise:/alertwise/app/
+      - ${STATIC_VOLUME_PATH}:/alertwise/app/src/alertwise/static
+      - ${MEDIA_VOLUME_PATH}:/alertwise/app/src/alertwise/media
+      - ${BACKUP_VOLUME_PATH}:/alertwise/app/src/alertwise/backup
+
+  alertwise_celery_worker:
+    image: alertwise_celery_worker
+    container_name: alertwise_celery_worker
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - UID=${UID}
+        - GID=${GID}
+        - DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX=${DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX:-}
+    command: celery-worker
+    restart: unless-stopped
+    environment:
+      <<: *alertwise-variables
+      WAIT_HOSTS: alertwise_db:5432,alertwise_redis:6379,alertwise:8000
+    healthcheck:
+      test: [ "CMD-SHELL", "/alertwise/app/docker/docker-entrypoint.sh celery-worker-healthcheck" ]
+    volumes:
+      - ./alertwise:/alertwise/app/
+      - ${STATIC_VOLUME_PATH}:/alertwise/app/src/alertwise/static
+      - ${MEDIA_VOLUME_PATH}:/alertwise/app/src/alertwise/media
+      - ${BACKUP_VOLUME_PATH}:/alertwise/app/src/alertwise/backup
+
+  alertwise_celery_beat:
+    image: alertwise_celery_beat
+    container_name: alertwise_celery_beat
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - UID=${UID}
+        - GID=${GID}
+        - DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX=${DOCKER_COMPOSE_WAIT_PLATFORM_SUFFIX:-}
+    init: true
+    command: celery-beat
+    restart: unless-stopped
+    stop_signal: SIGQUIT
+    environment:
+      <<: *alertwise-variables
+      WAIT_HOSTS: alertwise_db:5432,alertwise_redis:6379,alertwise:8000
+    volumes:
+      - ./alertwise:/alertwise/app/
+      - ${STATIC_VOLUME_PATH}:/alertwise/app/src/alertwise/static
+      - ${MEDIA_VOLUME_PATH}:/alertwise/app/src/alertwise/media
+      - ${BACKUP_VOLUME_PATH}:/alertwise/app/src/alertwise/backup
+
+  alertwise_web_proxy:
+    container_name: alertwise_web_proxy
+    image: nginx:1.20.2-alpine
+    restart: unless-stopped
+    volumes:
+      - ${STATIC_VOLUME_PATH}:/wagtail_static
+      - ${MEDIA_VOLUME_PATH}:/wagtail_media
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - ${ALERTWISE_WEB_PROXY_PORT:-80}:80
