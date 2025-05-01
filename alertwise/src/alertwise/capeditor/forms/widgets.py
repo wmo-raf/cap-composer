@@ -1,5 +1,4 @@
 import json
-from unicodedata import category
 
 from django.contrib.gis.forms import BaseGeometryWidget
 from django.contrib.gis.geometry import json_regex
@@ -36,6 +35,12 @@ class UNBoundaryWidgetMixin(Widget):
 class BasePolygonWidget(BaseGeometryWidget, BaseMapWidget):
     def serialize(self, value):
         return value.json if value else ""
+    
+    def deserialize(self, value):
+        value = value.strip()
+        if value:
+            return super().deserialize(value)
+        return None
 
 
 class BoundaryPolygonWidget(BasePolygonWidget, UNBoundaryWidgetMixin):
@@ -211,7 +216,7 @@ class HazardEventTypeWidget(TextInput):
         )
 
 
-class MultiPolygonWidget(BaseGeometryWidget, BaseMapWidget, UNBoundaryWidgetMixin):
+class MultiPolygonWidget(BasePolygonWidget, BaseMapWidget, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/multipolygon_widget.html"
     map_srid = 4326
     
@@ -253,7 +258,7 @@ class MultiPolygonWidget(BaseGeometryWidget, BaseMapWidget, UNBoundaryWidgetMixi
         )
 
 
-class GeojsonFileLoaderWidget(BaseGeometryWidget, BaseMapWidget):
+class GeojsonFileLoaderWidget(BasePolygonWidget, BaseMapWidget):
     template_name = "capeditor/widgets/geojson_file_loader_widget.html"
     
     def __init__(self, attrs=None):
