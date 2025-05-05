@@ -317,7 +317,7 @@ class AbstractCapAlertPage(Page):
             area_desc = [area.get("areaDesc") for area in info.value.area]
             area_desc = ", ".join(area_desc)
             
-            event = gettext(info.value.get('event'))
+            event = info.value.get('event')
             
             event_with_area = f"{event} ({area_desc})"
             severity = SEVERITY_MAPPING[info.value.get("severity")]
@@ -336,11 +336,13 @@ class AbstractCapAlertPage(Page):
                 category = category[0]
             category = gettext(category)
             
+            event_translated = gettext(event)
+            
             alert_info = {
                 "info": info,
                 "status": status,
                 "url": self.url,
-                "event": event,
+                "event": event_translated,
                 "event_with_area": event_with_area,
                 "event_icon": event_icon,
                 "severity": severity,
