@@ -389,7 +389,7 @@
                                                                             {% translate "Issued" %}
                                                                         </span>
                                                                         <span>
-                                                                            {{ page.sent }}
+                                                                            {{ page.sent|date:"D d M Y H:i"  }}
                                                                         </span>
                                                                     </div>
                                                                 </li>
@@ -401,9 +401,9 @@
                                                                         </span>
                                                                         <span>
                                                                             {% if  item.value.effective %}
-                                                                                {{ item.value.effective }}
+                                                                                {{ item.value.effective|date:"D d M Y H:i" }}
                                                                             {% else %}
-                                                                                {{ page.sent }}
+                                                                                {{ page.sent|date:"D d M Y H:i" }}
                                                                             {% endif %}
                                                                         </span>
                                                                     </div>
@@ -415,7 +415,8 @@
                                                                             <span class="time-type">
                                                                                 {% translate "Onset" %}:
                                                                             </span>
-                                                                            <span>{{ item.value.onset }}</span></div>
+                                                                            <span>{{ item.value.onset|date:"D d M Y H:i" }}</span>
+                                                                        </div>
                                                                     </li>
                                                                 {% endif %}
                                                                 <li class="warning-timeline__item">
@@ -424,7 +425,7 @@
                                                                         <span class="time-type">
                                                                             {% translate "Expires" %}:
                                                                         </span>
-                                                                        <span>{{ item.value.expires }}</span>
+                                                                        <span>{{ item.value.expires|date:"D d M Y H:i" }}</span>
                                                                     </div>
                                                                 </li>
                                                             </ul>
