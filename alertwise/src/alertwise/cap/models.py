@@ -315,7 +315,11 @@ class CapAlertPage(MetadataPageMixin, NewsletterPageMixin, AbstractCapAlertPage)
         return self.display_title
     
     def get_meta_description(self):
-        info = self.info[0]
+        info = self.info[0] if self.info else None
+        
+        if not info:
+            return None
+        
         description = info.value.get("description")
         
         if description:
