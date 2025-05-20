@@ -77,6 +77,9 @@ class CapAlertPageForm(WagtailAdminPageForm):
                 
                 info_field = self.fields.get("info")
                 
+                if info_field is None:
+                    return
+                
                 for block_type, block in info_field.block.child_blocks.items():
                     if block_type == "alert_info":
                         # set hazard type choices
@@ -269,6 +272,10 @@ class AbstractCapAlertPage(Page):
     @cached_property
     def bounds(self):
         geojson_data = self.feature_collection
+        
+        if not geojson_data or not geojson_data.get('features'):
+            return None
+        
         bounds = None
         for feature in geojson_data['features']:
             geometry = shape(feature['geometry'])
