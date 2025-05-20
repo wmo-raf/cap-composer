@@ -96,17 +96,17 @@ class CAPAlertPageButtonHelper(PageButtonHelper):
             }
             
             buttons = [live_button] + buttons
-        
-        if not obj.has_png_and_pdf:
-            label = _("Create PNG/PDF")
-            pdf_button = {
-                "url": reverse("create_cap_png_pdf", args=[obj.pk]),
-                "label": label,
-                "classname": cn,
-                "title": label
-            }
             
-            buttons = [pdf_button] + buttons
+            if not obj.has_png_and_pdf:
+                label = _("Create PNG/PDF")
+                pdf_button = {
+                    "url": reverse("create_cap_png_pdf", args=[obj.pk]),
+                    "label": label,
+                    "classname": cn,
+                    "title": label
+                }
+                
+                buttons = [pdf_button] + buttons
         
         return buttons
 
