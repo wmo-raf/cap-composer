@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _, gettext
 from wagtail import hooks
 from wagtail.actions.copy_page import CopyPageAction
 from wagtail.admin import messages
+from wagtail.admin import widgets as wagtailadmin_widgets
 from wagtail.admin.forms.pages import CopyForm
 from wagtail.admin.menu import MenuItem, Menu
 from wagtail.models import Page, Site
@@ -41,6 +42,8 @@ from .utils import (
 )
 from .views import create_cap_png_pdf
 
+CAN_EDIT_CAP = getattr(settings, "CAP_ALLOW_EDITING", False)
+
 
 @hooks.register('register_admin_urls')
 def urlconf_cap():
@@ -50,19 +53,6 @@ def urlconf_cap():
 
 
 class CAPPagePermissionHelper(PagePermissionHelper):
-    def user_can_edit_obj(self, user, obj):
-        can_edit = super().user_can_edit_obj(user, obj)
-        
-        # allow editing if enabled from settings
-        can_edit_cap = getattr(settings, "CAP_ALLOW_EDITING", False)
-        if can_edit_cap:
-            return True
-        
-        if obj.live and obj.status == "Actual":
-            return False
-        
-        return can_edit
-    
     def user_can_delete_obj(self, user, obj):
         can_delete = super().user_can_delete_obj(user, obj)
         
@@ -88,25 +78,28 @@ class CAPAlertPageButtonHelper(PageButtonHelper):
         cn = self.finalise_classname(classnames, classnames_exclude)
         
         if obj.is_published_publicly:
+            buttons_for_live = []
+            
+            if not obj.has_png_and_pdf:
+                label = _("Create PNG/PDF")
+                pdf_button = {
+                    "url": reverse("create_cap_png_pdf", args=[obj.pk]),
+                    "label": label,
+                    "classname": cn,
+                    "title": label
+                }
+                
+                buttons_for_live.append(pdf_button)
+            
             live_button = {
                 "url": obj.get_full_url(),
                 "label": _("LIVE"),
                 "classname": cn,
                 "title": _("Visit the live page")
             }
+            buttons_for_live.append(live_button)
             
-            buttons = [live_button] + buttons
-        
-        if not obj.has_png_and_pdf:
-            label = _("Create PNG/PDF")
-            pdf_button = {
-                "url": reverse("create_cap_png_pdf", args=[obj.pk]),
-                "label": label,
-                "classname": cn,
-                "title": label
-            }
-            
-            buttons = [pdf_button] + buttons
+            buttons = buttons_for_live + buttons
         
         return buttons
 
@@ -312,6 +305,28 @@ def hide_settings_menu_item(request, menu_items):
     menu_items[:] = [item for item in menu_items if item.name not in hidden_settings]
 
 
+@hooks.register('register_page_listing_buttons')
+def cap_page_listing_buttons(page, user, next_url=None):
+    if page and isinstance(page, CapAlertPage):
+        if page.is_published_publicly and not page.has_png_and_pdf:
+            # add a custom button to the page listing
+            yield wagtailadmin_widgets.PageListingButton(
+                _("Create PNG/PDF"),
+                reverse("create_cap_png_pdf", args=[page.pk]),
+                priority=10,
+            )
+
+
+@hooks.register('construct_page_action_menu')
+def remove_all_buttons_for_published_alert(menu_items, request, context):
+    page = context.get("page")
+    
+    if page and isinstance(page, CapAlertPage):
+        if page.is_published_publicly and not CAN_EDIT_CAP:
+            # remove all buttons for published alerts
+            menu_items[:] = []
+
+
 @hooks.register("before_copy_page")
 def copy_cap_alert_page(request, page):
     if page.specific.__class__.__name__ == "CapAlertPage":
@@ -394,23 +409,7 @@ def copy_cap_alert_page(request, page):
             },
         )
     
-    return
-
-
-@hooks.register("before_edit_page")
-def before_edit_cap_alert_page(request, page):
-    page = page.specific
-    if page.__class__.__name__ == "CapAlertPage":
-        # allow editing if enabled from settings
-        can_edit_cap = getattr(settings, "CAP_ALLOW_EDITING", False)
-        if can_edit_cap:
-            return
-        if page.live and page.status == "Actual":
-            url = AdminURLHelper(page).get_action_url("index")
-            messages.warning(request, gettext(
-                "Actual Alerts cannot be edited after they have been published. To publish an update to this alert, "
-                "create a new alert of Message Type 'Update' and reference this alert"))
-            return redirect(url)
+    return None
 
 
 @hooks.register("before_unpublish_page")
@@ -421,6 +420,8 @@ def before_unpublish_cap_alert_page(request, page):
             url = AdminURLHelper(page).get_action_url("index")
             messages.warning(request, gettext("Actual Alerts cannot be Unpublished after they have been published"))
             return redirect(url)
+    
+    return None
 
 
 @hooks.register("before_delete_page")
@@ -433,6 +434,7 @@ def before_delete_cap_alert_page(request, page):
                 "Actual Alerts cannot be deleted after they have been published. To cancel or publish an update "
                 "to this alert, create a new alert of Message Type 'Cancel' or 'Update' and reference this alert"))
             return redirect(url)
+    return None
 
 
 @hooks.register("before_import_cap_alert")

@@ -44,14 +44,14 @@ __all__ = [
 
 logger = logging.getLogger(__name__)
 
-MAX_CAP_LIST_PAGE_COUNT = getattr(settings, "MAX_CAP_LIST_PAGE_COUNT", None)
+CAP_MAX_LIST_PAGE_COUNT = getattr(settings, "CAP_MAX_LIST_PAGE_COUNT", None)
 CAP_LIST_PAGE_PARENT_PAGE_TYPES = getattr(settings, "CAP_LIST_PAGE_PARENT_PAGE_TYPES", None)
 
 
 class CapAlertListPage(MetadataPageMixin, Page):
     template = "cap/alert_list.html"
     subpage_types = ["cap.CapAlertPage"]
-    max_count = MAX_CAP_LIST_PAGE_COUNT
+    max_count = CAP_MAX_LIST_PAGE_COUNT
     
     parent_page_types = CAP_LIST_PAGE_PARENT_PAGE_TYPES
     
@@ -315,7 +315,11 @@ class CapAlertPage(MetadataPageMixin, NewsletterPageMixin, AbstractCapAlertPage)
         return self.display_title
     
     def get_meta_description(self):
-        info = self.info[0]
+        info = self.info[0] if self.info else None
+        
+        if not info:
+            return None
+        
         description = info.value.get("description")
         
         if description:

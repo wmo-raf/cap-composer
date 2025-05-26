@@ -1,11 +1,12 @@
 -c base.txt
-wagtail==6.4.1
+wagtail==7.0
+django==5.2.1
 django-environ
 django-deep-translator
 django-dbbackup
 celery
 celery-singleton
-django-celery-beat
+django-celery-beat>=2.8.1
 dj-database-url
 django-redis
 gunicorn
@@ -13,9 +14,9 @@ uvicorn[standard]
 channels
 daphne
 psycopg2
-django-axes==7.0.2
-django-ipware>=3.0.0
-wagtail-2fa==1.6.9
+django-axes
+django-ipware
+wagtail-2fa
 opentelemetry-api==1.28.2
 opentelemetry-sdk==1.28.2
 opentelemetry-exporter-otlp==1.28.2
