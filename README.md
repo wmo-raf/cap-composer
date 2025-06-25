@@ -1,4 +1,4 @@
-# Alertwise
+# CAP Composer
 
 A [Wagtail](https://wagtail.io/)
 based [Common Alerting Protocol](https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html) (CAP) Warning
@@ -37,15 +37,15 @@ at http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
 
 ## 🛠️ Installation
 
-Alertwise can be installed in two ways:
+The CAP Composer can be installed in two ways:
 
 1. As a standalone complete Wagtail project
 2. As a set of Wagtail apps that can be integrated into an existing Wagtail project
 
 ### Standalone Installation
 
-This option will set up a Wagtail project together with the complete components required to run Alertwise. Use this when
-you want to have Alertwise as a standalone project, and not a component in a bigger project.
+This option will set up a Wagtail project together with the complete components required to run the CAP Composer. Use this when
+you want to have the CAP Composer as a standalone project, and not a component in a bigger project.
 
 1. **Clone the repository**
 
