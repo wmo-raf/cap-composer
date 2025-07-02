@@ -20,7 +20,7 @@ def format_date_to_oid(oid_prefix, date):
     return f"urn:oid:{oid_prefix}.{oid_date}"
 
 
-def get_event_info(event, site=None, request=None):
+def get_event_info(event, site=None, request=None, language=None):
     from alertwise.capeditor.cap_settings import CapSetting
     
     cap_setting = None
@@ -36,14 +36,17 @@ def get_event_info(event, site=None, request=None):
             if hazard_event_types:
                 for hazard in hazard_event_types:
                     event_name = hazard.event
+                    using_wmo_list = hazard.is_in_wmo_event_types_list
                     if event_name == event and hazard.icon:
                         event_info = {
                             "icon": hazard.icon,
                             "category": hazard.category,
+                            "in_wmo_list": using_wmo_list,
                         }
                         if hazard.event_code:
                             event_info.update({
-                                "event_term": get_event_term(hazard.event_code),
+                                "oet": get_oasis_event_term(hazard.event_code),
+                                "event_name": hazard.event,
                             })
                         
                         return event_info
@@ -53,7 +56,7 @@ def get_event_info(event, site=None, request=None):
     return {"icon": "alert", "category": "Met"}
 
 
-def get_event_term(event_code):
+def get_oasis_event_term(event_code):
     return OASIS_EVENT_TERMS_BY_CODE.get(event_code)
 
 

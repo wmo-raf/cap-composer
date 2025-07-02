@@ -1,9 +1,11 @@
 import pytz
 from dateutil.parser import isoparse
+from django.utils.translation import activate, deactivate
+from django.utils.translation import gettext
 from rest_framework import serializers
 from wagtail.api.v2.utils import get_full_url
 
-from alertwise.capeditor.constants import CAP_MESSAGE_ORDER_SEQUENCE
+from alertwise.capeditor.constants import CAP_MESSAGE_ORDER_SEQUENCE, OET_VERSION_NAME
 from alertwise.capeditor.utils import order_dict_by_keys, get_event_info
 
 
@@ -64,13 +66,25 @@ class AlertSerializer(serializers.ModelSerializer):
             category = event_info.get("category")
             info_obj["category"] = category
             
-            event_term = event_info.get("event_term")
-            
-            if event_term:
+            oet = event_info.get("oet")
+            if oet:
                 info_obj.update({"eventCode": {
-                    "valueName": event_term.get("term"),
-                    "value": event_term.get("code"),
+                    "valueName": OET_VERSION_NAME,
+                    "value": oet.get("code"),
                 }})
+            
+            event_in_wmo_list = event_info.get("in_wmo_list", False)
+            if event_in_wmo_list:
+                language = info_obj.get("language")
+                
+                # try to translate event name to the set language
+                try:
+                    activate(language)
+                    event_name_translated = gettext(event)
+                    info_obj["event"] = event_name_translated
+                    deactivate()
+                except Exception:
+                    pass
             
             if info.value.resource:
                 resources = []
@@ -84,7 +98,7 @@ class AlertSerializer(serializers.ModelSerializer):
                 info_obj["resource"] = resources
             
             # assign full url
-            info_obj["web"] = obj.url
+            info_obj["web"] = get_full_url(request, obj.url)
             
             if not info_obj["headline"]:
                 info_obj["headline"] = obj.title

@@ -245,3 +245,4 @@ CERTAINTY_MAPPING = {
     },
 }
 
+OET_VERSION_NAME = "OET:v1.2"
