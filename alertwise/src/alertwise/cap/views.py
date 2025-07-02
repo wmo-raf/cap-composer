@@ -127,7 +127,9 @@ class AlertListFeed(Feed):
         return item.title
     
     def item_link(self, item):
-        return reverse("cap_alert_xml", args=[item.guid])
+        path = reverse("cap_alert_xml", args=[item.guid])
+        full_url = get_full_url_by_site(self.cap_setting.site, path)
+        return full_url
     
     def item_description(self, item):
         return item.info[0].value.get('description')
