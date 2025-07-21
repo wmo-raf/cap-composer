@@ -93,9 +93,10 @@ class AlertListFeed(Feed):
         self.cap_setting = CapSetting.for_request(request)
         return super().__call__(request, *args, **kwargs)
     
-    @staticmethod
-    def link():
-        return reverse("cap_alert_feed")
+    def link(self):
+        path = reverse("cap_alert_feed")
+        full_url = get_full_url_by_site(self.cap_setting.site, path)
+        return full_url
     
     def title(self):
         title = _("Latest alerts")
