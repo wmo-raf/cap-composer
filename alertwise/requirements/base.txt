@@ -3,7 +3,7 @@ djangorestframework-xml
 python-magic
 shapely
 wagtail-icon-chooser>=0.3.1
-wagtail-cache @ https://github.com/coderedcorp/wagtail-cache/archive/c7c2396e59935978338f42de37a0dfc9b8f73786.zip
+wagtail-cache==3.0.0
 adm-boundary-manager>=0.2.5
 wagtail-humanitarian-icons>=2.0.0
 wagtail-modelchooser>=4.0.1

@@ -16,7 +16,7 @@ daphne
 psycopg2
 django-axes
 django-ipware
-wagtail-2fa
+wagtail-2fa-v6
 opentelemetry-api==1.28.2
 opentelemetry-sdk==1.28.2
 opentelemetry-exporter-otlp==1.28.2
