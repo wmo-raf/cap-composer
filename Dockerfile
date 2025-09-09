@@ -95,11 +95,13 @@ ENTRYPOINT ["/usr/bin/tini", "--", "/bin/bash", "/capcomposer/app/docker/docker-
 # Add the venv to the path. This ensures that the venv is always activated when the container starts.
 ENV PATH="/capcomposer/venv/bin:$PATH"
 
-ENV DJANGO_SETTINGS_MODULE='capcomposer.config.settings.production'
-
 CMD ["gunicorn"]
 
 FROM base as dev
 
 ENV DJANGO_SETTINGS_MODULE='capcomposer.config.settings.dev'
 CMD ["django-dev-no-attach"]
+
+FROM base as prod
+ENV DJANGO_SETTINGS_MODULE='capcomposer.config.settings.production'
+CMD ["gunicorn"]
