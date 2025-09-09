@@ -106,7 +106,7 @@ crashlytics-build.properties
 .env
 cache
 media
-alertwise/src/alertwise/static
+capcomposer/src/capcomposer/static
 
 .DS_Store
 docker/volumes

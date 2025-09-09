@@ -13,10 +13,10 @@ jobs:
 
     defaults:
       run:
-        working-directory: alertwise
+        working-directory: capcomposer
     environment:
       name: release
-      url: https://pypi.org/p/alertwise
+      url: https://pypi.org/p/cap-composer
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
@@ -39,4 +39,4 @@ jobs:
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: alertwise/dist
+          packages-dir: capcomposer/dist
