@@ -11,17 +11,21 @@ class CAPAlertWebhook(ClusterableModel):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     retry_on_failure = models.BooleanField(default=True, verbose_name=_("Retry on failure"))
-
+    include_auth_header = models.BooleanField(default=False, verbose_name=_("Include Header for Authentication"))
+    header_value = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Header Value"))
+    
     panels = [
         FieldPanel("name"),
         FieldPanel("url"),
+        FieldPanel("include_auth_header"),
+        FieldPanel("header_value"),
         FieldPanel("active"),
     ]
-
+    
     class Meta:
         verbose_name = _("CAP Alert Webhook")
         verbose_name_plural = _("CAP Alert Webhooks")
-
+    
     def __str__(self):
         return f"{self.name} - {self.url}"
 
@@ -42,10 +46,10 @@ class CAPAlertWebhookEvent(models.Model):
     error = models.TextField(blank=True, null=True, verbose_name=_("Last Error Message"), )
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-
+    
     class Meta:
         verbose_name = _("CAP Alert Webhook Event")
         verbose_name_plural = _("CAP Alert Webhook Events")
-
+    
     def __str__(self):
         return f"{self.webhook.name} - {self.alert.title}"
