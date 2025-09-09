@@ -10,6 +10,11 @@ CAP_MQTT_SECRET_KEY = getattr(settings, "CAP_MQTT_SECRET_KEY", None)
 
 
 class CAPAlertMQTTBroker(models.Model):
+    QOS_CHOICES = (
+        (0, _("At most once. Fire and forget")),
+        (1, _("At least once. I’ll keep sending until you say you got it")),
+    )
+    
     # Broker Information
     name = models.CharField(max_length=255, verbose_name=_("Name"),
                             help_text=_("Provide a name to identify the broker"))
@@ -29,6 +34,7 @@ class CAPAlertMQTTBroker(models.Model):
                                                  "a wis2box."))
     topic = models.CharField(max_length=255, blank=True, verbose_name=_("Topic"),
                              help_text=_("Provide the MQTT topic to publish the CAP alerts."), )
+    qos = models.PositiveIntegerField(default=0, choices=QOS_CHOICES, verbose_name=_("Quality of Service (QoS)"))
     # WIS2Box Metadata
     wis2box_metadata_id = models.CharField(max_length=255, blank=True, verbose_name=_("Dataset ID"),
                                            help_text=_(

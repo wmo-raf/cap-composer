@@ -109,7 +109,7 @@ def publish_cap_to_each_mqtt_broker(alert, alert_xml, broker):
         publish.single(
             topic=broker.topic,
             payload=json.dumps(msg),
-            qos=1,
+            qos=broker.qos,
             retain=False,
             hostname=broker.host,
             port=int(broker.port),
