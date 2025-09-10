@@ -19,5 +19,5 @@ urlpatterns = [
     path("api/cap/<uuid:guid>.xml", get_cap_xml, name="cap_alert_xml"),
     path("cap-feed-style.xsl", get_cap_feed_stylesheet, name="cap_feed_stylesheet"),
     path("cap-alert-style.xsl", get_cap_alert_stylesheet, name="cap_alert_stylesheet"),
-    path("integrations/", third_party_integration, name="third_party_integration"),
+    path("cap/integrations/", third_party_integration, name="cap_third_party_integration"),
 ]

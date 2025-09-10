@@ -20,7 +20,7 @@ Best for simple periodic polling, caching, and low-ops environments.
 **Feed URL:**
 
 ```
-http://127.0.0.1:8200/api/cap/rss.xml
+{{ feed_url }}
 ```
 
 Each RSS `<item>` links to a CAP XML document. Poll responsibly (e.g., every 30–120 seconds) and deduplicate by
@@ -28,14 +28,12 @@ Each RSS `<item>` links to a CAP XML document. Poll responsibly (e.g., every 30�
 
 **Python example (poll & fetch CAP):**
 
-{% verbatim %}
-
 ```python
 # pip install feedparser requests
 import feedparser, requests
 from xml.etree import ElementTree as ET
 
-RSS_URL = "http://127.0.0.1:8200/api/cap/rss.xml"
+RSS_URL = "{{ feed_url }}"
 
 feed = feedparser.parse(RSS_URL)
 for entry in feed.entries:
@@ -43,13 +41,11 @@ for entry in feed.entries:
     r = requests.get(cap_url, timeout=15)
     r.raise_for_status()
     root = ET.fromstring(r.content)
-    ns = "urn:oasis:names:tc:emergency:cap:1.2"
-    identifier = root.findtext(f"{{{ns}}}identifier")
-    sent = root.findtext(f"{{{ns}}}sent")
+    cap = {"ns": "urn:oasis:names:tc:emergency:cap:1.2"}
+    identifier = root.findtext("{%(ns)s}identifier" % cap)
+    sent = root.findtext("{%(ns)s}sent" % cap)
     print("CAP:", identifier, sent, cap_url)
 ```
-
-{% endverbatim %}
 
 > **Tip:** Use HTTP caching (ETag / If-Modified-Since) and exponential backoff on transient errors.
 
@@ -105,9 +101,8 @@ Best for near real-time distribution to many consumers.
 
 **What you provide:**
 
-* **Broker** (host/port)
+* **Broker Details** (host/port/username/password)
 * **Topic** (e.g., `alerts/cap/<channel>`)
-* **Credentials** (username and password)
 
 Consumers can subscribe to the same topic. Choose QoS based on your reliability needs (e.g., QoS 1 with consumer-side
 deduplication).
@@ -137,10 +132,10 @@ def on_connect(client, userdata, flags, reason_code, properties=None):
 def on_message(client, userdata, msg):
     try:
         root = ET.fromstring(msg.payload)
-        ns = "urn:oasis:names:tc:emergency:cap:1.2"
-        identifier = root.findtext(f"{{{ns}}}identifier")
-        sent = root.findtext(f"{{{ns}}}sent")
-        print(f"[{msg.topic}] CAP {identifier} sent {sent}")
+        cap = {"ns": "urn:oasis:names:tc:emergency:cap:1.2"}
+        identifier = root.findtext("{%(ns)s}identifier" % cap)
+        sent = root.findtext("{%(ns)s}sent" % cap)
+        print("[%s] CAP %s sent %s" % (msg.topic, identifier, sent))
     except Exception as e:
         print("Invalid CAP XML:", e)
 
@@ -164,7 +159,7 @@ client.loop_forever()
 * **RSS:**
 
 ```bash
-curl -s http://127.0.0.1:8200/api/cap/rss.xml | head
+curl -s {{ feed_url }} | head
 ```
 
 * **Webhook (simulate CAP Composer → you):**
