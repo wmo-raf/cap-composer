@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static i18n %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cap/css/codehilite.css' %}">
+
+    <style>
+        h1, h2, h3 {
+            line-height: 1.25;
+            margin: 0 0 .5rem
+        }
+
+        h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-top: 1.25rem;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.125rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        p {
+            margin: .5rem 0;
+            color: #222
+        }
+
+
+    </style>
+
+
+
+{% endblock extra_css %}
+
+{% block content %}
+    <article class="container" style="margin-top:40px">
+        {{ md_content|safe }}
+    </article>
+
+{% endblock content %}
