@@ -25,3 +25,5 @@ staticmap==0.5.7
 wagtail-newsletter==0.2.2
 mailchimp-marketing==3.0.80
 mrml>=0.2
+Pygments
+markdown

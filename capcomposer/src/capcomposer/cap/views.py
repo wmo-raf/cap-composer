@@ -12,7 +12,9 @@ from django.utils.feedgenerator import rfc2822_date
 from django.utils.translation import gettext as _
 from django.utils.xmlutils import SimplerXMLGenerator
 from wagtail.admin import messages
+from wagtail.api.v2.utils import get_full_url
 from wagtail_modeladmin.helpers import AdminURLHelper
+import markdown
 
 from capcomposer.capeditor.constants import SEVERITY_MAPPING
 from capcomposer.capeditor.models import CapSetting
@@ -360,3 +362,30 @@ def create_cap_png_pdf(request, alert_id):
     
     cap_index_url = AdminURLHelper(alert).get_action_url("index")
     return redirect(cap_index_url)
+
+
+def third_party_integration(request):
+    """
+    A simple page to show third party integration options
+    """
+    cap_setting = CapSetting.for_request(request)
+    
+    cap_rss_feed_url = get_full_url(request, reverse("cap_alert_feed"))
+    
+    md_context = {
+        "sender_name": cap_setting.sender_name,
+        "feed_url": cap_rss_feed_url,
+    }
+    
+    md = markdown.Markdown(extensions=["fenced_code", "codehilite"])
+    
+    md_content = render_to_string("cap/third_party_integration_md_content.md", md_context)
+    
+    md_content = md.convert(md_content)
+    
+    context = {
+        **md_context,
+        "md_content": md_content,
+    }
+    
+    return render(request, "cap/third_party_integration.html", context)
