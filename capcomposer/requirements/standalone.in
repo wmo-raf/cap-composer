@@ -2,7 +2,7 @@
 wagtail==7.0
 django==5.2.1
 django-environ
-django-deep-translator
+django-deep-translator==1.5.2
 django-dbbackup
 celery
 celery-singleton

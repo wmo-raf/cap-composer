@@ -362,3 +362,9 @@ WAGTAIL_2FA_REQUIRED = env.bool("WAGTAIL_2FA_REQUIRED", default=False)
 WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY = env("WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY", default="")
 WAGTAIL_NEWSLETTER_FROM_NAME = env("WAGTAIL_NEWSLETTER_FROM_NAME", default="")
 WAGTAIL_NEWSLETTER_REPLY_TO = env("WAGTAIL_NEWSLETTER_REPLY_TO", default="")
+
+LOCALE_PATHS = [
+    'capcomposer/src/capcomposer/capeditor/locale', 
+    'capcomposer/src/capcomposer/cap/locale', 
+    'capcomposer/src/capcomposer/home/locale', 
+]
