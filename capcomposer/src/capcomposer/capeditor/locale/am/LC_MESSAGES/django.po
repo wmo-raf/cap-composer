@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-30 20:17+0300\n"
+"POT-Creation-Date: 2025-11-26 13:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,1320 +17,1479 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capeditor/blocks.py:117 capeditor/blocks.py:145 capeditor/blocks.py:482
-#: capeditor/cap_settings.py:114
+#: capcomposer/src/capcomposer/config/templates/404.html:19
+msgid "Page not found"
+msgstr "ገጽ አልተገኘም"
+
+#: capcomposer/src/capcomposer/config/templates/404.html:23
+msgid "Sorry, this page could not be found"
+msgstr "ይቅርታ, ይህ ገጽ ሊገኝ አልቻለም"
+
+#: capcomposer/src/capcomposer/config/templates/500.html:17
+msgid "Internal server error"
+msgstr "የውስጥ አገልጋይ ስህተት"
+
+#: capcomposer/src/capcomposer/config/templates/500.html:20
+msgid "Sorry, there seems to be an error. Please try again soon"
+msgstr "ይቅርታ, አንድ ስህተት ይመስላል. እባክዎ በቅርቡ እንደገና ይሞክሩ"
+
+#: capcomposer/src/capcomposer/config/templates/axes/lockout.html:4
+msgid "Sign in"
+msgstr "ይግቡ"
+
+#: capcomposer/src/capcomposer/config/templates/axes/lockout.html:10
+msgid "Account Locked"
+msgstr "መለያ ተቆል .ል"
+
+#: capcomposer/src/capcomposer/config/templates/axes/lockout.html:15
+msgid ""
+"Your account has been locked due to multiple failed login attempts. Please "
+"try again later."
+msgstr ""
+"የእርስዎ መለያ በተካሄደ በብዙ የተሳሳቱ የመግቢያ ሙከራዎች ምክንያት ተቆል has ል. እባክዎ ቆይተው እንደገና ይሞክሩ."
+
+#: capcomposer/src/capcomposer/config/templates/axes/lockout.html:17
+msgid ""
+"You account has been locked due to multiple failed login attempts. Please "
+"contact our support team for assistance."
+msgstr ""
+"በበርካታ የተሳካ የመግቢያ ሙከራዎች ምክንያት መለያ ተቆጥረዋል. እባክዎን ለእርዳታ ድጋፍ ቡድናችንን ያነጋግሩ."
+
+#: capcomposer/src/capcomposer/config/templates/footer.html:5
+msgid "Powered by CAPComposer"
+msgstr "በ CAPCOCOPOMOPOSE የተጎለበተ"
+
+#: capcomposer/src/capcomposer/config/templates/wagtailadmin/home.html:5
+msgid "Welcome to"
+msgstr "እንኳን በደህና መጡ"
+
+#: capcomposer/src/capcomposer/config/templates/wagtailadmin/home.html:9
+msgid "CAPComposer"
+msgstr "ካፒኮሚፕስ"
+
+#: capcomposer/src/capcomposer/home/models.py:19
+msgid "Subtitle"
+msgstr "ንዑስ ርዕስ"
+
+#: capcomposer/src/capcomposer/capeditor/blocks.py:117
+#: capcomposer/src/capcomposer/capeditor/blocks.py:145
+#: capcomposer/src/capcomposer/capeditor/blocks.py:502
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:163
 msgid "Name"
 msgstr "ስም"
 
-#: capeditor/blocks.py:117
+#: capcomposer/src/capcomposer/capeditor/blocks.py:117
 msgid "Name of the recipient"
 msgstr "የተቀባዩ ስም"
 
-#: capeditor/blocks.py:118
+#: capcomposer/src/capcomposer/capeditor/blocks.py:118
 msgid "Address"
 msgstr "አድራሻ"
 
-#: capeditor/blocks.py:118
+#: capcomposer/src/capcomposer/capeditor/blocks.py:118
 msgid "Address Information of the recipient"
-msgstr "የተቀባዩ አድራሻ መረጃ"
+msgstr "የተቀባዩ አድራሻ አድራሻ"
 
-#: capeditor/blocks.py:136 capeditor/models.py:172
+#: capcomposer/src/capcomposer/capeditor/blocks.py:136
+#: capcomposer/src/capcomposer/capeditor/models.py:228
 msgid "Reference Alert"
-msgstr "የማጣቀሻ ማንቂያ"
+msgstr "ማጣቀሻ ማንቂያ"
 
-#: capeditor/blocks.py:137
+#: capcomposer/src/capcomposer/capeditor/blocks.py:137
 msgid "Earlier alert referenced by this alert"
-msgstr "የቀደመው ማንቂያ በዚህ ማንቂያ ተጠቅሷል"
+msgstr "በዚህ ማንቂያ ላይ ቀደም ሲል ማንጠልጠያ ተጠቀሰ"
 
-#: capeditor/blocks.py:141 capeditor/models.py:177
+#: capcomposer/src/capcomposer/capeditor/blocks.py:141
+#: capcomposer/src/capcomposer/capeditor/models.py:233
 msgid "Incident"
 msgstr "ክስተት"
 
-#: capeditor/blocks.py:141
+#: capcomposer/src/capcomposer/capeditor/blocks.py:141
 msgid "Referent incident to this alert message"
-msgstr "ለዚህ የማንቂያ መልእክት የማጣቀሻ ክስተት"
+msgstr "ለዚህ ማንቂያ መልእክት"
 
-#: capeditor/blocks.py:146 capeditor/blocks.py:173 capeditor/blocks.py:483
+#: capcomposer/src/capcomposer/capeditor/blocks.py:146
+#: capcomposer/src/capcomposer/capeditor/blocks.py:173
+#: capcomposer/src/capcomposer/capeditor/blocks.py:503
 msgid "Value"
-msgstr "ዋጋ"
+msgstr "እሴት"
 
-#: capeditor/blocks.py:151
+#: capcomposer/src/capcomposer/capeditor/blocks.py:151
 msgid "Shelter - Take shelter in place or per instruction"
-msgstr "መጠለያ - በቦታ ወይም በመመሪያው መጠለል"
+msgstr "መጠለያ - በቦታው ወይም በአንድ መመሪያ ውስጥ መጠለያ ይያዙ"
 
-#: capeditor/blocks.py:152
+#: capcomposer/src/capcomposer/capeditor/blocks.py:152
 msgid "Evacuate - Relocate as instructed in the instruction"
-msgstr "መልቀቅ - በመመሪያው ውስጥ እንደታዘዘው ወደ ሌላ ቦታ ያስተላልፉ"
+msgstr "መልቀቅ - በትምህርቱ ውስጥ እንደተመረጠ"
 
-#: capeditor/blocks.py:153
+#: capcomposer/src/capcomposer/capeditor/blocks.py:153
 msgid "Prepare - Relocate as instructed in the instruction"
-msgstr "አዘጋጅ - በመመሪያው ውስጥ እንደታዘዘው ወደ ሌላ ቦታ ይቀይሩ"
+msgstr "ያዘጋጁ - በትምህርቱ ውስጥ እንደተመረጠ"
 
-#: capeditor/blocks.py:154
+#: capcomposer/src/capcomposer/capeditor/blocks.py:154
 msgid "Execute - Execute a pre-planned activity identified in instruction"
-msgstr "አስፈጽም - በመመሪያው ውስጥ ተለይቶ አስቀድሞ የታቀደ እንቅስቃሴን ያከናውኑ"
+msgstr "ተግባራዊ - በትምህርቱ ውስጥ የተለዩ ቅድመ-የታቀደ እንቅስቃሴን ያከናውናል"
 
-#: capeditor/blocks.py:155
+#: capcomposer/src/capcomposer/capeditor/blocks.py:155
 msgid "Avoid - Avoid the subject event as per the instruction"
-msgstr "አስወግዱ - እንደ መመሪያው የርዕሰ-ጉዳዩን ክስተት ያስወግዱ"
+msgstr "ከርዕሰ-ትምህርት መሠረት ከርዕሰ ትምህርት አስወግዱ"
 
-#: capeditor/blocks.py:156
+#: capcomposer/src/capcomposer/capeditor/blocks.py:156
 msgid "Monitor - Attend to information sources as described in instruction"
-msgstr "ክትትል - በመመሪያው ላይ እንደተገለጸው የመረጃ ምንጮችን መከታተል"
+msgstr "መከታተል - በትምህርቱ እንደተገለፀው ለመረጃ ምንጮች ይሳተፉ"
 
-#: capeditor/blocks.py:157
+#: capcomposer/src/capcomposer/capeditor/blocks.py:157
 msgid ""
 "Assess - Evaluate the information in this message - DONT USE FOR PUBLIC "
 "ALERTS"
-msgstr "ይገምግሙ - በዚህ መልእክት ውስጥ ያለውን መረጃ ይገምግሙ - ለሕዝብ ማንቂያዎች አይጠቀሙ"
+msgstr "መገምገም - በዚህ መልእክት ውስጥ ያለውን መረጃ ይገምግሙ - ለሕዝብ ማንቂያዎች አይጠቀሙ"
 
-#: capeditor/blocks.py:158
+#: capcomposer/src/capcomposer/capeditor/blocks.py:158
 msgid ""
 "All Clear - The subject event no longer poses a threat or concern and any "
 "follow on action is described in instruction"
 msgstr ""
-"ሁሉም ግልጽ - የርዕሰ-ጉዳዩ ክስተት ከአሁን በኋላ ስጋት ወይም ስጋት አያመጣም እና ማንኛውም የተግባር ክትትል "
-"በመመሪያው ውስጥ ተገልጿል"
+"ሁሉም ግልጽ - የርዕሰ ጉዳይ ክስተት ከእንግዲህ ስጋት ወይም አሳሳቢነት ወይም ጭንቀትን አያገኝም እና በትምህርቱ ላይ "
+"የሚደረግ ማንኛውም ቀጣይነት ነው"
 
-#: capeditor/blocks.py:160
+#: capcomposer/src/capcomposer/capeditor/blocks.py:160
 msgid "No action recommended"
-msgstr "ምንም እርምጃ አይመከርም"
+msgstr "ምንም እርምጃ አይመካም"
 
-#: capeditor/blocks.py:163
+#: capcomposer/src/capcomposer/capeditor/blocks.py:163
 msgid "Response type"
-msgstr "የምላሽ አይነት"
+msgstr "የምላሽ ዓይነት"
 
-#: capeditor/blocks.py:164
+#: capcomposer/src/capcomposer/capeditor/blocks.py:164
 msgid ""
 "The code denoting the type of action recommended for the target audience"
-msgstr "ለዒላማ ታዳሚዎች የሚመከር የእርምጃ አይነትን የሚያመለክት ኮድ"
+msgstr "ለ target ላማ አድማጮች የሚመከሩትን የእድገት አይነት የሚያመለክተው ኮድ"
 
-#: capeditor/blocks.py:169
+#: capcomposer/src/capcomposer/capeditor/blocks.py:169
 msgid "Value Name"
-msgstr "የእሴት ስም"
+msgstr "እሴት ስም"
 
-#: capeditor/blocks.py:171
+#: capcomposer/src/capcomposer/capeditor/blocks.py:171
 msgid ""
 "User-assigned string designating the domain of the code. Acronyms SHOULD be "
 "represented in all capital letters without periods (e.g., SAME, FIPS, ZIP"
 msgstr ""
-"የኮዱን ጎራ የሚሰየም በተጠቃሚ የተመደበ ሕብረቁምፊ። አጽሕሮተ ቃላት በሁሉም አቢይ ሆሄያት ያለ ጊዜዎች መወከል አለባቸው"
-" (ለምሳሌ፣ SAME፣ FIPS፣ ዚፕ"
+"የኮዱን ጎራ የሚያንፀባርቅ የተጠቃሚ-የተመደበው ሕብረቁምፊ. አቃቤዎች ያለ ምንም ጊዜ (ኢ.ጂ.ግ., ተመሳሳይ, ፍላሽ, "
+"ዚፕ) ውስጥ በሁሉም የካፒታል ፊደላት መወከል አለባቸው"
 
-#: capeditor/blocks.py:174
+#: capcomposer/src/capcomposer/capeditor/blocks.py:174
 msgid "A string (which may represent a number) denoting the value itself"
-msgstr "እሴቱን ራሱ የሚያመለክት ሕብረቁምፊ (ቁጥር ሊወክል ይችላል)"
+msgstr "ዋጋውን እራሱን የሚያመለክቱ ሕብረቁምፊ"
 
-#: capeditor/blocks.py:177
+#: capcomposer/src/capcomposer/capeditor/blocks.py:177
 msgid "Geographically-based code to describe a message target area"
-msgstr "የመልእክት ዒላማ አካባቢን ለመግለጽ በጂኦግራፊያዊ ላይ የተመሠረተ ኮድ"
+msgstr "የመልእክት target ላማ ቦታን ለመግለጽ ከጂዮግራፊያዊነት-ተኮር ኮድ"
 
-#: capeditor/blocks.py:232
+#: capcomposer/src/capcomposer/capeditor/blocks.py:233
 msgid "Level 0"
 msgstr "ደረጃ 0"
 
-#: capeditor/blocks.py:233
+#: capcomposer/src/capcomposer/capeditor/blocks.py:234
 msgid "Level 1"
 msgstr "ደረጃ 1"
 
-#: capeditor/blocks.py:234
+#: capcomposer/src/capcomposer/capeditor/blocks.py:235
 msgid "Level 2"
 msgstr "ደረጃ 2"
 
-#: capeditor/blocks.py:235
+#: capcomposer/src/capcomposer/capeditor/blocks.py:236
 msgid "Level 3"
 msgstr "ደረጃ 3"
 
-#: capeditor/blocks.py:238 capeditor/blocks.py:296 capeditor/blocks.py:358
+#: capcomposer/src/capcomposer/capeditor/blocks.py:239
+#: capcomposer/src/capcomposer/capeditor/blocks.py:299
+#: capcomposer/src/capcomposer/capeditor/blocks.py:377
 msgid "Affected areas / Regions"
 msgstr "የተጎዱ አካባቢዎች / ክልሎች"
 
-#: capeditor/blocks.py:239 capeditor/blocks.py:297 capeditor/blocks.py:359
+#: capcomposer/src/capcomposer/capeditor/blocks.py:241
+#: capcomposer/src/capcomposer/capeditor/blocks.py:301
+#: capcomposer/src/capcomposer/capeditor/blocks.py:379
 msgid "The text describing the affected area of the alert message"
-msgstr "የማስጠንቀቂያ መልእክት የተጎዳውን አካባቢ የሚገልጽ ጽሑፍ"
+msgstr "የተጎሳቆለ የእንኙነት መልእክት የተጎዱትን ቦታ የሚገልጽ ጽሑፍ"
 
-#: capeditor/blocks.py:240
+#: capcomposer/src/capcomposer/capeditor/blocks.py:242
 msgid "Administrative Level"
-msgstr "የአስተዳደር ደረጃ"
+msgstr "አስተዳደራዊ ደረጃ"
 
-#: capeditor/blocks.py:241
+#: capcomposer/src/capcomposer/capeditor/blocks.py:243
 msgid "Boundary"
 msgstr "ድንበር"
 
-#: capeditor/blocks.py:242 capeditor/blocks.py:300
+#: capcomposer/src/capcomposer/capeditor/blocks.py:244
+#: capcomposer/src/capcomposer/capeditor/blocks.py:304
 msgid ""
 "The paired values of points defining a polygon that delineates the affected "
 "area of the alert message"
-msgstr "የማንቂያ መልእክቱ የተጎዳውን አካባቢ የሚገልጽ ፖሊጎን የሚወስኑ ጥንድ ጥንድ እሴቶች"
+msgstr "የተጎሳቆለ የእንኙነት መልእክት የተጎዱትን የአከባቢው አካባቢ የሚያስተላልፉ ነጥቦችን የተጣመሩ ነጥቦች"
 
-#: capeditor/blocks.py:245 capeditor/blocks.py:302 capeditor/blocks.py:361
-#: capeditor/blocks.py:410
+#: capcomposer/src/capcomposer/capeditor/blocks.py:247
+#: capcomposer/src/capcomposer/capeditor/blocks.py:306
+#: capcomposer/src/capcomposer/capeditor/blocks.py:381
+#: capcomposer/src/capcomposer/capeditor/blocks.py:430
 msgid "Altitude"
 msgstr "ከፍታ"
 
-#: capeditor/blocks.py:246 capeditor/blocks.py:303 capeditor/blocks.py:362
-#: capeditor/blocks.py:411
+#: capcomposer/src/capcomposer/capeditor/blocks.py:248
+#: capcomposer/src/capcomposer/capeditor/blocks.py:307
+#: capcomposer/src/capcomposer/capeditor/blocks.py:382
+#: capcomposer/src/capcomposer/capeditor/blocks.py:431
 msgid ""
 "The specific or minimum altitude of the affected area of the alert message"
-msgstr "የማስጠንቀቂያው መልእክት የተጎዳው አካባቢ ልዩ ወይም ዝቅተኛ ከፍታ"
+msgstr "የተጎዱት የአስተያየት መልእክት ልዩ ወይም ዝቅተኛ ቅጣት"
 
-#: capeditor/blocks.py:248 capeditor/blocks.py:305 capeditor/blocks.py:364
-#: capeditor/blocks.py:413
+#: capcomposer/src/capcomposer/capeditor/blocks.py:250
+#: capcomposer/src/capcomposer/capeditor/blocks.py:309
+#: capcomposer/src/capcomposer/capeditor/blocks.py:384
+#: capcomposer/src/capcomposer/capeditor/blocks.py:433
 msgid "Ceiling"
 msgstr "ጣሪያ"
 
-#: capeditor/blocks.py:249 capeditor/blocks.py:306 capeditor/blocks.py:365
-#: capeditor/blocks.py:414
+#: capcomposer/src/capcomposer/capeditor/blocks.py:251
+#: capcomposer/src/capcomposer/capeditor/blocks.py:310
+#: capcomposer/src/capcomposer/capeditor/blocks.py:385
+#: capcomposer/src/capcomposer/capeditor/blocks.py:434
 msgid ""
 "The maximum altitude of the affected area of the alert message.MUST NOT be "
 "used except in combination with the altitude element. "
 msgstr ""
-"የማስጠንቀቂያ መልእክት የተጎዳው አካባቢ ከፍተኛው ከፍታ ከፍ ካለው ኤለመንት ጋር ካልተጣመረ በስተቀር ጥቅም ላይ መዋል "
-"የለበትም።"
+"የነካውን የማንቂያ መልእክት የተጎዳው ከፍተኛ ከፍታ ከፍተኛው ከፍተኛው ከፍታ ከፍታ ከፍታ ካለው በስተቀር ጥቅም ላይ "
+"አይውልም."
 
-#: capeditor/blocks.py:252 capeditor/blocks.py:308 capeditor/blocks.py:367
-#: capeditor/blocks.py:416
+#: capcomposer/src/capcomposer/capeditor/blocks.py:254
+#: capcomposer/src/capcomposer/capeditor/blocks.py:312
+#: capcomposer/src/capcomposer/capeditor/blocks.py:387
+#: capcomposer/src/capcomposer/capeditor/blocks.py:436
 msgid "Geocode"
 msgstr "ጂኦኮድ"
 
-#: capeditor/blocks.py:298
+#: capcomposer/src/capcomposer/capeditor/blocks.py:302
 msgid "Polygon"
 msgstr "ፖሊጎን"
 
-#: capeditor/blocks.py:360 capeditor/blocks.py:676
+#: capcomposer/src/capcomposer/capeditor/blocks.py:380
+#: capcomposer/src/capcomposer/capeditor/blocks.py:693
 msgid "Circle"
-msgstr "ክብ"
+msgstr "ክበብ"
 
-#: capeditor/blocks.py:360
+#: capcomposer/src/capcomposer/capeditor/blocks.py:380
 msgid "Drag the marker to change position"
-msgstr "ቦታውን ለመቀየር ምልክት ማድረጊያውን ይጎትቱት።"
+msgstr "አመልካቹን ለመቀየር አመልካቹን ይጎትቱ"
 
-#: capeditor/blocks.py:409 capeditor/cap_settings.py:66
-#: capeditor/cap_settings.py:115
+#: capcomposer/src/capcomposer/capeditor/blocks.py:429
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:73
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:164
 msgid "Area"
 msgstr "አካባቢ"
 
-#: capeditor/blocks.py:419
+#: capcomposer/src/capcomposer/capeditor/blocks.py:439
 msgid "The human-readable name of the agency or authority issuing this alert."
-msgstr "ይህን ማንቂያ የሚያወጣው ኤጀንሲ ወይም ባለስልጣን በሰው ሊነበብ የሚችል ስም።"
+msgstr "ይህንን ማንቂያ እየነካው የኤጀንሲው ስም ወይም ባለስልጣን ስም የተነባቢ ስም."
 
-#: capeditor/blocks.py:420
+#: capcomposer/src/capcomposer/capeditor/blocks.py:440
 msgid ""
 "The text describing the contact for follow-up and confirmation of the alert "
 "message"
-msgstr "ለመከታተል እና ለማንቂያ መልእክቱ ማረጋገጫ እውቂያውን የሚገልጽ ጽሑፍ"
+msgstr "የማንቂያ መልእክት ማረጋገጫ እና የማረጋገጫ መልዕክት ማረጋገጫን የሚገልጽ ጽሑፍ"
 
-#: capeditor/blocks.py:462 capeditor/blocks.py:471
+#: capcomposer/src/capcomposer/capeditor/blocks.py:482
+#: capcomposer/src/capcomposer/capeditor/blocks.py:491
 msgid "Resource Description"
-msgstr "የንብረት መግለጫ"
+msgstr "የመረጃ መግለጫ"
 
-#: capeditor/blocks.py:463 capeditor/blocks.py:472
+#: capcomposer/src/capcomposer/capeditor/blocks.py:483
+#: capcomposer/src/capcomposer/capeditor/blocks.py:492
 msgid "The text describing the type and content of the resource file"
-msgstr "የመርጃ ፋይሉን ዓይነት እና ይዘት የሚገልጽ ጽሑፍ"
+msgstr "የሀብት ፋይሉን አይነት እና ይዘት የሚገልጽ ጽሑፍ"
 
-#: capeditor/blocks.py:473
+#: capcomposer/src/capcomposer/capeditor/blocks.py:493
 msgid "External Resource Link"
-msgstr "የውጭ መገልገያ አገናኝ"
+msgstr "የውጭ ሀብት አገናኝ"
 
-#: capeditor/blocks.py:474
+#: capcomposer/src/capcomposer/capeditor/blocks.py:494
 msgid ""
 "Link to external resource. This can be for example a link to related "
 "websites. "
-msgstr "ወደ ውጫዊ ምንጭ አገናኝ. ይህ ለምሳሌ ወደ ተዛማጅ ድር ጣቢያዎች አገናኝ ሊሆን ይችላል."
+msgstr "ወደ ውጫዊ ሀብት አገናኝ. ይህ ለምሳሌ ተዛማጅ ድር ጣቢያዎች አገናኝ ሊሆን ይችላል."
 
-#: capeditor/blocks.py:482
+#: capcomposer/src/capcomposer/capeditor/blocks.py:502
 msgid "Name for the event code"
-msgstr "የክስተት ኮድ ስም"
+msgstr "ለክስተቱ ኮድ ስም"
 
-#: capeditor/blocks.py:483
+#: capcomposer/src/capcomposer/capeditor/blocks.py:503
 msgid "Value of the event code"
-msgstr "የክስተቱ ኮድ ዋጋ"
+msgstr "የዝግጅቱ ኮድ ዋጋ"
 
-#: capeditor/blocks.py:585
-msgid "English"
-msgstr "እንግሊዝኛ"
-
-#: capeditor/blocks.py:586
-msgid "French"
-msgstr "ፈረንሳይኛ"
-
-#: capeditor/blocks.py:590
-msgid "Geophysical"
-msgstr "ጂኦፊዚካል"
-
-#: capeditor/blocks.py:591
-msgid "Meteorological"
-msgstr "ሜትሮሎጂ"
-
-#: capeditor/blocks.py:592
-msgid "General emergency and public safety"
-msgstr "አጠቃላይ ድንገተኛ እና የህዝብ ደህንነት"
-
-#: capeditor/blocks.py:593
-msgid "Law enforcement, military, homeland and local/private security"
-msgstr "የሕግ አስከባሪ፣ ወታደራዊ፣ የአገር ቤት እና የአካባቢ/የግል ደህንነት"
-
-#: capeditor/blocks.py:594
-msgid "Rescue and recovery"
-msgstr "ማዳን እና ማገገም"
-
-#: capeditor/blocks.py:595
-msgid "Fire suppression and rescue"
-msgstr "እሳትን ማዳን እና ማዳን"
-
-#: capeditor/blocks.py:596
-msgid "Medical and public health"
-msgstr "የሕክምና እና የህዝብ ጤና"
-
-#: capeditor/blocks.py:597
-msgid "Pollution and other environmental"
-msgstr "ብክለት እና ሌሎች አካባቢያዊ"
-
-#: capeditor/blocks.py:598
-msgid "Public and private transportation"
-msgstr "የህዝብ እና የግል መጓጓዣ"
-
-#: capeditor/blocks.py:599
-msgid "Utility, telecommunication, other non-transport infrastructure"
-msgstr "መገልገያ፣ ቴሌኮሙኒኬሽን፣ ሌሎች የትራንስፖርት ያልሆኑ መሠረተ ልማቶች"
-
-#: capeditor/blocks.py:600
-msgid ""
-"Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat "
-"or attack"
-msgstr "ኬሚካል፣ ባዮሎጂካል፣ ራዲዮሎጂካል፣ ኑክሌር ወይም ከፍተኛ ምርት የሚፈነዳ ዛቻ ወይም ጥቃት"
-
-#: capeditor/blocks.py:601
-msgid "Other events"
-msgstr "ሌሎች ክስተቶች"
-
-#: capeditor/blocks.py:605
+#: capcomposer/src/capcomposer/capeditor/blocks.py:624
 msgid "Immediate - Responsive action SHOULD be taken immediately"
-msgstr "ወዲያውኑ - ምላሽ ሰጪ እርምጃ ወዲያውኑ መወሰድ አለበት"
+msgstr "ወዲያውኑ - ምላሽ ሰጭ እርምጃ ወዲያውኑ መወሰድ አለበት"
 
-#: capeditor/blocks.py:606
+#: capcomposer/src/capcomposer/capeditor/blocks.py:625
 msgid "Expected - Responsive action SHOULD be taken soon (within next hour)"
 msgstr "የሚጠበቀው - ምላሽ ሰጪ እርምጃ በቅርቡ መወሰድ አለበት (በሚቀጥለው ሰዓት ውስጥ)"
 
-#: capeditor/blocks.py:607
+#: capcomposer/src/capcomposer/capeditor/blocks.py:626
 msgid "Future - Responsive action SHOULD be taken in the near future"
-msgstr "ወደፊት - ምላሽ ሰጪ እርምጃ በቅርብ ጊዜ ውስጥ መወሰድ አለበት"
+msgstr "የወደፊቱ - ምላሽ ሰጭ እርምጃ በቅርብ ጊዜ ውስጥ መወሰድ አለበት"
 
-#: capeditor/blocks.py:608
+#: capcomposer/src/capcomposer/capeditor/blocks.py:627
 msgid "Past - Responsive action is no longer required"
-msgstr "ያለፈው - ምላሽ ሰጪ እርምጃ ከአሁን በኋላ አያስፈልግም"
+msgstr "ያለፈው - ምላሽ ሰጪ እርምጃ ከእንግዲህ አያስፈልግም"
 
-#: capeditor/blocks.py:613
+#: capcomposer/src/capcomposer/capeditor/blocks.py:632
 msgid "Extreme - Extraordinary threat to life or property"
-msgstr "እጅግ በጣም ከባድ - ለሕይወት ወይም ለንብረት ያልተለመደ ስጋት"
+msgstr "በጣም አስፈላጊ - ለሕይወት ወይም ለንብረት ያልተለመደ ስጋት"
 
-#: capeditor/blocks.py:614
+#: capcomposer/src/capcomposer/capeditor/blocks.py:633
 msgid "Severe - Significant threat to life or property"
 msgstr "ከባድ - ለሕይወት ወይም ለንብረት ትልቅ ስጋት"
 
-#: capeditor/blocks.py:615
+#: capcomposer/src/capcomposer/capeditor/blocks.py:634
 msgid "Moderate - Possible threat to life or property"
-msgstr "መጠነኛ - በህይወት ወይም በንብረት ላይ ሊከሰት የሚችል ስጋት"
+msgstr "መካከለኛ - ለሕይወት ወይም ለንብረት አደጋ"
 
-#: capeditor/blocks.py:616
+#: capcomposer/src/capcomposer/capeditor/blocks.py:635
 msgid "Minor - Minimal to no known threat to life or property"
-msgstr "አናሳ - በህይወት ወይም በንብረት ላይ የማይታወቅ አነስተኛ ስጋት"
+msgstr "ጥቃቅን - አነስተኛ ለሆኑ የህይወት ወይም ለንብረት ያለ ስጋት የለውም"
 
-#: capeditor/blocks.py:621
+#: capcomposer/src/capcomposer/capeditor/blocks.py:640
 msgid "Observed - Determined to have occurred or to be ongoing"
-msgstr "ታይቷል - ተከስቷል ወይም ቀጣይነት እንዲኖረው ተወስኗል"
+msgstr "ተስተካክሏል - ተከስቷል ወይም ለመቀጠል ቆርጦ ነበር"
 
-#: capeditor/blocks.py:622
+#: capcomposer/src/capcomposer/capeditor/blocks.py:641
 msgid "Likely - Likely (percentage > ~50%)"
-msgstr "ምናልባት - ምናልባት (መቶኛ > ~ 50%)"
+msgstr "ምናልባት ምናልባት - (መቶኛ> ~ 50% ሊሆን ይችላል)"
 
-#: capeditor/blocks.py:623
+#: capcomposer/src/capcomposer/capeditor/blocks.py:642
 msgid "Possible - Possible but not likely (percentage <= ~50%)"
-msgstr "ይቻላል - ይቻላል ነገር ግን የማይሆን ​​(መቶኛ <= ~ 50%)"
+msgstr "ሊቻል ይችላል - የሚቻል ነገር ግን አይቀርም (መቶኛ <መቶኛ <= ~ 50%>"
 
-#: capeditor/blocks.py:624
+#: capcomposer/src/capcomposer/capeditor/blocks.py:643
 msgid "Unlikely - Not expected to occur (percentage ~ 0)"
-msgstr "የማይመስል - ይከሰታል ተብሎ አይጠበቅም (መቶኛ ~ 0)"
+msgstr "የማይቻል ነው - እንዲከሰት አይጠበቅም (መቶኛ ~ 0)"
 
-#: capeditor/blocks.py:627
-#: capeditor/templates/capeditor/cap_alert_page.html:30
-#: capeditor/templates/capeditor/cap_alert_page.html:195
+#: capcomposer/src/capcomposer/capeditor/blocks.py:647
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:30
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:195
 msgid "Event"
 msgstr "ክስተት"
 
-#: capeditor/blocks.py:628
+#: capcomposer/src/capcomposer/capeditor/blocks.py:648
 msgid ""
 "The text denoting the type of the subject event of the alert message. You "
 "can define hazards events monitored by your institution from CAP settings"
 msgstr ""
-"የማንቂያ መልእክቱ የርዕሰ ጉዳይ ክስተት አይነትን የሚያመለክት ጽሑፍ። በተቋምዎ ቁጥጥር ስር ያሉ የአደጋ ክስተቶችን ከ "
-"CAP መቼቶች መግለፅ ይችላሉ።"
+"የማያውቀውን የርዕሰ-ጉዳይ ርዕሰ ጉዳይ ሁኔታ ዓይነት የሚያመለክተው ጽሑፉ. አደጋዎች በተቋማትዎ ከ CAP ቅንብሮችዎ "
+"ቁጥጥር የሚደረግላቸው አደጋዎች"
 
-#: capeditor/blocks.py:631
-msgid "Category"
-msgstr "ምድብ"
-
-#: capeditor/blocks.py:632
-msgid ""
-"The code denoting the category of the subject event of the alert message"
-msgstr "የማንቂያ መልእክቱ ርዕሰ ጉዳይ ክስተት ምድብን የሚያመለክት ኮድ"
-
-#: capeditor/blocks.py:634
+#: capcomposer/src/capcomposer/capeditor/blocks.py:651
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:77
 msgid "Language"
 msgstr "ቋንቋ"
 
-#: capeditor/blocks.py:635
-msgid "The code denoting the language of the alert message"
-msgstr "የማስጠንቀቂያ መልእክት ቋንቋን የሚያመለክት ኮድ"
+#: capcomposer/src/capcomposer/capeditor/blocks.py:652
+#, fuzzy
+#| msgid "The code denoting the language of the alert message"
+msgid ""
+"The code denoting the language of the alert message.If not selected, 'en-US'"
+" will be used as default"
+msgstr "የማንቂያ መልእክት ቋንቋውን ቋንቋ የሚያመለክተው ኮዱ"
 
-#: capeditor/blocks.py:637
+#: capcomposer/src/capcomposer/capeditor/blocks.py:654
 msgid "Urgency"
-msgstr "አስቸኳይ"
+msgstr "አጣዳፊነት"
 
-#: capeditor/blocks.py:638
+#: capcomposer/src/capcomposer/capeditor/blocks.py:655
 msgid ""
 "The code denoting the urgency of the subject event of the alert message"
-msgstr "የማንቂያ መልእክቱ የርእሰ ጉዳይ ክስተት አጣዳፊነት የሚያመለክት ኮድ"
+msgstr "የማያውቀውን መልእክት የርዕሰ-ጉዳዩ አጣዳፊነት የሚያመለክተው ኮዱ"
 
-#: capeditor/blocks.py:640
-#: capeditor/templates/capeditor/cap_alert_page.html:104
+#: capcomposer/src/capcomposer/capeditor/blocks.py:657
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:104
 msgid "Severity"
 msgstr "ከባድነት"
 
-#: capeditor/blocks.py:641
+#: capcomposer/src/capcomposer/capeditor/blocks.py:658
 msgid ""
 "The code denoting the severity of the subject event of the alert message"
-msgstr "የማንቂያ መልእክቱ የርዕሰ ጉዳይ ክስተት ክብደትን የሚያመለክት ኮድ"
+msgstr "የማንቂያ መልእክት ርዕሰ ጉዳይ የርዕሰ-ጉዳዩን ከባድነት የሚያመለክተው ኮድ"
 
-#: capeditor/blocks.py:643
-#: capeditor/templates/capeditor/cap_alert_page.html:113
+#: capcomposer/src/capcomposer/capeditor/blocks.py:660
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:113
 msgid "Certainty"
-msgstr "እርግጠኝነት"
+msgstr "እርግጠኛነት"
 
-#: capeditor/blocks.py:644
+#: capcomposer/src/capcomposer/capeditor/blocks.py:661
 msgid ""
 "The code denoting the certainty of the subject event of the alert message"
-msgstr "የማንቂያ መልእክቱ ርዕሰ ጉዳይ ክስተት እርግጠኝነትን የሚያመለክት ኮድ"
+msgstr "የማያውቀውን የርዕሱ ርዕሰ ጉዳይ ትክክለኛነት የሚያመለክተው ኮዱ"
 
-#: capeditor/blocks.py:646
+#: capcomposer/src/capcomposer/capeditor/blocks.py:663
 msgid "Headline"
-msgstr "ርዕስ"
+msgstr "አርዕስት"
 
-#: capeditor/blocks.py:647
+#: capcomposer/src/capcomposer/capeditor/blocks.py:664
 msgid ""
 "The text headline of the alert message. Make it direct and actionable as "
 "possible while remaining short"
-msgstr "የማንቂያ መልእክቱ የጽሑፍ ርዕስ። አጭር ሲቀሩ በተቻለ መጠን ቀጥተኛ እና ተግባራዊ ያድርጉት"
+msgstr "የማንቂያ መልእክት የጽሑፍ ርዕስ. አጭር እና እርምጃ እንዲወስድ ያድርጉ እና አጭር በሆነ ጊዜ አጭር ያድርጉት"
 
-#: capeditor/blocks.py:649
+#: capcomposer/src/capcomposer/capeditor/blocks.py:666
 msgid "Description"
 msgstr "መግለጫ"
 
-#: capeditor/blocks.py:651
+#: capcomposer/src/capcomposer/capeditor/blocks.py:668
 msgid ""
 "The text describing the subject event of the alert message. An extended "
 "description of the hazard or event that occasioned this message"
 msgstr ""
-"የማንቂያ መልእክቱን ርዕሰ ጉዳይ ክስተት የሚገልጽ ጽሑፍ። ይህን መልእክት ያስከተለው አደጋ ወይም ክስተት የተራዘመ "
-"መግለጫ"
+"የማያውቀውን የርዕሱ ርዕሰ ጉዳይ የሚገልጽ ጽሑፍ. ይህንን መልእክት ስለሚያገደው አደገኛ ወይም ክስተት የተራዘመ መግለጫ"
 
-#: capeditor/blocks.py:653
+#: capcomposer/src/capcomposer/capeditor/blocks.py:670
 msgid "Instruction"
 msgstr "መመሪያ"
 
-#: capeditor/blocks.py:654
+#: capcomposer/src/capcomposer/capeditor/blocks.py:671
 msgid ""
 "The text describing the recommended action to be taken by recipients of the "
 "alert message"
-msgstr "የማንቂያ መልእክቱ ተቀባዮች የሚመከር እርምጃን የሚገልጽ ጽሑፍ"
+msgstr "በተቀባው መልእክት በተቀባዮች የተያዙትን እርምጃ የሚገልጽ ጽሑፍ"
 
-#: capeditor/blocks.py:656
-#: capeditor/templates/capeditor/cap_alert_page.html:56
+#: capcomposer/src/capcomposer/capeditor/blocks.py:673
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:56
 msgid "Effective"
 msgstr "ውጤታማ"
 
-#: capeditor/blocks.py:657
+#: capcomposer/src/capcomposer/capeditor/blocks.py:674
 msgid ""
 "The effective time of the information of the alert message. If not set, the "
 "sent date will be used"
-msgstr "የማንቂያ መልእክት መረጃ ውጤታማ ጊዜ። ካልተዋቀረ የተላከው ቀን ስራ ላይ ይውላል"
+msgstr "የማንቂያ መልእክት መረጃ ውጤታማ ጊዜ. ካልተዋቀረ የተላከው ቀን ጥቅም ላይ ይውላል"
 
-#: capeditor/blocks.py:659
-#: capeditor/templates/capeditor/cap_alert_page.html:72
+#: capcomposer/src/capcomposer/capeditor/blocks.py:676
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:72
 msgid "Onset"
-msgstr "ጅምር"
+msgstr "መቀስቀስ"
 
-#: capeditor/blocks.py:660
+#: capcomposer/src/capcomposer/capeditor/blocks.py:677
 msgid ""
 "The expected time of the beginning of the subject event of the alert message"
-msgstr "የማንቂያ መልእክቱ ርዕሰ ጉዳይ ክስተት የሚጠበቀው ጊዜ"
+msgstr "የማያውቀውን መልእክት የርዕሱ ርዕሰ ጉዳይ መጀመሪያ የሚጠበቅበት ጊዜ"
 
-#: capeditor/blocks.py:662
-#: capeditor/templates/capeditor/cap_alert_page.html:81
+#: capcomposer/src/capcomposer/capeditor/blocks.py:679
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:81
 msgid "Expires"
-msgstr "ጊዜው ያበቃል"
+msgstr "ጊዜው ያልፋል"
 
-#: capeditor/blocks.py:663
+#: capcomposer/src/capcomposer/capeditor/blocks.py:680
 msgid ""
 "The expiry time of the information of the alert message. If not set, each "
 "recipient is free to set its own policy as to when the message is no longer "
 "in effect."
 msgstr ""
-"የማንቂያ መልእክቱ መረጃ የሚያበቃበት ጊዜ። ካልተዋቀረ እያንዳንዱ ተቀባይ መልእክቱ መቼ እንደማይሰራ የራሱን ፖሊሲ "
-"ለማዘጋጀት ነፃ ነው።"
+"የማንቂያ መልእክት ማጠናቀቂያ ጊዜ የሚያበቃበት ጊዜ. ካልተዋቀረ እያንዳንዱ ተቀባዩ መልዕክቱ ከእንግዲህ ተግባራዊ "
+"በማይሠራበት ጊዜ የራሱን ፖሊሲ ለማዘጋጀት ነፃ ነው."
 
-#: capeditor/blocks.py:666
+#: capcomposer/src/capcomposer/capeditor/blocks.py:683
 msgid "Response Types"
-msgstr "የምላሽ ዓይነቶች"
+msgstr "ምላሽ ዓይነቶች"
 
-#: capeditor/blocks.py:668
+#: capcomposer/src/capcomposer/capeditor/blocks.py:685
 msgid "Sender name"
 msgstr "የላኪ ስም"
 
-#: capeditor/blocks.py:670 capeditor/cap_settings.py:41
+#: capcomposer/src/capcomposer/capeditor/blocks.py:687
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:43
 msgid "Contact"
-msgstr "ተገናኝ"
+msgstr "እውቂያ"
 
-#: capeditor/blocks.py:671
+#: capcomposer/src/capcomposer/capeditor/blocks.py:688
 msgid "Audience"
-msgstr "ታዳሚዎች"
+msgstr "አድማጮች"
 
-#: capeditor/blocks.py:672
+#: capcomposer/src/capcomposer/capeditor/blocks.py:689
 msgid "The text describing the intended audience of the alert message"
-msgstr "የማንቂያ መልእክቱ የታሰቡትን ታዳሚዎች የሚገልጽ ጽሑፍ"
+msgstr "የማያውቀውን የታሰበ አድማጮችን የሚገልጽ ጽሑፍ"
 
-#: capeditor/blocks.py:674
+#: capcomposer/src/capcomposer/capeditor/blocks.py:691
 msgid "Admin Boundary"
 msgstr "የአስተዳዳሪ ወሰን"
 
-#: capeditor/blocks.py:675
+#: capcomposer/src/capcomposer/capeditor/blocks.py:692
 msgid "Draw Polygon"
 msgstr "ፖሊጎን ይሳሉ"
 
-#: capeditor/blocks.py:677 capeditor/cap_settings.py:118
+#: capcomposer/src/capcomposer/capeditor/blocks.py:694
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:167
 msgid "Predefined Area"
-msgstr "አስቀድሞ የተገለጸ አካባቢ"
+msgstr "የተገለጸ ቦታ"
 
-#: capeditor/blocks.py:678
+#: capcomposer/src/capcomposer/capeditor/blocks.py:695
 msgid "Alert Area"
 msgstr "ማንቂያ አካባቢ"
 
-#: capeditor/blocks.py:678
+#: capcomposer/src/capcomposer/capeditor/blocks.py:695
 msgid "Admin Boundary, Polygon, Circle, or Predefined area"
-msgstr "የአስተዳዳሪ ድንበር፣ ፖሊጎን፣ ክበብ ወይም አስቀድሞ የተወሰነ አካባቢ"
+msgstr "የአስተዳዳሪ ድንበር, ፖሊጎን, ክበብ ወይም ቅድመ-ተቋም"
 
-#: capeditor/blocks.py:683
+#: capcomposer/src/capcomposer/capeditor/blocks.py:700
 msgid "Resources"
-msgstr "መርጃዎች"
+msgstr "ሀብቶች"
 
-#: capeditor/blocks.py:683
+#: capcomposer/src/capcomposer/capeditor/blocks.py:700
 msgid ""
 "Additional file with supplemental information related to this alert "
 "information"
-msgstr "ከዚህ የማንቂያ መረጃ ጋር የተያያዘ ተጨማሪ መረጃ ያለው ተጨማሪ ፋይል"
+msgstr "ከዚህ የማነሻ መረጃ ጋር በተያያዘ የተጨማሪ መረጃ ተጨማሪ ፋይል"
 
-#: capeditor/blocks.py:686
+#: capcomposer/src/capcomposer/capeditor/blocks.py:703
 msgid "Parameter"
-msgstr "መለኪያ"
+msgstr "ግቤት"
 
-#: capeditor/blocks.py:686
+#: capcomposer/src/capcomposer/capeditor/blocks.py:703
 msgid "Parameters"
 msgstr "መለኪያዎች"
 
-#: capeditor/blocks.py:687
-msgid "Event Code"
-msgstr "የክስተት ኮድ"
-
-#: capeditor/blocks.py:687
-msgid "Event codes"
-msgstr "የክስተት ኮዶች"
-
-#: capeditor/blocks.py:704
+#: capcomposer/src/capcomposer/capeditor/blocks.py:723
 msgid "The expiry time of the alert should be greater than the effective time"
-msgstr "የማስጠንቀቂያው የማብቂያ ጊዜ ከውጤታማው ጊዜ የበለጠ መሆን አለበት።"
+msgstr "የማንቂያ ጊዜው የሚያበቃበት ጊዜ ከጊዜው ጊዜ የበለጠ መሆን አለበት"
 
-#: capeditor/blocks.py:709
+#: capcomposer/src/capcomposer/capeditor/blocks.py:728
 msgid "The expiry time of the alert should be greater than the onset time"
-msgstr "የማንቂያው የማብቂያ ጊዜ ከመጀመሪያው ጊዜ የበለጠ መሆን አለበት"
+msgstr "የማንቂያ ጊዜው የሚያበቃበት ጊዜ ከተመረጠው ጊዜ በላይ መሆን አለበት"
 
-#: capeditor/blocks.py:716
+#: capcomposer/src/capcomposer/capeditor/blocks.py:735
 msgid "Contact Detail"
 msgstr "የእውቂያ ዝርዝር"
 
-#: capeditor/cap_settings.py:27
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:29
 msgid "CAP Sender Email"
-msgstr "CAP ላኪ ኢሜይል"
+msgstr "ካፕ ላኪ ኢሜል"
 
-#: capeditor/cap_settings.py:28
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:30
 msgid "Email of the sending institution"
-msgstr "የላኪው ተቋም ኢሜይል"
+msgstr "የመላኪያ ተቋም ኢሜይል"
 
-#: capeditor/cap_settings.py:29
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:31
 msgid "CAP Sender Name"
-msgstr "የ CAP ላኪ ስም"
+msgstr "ካፕ ላኪ ስም"
 
-#: capeditor/cap_settings.py:30
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:32
 msgid "Name of the sending institution"
-msgstr "የላኪው ተቋም ስም"
+msgstr "የመላኪያ ተቋም ስም"
 
-#: capeditor/cap_settings.py:32
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:34
 msgid "WMO Register of Alerting Authorities OID"
-msgstr "የWMO የማንቂያ ባለስልጣናት ምዝገባ OID"
+msgstr "የደስታ ባለሥልጣናት የ WMA ምዝገባ"
 
-#: capeditor/cap_settings.py:33
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:35
 msgid ""
 "WMO Register of Alerting Authorities Object Identifier (OID) of the sending "
 "institution. This will be used to generate CAP messages identifiers"
 msgstr ""
-"የWMO የማሳወቂያ ባለስልጣኖች የላኪ ተቋም የነገር መለያ (OID) ይመዝገቡ። ይህ የCAP መልዕክቶች መለያዎችን "
-"ለማመንጨት ስራ ላይ ይውላል"
+"የመላኪያ ተቋም ደህንነቱ የተጠበቀ ባለሥልጣናት የማርያዎች ባለሥልጣናት የነፃ ባለስልጣናት የ WMA ምዝገባ. ይህ "
+"የካፒታል መልዕክቶችን ለማመንጨት ጥቅም ላይ ይውላል"
 
-#: capeditor/cap_settings.py:38
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:40
 msgid "Logo of the sending institution"
-msgstr "የላኪ ተቋም አርማ"
+msgstr "የመላኪያ ተቋም አርማ"
 
-#: capeditor/cap_settings.py:42
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:44
 msgid "Contact Details"
 msgstr "የእውቂያ ዝርዝሮች"
 
-#: capeditor/cap_settings.py:43
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:45
 msgid "Contact for follow-up and confirmation of the alert message"
-msgstr "ለክትትል እና የማንቂያ መልዕክቱን ማረጋገጫ ያነጋግሩ"
+msgstr "የማንቂያ መልእክት ለተከታታይ እና ማረጋገጫ ለማግኘት"
 
-#: capeditor/cap_settings.py:45
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:47
 msgid "UN Country Boundary"
-msgstr "የተባበሩት መንግስታት የአገር ድንበር"
+msgstr "የተባበሩት መንግስታት ሀገር ድንበር"
 
-#: capeditor/cap_settings.py:46
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:48
 msgid ""
 "GeoJSON file of the UN Country Boundary. Setting this will enable the UN "
 "Country Boundary check in the alertdrawing tools"
 msgstr ""
-"የተባበሩት መንግስታት የአገር ድንበር የጂኦጄሰን ፋይል። ይህንን ማዋቀር የተባበሩት መንግስታት የድንበር ማጣራት በማንቂያ"
-" መሳርያ መሳሪያዎች ውስጥ እንዲፈተሽ ያስችላል"
+"የጂኦጃየስ ፋይል የጂዮ es ን ፋይል. ይህንን ማዋቀር "
+"የዩኒቲየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየየመንት መሳሪያዎች"
 
-#: capeditor/cap_settings.py:51
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:54
+msgid "Number of latest Alerts to show in the XML CAP Feed"
+msgstr "በ <XML CAP> ውስጥ ለማሳየት የቅርብ ጊዜ ማንቂያዎች ብዛት"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:54
+msgid "Set a smaller number to improve perfomance for aggregators"
+msgstr "ለግድጓዳዎች ግጭቶች ለማሻሻል አነስተኛ ቁጥር ያዘጋጁ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:58
 msgid "CAP Settings"
-msgstr "CAP ቅንብሮች"
+msgstr "የ CAP ቅንብሮች"
 
-#: capeditor/cap_settings.py:60
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:67
 msgid "Sender Details"
 msgstr "የላኪ ዝርዝሮች"
 
-#: capeditor/cap_settings.py:62 capeditor/cap_settings.py:64
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:69
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:71
 msgid "Hazard Types"
 msgstr "የአደጋ ዓይነቶች"
 
-#: capeditor/cap_settings.py:62
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:69
 msgid "Hazard Type"
 msgstr "የአደጋ ዓይነት"
 
-#: capeditor/cap_settings.py:63
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:70
 msgid "Hazards monitored by the institution"
-msgstr "በተቋሙ ቁጥጥር የሚደረግባቸው አደጋዎች"
+msgstr "አደጋዎች በተቋሙ ቁጥጥር ተደረገላቸው"
 
-#: capeditor/cap_settings.py:66
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:73
 msgid "Predefined Alert Areas"
-msgstr "አስቀድሞ የተገለጹ የማንቂያ ቦታዎች"
+msgstr "አስቀድሞ የተገለጹ ማንቂያ ቦታዎች"
 
-#: capeditor/cap_settings.py:67
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:74
 msgid "Predefined areas for alerts"
-msgstr "አስቀድሞ የተገለጹ ቦታዎች ለማንቂያዎች"
+msgstr "ለማስጠንቀቅ ቀድሞ የተቀመጡ አካባቢዎች"
 
-#: capeditor/cap_settings.py:68 capeditor/cap_settings.py:119
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:75
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:168
 msgid "Predefined Areas"
-msgstr "አስቀድሞ የተገለጹ አካባቢዎች"
+msgstr "ቅድመ-ሁኔታዎች"
 
-#: capeditor/cap_settings.py:73
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:77
+msgid "Allowed Alert Languages"
+msgstr "የተፈቀደ ማንቂያዎች"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:78
+#, fuzzy
+#| msgid "Language"
+msgid "Languages"
+msgstr "ቋንቋዎች"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:83
 msgid "UN Boundary"
-msgstr "የተባበሩት መንግስታት ድንበር"
+msgstr "ኢስታን መወሰን"
 
-#: capeditor/cap_settings.py:98
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:86
+#, fuzzy
+#| msgid "CAP Settings"
+msgid "Other Settings"
+msgstr "ሌሎች ቅንብሮች"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:110
+msgid "Geophysical"
+msgstr "ጂኦሎጂያዊ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:111
+msgid "Meteorological"
+msgstr "ሜቶሮሎጂያዊ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:112
+msgid "General emergency and public safety"
+msgstr "አጠቃላይ የአደጋ ጊዜ እና የህዝብ ደህንነት"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:113
+msgid "Law enforcement, military, homeland and local/private security"
+msgstr "የሕግ አስፈፃሚ, ወታደራዊ, የትውልድ አገሩ እና አካባቢያዊ / የግል ደህንነት"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:114
+msgid "Rescue and recovery"
+msgstr "ማዳን እና ማገገም"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:115
+msgid "Fire suppression and rescue"
+msgstr "የእሳት አደጋ ማገድ እና ማዳን"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:116
+msgid "Medical and public health"
+msgstr "የህክምና እና የህዝብ ጤና"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:117
+msgid "Pollution and other environmental"
+msgstr "ብክለት እና ሌሎች አካባቢያዊ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:118
+msgid "Public and private transportation"
+msgstr "የህዝብ እና የግል መጓጓዣ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:119
+msgid "Utility, telecommunication, other non-transport infrastructure"
+msgstr "መገልገያ, ቴሌኮሙኒኬሽን, ሌላ የትራንስፖርት መሰረተ ልማት"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:120
+msgid ""
+"Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat "
+"or attack"
+msgstr "ኬሚካላዊ, ባዮሎጂያዊ, ራዲዮሎጂ, ኑክሌር ወይም ከፍተኛ የፍንዳታ ፍንዳታ ወይም ጥቃት"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:121
+msgid "Other events"
+msgstr "ሌሎች ክስተቶች"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:126
 msgid "Select from WMO list of Hazards Event Types"
-msgstr "ከ WMO የአደጋ ክስተት አይነቶች ዝርዝር ይምረጡ"
+msgstr "የአደጋዎች የአደጋዎች ዝርዝር ውስጥ ከ WMO ዝርዝር ውስጥ ይምረጡ"
 
-#: capeditor/cap_settings.py:99
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:127
 msgid "Hazard"
-msgstr "ሃዛርድ"
+msgstr "አደጋ"
 
-#: capeditor/cap_settings.py:99
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:127
 msgid "Name of Hazard"
-msgstr "የሃዛርድ ስም"
+msgstr "የአደጋ ስም"
 
-#: capeditor/cap_settings.py:100
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:128
+msgid "Category"
+msgstr "ምድብ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:130
+#, fuzzy
+#| msgid "Name of Hazard"
+msgid "Category of Hazard"
+msgstr "የአዛር ምድብ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:131
+msgid "Event Code"
+msgstr "የዝግጅት ኮድ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:132
 msgid "Icon"
 msgstr "አዶ"
 
-#: capeditor/cap_settings.py:100
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:132
 msgid "Matching icon"
 msgstr "ተዛማጅ አዶ"
 
-#: capeditor/constants.py:4
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:145
+#, fuzzy
+#| msgid "Event Code"
+msgid "Event Code is required"
+msgstr "የዝግጅት ኮድ ያስፈልጋል"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:153
+msgid "This event type already exists"
+msgstr "ይህ የዝግጅት ዓይነት ቀድሞውኑ አለ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:189
+#, fuzzy
+#| msgid "Language"
+msgid "Language Code"
+msgstr "የቋንቋ ኮድ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:189
+msgid "ISO 639-1 language code"
+msgstr "ISA 639-1 የቋንቋ ኮድ"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:190
+#, fuzzy
+#| msgid "Language"
+msgid "Language Name"
+msgstr "የቋንቋ ስም"
+
+#: capcomposer/src/capcomposer/capeditor/constants.py:4
 msgid "Geo"
 msgstr "ጂኦ"
 
-#: capeditor/constants.py:5
+#: capcomposer/src/capcomposer/capeditor/constants.py:5
 msgid "Met"
-msgstr "ሜትሮሎጂ"
+msgstr "ተገናኙ"
 
-#: capeditor/constants.py:6
+#: capcomposer/src/capcomposer/capeditor/constants.py:6
 msgid "Safety"
 msgstr "ደህንነት"
 
-#: capeditor/constants.py:7
+#: capcomposer/src/capcomposer/capeditor/constants.py:7
 msgid "Security"
 msgstr "ደህንነት"
 
-#: capeditor/constants.py:8
+#: capcomposer/src/capcomposer/capeditor/constants.py:8
 msgid "Rescue"
 msgstr "ማዳን"
 
-#: capeditor/constants.py:9
+#: capcomposer/src/capcomposer/capeditor/constants.py:9
 msgid "Fire"
 msgstr "እሳት"
 
-#: capeditor/constants.py:10
+#: capcomposer/src/capcomposer/capeditor/constants.py:10
 msgid "Health"
 msgstr "ጤና"
 
-#: capeditor/constants.py:11
+#: capcomposer/src/capcomposer/capeditor/constants.py:11
 msgid "Env"
-msgstr "አካባቢ"
+msgstr "Env"
 
-#: capeditor/constants.py:12
+#: capcomposer/src/capcomposer/capeditor/constants.py:12
 msgid "Transport"
 msgstr "መጓጓዣ"
 
-#: capeditor/constants.py:13
+#: capcomposer/src/capcomposer/capeditor/constants.py:13
 msgid "Infra"
-msgstr "መሠረተ ልማት"
+msgstr "የኢንፍራሬድ"
 
-#: capeditor/constants.py:14
+#: capcomposer/src/capcomposer/capeditor/constants.py:14
 msgid "CBRNE"
-msgstr "ኬሚካላዊ፣ ባዮሎጂካል፣ ራዲዮሎጂካል፣ ኒውክሌር ወይም ከፍተኛ ምርት የሚሰጥ ፈንጂ ወይም ጥቃት"
+msgstr "CRBRE"
 
-#: capeditor/constants.py:15
+#: capcomposer/src/capcomposer/capeditor/constants.py:15
 msgid "Other"
 msgstr "ሌላ"
 
-#: capeditor/constants.py:19 capeditor/constants.py:194
+#: capcomposer/src/capcomposer/capeditor/constants.py:19
+#: capcomposer/src/capcomposer/capeditor/constants.py:194
 msgid "Immediate"
 msgstr "ወዲያውኑ"
 
-#: capeditor/constants.py:20 capeditor/constants.py:199
-#: capeditor/models.py:249
+#: capcomposer/src/capcomposer/capeditor/constants.py:20
+#: capcomposer/src/capcomposer/capeditor/constants.py:199
+#: capcomposer/src/capcomposer/capeditor/models.py:322
 msgid "Expected"
 msgstr "የሚጠበቀው"
 
-#: capeditor/constants.py:21 capeditor/constants.py:204
+#: capcomposer/src/capcomposer/capeditor/constants.py:21
+#: capcomposer/src/capcomposer/capeditor/constants.py:204
 msgid "Future"
 msgstr "ወደፊት"
 
-#: capeditor/constants.py:22 capeditor/constants.py:209
+#: capcomposer/src/capcomposer/capeditor/constants.py:22
+#: capcomposer/src/capcomposer/capeditor/constants.py:209
 msgid "Past"
 msgstr "ያለፈው"
 
-#: capeditor/constants.py:27
-#: capeditor/templates/capeditor/cap_alert_page.html:146
+#: capcomposer/src/capcomposer/capeditor/constants.py:27
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:146
 msgid "Extreme"
-msgstr "ጽንፍ"
+msgstr "በጣም"
 
-#: capeditor/constants.py:28
-#: capeditor/templates/capeditor/cap_alert_page.html:152
+#: capcomposer/src/capcomposer/capeditor/constants.py:28
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:152
 msgid "Severe"
 msgstr "ከባድ"
 
-#: capeditor/constants.py:29
-#: capeditor/templates/capeditor/cap_alert_page.html:158
+#: capcomposer/src/capcomposer/capeditor/constants.py:29
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:158
 msgid "Moderate"
-msgstr "መጠነኛ"
+msgstr "መካከለኛ"
 
-#: capeditor/constants.py:30
-#: capeditor/templates/capeditor/cap_alert_page.html:164
+#: capcomposer/src/capcomposer/capeditor/constants.py:30
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:164
 msgid "Minor"
 msgstr "አናሳ"
 
-#: capeditor/constants.py:35 capeditor/constants.py:222
+#: capcomposer/src/capcomposer/capeditor/constants.py:35
+#: capcomposer/src/capcomposer/capeditor/constants.py:222
 msgid "Observed"
-msgstr "ተስተውሏል።"
+msgstr "ተመለከተ"
 
-#: capeditor/constants.py:36 capeditor/constants.py:227
+#: capcomposer/src/capcomposer/capeditor/constants.py:36
+#: capcomposer/src/capcomposer/capeditor/constants.py:227
 msgid "Likely"
-msgstr "ሊሆን ይችላል።"
+msgstr "ሊሆን ይችላል"
 
-#: capeditor/constants.py:37 capeditor/constants.py:232
+#: capcomposer/src/capcomposer/capeditor/constants.py:37
+#: capcomposer/src/capcomposer/capeditor/constants.py:232
 msgid "Possible"
-msgstr "ይቻላል"
+msgstr "የሚቻል"
 
-#: capeditor/constants.py:38 capeditor/constants.py:237
+#: capcomposer/src/capcomposer/capeditor/constants.py:38
+#: capcomposer/src/capcomposer/capeditor/constants.py:237
 msgid "Unlikely"
-msgstr "የማይመስል ነገር"
+msgstr "የማይቻል"
 
-#: capeditor/constants.py:43
+#: capcomposer/src/capcomposer/capeditor/constants.py:43
 msgid "Shelter"
 msgstr "መጠለያ"
 
-#: capeditor/constants.py:44
+#: capcomposer/src/capcomposer/capeditor/constants.py:44
 msgid "Evacuate"
 msgstr "ለቆ መውጣት"
 
-#: capeditor/constants.py:45
+#: capcomposer/src/capcomposer/capeditor/constants.py:45
 msgid "Prepare"
-msgstr "አዘጋጅ"
+msgstr "አዘጋጁ"
 
-#: capeditor/constants.py:46
+#: capcomposer/src/capcomposer/capeditor/constants.py:46
 msgid "Execute"
-msgstr "ማስፈጸም"
+msgstr "ተግባራዊ ማድረግ"
 
-#: capeditor/constants.py:47
+#: capcomposer/src/capcomposer/capeditor/constants.py:47
 msgid "Avoid"
-msgstr "አስወግዱ"
+msgstr "ራቅ"
 
-#: capeditor/constants.py:48
+#: capcomposer/src/capcomposer/capeditor/constants.py:48
 msgid "Monitor"
 msgstr "ተቆጣጠር"
 
-#: capeditor/constants.py:49
+#: capcomposer/src/capcomposer/capeditor/constants.py:49
 msgid "Assess"
-msgstr "ይገምግሙ"
+msgstr "መገምገም"
 
-#: capeditor/constants.py:50
+#: capcomposer/src/capcomposer/capeditor/constants.py:50
 msgid "AllClear"
-msgstr "AllClear"
+msgstr "ቼልሌር"
 
-#: capeditor/constants.py:51
+#: capcomposer/src/capcomposer/capeditor/constants.py:51
 msgid "None"
-msgstr "ምንም"
+msgstr "የለም"
 
-#: capeditor/constants.py:56
+#: capcomposer/src/capcomposer/capeditor/constants.py:56
 msgid "Avalanche"
-msgstr "አቫላንቸ"
+msgstr "Avavelnoche"
 
-#: capeditor/constants.py:57
+#: capcomposer/src/capcomposer/capeditor/constants.py:57
 msgid "Cold wave"
 msgstr "ቀዝቃዛ ሞገድ"
 
-#: capeditor/constants.py:58
+#: capcomposer/src/capcomposer/capeditor/constants.py:58
 msgid "Drought/Dry spell"
-msgstr "ድርቅ/ደረቅ ፊደል"
+msgstr "ድርቅ / ደረቅ ፊደል"
 
-#: capeditor/constants.py:59
+#: capcomposer/src/capcomposer/capeditor/constants.py:59
 msgid "Dust storm/Sandstorm"
-msgstr "የአቧራ አውሎ ነፋስ/የአሸዋ አውሎ ንፋስ"
+msgstr "አቧራ አውሎ ነፋስ / አሸዋማ"
 
-#: capeditor/constants.py:60
+#: capcomposer/src/capcomposer/capeditor/constants.py:60
 msgid "Extra-tropical cyclone"
-msgstr "ተጨማሪ ሞቃታማ አውሎ ንፋስ"
+msgstr "ተጨማሪ ሞቃታማ ሞሎፒክ"
 
-#: capeditor/constants.py:61
+#: capcomposer/src/capcomposer/capeditor/constants.py:61
 msgid "Flood"
 msgstr "ጎርፍ"
 
-#: capeditor/constants.py:62
+#: capcomposer/src/capcomposer/capeditor/constants.py:62
 msgid "Fog"
 msgstr "ጭጋግ"
 
-#: capeditor/constants.py:63
+#: capcomposer/src/capcomposer/capeditor/constants.py:63
 msgid "Haze/Smoke"
-msgstr "ጭጋግ/ጭስ"
+msgstr "ሃይ / ጭስ"
 
-#: capeditor/constants.py:64
+#: capcomposer/src/capcomposer/capeditor/constants.py:64
 msgid "Frost"
 msgstr "በረዶ"
 
-#: capeditor/constants.py:65
+#: capcomposer/src/capcomposer/capeditor/constants.py:65
 msgid "Hail"
-msgstr "ሰላም"
-
-#: capeditor/constants.py:66
-msgid "Heat wave"
-msgstr "የሙቀት ሞገድ"
-
-#: capeditor/constants.py:67
-msgid "High UV radiation"
-msgstr "ከፍተኛ የአልትራቫዮሌት ጨረር"
-
-#: capeditor/constants.py:68
-msgid "Icing"
 msgstr "በረዶ"
 
-#: capeditor/constants.py:69
+#: capcomposer/src/capcomposer/capeditor/constants.py:66
+msgid "Heat wave"
+msgstr "ሙቀት ሞገድ"
+
+#: capcomposer/src/capcomposer/capeditor/constants.py:67
+msgid "High UV radiation"
+msgstr "ከፍተኛ የዩቪ ጨረር ጨረር"
+
+#: capcomposer/src/capcomposer/capeditor/constants.py:68
+msgid "Icing"
+msgstr "አይጦች"
+
+#: capcomposer/src/capcomposer/capeditor/constants.py:69
 msgid "Freezing rain"
-msgstr "የቀዘቀዘ ዝናብ"
+msgstr "ዝናብ ዝናብ"
 
-#: capeditor/constants.py:70
+#: capcomposer/src/capcomposer/capeditor/constants.py:70
 msgid "Landslide/Mudslide & Debris flow"
-msgstr "የመሬት መንሸራተት/የጭቃ መንሸራተት እና የቆሻሻ ፍሰት"
+msgstr "የመሬት መንቀጥቀጥ / ጭቃ እና ፍርስራሾች ፍሰት"
 
-#: capeditor/constants.py:71
-msgid "Lighting"
-msgstr "ማብራት"
+#: capcomposer/src/capcomposer/capeditor/constants.py:71
+#, fuzzy
+#| msgid "Lighting"
+msgid "Lightning"
+msgstr "መብረቅ"
 
-#: capeditor/constants.py:72
+#: capcomposer/src/capcomposer/capeditor/constants.py:72
 msgid "Pollen pollution/Polluted air"
-msgstr "የአበባ ብናኝ / የተበከለ አየር"
+msgstr "የአበባ ዱቄት ብክለት / የተበከለ አየር"
 
-#: capeditor/constants.py:73
+#: capcomposer/src/capcomposer/capeditor/constants.py:73
 msgid "Rain/Wet Spell"
-msgstr "ዝናብ/እርጥብ ፊደል"
+msgstr "ዝናብ / እርጥብ ፊደል"
 
-#: capeditor/constants.py:74
+#: capcomposer/src/capcomposer/capeditor/constants.py:74
 msgid "Snow"
 msgstr "በረዶ"
 
-#: capeditor/constants.py:75
+#: capcomposer/src/capcomposer/capeditor/constants.py:75
 msgid "Snowstorm"
-msgstr "የበረዶ አውሎ ነፋስ"
+msgstr "የበረዶ ዐውሎም"
 
-#: capeditor/constants.py:76
+#: capcomposer/src/capcomposer/capeditor/constants.py:76
 msgid "Space weather event"
-msgstr "የጠፈር የአየር ሁኔታ ክስተት"
+msgstr "የቦታ የአየር ሁኔታ ክስተት"
 
-#: capeditor/constants.py:77
+#: capcomposer/src/capcomposer/capeditor/constants.py:77
 msgid "High Seas/Rogue waves etc."
-msgstr "ከፍተኛ የባህር ሞገዶች / Rogue ሞገዶች ወዘተ."
+msgstr "ከፍተኛ ባሕሮች / የጋብቻ ማዕበሎች ወዘተ."
 
-#: capeditor/constants.py:78
+#: capcomposer/src/capcomposer/capeditor/constants.py:78
 msgid "Storm surge/Coastal flood"
-msgstr "የጎርፍ መጥለቅለቅ / የባህር ዳርቻ ጎርፍ"
+msgstr "አውሎ ነፋሱ / የባህር ዳርቻ ጎርፍ"
 
-#: capeditor/constants.py:79
+#: capcomposer/src/capcomposer/capeditor/constants.py:79
 msgid "Thunderstorms/Squall lines"
-msgstr "የነጎድጓድ አውሎ ነፋሶች / ስኩዌል መስመሮች"
+msgstr "ነጎድጓድ / ሳንቲም መስመሮች"
 
-#: capeditor/constants.py:80
+#: capcomposer/src/capcomposer/capeditor/constants.py:80
 msgid "Tornado"
-msgstr "አውሎ ነፋስ"
+msgstr "ቶርዶዶ"
 
-#: capeditor/constants.py:81
+#: capcomposer/src/capcomposer/capeditor/constants.py:81
 msgid "Tropical cyclone"
-msgstr "የትሮፒካል አውሎ ንፋስ"
+msgstr "ሞቃታማ አውሎ ነፋስ"
 
-#: capeditor/constants.py:82
+#: capcomposer/src/capcomposer/capeditor/constants.py:82
 msgid "Tsunami"
 msgstr "ሱናሚ"
 
-#: capeditor/constants.py:83
+#: capcomposer/src/capcomposer/capeditor/constants.py:83
 msgid "Volcanic ash"
 msgstr "የእሳተ ገሞራ አመድ"
 
-#: capeditor/constants.py:84
+#: capcomposer/src/capcomposer/capeditor/constants.py:84
 msgid "Wild land fire/Forest fire"
 msgstr "የዱር መሬት እሳት / የደን እሳት"
 
-#: capeditor/constants.py:85
+#: capcomposer/src/capcomposer/capeditor/constants.py:85
 msgid "Wind"
-msgstr "ንፋስ"
+msgstr "ነፋስ"
 
-#: capeditor/constants.py:149
-#| msgid "Severity"
+#: capcomposer/src/capcomposer/capeditor/constants.py:149
 msgid "Red severity"
 msgstr "ቀይ ከባድነት"
 
-#: capeditor/constants.py:158
-#| msgid "Alert Severity"
+#: capcomposer/src/capcomposer/capeditor/constants.py:158
 msgid "Orange severity"
-msgstr "የብርቱካናማ ክብደት"
+msgstr "ብርቱካናማ ከባድነት"
 
-#: capeditor/constants.py:166
-#| msgid "Alert Severity"
+#: capcomposer/src/capcomposer/capeditor/constants.py:166
 msgid "Yellow severity"
-msgstr "ቢጫ ክብደት"
+msgstr "ቢጫ ከባድነት"
 
-#: capeditor/constants.py:174
-#| msgid "Alert Severity"
+#: capcomposer/src/capcomposer/capeditor/constants.py:174
 msgid "Minor severity"
-msgstr "አነስተኛ ክብደት"
+msgstr "ጥቃቅን ከባድነት"
 
-#: capeditor/constants.py:182
-#| msgid "Unknown"
+#: capcomposer/src/capcomposer/capeditor/constants.py:182
 msgid "Unknown severity"
-msgstr "ያልታወቀ ክብደት"
+msgstr "ያልታወቀ ድካም"
 
-#: capeditor/constants.py:214 capeditor/constants.py:242
-#: capeditor/templates/capeditor/cap_alert_page.html:171
+#: capcomposer/src/capcomposer/capeditor/constants.py:214
+#: capcomposer/src/capcomposer/capeditor/constants.py:242
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:171
 msgid "Unknown"
 msgstr "ያልታወቀ"
 
-#: capeditor/forms/capimporter.py:11
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:11
 msgid "Copy Paste XML"
-msgstr "ኤክስኤምኤልን ለጥፍ ይቅዱ"
+msgstr "PATE PASTE XML"
 
-#: capeditor/forms/capimporter.py:12
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:12
 msgid "URL"
-msgstr "URL"
+msgstr "ዩ አር ኤል"
 
-#: capeditor/forms/capimporter.py:13
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:13
 msgid "File"
 msgstr "ፋይል"
 
-#: capeditor/forms/capimporter.py:17
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:17
 msgid "Load from"
-msgstr "ጫን ከ"
+msgstr "ጭነት ከ"
 
-#: capeditor/forms/capimporter.py:18
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:18
 msgid "Paste your CAP XML here"
-msgstr "የእርስዎን CAP XML እዚህ ይለጥፉ"
+msgstr "እዚህ ካፕ ኤክስኤምኤልን እዚህ ይለጥፉ"
 
-#: capeditor/forms/capimporter.py:19
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:19
 msgid "CAP Alert XML URL"
-msgstr "CAP ማንቂያ XML URL"
+msgstr "ካፕ ማንጠልጠል ኤክስኤምኤል ዩ.አር.ኤል."
 
-#: capeditor/forms/capimporter.py:20
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:20
 msgid "CAP File"
-msgstr "CAP ፋይል"
+msgstr "ካፕ ፋይል"
 
-#: capeditor/forms/capimporter.py:35 capeditor/forms/capimporter.py:37
-#: capeditor/forms/capimporter.py:39
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:35
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:37
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:39
 msgid "This field is required."
 msgstr "ይህ መስክ ያስፈልጋል."
 
-#: capeditor/forms/capimporter.py:75
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:75
 msgid ""
 "An error occurred while trying to load the CAP XML. Please check the data "
 "and try again."
-msgstr ""
-"CAP ኤክስኤምኤልን ለመጫን በመሞከር ላይ ሳለ አንድ ስህተት ተከስቷል። እባክዎ ውሂቡን ይፈትሹ እና እንደገና ይሞክሩ።"
+msgstr "ካፕ ኤክስኤምኤልን ለመጫን በሚሞክርበት ጊዜ ስህተት ተከስቷል. እባክዎ ውሂቡን ይፈትሹ እና እንደገና ይሞክሩ."
 
-#: capeditor/models.py:81
+#: capcomposer/src/capcomposer/capeditor/models.py:136
 msgid ""
 "You must select at least one reference alert for this message type. Only "
 "'Alert' Message Type can be saved without references."
 msgstr ""
-"ለዚህ መልእክት አይነት ቢያንስ አንድ የማጣቀሻ ማንቂያ መምረጥ አለቦት። ያለ ማጣቀሻዎች 'ማንቂያ' የመልእክት አይነት "
-"ብቻ ነው የሚቀመጠው።"
+"ለዚህ የመልእክት ዓይነት ቢያንስ አንድ የማጣቀሻ ማስጠንቀቂያ መምረጥ አለብዎት. ያለ ማጣቀሻዎች ብቻ ሊቀመጥ የሚችለው "
+"<ማንቂያ> መልእክት ብቻ ነው."
 
-#: capeditor/models.py:95
+#: capcomposer/src/capcomposer/capeditor/models.py:145
+msgid ""
+"You cannot reference an alert to itself. Please select a previously "
+"published alert."
+msgstr "ለራሱ ማንቂያ ማመልከት አይችሉም. እባክዎ ከዚህ ቀደም የታተሙ ማንቂያ ይምረጡ."
+
+#: capcomposer/src/capcomposer/capeditor/models.py:151
 msgid "You cannot select the same alert more than once."
-msgstr "ተመሳሳዩን ማንቂያ ከአንድ ጊዜ በላይ መምረጥ አይችሉም።"
+msgstr "ከአንድ ጊዜ በላይ ተመሳሳይ ማንቃት መምረጥ አይችሉም."
 
-#: capeditor/models.py:106
+#: capcomposer/src/capcomposer/capeditor/models.py:161
 msgid ""
 "Draft - A preliminary template or draft, not actionable in its current form"
-msgstr "ረቂቅ - ቀዳሚ አብነት ወይም ረቂቅ፣ አሁን ባለው መልኩ ሊተገበር የሚችል አይደለም።"
+msgstr "ረቂቅ - የአሁኑን ቅፅ ውስጥ የማይንቀሳቀሱ የመጀመሪያ ንድፍ ወይም ረቂቅ"
 
-#: capeditor/models.py:107
+#: capcomposer/src/capcomposer/capeditor/models.py:162
 msgid "Actual - Actionable by all targeted recipients"
-msgstr "ትክክለኛ - በሁሉም የታለሙ ተቀባዮች ሊተገበር የሚችል"
+msgstr "ትክክለኛ - በሁሉም የታለሙ ተቀባዮች የተካተቱ"
 
-#: capeditor/models.py:108
+#: capcomposer/src/capcomposer/capeditor/models.py:163
 msgid "Test - Technical testing only, all recipients disregard"
-msgstr "ሙከራ - የቴክኒክ ሙከራ ብቻ፣ ሁሉም ተቀባዮች ችላ ይላሉ"
+msgstr "ሙከራ - ቴክኒካዊ ሙከራ ብቻ, ሁሉም ተቀባዮች ችላ ይላሉ"
 
-#: capeditor/models.py:109
+#: capcomposer/src/capcomposer/capeditor/models.py:164
 msgid ""
 "Exercise - Actionable only by designated exercise participants; exercise "
 "identifier SHOULD appear in note"
 msgstr ""
-"የአካል ብቃት እንቅስቃሴ - በተሰየሙ የአካል ብቃት እንቅስቃሴ ተሳታፊዎች ብቻ ሊተገበር የሚችል; የአካል ብቃት "
-"እንቅስቃሴ መለያ በማስታወሻ ውስጥ መታየት አለበት።"
+"የአካል ብቃት እንቅስቃሴ - የተስተካከለ የአካል ብቃት እንቅስቃሴ በተሰየሙ ተሳታፊዎች ብቻ, የአካል ብቃት እንቅስቃሴ "
+"መለያ ማስታወሻ ማስታወሻ ውስጥ መታየት አለበት"
 
-#: capeditor/models.py:111
+#: capcomposer/src/capcomposer/capeditor/models.py:166
 msgid "System - For messages that support alert network internal functions"
-msgstr "ስርዓት - የማንቂያ አውታር ውስጣዊ ተግባራትን ለሚደግፉ መልዕክቶች"
+msgstr "ስርዓት - ለማነ ሙሉነት አውታረ መረብ ውስጣዊ ተግባሮችን የሚደግፉ መልእክቶች"
 
-#: capeditor/models.py:115
+#: capcomposer/src/capcomposer/capeditor/models.py:170
 msgid "Alert - Initial information requiring attention by targeted recipients"
-msgstr "ማንቂያ - በታለመላቸው ተቀባዮች ትኩረት የሚፈልግ የመጀመሪያ መረጃ"
+msgstr "ማንቂያ - በትዕግስት የተያዙ ተቀባዮች ትኩረት የሚሹ የመጀመሪያ መረጃ"
 
-#: capeditor/models.py:116
+#: capcomposer/src/capcomposer/capeditor/models.py:171
 msgid ""
 "Update - Updates and supersedes the earlier message(s) identified in "
 "referenced alerts"
-msgstr "አዘምን - በተጠቀሱት ማንቂያዎች ውስጥ የተገለጸውን የቀደመ መልእክት(ዎች) ያዘምናል እና ይተካል።"
+msgstr "ዝመና - ዝመናዎች - ቀደም ሲል በተጠቀሱ ማንቂያዎች ውስጥ የተገለጹትን የቀደመ መልዕክት (ቶች)"
 
-#: capeditor/models.py:117
+#: capcomposer/src/capcomposer/capeditor/models.py:172
 msgid "Cancel - Cancels the earlier message(s) identified in references"
-msgstr "ሰርዝ - በማጣቀሻዎች ውስጥ የተገለጸውን የቀደመ መልእክት(ዎች) ይሰርዛል"
+msgstr "መሰረዝ - የቀደመውን መልእክት (ቶች) በማጣቀሻዎች ውስጥ ተለይቷል"
 
-#: capeditor/models.py:128
+#: capcomposer/src/capcomposer/capeditor/models.py:183
 msgid "Public - For general dissemination to unrestricted audiences"
-msgstr "ይፋዊ - ላልተገደቡ ታዳሚዎች አጠቃላይ ስርጭት"
+msgstr "ይፋዊ - ለአስተማሪዎች አጠቃላይ ማሰራጨት አጠቃላይ ማሰራጨት"
 
-#: capeditor/models.py:129
+#: capcomposer/src/capcomposer/capeditor/models.py:184
 msgid ""
 "Restricted - For dissemination only to users with a known operational "
 "requirement as in the restriction field"
-msgstr "የተገደበ - እንደ ገዳቢው መስክ የታወቀ የአሠራር መስፈርት ላላቸው ተጠቃሚዎች ብቻ ለማሰራጨት"
+msgstr ""
+"የተገደበ - ለማሰራጨት - ለማሰራጨት ብቻ በሕግ መስክ ውስጥ የታወቀ የአፈፃፀም መስፈርቶች ላላቸው ተጠቃሚዎች ብቻ"
 
-#: capeditor/models.py:131
+#: capcomposer/src/capcomposer/capeditor/models.py:186
 msgid ""
 "Private - For dissemination only to specified addresses as in the addresses "
 "field in the alert"
-msgstr "የግል - በማንቂያው ውስጥ ባለው የአድራሻ መስክ ውስጥ ለተገለጹት አድራሻዎች ብቻ ለማሰራጨት"
+msgstr "የግል - ለማሰራጨት በአስተማማኝ አድራሻዎች ውስጥ ለተገለጹት አድራሻዎች ብቻ"
 
-#: capeditor/models.py:134
+#: capcomposer/src/capcomposer/capeditor/models.py:189
 msgid "Id"
 msgstr "መታወቂያ"
 
-#: capeditor/models.py:135
+#: capcomposer/src/capcomposer/capeditor/models.py:190
 msgid "Unique ID. Auto generated on creation."
-msgstr "ልዩ መታወቂያ በፍጥረት ላይ በራስ-ሰር የተፈጠረ።"
+msgstr "ልዩ መታወቂያ. በፍጥረት ላይ የፈጠራ ራስ-ሰር."
 
-#: capeditor/models.py:136
+#: capcomposer/src/capcomposer/capeditor/models.py:191
 msgid "Sender"
 msgstr "ላኪ"
 
-#: capeditor/models.py:137
+#: capcomposer/src/capcomposer/capeditor/models.py:192
 msgid ""
 "Identifies the originator of an alert. For example the website address of "
 "the institution"
-msgstr "የማንቂያ ጀማሪን ይለያል። ለምሳሌ የተቋሙ ድረ-ገጽ አድራሻ"
+msgstr "የማንቂያ መሥራች ይለያል. ለምሳሌ የተቋሙ ድር ጣቢያ አድራሻ"
 
-#: capeditor/models.py:139
+#: capcomposer/src/capcomposer/capeditor/models.py:194
 msgid "Sent"
-msgstr "ተልኳል።"
+msgstr "ተልኳል"
 
-#: capeditor/models.py:140
-msgid "Time and date of origination of the alert"
-msgstr "የማንቂያው መነሻ ጊዜ እና ቀን"
+#: capcomposer/src/capcomposer/capeditor/models.py:195
+msgid ""
+"Time and date of origination of the alert. Automatically generated by the "
+"system during publishing"
+msgstr "የማንቂያ መነሻ ጊዜ እና ቀን. በሕትመት ጊዜ በስርዓቱ በራስ-ሰር የመነጨ"
 
-#: capeditor/models.py:141
+#: capcomposer/src/capcomposer/capeditor/models.py:197
 msgid "Status"
 msgstr "ሁኔታ"
 
-#: capeditor/models.py:142
+#: capcomposer/src/capcomposer/capeditor/models.py:198
 msgid "The code denoting the appropriate handling of the alert"
-msgstr "የማስጠንቀቂያውን ተገቢ አያያዝ የሚያመለክት ኮድ"
+msgstr "አግባብ ያለው የእንቁላል አያያዝን የሚያመለክተው ኮዱ"
 
-#: capeditor/models.py:144
+#: capcomposer/src/capcomposer/capeditor/models.py:200
 msgid "Message Type"
-msgstr "የመልእክት አይነት"
+msgstr "የመልእክት ዓይነት"
 
-#: capeditor/models.py:145
+#: capcomposer/src/capcomposer/capeditor/models.py:201
 msgid "The code denoting the nature of the alert message"
-msgstr "የማስጠንቀቂያ መልእክት ተፈጥሮን የሚያመለክት ኮድ"
+msgstr "የአስተያየቱን ማንነት የሚመለከት ኮድ"
 
-#: capeditor/models.py:146
+#: capcomposer/src/capcomposer/capeditor/models.py:202
 msgid "Scope"
 msgstr "ወሰን"
 
-#: capeditor/models.py:147
+#: capcomposer/src/capcomposer/capeditor/models.py:203
 msgid "The code denoting the intended distribution of the alert message"
-msgstr "የማስጠንቀቂያ መልእክት የታሰበውን ስርጭት የሚያመለክት ኮድ"
+msgstr "የማንቂያ መልእክት የታሰበውን ስርጭት የሚያመለክተው ኮድ"
 
-#: capeditor/models.py:148
+#: capcomposer/src/capcomposer/capeditor/models.py:204
 msgid "Source"
 msgstr "ምንጭ"
 
-#: capeditor/models.py:149
+#: capcomposer/src/capcomposer/capeditor/models.py:205
 msgid "The text identifying the source of the alert message"
-msgstr "የማንቂያ መልእክቱን ምንጭ የሚለይ ጽሑፍ"
+msgstr "የእንኙነት መልእክት ምንጭን የሚገልጽ ጽሑፍ"
 
-#: capeditor/models.py:151
+#: capcomposer/src/capcomposer/capeditor/models.py:207
 msgid ""
 "The text describing the rule for limiting distribution of the restricted "
 "alert message. Used when scope value is Restricted"
 msgstr ""
-"የተገደበ የማንቂያ መልእክት ስርጭትን ለመገደብ ደንቡን የሚገልጽ ጽሑፍ። የወሰን እሴት ሲገደብ ጥቅም ላይ ይውላል"
+"የተከለከለውን የማነወቂያ መልእክት ስርጭት ለመገደብ ደንቡን የሚገልጽ ጽሑፍ. የወሰን እሴት በሚገደብበት ጊዜ ያገለገሉ"
 
-#: capeditor/models.py:153
+#: capcomposer/src/capcomposer/capeditor/models.py:209
 msgid "Restriction"
-msgstr "ገደብ"
+msgstr "እገዳ"
 
-#: capeditor/models.py:155
+#: capcomposer/src/capcomposer/capeditor/models.py:211
 msgid "The code denoting the special handling of the alert message"
-msgstr "የማስጠንቀቂያ መልእክት ልዩ አያያዝን የሚያመለክት ኮድ"
+msgstr "የማያውቁ መልዕክቱን ልዩ አያያዝ የሚያመለክተው ኮዱ"
 
-#: capeditor/models.py:156
+#: capcomposer/src/capcomposer/capeditor/models.py:212
 msgid "Code"
 msgstr "ኮድ"
 
-#: capeditor/models.py:158
+#: capcomposer/src/capcomposer/capeditor/models.py:214
 msgid ""
 "The text describing the purpose or significance of the alert message.The "
 "message note is primarily intended for use with <status> 'Exercise' and "
 "<msgType> 'Error'"
 msgstr ""
-"የማንቂያ መልእክቱን ዓላማ ወይም አስፈላጊነት የሚገልጽ ጽሑፍ። የመልእክቱ ማስታወሻ በዋነኝነት የታሰበው በ<status> "
-"'የአካል ብቃት እንቅስቃሴ' እና በ<msgType> 'ስህተት' ለመጠቀም ነው።"
+"The text describing the purpose or significance of the alert message.The "
+"message note is primarily intended for use with <status> 'Exercise' and "
+"<msgType> 'Error'"
 
-#: capeditor/models.py:160
+#: capcomposer/src/capcomposer/capeditor/models.py:216
 msgid "Note"
 msgstr "ማስታወሻ"
 
-#: capeditor/models.py:162 capeditor/models.py:164
+#: capcomposer/src/capcomposer/capeditor/models.py:218
+#: capcomposer/src/capcomposer/capeditor/models.py:220
 msgid "Alert Information"
-msgstr "የማንቂያ መረጃ"
+msgstr "ማንቂያ መረጃ"
 
-#: capeditor/models.py:167
+#: capcomposer/src/capcomposer/capeditor/models.py:223
 msgid "Recipient"
-msgstr "ተቀባይ"
+msgstr "ተቀባዩ"
 
-#: capeditor/models.py:168
+#: capcomposer/src/capcomposer/capeditor/models.py:224
 msgid "Addresses"
 msgstr "አድራሻዎች"
 
-#: capeditor/models.py:169
+#: capcomposer/src/capcomposer/capeditor/models.py:225
 msgid ""
 "The group listing of intended recipients of the alert message, if scope is "
 "Private"
-msgstr "ወሰን የግል ከሆነ የማንቂያ መልእክቱ የታቀዱ ተቀባዮች የቡድን ዝርዝር"
+msgstr "የማንቂያ መልእክት የታሰበ ተቀባዮች ቡድን, ወሰን የግል ከሆነ"
 
-#: capeditor/models.py:174
+#: capcomposer/src/capcomposer/capeditor/models.py:230
 msgid "Reference Alerts"
-msgstr "የማጣቀሻ ማንቂያዎች"
+msgstr "ማጣቀሻ ማንቂያዎች"
 
-#: capeditor/models.py:179
+#: capcomposer/src/capcomposer/capeditor/models.py:235
 msgid "Incidents"
 msgstr "ክስተቶች"
 
-#: capeditor/models.py:194
+#: capcomposer/src/capcomposer/capeditor/models.py:252
 msgid "Alert Identification"
-msgstr "ማንቂያ መታወቂያ"
+msgstr "አዕምሮ መታወቂያ"
 
-#: capeditor/models.py:244
+#: capcomposer/src/capcomposer/capeditor/models.py:317
 msgid "Expired"
-msgstr "ጊዜው አልፎበታል።"
+msgstr "ጊዜው አልፎበታል"
 
-#: capeditor/models.py:247
+#: capcomposer/src/capcomposer/capeditor/models.py:320
 msgid "Ongoing"
-msgstr "በመካሄድ ላይ"
+msgstr "ቀጣይነት ያለው"
 
-#: capeditor/templates/capeditor/cap_alert_page.html:47
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:47
 msgid "Issued"
-msgstr "የተሰጠበት"
+msgstr "የተሰጠው"
 
-#: capeditor/templates/capeditor/cap_alert_page.html:95
-#: capeditor/templates/capeditor/preview_cap_alert.html:172
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:95
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:172
 msgid "Urgency:"
-msgstr "አጣዳፊነት፡-"
+msgstr "አጣዳፊነት"
 
-#: capeditor/templates/capeditor/cap_alert_page.html:128
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:128
 msgid "CAP XML Link"
-msgstr "CAP XML አገናኝ"
+msgstr "ካፕ ኤክስኤምኤል አገናኝ"
 
-#: capeditor/templates/capeditor/cap_alert_page.html:140
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:140
 msgid "Alert Severity"
-msgstr "የማንቂያ ጥብቅነት"
+msgstr "ማስጠንቀቂያ"
 
-#: capeditor/templates/capeditor/cap_alert_page.html:180
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:180
 msgid "Affected area"
-msgstr "የተጎዳው አካባቢ"
+msgstr "የተጎዳ አካባቢ"
 
-#: capeditor/templates/capeditor/cap_alert_page.html:209
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:209
 msgid "Event Description"
-msgstr "የክስተት መግለጫ"
+msgstr "የዝግጅት መግለጫ"
 
-#: capeditor/templates/capeditor/cap_alert_page.html:220
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:220
 msgid "Instructions"
 msgstr "መመሪያዎች"
 
-#: capeditor/templates/capeditor/load_cap_alert.html:6
-#: capeditor/templates/capeditor/preview_cap_alert.html:6
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/load_cap_alert.html:6
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:6
 #, python-format
 msgid "Import CAP Alert %(title)s"
-msgstr "የ CAP ማንቂያ %(title)s አስመጣ"
+msgstr "የማስመጣት ካፕ ማስጠንቀቂያ% (ርዕስ) s"
 
-#: capeditor/templates/capeditor/load_cap_alert.html:15
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/load_cap_alert.html:15
 msgid "Import CAP Alert"
-msgstr "የ CAP ማንቂያ አስመጣ"
+msgstr "የማስመጣት ካፕ ማስጠንቀቂያ"
 
-#: capeditor/templates/capeditor/load_cap_alert.html:37
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/load_cap_alert.html:37
 msgid "Load"
-msgstr "ጫን"
+msgstr "ጭነት"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:17
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:17
 msgid "Import CAP Alert - Preview"
-msgstr "የ CAP ማንቂያ አስመጣ - ቅድመ እይታ"
+msgstr "የማስመጣት ካፕ ማንቂያ - ቅድመ-እይታ"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:25
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:25
 msgid "Import Type:"
-msgstr "የማስመጣት አይነት፡-"
+msgstr "የማስመጣት ሁኔታ:"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:34
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:34
 msgid "Source URL:"
-msgstr "ምንጭ URL፡"
+msgstr "ምንጭ ዩ.አር.ኤል."
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:43
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:43
 msgid "Source File Name:"
-msgstr "ምንጭ ፋይል ስም፡-"
+msgstr "የምንጭ ፋይል ስም"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:59
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:59
 msgid "Load different alert"
-msgstr "የተለየ ማንቂያ ጫን"
+msgstr "የተለያዩ ማንቂያዎችን ይጫኑ"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:68
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:68
 msgid "Sender:"
-msgstr "ላኪ፡"
+msgstr "ላኪ"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:76
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:76
 msgid "Sent:"
-msgstr "ተልኳል፡"
+msgstr "ተልኳል"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:84
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:84
 msgid "Status:"
-msgstr "ሁኔታ፡"
+msgstr "ሁኔታ:"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:92
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:92
 msgid "Message Type:"
-msgstr "የመልእክት አይነት፡-"
+msgstr "የመልእክት ዓይነት: -"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:112
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:112
 msgid "Create Draft Alert"
-msgstr "ረቂቅ ማንቂያ ፍጠር"
+msgstr "ረቂቅ ማንቂያ ማስጠንቀቂያ ይፍጠሩ"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:146
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:146
 msgid "Language:"
-msgstr "ቋንቋ፡"
+msgstr "ቋንቋ:"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:154
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:154
 msgid "Category:"
-msgstr "ምድብ፡"
+msgstr "ምድብ:"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:164
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:164
 msgid "Event:"
-msgstr "ክስተት፡-"
+msgstr "ክስተት"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:180
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:180
 msgid "Severity:"
-msgstr "ክብደት፡"
+msgstr "ከባድነት: -"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:188
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:188
 msgid "Certainty:"
-msgstr "እርግጠኝነት፡-"
+msgstr "እርግጠኛነት: -"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:199
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:199
 msgid "Effective:"
-msgstr "ውጤታማ፡"
+msgstr "ውጤታማ"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:209
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:209
 msgid "Onset:"
-msgstr "ጅምር፡"
+msgstr "መቀስቀስ"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:219
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:219
 msgid "Expires:"
-msgstr "ጊዜው ያበቃል"
+msgstr "ጊዜው ያልፍበታል"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:231
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:231
 msgid "Headline:"
-msgstr "ርዕስ፡-"
+msgstr "አርዕስት"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:239
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:239
 msgid "Description:"
-msgstr "መግለጫ፡-"
+msgstr "መግለጫ"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:248
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:248
 msgid "Instruction:"
-msgstr "መመሪያ፡-"
+msgstr "መመሪያ"
 
-#: capeditor/templates/capeditor/preview_cap_alert.html:258
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:258
 msgid "Area:"
-msgstr "አካባቢ፡"
+msgstr "አካባቢ"
 
-#: capeditor/templates/capeditor/widgets/circle_widget.html:10
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/widgets/circle_widget.html:10
 msgid "Longitude"
 msgstr "ኬንትሮስ"
 
-#: capeditor/templates/capeditor/widgets/circle_widget.html:22
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/widgets/circle_widget.html:22
 msgid "Latitude"
 msgstr "ኬክሮስ"
 
-#: capeditor/templates/capeditor/widgets/circle_widget.html:36
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/widgets/circle_widget.html:36
 msgid "Radius (in kilometers) "
-msgstr "ራዲየስ (በኪሎሜትር)"
+msgstr "ራዲየስ (ኪሎሜትሮች)"
 
-#: capeditor/wagtail_hooks.py:88
+#: capcomposer/src/capcomposer/capeditor/wagtail_hooks.py:93
 #, python-format
 msgid "Page '%(page_title)s' copied."
-msgstr "ገጽ '%(page_title)s' ተቀድቷል።"
+msgstr "ገጽ% (ገጽ_TITLE) S 'ተቀዳጅ."
+
+#~ msgid "English"
+#~ msgstr "እንግሊዝኛ"
+
+#~ msgid "French"
+#~ msgstr "ፈረንሳይኛ"
+
+#~ msgid ""
+#~ "The code denoting the category of the subject event of the alert message"
+#~ msgstr "የማንቂያ መልእክት ርዕሰ ጉዳይ ርዕሰ ጉዳይ ምድብ ምድብ የሚያመለክተው ኮድ"
+
+#~ msgid "Event codes"
+#~ msgstr "የዝግጅት ኮዶች"
+
+#~ msgid "Time and date of origination of the alert"
+#~ msgstr "የመነሻው መነሻ ቀን እና ቀን"
