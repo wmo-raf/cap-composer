@@ -845,7 +845,7 @@ msgstr "Géo"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:5
 msgid "Met"
-msgstr "Rencontré"
+msgstr "Met"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:6
 msgid "Safety"
