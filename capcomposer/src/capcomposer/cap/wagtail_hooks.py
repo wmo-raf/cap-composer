@@ -119,7 +119,7 @@ class CAPAlertPageButtonHelper(PageButtonHelper):
 
 class CAPAdmin(ModelAdmin):
     model = CapAlertPage
-    menu_label = _('Alerts')
+    menu_label = _('Manage CAP Alerts')
     menu_icon = 'list-ul'
     menu_order = 200
     add_to_settings_menu = False
@@ -273,7 +273,7 @@ class CAPMenuGroupAdminMenuItem(GroupMenuItem):
 
 
 class CAPMenuGroup(ModelAdminGroup):
-    menu_label = _('Alerts')
+    menu_label = _('CAP Alerts')
     menu_icon = 'warning'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
     items = (

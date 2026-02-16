@@ -1,3 +1,8 @@
 {% extends "wagtailadmin/admin_base.html" %}
+{% load static %}
 
-{% block branding_title %}CAPComposer{% endblock %}
+{% block branding_title %}CAP Composer{% endblock %}
+
+{% block branding_favicon %}
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+{% endblock %}

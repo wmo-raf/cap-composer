@@ -6,7 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "cap-composer"
 authors = [
     { name = "Erick Otenyo", email = "otenyo.erick@gmail.com" },
-    { name = "Grace Amondi", email = "miswa.grace@gmail.com" }
+    { name = "Grace Amondi", email = "miswa.grace@gmail.com" },
+    { name = "Maaike Limper", email = "mlimper@wmo.int" }
 ]
 description = """Wagtail based weather warnings composing and dissemination tool, using Common Alerting Protocol (CAP) standard."""
 readme = { file = "README.md", content-type = "text/markdown" }

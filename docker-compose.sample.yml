@@ -4,8 +4,8 @@ x-capcomposer-variables: &capcomposer-variables
   CAP_COMPOSER_NUM_OF_GUNICORN_WORKERS: ${GUNICORN_NUM_OF_WORKERS:-4}
   CAP_COMPOSER_NUM_OF_CELERY_WORKERS: ${CELERY_NUM_OF_WORKERS:-4}
   DEBUG: ${CAP_COMPOSER_DEBUG:-False}
-  WAGTAIL_SITE_NAME: ${WAGTAIL_SITE_NAME:-"CAP Composer"}
-  ADMIN_URL_PATH: ${ADMIN_URL_PATH:-cap-admin}
+  WAGTAIL_SITE_NAME: ${WAGTAIL_SITE_NAME:-}
+  ADMIN_URL_PATH: ${ADMIN_URL_PATH:-cap_composer}
   TIME_ZONE: ${TIME_ZONE:-UTC}
   SECRET_KEY: ${SECRET_KEY:?}
   ALLOWED_HOSTS: ${ALLOWED_HOSTS:-127.0.0.1,localhost}
@@ -21,6 +21,7 @@ x-capcomposer-variables: &capcomposer-variables
   DJANGO_ADMINS: ${CAP_COMPOSER_ADMINS:-}
   DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-}
   WAGTAILADMIN_BASE_URL: ${CAP_COMPOSER_BASE_URL:-}
+  WAGTAIL_PASSWORD_RESET_ENABLED: ${WAGTAIL_PASSWORD_RESET_ENABLED:-False}
   LANGUAGE_CODE: ${LANGUAGE_CODE:-en}
   CAP_CERT_PATH: ${CAP_CERT_PATH:-}
   CAP_PRIVATE_KEY_PATH: ${CAP_PRIVATE_KEY_PATH:-}
@@ -28,6 +29,7 @@ x-capcomposer-variables: &capcomposer-variables
   CAP_MQTT_SECRET_KEY: ${CAP_MQTT_SECRET_KEY:-}
   CAP_LIST_PAGE_PARENT_PAGE_TYPES: ${CAP_LIST_PAGE_PARENT_PAGE_TYPES:-}
   CAP_MAX_LIST_PAGE_COUNT: ${CAP_MAX_LIST_PAGE_COUNT:-}
+  MBGL_RENDERER_URL: ${MBGL_RENDERER_URL:-http://capcomposer_mbgl_renderer}
 
   # OpenTelemetry
   CAP_COMPOSER_ENABLE_OTEL: ${CAP_COMPOSER_ENABLE_OTEL:-}
@@ -37,9 +39,6 @@ x-capcomposer-variables: &capcomposer-variables
   OTEL_TRACES_SAMPLER_ARG: ${OTEL_TRACES_SAMPLER_ARG:-0.1}
   OTEL_PER_MODULE_SAMPLER_OVERRIDES: ${OTEL_PER_MODULE_SAMPLER_OVERRIDES:-}
   CAP_COMPOSER_DEPLOYMENT_ENV: ${CAP_COMPOSER_DEPLOYMENT_ENV:-production}
-  WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY: ${WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY:-}
-  WAGTAIL_NEWSLETTER_FROM_NAME: ${WAGTAIL_NEWSLETTER_FROM_NAME:-}
-  WAGTAIL_NEWSLETTER_REPLY_TO: ${WAGTAIL_NEWSLETTER_REPLY_TO:-}
 
 services:
   capcomposer_db:
@@ -146,4 +145,33 @@ services:
       - ${MEDIA_VOLUME_PATH}:/wagtail_media
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - ${CAP_COMPOSER_WEB_PROXY_PORT:-80}:80
+      - ${CAP_COMPOSER_WEB_PROXY_PORT:-8080}:80
+
+  mbgl_renderer:
+    container_name: capcomposer_mbgl_renderer
+    image: consbio/mbgl-renderer:0.8.0
+    restart: always
+    ports:
+      - "80"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  nginx_proxy_manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx_proxy_manager
+    restart: always
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ${NPM_VOLUME_PATH}/data:/data
+      - ${NPM_VOLUME_PATH}/letsencrypt:/etc/letsencrypt
+
+networks:
+  default:
+    name: capcomposer_default

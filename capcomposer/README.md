@@ -6,5 +6,3 @@ This is a web-based tool for creating and managing CAP alerts. It is designed to
 Hydrological Services (NMHSs), disaster management agencies and other organizations that have the authority to publish
 and disseminate CAP alerts.
 
-For more details, see [https://github.com/wmo-raf/cap-composer](https://github.com/wmo-raf/capcomposer)
-

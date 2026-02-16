@@ -24,6 +24,12 @@ The core development and support team is composed of the following members:
 
     Co-developed with National Meteorological and Hydrological Services (NMHSs) in Africa
 
+To support deployment independently from ClimWeb, the standalone version of CAPComposer is developed and maintained by:
+
+    WMO Scientific Officer: Maaike Limper
+    Github: github.com/maaikelimper
+    Linkedin: linkedin.com/in/maaikelimper
+
 /* ACKNOWLEDGEMENT */
 
     NORCAP, part of the Norwegian Refugee Council.
