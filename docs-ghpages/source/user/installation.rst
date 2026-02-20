@@ -73,13 +73,13 @@ This option will set up a Wagtail project together with the complete components 
 
    You should see the following containers running:
 
-   - cap_composer
-   - cap_composer_celery_worker
-   - cap_composer_celery_beat
-   - cap_composer_mbgl_renderer
-   - cap_composer_web_proxy
-   - cap_composer_db
-   - cap_composer_redis
+   - capcomposer
+   - capcomposer_celery_worker
+   - capcomposer_celery_beat
+   - capcomposer_mbgl_renderer
+   - capcomposer_web_proxy
+   - capcomposer_db
+   - capcomposer_redis
    - nginx_proxy_manager
 
    If any of the containers are not starting, you can check the logs for the container by running:
@@ -132,8 +132,6 @@ This option will set up a Wagtail project together with the complete components 
 
 Your installation is now complete. 
 
-You can now proceed with the configuration of the Wagtail site and the CAP Composer components.
-
 Please note that you should not expose port 8080 of your host on the public internet. 
 
-To make your CAP Composer available over the public internet, see "Securing your installation" in this documentation.
+**Next**: Proceed to the :doc:`Securing your installation <securing-your-installation>` to set up SSL and make your CAP Composer available over the public internet.

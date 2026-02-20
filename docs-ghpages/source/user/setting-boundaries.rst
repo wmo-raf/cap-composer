@@ -10,7 +10,8 @@ The Boundary Manager allows for the addition of boundaries to be used in the cre
 .. image:: ../_static/images/cap_composer_boundary_manager.png
       :alt: WMO CAP Composer Boundary Manager
 
-There you will configure the boundary settings for your country, an example is shown below:
+There you will configure the boundary settings for your country, select "Global Administrative Areas 4.1 (GADM)" as the source and select your country.
+Then click on the Save button.  
 
 .. image:: ../_static/images/cap_composer_boundary_settings.png
       :alt: WMO CAP Composer Boundary Settings

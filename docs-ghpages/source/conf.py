@@ -29,7 +29,7 @@
 
 import wmo_sphinx_theme
 
-project = 'CAP Composer'
+project = 'WMO CAP Composer'
 author = 'World Meteorological Organization (WMO)'
 license = 'This work is licensed under a Creative Commons Attribution 4.0 International License'  # noqa
 copyright = '2021-2025, ' + author + ' ' + license

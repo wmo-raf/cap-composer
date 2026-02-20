@@ -5,6 +5,7 @@ Getting started
 
 The CAP Composer is a web-application based on `Wagtail <https://wagtail.io/>`_. 
 Wagtail is an Open Source Content Management System (CMS) written in Python and built on the Django web framework.
+The alerts will be published as pages on the website and made available in an RSS feed to enable the distribution of the CAP alerts to other systems.
 
 The CAP Composer source code contains docker-compose files to help define the required services and dependencies to setup a standalone version of the CAP Composer.
 The standalone version of the CAP Composer is a complete Wagtail project that includes the CAP Composer components. It will require a host with the necessary resources to run the docker-compose stack.
@@ -33,5 +34,7 @@ If you want to use different ports, you can modify the docker-compose.yml file d
 
 To run the CAP Composer in a production environment the server should have a public IP address and a domain name. Only port 443 and 80 should be open to the public.
 You will need to configure DNS to point to the IP address of your server, after which you can setup SSL using the Nginx Proxy Manager.
+
+**Next**: Once your host is prepared, proceed to the :doc:`Installation <installation>` section for instructions on installing the standalone CAP Composer.
 
 
