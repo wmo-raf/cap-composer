@@ -4,4 +4,4 @@ The CAP Composer documentation is hosted on [Read the Docs](https://cap-composer
 
 ## Building the documentation
 
-To test this documentation locally run `make html` (or `./make.bat html` on Windows) from the `docs` directory. This will generate the HTML documentation in the `docs/_build/html` directory.
+To test this documentation locally run `make html` (or `./make.bat html` on Windows) from the `docs-rtd` directory. This will generate the HTML documentation in the `docs-rtd/_build/html` directory.
