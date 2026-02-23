@@ -4,13 +4,15 @@ on:
   push:
     branches:
       - main
+      - docs-deploy-test
     paths:
-      - 'docs-ghpages/**'
+      - 'docs-rtd/**'
   pull_request:
     branches:
       - main
+      - docs-deploy-test
     paths:
-      - 'docs-ghpages/**'
+      - 'docs-rtd/**'
 
 jobs:
   main:
@@ -25,4 +27,4 @@ jobs:
     - name: build docs ⚙️
       uses: ammaraskar/sphinx-action@master
       with:
-        docs-folder: "docs-ghpages/"
+        docs-folder: "docs-rtd/"
