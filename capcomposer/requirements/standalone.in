@@ -1,5 +1,6 @@
 -c base.txt
 wagtail==7.0
+wagtail-modeladmin==2.2.0
 django==5.2.1
 django-environ
 django-deep-translator==1.5.2

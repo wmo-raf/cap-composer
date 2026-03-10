@@ -372,7 +372,10 @@ wagtail==7.0
     #   -c base.txt
     #   -r standalone.in
     #   wagtail-2fa-v6
+    #   wagtail-modeladmin
 wagtail-2fa-v6==1.0.7
+    # via -r standalone.in
+wagtail-modeladmin==2.2.0
     # via -r standalone.in
 watchfiles==1.1.0
     # via uvicorn
