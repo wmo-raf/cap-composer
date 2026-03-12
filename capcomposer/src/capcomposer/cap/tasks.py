@@ -10,7 +10,7 @@ from capcomposer.utils import get_celery_app
 from .external_feed.utils import fetch_and_process_feed
 from .models import CapAlertPage, ExternalAlertFeed
 from .mqtt.publish import publish_cap_to_all_mqtt_brokers
-from .utils import create_cap_alert_multi_media
+from .utils import create_cap_alert_multi_media,send_private_alert_email
 from .webhook.utils import fire_alert_webhooks
 
 logger = logging.getLogger(__name__)
@@ -113,3 +113,11 @@ def setup_feed_processing_tasks(sender, **kwargs):
     
     for feed in external_feeds:
         create_or_update_alert_feed_periodic_tasks(feed)
+
+
+@app.task(base=Singleton, bind=True)
+def handle_send_private_alert_email(self, alert_id):
+    logger.info(f"Handling sending private alert email for alert ID: {alert_id}")
+
+    send_private_alert_email(alert_id)
+    
