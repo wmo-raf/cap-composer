@@ -310,6 +310,10 @@ class CapAlertPage(MetadataPageMixin, NewsletterPageMixin, AbstractCapAlertPage)
     @property
     def is_published_publicly(self):
         return self.live and self.status == "Actual" and self.scope == "Public"
+
+    @property
+    def is_private_scope(self):
+        return self.live and self.status == "Actual" and self.scope == "Private"
     
     def get_admin_display_title(self):
         return self.display_title
@@ -467,7 +471,8 @@ def on_publish_cap_alert(sender, **kwargs):
     from .tasks import (
         handle_publish_alert_to_mqtt,
         handle_publish_alert_to_webhook,
-        handle_generate_multimedia
+        handle_generate_multimedia,
+        handle_send_private_alert_email
     )
     
     alert = kwargs['instance']
@@ -479,6 +484,10 @@ def on_publish_cap_alert(sender, **kwargs):
         handle_publish_alert_to_webhook.delay(alert.id)
         # generate multimedia
         handle_generate_multimedia.delay(alert.id)
+
+    # Send email for Private scope in background
+    if alert.status == "Actual" and alert.scope == "Private":
+        handle_send_private_alert_email.delay(alert.id)
 
 
 page_published.connect(on_publish_cap_alert, sender=CapAlertPage)

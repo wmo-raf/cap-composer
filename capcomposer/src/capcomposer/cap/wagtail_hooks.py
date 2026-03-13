@@ -40,7 +40,7 @@ from .models import (
 from .utils import (
     create_draft_alert_from_alert_data
 )
-from .views import create_cap_png_pdf
+from .views import create_cap_png_pdf, send_private_alert_email_view
 
 CAN_EDIT_CAP = getattr(settings, "CAP_ALLOW_EDITING", False)
 
@@ -49,6 +49,7 @@ CAN_EDIT_CAP = getattr(settings, "CAP_ALLOW_EDITING", False)
 def urlconf_cap():
     return [
         path('import-cap/<int:alert_id>/', create_cap_png_pdf, name='create_cap_png_pdf'),
+        path('send-private-alert-email/<int:alert_id>/', send_private_alert_email_view, name='send_private_alert_email'),
     ]
 
 
@@ -100,6 +101,15 @@ class CAPAlertPageButtonHelper(PageButtonHelper):
             buttons_for_live.append(live_button)
             
             buttons = buttons_for_live + buttons
+
+        if obj.is_private_scope:
+            email_button = {
+                "url": reverse("send_private_alert_email", args=[obj.pk]),
+                "label": _("Email Recipients"),
+                "classname": cn,
+                "title": _("Send private alert email to recipients"),
+            }
+            buttons.append(email_button)
         
         return buttons
 
@@ -314,6 +324,12 @@ def cap_page_listing_buttons(page, user, next_url=None):
                 _("Create PNG/PDF"),
                 reverse("create_cap_png_pdf", args=[page.pk]),
                 priority=10,
+            )
+        if page.is_private_scope:
+            yield wagtailadmin_widgets.PageListingButton(
+            _("Email Recipients"),
+            reverse("send_private_alert_email", args=[page.pk]),
+            priority=11,
             )
 
 

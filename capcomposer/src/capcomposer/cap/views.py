@@ -25,7 +25,7 @@ from .models import (
     CapAlertListPage,
     OtherCAPSettings,
 )
-from .utils import get_full_url_by_site, create_cap_alert_multi_media
+from .utils import get_full_url_by_site, create_cap_alert_multi_media, send_private_alert_email
 from .utils import (
     serialize_and_sign_cap_alert,
     get_currently_active_alerts,
@@ -358,6 +358,22 @@ def create_cap_png_pdf(request, alert_id):
         messages.success(request, _("CAP Alert PNG and PDF created successfully."))
     except Exception as e:
         messages.error(request, _("Failed to create CAP Alert PNG and PDF."))
+        messages.error(request, str(e))
+    
+    cap_index_url = AdminURLHelper(alert).get_action_url("index")
+    return redirect(cap_index_url)
+
+def send_private_alert_email_view(request, alert_id):
+    """
+    Send private alert email
+    """
+    alert = get_object_or_404(CapAlertPage, id=alert_id)
+    
+    try:
+        send_private_alert_email(alert_id)
+        messages.success(request, _("Private alert email sent successfully."))
+    except Exception as e:
+        messages.error(request, _("Failed to send private alert email."))
         messages.error(request, str(e))
     
     cap_index_url = AdminURLHelper(alert).get_action_url("index")

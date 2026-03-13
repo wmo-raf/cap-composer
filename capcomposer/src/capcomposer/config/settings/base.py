@@ -339,6 +339,17 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = env.int("DATA_UPLOAD_MAX_MEMORY_SIZE", default=262
 # EMAIL SETTINGS
 # Default email address used to send messages from the website.
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = env.str('EMAIL_HOST', default="localhost")
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", False)
+EMAIL_PORT = os.getenv("EMAIL_PORT", "")
+if not EMAIL_PORT:
+    EMAIL_PORT = 25
+else:
+    EMAIL_PORT = env.int('EMAIL_PORT', default=25)
+
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD', default="")
 
 # A list of people who get error notifications.
 ADMINS = getaddresses([env('DJANGO_ADMINS', default="")])
