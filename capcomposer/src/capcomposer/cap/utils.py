@@ -31,7 +31,22 @@ from .weasyprint_utils import django_url_fetcher
 
 def get_all_published_alerts():
     from .models import CapAlertPage
-    return CapAlertPage.objects.all().live().filter(status="Actual", scope="Public").order_by('-sent')
+    alerts = CapAlertPage.objects.all().live().filter(status="Actual", scope="Public")
+
+    # Exclude alerts that have already been cancelled by a published public cancel alert.
+    cancelled_alert_ids = set()
+    cancel_alerts = alerts.filter(msgType="Cancel").only("references")
+
+    for cancel_alert in cancel_alerts:
+        for reference in cancel_alert.references:
+            ref_alert = reference.value.get("ref_alert")
+            if ref_alert and hasattr(ref_alert, "id"):
+                cancelled_alert_ids.add(ref_alert.id)
+
+    if cancelled_alert_ids:
+        alerts = alerts.exclude(id__in=cancelled_alert_ids)
+
+    return alerts.order_by('-sent')
 
 
 def get_currently_active_alerts():
