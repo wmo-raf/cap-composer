@@ -819,7 +819,7 @@ msgstr "Geografia"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:5
 msgid "Met"
-msgstr "Conheci"
+msgstr "Meteorologia"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:6
 msgid "Safety"
