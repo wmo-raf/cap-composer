@@ -157,11 +157,11 @@ msgid ""
 "follow on action is described in instruction"
 msgstr ""
 "Tudo limpo - O evento em questão não representa mais uma ameaça ou "
-"preocupação e qualquer ação subsequente é descrita nas instruções"
+"preocupação e qualquer acção subsequente é descrita nas instruções"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:160
 msgid "No action recommended"
-msgstr "Nenhuma ação recomendada"
+msgstr "Nenhuma acção recomendada"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:163
 msgid "Response type"
@@ -170,7 +170,7 @@ msgstr "Tipo de resposta"
 #: capcomposer/src/capcomposer/capeditor/blocks.py:164
 msgid ""
 "The code denoting the type of action recommended for the target audience"
-msgstr "O código que denota o tipo de ação recomendada para o público-alvo"
+msgstr "O código que denota o tipo de acção recomendada para o público-alvo"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:169
 msgid "Value Name"
@@ -342,11 +342,11 @@ msgstr "Valor do código do evento"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:624
 msgid "Immediate - Responsive action SHOULD be taken immediately"
-msgstr "Imediato - Ação responsiva DEVE ser tomada imediatamente"
+msgstr "Imediato - Acção responsiva DEVE ser tomada imediatamente"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:625
 msgid "Expected - Responsive action SHOULD be taken soon (within next hour)"
-msgstr "Esperado - Ação responsiva DEVE ser tomada em breve (na próxima hora)"
+msgstr "Esperado - Acção responsiva DEVE ser tomada em breve (na próxima hora)"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:626
 msgid "Future - Responsive action SHOULD be taken in the near future"
@@ -354,7 +354,7 @@ msgstr "Futuro - Ações responsivas DEVEM ser tomadas em um futuro próximo"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:627
 msgid "Past - Responsive action is no longer required"
-msgstr "Passado - A ação responsiva não é mais necessária"
+msgstr "Passado - A acção responsiva não é mais necessária"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:632
 msgid "Extreme - Extraordinary threat to life or property"
@@ -481,7 +481,7 @@ msgid ""
 "The text describing the recommended action to be taken by recipients of the "
 "alert message"
 msgstr ""
-"O texto que descreve a ação recomendada a ser tomada pelos destinatários da "
+"O texto que descreve a acção recomendada a ser tomada pelos destinatários da "
 "mensagem de alerta"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:673
@@ -980,11 +980,11 @@ msgstr "Ciclone extratropical"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:61
 msgid "Flood"
-msgstr "Enchente"
+msgstr "Cheia"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:62
 msgid "Fog"
-msgstr "Névoa"
+msgstr "Nevoeiro"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:63
 msgid "Haze/Smoke"
@@ -996,7 +996,7 @@ msgstr "Geada"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:65
 msgid "Hail"
-msgstr "Saudação"
+msgstr "Granizo"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:66
 msgid "Heat wave"
@@ -1008,11 +1008,11 @@ msgstr "Alta radiação UV"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:68
 msgid "Icing"
-msgstr "Glacê"
+msgstr "Frio Intenso"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:69
 msgid "Freezing rain"
-msgstr "Chuva congelante"
+msgstr "Chuvas moderadas a forte, trovoadas e granizo"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:70
 msgid "Landslide/Mudslide & Debris flow"
@@ -1020,15 +1020,15 @@ msgstr "Deslizamento de terra/deslizamento de lama e fluxo de detritos"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:71
 msgid "Lightning"
-msgstr "Raio"
+msgstr "Trovoada"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:72
 msgid "Pollen pollution/Polluted air"
-msgstr "Poluição por pólen/Ar poluído"
+msgstr "Poluição do Ar"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:73
 msgid "Rain/Wet Spell"
-msgstr "Feitiço de Chuva/Molhada"
+msgstr "Chuva moderada a forte e trovoada"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:74
 msgid "Snow"
@@ -1040,11 +1040,11 @@ msgstr "Tempestade de neve"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:76
 msgid "Space weather event"
-msgstr "Evento climático espacial"
+msgstr "Eventos meteorológicos espaciais"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:77
 msgid "High Seas/Rogue waves etc."
-msgstr "Alto mar/ondas traiçoeiras etc."
+msgstr "Agitação das ondas no mar"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:78
 msgid "Storm surge/Coastal flood"
@@ -1052,7 +1052,7 @@ msgstr "Onda de tempestade/inundação costeira"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:79
 msgid "Thunderstorms/Squall lines"
-msgstr "Trovoadas/linhas de instabilidade"
+msgstr "Trovoadas Severas"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:80
 msgid "Tornado"
@@ -1080,23 +1080,23 @@ msgstr "Vento"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:149
 msgid "Red severity"
-msgstr "Gravidade vermelha"
+msgstr "Severidade vermelha"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:158
 msgid "Orange severity"
-msgstr "Gravidade laranja"
+msgstr "Severidade laranja"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:166
 msgid "Yellow severity"
-msgstr "Gravidade amarela"
+msgstr "Severidade amarela"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:174
 msgid "Minor severity"
-msgstr "Gravidade menor"
+msgstr "Severidade menor"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:182
 msgid "Unknown severity"
-msgstr "Gravidade desconhecida"
+msgstr "Severidade desconhecida"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:214
 #: capcomposer/src/capcomposer/capeditor/constants.py:242
