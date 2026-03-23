@@ -1369,7 +1369,7 @@ msgstr "Expirado"
 
 #: capcomposer/src/capcomposer/capeditor/models.py:320
 msgid "Ongoing"
-msgstr "Em andamento"
+msgstr "Em curso alerta de"
 
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:47
 msgid "Issued"

@@ -275,7 +275,8 @@ def get_home_map_alerts(request):
         alert_info = {
             "status": status,
             "url": alert.url,
-            "event": f"{event} ({area_desc})",
+            "event": event,
+            "area_desc": area_desc,
             "event_icon": event_icon,
             "severity": SEVERITY_MAPPING[info.value.get("severity")]
         }

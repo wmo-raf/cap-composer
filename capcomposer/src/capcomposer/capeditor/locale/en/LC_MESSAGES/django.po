@@ -20,55 +20,59 @@ msgstr ""
 
 #: capcomposer/src/capcomposer/config/templates/404.html:19
 msgid "Page not found"
-msgstr ""
+msgstr "Page not found"
 
 #: capcomposer/src/capcomposer/config/templates/404.html:23
 msgid "Sorry, this page could not be found"
-msgstr ""
+msgstr "Sorry, this page could not be found"
 
 #: capcomposer/src/capcomposer/config/templates/500.html:17
 msgid "Internal server error"
-msgstr ""
+msgstr "Internal server error"
 
 #: capcomposer/src/capcomposer/config/templates/500.html:20
 msgid "Sorry, there seems to be an error. Please try again soon"
-msgstr ""
+msgstr "Sorry, there seems to be an error. Please try again soon"
 
 #: capcomposer/src/capcomposer/config/templates/axes/lockout.html:4
 msgid "Sign in"
-msgstr ""
+msgstr "Sign in"
 
 #: capcomposer/src/capcomposer/config/templates/axes/lockout.html:10
 msgid "Account Locked"
-msgstr ""
+msgstr "Account Locked"
 
 #: capcomposer/src/capcomposer/config/templates/axes/lockout.html:15
 msgid ""
 "Your account has been locked due to multiple failed login attempts. Please "
 "try again later."
 msgstr ""
+"Your account has been locked due to multiple failed login attempts. Please "
+"try again later."
 
 #: capcomposer/src/capcomposer/config/templates/axes/lockout.html:17
 msgid ""
 "You account has been locked due to multiple failed login attempts. Please "
 "contact our support team for assistance."
 msgstr ""
+"You account has been locked due to multiple failed login attempts. Please "
+"contact our support team for assistance."
 
 #: capcomposer/src/capcomposer/config/templates/footer.html:5
 msgid "Powered by CAPComposer"
-msgstr ""
+msgstr "Powered by CAPComposer"
 
 #: capcomposer/src/capcomposer/config/templates/wagtailadmin/home.html:5
 msgid "Welcome to"
-msgstr ""
+msgstr "Welcome to"
 
 #: capcomposer/src/capcomposer/config/templates/wagtailadmin/home.html:9
 msgid "CAPComposer"
-msgstr ""
+msgstr "CAPComposer"
 
 #: capcomposer/src/capcomposer/home/models.py:19
 msgid "Subtitle"
-msgstr ""
+msgstr "Subtitle"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:117
 #: capcomposer/src/capcomposer/capeditor/blocks.py:145
@@ -294,7 +298,8 @@ msgstr "Area"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:439
 msgid "The human-readable name of the agency or authority issuing this alert."
-msgstr "The human-readable name of the agency or authority issuing this alert."
+msgstr ""
+"The human-readable name of the agency or authority issuing this alert."
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:440
 msgid ""
@@ -405,16 +410,19 @@ msgstr "Language"
 #, fuzzy
 #| msgid "The code denoting the language of the alert message"
 msgid ""
-"The code denoting the language of the alert message.If not selected, 'en-US' "
-"will be used as default"
-msgstr "The code denoting the language of the alert message"
+"The code denoting the language of the alert message.If not selected, 'en-US'"
+" will be used as default"
+msgstr ""
+"The code denoting the language of the alert message.If not selected, 'en-US'"
+" will be used as default"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:654
 msgid "Urgency"
 msgstr "Urgency"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:655
-msgid "The code denoting the urgency of the subject event of the alert message"
+msgid ""
+"The code denoting the urgency of the subject event of the alert message"
 msgstr ""
 "The code denoting the urgency of the subject event of the alert message"
 
@@ -579,7 +587,8 @@ msgstr "Parameters"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:723
 msgid "The expiry time of the alert should be greater than the effective time"
-msgstr "The expiry time of the alert should be greater than the effective time"
+msgstr ""
+"The expiry time of the alert should be greater than the effective time"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:728
 msgid "The expiry time of the alert should be greater than the onset time"
@@ -643,11 +652,11 @@ msgstr ""
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:54
 msgid "Number of latest Alerts to show in the XML CAP Feed"
-msgstr ""
+msgstr "Number of latest Alerts to show in the XML CAP Feed"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:54
 msgid "Set a smaller number to improve perfomance for aggregators"
-msgstr ""
+msgstr "Set a smaller number to improve perfomance for aggregators"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:58
 msgid "CAP Settings"
@@ -685,13 +694,13 @@ msgstr "Predefined Areas"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:77
 msgid "Allowed Alert Languages"
-msgstr ""
+msgstr "Allowed Alert Languages"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:78
 #, fuzzy
 #| msgid "Language"
 msgid "Languages"
-msgstr "Language"
+msgstr "Languages"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:83
 msgid "UN Boundary"
@@ -701,7 +710,7 @@ msgstr "UN Boundary"
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "Other Settings"
-msgstr "CAP Settings"
+msgstr "Other Settings"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:110
 msgid "Geophysical"
@@ -775,7 +784,7 @@ msgstr "Category"
 #, fuzzy
 #| msgid "Name of Hazard"
 msgid "Category of Hazard"
-msgstr "Name of Hazard"
+msgstr "Category of Hazard"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:131
 msgid "Event Code"
@@ -793,27 +802,27 @@ msgstr "Matching icon"
 #, fuzzy
 #| msgid "Event Code"
 msgid "Event Code is required"
-msgstr "Event Code"
+msgstr "Event Code is required"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:153
 msgid "This event type already exists"
-msgstr ""
+msgstr "This event type already exists"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:189
 #, fuzzy
 #| msgid "Language"
 msgid "Language Code"
-msgstr "Language"
+msgstr "Language Code"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:189
 msgid "ISO 639-1 language code"
-msgstr ""
+msgstr "ISO 639-1 language code"
 
 #: capcomposer/src/capcomposer/capeditor/cap_settings.py:190
 #, fuzzy
 #| msgid "Language"
 msgid "Language Name"
-msgstr "Language"
+msgstr "Language Name"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:4
 msgid "Geo"
@@ -1024,7 +1033,7 @@ msgstr "Landslide/Mudslide & Debris flow"
 #, fuzzy
 #| msgid "Lighting"
 msgid "Lightning"
-msgstr "Lighting"
+msgstr "Lightning"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:72
 msgid "Pollen pollution/Polluted air"
@@ -1163,6 +1172,8 @@ msgid ""
 "You cannot reference an alert to itself. Please select a previously "
 "published alert."
 msgstr ""
+"You cannot reference an alert to itself. Please select a previously "
+"published alert."
 
 #: capcomposer/src/capcomposer/capeditor/models.py:151
 msgid "You cannot select the same alert more than once."
@@ -1196,7 +1207,8 @@ msgstr "System - For messages that support alert network internal functions"
 
 #: capcomposer/src/capcomposer/capeditor/models.py:170
 msgid "Alert - Initial information requiring attention by targeted recipients"
-msgstr "Alert - Initial information requiring attention by targeted recipients"
+msgstr ""
+"Alert - Initial information requiring attention by targeted recipients"
 
 #: capcomposer/src/capcomposer/capeditor/models.py:171
 msgid ""
@@ -1259,6 +1271,8 @@ msgid ""
 "Time and date of origination of the alert. Automatically generated by the "
 "system during publishing"
 msgstr ""
+"Time and date of origination of the alert. Automatically generated by the "
+"system during publishing"
 
 #: capcomposer/src/capcomposer/capeditor/models.py:197
 msgid "Status"

@@ -187,13 +187,13 @@ msgid ""
 "represented in all capital letters without periods (e.g., SAME, FIPS, ZIP"
 msgstr ""
 "Cadena asignada por el usuario que designa el dominio del código. Las siglas"
-" DEBEN estar representadas en letras mayúsculas sin puntos (por ejemplo, "
-"SAME, FIPS, ZIP"
+" DEBEN representarse en letras mayúsculas sin puntos (por ejemplo, SAME, "
+"FIPS, ZIP"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:174
 msgid "A string (which may represent a number) denoting the value itself"
 msgstr ""
-"Una cadena (que puede representar un número) que denota el valor en sí."
+"Una cadena (que puede representar un número) que indica el valor en sí."
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:177
 msgid "Geographically-based code to describe a message target area"

@@ -20,31 +20,31 @@ msgstr ""
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:15
 msgid "Feed name"
-msgstr ""
+msgstr "Feed name"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:16
 #, fuzzy
 #| msgid "Provide a name to identify the broker"
 msgid "Provide a name to identify the feed"
-msgstr "Provide a name to identify the broker"
+msgstr "Provide a name to identify the feed"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:17
 #, fuzzy
 #| msgid "Message Type"
 msgid "Feed Type"
-msgstr "Message Type"
+msgstr "Feed Type"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:18
 msgid "Select the type of feed"
-msgstr ""
+msgstr "Select the type of feed"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:19
 msgid "Feed URL"
-msgstr ""
+msgstr "Feed URL"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:19
 msgid "Enter the URL of the feed"
-msgstr ""
+msgstr "Enter the URL of the feed"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:20
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:44
@@ -54,81 +54,83 @@ msgstr "Active"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:21
 msgid "Automatically fetch data from this feed. Uncheck to disable."
-msgstr ""
+msgstr "Automatically fetch data from this feed. Uncheck to disable."
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:22
 #, fuzzy
 #| msgid "Auto Refresh interval in minutes"
 msgid "Feed check interval in minutes"
-msgstr "Auto Refresh interval in minutes"
+msgstr "Feed check interval in minutes"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:27
 msgid "How often to check for new alerts in minutes. Min: 1, Max: 10"
-msgstr ""
+msgstr "How often to check for new alerts in minutes. Min: 1, Max: 10"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:29
 msgid "Validate CAP XML Signature"
-msgstr ""
+msgstr "Validate CAP XML Signature"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:30
 msgid "Check to only import alerts with a valid XML signature."
-msgstr ""
+msgstr "Check to only import alerts with a valid XML signature."
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:33
 msgid "Submit imported alerts for moderation"
-msgstr ""
+msgstr "Submit imported alerts for moderation"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:35
 msgid ""
 "Check to automatically submit imported alerts for moderation. Otherwise, "
 "alerts will be saved as drafts."
 msgstr ""
+"Check to automatically submit imported alerts for moderation. Otherwise, "
+"alerts will be saved as drafts."
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:48
 msgid "External Alert Feed"
-msgstr ""
+msgstr "External Alert Feed"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:49
 msgid "External Alert Feeds"
-msgstr ""
+msgstr "External Alert Feeds"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:57
 #, fuzzy
 #| msgid "Alert"
 msgid "Alert URL"
-msgstr "Alert"
+msgstr "Alert URL"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:57
 msgid "The URL of the alert XML"
-msgstr ""
+msgstr "The URL of the alert XML"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:58
 msgid "Remote Alert ID"
-msgstr ""
+msgstr "Remote Alert ID"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:59
 msgid "The unique identifier of the alert in the remote feed"
-msgstr ""
+msgstr "The unique identifier of the alert in the remote feed"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:62
 msgid "The imported alert from this entry"
-msgstr ""
+msgstr "The imported alert from this entry"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:65
 msgid "External Alert Feed Entry"
-msgstr ""
+msgstr "External Alert Feed Entry"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:66
 msgid "External Alert Feed Entries"
-msgstr ""
+msgstr "External Alert Feed Entries"
 
 #: capcomposer/src/capcomposer/cap/mixins.py:21
 msgid "For search engines"
-msgstr ""
+msgstr "For search engines"
 
 #: capcomposer/src/capcomposer/cap/mixins.py:27
 msgid "For site menus"
-msgstr ""
+msgstr "For site menus"
 
 #: capcomposer/src/capcomposer/cap/models.py:58
 msgid "CAP Alerts Heading"
@@ -136,7 +138,7 @@ msgstr "CAP Alerts Heading"
 
 #: capcomposer/src/capcomposer/cap/models.py:63
 msgid "Number of alerts to show per page"
-msgstr ""
+msgstr "Number of alerts to show per page"
 
 #: capcomposer/src/capcomposer/cap/models.py:231
 msgid "Effective date cannot be earlier than the alert sent date."
@@ -148,7 +150,7 @@ msgstr "Expires date cannot be earlier than the alert sent date."
 
 #: capcomposer/src/capcomposer/cap/models.py:270
 msgid "Imported"
-msgstr ""
+msgstr "Imported"
 
 #: capcomposer/src/capcomposer/cap/models.py:280
 msgid "CAP Alert"
@@ -156,11 +158,11 @@ msgstr "CAP Alert"
 
 #: capcomposer/src/capcomposer/cap/models.py:298
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: capcomposer/src/capcomposer/cap/models.py:299
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: capcomposer/src/capcomposer/cap/models.py:446
 msgid "Left of the Navbar"
@@ -186,11 +188,11 @@ msgstr "Other Settings"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:14
 msgid "At most once. Fire and forget"
-msgstr ""
+msgstr "At most once. Fire and forget"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:15
 msgid "At least once. I’ll keep sending until you say you got it"
-msgstr ""
+msgstr "At least once. I’ll keep sending until you say you got it"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:19
 #: capcomposer/src/capcomposer/cap/webhook/models.py:8
@@ -247,7 +249,7 @@ msgstr "Provide the MQTT topic to publish the CAP alerts."
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:37
 msgid "Quality of Service (QoS)"
-msgstr ""
+msgstr "Quality of Service (QoS)"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:39
 msgid "Dataset ID"
@@ -347,11 +349,11 @@ msgstr "MQTT Broker Events"
 
 #: capcomposer/src/capcomposer/cap/permissions.py:7
 msgid "CAP Menu Permission"
-msgstr ""
+msgstr "CAP Menu Permission"
 
 #: capcomposer/src/capcomposer/cap/permissions.py:8
 msgid "CAP Menu Permissions"
-msgstr ""
+msgstr "CAP Menu Permissions"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:77
 msgid "View PNG"
@@ -658,16 +660,16 @@ msgstr "Latest alerts from %(sender_name)s"
 
 #: capcomposer/src/capcomposer/cap/views.py:358
 msgid "CAP Alert PNG and PDF created successfully."
-msgstr ""
+msgstr "CAP Alert PNG and PDF created successfully."
 
 #: capcomposer/src/capcomposer/cap/views.py:360
 msgid "Failed to create CAP Alert PNG and PDF."
-msgstr ""
+msgstr "Failed to create CAP Alert PNG and PDF."
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:84
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:314
 msgid "Create PNG/PDF"
-msgstr ""
+msgstr "Create PNG/PDF"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:96
 msgid "LIVE"
@@ -692,7 +694,7 @@ msgstr "Webhook Events"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:233
 msgid "External CAP Alert Feeds"
-msgstr ""
+msgstr "External CAP Alert Feeds"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:272
 msgid "Import CAP Alert"
@@ -713,13 +715,13 @@ msgstr "Actual Alerts cannot be Unpublished after they have been published"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:434
 msgid ""
-"Actual Alerts cannot be deleted after they have been published. To cancel or "
-"publish an update to this alert, create a new alert of Message Type 'Cancel' "
-"or 'Update' and reference this alert"
+"Actual Alerts cannot be deleted after they have been published. To cancel or"
+" publish an update to this alert, create a new alert of Message Type "
+"'Cancel' or 'Update' and reference this alert"
 msgstr ""
-"Actual Alerts cannot be deleted after they have been published. To cancel or "
-"publish an update to this alert, create a new alert of Message Type 'Cancel' "
-"or 'Update' and reference this alert"
+"Actual Alerts cannot be deleted after they have been published. To cancel or"
+" publish an update to this alert, create a new alert of Message Type "
+"'Cancel' or 'Update' and reference this alert"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:447
 msgid "CAP Alert draft created. You can now edit the alert."
@@ -731,13 +733,13 @@ msgstr "Webhook URL"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:14
 msgid "Include Header for Authentication"
-msgstr ""
+msgstr "Include Header for Authentication"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:15
 #, fuzzy
 #| msgid "Headline"
 msgid "Header Value"
-msgstr "Headline"
+msgstr "Header Value"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:26
 msgid "CAP Alert Webhook"
@@ -787,12 +789,12 @@ msgstr "CAP Alert Webhook Events"
 #~ msgstr "CAP Mapviewer Settings"
 
 #~ msgid ""
-#~ "Actual Alerts cannot be edited after they have been published. To publish "
-#~ "an update to this alert, create a new alert of Message Type 'Update' and "
+#~ "Actual Alerts cannot be edited after they have been published. To publish an"
+#~ " update to this alert, create a new alert of Message Type 'Update' and "
 #~ "reference this alert"
 #~ msgstr ""
-#~ "Actual Alerts cannot be edited after they have been published. To publish "
-#~ "an update to this alert, create a new alert of Message Type 'Update' and "
+#~ "Actual Alerts cannot be edited after they have been published. To publish an"
+#~ " update to this alert, create a new alert of Message Type 'Update' and "
 #~ "reference this alert"
 
 #~ msgid "Unknown"
