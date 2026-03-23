@@ -48,7 +48,7 @@ msgid ""
 "try again later."
 msgstr ""
 "لقد تم قفل حسابك بسبب عدة محاولات تسجيل دخول فاشلة. يرجى المحاولة مرة أخرى "
-"لاحقا."
+"في وقت لاحق."
 
 #: capcomposer/src/capcomposer/config/templates/axes/lockout.html:17
 msgid ""

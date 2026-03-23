@@ -20,113 +20,115 @@ msgstr ""
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:15
 msgid "Feed name"
-msgstr "Jina la kulisha"
+msgstr "Jina la mipasho"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:16
 #, fuzzy
 #| msgid "Provide a name to identify the broker"
 msgid "Provide a name to identify the feed"
-msgstr "Toa jina la kutambua malisho"
+msgstr "Toa jina ili kutambua mipasho"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:17
 #, fuzzy
 #| msgid "Message Type"
 msgid "Feed Type"
-msgstr "Aina ya kulisha"
+msgstr "Aina ya Kulisha"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:18
 msgid "Select the type of feed"
-msgstr "Chagua aina ya malisho"
+msgstr "Chagua aina ya kulisha"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:19
 msgid "Feed URL"
-msgstr "Kulisha URL"
+msgstr "URL ya mipasho"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:19
 msgid "Enter the URL of the feed"
-msgstr "Ingiza URL ya kulisha"
+msgstr "Weka URL ya mipasho"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:20
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:44
 #: capcomposer/src/capcomposer/cap/webhook/models.py:10
 msgid "Active"
-msgstr "Kazi"
+msgstr "Inayotumika"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:21
 msgid "Automatically fetch data from this feed. Uncheck to disable."
-msgstr "Panda kiotomatiki kutoka kwa kulisha hii. Uncheck kuzima."
+msgstr "Leta data kiotomatiki kutoka kwa mpasho huu. Ondoa uteuzi ili kuzima."
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:22
 #, fuzzy
 #| msgid "Auto Refresh interval in minutes"
 msgid "Feed check interval in minutes"
-msgstr "Kulisha muda wa kuangalia kwa dakika"
+msgstr "Muda wa kuangalia malisho kwa dakika"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:27
 msgid "How often to check for new alerts in minutes. Min: 1, Max: 10"
-msgstr "Ni mara ngapi kuangalia arifu mpya katika dakika. Min: 1, max: 10"
+msgstr ""
+"Ni mara ngapi utaangalia arifa mpya kwa dakika. Kiwango cha chini: 1, Upeo: "
+"10"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:29
 msgid "Validate CAP XML Signature"
-msgstr "Thibitisha saini ya XML"
+msgstr "Thibitisha Sahihi ya CAP XML"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:30
 msgid "Check to only import alerts with a valid XML signature."
-msgstr "Angalia arifu za kuagiza tu na saini halali ya XML."
+msgstr "Angalia ili kuleta arifa zilizo na sahihi ya XML pekee."
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:33
 msgid "Submit imported alerts for moderation"
-msgstr "Peana arifu zilizoingizwa kwa kiasi"
+msgstr "Wasilisha arifa zilizoletwa kwa udhibiti"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:35
 msgid ""
 "Check to automatically submit imported alerts for moderation. Otherwise, "
 "alerts will be saved as drafts."
 msgstr ""
-"Angalia ili kuwasilisha otomatiki arifu zilizoingizwa kwa wastani. "
-"Vinginevyo, arifu zitaokolewa kama rasimu."
+"Angalia ili kuwasilisha arifa zilizoletwa kiotomatiki kwa udhibiti. "
+"Vinginevyo, arifa zitahifadhiwa kama rasimu."
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:48
 msgid "External Alert Feed"
-msgstr "Malisho ya tahadhari ya nje"
+msgstr "Mlisho wa Tahadhari ya Nje"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:49
 msgid "External Alert Feeds"
-msgstr "Malisho ya nje ya tahadhari"
+msgstr "Milisho ya Tahadhari ya Nje"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:57
 #, fuzzy
 #| msgid "Alert"
 msgid "Alert URL"
-msgstr "URL ya tahadhari"
+msgstr "URL ya Arifa"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:57
 msgid "The URL of the alert XML"
-msgstr "URL ya Alert XML"
+msgstr "URL ya XML ya arifa"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:58
 msgid "Remote Alert ID"
-msgstr "Kitambulisho cha tahadhari ya mbali"
+msgstr "Kitambulisho cha Arifa ya Mbali"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:59
 msgid "The unique identifier of the alert in the remote feed"
-msgstr "Kitambulisho cha kipekee cha tahadhari katika kulisha mbali"
+msgstr "Kitambulishi cha kipekee cha arifa katika mpasho wa mbali"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:62
 msgid "The imported alert from this entry"
-msgstr "Arifa iliyoingizwa kutoka kwa kiingilio hiki"
+msgstr "Tahadhari iliyoingizwa kutoka kwa ingizo hili"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:65
 msgid "External Alert Feed Entry"
-msgstr "Kuingia kwa tahadhari ya nje"
+msgstr "Ingizo la Mlisho wa Tahadhari ya Nje"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:66
 msgid "External Alert Feed Entries"
-msgstr "Maingizo ya nje ya tahadhari ya nje"
+msgstr "Maingizo ya Milisho ya Tahadhari ya Nje"
 
 #: capcomposer/src/capcomposer/cap/mixins.py:21
 msgid "For search engines"
-msgstr "Kwa injini za utaftaji"
+msgstr "Kwa injini za utafutaji"
 
 #: capcomposer/src/capcomposer/cap/mixins.py:27
 msgid "For site menus"
@@ -134,34 +136,35 @@ msgstr "Kwa menyu ya tovuti"
 
 #: capcomposer/src/capcomposer/cap/models.py:58
 msgid "CAP Alerts Heading"
-msgstr "Arifa za cap"
+msgstr "Kichwa cha Arifa za CAP"
 
 #: capcomposer/src/capcomposer/cap/models.py:63
 msgid "Number of alerts to show per page"
-msgstr "Idadi ya arifu za kuonyesha kwa kila ukurasa"
+msgstr "Idadi ya arifa za kuonyesha kwa kila ukurasa"
 
 #: capcomposer/src/capcomposer/cap/models.py:231
 msgid "Effective date cannot be earlier than the alert sent date."
 msgstr ""
-"Tarehe ya ufanisi haiwezi kuwa mapema kuliko tarehe iliyotumwa ya tahadhari."
+"Tarehe ya kuanza kutumika haiwezi kuwa mapema zaidi ya tarehe iliyotumwa ya "
+"arifa."
 
 #: capcomposer/src/capcomposer/cap/models.py:234
 msgid "Expires date cannot be earlier than the alert sent date."
 msgstr ""
-"Tarehe ya kumalizika haiwezi kuwa mapema kuliko tarehe iliyotumwa ya "
-"tahadhari."
+"Tarehe ya mwisho wa matumizi haiwezi kuwa mapema zaidi ya tarehe iliyotumwa "
+"ya arifa."
 
 #: capcomposer/src/capcomposer/cap/models.py:270
 msgid "Imported"
-msgstr "Kuingizwa"
+msgstr "Imeingizwa"
 
 #: capcomposer/src/capcomposer/cap/models.py:280
 msgid "CAP Alert"
-msgstr "Tahadhari ya cap"
+msgstr "Tahadhari ya CAP"
 
 #: capcomposer/src/capcomposer/cap/models.py:298
 msgid "PDF"
-msgstr "Pdf"
+msgstr "PDF"
 
 #: capcomposer/src/capcomposer/cap/models.py:299
 msgid "Email"
@@ -173,29 +176,29 @@ msgstr "Kushoto kwa Navbar"
 
 #: capcomposer/src/capcomposer/cap/models.py:447
 msgid "Top of the Navbar"
-msgstr "Juu ya Navbar"
+msgstr "Juu ya Upau wa Nav"
 
 #: capcomposer/src/capcomposer/cap/models.py:451
 msgid "Active Alert Style"
-msgstr "Mtindo wa tahadhari inayotumika"
+msgstr "Mtindo Amilifu wa Arifa"
 
 #: capcomposer/src/capcomposer/cap/models.py:452
 msgid "Choose the style of active alerts"
-msgstr "Chagua mtindo wa arifu za kazi"
+msgstr "Chagua mtindo wa arifa zinazotumika"
 
 #: capcomposer/src/capcomposer/cap/models.py:462
 #: capcomposer/src/capcomposer/cap/models.py:463
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:288
 msgid "Other Settings"
-msgstr "Mipangilio mingine"
+msgstr "Mipangilio Mingine"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:14
 msgid "At most once. Fire and forget"
-msgstr "Mara moja. Moto na usahau"
+msgstr "Mara moja zaidi. Moto na kusahau"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:15
 msgid "At least once. I’ll keep sending until you say you got it"
-msgstr "Angalau mara moja. Nitaendelea kutuma hadi utakaposema umepata"
+msgstr "Angalau mara moja. Nitaendelea kutuma hadi utakaposema umeipata"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:19
 #: capcomposer/src/capcomposer/cap/webhook/models.py:8
@@ -204,43 +207,44 @@ msgstr "Jina"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:20
 msgid "Provide a name to identify the broker"
-msgstr "Toa jina la kutambua broker"
+msgstr "Toa jina ili kutambua wakala"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:21
 msgid "Broker Host"
-msgstr "Mwenyeji wa broker"
+msgstr "Mwenyeji wa Dalali"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:22
 msgid "Provide the broker host name or IP address"
-msgstr "Toa jina la mwenyeji wa broker au anwani ya IP"
+msgstr "Toa jina la mpangishi wa wakala au anwani ya IP"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:23
 msgid "Broker Port"
-msgstr "Bandari ya broker"
+msgstr "Bandari ya Dalali"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:23
 msgid "Provide the broker port number"
-msgstr "Toa nambari ya bandari ya broker"
+msgstr "Toa nambari ya bandari ya wakala"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:26
 msgid "Broker Username"
-msgstr "Jina la mtumiaji la Broker"
+msgstr "Jina la mtumiaji la Dalali"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:27
 msgid "Broker Password"
-msgstr "Nenosiri la Broker"
+msgstr "Nenosiri la Dalali"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:28
 msgid "Enter a password. If a password already exists, it will be updated"
-msgstr "Ingiza nywila. Ikiwa nywila tayari ipo, itasasishwa"
+msgstr "Weka nenosiri. Ikiwa nenosiri tayari lipo, litasasishwa"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:32
 msgid "Is WIS2Box Node"
-msgstr "Ni nodi ya Wis2box"
+msgstr "Ni Njia ya WIS2Box"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:33
 msgid "Check this box if you are providing the broker details of a wis2box."
-msgstr "Angalia kisanduku hiki ikiwa unapeana maelezo ya broker ya Wis2box."
+msgstr ""
+"Weka alama kwenye kisanduku hiki ikiwa unatoa maelezo ya wakala wa wis2box."
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:35
 msgid "Topic"
@@ -248,37 +252,37 @@ msgstr "Mada"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:36
 msgid "Provide the MQTT topic to publish the CAP alerts."
-msgstr "Toa mada ya MQTT kuchapisha arifu za CAP."
+msgstr "Toa mada ya MQTT ili kuchapisha arifa za CAP."
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:37
 msgid "Quality of Service (QoS)"
-msgstr "Ubora wa Huduma (QOS)"
+msgstr "Ubora wa Huduma (QoS)"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:39
 msgid "Dataset ID"
-msgstr "Kitambulisho cha data"
+msgstr "Kitambulisho cha seti ya data"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:41
 msgid ""
 "Provide the metadata ID for your dataset registered in the wis2box. If you "
 "do not have this, please create a dataset in the wis2box before proceeding."
 msgstr ""
-"Toa kitambulisho cha metadata kwa hifadhidata yako iliyosajiliwa kwenye "
-"Wis2Box. Ikiwa hauna hii, tafadhali tengeneza daftari kwenye sanduku la Wis2"
-" kabla ya kuendelea."
+"Toa kitambulisho cha metadata cha seti yako ya data iliyosajiliwa katika "
+"wis2box. Ikiwa huna hii, tafadhali unda seti ya data katika wis2box kabla ya"
+" kuendelea."
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:45
 msgid "Automatically publish CAP alerts to this broker"
-msgstr "Chapisha moja kwa moja arifu za cap kwa broker hii"
+msgstr "Chapisha kiotomatiki arifa za CAP kwa wakala huyu"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:48
 #: capcomposer/src/capcomposer/cap/webhook/models.py:13
 msgid "Retry on failure"
-msgstr "Jaribu tena juu ya kutofaulu"
+msgstr "Jaribu tena kushindwa"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:55
 msgid "Broker Information"
-msgstr "Habari ya broker"
+msgstr "Taarifa za Dalali"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:59
 msgid "Authentication"
@@ -286,7 +290,7 @@ msgstr "Uthibitishaji"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:76
 msgid "Dataset ID is required for a WIS2Box Broker"
-msgstr "Kitambulisho cha data inahitajika kwa broker ya Wis2box"
+msgstr "Kitambulisho cha seti ya data kinahitajika kwa Dalali wa WIS2Box"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:81
 msgid "Topic is required"
@@ -297,16 +301,16 @@ msgid ""
 "Secret key for encrypting passwords is not set. Please ensure the "
 "CAP_MQTT_SECRET_KEY is set "
 msgstr ""
-"Ufunguo wa siri wa nywila za usimbuaji haujawekwa. Tafadhali hakikisha "
-"cap_mqtt_secret_key imewekwa"
+"Ufunguo wa siri wa kusimba nenosiri haujawekwa. Tafadhali hakikisha "
+"CAP_MQTT_SECRET_KEY imewekwa"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:91
 msgid "Password is required if creating a new broker"
-msgstr "Nenosiri linahitajika ikiwa kuunda broker mpya"
+msgstr "Nenosiri linahitajika ikiwa unaunda wakala mpya"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:112
 msgid "MQTT Broker"
-msgstr "MQTT broker"
+msgstr "Dalali wa MQTT"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:113
 msgid "MQTT Brokers"
@@ -336,28 +340,28 @@ msgstr "Hali"
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:131
 #: capcomposer/src/capcomposer/cap/webhook/models.py:45
 msgid "Retries"
-msgstr "Anarudi"
+msgstr "Inajaribu tena"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:132
 #: capcomposer/src/capcomposer/cap/webhook/models.py:46
 msgid "Last Error Message"
-msgstr "Ujumbe wa mwisho wa makosa"
+msgstr "Ujumbe wa Hitilafu wa Mwisho"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:137
 msgid "MQTT Broker Event"
-msgstr "Tukio la broker la MQTT"
+msgstr "Tukio la Dalali wa MQTT"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:138
 msgid "MQTT Broker Events"
-msgstr "Matukio ya broker ya MQTT"
+msgstr "Matukio ya Wakala wa MQTT"
 
 #: capcomposer/src/capcomposer/cap/permissions.py:7
 msgid "CAP Menu Permission"
-msgstr "Ruhusa ya menyu"
+msgstr "Ruhusa ya Menyu ya CAP"
 
 #: capcomposer/src/capcomposer/cap/permissions.py:8
 msgid "CAP Menu Permissions"
-msgstr "Ruhusa za menyu ya cap"
+msgstr "Ruhusa za Menyu ya CAP"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:77
 msgid "View PNG"
@@ -369,32 +373,32 @@ msgstr "Tazama PDF"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:103
 msgid "Warning: This is not an Actual alert"
-msgstr "Onyo: Hii sio tahadhari halisi"
+msgstr "Onyo: Hii si tahadhari Halisi"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:106
 msgid "The alert below is marked as"
-msgstr "Arifa hapa chini ni alama kama"
+msgstr "Tahadhari hapa chini imewekwa alama kama"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:108
 msgid ""
 "This means it is not an Actual alert and therefore not actionable to the "
 "general public"
 msgstr ""
-"Hii inamaanisha sio tahadhari halisi na kwa hivyo haiwezi kutekelezwa kwa "
-"umma kwa ujumla"
+"Hii inamaanisha kuwa si tahadhari Halisi na kwa hivyo haiwezi kuchukuliwa "
+"hatua kwa umma"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:116
 msgid "This alert is an update to the previously published alerts below:"
-msgstr "Arifa hii ni sasisho kwa arifu zilizochapishwa hapo chini:"
+msgstr "Tahadhari hii ni sasisho kwa arifa zilizochapishwa hapo chini:"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:121
 msgid "This alert cancels the previously published alerts below:"
-msgstr "Arifa hii inafuta arifu zilizochapishwa hapo chini:"
+msgstr "Tahadhari hii hughairi arifa zilizochapishwa hapo chini:"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:154
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:433
 msgid "Alert Severity"
-msgstr "Ukali wa tahadhari"
+msgstr "Ukali wa Tahadhari"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:161
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:303
@@ -408,7 +412,7 @@ msgstr "Uliokithiri"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:76
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:447
 msgid "Severe"
-msgstr "MUHIMU"
+msgstr "Mkali"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:175
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:307
@@ -422,7 +426,7 @@ msgstr "Wastani"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:80
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:461
 msgid "Minor"
-msgstr "Mdogo"
+msgstr "Ndogo"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:255
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:507
@@ -432,7 +436,7 @@ msgstr "Lugha"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:264
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:518
 msgid "Category"
-msgstr "Jamii"
+msgstr "Kategoria"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:277
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:51
@@ -471,19 +475,19 @@ msgstr "Ukali"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:89
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:574
 msgid "Certainty"
-msgstr "Uhakikisho"
+msgstr "Uhakika"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:324
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:93
 msgid "Observed"
-msgstr "Kuzingatiwa"
+msgstr "Imezingatiwa"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:326
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:95
 #, fuzzy
 #| msgid "Unlikely"
 msgid "Likely"
-msgstr "Uwezekano"
+msgstr "Yawezekana"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:328
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:97
@@ -493,12 +497,12 @@ msgstr "Inawezekana"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:330
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:99
 msgid "Unlikely"
-msgstr "Uwezekano"
+msgstr "Haiwezekani"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:345
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:534
 msgid "Response Types"
-msgstr "Aina za majibu"
+msgstr "Aina za Majibu"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:351
 msgid "Shelter"
@@ -514,7 +518,7 @@ msgstr "Jitayarishe"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:357
 msgid "Execute"
-msgstr "Kutekeleza"
+msgstr "Tekeleza"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:359
 msgid "Avoid"
@@ -530,7 +534,7 @@ msgstr "Tathmini"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:365
 msgid "AllClear"
-msgstr "Allclear"
+msgstr "YoteWazi"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:367
 msgid "None"
@@ -538,7 +542,7 @@ msgstr "Hakuna"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:380
 msgid "Time period"
-msgstr "Kipindi cha muda"
+msgstr "Kipindi cha wakati"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:389
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:109
@@ -561,7 +565,7 @@ msgstr "Mwanzo"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:165
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:618
 msgid "Expires"
-msgstr "Inaisha"
+msgstr "Muda wake unaisha"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:437
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:254
@@ -589,19 +593,19 @@ msgstr "Maagizo"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:33
 msgid "Active Alerts"
-msgstr "Arifu zinazotumika"
+msgstr "Tahadhari Amilifu"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:46
 msgid "No active alerts currently"
-msgstr "Hakuna arifu za kazi kwa sasa"
+msgstr "Hakuna arifa zinazotumika kwa sasa"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:55
 msgid "Past Alerts"
-msgstr "Arifu za zamani"
+msgstr "Tahadhari za Zamani"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:99
 msgid "Event type"
-msgstr "Aina ya hafla"
+msgstr "Aina ya tukio"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:223
 msgid "Identifier"
@@ -621,15 +625,15 @@ msgstr "Aina ya Ujumbe"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:256
 msgid "Scope"
-msgstr "Wigo"
+msgstr "Upeo"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:266
 msgid "Reference Alerts"
-msgstr "Arifu za kumbukumbu"
+msgstr "Tahadhari za Marejeleo"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:583
 msgid "Time"
-msgstr "Wakati"
+msgstr "Muda"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:629
 msgid "Headline"
@@ -641,12 +645,12 @@ msgstr "Wasiliana"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/include_alert_list_item.html:32
 msgid "Issued on:"
-msgstr "Imetolewa:"
+msgstr "Imetolewa mnamo:"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/include_alert_list_item.html:35
 #, python-format
 msgid "%(issued_on)s"
-msgstr "%(iliyotolewa_on) s"
+msgstr "%(issued_on)s"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_left_alert.html:97
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:69
@@ -656,21 +660,21 @@ msgstr "Tahadhari"
 #: capcomposer/src/capcomposer/cap/views.py:104
 #: capcomposer/src/capcomposer/cap/views.py:110
 msgid "Latest alerts"
-msgstr "Arifa za hivi karibuni"
+msgstr "Arifa za hivi punde"
 
 #: capcomposer/src/capcomposer/cap/views.py:106
 #: capcomposer/src/capcomposer/cap/views.py:112
 #, python-format
 msgid "Latest alerts from %(sender_name)s"
-msgstr "Arifa za hivi karibuni kutoka %(Sender_name) s"
+msgstr "Arifa za hivi punde kutoka kwa %(sender_name)s"
 
 #: capcomposer/src/capcomposer/cap/views.py:358
 msgid "CAP Alert PNG and PDF created successfully."
-msgstr "CAP Alert PNG na PDF imeundwa kwa mafanikio."
+msgstr "CAP Alert PNG na PDF imeundwa kwa ufanisi."
 
 #: capcomposer/src/capcomposer/cap/views.py:360
 msgid "Failed to create CAP Alert PNG and PDF."
-msgstr "Imeshindwa kuunda tahadhari ya PNG na PDF."
+msgstr "Imeshindwa kuunda CAP Alert PNG na PDF."
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:84
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:314
@@ -679,7 +683,7 @@ msgstr "Unda PNG/PDF"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:96
 msgid "LIVE"
-msgstr "Live"
+msgstr "LIVE"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:98
 msgid "Visit the live page"
@@ -688,38 +692,38 @@ msgstr "Tembelea ukurasa wa moja kwa moja"
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:109
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:243
 msgid "Alerts"
-msgstr "Arifu"
+msgstr "Tahadhari"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:166
 msgid "Webhooks"
-msgstr "Webhooks"
+msgstr "Viboko vya mtandao"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:186
 msgid "Webhook Events"
-msgstr "Matukio ya WebHook"
+msgstr "Matukio ya Webhook"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:233
 msgid "External CAP Alert Feeds"
-msgstr "Malisho ya tahadhari ya nje"
+msgstr "Milisho ya Arifa ya CAP ya Nje"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:272
 msgid "Import CAP Alert"
-msgstr "Ingiza tahadhari ya cap"
+msgstr "Ingiza Arifa ya CAP"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:280
 msgid "CAP Base Settings"
-msgstr "Mipangilio ya msingi wa cap"
+msgstr "Mipangilio ya Msingi ya CAP"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:391
 #, python-format
 msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
 msgstr ""
-"Tahadhari '%(ukurasa_title) s' kunakiliwa. Unaweza kuhariri tahadhari mpya "
-"hapa chini."
+"Tahadhari '%(page_title)s' imenakiliwa. Unaweza kuhariri arifa mpya hapa "
+"chini."
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:421
 msgid "Actual Alerts cannot be Unpublished after they have been published"
-msgstr "Arifa halisi haziwezi kuchapishwa baada ya kuchapishwa"
+msgstr "Arifa Halisi haziwezi Kubatilishwa baada ya kuchapishwa"
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:434
 msgid ""
@@ -727,87 +731,86 @@ msgid ""
 " publish an update to this alert, create a new alert of Message Type "
 "'Cancel' or 'Update' and reference this alert"
 msgstr ""
-"Arifa halisi haziwezi kufutwa baada ya kuchapishwa. Ili kufuta au kuchapisha"
-" sasisho kwa tahadhari hii, tengeneza tahadhari mpya ya aina ya ujumbe "
-"'Ghairi' au 'Sasisha' na urejee tahadhari hii"
+"Arifa Halisi haziwezi kufutwa baada ya kuchapishwa. Ili kughairi au "
+"kuchapisha sasisho la arifa hii, unda arifa mpya ya Aina ya Ujumbe 'Ghairi' "
+"au 'Sasisha' na urejelee arifa hii."
 
 #: capcomposer/src/capcomposer/cap/wagtail_hooks.py:447
 msgid "CAP Alert draft created. You can now edit the alert."
-msgstr ""
-"Rasimu ya tahadhari ya cap iliyoundwa. Sasa unaweza kuhariri tahadhari."
+msgstr "Rasimu ya Arifa ya CAP imeundwa. Sasa unaweza kuhariri arifa."
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:9
 msgid "Webhook URL"
-msgstr "URL ya wavuti"
+msgstr "URL ya Mtandao"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:14
 msgid "Include Header for Authentication"
-msgstr "Jumuisha kichwa cha uthibitishaji"
+msgstr "Jumuisha Kijajuu kwa Uthibitishaji"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:15
 #, fuzzy
 #| msgid "Headline"
 msgid "Header Value"
-msgstr "Thamani ya kichwa"
+msgstr "Thamani ya Kichwa"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:26
 msgid "CAP Alert Webhook"
-msgstr "Cap Alert WebHook"
+msgstr "CAP Alert Webhook"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:27
 msgid "CAP Alert Webhooks"
-msgstr "Tahadhari za wavuti"
+msgstr "CAP Alert Webhooks"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:51
 msgid "CAP Alert Webhook Event"
-msgstr "Tukio la Alert WebHook"
+msgstr "Tukio la CAP Alert Webhook"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:52
 msgid "CAP Alert Webhook Events"
-msgstr "Matukio ya wavuti ya tahadhari ya cap"
+msgstr "Matukio ya CAP Alert Webhook"
 
 #~ msgid "Show on MapViewer"
 #~ msgstr "Onyesha kwenye MapViewer"
 
 #~ msgid "Check to show cap alerts on MapViewer"
-#~ msgstr "Angalia kuonyesha arifu za CAP kwenye MapViewer"
+#~ msgstr "Angalia ili kuonyesha arifa za kiwango cha juu kwenye MapViewer"
 
 #~ msgid "CAP Alerts Layer Title"
-#~ msgstr "TAFAKARI ZA KIWANGO CHA KIWANGO"
+#~ msgstr "Kichwa cha Tabaka la Tahadhari za CAP"
 
 #~ msgid "CAP Alerts Layer SubCategory"
-#~ msgstr "Arifa za Arifa za Cap"
+#~ msgstr "Kitengo kidogo cha Tabaka la Tahadhari za CAP"
 
 #~ msgid "CAP Layer Metadata"
-#~ msgstr "Metadata ya safu ya cap"
+#~ msgstr "Metadata ya Tabaka la CAP"
 
 #~ msgid ""
 #~ "Refresh cap alerts on the map after this minutes. Leave blank to disable "
 #~ "auto refreshing"
 #~ msgstr ""
-#~ "Furahisha arifu za cap kwenye ramani baada ya dakika hii. Acha tupu ili "
-#~ "kulemaza kuburudisha kiotomatiki"
+#~ "Onyesha upya arifa za upeo kwenye ramani baada ya dakika hizi. Acha wazi ili"
+#~ " kuzima uonyeshaji upya kiotomatiki"
 
 #~ msgid "Go to warnings list"
 #~ msgstr "Nenda kwenye orodha ya maonyo"
 
 #~ msgid "CAP Alerts"
-#~ msgstr "Arifa za CAP"
+#~ msgstr "Tahadhari za CAP"
 
 #~ msgid "CAP Mapviewer Settings"
-#~ msgstr "Mipangilio ya MapViewer ya cap"
+#~ msgstr "Mipangilio ya Kitazamaji ramani cha CAP"
 
 #~ msgid ""
 #~ "Actual Alerts cannot be edited after they have been published. To publish an"
 #~ " update to this alert, create a new alert of Message Type 'Update' and "
 #~ "reference this alert"
 #~ msgstr ""
-#~ "Arifa halisi haziwezi kuhaririwa baada ya kuchapishwa. Ili kuchapisha "
-#~ "sasisho kwa tahadhari hii, tengeneza tahadhari mpya ya aina ya ujumbe "
-#~ "'sasisho' na urejee tahadhari hii"
+#~ "Arifa Halisi haziwezi kuhaririwa baada ya kuchapishwa. Ili kuchapisha "
+#~ "sasisho la arifa hii, unda arifa mpya ya Aina ya Ujumbe 'Sasisha' na "
+#~ "urejelee tahadhari hii."
 
 #~ msgid "Unknown"
 #~ msgstr "Haijulikani"
 
 #~ msgid "Stations Layer SubCategory"
-#~ msgstr "Vituo vya safu ndogo"
+#~ msgstr "Kitengo Kidogo cha Tabaka la Vituo"
