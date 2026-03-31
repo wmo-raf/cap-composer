@@ -29,10 +29,14 @@ The general process for setting up Composer and Approver groups involves the fol
 - Click on groups
 - Create roles/groups titled "Composer" and "Approver." and assign permissions to each role based on their responsibilities:
 
-    - *Composer:* Permissions to create and edit alerts but not to publish them.
-
+    - *Composer:* 
+    
+        In Object Permissions enable permissions to create CAP Alerts:
+        
         .. image:: ../_static/images/cap_composer_composer_1.png
             :alt: WMO CAP Composer Composer Role
+        
+        Other permissions enable "Can access Wagtail Admin" and in Page Permissions, select your country-page and set "Add", "Edit" but not "Publish"
 
         .. image:: ../_static/images/cap_composer_composer_2.png
             :alt: WMO CAP Composer Composer Role
