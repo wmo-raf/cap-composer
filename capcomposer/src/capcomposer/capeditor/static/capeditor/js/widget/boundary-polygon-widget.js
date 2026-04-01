@@ -159,10 +159,26 @@ class BoundaryPolygonWidget {
     setSourceData(featureGeom) {
         if (featureGeom) {
 
+            // clear any map error
+            this.hideWarnings()
+
             // truncate the coordinates to 6 decimal places
             turf.truncate(featureGeom, {
                 precision: 6, coordinates: 2, mutate: true
             })
+
+            // Update registry and check intersections
+            if (this.areaRegistry) {
+                const adminLevel = this.getSelectedAdminLevel()
+
+                this.areaRegistry.update(featureGeom)
+                const intersectionError = this.areaRegistry.checkIntersections()
+                if (intersectionError) {
+                    this.showWarning(intersectionError)
+                    this.map.getSource("polygon").setData(this.emptyGeojsonData)
+                    return
+                }
+            }
 
             // add data to source
             this.map.getSource("polygon").setData(featureGeom)
@@ -175,18 +191,6 @@ class BoundaryPolygonWidget {
             // set state
             const geomString = JSON.stringify(featureGeom)
             this.setState(geomString)
-            // clear any map error
-            this.hideWarnings()
-
-
-            // Update registry and check intersections
-            if (this.areaRegistry) {
-                this.areaRegistry.update(featureGeom)
-                const intersectionError = this.areaRegistry.checkIntersections()
-                if (intersectionError) {
-                    this.showWarning(intersectionError)
-                }
-            }
 
             // check if the drawn feature has any issues with the UN boundary
             this.checkUNBoundaryIssues(featureGeom)
@@ -304,6 +308,8 @@ class BoundaryPolygonWidget {
                     fetch(`${this.boundaryDetailUrl}/${id}`).then(res => res.json()).then(boundary => {
                         const {feature, level} = boundary
                         const name = boundary[`name_${level}`]
+
+                        feature.properties = {id, level}
 
                         if (name) {
                             this.areaDescInput.val(name)
