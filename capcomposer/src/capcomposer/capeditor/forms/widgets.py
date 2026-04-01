@@ -1,14 +1,13 @@
 import json
 
+from capcomposer.capeditor.constants import WMO_HAZARD_EVENTS_TYPE_CHOICES
+from capcomposer.capeditor.oet_v1_2 import OASIS_EVENT_TERMS_AS_CHOICES
 from django.contrib.gis.forms import BaseGeometryWidget
 from django.contrib.gis.geometry import json_regex
 from django.forms import Textarea, Widget, TextInput, Media
 from django.urls import reverse
 from wagtail.admin.telepath import register
 from wagtail.admin.telepath.widgets import WidgetAdapter
-
-from capcomposer.capeditor.constants import WMO_HAZARD_EVENTS_TYPE_CHOICES
-from capcomposer.capeditor.oet_v1_2 import OASIS_EVENT_TERMS_AS_CHOICES
 
 
 class BaseMapWidget(Widget):
@@ -68,6 +67,7 @@ class BoundaryPolygonWidget(BasePolygonWidget, UNBoundaryWidgetMixin):
         js = [
             "capeditor/js/maplibre-gl.js",
             "capeditor/js/turf.min.js",
+            "capeditor/js/widget/area-registry.js",
             "capeditor/js/widget/boundary-polygon-widget.js",
         ]
         
@@ -113,6 +113,7 @@ class PolygonWidget(BasePolygonWidget, UNBoundaryWidgetMixin):
                 "capeditor/js/maplibre-gl.js",
                 "capeditor/js/mapbox-gl-draw.js",
                 "capeditor/js/turf.min.js",
+                "capeditor/js/widget/area-registry.js",
                 "capeditor/js/widget/polygon-widget.js",
             ]
         )
@@ -155,6 +156,7 @@ class CircleWidget(BaseMapWidget, Textarea, UNBoundaryWidgetMixin):
             js=[
                 "capeditor/js/maplibre-gl.js",
                 "capeditor/js/turf.min.js",
+                "capeditor/js/widget/area-registry.js",
                 "capeditor/js/widget/circle-widget.js",
             ]
         )

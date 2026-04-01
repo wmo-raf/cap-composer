@@ -48,6 +48,8 @@ class BoundaryPolygonWidget {
 
             this.initUNBoundary()
 
+            this.areaRegistry = new AreaRegistry(this.options.id, this.map)
+
             if (this.initialState) {
                 this.setState(this.initialState)
                 this.initFromState()
@@ -176,6 +178,16 @@ class BoundaryPolygonWidget {
             // clear any map error
             this.hideWarnings()
 
+
+            // Update registry and check intersections
+            if (this.areaRegistry) {
+                this.areaRegistry.update(featureGeom)
+                const intersectionError = this.areaRegistry.checkIntersections()
+                if (intersectionError) {
+                    this.showWarning(intersectionError)
+                }
+            }
+
             // check if the drawn feature has any issues with the UN boundary
             this.checkUNBoundaryIssues(featureGeom)
 
@@ -189,6 +201,10 @@ class BoundaryPolygonWidget {
 
             // set state to empty string
             this.setState("")
+
+            if (this.areaRegistry) {
+                this.areaRegistry.update(null)
+            }
         }
     }
 

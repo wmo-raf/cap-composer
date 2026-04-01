@@ -96,6 +96,7 @@ class PolygonWidget {
 
             this.initDraw()
 
+            this.areaRegistry = new AreaRegistry(this.options.id, this.map)
 
             if (initialState) {
                 this.setState(initialState)
@@ -346,6 +347,19 @@ class PolygonWidget {
                 precision: 6, coordinates: 2, mutate: true
             })
 
+            // Update registry and check intersections with other areas
+            if (this.areaRegistry) {
+                this.areaRegistry.update(geometry)
+                const intersectionError = this.areaRegistry.checkIntersections()
+                if (intersectionError) {
+                    this.showWarning(intersectionError)
+
+                    this.areaRegistry.update(null)  // reset registry to prevent saving intersecting geometries
+
+                    return false
+                }
+            }
+
             const bbox = turf.bbox(geometry)
             const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
 
@@ -357,13 +371,16 @@ class PolygonWidget {
 
             this.setState(geomString)
 
-
             // check if the drawn feature has any issues with the UN boundary
             this.checkUNBoundaryIssues(featureGeom)
 
         } else {
             this.setSourceData(null)
             this.setState("")
+
+            if (this.areaRegistry) {
+                this.areaRegistry.update(null)
+            }
         }
 
         this.initDraw()
