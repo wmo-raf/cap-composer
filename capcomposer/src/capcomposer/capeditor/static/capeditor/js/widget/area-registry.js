@@ -101,8 +101,20 @@ class AreaRegistry {
                 const [, geomA] = entries[i]
                 const [, geomB] = entries[j]
 
-                if (turf.booleanIntersects(turf.feature(geomA), turf.feature(geomB))) {
-                    return "This area overlaps with another alert area. Intersecting areas are not allowed"
+                const featureA = turf.feature(geomA)
+                const featureB = turf.feature(geomB)
+
+                if (turf.booleanIntersects(featureA, featureB)) {
+                    // Calculate the actual intersection area
+                    const intersection = turf.intersect(turf.featureCollection([featureA, featureB]))
+
+                    if (intersection) {
+                        const intersectionArea = turf.area(intersection)
+                        // Only flag as overlap if intersection area is above a small threshold (1000 sqm)
+                        if (intersectionArea > 1000) {
+                            return "This area overlaps with another alert area. Intersecting areas are not allowed"
+                        }
+                    }
                 }
             }
         }
