@@ -2,7 +2,7 @@ wagtail>=7.0
 djangorestframework-xml
 python-magic
 shapely
-wagtail-icon-chooser>=0.3.1
+wagtail-icon-chooser>=0.3.2
 wagtail-cache==3.0.0
 adm-boundary-manager>=0.2.5
 wagtail-humanitarian-icons>=2.0.0
