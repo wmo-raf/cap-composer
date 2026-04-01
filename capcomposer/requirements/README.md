@@ -30,3 +30,17 @@ We install the `standalone.txt` requirements into the CAPComposer docker image.
 
 1. Change the version in the corresponding `.in` file.
 2. Follow from step 2 above
+
+### Upgrade specific dependancy package in .txt that is not in .in file
+
+For example: "pyopenssl>=26.0.0"
+
+`pip-compile --upgrade-package "pyopenssl>=26.0.0" standalone.in`
+
+Also check for no package conflicts
+
+`pip check`
+
+Sync updates with your virtual environment
+
+`pip-sync standalone.txt` or in this case `pip install -e capcomposer`
