@@ -159,16 +159,31 @@ class MultiPolygonWidget {
         if (drawnFeatures) {
             const feature = drawnFeatures.features[0]
 
+            // clear any previous warnings
+            this.hideWarnings()
+
+            // Check for kinks before committing
+            const kinks = turf.kinks(feature)
+            if (kinks.features.length > 0) {
+                // Find and delete only the offending feature(s)
+                const allFeatures = this.draw.getAll().features
+                allFeatures.forEach(f => {
+                    const featureKinks = turf.kinks(f)
+                    if (featureKinks.features.length > 0) {
+                        this.draw.delete(f.id)
+                    }
+                })
+                this.showWarning(
+                    "The polygon you drew has self-intersecting edges. Please redraw without crossing lines"
+                )
+                return
+            }
+
             const truncatedFeature = turf.truncate(feature, {
                 precision: 6, coordinates: 2, mutate: true
             })
 
             this.setValue(JSON.stringify(truncatedFeature.geometry))
-
-            // clear any map error
-            this.hideWarnings()
-
-            // check if the drawn feature has any issues with the UN boundary
             this.checkUNBoundaryIssues(truncatedFeature.geometry)
 
         } else {

@@ -123,6 +123,8 @@ class CapAlertPageForm(WagtailAdminPageForm):
                             if default_language:
                                 info_field.block.child_blocks[block_type].child_blocks[
                                     field_name].meta.default = default_language
+                        
+                        block.intersection_area_threshold = cap_setting.intersection_area_threshold
     
     def clean(self):
         cleaned_data = super().clean()

@@ -50,6 +50,7 @@
     </div>
     <textarea id="{{ widget.name }}" class="vSerializedField required" name="{{ widget.name }}" hidden
               data-boundaryinfourl="{{ boundary_info_url }}"
+              data-map-widget-config-url="{{ map_widget_config_url }}"
               data-ungeojsonurl="{{ un_geojson_url }}">{% if widget.value %}
         {{ widget.value }}{% endif %}</textarea>
 </div>

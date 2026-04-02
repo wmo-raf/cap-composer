@@ -619,6 +619,31 @@ class EventCodeBlock(blocks.TextBlock):
         return forms.CharField(**field_kwargs)
 
 
+def check_area_intersections(area_blocks):
+    geometries = []
+    for area in area_blocks:
+        geojson = area.value.geojson
+        if geojson:
+            geometries.append((area, shape(geojson)))
+    
+    for i in range(len(geometries)):
+        for j in range(i + 1, len(geometries)):
+            _, geom_i = geometries[i]
+            _, geom_j = geometries[j]
+            
+            if geom_i.intersects(geom_j):
+                intersection = geom_i.intersection(geom_j)
+                # intersection.area is in degrees² — convert to m²
+                # at equator, 1 degree² ≈ 1.23e10 m²
+                # 1000 sqm threshold ≈ 8e-8 degrees²
+                intersection_area_m2 = intersection.area * 1.23e10
+                if intersection_area_m2 > 1000:
+                    return _("Alert area polygons must not overlap each other. "
+                             "Intersecting areas are not allowed.")
+    
+    return None
+
+
 class AlertInfo(blocks.StructBlock):
     URGENCY_CHOICES = (
         ('Immediate', _("Immediate - Responsive action SHOULD be taken immediately")),
@@ -716,6 +741,8 @@ class AlertInfo(blocks.StructBlock):
         onset = result.get("onset")
         expires = result.get("expires")
         
+        intersection_area_threshold = getattr(self, "intersection_area_threshold", 1000)
+        
         if expires:
             if effective and expires < effective:
                 raise StructBlockValidationError(block_errors={
@@ -727,6 +754,33 @@ class AlertInfo(blocks.StructBlock):
                 raise StructBlockValidationError(block_errors={
                     "expires": ValidationError(_("The expiry time of the alert should be greater than the onset time"))
                 })
+        
+        # Check for intersections between area blocks
+        area_blocks = result.get("area")
+        if area_blocks:
+            geometries = []
+            for area in area_blocks:
+                geojson = area.value.geojson
+                if geojson:
+                    geometries.append((area, shape(geojson)))
+            
+            for i in range(len(geometries)):
+                for j in range(i + 1, len(geometries)):
+                    _, geom_i = geometries[i]
+                    _, geom_j = geometries[j]
+                    
+                    if geom_i.intersects(geom_j):
+                        intersection = geom_i.intersection(geom_j)
+                        # Convert degrees² to m² (approx, valid for equatorial regions)
+                        intersection_area_m2 = intersection.area * 1.23e10
+                        
+                        if intersection_area_m2 > intersection_area_threshold:
+                            raise StructBlockValidationError(block_errors={
+                                "area": ValidationError(
+                                    _("Alert area polygons must not overlap each other. "
+                                      "CAP does not allow intersecting areas.")
+                                )
+                            })
         
         return result
 

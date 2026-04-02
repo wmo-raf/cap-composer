@@ -1,3 +1,9 @@
+from capcomposer.capeditor.views import (
+    load_cap_alert,
+    import_cap_alert,
+    get_un_boundary_geojson,
+    map_widget_config
+)
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.templatetags.static import static
@@ -10,12 +16,6 @@ from wagtail.admin import messages
 from wagtail.admin.forms.pages import CopyForm
 from wagtail.admin.utils import get_valid_next_url_from_request
 from wagtail.models import Page
-
-from capcomposer.capeditor.views import (
-    load_cap_alert,
-    import_cap_alert,
-    get_un_boundary_geojson
-)
 
 
 @hooks.register("insert_editor_js")
@@ -39,6 +39,7 @@ def urlconf_capeditor():
         path('import-cap/', load_cap_alert, name='load_cap_alert'),
         path('import-cap/import/', import_cap_alert, name='import_cap_alert'),
         path('cap/un-boundary-geojson', get_un_boundary_geojson, name='un_boundary_geojson'),
+        path('cap/map-widget-config/', map_widget_config, name='map_widget_config'),
     ]
 
 
