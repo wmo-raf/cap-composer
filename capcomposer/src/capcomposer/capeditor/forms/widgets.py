@@ -14,8 +14,11 @@ class BaseMapWidget(Widget):
     def get_context(self, *args, **kwargs):
         context = super().get_context(*args, **kwargs)
         boundary_info_url = reverse("admin_boundary_info")
+        map_widget_config_url = reverse("map_widget_config")
+        
         context.update({
-            "boundary_info_url": boundary_info_url
+            "boundary_info_url": boundary_info_url,
+            "map_widget_config_url": reverse("map_widget_config"),
         })
         
         return context

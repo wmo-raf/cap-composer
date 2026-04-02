@@ -1,8 +1,17 @@
 import json
 
+from capcomposer.capeditor.blocks import (
+    ContactBlock
+)
+from capcomposer.capeditor.forms.widgets import (
+    HazardEventTypeWidget,
+    MultiPolygonWidget,
+    GeojsonFileLoaderWidget, EventCodeWidget
+)
 from django.contrib.gis.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
@@ -14,20 +23,9 @@ from wagtail.models import Orderable
 from wagtailiconchooser.widgets import IconChooserWidget
 from wagtailmodelchooser import register_model_chooser
 
-from capcomposer.capeditor.blocks import (
-    ContactBlock
-)
-from capcomposer.capeditor.forms.widgets import (
-    HazardEventTypeWidget,
-    MultiPolygonWidget,
-    GeojsonFileLoaderWidget, EventCodeWidget
-)
-from django.utils.safestring import mark_safe
-
 
 @register_setting
 class CapSetting(BaseSiteSetting, ClusterableModel):
-    
     sender = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Email"),
                               help_text=_("Email of the sending institution"))
     sender_name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("CAP Sender Name"),
@@ -62,6 +60,17 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
     ], verbose_name=_("Number of latest Alerts to show in the XML CAP Feed"), help_text=_("Set a smaller number to "
                                                                                           "improve perfomance for aggregators"))
     
+    intersection_area_threshold = models.PositiveIntegerField(
+        default=1000,
+        verbose_name=_("Intersection Area Threshold (m²)"),
+        help_text=_(
+            "The maximum allowed overlap between two alert areas, in square meters. "
+            "Areas that overlap by more than this value will be flagged as intersecting. "
+            "The default of 1000m² accounts for small boundary imprecisions between adjacent areas. "
+            "Increase this value if adjacent areas from your boundary data share imprecise borders."
+        )
+    )
+    
     class Meta:
         verbose_name = _("CAP Settings")
     
@@ -91,6 +100,7 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
         ], heading=_("UN Boundary"), classname="map-resize-trigger"),
         ObjectList([
             FieldPanel("num_of_latest_alerts_in_feed"),
+            FieldPanel("intersection_area_threshold"),
         ], heading=_("Other Settings")),
     ])
     
@@ -121,17 +131,18 @@ class CapSetting(BaseSiteSetting, ClusterableModel):
         if wmo_oid:
             parts = wmo_oid.split('.')
             valid = (
-                len(parts) == 6 and
-                parts[0] == '2' and
-                parts[1] == '49' and
-                parts[2] == '0' and
-                parts[3] == '1' and
-                parts[4].isdigit() and
-                parts[5].isdigit()
+                    len(parts) == 6 and
+                    parts[0] == '2' and
+                    parts[1] == '49' and
+                    parts[2] == '0' and
+                    parts[3] == '1' and
+                    parts[4].isdigit() and
+                    parts[5].isdigit()
             )
             if not valid:
                 raise ValidationError({
-                    'wmo_oid': _('WMO OID must be in the form 2.49.0.1.<ISO-numeric-country>.<authority-id> (e.g. 2.49.0.1.231.0)')
+                    'wmo_oid': _(
+                        'WMO OID must be in the form 2.49.0.1.<ISO-numeric-country>.<authority-id> (e.g. 2.49.0.1.231.0)')
                 })
 
 

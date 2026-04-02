@@ -1,8 +1,8 @@
+from capcomposer.capeditor.forms.capimporter import CAPLoadForm, CAPImportForm
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from wagtail import hooks
 
-from capcomposer.capeditor.forms.capimporter import CAPLoadForm, CAPImportForm
 from .models import CapSetting
 
 
@@ -60,3 +60,13 @@ def get_un_boundary_geojson(request):
         return JsonResponse({})
     
     return JsonResponse(un_country_boundary_geojson)
+
+
+def map_widget_config(request):
+    cap_setting = CapSetting.for_request(request)
+    
+    config = {
+        "intersection_area_threshold": cap_setting.intersection_area_threshold if cap_setting else 1000,
+    }
+    
+    return JsonResponse(config)

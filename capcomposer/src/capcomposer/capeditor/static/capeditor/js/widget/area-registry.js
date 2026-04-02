@@ -9,9 +9,45 @@ class AreaRegistry {
         window.alertAreas[widgetId] = null
         window.alertAreaWidgets[widgetId] = this
 
-        this.initSiblingAreasLayer()
+        this.intersectionThreshold = 1000 // default until fetched
 
+        this.initSiblingAreasLayer()
+        this.fetchMapWidgetConfig()
         this.observeBlockRemoval()
+    }
+
+    fetchMapWidgetConfig() {
+        const widgetEl = document.getElementById(this.widgetId)
+        if (!widgetEl) return
+
+        const mapWidgetConfigUrl = widgetEl.dataset.mapWidgetConfigUrl
+        if (!mapWidgetConfigUrl) return
+
+        // If already cached, use it directly
+        if (window.alertAreaConfig) {
+            this.intersectionThreshold = window.alertAreaConfig.intersection_area_threshold || 1000
+            return
+        }
+
+        // If a fetch is already in flight, wait for it
+        if (window.alertAreaConfigPromise) {
+            window.alertAreaConfigPromise.then(config => {
+                this.intersectionThreshold = config.intersection_area_threshold || 1000
+            })
+            return
+        }
+
+        // First widget to init — fetch and cache
+        window.alertAreaConfigPromise = fetch(mapWidgetConfigUrl)
+            .then(res => res.json())
+            .then(config => {
+                window.alertAreaConfig = config
+                // Update all already-initialized widgets with the fetched threshold
+                Object.values(window.alertAreaWidgets).forEach(registry => {
+                    registry.intersectionThreshold = config.intersection_area_threshold || 1000
+                })
+                return config
+            })
     }
 
     observeBlockRemoval() {
@@ -46,7 +82,7 @@ class AreaRegistry {
             source: "sibling-areas",
             paint: {
                 "fill-color": "#666666",
-                "fill-opacity": 0.15  // subtle tint, doesn't compete with active area
+                "fill-opacity": 0.7  // subtle tint, doesn't compete with active area
             }
         })
 
@@ -61,20 +97,26 @@ class AreaRegistry {
             }
         })
 
-
         this.refreshSiblingAreas()
     }
+
 
     update(geom) {
         window.alertAreas[this.widgetId] = geom || null
         this.refreshSiblingAreas()
 
-        // notify all other widgets to refresh their sibling layers
+        const intersectionError = this.checkIntersections()
+        this.onIntersectionStateChange(intersectionError !== null)
+
         Object.values(window.alertAreaWidgets).forEach(registry => {
             if (registry.widgetId !== this.widgetId) {
                 registry.refreshSiblingAreas()
             }
         })
+    }
+
+    onIntersectionStateChange(hasIntersection) {
+        window.alertAreasHasIntersection = hasIntersection
     }
 
     refreshSiblingAreas() {
@@ -95,6 +137,8 @@ class AreaRegistry {
     checkIntersections() {
         const areas = window.alertAreas
         const entries = Object.entries(areas).filter(([, geom]) => geom !== null)
+        const threshold = (window.alertAreaConfig && window.alertAreaConfig.intersection_area_threshold)
+            || this.intersectionThreshold
 
         for (let i = 0; i < entries.length; i++) {
             for (let j = i + 1; j < entries.length; j++) {
@@ -105,13 +149,11 @@ class AreaRegistry {
                 const featureB = turf.feature(geomB)
 
                 if (turf.booleanIntersects(featureA, featureB)) {
-                    // Calculate the actual intersection area
                     const intersection = turf.intersect(turf.featureCollection([featureA, featureB]))
 
                     if (intersection) {
                         const intersectionArea = turf.area(intersection)
-                        // Only flag as overlap if intersection area is above a small threshold (1000 sqm)
-                        if (intersectionArea > 1000) {
+                        if (intersectionArea > threshold) {
                             return "This area overlaps with another alert area. Intersecting areas are not allowed"
                         }
                     }
@@ -131,8 +173,17 @@ class AreaRegistry {
         delete window.alertAreas[this.widgetId]
         delete window.alertAreaWidgets[this.widgetId]
 
+        // If no widgets remain, clean up global state entirely
+        if (Object.keys(window.alertAreaWidgets).length === 0) {
+            window.alertAreaConfig = null
+            window.alertAreaConfigPromise = null
+            window.alertAreasHasIntersection = false
+        }
+
         Object.values(window.alertAreaWidgets).forEach(registry => {
             registry.refreshSiblingAreas()
+            const intersectionError = registry.checkIntersections()
+            registry.onIntersectionStateChange(intersectionError !== null)
         })
     }
 }
