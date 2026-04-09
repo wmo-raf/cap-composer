@@ -113,6 +113,8 @@ MIDDLEWARE = [
 if otel_is_enabled():
     MIDDLEWARE += ["capcomposer.config.telemetry.middleware.OTELMiddleware"]
 
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
 ROOT_URLCONF = "capcomposer.config.urls"
 
 TEMPLATES = [
