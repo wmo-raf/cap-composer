@@ -38,6 +38,7 @@ class CircleWidget {
 
             this.initUNBoundary()
 
+            this.areaRegistry = new AreaRegistry(this.options.id, this.map)
 
             if (initialState) {
                 this.setState(initialState)
@@ -242,6 +243,16 @@ class CircleWidget {
 
     setSourceData(feature) {
         if (feature) {
+            // Update registry and check intersections
+            if (this.areaRegistry) {
+                this.areaRegistry.update(feature.geometry)
+                const intersectionError = this.areaRegistry.checkIntersections()
+                if (intersectionError) {
+                    this.showWarning(intersectionError)
+                    return
+                }
+            }
+
             // add data to source
             this.map.getSource("polygon").setData(feature)
 
@@ -250,7 +261,6 @@ class CircleWidget {
             const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
             this.map.fitBounds(bounds, {padding: 50})
 
-
             const circleValue = this.getCircleValue()
 
             if (circleValue) {
@@ -258,6 +268,7 @@ class CircleWidget {
 
                 // clear any map error
                 this.hideWarnings()
+
 
                 // check if the drawn feature has any issues with the UN boundary
                 this.checkUNBoundaryIssues(feature.geometry)
@@ -269,6 +280,11 @@ class CircleWidget {
 
             // set state to empty string
             this.setState("")
+
+
+            if (this.areaRegistry) {
+                this.areaRegistry.update(null)
+            }
         }
     }
 

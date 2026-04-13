@@ -96,6 +96,7 @@ class PolygonWidget {
 
             this.initDraw()
 
+            this.areaRegistry = new AreaRegistry(this.options.id, this.map)
 
             if (initialState) {
                 this.setState(initialState)
@@ -262,6 +263,8 @@ class PolygonWidget {
             e.preventDefault()
 
             const isSaveButton = e.target.classList.contains("mapboxgl-draw-actions-btn_save")
+
+            // save button — stay in edit mode if setDrawData rejects it
             if (isSaveButton) {
                 let combinedFeatures
 
@@ -272,11 +275,13 @@ class PolygonWidget {
 
                 if (combinedFeatures) {
                     const feature = combinedFeatures.features[0]
-                    this.setDrawData(feature.geometry)
+                    const success = this.setDrawData(feature.geometry)
+                    if (!success) {
+                        return  // stay in edit mode
+                    }
                 } else {
                     this.setDrawData(null)
                 }
-
             } else {
                 this.map.setLayoutProperty("polygon", "visibility", "visible")
 
@@ -293,17 +298,13 @@ class PolygonWidget {
         })
 
         this.map.on("draw.create", (e) => {
-            let combinedFeatures
-
-            // combine all features into one multi polygon
             const featureCollection = this.draw.getAll()
             if (featureCollection && featureCollection.features && !!featureCollection.features.length) {
-                combinedFeatures = turf.combine(featureCollection)
-            }
-
-            if (combinedFeatures) {
-                const feature = combinedFeatures.features[0]
-                this.setDrawData(feature.geometry)
+                const combined = turf.combine(featureCollection).features[0]
+                const success = this.setDrawData(combined.geometry)
+                if (!success) {
+                    this.draw.deleteAll()  // remove the invalid feature from the map
+                }
             }
         });
     }
@@ -327,10 +328,37 @@ class PolygonWidget {
 
     setDrawData(featureGeom) {
         if (featureGeom) {
+
+            // clear any map error
+            this.hideWarnings()
+
+            // Check for kinks before doing anything
+            const feature = turf.feature(featureGeom)
+            const kinks = turf.kinks(feature)
+            if (kinks.features.length > 0) {
+                this.showWarning(
+                    "The polygon has self-intersecting edges. Please fix the shape before saving."
+                )
+                return false
+            }
+
             // truncate geometry to 6 decimal places
             const geometry = turf.truncate(featureGeom, {
                 precision: 6, coordinates: 2, mutate: true
             })
+
+            // Update registry and check intersections with other areas
+            if (this.areaRegistry) {
+                this.areaRegistry.update(geometry)
+                const intersectionError = this.areaRegistry.checkIntersections()
+                if (intersectionError) {
+                    this.showWarning(intersectionError)
+
+                    this.areaRegistry.update(null)  // reset registry to prevent saving intersecting geometries
+
+                    return false
+                }
+            }
 
             const bbox = turf.bbox(geometry)
             const bounds = [[bbox[0], bbox[1]], [bbox[2], bbox[3]]]
@@ -343,19 +371,22 @@ class PolygonWidget {
 
             this.setState(geomString)
 
-            // clear any map error
-            this.hideWarnings()
-
             // check if the drawn feature has any issues with the UN boundary
             this.checkUNBoundaryIssues(featureGeom)
 
         } else {
             this.setSourceData(null)
             this.setState("")
+
+            if (this.areaRegistry) {
+                this.areaRegistry.update(null)
+            }
         }
 
         this.initDraw()
         this.maybeShowEditControl()
+
+        return true
     }
 
     setSourceData(data) {
