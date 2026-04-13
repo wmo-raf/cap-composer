@@ -4,7 +4,9 @@
     <div id="{{ id }}_map" class="multipolygon_map">
     </div>
     <textarea id="{{ id }}" class="vSerializedField required" name="{{ name }}" hidden
-              data-boundaryinfourl="{{ boundary_info_url }}" data-ungeojsonurl="{{ un_geojson_url }}">
+              data-boundaryinfourl="{{ boundary_info_url }}"
+              data-ungeojsonurl="{{ un_geojson_url }}"
+              data-convertareafileurl="{{ convert_area_file_url }}">
         {{ serialized }}
     </textarea>
     <script>

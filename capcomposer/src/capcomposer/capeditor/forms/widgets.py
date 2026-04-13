@@ -219,19 +219,24 @@ class HazardEventTypeWidget(TextInput):
 class MultiPolygonWidget(BasePolygonWidget, BaseMapWidget, UNBoundaryWidgetMixin):
     template_name = "capeditor/widgets/multipolygon_widget.html"
     map_srid = 4326
-    
+
     def __init__(self, attrs=None):
         default_attrs = {
             "class": "capeditor-widget__multipolygon-input",
         }
         attrs = attrs or {}
         attrs = {**default_attrs, **attrs}
-        
+
         super().__init__(attrs=attrs)
-    
+
+    def get_context(self, *args, **kwargs):
+        context = super().get_context(*args, **kwargs)
+        context["convert_area_file_url"] = reverse("convert_area_file")
+        return context
+
     def serialize(self, value):
         return value.json if value else ""
-    
+
     def deserialize(self, value):
         geom = super().deserialize(value)
         # GeoJSON assumes WGS84 (4326). Use the map's SRID instead.

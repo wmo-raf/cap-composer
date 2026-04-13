@@ -14,7 +14,8 @@ from wagtail.models import Page
 from capcomposer.capeditor.views import (
     load_cap_alert,
     import_cap_alert,
-    get_un_boundary_geojson
+    get_un_boundary_geojson,
+    convert_area_file,
 )
 
 
@@ -39,6 +40,7 @@ def urlconf_capeditor():
         path('import-cap/', load_cap_alert, name='load_cap_alert'),
         path('import-cap/import/', import_cap_alert, name='import_cap_alert'),
         path('cap/un-boundary-geojson', get_un_boundary_geojson, name='un_boundary_geojson'),
+        path('cap/convert-area-file', convert_area_file, name='convert_area_file'),
     ]
 
 
