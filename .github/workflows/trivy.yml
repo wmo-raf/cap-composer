@@ -2,11 +2,8 @@ name: Run Trivy vulnerability scanner
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  schedule:
+    - cron: '0 8 * * *'  # runs daily at 8h UTC
 
 jobs:
   main:
