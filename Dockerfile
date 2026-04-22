@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1.5
 
 # use osgeo gdal ubuntu small 3.10.0 image.
-FROM ghcr.io/osgeo/gdal:ubuntu-small-latest as base
+FROM ghcr.io/osgeo/gdal:ubuntu-small-3.12.0 as base
 
 ARG UID
 ENV UID=${UID:-9999}
@@ -71,7 +71,7 @@ RUN python3 -m venv /capcomposer/venv
 
 ENV PIP_CACHE_DIR=/tmp/capcomposer_pip_cache
 # hadolint ignore=SC1091,DL3042
-RUN --mount=type=cache,mode=777,target=$PIP_CACHE_DIR,uid=$UID,gid=$GID . /capcomposer/venv/bin/activate && \
+RUN mode=777,target=$PIP_CACHE_DIR,uid=$UID,gid=$GID . /capcomposer/venv/bin/activate && \
      pip3 install  -r /capcomposer/requirements/standalone.txt
 
 COPY --chown=$UID:$GID ./capcomposer /capcomposer/app
