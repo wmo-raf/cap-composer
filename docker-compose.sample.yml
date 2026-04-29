@@ -63,7 +63,7 @@ services:
 
   capcomposer_pgbouncer:
     container_name: capcomposer_pgbouncer
-    image: edoburu/pgbouncer:1.23.1
+    image: edoburu/pgbouncer:v1.24.1-p1
     restart: always
     environment:
       - DB_HOST=capcomposer_db
