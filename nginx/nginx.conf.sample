@@ -69,6 +69,11 @@ http {
 
         resolver 127.0.0.11 valid=30s;
 
+        location = /robots.txt {
+            add_header Content-Type text/plain;
+            return 200 "User-agent: *\nDisallow: /admin/\nDisallow: /api/\nDisallow: /static/\nDisallow: /media/\n# Allow everything else\n";
+        }
+
         location / {
             set $upstream capcomposer:8000;
 
