@@ -143,11 +143,16 @@ ASGI_APPLICATION = "capcomposer.config.asgi.application"
 
 DB_ENGINE = 'capcomposer.config.db_engine'
 
+DB_CONNECTION_MAX_AGE = env.int("DB_CONNECTION_MAX_AGE", default=0)
+DB_CONN_HEALTH_CHECKS = env.bool("DB_CONN_HEALTH_CHECKS", default=False)
+DB_DISABLE_SERVER_SIDE_CURSORS = env.bool("DB_DISABLE_SERVER_SIDE_CURSORS", default=False)
+
 DATABASES = {
     "default": dj_database_url.config(
         engine=DB_ENGINE,
-        conn_max_age=600,
-        conn_health_checks=True,
+        conn_max_age=DB_CONNECTION_MAX_AGE,
+        conn_health_checks=DB_CONN_HEALTH_CHECKS,
+        disable_server_side_cursors=DB_DISABLE_SERVER_SIDE_CURSORS,
     )
 }
 
