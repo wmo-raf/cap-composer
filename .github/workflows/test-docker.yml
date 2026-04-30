@@ -33,7 +33,6 @@ jobs:
     - name: docker compose up, sleep 60 seconds and check status
       run: |
         docker compose up -d
-        docker logs -f capcomposer_db
         sleep 60
         docker ps
     - name: check if the web server is running
