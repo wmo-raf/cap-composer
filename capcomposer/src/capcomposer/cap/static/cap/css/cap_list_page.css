@@ -23,7 +23,6 @@
     position: relative;
     width: 32px;
     height: 32px;
-    border: 1px solid;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +36,6 @@
 
 .alert-item-title {
     font-weight: 600;
-    font-size: 15px;
 }
 
 .alert-severity-label {
@@ -108,4 +106,148 @@
     height: 100%;
     width: 100%;
     fill: green;
+}
+
+/* ── ALERT LINK ── */
+.alert-link {
+  text-decoration: none;
+  display: block;
+}
+
+/* ── ALERT ITEM ── */
+.alert-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  border-left-width: 3px;
+  background: #fff;
+  margin-bottom: 6px;
+  transition: background 0.12s, box-shadow 0.12s;
+}
+
+.alert-link:hover .alert-item {
+  background: #fafafa;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+
+/* ── LEFT ── */
+.alert-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+/* ── ICON ── */
+.alert-item-icon {
+  flex-shrink: 0;
+}
+
+.alert-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.alert-icon-wrapper svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* ── INFO ── */
+.alert-item-info {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.alert-item-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alert-info-headline {
+  font-size: 11px;
+  color: #555;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alert-time-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 1px;
+}
+
+.alert-time-info .time-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.alert-time-info .time-icon svg {
+  width: 10px;
+  height: 10px;
+  fill: #bbb;
+}
+
+.alert-time-info .time-em {
+  font-weight: 600;
+  color: #888;
+}
+
+/* ── RIGHT: pill + arrow ── */
+.alert-item-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.alert-severity-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.alert-arrow {
+  display: flex;
+  align-items: center;
+  color: #bbb;
+  transition: color 0.12s, transform 0.12s;
+}
+
+.alert-arrow svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+}
+
+.alert-link:hover .alert-arrow {
+  color: #185FA5;
+  transform: translateX(2px);
 }

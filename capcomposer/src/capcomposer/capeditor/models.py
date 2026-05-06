@@ -218,8 +218,7 @@ class AbstractCapAlertPage(Page):
                                         "<status> 'Exercise' and <msgType> 'Error'"), verbose_name=_("Note"))
     info = StreamField([
         ("alert_info", AlertInfo(label=_("Alert Information")))
-    ], use_json_field=True, min_num=1, max_num=1, block_counts={'alert_info': {'max_num': 1, "min_num": 1}, },
-        verbose_name=_("Alert Information"), )
+    ], use_json_field=True, min_num=1, verbose_name=_("Alert Information"))
     
     addresses = StreamField([
         ("recipient", AlertAddress(label=_("Recipient")))

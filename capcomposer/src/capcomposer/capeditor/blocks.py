@@ -733,8 +733,7 @@ class AlertInfo(blocks.StructBlock):
         label_format = "({language}) {event}"
     
     class Media:
-        js = ("capeditor/js/alert_info.js",)
-    
+        js = ("capeditor/js/alert_info.js",) 
     def clean(self, value):
         result = super().clean(value)
         effective = result.get("effective")

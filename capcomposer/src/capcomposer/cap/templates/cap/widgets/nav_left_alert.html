@@ -85,7 +85,7 @@
             <div class="banner-alert-item">
                 <div class="banner-alert-item-icon">
                     <div class="banner-alert-icon-wrapper"
-                         style="background-color: {{ latest_active_alert.severity.color }}; border-color: {{ latest_active_alert.severity.border_color }};
+                         style="background-color: {{ latest_active_alert.severity.background_color }}; border-color: {{ latest_active_alert.severity.border_color }};
                                  {% if latest_active_alert.severity.icon_color %}color:{{ latest_active_alert.severity.icon_color }};{% endif %} ">
                         {% if latest_active_alert.event_icon %}
                             {% svg_icon name=latest_active_alert.event_icon %}

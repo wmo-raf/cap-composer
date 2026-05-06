@@ -146,44 +146,47 @@ CAP_MESSAGE_ORDER_SEQUENCE = {
 
 SEVERITY_MAPPING = {
     "Extreme": {
-        "label": _("Red severity"),
-        "color": "#d72f2a",
-        "background_color": "#fcf2f2",
-        "border_color": "#721515",
-        "icon_color": "#fff",
+        "label": _("Extreme severity"),
+        "color": "#d42d41",
+        "background_color": "#FEE2E2",
+        "border_color": "#DC2626",
+        "icon_color": "#DC2626",
         "severity": "Extreme",
         "id": 4
     },
     "Severe": {
-        "label": _("Orange severity"),
-        "color": "#fe9900",
-        "background_color": "#fff9f2",
-        "border_color": "#9a6100",
+        "label": _("Severe severity"),
+        "color": "#f08c11",           # burnt orange
+        "background_color": "#FDE8D0", # soft peach
+        "border_color": "#C2600A",
+        "icon_color": "#C2600A",
         "severity": "Severe",
         "id": 3
     },
     "Moderate": {
-        "label": _("Yellow severity"),
-        "color": "#ffff00",
-        "background_color": "#fffdf1",
-        "border_color": "#938616",
+        "label": _("Moderate severity"),
+        "color": "#f4cf00",           # dark amber text
+        "background_color": "#FEF08A", # bright yellow bg
+        "border_color": "#A16207",
+        "icon_color": "#A16207",
         "severity": "Moderate",
         "id": 2
     },
     "Minor": {
         "label": _("Minor severity"),
-        "color": "#03ffff",
-        "background_color": "#fffdf1",
-        "border_color": "#938616",
+        "color": "#399cc7",
+        "background_color": "#CFFAFE",
+        "border_color": "#0E7490",
+        "icon_color": "#0E7490",
         "severity": "Minor",
         "id": 1
     },
     "Unknown": {
         "label": _("Unknown severity"),
-        "color": "#3366ff",
-        "background_color": "#fffdf1",
-        "border_color": "#122663",
-        "icon_color": "#fff",
+        "color": "#82a8df",
+        "background_color": "#E0E7FF",
+        "border_color": "#4B6CB7",
+        "icon_color": "#4B6CB7",
         "severity": "Unknown",
         "id": 0
     }
