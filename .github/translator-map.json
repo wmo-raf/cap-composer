@@ -1,0 +1,59 @@
+{
+  "_comment": "Maps Crowdin username \u2192 GitHub display name + GitHub username. Add an entry for each translator who wants their GitHub profile credited.",
+  "GraceAmondi": {
+    "github_display_name": "Grace Amondi",
+    "github_user_name": "Grace-Amondi"
+  },
+  "Grace-Miswa": {
+    "github_display_name": "Grace-Miswa",
+    "github_user_name": "Grace-Miswa"
+  },
+  "stellandagire": {
+    "github_display_name": "stellandagire",
+    "github_user_name": "stellandagire"
+  },
+  "erick-otenyo": {
+    "github_display_name": "Erick Otenyo",
+    "github_user_name": "erick-otenyo"
+  },
+  "diane-laourou": {
+    "github_display_name": "Diane M. LAOUROU",
+    "github_user_name": "DianeLaourou"
+  },
+  "gasim178":{
+    "github_display_name": "gasim178",
+    "github_user_name": "gasim178"
+  },
+  "MAHAMAT86":{
+    "github_display_name": "MAHAMAT86",
+    "github_user_name": "MAHAMAT86"
+  },
+  "mopn14":{
+    "github_display_name": "mopn14",
+    "github_user_name": "mopn14"
+  },
+  "saidoikil":{
+    "github_display_name": "saidoikil-prog",
+    "github_user_name": "saidoikil-prog"
+  },
+  "Joanaamavih":{
+    "github_display_name": "Joanaamavih",
+    "github_user_name": "Joanaamavih"
+  },
+  "Curtisrito":{
+    "github_display_name": "curtisrito",
+    "github_user_name": "curtisrito"
+  },
+  "JustinodaCosta":{
+    "github_display_name": "JustinodaCosta",
+    "github_user_name": "JustinodaCosta"
+  },
+  "ntahondi123":{
+    "github_display_name": "ntahondi123",
+    "github_user_name": "ntahondi123"
+  },
+  "deebo91":{
+    "github_display_name": "MOHAMAD DIAB",
+    "github_user_name": "deebo91"
+  }
+}
