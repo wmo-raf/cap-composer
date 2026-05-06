@@ -1,0 +1,471 @@
+name: Crowdin – Download Translations & Open PR
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # Every Monday 06:00 UTC — adjust to your cadence
+  workflow_dispatch:
+    inputs:
+        date_from:
+          description: 'Override DATE_FROM (e.g. 2024-01-01T00:00:00Z)'
+          required: false
+          default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  crowdin-sync:
+    name: Sync translations from Crowdin
+    runs-on: ubuntu-latest
+
+    env:
+      TARGET_BRANCH: main   # stable base — PR merges INTO this
+      PATCH_BRANCH: patch               # short-lived — PR is opened FROM this
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ── 2. Restore last-run timestamp from cache ──────────────────────────────
+      - name: Restore last-run timestamp
+        uses: actions/cache/restore@v4
+        with:
+          path: .crowdin-last-run
+          key: crowdin-last-run-timestamp-${{ github.run_id }}
+          restore-keys: |
+            crowdin-last-run-timestamp-
+
+      - name: Resolve sync window timestamps
+        id: sync_time
+        run: |
+          if [ -n "${{ github.event.inputs.date_from }}" ]; then
+            DATE_FROM="${{ github.event.inputs.date_from }}"
+            echo "Using manually provided DATE_FROM: $DATE_FROM"
+          elif [ -f .crowdin-last-run/timestamp ]; then
+            DATE_FROM=$(cat .crowdin-last-run/timestamp)
+            echo "Using cached last-run timestamp: $DATE_FROM"
+          else
+            DATE_FROM=$(date -u -d "7 days ago" +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null \
+              || date -u -v-7d +"%Y-%m-%dT%H:%M:%SZ")
+            echo "No cache found — defaulting to 7 days ago: $DATE_FROM"
+          fi
+
+          DATE_TO=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo "date_from=$DATE_FROM" >> "$GITHUB_OUTPUT"
+          echo "date_to=$DATE_TO"     >> "$GITHUB_OUTPUT"
+          echo "Sync window: $DATE_FROM → $DATE_TO"
+
+          # Snapshot current SHA of main for diff check
+          if git ls-remote --exit-code --heads origin "$TARGET_BRANCH"; then
+            echo "prev_sha=$(git rev-parse origin/$TARGET_BRANCH)" >> "$GITHUB_OUTPUT"
+          else
+            echo "prev_sha=" >> "$GITHUB_OUTPUT"
+          fi
+
+      # ── 3. Prepare the patch branch ───────────────────────────────────────────
+      - name: Prepare patch branch
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git ls-remote --exit-code --heads origin "$TARGET_BRANCH"; then
+            git fetch origin "$TARGET_BRANCH"
+            git checkout -B "$TARGET_BRANCH" "origin/$TARGET_BRANCH"
+          fi
+
+          git checkout -B "$PATCH_BRANCH" "$TARGET_BRANCH"
+
+          # Ensure the timestamp cache file never ends up in the PR diff.
+          # Add it to .git/info/exclude (local gitignore, not committed).
+          echo ".crowdin-last-run/" >> .git/info/exclude
+
+          git push --force origin "$PATCH_BRANCH"
+
+      # ── 4. Download translations from Crowdin onto the patch branch ───────────
+      - name: Download translations from Crowdin
+        uses: crowdin/github-action@v2
+        with:
+          upload_sources: false
+          upload_translations: false
+          download_translations: true
+          create_pull_request: false
+          skip_untranslated_strings: true
+          localization_branch_name: ${{ env.PATCH_BRANCH }}
+          commit_message: 'chore(i18n): sync translations from Crowdin'
+          github_user_name: 'crowdin-bot'
+          github_user_email: 'support+bot@crowdin.com'
+          project_id: ${{ secrets.CROWDIN_PROJECT_ID }}
+          token: ${{ secrets.CROWDIN_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Guard against empty-string regressions
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" .git
+          git config --global safe.directory "$GITHUB_WORKSPACE"
+          git fetch origin "$TARGET_BRANCH" "$PATCH_BRANCH"
+          git checkout "$PATCH_BRANCH"   # ← make sure we're on the right branch
+      
+          for file in $(git diff --name-only "origin/$TARGET_BRANCH" | grep -E '\.(po|pot)$'); do
+            MAIN_COUNT=$(git show "origin/$TARGET_BRANCH:$file" \
+              | grep -c 'msgstr "[^"]' || echo 0)
+            PATCH_COUNT=$(grep -c 'msgstr "[^"]' "$file" || echo 0)
+      
+            if [ "$PATCH_COUNT" -lt "$MAIN_COUNT" ]; then
+              echo "⚠️  $file lost translations ($MAIN_COUNT → $PATCH_COUNT). Restoring from main."
+              git checkout "origin/$TARGET_BRANCH" -- "$file"
+            fi
+          done
+      
+          # Commit any restorations
+          if ! git diff --cached --quiet; then
+            git add -A
+            git commit -m "chore(i18n): restore translations lost in Crowdin sync"
+            git push origin "$PATCH_BRANCH"
+          fi
+
+      - name: Revert files with only header changes
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" .git
+          git config --global safe.directory "$GITHUB_WORKSPACE"
+          
+          for file in $(git diff --name-only "origin/$TARGET_BRANCH" | grep -E '\.(po|pot)$'); do
+            # Get the diff ignoring PO header lines
+            REAL_DIFF=$(git diff "origin/$TARGET_BRANCH" -- "$file" \
+              | grep '^[+-]' \
+              | grep -v '^[+-][+-][+-]' \
+              | grep -vE '^[+-]("PO-Revision-Date:|"POT-Creation-Date:|"X-Crowdin-)' \
+              | grep -vE '^[+-]#' || true)  # ← || true prevents grep exit code 1 from failing the step
+      
+            if [ -z "$REAL_DIFF" ]; then
+              echo "↩️  $file — only header changes, reverting."
+              git checkout "origin/$TARGET_BRANCH" -- "$file"
+            else
+              echo "✅  $file — has real translation changes, keeping."
+            fi
+          done
+      
+          # Commit if anything was reverted
+          if ! git diff --cached --quiet; then
+            git add -A
+            git commit -m "chore(i18n): revert files with header-only changes"
+            git push origin "$PATCH_BRANCH"
+          fi
+    
+      # ── 5. Check whether anything actually changed ────────────────────────────
+      - name: Check for translation changes
+        id: changed
+        run: |
+          git fetch origin "$TARGET_BRANCH" "$PATCH_BRANCH"
+
+          CHANGED_FILES=$(git diff --name-only \
+            "origin/$TARGET_BRANCH" "origin/$PATCH_BRANCH" \
+            | grep -E '\.(po|pot)$' || echo "")
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No translation files changed. Skipping PR."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+            echo "Changed files:"
+            echo "$CHANGED_FILES"
+            {
+              echo "changed_files<<EOF"
+              echo "$CHANGED_FILES"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      # ── 6. Fetch contributors for the changed files only ─────────────────────
+      # 1. Map each changed .po file back to its Crowdin source path (/en/ version)
+      # 2. Look up the Crowdin file ID for each source path
+      # 3. Query approvals scoped to those file IDs + sync date window
+      # 4. Only people who approved strings in the changed files are listed
+      - name: Fetch contributors for changed files
+        id: contributors
+        if: steps.changed.outputs.has_changes == 'true'
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
+          DATE_FROM: ${{ steps.sync_time.outputs.date_from }}
+          DATE_TO: ${{ steps.sync_time.outputs.date_to }}
+          CHANGED_FILES: ${{ steps.changed.outputs.changed_files }}
+        run: |
+          echo "Fetching contributors between $DATE_FROM and $DATE_TO"
+
+          # ── A: Load translator map if it exists ────────────────────────────────────
+          # .github/translator-map.json maps Crowdin username → { name, github }
+          # allowing correct GitHub display name and username per translator.
+          TRANSLATOR_MAP=""
+          if [ -f ".github/translator-map.json" ]; then
+            # Strip the _comment key so jq doesn't choke on it
+            TRANSLATOR_MAP=$(jq 'del(._comment)' .github/translator-map.json)
+            echo "Loaded translator map with $(echo "$TRANSLATOR_MAP" | jq 'keys | length') entries"
+          else
+            echo "No translator map found — using Crowdin usernames as-is"
+          fi
+
+          # Helper: resolve a Crowdin username to "Display Name <github@users.noreply.github.com>"
+          # Falls back to "crowdin_username <crowdin_username@users.noreply.github.com>" if not mapped
+          resolve_author() {
+            local crowdin_user="$1"
+            local gh_name gh_username
+
+            if [ -n "$TRANSLATOR_MAP" ]; then
+              gh_name=$(echo "$TRANSLATOR_MAP" | jq -r --arg u "$crowdin_user" \
+                '.[$u].github_display_name // .[$u].github_user_name // empty')
+              gh_username=$(echo "$TRANSLATOR_MAP" | jq -r --arg u "$crowdin_user" '.[$u].github_user_name // empty')
+            fi
+
+            # Fall back to Crowdin username for both if not in map
+            gh_name="${gh_name:-$crowdin_user}"
+            gh_username="${gh_username:-$crowdin_user}"
+
+            echo "Co-authored-by: $gh_name <${gh_username}@users.noreply.github.com>"
+          }
+
+          # ── B: Fetch all Crowdin file IDs once — matched per changed file below ───
+          ALL_FILES=$(curl -sf \
+            "https://api.crowdin.com/api/v2/projects/${CROWDIN_PROJECT_ID}/files?limit=500" \
+            -H "Authorization: Bearer ${CROWDIN_TOKEN}")
+
+          # ── C: Fetch approvals per file+language, collect unique approvers ────────
+          # The approvals endpoint requires both fileId AND languageId.
+          # We extract the language code from each changed file path directly.
+          declare -A SEEN_USERS
+          declare -A SEEN_FILE_LANG
+          CO_AUTHORS=""
+
+
+          # Build a map of short code → full Crowdin language ID once
+          LANG_MAP=$(curl -sf \
+            "https://api.crowdin.com/api/v2/projects/${CROWDIN_PROJECT_ID}" \
+            -H "Authorization: Bearer ${CROWDIN_TOKEN}" \
+            | jq -r '.data.targetLanguages[] | "\(.twoLettersCode) \(.id)"')
+              
+          while IFS= read -r changed_file; do
+            [ -z "$changed_file" ] && continue
+
+            # Extract language code e.g. locale/fr/LC_MESSAGES → fr
+            lang_code=$(echo "$changed_file" | grep -oP '(?<=/locale/)[^/]+(?=/LC_MESSAGES)')
+            [ -z "$lang_code" ] && continue
+
+            
+            # Then resolve lang_code from path to Crowdin ID
+            crowdin_lang_id=$(echo "$LANG_MAP" | awk -v code="$lang_code" '$1 == code {print $2}')
+            [ -z "$crowdin_lang_id" ] && echo "Skipping $lang_code — not found in Crowdin" && continue
+
+            # Map to source path to get Crowdin file ID
+            src_path="/$(echo "$changed_file" | sed 's|/locale/[^/]*/LC_MESSAGES/|/locale/en/LC_MESSAGES/|g')"
+            file_id=$(echo "$ALL_FILES" | jq -r \
+              --arg p "$src_path" \
+              '.data[] | select(.data.path == $p) | .data.id')
+
+            [ -z "$file_id" ] || [ "$file_id" = "null" ] && continue
+
+            # Skip duplicate file+language combinations
+            key="${file_id}:${lang_code}"
+            [ -n "${SEEN_FILE_LANG[$key]+_}" ] && continue
+            SEEN_FILE_LANG[$key]=1
+
+            echo "Fetching approvals for file ID $file_id, language $lang_code ($crowdin_lang_id)"
+            APPROVALS=$(curl -sf \
+              "https://api.crowdin.com/api/v2/projects/${CROWDIN_PROJECT_ID}/approvals?fileId=${file_id}&languageId=${crowdin_lang_id}&limit=500" \
+              -H "Authorization: Bearer ${CROWDIN_TOKEN}")
+
+            while IFS= read -r crowdin_username; do
+              [ -z "$crowdin_username" ] && continue
+              if [ -z "${SEEN_USERS[$crowdin_username]+_}" ]; then
+                SEEN_USERS[$crowdin_username]=1
+                CO_AUTHORS+="$(resolve_author "$crowdin_username")"$'\n'
+              fi
+            done < <(echo "$APPROVALS" | jq -r \
+              --arg from "$DATE_FROM" \
+              --arg to   "$DATE_TO" \
+              '.data[]
+               | select(.data.createdAt >= $from and .data.createdAt <= $to)
+               | select(.data.user != null)
+               | .data.user.username')
+          done <<< "$CHANGED_FILES"
+
+          CO_AUTHORS=$(echo "$CO_AUTHORS" | sort -u | sed '/^$/d')
+
+          if [ -z "$CO_AUTHORS" ]; then
+            echo "No approvers found in window for the changed files."
+            CO_AUTHORS="Co-authored-by: Crowdin Community <crowdin@noreply.com>"
+          fi
+
+          echo "Contributors:"
+          echo "$CO_AUTHORS"
+
+          {
+            echo "co_authors<<EOF"
+            echo "$CO_AUTHORS"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      # ── 7. Amend the commit on patch with Co-authored-by trailers ────────────
+      - name: Amend commit with Co-authored-by
+        if: steps.changed.outputs.has_changes == 'true'
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" .git
+          git config --global safe.directory "$GITHUB_WORKSPACE"
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin "$PATCH_BRANCH"
+          git checkout "$PATCH_BRANCH"
+
+          # Remove timestamp file from the commit if Crowdin action staged it
+          git rm --cached .crowdin-last-run/timestamp 2>/dev/null || true
+          echo ".crowdin-last-run/" >> .git/info/exclude
+
+          COMMIT_MSG="chore(i18n): sync Crowdin translations
+
+          ${{ steps.contributors.outputs.co_authors }}"
+          
+                    git commit --allow-empty --amend -m "$COMMIT_MSG"
+                    git push --force-with-lease origin "$PATCH_BRANCH"
+
+      # ── 8. Open PR from patch → main via GitHub API ────────────────
+      # peter-evans/create-pull-request works on local workspace changes, not
+      # between two existing remote branches. We use the GitHub API directly instead.
+      - name: Create or update Pull Request
+        if: steps.changed.outputs.has_changes == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CO_AUTHORS: ${{ steps.contributors.outputs.co_authors }}
+          CHANGED_FILES: ${{ steps.changed.outputs.changed_files }}
+          DATE_FROM: ${{ steps.sync_time.outputs.date_from }}
+          DATE_TO: ${{ steps.sync_time.outputs.date_to }}
+        run: |
+          REPO="${{ github.repository }}"
+
+          PR_TITLE="🌐 Crowdin translation sync – community contributions"
+
+          PR_BODY="## 🌐 Crowdin Translation Sync
+
+          **Sync window:** \`$DATE_FROM\` → \`$DATE_TO\`
+          
+          ### 📄 Changed translation files
+          
+          \`\`\`
+          $CHANGED_FILES
+          \`\`\`
+          
+          ### 👥 Translators in this batch
+          
+          Only contributors who approved strings in the changed files during this window
+          are credited via \`Co-authored-by:\` in the commit:
+          
+          \`\`\`
+          $CO_AUTHORS
+          \`\`\`
+          
+          ---
+          *Merge this PR into \`main\` to accept the translations.*
+          *Generated by the **Crowdin Translations** workflow.*"
+          
+                    # Check if a PR from patch → main already exists
+                    EXISTING_PR=$(gh pr list             --repo "$REPO"             --head "$PATCH_BRANCH"             --base "$TARGET_BRANCH"             --json number,body             --jq '.[0]')
+          
+                    EXISTING_PR_NUMBER=$(echo "$EXISTING_PR" | jq -r '.number // empty')
+          
+                    if [ -n "$EXISTING_PR_NUMBER" ]; then
+                      echo "PR #$EXISTING_PR_NUMBER already open — merging co-authors"
+          
+                      # Extract existing Co-authored-by lines from the current PR body
+                      EXISTING_BODY=$(gh pr view "$EXISTING_PR_NUMBER"               --repo "$REPO"               --json body               --jq '.body')
+          
+                      EXISTING_CO_AUTHORS=$(echo "$EXISTING_BODY"               | grep -oP 'Co-authored-by: .+' || echo "")
+          
+                      # Merge existing + new co-authors, deduplicate by username
+                      ALL_CO_AUTHORS=$(printf '%s
+          %s
+          ' "$EXISTING_CO_AUTHORS" "$CO_AUTHORS"               | grep -v '^$'               | sort -u               | awk -F'[<>]' '!seen[$2]++')  # dedupe by email (username part)
+          
+                      echo "Merged co-authors:"
+                      echo "$ALL_CO_AUTHORS"
+          
+                      # Also merge the changed files lists
+                      EXISTING_FILES=$(echo "$EXISTING_BODY"               | grep -oP '(?<=```
+          )(.|
+          )*?(?=
+          ```)' | head -1 || echo "")
+          
+                      ALL_CHANGED_FILES=$(printf '%s
+          %s
+          ' "$EXISTING_FILES" "$CHANGED_FILES"               | grep -v '^$' | sort -u)
+          
+                      # Rebuild PR body with merged data
+                      PR_BODY="## 🌐 Crowdin Translation Sync
+          
+          **Last sync:** \`$DATE_FROM\` → \`$DATE_TO\`
+          
+          ### 📄 Changed translation files
+          
+          \`\`\`
+          $ALL_CHANGED_FILES
+          \`\`\`
+          
+          ### 👥 Translators in this batch
+          
+          Only contributors who approved strings in the changed files are credited
+          via \`Co-authored-by:\` in the commit:
+          
+          \`\`\`
+          $ALL_CO_AUTHORS
+          \`\`\`
+          
+          ---
+          *Merge this PR into \`main\` to accept the translations.*
+          *Generated by the **Crowdin Translations** workflow.*"
+          
+                      gh pr edit "$EXISTING_PR_NUMBER"               --repo "$REPO"               --title "$PR_TITLE"               --body "$PR_BODY"
+          
+                      # Also amend the commit to include all co-authors
+                      sudo chown -R "$(id -u):$(id -g)" .git
+                      git config --global safe.directory "$GITHUB_WORKSPACE"
+                      git config user.name  "github-actions[bot]"
+                      git config user.email "github-actions[bot]@users.noreply.github.com"
+                      git fetch origin "$PATCH_BRANCH"
+                      git checkout "$PATCH_BRANCH"
+                      COMMIT_MSG="chore(i18n): sync Crowdin translations
+          
+          $ALL_CO_AUTHORS"
+                      git commit --allow-empty --amend -m "$COMMIT_MSG"
+                      git push --force-with-lease origin "$PATCH_BRANCH"
+          
+                    else
+                      echo "Creating new PR"
+                      gh pr create               --repo "$REPO"               --head "$PATCH_BRANCH"               --base "$TARGET_BRANCH"               --title "$PR_TITLE"               --body "$PR_BODY"               --label "translations"               --label "community"               --label "crowdin"
+                    fi
+
+      # ── 9. Persist timestamp — only on full success ───────────────────────────
+      - name: Write last-run timestamp
+        if: steps.changed.outputs.has_changes == 'true'
+        run: |
+          mkdir -p .crowdin-last-run
+          echo "${{ steps.sync_time.outputs.date_to }}" > .crowdin-last-run/timestamp
+      - name: Save last-run timestamp cache
+        if: steps.changed.outputs.has_changes == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .crowdin-last-run
+          key: crowdin-last-run-timestamp-${{ github.run_id }}
+
+      - name: Write last-run timestamp (no changes)
+        if: steps.changed.outputs.has_changes == 'false'
+        run: |
+          mkdir -p .crowdin-last-run
+          echo "${{ steps.sync_time.outputs.date_to }}" > .crowdin-last-run/timestamp
+      - name: Save last-run timestamp cache (no changes)
+        if: steps.changed.outputs.has_changes == 'false'
+        uses: actions/cache/save@v4
+        with:
+          path: .crowdin-last-run
+          key: crowdin-last-run-timestamp-${{ github.run_id }}
