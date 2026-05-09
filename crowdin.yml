@@ -14,6 +14,6 @@ files:
     export_translated_only: true
 
   - source: /capcomposer/src/capcomposer/capeditor/locale/en/LC_MESSAGES/django.po
-    translation: /capcomposer/src/capcomposer/cap/locale/%two_letters_code%/LC_MESSAGES/%original_file_name%
+    translation: /capcomposer/src/capcomposer/capeditor/locale/%two_letters_code%/LC_MESSAGES/%original_file_name%
     skip_untranslated_strings: true
     export_translated_only: true

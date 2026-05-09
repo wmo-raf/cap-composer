@@ -17,7 +17,6 @@ from wagtail.admin.forms.pages import CopyForm
 from wagtail.admin.utils import get_valid_next_url_from_request
 from wagtail.models import Page
 
-<<<<<<< HEAD
 from capcomposer.capeditor.views import (
     load_cap_alert,
     import_cap_alert,
@@ -25,8 +24,6 @@ from capcomposer.capeditor.views import (
     convert_area_file,
 )
 
-=======
->>>>>>> 03f2145aa926ef5b3127bdbd503ceca2aaff1392
 
 @hooks.register("insert_editor_js")
 def insert_editor_js():
@@ -49,11 +46,8 @@ def urlconf_capeditor():
         path('import-cap/', load_cap_alert, name='load_cap_alert'),
         path('import-cap/import/', import_cap_alert, name='import_cap_alert'),
         path('cap/un-boundary-geojson', get_un_boundary_geojson, name='un_boundary_geojson'),
-<<<<<<< HEAD
         path('cap/convert-area-file', convert_area_file, name='convert_area_file'),
-=======
         path('cap/map-widget-config/', map_widget_config, name='map_widget_config'),
->>>>>>> 03f2145aa926ef5b3127bdbd503ceca2aaff1392
     ]
 
 

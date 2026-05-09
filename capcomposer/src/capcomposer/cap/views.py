@@ -278,7 +278,12 @@ def get_home_map_alerts(request):
             "event": event,
             "area_desc": area_desc,
             "event_icon": event_icon,
-            "severity": SEVERITY_MAPPING[info.value.get("severity")]
+            "severity": SEVERITY_MAPPING[info.value.get("severity")],
+            "expires": info.value.get("expires"),
+            "properties": {
+                "headline": info.value.get("headline"),
+                "sent": alert.sent,
+            }
         }
         
         active_alert_infos.append(alert_info)
