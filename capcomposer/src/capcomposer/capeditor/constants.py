@@ -150,7 +150,7 @@ SEVERITY_MAPPING = {
         "color": "#d42d41",
         "background_color": "#FEE2E2",
         "border_color": "#DC2626",
-        "icon_color": "#DC2626",
+        "icon_color": "#d42d41",
         "severity": "Extreme",
         "id": 4
     },
@@ -159,7 +159,7 @@ SEVERITY_MAPPING = {
         "color": "#f08c11",           # burnt orange
         "background_color": "#FDE8D0", # soft peach
         "border_color": "#C2600A",
-        "icon_color": "#C2600A",
+        "icon_color": "#f08c11",
         "severity": "Severe",
         "id": 3
     },
@@ -168,7 +168,7 @@ SEVERITY_MAPPING = {
         "color": "#f4cf00",           # dark amber text
         "background_color": "#FEF08A", # bright yellow bg
         "border_color": "#A16207",
-        "icon_color": "#A16207",
+        "icon_color": "#f4cf00",
         "severity": "Moderate",
         "id": 2
     },
@@ -177,7 +177,7 @@ SEVERITY_MAPPING = {
         "color": "#399cc7",
         "background_color": "#CFFAFE",
         "border_color": "#0E7490",
-        "icon_color": "#0E7490",
+        "icon_color": "#399cc7",
         "severity": "Minor",
         "id": 1
     },
@@ -186,7 +186,7 @@ SEVERITY_MAPPING = {
         "color": "#82a8df",
         "background_color": "#E0E7FF",
         "border_color": "#4B6CB7",
-        "icon_color": "#4B6CB7",
+        "icon_color": "#82a8df",
         "severity": "Unknown",
         "id": 0
     }
