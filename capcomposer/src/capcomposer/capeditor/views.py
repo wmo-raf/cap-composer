@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 import json
 import os
 import tempfile
 
-=======
 from capcomposer.capeditor.forms.capimporter import CAPLoadForm, CAPImportForm
->>>>>>> 03f2145aa926ef5b3127bdbd503ceca2aaff1392
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from wagtail import hooks
@@ -69,7 +66,6 @@ def get_un_boundary_geojson(request):
     return JsonResponse(un_country_boundary_geojson)
 
 
-<<<<<<< HEAD
 def convert_area_file(request):
     """Accept a GeoJSON or shapefile ZIP and return a MultiPolygon GeoJSON geometry."""
     if request.method != 'POST':
@@ -174,7 +170,6 @@ def _ensure_multipolygon(geom):
         return geom
     else:
         raise ValueError(f"Expected Polygon or MultiPolygon geometry, got {geom.get('type')}")
-=======
 def map_widget_config(request):
     cap_setting = CapSetting.for_request(request)
     
@@ -183,4 +178,3 @@ def map_widget_config(request):
     }
     
     return JsonResponse(config)
->>>>>>> 03f2145aa926ef5b3127bdbd503ceca2aaff1392
