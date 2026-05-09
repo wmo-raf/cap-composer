@@ -1,7 +1,5 @@
 // alert_info.js
 // Adds a Translate button to each AlertInfo block in the Wagtail admin UI
-    console.log("hello")
-
 (function() {
     function addTranslateButtons() {
         // Find all alert info blocks
