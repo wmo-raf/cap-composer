@@ -70,6 +70,19 @@ class AreaRegistry {
         })
     }
 
+    getAlertInfoBlockEl() {
+        const widgetEl = document.getElementById(this.widgetId)
+        if (!widgetEl) return null
+        // Widget is inside an area sub-block's [data-streamfield-child].
+        // Its parent is the area stream container, whose own closest
+        // [data-streamfield-child] ancestor is the alert_info block.
+        const areaItem = widgetEl.closest('[data-streamfield-child]')
+        if (!areaItem) return null
+        const parent = areaItem.parentElement
+        if (!parent) return null
+        return parent.closest('[data-streamfield-child]')
+    }
+
     initSiblingAreasLayer() {
         this.map.addSource("sibling-areas", {
             type: "geojson",
@@ -120,8 +133,14 @@ class AreaRegistry {
     }
 
     refreshSiblingAreas() {
+        const myAlertInfoBlock = this.getAlertInfoBlockEl()
         const features = Object.entries(window.alertAreas)
-            .filter(([id, geom]) => id !== this.widgetId && geom !== null)
+            .filter(([id, geom]) => {
+                if (id === this.widgetId || geom === null) return false
+                const sibling = window.alertAreaWidgets[id]
+                if (!sibling) return false
+                return sibling.getAlertInfoBlockEl() === myAlertInfoBlock
+            })
             .map(([id, geom]) => ({
                 type: "Feature",
                 geometry: geom,
@@ -135,8 +154,14 @@ class AreaRegistry {
     }
 
     checkIntersections() {
+        const myAlertInfoBlock = this.getAlertInfoBlockEl()
         const areas = window.alertAreas
-        const entries = Object.entries(areas).filter(([, geom]) => geom !== null)
+        const entries = Object.entries(areas).filter(([id, geom]) => {
+            if (!geom) return false
+            const widget = window.alertAreaWidgets[id]
+            if (!widget) return true
+            return widget.getAlertInfoBlockEl() === myAlertInfoBlock
+        })
         const threshold = (window.alertAreaConfig && window.alertAreaConfig.intersection_area_threshold)
             || this.intersectionThreshold
 

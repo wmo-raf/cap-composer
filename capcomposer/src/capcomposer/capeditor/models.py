@@ -412,3 +412,5 @@ class AbstractCapAlertPage(Page):
         context = super().get_context(request, *args, **kwargs)
         context["geojson_features"] = self.get_geojson_features(request)
         return context
+
+    
