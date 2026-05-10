@@ -50,283 +50,286 @@
         </div>
       {% endif %}
 
-      <!-- ── MAIN CARD ── -->
-      <div class="cap-card">
-
-        <!-- HEADER -->
-        <div class="cap-card-header">
-          <div class="cap-card-header-left">
-            <p class="cap-card-eyebrow">
-              {% translate "CAP Alert" %} · {{ page.status }}
-            </p>
-            <h1 class="cap-card-title">{{ page.title }}</h1>
-          </div>
-          <div class="cap-card-header-right">
-            <div class="cap-share-row">
-              <a class="cap-share-btn"
-                 href="{{ page.xml_link }}"
-                 target="_blank" rel="noreferrer noopener">
-                <span class="icon">{% svg_icon name="cap-alert" %}</span>
-                <span>CAP XML</span>
-              </a>
-              {% if page.search_image %}
-                {% image page.search_image original as alert_png %}
-                <a class="cap-share-btn" href="{{ alert_png.url }}" target="_blank">
-                  <span class="icon">{% svg_icon name="image" %}</span>
-                  <span>{% translate "PNG" %}</span>
-                </a>
-              {% endif %}
-              {% if page.alert_pdf_preview %}
-                <a class="cap-share-btn" href="{{ page.alert_pdf_preview.url }}">
-                  <span class="icon">{% svg_icon name="doc-full-inverse" %}</span>
-                  <span>{% translate "PDF" %}</span>
-                </a>
-              {% endif %}
-              <div class="cap-share-social share-buttons">
-                {% share_buttons url=page.get_full_url text=page.title %}
-              </div>
-            </div>
+      <!-- ── PAGE TITLE + SHARE ── -->
+      <div class="cap-page-header">
+        <div>
+          <p class="cap-page-eyebrow">{% translate "CAP Alert" %} · {{ page.status }}</p>
+          <h1 class="cap-page-title">{{ page.title }}</h1>
+        </div>
+        <div class="cap-share-row">
+          <a class="cap-share-btn" href="{{ page.xml_link }}" target="_blank" rel="noreferrer noopener">
+            <span class="icon">{% svg_icon name="cap-alert" %}</span>
+            <span>CAP XML</span>
+          </a>
+          {% if page.search_image %}
+            {% image page.search_image original as alert_png %}
+            <a class="cap-share-btn" href="{{ alert_png.url }}" target="_blank">
+              <span class="icon">{% svg_icon name="image" %}</span>
+              <span>{% translate "PNG" %}</span>
+            </a>
+          {% endif %}
+          {% if page.alert_pdf_preview %}
+            <a class="cap-share-btn" href="{{ page.alert_pdf_preview.url }}">
+              <span class="icon">{% svg_icon name="doc-full-inverse" %}</span>
+              <span>{% translate "PDF" %}</span>
+            </a>
+          {% endif %}
+          <div class="cap-share-social share-buttons">
+            {% share_buttons url=page.get_full_url text=page.title %}
           </div>
         </div>
+      </div>
 
-        <!-- EVENT TAB STRIP -->
-        {% if sorted_infos|length > 0 %}
-          <div class="cap-tab-strip" id="cap-tab-strip">
-            {% for item in sorted_infos %}
-              <button class="cap-tab {% if forloop.first %}active{% endif %}"
-                      data-target="{{ item.info.id }}">
-                {% if item.event_icon %}
-                  <span class="cap-tab-icon"
-                        style="background:{{ item.severity.background_color }};
-                               {% if item.severity.icon_color %}color:{{ item.severity.icon_color }};{% endif %}">
-                    {% svg_icon name=item.event_icon %}
-                  </span>
-                {% else %}
-                  <span class="cap-tab-dot"
-                        style="background:{{ item.severity.background_color }};"></span>
+      <!-- ── MAIN CARD: sidebar left, map+tabs right ── -->
+      <div class="cap-card">
+        <div class="cap-layout">
+
+          <!-- ── LEFT SIDEBAR ── -->
+          <div class="cap-sidebar">
+
+            <!-- active info severity badge — updates on tab switch -->
+            <div class="cap-sb-severity" id="cap-sb-severity">
+              {% with sorted_infos.0 as first_info %}
+                {% if first_info %}
+                  <div class="cap-sb-sev-icon"
+                       id="cap-sb-sev-icon"
+                       style="background:{{ first_info.severity.background_color }};
+                              border-color:{{ first_info.severity.border_color }};
+                              {% if first_info.severity.icon_color %}color:{{ first_info.severity.icon_color }};{% endif %}">
+                    {% if first_info.event_icon %}{% svg_icon name=first_info.event_icon %}{% endif %}
+                  </div>
+                  <div>
+                    <div class="cap-sb-sev-event" id="cap-sb-sev-event">{{ first_info.status }}: {{ first_info.event }}</div>
+                    <div class="cap-sb-sev-label" id="cap-sb-sev-label">{{ first_info.severity.label }}</div>
+                  </div>
                 {% endif %}
-                <span class="cap-tab-label">{{ item.event|truncatechars:40 }}</span>
-              </button>
-            {% endfor %}
-          </div>
-        {% endif %}
+              {% endwith %}
+            </div>
 
-        <!-- MAP + DETAIL SPLIT -->
-        <div class="cap-body-grid">
+            <!-- meta rows — static per alert, not per info -->
+            {% with sorted_infos.0 as fi %}
+              {% if fi %}
+                <div class="cap-sb-meta">
+                  <div class="cap-sb-meta-row">
+                    <span class="cap-sb-meta-icon">{% svg_icon name="time" %}</span>
+                    <span class="cap-sb-meta-lbl">{% translate "Urgency" %}</span>
+                    <span class="cap-sb-meta-val" id="cap-sb-urgency">
+                      {% with u=fi.info.value.urgency %}
+                        {% if u == "Immediate" %}{% translate "Immediate" %}
+                        {% elif u == "Expected" %}{% translate "Expected" %}
+                        {% elif u == "Future" %}{% translate "Future" %}
+                        {% elif u == "Past" %}{% translate "Past" %}
+                        {% endif %}
+                      {% endwith %}
+                    </span>
+                  </div>
+                  <div class="cap-sb-meta-row">
+                    <span class="cap-sb-meta-icon">{% svg_icon name="warning" %}</span>
+                    <span class="cap-sb-meta-lbl">{% translate "Severity" %}</span>
+                    <span class="cap-sb-meta-val" id="cap-sb-severity-val">
+                      {% with s=fi.info.value.severity %}
+                        {% if s == "Extreme" %}{% translate "Extreme" %}
+                        {% elif s == "Severe" %}{% translate "Severe" %}
+                        {% elif s == "Moderate" %}{% translate "Moderate" %}
+                        {% elif s == "Minor" %}{% translate "Minor" %}
+                        {% endif %}
+                      {% endwith %}
+                    </span>
+                  </div>
+                  <div class="cap-sb-meta-row">
+                    <span class="cap-sb-meta-icon">{% svg_icon name="crosshairs" %}</span>
+                    <span class="cap-sb-meta-lbl">{% translate "Certainty" %}</span>
+                    <span class="cap-sb-meta-val" id="cap-sb-certainty">
+                      {% with c=fi.info.value.certainty %}
+                        {% if c == "Observed" %}{% translate "Observed" %}
+                        {% elif c == "Likely" %}{% translate "Likely" %}
+                        {% elif c == "Possible" %}{% translate "Possible" %}
+                        {% elif c == "Unlikely" %}{% translate "Unlikely" %}
+                        {% endif %}
+                      {% endwith %}
+                    </span>
+                  </div>
+                  <div class="cap-sb-meta-row">
+                    <span class="cap-sb-meta-icon">{% svg_icon name="cap-category" %}</span>
+                    <span class="cap-sb-meta-lbl">{% translate "Category" %}</span>
+                    <span class="cap-sb-meta-val" id="cap-sb-category">{{ fi.category }}</span>
+                  </div>
+                  <div class="cap-sb-meta-row">
+                    <span class="cap-sb-meta-icon">{% svg_icon name="cap-language" %}</span>
+                    <span class="cap-sb-meta-lbl">{% translate "Language" %}</span>
+                    <span class="cap-sb-meta-val" id="cap-sb-language">{{ fi.info.value.language }}</span>
+                  </div>
+                </div>
 
-          <!-- MAP -->
-          <div class="cap-map-col">
-            <div id="cap-map" class="cap-map"></div>
-            <div class="cap-map-legend">
-              <span class="cap-legend-title">{% translate "Severity" %}:</span>
-              <div class="cap-legend-items">
-                <div class="cap-legend-item">
-                  <span class="cap-legend-dot" style="background:#d42d41;"></span>
-                  <span>{% translate "Extreme" %}</span>
+                <!-- timeline -->
+                <div class="cap-sb-section">
+                  <div class="cap-sb-section-title">{% translate "Time period" %}</div>
+                  <ul class="cap-sb-timeline" id="cap-sb-timeline">
+                    <li class="cap-sb-tl-item">
+                      <div class="cap-sb-tl-dot"></div>
+                      <div>
+                        <span class="cap-sb-tl-type">{% translate "Issued" %}</span>
+                        <span class="cap-sb-tl-val">{{ page.sent|date:"d M Y H:i" }}</span>
+                      </div>
+                    </li>
+                    <li class="cap-sb-tl-item">
+                      <div class="cap-sb-tl-dot"></div>
+                      <div>
+                        <span class="cap-sb-tl-type">{% translate "Effective" %}</span>
+                        <span class="cap-sb-tl-val">
+                          {% if fi.info.value.effective %}{{ fi.info.value.effective|date:"d M Y H:i" }}
+                          {% else %}{{ page.sent|date:"d M Y H:i" }}{% endif %}
+                        </span>
+                      </div>
+                    </li>
+                    {% if fi.info.value.onset %}
+                      <li class="cap-sb-tl-item">
+                        <div class="cap-sb-tl-dot"></div>
+                        <div>
+                          <span class="cap-sb-tl-type">{% translate "Onset" %}</span>
+                          <span class="cap-sb-tl-val">{{ fi.info.value.onset|date:"d M Y H:i" }}</span>
+                        </div>
+                      </li>
+                    {% endif %}
+                    <li class="cap-sb-tl-item">
+                      <div class="cap-sb-tl-dot"></div>
+                      <div>
+                        <span class="cap-sb-tl-type">{% translate "Expires" %}</span>
+                        <span class="cap-sb-tl-val">{{ fi.info.value.expires|date:"d M Y H:i" }}</span>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
-                <div class="cap-legend-item">
-                  <span class="cap-legend-dot" style="background:#f08c11;"></span>
-                  <span>{% translate "Severe" %}</span>
-                </div>
-                <div class="cap-legend-item">
-                  <span class="cap-legend-dot" style="background:#f4cf00;"></span>
-                  <span>{% translate "Moderate" %}</span>
-                </div>
-                <div class="cap-legend-item">
-                  <span class="cap-legend-dot" style="background:#399cc7;"></span>
-                  <span>{% translate "Minor" %}</span>
-                </div>
+              {% endif %}
+            {% endwith %}
+
+            <!-- legend -->
+            <div class="cap-sb-section">
+              <div class="cap-sb-section-title">{% translate "Severity" %}</div>
+              <div class="cap-sb-legend">
+                <div class="cap-sb-legend-item"><span class="cap-sb-legend-dot" style="background:#d42d41;"></span><span>{% translate "Extreme" %}</span></div>
+                <div class="cap-sb-legend-item"><span class="cap-sb-legend-dot" style="background:#f08c11;"></span><span>{% translate "Severe" %}</span></div>
+                <div class="cap-sb-legend-item"><span class="cap-sb-legend-dot" style="background:#f4cf00;"></span><span>{% translate "Moderate" %}</span></div>
+                <div class="cap-sb-legend-item"><span class="cap-sb-legend-dot" style="background:#399cc7;"></span><span>{% translate "Minor" %}</span></div>
               </div>
             </div>
+
           </div>
 
-          <!-- DETAIL PANEL -->
-          <div class="cap-detail-col">
-            {% for alert_info in sorted_infos %}
-              {% with item=alert_info.info %}
-                <div class="cap-detail-panel {% if not forloop.first %}is-hidden{% endif %}"
-                     id="{{ alert_info.info.id }}">
+          <!-- ── RIGHT: MAP + TABS + CONTENT ── -->
+          <div class="cap-right">
 
-                  <!-- SEVERITY BADGE -->
-                  <div class="cap-severity-badge"
-                       style="background:{{ alert_info.severity.background_color }};
-                              border-color:{{ alert_info.severity.border_color }};">
-                    <div class="cap-severity-icon"
-                         data-infoid="{{ alert_info.info.id }}"
-                         style="background:{{ alert_info.severity.background_color }};
-                                border-color:{{ alert_info.severity.border_color }};
-                                {% if alert_info.severity.icon_color %}color:{{ alert_info.severity.icon_color }};{% endif %}">
-                      {% if alert_info.event_icon %}
-                        {% svg_icon name=alert_info.event_icon %}
-                      {% endif %}
-                    </div>
-                    <div>
-                      <div class="cap-severity-event">{{ alert_info.status }}: {{ alert_info.event }}</div>
-                      <div class="cap-severity-label">{{ alert_info.severity.label }}</div>
-                    </div>
-                  </div>
+            <!-- MAP -->
+            <div class="cap-map-wrap">
+              <div id="cap-map" class="cap-map"></div>
+            </div>
 
-                  <!-- HEADLINE -->
-                  {% if item.value.headline %}
-                    <h2 class="cap-detail-headline">{{ item.value.headline }}</h2>
-                  {% endif %}
+            <!-- UNDERLINE EVENT TABS -->
+            {% if sorted_infos|length > 0 %}
+              <div class="cap-tab-strip" id="cap-tab-strip">
+                {% for item in sorted_infos %}
+                  <button class="cap-tab {% if forloop.first %}active{% endif %}"
+                          data-target="{{ item.info.id }}"
+                          data-event="{{ item.event }}"
+                          data-status="{{ item.status }}"
+                          data-sev-label="{{ item.severity.label }}"
+                          data-sev-bg="{{ item.severity.background_color }}"
+                          data-sev-border="{{ item.severity.border_color }}"
+                          data-sev-icon-color="{{ item.severity.icon_color }}"
+                          data-urgency="{{ item.info.value.urgency }}"
+                          data-severity="{{ item.info.value.severity }}"
+                          data-certainty="{{ item.info.value.certainty }}"
+                          data-category="{{ item.category }}"
+                          data-language="{{ item.info.value.language }}"
+                          data-event-icon="{{ item.event_icon }}">
+                    {% if item.event_icon %}
+                      <span class="cap-tab-icon"
+                            style="background:{{ item.severity.background_color }};
+                                   {% if item.severity.icon_color %}color:{{ item.severity.icon_color }};{% endif %}">
+                        {% svg_icon name=item.event_icon %}
+                      </span>
+                    {% else %}
+                      <span class="cap-tab-dot"
+                            style="background:{{ item.severity.color }};"></span>
+                    {% endif %}
+                    <span class="cap-tab-label">{{ item.event|truncatechars:40 }} ({{ item.info.value.language }})</span>
+                  </button>
+                {% endfor %}
+              </div>
+            {% endif %}
 
-                  <!-- META ROWS -->
-                  <div class="cap-meta-rows">
+            <!-- TAB CONTENT PANELS -->
+            <div class="cap-right-content">
+              {% for alert_info in sorted_infos %}
+                {% with item=alert_info.info %}
+                  <div class="cap-detail-panel {% if not forloop.first %}is-hidden{% endif %}"
+                       id="{{ alert_info.info.id }}">
 
-                    <div class="cap-meta-group">
-                      <div class="cap-meta-row">
-                        <span class="cap-meta-icon">{% svg_icon name="cap-language" %}</span>
-                        <span class="cap-meta-lbl">{% translate "Language" %}</span>
-                        <span class="cap-meta-val">{{ item.value.language }}</span>
-                      </div>
-                      <div class="cap-meta-row">
-                        <span class="cap-meta-icon">{% svg_icon name="cap-category" %}</span>
-                        <span class="cap-meta-lbl">{% translate "Category" %}</span>
-                        <span class="cap-meta-val">{{ alert_info.category }}</span>
-                      </div>
-                    </div>
+                    <!-- headline -->
+                    {% if item.value.headline %}
+                      <h2 class="cap-detail-headline">{{ item.value.headline }}</h2>
+                    {% endif %}
 
-                    <div class="cap-meta-group">
-                      <div class="cap-meta-row">
-                        <span class="cap-meta-icon">{% svg_icon name="time" %}</span>
-                        <span class="cap-meta-lbl">{% translate "Urgency" %}</span>
-                        <span class="cap-meta-val">
-                          {% with u=item.value.urgency %}
-                            {% if u == "Immediate" %}{% translate "Immediate" %}
-                            {% elif u == "Expected" %}{% translate "Expected" %}
-                            {% elif u == "Future" %}{% translate "Future" %}
-                            {% elif u == "Past" %}{% translate "Past" %}
-                            {% endif %}
-                          {% endwith %}
-                        </span>
-                      </div>
-                      <div class="cap-meta-row">
-                        <span class="cap-meta-icon">{% svg_icon name="warning" %}</span>
-                        <span class="cap-meta-lbl">{% translate "Severity" %}</span>
-                        <span class="cap-meta-val">
-                          {% with s=item.value.severity %}
-                            {% if s == "Extreme" %}{% translate "Extreme" %}
-                            {% elif s == "Severe" %}{% translate "Severe" %}
-                            {% elif s == "Moderate" %}{% translate "Moderate" %}
-                            {% elif s == "Minor" %}{% translate "Minor" %}
-                            {% endif %}
-                          {% endwith %}
-                        </span>
-                      </div>
-                      <div class="cap-meta-row">
-                        <span class="cap-meta-icon">{% svg_icon name="crosshairs" %}</span>
-                        <span class="cap-meta-lbl">{% translate "Certainty" %}</span>
-                        <span class="cap-meta-val">
-                          {% with c=item.value.certainty %}
-                            {% if c == "Observed" %}{% translate "Observed" %}
-                            {% elif c == "Likely" %}{% translate "Likely" %}
-                            {% elif c == "Possible" %}{% translate "Possible" %}
-                            {% elif c == "Unlikely" %}{% translate "Unlikely" %}
-                            {% endif %}
-                          {% endwith %}
-                        </span>
-                      </div>
-                    </div>
-
+                    <!-- response types -->
                     {% if item.value.responseType %}
-                      <div class="cap-meta-group">
-                        <div class="cap-meta-row">
-                          <span class="cap-meta-icon">{% svg_icon name="cap-response" %}</span>
-                          <span class="cap-meta-lbl">{% translate "Response" %}</span>
-                          <span class="cap-meta-val">
-                            {% for r in item.value.responseType %}
-                              {% with rt=r.response_type %}
-                                {% if rt == "Shelter" %}{% translate "Shelter" %}
-                                {% elif rt == "Evacuate" %}{% translate "Evacuate" %}
-                                {% elif rt == "Prepare" %}{% translate "Prepare" %}
-                                {% elif rt == "Execute" %}{% translate "Execute" %}
-                                {% elif rt == "Avoid" %}{% translate "Avoid" %}
-                                {% elif rt == "Monitor" %}{% translate "Monitor" %}
-                                {% elif rt == "Assess" %}{% translate "Assess" %}
-                                {% elif rt == "AllClear" %}{% translate "All Clear" %}
-                                {% elif rt == "None" %}{% translate "None" %}
-                                {% endif %}
-                              {% endwith %}
-                              {% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                          </span>
-                        </div>
+                      <div class="cap-detail-section">
+                        <div class="cap-detail-section-title">{% translate "Response" %}</div>
+                        <p class="cap-detail-text">
+                          {% for r in item.value.responseType %}
+                            {% with rt=r.response_type %}
+                              {% if rt == "Shelter" %}{% translate "Shelter" %}
+                              {% elif rt == "Evacuate" %}{% translate "Evacuate" %}
+                              {% elif rt == "Prepare" %}{% translate "Prepare" %}
+                              {% elif rt == "Execute" %}{% translate "Execute" %}
+                              {% elif rt == "Avoid" %}{% translate "Avoid" %}
+                              {% elif rt == "Monitor" %}{% translate "Monitor" %}
+                              {% elif rt == "Assess" %}{% translate "Assess" %}
+                              {% elif rt == "AllClear" %}{% translate "All Clear" %}
+                              {% elif rt == "None" %}{% translate "None" %}
+                              {% endif %}
+                            {% endwith %}
+                            {% if not forloop.last %}, {% endif %}
+                          {% endfor %}
+                        </p>
                       </div>
                     {% endif %}
 
-                  </div>
-
-                  <!-- TIME PERIOD -->
-                  <div class="cap-detail-section">
-                    <div class="cap-detail-section-title">{% translate "Time period" %}</div>
-                    <ul class="cap-timeline">
-                      <li class="cap-tl-item">
-                        <div class="cap-tl-dot"></div>
-                        <div>
-                          <span class="cap-tl-type">{% translate "Issued" %}</span>
-                          <span class="cap-tl-val">{{ page.sent|date:"D d M Y H:i" }}</span>
-                        </div>
-                      </li>
-                      <li class="cap-tl-item">
-                        <div class="cap-tl-dot"></div>
-                        <div>
-                          <span class="cap-tl-type">{% translate "Effective" %}</span>
-                          <span class="cap-tl-val">
-                            {% if item.value.effective %}
-                              {{ item.value.effective|date:"D d M Y H:i" }}
-                            {% else %}
-                              {{ page.sent|date:"D d M Y H:i" }}
-                            {% endif %}
-                          </span>
-                        </div>
-                      </li>
-                      {% if item.value.onset %}
-                        <li class="cap-tl-item">
-                          <div class="cap-tl-dot"></div>
-                          <div>
-                            <span class="cap-tl-type">{% translate "Onset" %}</span>
-                            <span class="cap-tl-val">{{ item.value.onset|date:"D d M Y H:i" }}</span>
-                          </div>
-                        </li>
-                      {% endif %}
-                      <li class="cap-tl-item">
-                        <div class="cap-tl-dot"></div>
-                        <div>
-                          <span class="cap-tl-type">{% translate "Expires" %}</span>
-                          <span class="cap-tl-val">{{ item.value.expires|date:"D d M Y H:i" }}</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <!-- AREA -->
-                  <div class="cap-detail-section">
-                    <div class="cap-detail-section-title">{% translate "Area" %}</div>
-                    {% for area in item.value.area %}
-                      <p class="cap-detail-text">{{ area.value.areaDesc }}</p>
-                    {% endfor %}
-                  </div>
-
-                  <!-- DESCRIPTION -->
-                  <div class="cap-detail-section">
-                    <div class="cap-detail-section-title">{% translate "Event description" %}</div>
-                    <p class="cap-detail-text">{{ item.value.description }}</p>
-                  </div>
-
-                  <!-- INSTRUCTIONS -->
-                  {% if item.value.instruction %}
+                    <!-- area -->
                     <div class="cap-detail-section">
-                      <div class="cap-detail-section-title">{% translate "Instructions" %}</div>
-                      <p class="cap-detail-text">{{ item.value.instruction }}</p>
+                      <div class="cap-detail-section-title">{% translate "Area" %}</div>
+                      {% for area in item.value.area %}
+                        <p class="cap-detail-text">{{ area.value.areaDesc }}</p>
+                      {% endfor %}
                     </div>
-                  {% endif %}
 
-                </div>
-              {% endwith %}
-            {% endfor %}
+                    <!-- description -->
+                    <div class="cap-detail-section">
+                      <div class="cap-detail-section-title">{% translate "Event description" %}</div>
+                      <p class="cap-detail-text">{{ item.value.description }}</p>
+                    </div>
+
+                    <!-- instructions -->
+                    {% if item.value.instruction %}
+                      <div class="cap-detail-section">
+                        <div class="cap-detail-section-title">{% translate "Instructions" %}</div>
+                        <p class="cap-detail-text">{{ item.value.instruction }}</p>
+                      </div>
+                    {% endif %}
+
+                    <!-- hidden severity icon for map markers -->
+                    <div class="cap-severity-icon is-hidden"
+                         data-infoid="{{ alert_info.info.id }}"
+                         style="background:{{ alert_info.severity.background_color }};
+                                {% if alert_info.severity.icon_color %}color:{{ alert_info.severity.icon_color }};{% endif %}">
+                      {% if alert_info.event_icon %}{% svg_icon name=alert_info.event_icon %}{% endif %}
+                    </div>
+
+                  </div>
+                {% endwith %}
+              {% endfor %}
+            </div>
+
           </div>
-
         </div>
       </div>
 
@@ -341,34 +344,58 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ── TABS ── */
-  const tabs           = document.querySelectorAll('.cap-tab');
-  const detailPanels   = document.querySelectorAll('.cap-detail-panel');
+  const tabs         = document.querySelectorAll('.cap-tab');
+  const detailPanels = document.querySelectorAll('.cap-detail-panel');
+
+  /* sidebar elements */
+  const sbSevIcon    = document.getElementById('cap-sb-sev-icon');
+  const sbSevEvent   = document.getElementById('cap-sb-sev-event');
+  const sbSevLabel   = document.getElementById('cap-sb-sev-label');
+  const sbUrgency    = document.getElementById('cap-sb-urgency');
+  const sbSeverity   = document.getElementById('cap-sb-severity-val');
+  const sbCertainty  = document.getElementById('cap-sb-certainty');
+  const sbCategory   = document.getElementById('cap-sb-category');
+  const sbLanguage   = document.getElementById('cap-sb-language');
+
+  const urgencyMap   = { Immediate: "{% translate 'Immediate' %}", Expected: "{% translate 'Expected' %}", Future: "{% translate 'Future' %}", Past: "{% translate 'Past' %}" };
+  const severityMap  = { Extreme: "{% translate 'Extreme' %}", Severe: "{% translate 'Severe' %}", Moderate: "{% translate 'Moderate' %}", Minor: "{% translate 'Minor' %}" };
+  const certaintyMap = { Observed: "{% translate 'Observed' %}", Likely: "{% translate 'Likely' %}", Possible: "{% translate 'Possible' %}", Unlikely: "{% translate 'Unlikely' %}" };
 
   let initialFilter;
+  let map;
 
   const activateTab = (tab) => {
     tabs.forEach(t => t.classList.remove('active'));
     detailPanels.forEach(p => p.classList.add('is-hidden'));
     tab.classList.add('active');
+
     const target = tab.dataset.target;
     const panel  = document.getElementById(target);
     if (panel) panel.classList.remove('is-hidden');
-    /* update map filter */
-    if (typeof map !== 'undefined') {
-      map.setFilter('alert-areas-layer', ['==', 'info-id', target]);
+
+    /* update sidebar */
+    const d = tab.dataset;
+    if (sbSevEvent)  sbSevEvent.textContent  = d.status + ': ' + d.event;
+    if (sbSevLabel)  sbSevLabel.textContent  = d.sevLabel;
+    if (sbSevIcon) {
+      sbSevIcon.style.background   = d.sevBg;
+      sbSevIcon.style.borderColor  = d.sevBorder;
+      sbSevIcon.style.color        = d.sevIconColor || '';
     }
+    if (sbUrgency)   sbUrgency.textContent   = urgencyMap[d.urgency]   || d.urgency;
+    if (sbSeverity)  sbSeverity.textContent  = severityMap[d.severity]  || d.severity;
+    if (sbCertainty) sbCertainty.textContent = certaintyMap[d.certainty] || d.certainty;
+    if (sbCategory)  sbCategory.textContent  = d.category;
+    if (sbLanguage)  sbLanguage.textContent  = d.language;
+
+    /* update map filter */
+    if (map) map.setFilter('alert-areas-layer', ['==', 'info-id', target]);
   };
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => activateTab(tab));
-  });
+  tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
 
-  /* set initial map filter from first active tab */
   const firstTab = document.querySelector('.cap-tab.active');
-  if (firstTab) {
-    initialFilter = ['==', 'info-id', firstTab.dataset.target];
-  }
+  if (firstTab) initialFilter = ['==', 'info-id', firstTab.dataset.target];
 
   /* ── MAP ── */
   const geojson = {{ page.geojson|safe }};
@@ -390,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
     layers: [{ id: 'carto-light-layer', source: 'carto-light', type: 'raster', minzoom: 0, maxzoom: 22 }],
   };
 
-  const map = new maplibregl.Map({
+  map = new maplibregl.Map({
     container: "cap-map",
     style: defaultStyle,
     center: [0, 0],
@@ -403,7 +430,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }), 'bottom-right');
 
   map.on("load", () => {
-
     map.addSource("alert-areas", { type: "geojson", data: geojson });
 
     map.addLayer({
@@ -427,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (bounds) {
-      map.fitBounds([[bounds[0], bounds[1]], [bounds[2], bounds[3]]], { padding: 40 });
+      map.fitBounds([[bounds[0], bounds[1]], [bounds[2], bounds[3]]], { padding: 30 });
     }
 
     /* markers */

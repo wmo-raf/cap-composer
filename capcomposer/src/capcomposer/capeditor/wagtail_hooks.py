@@ -22,6 +22,7 @@ from capcomposer.capeditor.views import (
     import_cap_alert,
     get_un_boundary_geojson,
     convert_area_file,
+    translate_text,
 )
 
 
@@ -48,6 +49,7 @@ def urlconf_capeditor():
         path('cap/un-boundary-geojson', get_un_boundary_geojson, name='un_boundary_geojson'),
         path('cap/convert-area-file', convert_area_file, name='convert_area_file'),
         path('cap/map-widget-config/', map_widget_config, name='map_widget_config'),
+        path('cap/translate-text/', translate_text, name='translate_text'),
     ]
 
 
@@ -124,3 +126,10 @@ def copy_cap_alert_page(request, page):
         )
     
     return
+
+
+@hooks.register("insert_global_admin_js")
+def global_admin_js():
+    return format_html(
+        '<script src="/static/capeditor/js/alert_info.js"></script>'
+    )

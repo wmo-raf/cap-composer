@@ -732,8 +732,7 @@ class AlertInfo(blocks.StructBlock):
         value_class = AlertInfoStructValue
         label_format = "({language}) {event}"
     
-    class Media:
-        js = ("capeditor/js/alert_info.js",) 
+    
     def clean(self, value):
         result = super().clean(value)
         effective = result.get("effective")
@@ -782,7 +781,6 @@ class AlertInfo(blocks.StructBlock):
                             })
         
         return result
-
-
+    
 class ContactBlock(blocks.StructBlock):
     contact = blocks.CharBlock(max_length=255, label=_("Contact Detail"))
