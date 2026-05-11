@@ -89,7 +89,7 @@
 .cap-share-social .share-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
 .cap-share-social .button {
   border-radius: 20px !important;
-  font-size: 14px !important;
+  font-size: 11px !important;
   height: auto !important;
   padding: 5px 12px !important;
   border-color: #eee !important;
