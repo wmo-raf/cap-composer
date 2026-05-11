@@ -297,9 +297,17 @@
                     <!-- area -->
                     <div class="cap-detail-section">
                       <div class="cap-detail-section-title">{% translate "Area" %}</div>
-                      {% for area in item.value.area %}
-                        <p class="cap-detail-text">{{ area.value.areaDesc }}</p>
-                      {% endfor %}
+
+                      
+                          <p class="cap-detail-text">
+                              {% for area in item.value.area %}
+                              {% if not forloop.first %},{% endif %}
+                              {% if area.block_type == "predefined_block" %}{{ area.value.area }}{% else %}{{area.value.areaDesc }}
+                              {% endif %}                                                        
+                              {% endfor %}
+
+                          </p>
+
                     </div>
 
                     <!-- description -->

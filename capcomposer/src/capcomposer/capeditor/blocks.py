@@ -725,6 +725,7 @@ class AlertInfo(blocks.StructBlock):
     ], required=False, label=_("Resources"), help_text=_("Additional file with supplemental information "
                                                          "related to this alert information"))
     
+    
     parameter = blocks.ListBlock(AlertInfoParameter(label=_("Parameter")), label=_("Parameters"), default=[])
     
     # NOTE: web attribute is obtained from the url of the page
