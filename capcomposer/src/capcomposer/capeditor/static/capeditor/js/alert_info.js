@@ -326,7 +326,12 @@
         var streamContainer = block.closest('[data-streamfield-stream-container]');
         if (streamContainer) {
             streamContainer.querySelectorAll('.c-sf-add-button').forEach(function (b) {
-                b.style.display = 'none';
+                // Only hide add buttons that belong to this top-level stream, not those
+                // nested inside an alert_info block's own sub-streams (area, resource, etc.).
+                var parentBlock = b.closest('[data-streamfield-child]');
+                if (!parentBlock || !streamContainer.contains(parentBlock)) {
+                    b.style.display = 'none';
+                }
             });
         }
 
