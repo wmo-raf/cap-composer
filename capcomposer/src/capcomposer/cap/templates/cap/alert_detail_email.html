@@ -1,5 +1,12 @@
 {% load static wagtailimages_tags %}
 
+
+<style>
+    tr[dir="rtl"] td {
+        text-align: right;
+    }
+</style>
+
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f9f9f9; padding: 20px 0;">
     <tr>
         <td align="center">
@@ -16,14 +23,14 @@
                 </tr>
 
                 {% for info in page.infos %}
-                    <tr>
-                        <td style="background-color:{{ info.severity.color }}; color:
-                                {{ info.severity.icon_color|default:'#4a4a4a' }}; padding: 10px 15px;text-align: center;">
+                    <tr dir="{% if info.info.value.language|slice:':2' == 'ar' %}rtl{% endif %}">
+                        <td style="background-color:{{ info.severity.background_color }}; color:
+                                {{ info.severity.color|default:'#4a4a4a' }}; padding: 10px 15px;text-align: center;">
                             <strong style="font-size: 20px;">⚠️ {{ page.title }}</strong>
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr dir="{% if info.info.value.language|slice:':2' == 'ar' %}rtl{% endif %}">
                         <td style="padding: 15px;">
                             <table width="100%" cellpadding="5" cellspacing="0" border="0">
                                 <tr>
@@ -67,7 +74,7 @@
                     </tr>
 
                     {% if page.alert_area_map_image %}
-                        <tr>
+                        <tr dir="{% if info.info.value.language|slice:':2' == 'ar' %}rtl{% endif %}">
                             {% block map_image %}
                                 <td align="center" style="padding: 10px;">
                                     {% image page.alert_area_map_image original as map_image %}
@@ -77,7 +84,7 @@
                             {% endblock %}
                         </tr>
                     {% else %}
-                        <tr>
+                        <tr dir="{% if info.info.value.language|slice:':2' == 'ar' %}rtl{% endif %}">
                             <td>
                                 <div id="cap-map"
                                      style="width:100%;max-width:560px; height:400px; border:1px solid #ccc;"></div>
@@ -148,29 +155,28 @@
                             });
                         </script>
                     {% endif %}
-                    <tr>
+                    <tr dir="{% if info.info.value.language|slice:':2' == 'ar' %}rtl{% endif %}">
                         <td style="padding: 15px;">
                             <strong>📍 Area:</strong>
                             <p>{{ info.properties.area_desc|truncatechars:500 }}</p>
                         </td>
                     </tr>
-                    <tr>
+                    <tr dir="{% if info.info.value.language|slice:':2' == 'ar' %}rtl{% endif %}">
                         <td style="padding: 15px;">
                             <strong>📝 Description:</strong>
                             <p>{{ info.info.value.description }}</p>
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr dir="{% if info.info.value.language|slice:':2' == 'ar' %}rtl{% endif %}">
                         <td style="padding: 15px;">
                             <strong>📢 Instruction:</strong>
                             <p>{{ info.info.value.instruction }}</p>
                         </td>
                     </tr>
-                    <tr>
+                    <tr dir="{% if info.info.value.language|slice:':2' == 'ar' %}rtl{% endif %}">
                         {% block read_more %}
                             <td align="center" style="padding: 20px;">
-
                                 <a href="{{ page.full_url }}"
                                    style="display: inline-block; background-color: #41b1f7; color: #ffffff; text-decoration: none;
                                                            padding: 12px 24px; font-size: 16px; border-radius: 4px; font-weight: bold;">

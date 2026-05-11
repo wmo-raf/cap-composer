@@ -155,3 +155,17 @@ html, body {
     position: running(footer);
     font-size: 11px;
 }
+
+[dir="rtl"] .alert-level-info-item {
+    text-align: right;
+}
+
+[dir="rtl"] .alert-title-container svg {
+    margin-right: 0;
+    margin-left: 4px;
+}
+
+[dir="rtl"] .alert-area-map {
+    margin-right: 0;
+    margin-left: 30px;
+}
