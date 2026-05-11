@@ -725,6 +725,7 @@ class AlertInfo(blocks.StructBlock):
     ], required=False, label=_("Resources"), help_text=_("Additional file with supplemental information "
                                                          "related to this alert information"))
     
+    
     parameter = blocks.ListBlock(AlertInfoParameter(label=_("Parameter")), label=_("Parameters"), default=[])
     
     # NOTE: web attribute is obtained from the url of the page
@@ -732,8 +733,7 @@ class AlertInfo(blocks.StructBlock):
         value_class = AlertInfoStructValue
         label_format = "({language}) {event}"
     
-    class Media:
-        js = ("capeditor/js/alert_info.js",) 
+    
     def clean(self, value):
         result = super().clean(value)
         effective = result.get("effective")
@@ -782,7 +782,6 @@ class AlertInfo(blocks.StructBlock):
                             })
         
         return result
-
-
+    
 class ContactBlock(blocks.StructBlock):
     contact = blocks.CharBlock(max_length=255, label=_("Contact Detail"))

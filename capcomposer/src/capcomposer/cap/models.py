@@ -203,7 +203,7 @@ class CapPageForm(CapAlertPageForm):
             # remove max_num for alert_info block. Allow having multiple info for multiple languages
             info_field.block.meta.max_num = None
             block_counts = info_field.block.meta.block_counts
-            block_counts.update({"alert_info": {**block_counts.get("alert_info"), "max_num": None}})
+            block_counts.update({"alert_info": {**( block_counts.get("alert_info") or {}), "max_num": None}})
             
             event_choices = []
             for info in self.instance.info:

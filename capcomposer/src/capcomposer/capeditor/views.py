@@ -5,6 +5,7 @@ import tempfile
 from capcomposer.capeditor.forms.capimporter import CAPLoadForm, CAPImportForm
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
 from wagtail import hooks
 
 from .models import CapSetting
@@ -178,3 +179,37 @@ def map_widget_config(request):
     }
     
     return JsonResponse(config)
+
+
+@require_POST
+def translate_text(request):
+    """Translate text fields to a target language using the configured translator service."""
+    try:
+        data = json.loads(request.body)
+    except (json.JSONDecodeError, ValueError):
+        return JsonResponse({'error': 'Invalid JSON body'}, status=400)
+
+    texts = data.get('texts', {})
+    target_language = data.get('target_language', '').strip()
+    source_language = data.get('source_language', 'auto').strip() or 'auto'
+
+    if not target_language or not isinstance(texts, dict):
+        return JsonResponse({'error': 'Missing required fields'}, status=400)
+
+    try:
+        from django_deep_translator.utils import get_translator
+        translator = get_translator()
+    except Exception as e:
+        return JsonResponse({'error': f'Translation service unavailable: {e}'}, status=503)
+
+    translated = {}
+    for key, text in texts.items():
+        if text and isinstance(text, str) and text.strip():
+            try:
+                translated[key] = translator.translate_string(text, target_language, source_language)
+            except Exception:
+                translated[key] = text
+        else:
+            translated[key] = text
+
+    return JsonResponse({'translated': translated})
