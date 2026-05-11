@@ -35,14 +35,19 @@
     </div>
 
     {% for info in page.infos %}
+        {% with item=info.info %}
+        {% if item.value.language|slice:":2" == "ar" %}
+        <div dir="rtl">
+        {% else %}
+        <div>
+        {% endif %}
         <div class="alert-title-container"
-             style="background-color: {{ info.severity.color }};{% if info.severity.icon_color %}color:{{ info.severity.icon_color }};{% endif %}">
+             style="background-color: {{ info.severity.color }};{% if info.severity.icon_color %}color:{{ info.severity.background_color }};{% endif %}">
             {% svg_icon name="warning-outline" %}
             <span class="alert-title">
                     {{ page.title }}
                 </span>
         </div>
-        {% with item=info.info %}
             <div class="alert-level-info">
                 <div class="alert-level-info-item">
                     {% svg_icon name="time" %}
@@ -286,6 +291,7 @@
                     </p>
                 </div>
             </div>
+        </div>{# close dir wrapper #}
         {% endwith %}
         {% if page.infos|length > 1 and not forloop.last %}
             <p style="page-break-before: always"></p>

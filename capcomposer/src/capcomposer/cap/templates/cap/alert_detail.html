@@ -259,83 +259,86 @@
             {% endif %}
 
             <!-- TAB CONTENT PANELS -->
-            <div class="cap-right-content">
-              {% for alert_info in sorted_infos %}
-                {% with item=alert_info.info %}
-                  <div class="cap-detail-panel {% if not forloop.first %}is-hidden{% endif %}"
-                       id="{{ alert_info.info.id }}">
+              
+              <div class="cap-right-content">
+                {% for alert_info in sorted_infos %}
+                  {% with item=alert_info.info %}
+                  <div dir="{%if item.value.language|slice:":2" == "ar" %}rtl{% endif %}">
+                    <div class="cap-detail-panel {% if not forloop.first %}is-hidden{% endif %}"
+                        id="{{ alert_info.info.id }}">
 
-                    <!-- headline -->
-                    {% if item.value.headline %}
-                      <h2 class="cap-detail-headline">{{ item.value.headline }}</h2>
-                    {% endif %}
+                      <!-- headline -->
+                      {% if item.value.headline %}
+                        <h2 class="cap-detail-headline">{{ item.value.headline }}</h2>
+                      {% endif %}
 
-                    <!-- response types -->
-                    {% if item.value.responseType %}
-                      <div class="cap-detail-section">
-                        <div class="cap-detail-section-title">{% translate "Response" %}</div>
-                        <p class="cap-detail-text">
-                          {% for r in item.value.responseType %}
-                            {% with rt=r.response_type %}
-                              {% if rt == "Shelter" %}{% translate "Shelter" %}
-                              {% elif rt == "Evacuate" %}{% translate "Evacuate" %}
-                              {% elif rt == "Prepare" %}{% translate "Prepare" %}
-                              {% elif rt == "Execute" %}{% translate "Execute" %}
-                              {% elif rt == "Avoid" %}{% translate "Avoid" %}
-                              {% elif rt == "Monitor" %}{% translate "Monitor" %}
-                              {% elif rt == "Assess" %}{% translate "Assess" %}
-                              {% elif rt == "AllClear" %}{% translate "All Clear" %}
-                              {% elif rt == "None" %}{% translate "None" %}
-                              {% endif %}
-                            {% endwith %}
-                            {% if not forloop.last %}, {% endif %}
-                          {% endfor %}
-                        </p>
-                      </div>
-                    {% endif %}
-
-                    <!-- area -->
-                    <div class="cap-detail-section">
-                      <div class="cap-detail-section-title">{% translate "Area" %}</div>
-
-                      
+                      <!-- response types -->
+                      {% if item.value.responseType %}
+                        <div class="cap-detail-section">
+                          <div class="cap-detail-section-title">{% translate "Response" %}</div>
                           <p class="cap-detail-text">
-                              {% for area in item.value.area %}
-                              {% if not forloop.first %},{% endif %}
-                              {% if area.block_type == "predefined_block" %}{{ area.value.area }}{% else %}{{area.value.areaDesc }}
-                              {% endif %}                                                        
-                              {% endfor %}
-
+                            {% for r in item.value.responseType %}
+                              {% with rt=r.response_type %}
+                                {% if rt == "Shelter" %}{% translate "Shelter" %}
+                                {% elif rt == "Evacuate" %}{% translate "Evacuate" %}
+                                {% elif rt == "Prepare" %}{% translate "Prepare" %}
+                                {% elif rt == "Execute" %}{% translate "Execute" %}
+                                {% elif rt == "Avoid" %}{% translate "Avoid" %}
+                                {% elif rt == "Monitor" %}{% translate "Monitor" %}
+                                {% elif rt == "Assess" %}{% translate "Assess" %}
+                                {% elif rt == "AllClear" %}{% translate "All Clear" %}
+                                {% elif rt == "None" %}{% translate "None" %}
+                                {% endif %}
+                              {% endwith %}
+                              {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
                           </p>
+                        </div>
+                      {% endif %}
 
-                    </div>
-
-                    <!-- description -->
-                    <div class="cap-detail-section">
-                      <div class="cap-detail-section-title">{% translate "Event description" %}</div>
-                      <p class="cap-detail-text">{{ item.value.description }}</p>
-                    </div>
-
-                    <!-- instructions -->
-                    {% if item.value.instruction %}
+                      <!-- area -->
                       <div class="cap-detail-section">
-                        <div class="cap-detail-section-title">{% translate "Instructions" %}</div>
-                        <p class="cap-detail-text">{{ item.value.instruction }}</p>
+                        <div class="cap-detail-section-title">{% translate "Area" %}</div>
+
+                        
+                            <p class="cap-detail-text">
+                                {% for area in item.value.area %}
+                                {% if not forloop.first %},{% endif %}
+                                {% if area.block_type == "predefined_block" %}{{ area.value.area }}{% else %}{{area.value.areaDesc }}
+                                {% endif %}                                                        
+                                {% endfor %}
+
+                            </p>
+
                       </div>
-                    {% endif %}
 
-                    <!-- hidden severity icon for map markers -->
-                    <div class="cap-severity-icon is-hidden"
-                         data-infoid="{{ alert_info.info.id }}"
-                         style="background:{{ alert_info.severity.background_color }};
-                                {% if alert_info.severity.icon_color %}color:{{ alert_info.severity.icon_color }};{% endif %}">
-                      {% if alert_info.event_icon %}{% svg_icon name=alert_info.event_icon %}{% endif %}
+                      <!-- description -->
+                      <div class="cap-detail-section">
+                        <div class="cap-detail-section-title">{% translate "Event description" %}</div>
+                        <p class="cap-detail-text">{{ item.value.description }}</p>
+                      </div>
+
+                      <!-- instructions -->
+                      {% if item.value.instruction %}
+                        <div class="cap-detail-section">
+                          <div class="cap-detail-section-title">{% translate "Instructions" %}</div>
+                          <p class="cap-detail-text">{{ item.value.instruction }}</p>
+                        </div>
+                      {% endif %}
+
+                      <!-- hidden severity icon for map markers -->
+                      <div class="cap-severity-icon is-hidden"
+                          data-infoid="{{ alert_info.info.id }}"
+                          style="background:{{ alert_info.severity.background_color }};
+                                  {% if alert_info.severity.icon_color %}color:{{ alert_info.severity.icon_color }};{% endif %}">
+                        {% if alert_info.event_icon %}{% svg_icon name=alert_info.event_icon %}{% endif %}
+                      </div>
+
                     </div>
-
-                  </div>
-                {% endwith %}
-              {% endfor %}
-            </div>
+                    </div>
+                  {% endwith %}
+                {% endfor %}
+              </div>
 
           </div>
         </div>
