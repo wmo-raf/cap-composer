@@ -95,6 +95,16 @@
                         {{ alert_data.scope }}
                     </span>
                 </div>
+                {% if include_guid and alert_data.guid %}
+                    <div class="alert-meta-item">
+                    <span class="alert-meta-item-label">
+                        {% translate "GUID:" %}
+                    </span>
+                        <span class="alert-meta-item-value">
+                            {{ alert_data.guid }}
+                    </span>
+                    </div>
+                {% endif %}
                 <div class="w-mt-5">
                     <form action="{% url 'import_cap_alert' %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
