@@ -49,7 +49,8 @@ CAN_EDIT_CAP = getattr(settings, "CAP_ALLOW_EDITING", False)
 def urlconf_cap():
     return [
         path('import-cap/<int:alert_id>/', create_cap_png_pdf, name='create_cap_png_pdf'),
-        path('send-private-alert-email/<int:alert_id>/', send_private_alert_email_view, name='send_private_alert_email'),
+        path('send-private-alert-email/<int:alert_id>/', send_private_alert_email_view,
+             name='send_private_alert_email'),
     ]
 
 
@@ -101,7 +102,7 @@ class CAPAlertPageButtonHelper(PageButtonHelper):
             buttons_for_live.append(live_button)
             
             buttons = buttons_for_live + buttons
-
+        
         if obj.is_private_scope:
             email_button = {
                 "url": reverse("send_private_alert_email", args=[obj.pk]),
@@ -327,9 +328,9 @@ def cap_page_listing_buttons(page, user, next_url=None):
             )
         if page.is_private_scope:
             yield wagtailadmin_widgets.PageListingButton(
-            _("Email Recipients"),
-            reverse("send_private_alert_email", args=[page.pk]),
-            priority=11,
+                _("Email Recipients"),
+                reverse("send_private_alert_email", args=[page.pk]),
+                priority=11,
             )
 
 
@@ -454,8 +455,8 @@ def before_delete_cap_alert_page(request, page):
 
 
 @hooks.register("before_import_cap_alert")
-def import_cap_alert(request, alert_data):
-    new_cap_alert_page = create_draft_alert_from_alert_data(alert_data, request)
+def import_cap_alert(request, alert_data, include_guid=False):
+    new_cap_alert_page = create_draft_alert_from_alert_data(alert_data, request, include_guid=include_guid)
     
     if not new_cap_alert_page:
         return None
