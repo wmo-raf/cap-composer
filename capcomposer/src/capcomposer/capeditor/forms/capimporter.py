@@ -18,6 +18,7 @@ class CAPLoadForm(forms.Form):
     text = forms.CharField(required=False, widget=forms.Textarea, label=_('Paste your CAP XML here'))
     url = forms.URLField(required=False, label=_('CAP Alert XML URL'))
     file = forms.FileField(required=False, label=_('CAP File'))
+    include_guid = forms.BooleanField(required=False, label=_('Include GUID'))
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -29,6 +30,7 @@ class CAPLoadForm(forms.Form):
         text = cleaned_data.get('text')
         url = cleaned_data.get('url')
         file = cleaned_data.get('file')
+        include_guid = cleaned_data.get('include_guid', False)
         
         # field validation
         if load_from == 'text' and not text:
@@ -61,11 +63,12 @@ class CAPLoadForm(forms.Form):
                     "type": "URL",
                 }
             
-            alert_data = cap_xml_to_alert_data(content)
+            alert_data = cap_xml_to_alert_data(content, include_guid=include_guid)
             
             alert_data['alert_source'] = alert_source
             
             cleaned_data['alert_data'] = alert_data
+            cleaned_data['include_guid'] = include_guid
         
         except CAPImportError as e:
             self.add_error(None, e.message)
@@ -81,3 +84,4 @@ class CAPLoadForm(forms.Form):
 
 class CAPImportForm(forms.Form):
     alert_data = forms.JSONField(widget=forms.HiddenInput)
+    include_guid = forms.BooleanField(required=True, label=_('Include GUID'), widget=forms.HiddenInput)

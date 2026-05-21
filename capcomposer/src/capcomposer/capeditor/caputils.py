@@ -348,12 +348,13 @@ def extract_element_data(element, data, validate=True):
     return element_data
 
 
-def cap_xml_to_alert_data(cap_xml_string, validate=True):
+def cap_xml_to_alert_data(cap_xml_string, validate=True, include_guid=False):
     """
     Convert a CAP XML string to a GeoJSON FeatureCollection.
 
     :param cap_xml_string: A string containing a CAP XML document.
     :param validate: Whether to validate the CAP XML with the CAP schema for compulsory fields.
+    :param include_guid: Whether to include the GUID field in the CAP XML.
     :return: Alert data as a dictionary.
     """
     
@@ -372,5 +373,10 @@ def cap_xml_to_alert_data(cap_xml_string, validate=True):
         
         if element_data:
             alert_data[element_name] = element_data
+    
+    if include_guid:
+        guid = alert_element_data.get("guid") or alert_element_data.get("cap:guid")
+        if guid:
+            alert_data["guid"] = guid
     
     return alert_data
