@@ -174,7 +174,7 @@ msgstr "Importé"
 #, fuzzy
 #| msgid "Import CAP Alert"
 msgid "CAP Alert"
-msgstr "Alerte PAC"
+msgstr "Alerte CAP"
 
 #: capcomposer/src/capcomposer/cap/models.py:298
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:74

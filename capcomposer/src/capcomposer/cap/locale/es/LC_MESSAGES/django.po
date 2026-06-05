@@ -172,7 +172,7 @@ msgstr "Importado"
 #, fuzzy
 #| msgid "Import CAP Alert"
 msgid "CAP Alert"
-msgstr "Alerta de la PAC"
+msgstr "Alerta de la CAP"
 
 #: capcomposer/src/capcomposer/cap/models.py:298
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:74
@@ -691,7 +691,7 @@ msgstr "Emitido:"
 #: capcomposer/src/capcomposer/cap/templates/cap/include_alert_list_item.html:39
 #, python-format
 msgid "%(issued_on)s"
-msgstr "%(emitido_en)s"
+msgstr "%(issued_on)s"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_left_alert.html:97
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:69

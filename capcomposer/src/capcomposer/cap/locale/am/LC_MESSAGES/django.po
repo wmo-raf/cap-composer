@@ -677,7 +677,7 @@ msgstr "የተሰጠ፡"
 #: capcomposer/src/capcomposer/cap/templates/cap/include_alert_list_item.html:39
 #, python-format
 msgid "%(issued_on)s"
-msgstr "%(የተሰጠ) s"
+msgstr "%(issued_on)s"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_left_alert.html:97
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:69
@@ -697,7 +697,7 @@ msgstr "የቅርብ ጊዜ ማንቂያዎች"
 #: capcomposer/src/capcomposer/cap/views.py:112
 #, python-format
 msgid "Latest alerts from %(sender_name)s"
-msgstr "የቅርብ ጊዜ ማንቂያዎች ከ%(የላኪ_ስም) ዎች"
+msgstr "የቅርብ ጊዜ ማንቂያዎች ከ%(sender_name)s"
 
 #: capcomposer/src/capcomposer/cap/views.py:365
 msgid "CAP Alert PNG and PDF created successfully."
