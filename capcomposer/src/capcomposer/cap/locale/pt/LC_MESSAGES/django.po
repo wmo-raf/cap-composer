@@ -458,7 +458,7 @@ msgstr "Extremo"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:81
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:447
 msgid "Severe"
-msgstr "Forte"
+msgstr "Severo"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:133
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:212
