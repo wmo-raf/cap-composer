@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.syndication.views import Feed
 from django.core.validators import validate_email
 from django.http import JsonResponse, HttpResponse
@@ -25,6 +26,7 @@ from .models import (
     CapAlertListPage,
     OtherCAPSettings,
 )
+from .statistics import _get_filtered_queryset, get_alert_statistics, export_alerts_csv
 from .utils import get_full_url_by_site, create_cap_alert_multi_media, send_private_alert_email
 from .utils import (
     serialize_and_sign_cap_alert,
@@ -199,7 +201,6 @@ def get_cap_feed_stylesheet(request):
         wagcache.set("cap_feed_stylesheet", stylesheet, 60 * 60 * 24 * 5)
     
     return HttpResponse(stylesheet, content_type="application/xml")
-
 
 def get_cap_alert_stylesheet(request):
     context = {}
@@ -392,23 +393,84 @@ def third_party_integration(request):
     A simple page to show third party integration options
     """
     cap_setting = CapSetting.for_request(request)
-    
+
     cap_rss_feed_url = get_full_url(request, reverse("cap_alert_feed"))
-    
+
     md_context = {
         "sender_name": cap_setting.sender_name,
         "feed_url": cap_rss_feed_url,
     }
-    
+
     md = markdown.Markdown(extensions=["fenced_code", "codehilite"])
-    
+
     md_content = render_to_string("cap/third_party_integration_md_content.md", md_context)
-    
+
     md_content = md.convert(md_content)
-    
+
     context = {
         **md_context,
         "md_content": md_content,
     }
-    
+
     return render(request, "cap/third_party_integration.html", context)
+
+
+@login_required
+def cap_statistics_view(request):
+    """Render the CAP alert statistics admin page."""
+    queryset = _get_filtered_queryset(request)
+    stats = get_alert_statistics(queryset)
+
+    try:
+        admin_list_url = AdminURLHelper(CapAlertPage).get_action_url("index")
+    except Exception:
+        admin_list_url = "/admin/"
+
+    trend = stats["monthly_trend"]
+    severity_colors_list = [stats["severity_colors"].get(k, "#ccc") for k in stats["by_severity"]]
+    status_colors_list = [stats["status_colors"].get(k, "#ccc") for k in stats["by_status"]]
+
+    context = {
+        "stats": stats,
+        "admin_list_url": admin_list_url,
+        "start_date": request.GET.get("start_date", ""),
+        "end_date": request.GET.get("end_date", ""),
+        "selected_severities": request.GET.getlist("severity"),
+        "severity_choices": ["Extreme", "Severe", "Moderate", "Minor"],
+        "export_csv_url": reverse("cap_statistics_export_csv"),
+        "trend_labels_json": json.dumps([row["label"] for row in trend]),
+        "trend_data_json": json.dumps([row["count"] for row in trend]),
+        "severity_labels_json": json.dumps(list(stats["by_severity"].keys())),
+        "severity_data_json": json.dumps(list(stats["by_severity"].values())),
+        "severity_colors_json": json.dumps(severity_colors_list),
+        "urgency_labels_json": json.dumps(list(stats["by_urgency"].keys())),
+        "urgency_data_json": json.dumps(list(stats["by_urgency"].values())),
+        "certainty_labels_json": json.dumps(list(stats["by_certainty"].keys())),
+        "certainty_data_json": json.dumps(list(stats["by_certainty"].values())),
+        "status_labels_json": json.dumps(list(stats["by_status"].keys())),
+        "status_data_json": json.dumps(list(stats["by_status"].values())),
+        "status_colors_json": json.dumps(status_colors_list),
+        "event_labels_json": json.dumps(list(stats["by_event"].keys())),
+        "event_data_json": json.dumps(list(stats["by_event"].values())),
+    }
+
+    return render(request, "cap/statistics.html", context)
+
+
+@login_required
+def cap_statistics_api(request):
+    """Return statistics as JSON, respecting the same query-param filters."""
+    queryset = _get_filtered_queryset(request)
+    stats = get_alert_statistics(queryset)
+    return JsonResponse(stats, safe=False)
+
+
+@login_required
+def cap_statistics_export_csv(request):
+    """Stream a CSV of the filtered alerts."""
+    queryset = _get_filtered_queryset(request)
+    csv_content = export_alerts_csv(queryset)
+
+    response = HttpResponse(csv_content, content_type="text/csv")
+    response["Content-Disposition"] = 'attachment; filename="cap_alerts_statistics.csv"'
+    return response

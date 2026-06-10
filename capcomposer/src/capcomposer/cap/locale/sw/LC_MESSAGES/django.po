@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: climweb-cap-composer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-11 13:58+0000\n"
+"POT-Creation-Date: 2026-06-10 08:33+0000\n"
 "PO-Revision-Date: 2026-05-11 09:48\n"
 "Last-Translator: \n"
 "Language-Team: Swahili\n"
@@ -202,7 +202,7 @@ msgstr "Chagua mtindo wa arifa zinazotumika"
 
 #: capcomposer/src/capcomposer/cap/models.py:466
 #: capcomposer/src/capcomposer/cap/models.py:467
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:298
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:305
 msgid "Other Settings"
 msgstr "Mipangilio Mingine"
 
@@ -383,6 +383,11 @@ msgstr "Ruhusa ya Menyu ya CAP"
 msgid "CAP Menu Permissions"
 msgstr "Ruhusa za Menyu ya CAP"
 
+#: capcomposer/src/capcomposer/cap/statistics.py:95
+#: capcomposer/src/capcomposer/cap/statistics.py:129
+msgid "Unknown"
+msgstr "Haijulikani"
+
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:22
 msgid "Warning: This is not an Actual alert"
 msgstr "Onyo: Hii si tahadhari Halisi"
@@ -444,6 +449,7 @@ msgstr "Zamani"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:75
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:71
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:563
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:201
 msgid "Severity"
 msgstr "Ukali"
 
@@ -452,6 +458,7 @@ msgstr "Ukali"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:79
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:440
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:230
 msgid "Extreme"
 msgstr "Uliokithiri"
 
@@ -460,6 +467,7 @@ msgstr "Uliokithiri"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:81
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:447
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:237
 msgid "Severe"
 msgstr "Mkali"
 
@@ -468,6 +476,7 @@ msgstr "Mkali"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:83
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:454
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:244
 msgid "Moderate"
 msgstr "Wastani"
 
@@ -476,6 +485,7 @@ msgstr "Wastani"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:85
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:461
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:251
 msgid "Minor"
 msgstr "Ndogo"
 
@@ -691,6 +701,107 @@ msgstr "Imetolewa:"
 msgid "%(issued_on)s"
 msgstr "%(issued_on)s"
 
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:4
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:181
+#, fuzzy
+#| msgid "CAP Settings"
+msgid "CAP Alert Statistics"
+msgstr "Takwimu za Arifa za CAP"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:191
+msgid "From"
+msgstr "Kutoka"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:196
+msgid "To"
+msgstr "Kwa"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:214
+msgid "Apply"
+msgstr "Omba"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:215
+msgid "Reset"
+msgstr "Weka upya"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:224
+#, fuzzy
+#| msgid "Past Alerts"
+msgid "Total Alerts"
+msgstr "Jumla ya Arifa"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:258
+msgid "Export"
+msgstr "Hamisha"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:262
+msgid "Download CSV"
+msgstr "Pakua CSV"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:271
+#, fuzzy
+#| msgid "Alert Severity"
+msgid "Alerts Over Time (Monthly)"
+msgstr "Tahadhari Baada ya Muda (Kila mwezi)"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:279
+#, fuzzy
+#| msgid "Severity"
+msgid "By Severity"
+msgstr "Kwa Ukali"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:287
+#, fuzzy
+#| msgid "Urgency"
+msgid "By Urgency"
+msgstr "Kwa Dharura"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:295
+#, fuzzy
+#| msgid "Certainty"
+msgid "By Certainty"
+msgstr "Kwa Hakika"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:303
+#, fuzzy
+#| msgid "Status"
+msgid "By Status"
+msgstr "Kwa Hali"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:311
+#, fuzzy
+#| msgid "Hazard Types"
+msgid "Top Hazard Types"
+msgstr "Aina za Hatari za Juu"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:322
+#, fuzzy
+#| msgid "Hazard Type"
+msgid "Alerts by Hazard Type"
+msgstr "Tahadhari kwa Aina ya Hatari"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:326
+msgid "Hazard Type"
+msgstr "Aina ya Hatari"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:327
+msgid "Count"
+msgstr "Hesabu"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:328
+#, fuzzy
+#| msgid "Restriction"
+msgid "Distribution"
+msgstr "Usambazaji"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:423
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:122
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:256
+#, fuzzy
+#| msgid "Alert Area"
+msgid "Alerts"
+msgstr "Tahadhari"
+
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_left_alert.html:97
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:69
 #, fuzzy
@@ -698,100 +809,99 @@ msgstr "%(issued_on)s"
 msgid "Alert"
 msgstr "Tahadhari"
 
-#: capcomposer/src/capcomposer/cap/views.py:104
-#: capcomposer/src/capcomposer/cap/views.py:110
+#: capcomposer/src/capcomposer/cap/views.py:106
+#: capcomposer/src/capcomposer/cap/views.py:112
 #, fuzzy
 #| msgid "Load different alert"
 msgid "Latest alerts"
 msgstr "Arifa za hivi punde"
 
-#: capcomposer/src/capcomposer/cap/views.py:106
-#: capcomposer/src/capcomposer/cap/views.py:112
+#: capcomposer/src/capcomposer/cap/views.py:108
+#: capcomposer/src/capcomposer/cap/views.py:114
 #, python-format
 msgid "Latest alerts from %(sender_name)s"
 msgstr "Arifa za hivi punde kutoka kwa %(sender_name)s"
 
-#: capcomposer/src/capcomposer/cap/views.py:365
+#: capcomposer/src/capcomposer/cap/views.py:366
 msgid "CAP Alert PNG and PDF created successfully."
 msgstr "CAP Alert PNG na PDF imeundwa kwa ufanisi."
 
-#: capcomposer/src/capcomposer/cap/views.py:367
+#: capcomposer/src/capcomposer/cap/views.py:368
 msgid "Failed to create CAP Alert PNG and PDF."
 msgstr "Imeshindwa kuunda CAP Alert PNG na PDF."
 
-#: capcomposer/src/capcomposer/cap/views.py:381
+#: capcomposer/src/capcomposer/cap/views.py:382
 msgid "Private alert email sent successfully."
 msgstr "Barua pepe ya arifa ya faragha imetumwa kwa mafanikio."
 
-#: capcomposer/src/capcomposer/cap/views.py:383
+#: capcomposer/src/capcomposer/cap/views.py:384
 msgid "Failed to send private alert email."
 msgstr "Imeshindwa kutuma barua pepe ya arifa ya faragha."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:85
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:324
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:88
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:331
 msgid "Create PNG/PDF"
 msgstr "Unda PNG/PDF"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:97
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:100
 msgid "LIVE"
 msgstr "LIVE"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:99
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:102
 msgid "Visit the live page"
 msgstr "Tembelea ukurasa wa moja kwa moja"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:108
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:330
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:111
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:337
 #, fuzzy
 #| msgid "Recipient"
 msgid "Email Recipients"
 msgstr "Wapokeaji Barua pepe"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:110
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:113
 msgid "Send private alert email to recipients"
 msgstr "Tuma barua pepe ya arifa ya faragha kwa wapokeaji"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:119
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:253
-#, fuzzy
-#| msgid "Alert Area"
-msgid "Alerts"
-msgstr "Tahadhari"
-
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:176
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:179
 msgid "Webhooks"
 msgstr "Viboko vya mtandao"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:196
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:199
 msgid "Webhook Events"
 msgstr "Matukio ya Webhook"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:243
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:246
 msgid "External CAP Alert Feeds"
 msgstr "Milisho ya Arifa ya CAP ya Nje"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:282
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:284
+#, fuzzy
+#| msgid "Status"
+msgid "Statistics"
+msgstr "Takwimu"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:289
 msgid "Import CAP Alert"
 msgstr "Ingiza Arifa ya CAP"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:290
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:297
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "CAP Base Settings"
 msgstr "Mipangilio ya Msingi ya CAP"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:407
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:414
 #, python-format
 msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
 msgstr ""
 "Tahadhari '%(page_title)s' imenakiliwa. Unaweza kuhariri arifa mpya hapa "
 "chini."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:437
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:444
 msgid "Actual Alerts cannot be Unpublished after they have been published"
 msgstr "Arifa Halisi haziwezi Kubatilishwa baada ya kuchapishwa"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:450
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:457
 msgid ""
 "Actual Alerts cannot be deleted after they have been published. To cancel or"
 " publish an update to this alert, create a new alert of Message Type "
@@ -801,7 +911,7 @@ msgstr ""
 "kuchapisha sasisho la arifa hii, unda arifa mpya ya Aina ya Ujumbe 'Ghairi' "
 "au 'Sasisha' na urejelee arifa hii."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:463
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:470
 msgid "CAP Alert draft created. You can now edit the alert."
 msgstr "Rasimu ya Arifa ya CAP imeundwa. Sasa unaweza kuhariri arifa."
 
@@ -919,8 +1029,7 @@ msgstr "Matukio ya CAP Alert Webhook"
 #~ msgstr "Epuka - Epuka tukio la somo kulingana na maagizo"
 
 #~ msgid "Monitor - Attend to information sources as described in instruction"
-#~ msgstr ""
-#~ "Monitor - Hudhuria vyanzo vya habari kama ilivyofafanuliwa katika maagizo"
+#~ msgstr "Monitor - Hudhuria vyanzo vya habari kama ilivyoelezwa katika maagizo"
 
 #~ msgid ""
 #~ "Assess - Evaluate the information in this message - DONT USE FOR PUBLIC "
@@ -998,8 +1107,7 @@ msgstr "Matukio ya CAP Alert Webhook"
 #~ msgid ""
 #~ "The specific or minimum altitude of the affected area of the alert message"
 #~ msgstr ""
-#~ "Urefu mahususi au wa chini kabisa wa eneo lililoathiriwa la ujumbe wa "
-#~ "tahadhari"
+#~ "Urefu mahususi au wa chini kabisa wa eneo lililoathiriwa la ujumbe wa arifa"
 
 #~ msgid "Ceiling"
 #~ msgstr "Dari"
@@ -1058,7 +1166,7 @@ msgstr "Matukio ya CAP Alert Webhook"
 #~ msgstr "Thamani ya msimbo wa tukio"
 
 #~ msgid "Immediate - Responsive action SHOULD be taken immediately"
-#~ msgstr "Papo Hapo - Hatua ya kujibu INATAKIWA ichukuliwe mara moja"
+#~ msgstr "Hapo Hapo - Hatua ya kuitikia INATAKIWA ichukuliwe mara moja"
 
 #~ msgid "Expected - Responsive action SHOULD be taken soon (within next hour)"
 #~ msgstr ""
@@ -1252,12 +1360,6 @@ msgstr "Matukio ya CAP Alert Webhook"
 #~ msgid "Sender Details"
 #~ msgstr "Maelezo ya Mtumaji"
 
-#~ msgid "Hazard Types"
-#~ msgstr "Aina za Hatari"
-
-#~ msgid "Hazard Type"
-#~ msgstr "Aina ya Hatari"
-
 #~ msgid "Hazards monitored by the institution"
 #~ msgstr "Hatari zinazofuatiliwa na taasisi"
 
@@ -1317,7 +1419,7 @@ msgstr "Matukio ya CAP Alert Webhook"
 #~ msgstr "Matukio mengine"
 
 #~ msgid "Select from WMO list of Hazards Event Types"
-#~ msgstr "Chagua kutoka kwa orodha ya WMO ya Aina za Tukio la Hatari"
+#~ msgstr "Chagua kutoka kwa orodha ya WMO ya Aina za Matukio ya Hatari"
 
 #~ msgid "Hazard"
 #~ msgstr "Hatari"
@@ -1454,9 +1556,6 @@ msgstr "Matukio ya CAP Alert Webhook"
 #~ msgid "Unknown severity"
 #~ msgstr "Ukali usiojulikana"
 
-#~ msgid "Unknown"
-#~ msgstr "Haijulikani"
-
 #~ msgid "Copy Paste XML"
 #~ msgstr "Nakili Bandika XML"
 
@@ -1540,7 +1639,7 @@ msgstr "Matukio ya CAP Alert Webhook"
 #~ "requirement as in the restriction field"
 #~ msgstr ""
 #~ "Imezuiliwa - Kwa usambazaji tu kwa watumiaji walio na hitaji la kufanya kazi"
-#~ " linalojulikana kama katika uga wa vizuizi"
+#~ " linalojulikana kama katika uga wa kizuizi"
 
 #~ msgid ""
 #~ "Private - For dissemination only to specified addresses as in the addresses "
@@ -1586,9 +1685,6 @@ msgstr "Matukio ya CAP Alert Webhook"
 #~ msgstr ""
 #~ "Maandishi yanayoelezea sheria ya kuzuia usambazaji wa ujumbe wa tahadhari "
 #~ "uliowekewa vikwazo. Inatumika wakati thamani ya upeo imezuiwa"
-
-#~ msgid "Restriction"
-#~ msgstr "Kizuizi"
 
 #~ msgid "The code denoting the special handling of the alert message"
 #~ msgstr "Msimbo unaoashiria utunzaji maalum wa ujumbe wa tahadhari"
@@ -1760,4 +1856,4 @@ msgstr "Matukio ya CAP Alert Webhook"
 #~ "explanation SHOULD appear in note field"
 #~ msgstr ""
 #~ "Hitilafu - Huonyesha kukataliwa kwa ujumbe uliotambuliwa katika marejeleo; "
-#~ "maelezo LAZIMA yaonekane katika sehemu ya noti"
+#~ "maelezo LAZIMA kuonekana katika uga wa kumbukumbu"

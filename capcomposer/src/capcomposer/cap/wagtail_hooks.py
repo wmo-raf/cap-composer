@@ -40,7 +40,7 @@ from .models import (
 from .utils import (
     create_draft_alert_from_alert_data
 )
-from .views import create_cap_png_pdf, send_private_alert_email_view
+from .views import create_cap_png_pdf, send_private_alert_email_view, cap_statistics_view, cap_statistics_export_csv
 
 CAN_EDIT_CAP = getattr(settings, "CAP_ALLOW_EDITING", False)
 
@@ -51,6 +51,8 @@ def urlconf_cap():
         path('import-cap/<int:alert_id>/', create_cap_png_pdf, name='create_cap_png_pdf'),
         path('send-private-alert-email/<int:alert_id>/', send_private_alert_email_view,
              name='send_private_alert_email'),
+        path('cap/statistics/', cap_statistics_view, name='cap_statistics'),
+        path('cap/statistics/export/csv/', cap_statistics_export_csv, name='cap_statistics_export_csv'),
     ]
 
 
@@ -277,7 +279,11 @@ class CAPMenuGroup(ModelAdminGroup):
             item_order += 1
         
         try:
-            
+            # add statistics menu
+            statistics_url = reverse("cap_statistics")
+            statistics_menu = MenuItem(label=_("Statistics"), url=statistics_url, icon_name="date")
+            menu_items.append(statistics_menu)
+
             # add CAP import menu
             settings_url = reverse("load_cap_alert")
             import_cap_menu = MenuItem(label=_("Import CAP Alert"), url=settings_url, icon_name="upload")
