@@ -1444,7 +1444,7 @@ msgstr "መመሪያዎች"
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:6
 #, python-format
 msgid "Import CAP Alert %(title)s"
-msgstr "የ CAP ማንቂያ %(ርዕስ) s አስመጣ"
+msgstr "የ CAP ማንቂያ %(title)s አስመጣ"
 
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/load_cap_alert.html:15
 msgid "Import CAP Alert"
@@ -1561,7 +1561,7 @@ msgstr "ራዲየስ (በኪሎሜትር)"
 #: capcomposer/src/capcomposer/capeditor/wagtail_hooks.py:104
 #, python-format
 msgid "Page '%(page_title)s' copied."
-msgstr "ገጽ '%(ገጽ_title)' ተቀድቷል።"
+msgstr "ገጽ '%(page_title)s' ተቀድቷል።"
 
 #~ msgid "Orange severity"
 #~ msgstr "የብርቱካናማ ክብደት"

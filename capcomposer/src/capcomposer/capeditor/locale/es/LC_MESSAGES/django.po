@@ -1530,7 +1530,7 @@ msgstr "Instrucciones"
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:6
 #, python-format
 msgid "Import CAP Alert %(title)s"
-msgstr "Importar % de alerta CAP (título) s"
+msgstr "Importar de alerta CAP %(title)s"
 
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/load_cap_alert.html:15
 msgid "Import CAP Alert"

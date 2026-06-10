@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: climweb-cap-composer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-05 11:51+0000\n"
+"POT-Creation-Date: 2026-06-10 08:33+0000\n"
 "PO-Revision-Date: 2026-05-11 09:48\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -203,7 +203,7 @@ msgstr "Choisissez le style des alertes actives"
 
 #: capcomposer/src/capcomposer/cap/models.py:466
 #: capcomposer/src/capcomposer/cap/models.py:467
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:299
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:305
 msgid "Other Settings"
 msgstr "Autres paramètres"
 
@@ -387,6 +387,11 @@ msgstr "Autorisation du menu CAP"
 msgid "CAP Menu Permissions"
 msgstr "Autorisations du menu CAP"
 
+#: capcomposer/src/capcomposer/cap/statistics.py:95
+#: capcomposer/src/capcomposer/cap/statistics.py:129
+msgid "Unknown"
+msgstr "Inconnu"
+
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:22
 msgid "Warning: This is not an Actual alert"
 msgstr "Avertissement : ce n'est pas une alerte réelle"
@@ -449,6 +454,7 @@ msgstr "Passé"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:75
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:71
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:563
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:201
 msgid "Severity"
 msgstr "Gravité"
 
@@ -457,6 +463,7 @@ msgstr "Gravité"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:79
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:440
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:230
 msgid "Extreme"
 msgstr "Extrême"
 
@@ -465,6 +472,7 @@ msgstr "Extrême"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:81
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:447
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:237
 msgid "Severe"
 msgstr "Sévère"
 
@@ -473,6 +481,7 @@ msgstr "Sévère"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:83
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:454
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:244
 msgid "Moderate"
 msgstr "Modéré"
 
@@ -481,6 +490,7 @@ msgstr "Modéré"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:85
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:461
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:251
 msgid "Minor"
 msgstr "Mineur"
 
@@ -696,6 +706,107 @@ msgstr "Émis:"
 msgid "%(issued_on)s"
 msgstr "%(issued_on)s"
 
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:4
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:181
+#, fuzzy
+#| msgid "CAP Settings"
+msgid "CAP Alert Statistics"
+msgstr "Statistiques d'alerte CAP"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:191
+msgid "From"
+msgstr "Depuis"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:196
+msgid "To"
+msgstr "À"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:214
+msgid "Apply"
+msgstr "Appliquer"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:215
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:224
+#, fuzzy
+#| msgid "Past Alerts"
+msgid "Total Alerts"
+msgstr "Alertes totales"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:258
+msgid "Export"
+msgstr "Exporter"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:262
+msgid "Download CSV"
+msgstr "Télécharger CSV"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:271
+#, fuzzy
+#| msgid "Alert Severity"
+msgid "Alerts Over Time (Monthly)"
+msgstr "Alertes au fil du temps (mensuel)"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:279
+#, fuzzy
+#| msgid "Severity"
+msgid "By Severity"
+msgstr "Par gravité"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:287
+#, fuzzy
+#| msgid "Urgency"
+msgid "By Urgency"
+msgstr "Par urgence"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:295
+#, fuzzy
+#| msgid "Certainty"
+msgid "By Certainty"
+msgstr "Par certitude"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:303
+#, fuzzy
+#| msgid "Status"
+msgid "By Status"
+msgstr "Par statut"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:311
+#, fuzzy
+#| msgid "Hazard Types"
+msgid "Top Hazard Types"
+msgstr "Principaux types de dangers"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:322
+#, fuzzy
+#| msgid "Hazard Type"
+msgid "Alerts by Hazard Type"
+msgstr "Alertes par type de danger"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:326
+msgid "Hazard Type"
+msgstr "Type de danger"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:327
+msgid "Count"
+msgstr "Compter"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:328
+#, fuzzy
+#| msgid "Restriction"
+msgid "Distribution"
+msgstr "Distribution"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:423
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:122
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:256
+#, fuzzy
+#| msgid "Alert Area"
+msgid "Alerts"
+msgstr "Alertes"
+
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_left_alert.html:97
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:69
 #, fuzzy
@@ -703,101 +814,100 @@ msgstr "%(issued_on)s"
 msgid "Alert"
 msgstr "Alerte"
 
-#: capcomposer/src/capcomposer/cap/views.py:104
-#: capcomposer/src/capcomposer/cap/views.py:110
+#: capcomposer/src/capcomposer/cap/views.py:106
+#: capcomposer/src/capcomposer/cap/views.py:112
 #, fuzzy
 #| msgid "Load different alert"
 msgid "Latest alerts"
 msgstr "Dernières alertes"
 
-#: capcomposer/src/capcomposer/cap/views.py:106
-#: capcomposer/src/capcomposer/cap/views.py:112
+#: capcomposer/src/capcomposer/cap/views.py:108
+#: capcomposer/src/capcomposer/cap/views.py:114
 #, python-format
 msgid "Latest alerts from %(sender_name)s"
 msgstr "Dernières alertes de %(sender_name)s"
 
-#: capcomposer/src/capcomposer/cap/views.py:365
+#: capcomposer/src/capcomposer/cap/views.py:366
 msgid "CAP Alert PNG and PDF created successfully."
 msgstr "CAP Alert PNG et PDF créés avec succès."
 
-#: capcomposer/src/capcomposer/cap/views.py:367
+#: capcomposer/src/capcomposer/cap/views.py:368
 msgid "Failed to create CAP Alert PNG and PDF."
 msgstr "Échec de la création du CAP Alert PNG et PDF."
 
-#: capcomposer/src/capcomposer/cap/views.py:381
+#: capcomposer/src/capcomposer/cap/views.py:382
 msgid "Private alert email sent successfully."
 msgstr "E-mail d'alerte privé envoyé avec succès."
 
-#: capcomposer/src/capcomposer/cap/views.py:383
+#: capcomposer/src/capcomposer/cap/views.py:384
 msgid "Failed to send private alert email."
 msgstr "Échec de l'envoi d'un e-mail d'alerte privé."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:86
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:325
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:88
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:331
 msgid "Create PNG/PDF"
 msgstr "Créer un PNG/PDF"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:98
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:100
 msgid "LIVE"
 msgstr "EN DIRECT"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:100
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:102
 msgid "Visit the live page"
 msgstr "Visitez la page en direct"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:109
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:331
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:111
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:337
 #, fuzzy
 #| msgid "Recipient"
 msgid "Email Recipients"
 msgstr "Destinataires des e-mails"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:111
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:113
 msgid "Send private alert email to recipients"
 msgstr "Envoyer un e-mail d'alerte privé aux destinataires"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:120
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:254
-#, fuzzy
-#| msgid "Alert Area"
-msgid "Alerts"
-msgstr "Alertes"
-
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:177
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:179
 msgid "Webhooks"
 msgstr "Webhooks"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:197
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:199
 msgid "Webhook Events"
 msgstr "Événements Webhook"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:244
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:246
 msgid "External CAP Alert Feeds"
 msgstr "Flux d’alertes CAP externes"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:283
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:284
+#, fuzzy
+#| msgid "Status"
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:289
 msgid "Import CAP Alert"
 msgstr "Importer une alerte CAP"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:291
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:297
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "CAP Base Settings"
 msgstr "Paramètres de base du CAP"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:408
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:414
 #, python-format
 msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
 msgstr ""
 "Alerte '%(page_title)s' copiée. Vous pouvez modifier la nouvelle alerte ci-"
 "dessous."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:438
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:444
 msgid "Actual Alerts cannot be Unpublished after they have been published"
 msgstr ""
 "Les alertes réelles ne peuvent pas être annulées après leur publication."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:451
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:457
 msgid ""
 "Actual Alerts cannot be deleted after they have been published. To cancel or"
 " publish an update to this alert, create a new alert of Message Type "
@@ -808,7 +918,7 @@ msgstr ""
 "alerte de type de message « Annuler » ou « Mettre à jour » et référencez "
 "cette alerte."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:464
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:470
 msgid "CAP Alert draft created. You can now edit the alert."
 msgstr "Projet d'alerte CAP créé. Vous pouvez maintenant modifier l'alerte."
 
@@ -1110,9 +1220,8 @@ msgstr "Événements du webhook d’alerte CAP"
 #~ "The text denoting the type of the subject event of the alert message. You "
 #~ "can define hazards events monitored by your institution from CAP settings"
 #~ msgstr ""
-#~ "Texte indiquant le type d'événement objet du message d'alerte. Vous pouvez "
-#~ "définir les événements de danger surveillés par votre institution à partir "
-#~ "des paramètres du CAP."
+#~ "Texte indiquant le type d'événement objet du message d'alerte. You can "
+#~ "define hazards events monitored by your institution from CAP settings"
 
 #~ msgid ""
 #~ "The code denoting the language of the alert message.If not selected, 'en-US'"
@@ -1269,12 +1378,6 @@ msgstr "Événements du webhook d’alerte CAP"
 
 #~ msgid "Sender Details"
 #~ msgstr "Détails de l'expéditeur"
-
-#~ msgid "Hazard Types"
-#~ msgstr "Types de dangers"
-
-#~ msgid "Hazard Type"
-#~ msgstr "Type de danger"
 
 #~ msgid "Hazards monitored by the institution"
 #~ msgstr "Risques surveillés par l'établissement"
@@ -1514,9 +1617,6 @@ msgstr "Événements du webhook d’alerte CAP"
 #~ msgid "Unknown severity"
 #~ msgstr "Gravité inconnue"
 
-#~ msgid "Unknown"
-#~ msgstr "Inconnu"
-
 #~ msgid "Copy Paste XML"
 #~ msgstr "Copier Coller XML"
 
@@ -1656,9 +1756,6 @@ msgstr "Événements du webhook d’alerte CAP"
 #~ msgstr ""
 #~ "Texte décrivant la règle de limitation de la distribution du message "
 #~ "d'alerte restreint. Utilisé lorsque la valeur de la portée est restreinte"
-
-#~ msgid "Restriction"
-#~ msgstr "Restriction"
 
 #~ msgid "The code denoting the special handling of the alert message"
 #~ msgstr "Le code désignant le traitement particulier du message d'alerte"
