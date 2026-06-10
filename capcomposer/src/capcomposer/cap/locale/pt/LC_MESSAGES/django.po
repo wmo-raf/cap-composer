@@ -168,7 +168,7 @@ msgstr "Importado"
 #, fuzzy
 #| msgid "Import CAP Alert"
 msgid "CAP Alert"
-msgstr "Alerta PAC"
+msgstr "Alerta CAP"
 
 #: capcomposer/src/capcomposer/cap/models.py:298
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:74
@@ -458,7 +458,7 @@ msgstr "Extremo"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:81
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:447
 msgid "Severe"
-msgstr "Forte"
+msgstr "Severo"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:133
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:212
@@ -686,7 +686,7 @@ msgstr "Publicado:"
 #: capcomposer/src/capcomposer/cap/templates/cap/include_alert_list_item.html:39
 #, python-format
 msgid "%(issued_on)s"
-msgstr "%(emitido_em)s"
+msgstr "%(issued_on)s"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_left_alert.html:97
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:69

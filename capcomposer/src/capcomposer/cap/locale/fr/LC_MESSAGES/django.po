@@ -174,7 +174,7 @@ msgstr "Importé"
 #, fuzzy
 #| msgid "Import CAP Alert"
 msgid "CAP Alert"
-msgstr "Alerte PAC"
+msgstr "Alerte CAP"
 
 #: capcomposer/src/capcomposer/cap/models.py:298
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:74
@@ -466,7 +466,7 @@ msgstr "Extrême"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:81
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:447
 msgid "Severe"
-msgstr "Grave"
+msgstr "Sévère"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:133
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:212
@@ -482,7 +482,7 @@ msgstr "Modéré"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:85
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:461
 msgid "Minor"
-msgstr "Mineure"
+msgstr "Mineur"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:141
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:94
