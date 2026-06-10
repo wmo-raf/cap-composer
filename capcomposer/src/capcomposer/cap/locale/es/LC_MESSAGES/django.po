@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: climweb-cap-composer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-11 13:58+0000\n"
+"POT-Creation-Date: 2026-06-05 11:51+0000\n"
 "PO-Revision-Date: 2026-05-11 09:48\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
@@ -172,7 +172,7 @@ msgstr "Importado"
 #, fuzzy
 #| msgid "Import CAP Alert"
 msgid "CAP Alert"
-msgstr "Alerta de la CAP"
+msgstr "Alerta de la PAC"
 
 #: capcomposer/src/capcomposer/cap/models.py:298
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:74
@@ -201,7 +201,7 @@ msgstr "Elige el estilo de las alertas activas."
 
 #: capcomposer/src/capcomposer/cap/models.py:466
 #: capcomposer/src/capcomposer/cap/models.py:467
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:298
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:299
 msgid "Other Settings"
 msgstr "Otras configuraciones"
 
@@ -729,71 +729,71 @@ msgstr "Correo electrónico de alerta privada enviado correctamente."
 msgid "Failed to send private alert email."
 msgstr "No se pudo enviar el correo electrónico de alerta privado."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:85
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:324
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:86
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:325
 msgid "Create PNG/PDF"
 msgstr "Crear PNG/PDF"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:97
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:98
 msgid "LIVE"
 msgstr "VIVIR"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:99
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:100
 msgid "Visit the live page"
 msgstr "Visita la página en vivo"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:108
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:330
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:109
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:331
 #, fuzzy
 #| msgid "Recipient"
 msgid "Email Recipients"
 msgstr "Destinatarios de correo electrónico"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:110
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:111
 msgid "Send private alert email to recipients"
 msgstr "Enviar correo electrónico de alerta privado a los destinatarios"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:119
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:253
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:120
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:254
 #, fuzzy
 #| msgid "Alert Area"
 msgid "Alerts"
 msgstr "Alertas"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:176
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:177
 msgid "Webhooks"
 msgstr "Ganchos web"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:196
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:197
 msgid "Webhook Events"
 msgstr "Eventos de webhook"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:243
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:244
 msgid "External CAP Alert Feeds"
 msgstr "Fuentes de alerta de CAP externas"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:282
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:283
 msgid "Import CAP Alert"
 msgstr "Alerta de PAC de importación"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:290
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:291
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "CAP Base Settings"
 msgstr "Configuración básica de la PAC"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:407
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:408
 #, python-format
 msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
 msgstr ""
 "Alerta '%(page_title)s' copiada. Puede editar la nueva alerta a "
 "continuación."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:437
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:438
 msgid "Actual Alerts cannot be Unpublished after they have been published"
 msgstr "Las alertas reales no se pueden cancelar una vez publicadas"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:450
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:451
 msgid ""
 "Actual Alerts cannot be deleted after they have been published. To cancel or"
 " publish an update to this alert, create a new alert of Message Type "
@@ -803,7 +803,7 @@ msgstr ""
 " publicar una actualización de esta alerta, cree una nueva alerta de tipo de"
 " mensaje \"Cancelar\" o \"Actualizar\" y haga referencia a esta alerta."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:463
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:464
 msgid "CAP Alert draft created. You can now edit the alert."
 msgstr "Borrador de alerta CAP creado. Ahora puede editar la alerta."
 
@@ -956,8 +956,8 @@ msgstr "Eventos de webhook de alerta de CAP"
 #~ "represented in all capital letters without periods (e.g., SAME, FIPS, ZIP"
 #~ msgstr ""
 #~ "Cadena asignada por el usuario que designa el dominio del código. Las siglas"
-#~ " DEBEN estar representadas en letras mayúsculas sin puntos (por ejemplo, "
-#~ "SAME, FIPS, ZIP"
+#~ " DEBEN representarse en letras mayúsculas sin puntos (por ejemplo, SAME, "
+#~ "FIPS, ZIP"
 
 #~ msgid "A string (which may represent a number) denoting the value itself"
 #~ msgstr ""

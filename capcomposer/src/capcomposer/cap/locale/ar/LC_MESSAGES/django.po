@@ -1,8 +1,9 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: climweb-cap-composer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-11 13:58+0000\n"
+"POT-Creation-Date: 2026-06-05 11:51+0000\n"
 "PO-Revision-Date: 2026-05-11 09:48\n"
 "Last-Translator: \n"
 "Language-Team: Arabic\n"
@@ -10,42 +11,40 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Crowdin-File: /capcomposer/src/capcomposer/capeditor/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 1634\n"
+"X-Crowdin-Language: ar\n"
 "X-Crowdin-Project: climweb-cap-composer\n"
 "X-Crowdin-Project-ID: 887364\n"
-"X-Crowdin-Language: ar\n"
-"X-Crowdin-File: /capcomposer/src/capcomposer/capeditor/locale/en/LC_MESSAGES/"
-"django.po\n"
-"X-Crowdin-File-ID: 1634\n"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:15
 #, fuzzy
 #| msgid "Sender name"
 msgid "Feed name"
-msgstr "اسم المرسل"
+msgstr "اسم الخلاصة"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:16
 msgid "Provide a name to identify the feed"
-msgstr ""
+msgstr "أدخل اسمًا لتعريف الخلاصة"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:17
 #, fuzzy
 #| msgid "Message Type"
 msgid "Feed Type"
-msgstr "نوع الرسالة"
+msgstr "نوع التغذية"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:18
 msgid "Select the type of feed"
-msgstr ""
+msgstr "حدد نوع الخلاصة"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:19
 msgid "Feed URL"
-msgstr ""
+msgstr "عنوان URL للخلاصة"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:19
 msgid "Enter the URL of the feed"
-msgstr ""
+msgstr "أدخل عنوان URL للخلاصة"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:20
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:44
@@ -53,159 +52,163 @@ msgstr ""
 #, fuzzy
 #| msgid "Effective"
 msgid "Active"
-msgstr "فعال"
+msgstr "نشيط"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:21
 msgid "Automatically fetch data from this feed. Uncheck to disable."
-msgstr ""
+msgstr "جلب البيانات تلقائيًا من هذه الخلاصة. قم بإلغاء التحديد للتعطيل."
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:22
 msgid "Feed check interval in minutes"
-msgstr ""
+msgstr "الفاصل الزمني لفحص التغذية بالدقائق"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:27
 msgid "How often to check for new alerts in minutes. Min: 1, Max: 10"
 msgstr ""
+"كم مرة للتحقق من وجود تنبيهات جديدة في دقائق. الحد الأدنى: 1، الحد الأقصى: "
+"10"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:29
 msgid "Validate CAP XML Signature"
-msgstr ""
+msgstr "التحقق من صحة توقيع CAP XML"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:30
 msgid "Check to only import alerts with a valid XML signature."
-msgstr ""
+msgstr "حدد هذا الخيار لاستيراد التنبيهات التي تحتوي على توقيع XML صالح فقط."
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:33
 msgid "Submit imported alerts for moderation"
-msgstr ""
+msgstr "إرسال التنبيهات المستوردة للإعتدال"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:35
 msgid ""
 "Check to automatically submit imported alerts for moderation. Otherwise, "
 "alerts will be saved as drafts."
 msgstr ""
+"حدد هذا الإعداد لإرسال التنبيهات المستوردة تلقائيًا للإشراف. وبخلاف ذلك، "
+"سيتم حفظ التنبيهات كمسودات."
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:48
 msgid "External Alert Feed"
-msgstr ""
+msgstr "تغذية التنبيه الخارجية"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:49
 msgid "External Alert Feeds"
-msgstr ""
+msgstr "خلاصات التنبيه الخارجية"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:57
 #, fuzzy
 #| msgid "CAP Alert XML URL"
 msgid "Alert URL"
-msgstr "عنوان URL الخاص بتنبيه CAP بتنسيق XML"
+msgstr "عنوان URL للتنبيه"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:57
 msgid "The URL of the alert XML"
-msgstr ""
+msgstr "عنوان URL للتنبيه XML"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:58
 #, fuzzy
 #| msgid "Reference Alert"
 msgid "Remote Alert ID"
-msgstr "التنبيه المرجعي"
+msgstr "معرف التنبيه عن بعد"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:59
 #, fuzzy
 #| msgid "The text identifying the source of the alert message"
 msgid "The unique identifier of the alert in the remote feed"
-msgstr "النص الذي يحدد مصدر رسالة التنبيه"
+msgstr "المعرف الفريد للتنبيه في الخلاصة عن بعد"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:62
 msgid "The imported alert from this entry"
-msgstr ""
+msgstr "التنبيه المستورد من هذا الإدخال"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:65
 msgid "External Alert Feed Entry"
-msgstr ""
+msgstr "إدخال موجز التنبيه الخارجي"
 
 #: capcomposer/src/capcomposer/cap/external_feed/models.py:66
 msgid "External Alert Feed Entries"
-msgstr ""
+msgstr "إدخالات موجز التنبيه الخارجي"
 
 #: capcomposer/src/capcomposer/cap/mixins.py:21
 msgid "For search engines"
-msgstr ""
+msgstr "لمحركات البحث"
 
 #: capcomposer/src/capcomposer/cap/mixins.py:27
 msgid "For site menus"
-msgstr ""
+msgstr "لقوائم الموقع"
 
 #: capcomposer/src/capcomposer/cap/models.py:58
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "CAP Alerts Heading"
-msgstr "إعدادات كاب"
+msgstr "عنوان تنبيهات CAP"
 
 #: capcomposer/src/capcomposer/cap/models.py:63
 #, fuzzy
 #| msgid "Number of latest Alerts to show in the XML CAP Feed"
 msgid "Number of alerts to show per page"
-msgstr "عدد أحدث التنبيهات التي سيتم عرضها في موجز XML CAP"
+msgstr "عدد التنبيهات التي سيتم عرضها في كل صفحة"
 
 #: capcomposer/src/capcomposer/cap/models.py:231
 msgid "Effective date cannot be earlier than the alert sent date."
-msgstr ""
+msgstr "لا يمكن أن يكون تاريخ السريان أقدم من تاريخ إرسال التنبيه."
 
 #: capcomposer/src/capcomposer/cap/models.py:234
 msgid "Expires date cannot be earlier than the alert sent date."
-msgstr ""
+msgstr "لا يمكن أن يكون تاريخ انتهاء الصلاحية أقدم من تاريخ إرسال التنبيه."
 
 #: capcomposer/src/capcomposer/cap/models.py:270
 #, fuzzy
 #| msgid "Import Type:"
 msgid "Imported"
-msgstr "نوع الاستيراد:"
+msgstr "مستورد"
 
 #: capcomposer/src/capcomposer/cap/models.py:280
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:56
 #, fuzzy
 #| msgid "Import CAP Alert"
 msgid "CAP Alert"
-msgstr "تنبيه استيراد CAP"
+msgstr "تنبيه CAP"
 
 #: capcomposer/src/capcomposer/cap/models.py:298
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:74
 msgid "PDF"
-msgstr ""
+msgstr "قوات الدفاع الشعبي"
 
 #: capcomposer/src/capcomposer/cap/models.py:299
 msgid "Email"
-msgstr ""
+msgstr "بريد إلكتروني"
 
 #: capcomposer/src/capcomposer/cap/models.py:450
 msgid "Left of the Navbar"
-msgstr ""
+msgstr "يسار شريط التنقل"
 
 #: capcomposer/src/capcomposer/cap/models.py:451
 msgid "Top of the Navbar"
-msgstr ""
+msgstr "أعلى شريط التنقل"
 
 #: capcomposer/src/capcomposer/cap/models.py:455
 msgid "Active Alert Style"
-msgstr ""
+msgstr "نمط التنبيه النشط"
 
 #: capcomposer/src/capcomposer/cap/models.py:456
 msgid "Choose the style of active alerts"
-msgstr ""
+msgstr "اختر نمط التنبيهات النشطة"
 
 #: capcomposer/src/capcomposer/cap/models.py:466
 #: capcomposer/src/capcomposer/cap/models.py:467
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:298
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:299
 msgid "Other Settings"
 msgstr "إعدادات أخرى"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:14
 msgid "At most once. Fire and forget"
-msgstr ""
+msgstr "مرة واحدة على الأكثر. النار وننسى"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:15
 msgid "At least once. I’ll keep sending until you say you got it"
-msgstr ""
+msgstr "مرة واحدة على الأقل. سأستمر في الإرسال حتى تقول أنك حصلت عليه"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:19
 #: capcomposer/src/capcomposer/cap/webhook/models.py:8
@@ -214,129 +217,134 @@ msgstr "اسم"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:20
 msgid "Provide a name to identify the broker"
-msgstr ""
+msgstr "قم بتوفير اسم للتعرف على الوسيط"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:21
 msgid "Broker Host"
-msgstr ""
+msgstr "مضيف الوسيط"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:22
 msgid "Provide the broker host name or IP address"
-msgstr ""
+msgstr "قم بتوفير اسم مضيف الوسيط أو عنوان IP"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:23
 msgid "Broker Port"
-msgstr ""
+msgstr "ميناء الوسيط"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:23
 msgid "Provide the broker port number"
-msgstr ""
+msgstr "توفير رقم منفذ الوسيط"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:26
 msgid "Broker Username"
-msgstr ""
+msgstr "اسم مستخدم الوسيط"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:27
 msgid "Broker Password"
-msgstr ""
+msgstr "كلمة مرور الوسيط"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:28
 msgid "Enter a password. If a password already exists, it will be updated"
-msgstr ""
+msgstr "أدخل كلمة المرور. إذا كانت كلمة المرور موجودة بالفعل، فسيتم تحديثها"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:32
 msgid "Is WIS2Box Node"
-msgstr ""
+msgstr "هي عقدة WIS2Box"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:33
 msgid "Check this box if you are providing the broker details of a wis2box."
-msgstr ""
+msgstr "حدد هذا المربع إذا كنت تقدم تفاصيل الوسيط الخاص بـ wis2box."
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:35
 msgid "Topic"
-msgstr ""
+msgstr "عنوان"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:36
 msgid "Provide the MQTT topic to publish the CAP alerts."
-msgstr ""
+msgstr "قم بتوفير موضوع MQTT لنشر تنبيهات CAP."
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:37
 msgid "Quality of Service (QoS)"
-msgstr ""
+msgstr "جودة الخدمة (QoS)"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:39
 msgid "Dataset ID"
-msgstr ""
+msgstr "معرف مجموعة البيانات"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:41
 msgid ""
 "Provide the metadata ID for your dataset registered in the wis2box. If you "
 "do not have this, please create a dataset in the wis2box before proceeding."
 msgstr ""
+"قم بتوفير معرف البيانات الوصفية لمجموعة البيانات الخاصة بك المسجلة في "
+"wis2box. إذا لم يكن لديك هذا، يرجى إنشاء مجموعة بيانات في wis2box قبل "
+"المتابعة."
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:45
 msgid "Automatically publish CAP alerts to this broker"
-msgstr ""
+msgstr "نشر تنبيهات CAP تلقائيًا لهذا الوسيط"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:48
 #: capcomposer/src/capcomposer/cap/webhook/models.py:13
 msgid "Retry on failure"
-msgstr ""
+msgstr "أعد المحاولة عند الفشل"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:55
 #, fuzzy
 #| msgid "Alert Information"
 msgid "Broker Information"
-msgstr "معلومات التنبيه"
+msgstr "معلومات الوسيط"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:59
 #, fuzzy
 #| msgid "Alert Identification"
 msgid "Authentication"
-msgstr "تحديد التنبيه"
+msgstr "المصادقة"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:76
 msgid "Dataset ID is required for a WIS2Box Broker"
-msgstr ""
+msgstr "معرف مجموعة البيانات مطلوب لوسيط WIS2Box"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:81
 #, fuzzy
 #| msgid "This field is required."
 msgid "Topic is required"
-msgstr "هذه الخانة مطلوبه."
+msgstr "الموضوع مطلوب"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:86
 msgid ""
 "Secret key for encrypting passwords is not set. Please ensure the "
 "CAP_MQTT_SECRET_KEY is set "
 msgstr ""
+"لم يتم تعيين المفتاح السري لتشفير كلمات المرور. الرجاء التأكد من تعيين "
+"CAP_MQTT_SECRET_KEY"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:91
 msgid "Password is required if creating a new broker"
-msgstr ""
+msgstr "كلمة المرور مطلوبة في حالة إنشاء وسيط جديد"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:112
 msgid "MQTT Broker"
-msgstr ""
+msgstr "وسيط MQTT"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:113
 msgid "MQTT Brokers"
-msgstr ""
+msgstr "وسطاء MQTT"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:120
 #: capcomposer/src/capcomposer/cap/webhook/models.py:34
 msgid "Pending"
-msgstr ""
+msgstr "قيد الانتظار"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:121
 #: capcomposer/src/capcomposer/cap/webhook/models.py:35
 msgid "Failure"
-msgstr ""
+msgstr "فشل"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:122
 #: capcomposer/src/capcomposer/cap/webhook/models.py:36
 msgid "Success"
-msgstr ""
+msgstr "نجاح"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:129
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:244
@@ -347,54 +355,54 @@ msgstr "حالة"
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:131
 #: capcomposer/src/capcomposer/cap/webhook/models.py:45
 msgid "Retries"
-msgstr ""
+msgstr "إعادة المحاولة"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:132
 #: capcomposer/src/capcomposer/cap/webhook/models.py:46
 msgid "Last Error Message"
-msgstr ""
+msgstr "رسالة الخطأ الأخيرة"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:137
 msgid "MQTT Broker Event"
-msgstr ""
+msgstr "حدث وسيط MQTT"
 
 #: capcomposer/src/capcomposer/cap/mqtt/models.py:138
 msgid "MQTT Broker Events"
-msgstr ""
+msgstr "أحداث وسيط MQTT"
 
 #: capcomposer/src/capcomposer/cap/permissions.py:7
 msgid "CAP Menu Permission"
-msgstr ""
+msgstr "إذن قائمة CAP"
 
 #: capcomposer/src/capcomposer/cap/permissions.py:8
 msgid "CAP Menu Permissions"
-msgstr ""
+msgstr "أذونات قائمة CAP"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:22
 msgid "Warning: This is not an Actual alert"
-msgstr ""
+msgstr "تحذير: هذا ليس تنبيهًا فعليًا"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:23
 msgid "The alert below is marked as"
-msgstr ""
+msgstr "تم وضع علامة على التنبيه أدناه كـ"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:23
 msgid "not actionable to the general public."
-msgstr ""
+msgstr "غير قابلة للتنفيذ لعامة الناس."
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:32
 msgid "This alert updates the previously published alerts below:"
-msgstr ""
+msgstr "يقوم هذا التنبيه بتحديث التنبيهات المنشورة مسبقًا أدناه:"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:33
 #, fuzzy
 #| msgid "Target audiences for published alerts"
 msgid "This alert cancels the previously published alerts below:"
-msgstr "Target audiences for published alerts"
+msgstr "يلغي هذا التنبيه التنبيهات المنشورة سابقًا أدناه:"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:68
 msgid "PNG"
-msgstr ""
+msgstr "PNG"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:115
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:56
@@ -508,7 +516,7 @@ msgstr "لغة"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:166
 msgid "Time period"
-msgstr ""
+msgstr "الفترة الزمنية"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:171
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:114
@@ -537,7 +545,7 @@ msgstr "تنتهي"
 #, fuzzy
 #| msgid "Response type"
 msgid "Response"
-msgstr "نوع الاستجابة"
+msgstr "إجابة"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:282
 msgid "Shelter"
@@ -571,7 +579,7 @@ msgstr "يٌقيِّم"
 #, fuzzy
 #| msgid "AllClear"
 msgid "All Clear"
-msgstr "كل كلير"
+msgstr "كل شيء واضح"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:290
 msgid "None"
@@ -607,21 +615,21 @@ msgstr "تعليمات"
 #, fuzzy
 #| msgid "Reference Alerts"
 msgid "Active Alerts"
-msgstr "التنبيهات المرجعية"
+msgstr "التنبيهات النشطة"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:46
 msgid "No active alerts currently"
-msgstr ""
+msgstr "لا توجد تنبيهات نشطة حاليا"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:55
 msgid "Past Alerts"
-msgstr ""
+msgstr "التنبيهات الماضية"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:99
 #, fuzzy
 #| msgid "Event Code"
 msgid "Event type"
-msgstr "رمز الحدث"
+msgstr "نوع الحدث"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:223
 msgid "Identifier"
@@ -657,7 +665,7 @@ msgstr "أنواع الاستجابة"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:583
 msgid "Time"
-msgstr ""
+msgstr "وقت"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:629
 msgid "Headline"
@@ -671,151 +679,154 @@ msgstr "اتصال"
 #, fuzzy
 #| msgid "Issued"
 msgid "Issued:"
-msgstr "صادر"
+msgstr "صادر:"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/include_alert_list_item.html:39
 #, python-format
 msgid "%(issued_on)s"
-msgstr ""
+msgstr "%(issued_on)s"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_left_alert.html:97
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:69
 #, fuzzy
 #| msgid "Alert Area"
 msgid "Alert"
-msgstr "منطقة التنبيه"
+msgstr "يُحذًِر"
 
 #: capcomposer/src/capcomposer/cap/views.py:104
 #: capcomposer/src/capcomposer/cap/views.py:110
 #, fuzzy
 #| msgid "Load different alert"
 msgid "Latest alerts"
-msgstr "تحميل تنبيه مختلف"
+msgstr "أحدث التنبيهات"
 
 #: capcomposer/src/capcomposer/cap/views.py:106
 #: capcomposer/src/capcomposer/cap/views.py:112
 #, python-format
 msgid "Latest alerts from %(sender_name)s"
-msgstr ""
+msgstr "أحدث التنبيهات من %(sender_name)s"
 
 #: capcomposer/src/capcomposer/cap/views.py:365
 msgid "CAP Alert PNG and PDF created successfully."
-msgstr ""
+msgstr "تم إنشاء CAP Alert PNG وPDF بنجاح."
 
 #: capcomposer/src/capcomposer/cap/views.py:367
 msgid "Failed to create CAP Alert PNG and PDF."
-msgstr ""
+msgstr "فشل في إنشاء CAP Alert PNG وPDF."
 
 #: capcomposer/src/capcomposer/cap/views.py:381
 msgid "Private alert email sent successfully."
-msgstr ""
+msgstr "تم إرسال البريد الإلكتروني للتنبيه الخاص بنجاح."
 
 #: capcomposer/src/capcomposer/cap/views.py:383
 msgid "Failed to send private alert email."
-msgstr ""
+msgstr "فشل إرسال تنبيه خاص بالبريد الإلكتروني."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:85
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:324
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:86
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:325
 msgid "Create PNG/PDF"
-msgstr ""
+msgstr "إنشاء PNG/PDF"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:97
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:98
 msgid "LIVE"
-msgstr ""
+msgstr "يعيش"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:99
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:100
 msgid "Visit the live page"
-msgstr ""
+msgstr "قم بزيارة الصفحة المباشرة"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:108
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:330
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:109
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:331
 #, fuzzy
 #| msgid "Recipient"
 msgid "Email Recipients"
-msgstr "متلقي"
+msgstr "مستلمو البريد الإلكتروني"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:110
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:111
 msgid "Send private alert email to recipients"
-msgstr ""
+msgstr "أرسل بريدًا إلكترونيًا خاصًا للتنبيه إلى المستلمين"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:119
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:253
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:120
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:254
 #, fuzzy
 #| msgid "Alert Area"
 msgid "Alerts"
-msgstr "منطقة التنبيه"
+msgstr "التنبيهات"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:176
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:177
 msgid "Webhooks"
-msgstr ""
+msgstr "خطافات الويب"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:196
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:197
 msgid "Webhook Events"
-msgstr ""
+msgstr "أحداث الويب هوك"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:243
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:244
 msgid "External CAP Alert Feeds"
-msgstr ""
+msgstr "خلاصات تنبيهات CAP الخارجية"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:282
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:283
 msgid "Import CAP Alert"
 msgstr "تنبيه استيراد CAP"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:290
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:291
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "CAP Base Settings"
-msgstr "إعدادات كاب"
+msgstr "إعدادات قاعدة CAP"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:407
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:408
 #, python-format
 msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
-msgstr ""
+msgstr "تم نسخ التنبيه '%(page_title)s'. يمكنك تعديل التنبيه الجديد أدناه."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:437
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:438
 msgid "Actual Alerts cannot be Unpublished after they have been published"
-msgstr ""
+msgstr "لا يمكن إلغاء نشر التنبيهات الفعلية بعد نشرها"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:450
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:451
 msgid ""
-"Actual Alerts cannot be deleted after they have been published. To cancel or "
-"publish an update to this alert, create a new alert of Message Type 'Cancel' "
-"or 'Update' and reference this alert"
+"Actual Alerts cannot be deleted after they have been published. To cancel or"
+" publish an update to this alert, create a new alert of Message Type "
+"'Cancel' or 'Update' and reference this alert"
 msgstr ""
+"لا يمكن حذف التنبيهات الفعلية بعد نشرها. لإلغاء هذا التنبيه أو نشر تحديث له،"
+" قم بإنشاء تنبيه جديد من نوع الرسالة \"إلغاء\" أو \"تحديث\" وقم بالإشارة إلى"
+" هذا التنبيه"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:463
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:464
 msgid "CAP Alert draft created. You can now edit the alert."
-msgstr ""
+msgstr "تم إنشاء مسودة تنبيه CAP. يمكنك الآن تعديل التنبيه."
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:9
 msgid "Webhook URL"
-msgstr ""
+msgstr "عنوان URL للويب هوك"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:14
 msgid "Include Header for Authentication"
-msgstr ""
+msgstr "تضمين رأس للمصادقة"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:15
 #, fuzzy
 #| msgid "Sender name"
 msgid "Header Value"
-msgstr "اسم المرسل"
+msgstr "قيمة الرأس"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:26
 msgid "CAP Alert Webhook"
-msgstr ""
+msgstr "تنبيه CAP على الويب"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:27
 msgid "CAP Alert Webhooks"
-msgstr ""
+msgstr "تنبيهات CAP عبر الويب"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:51
 msgid "CAP Alert Webhook Event"
-msgstr ""
+msgstr "حدث Webhook لتنبيه CAP"
 
 #: capcomposer/src/capcomposer/cap/webhook/models.py:52
 msgid "CAP Alert Webhook Events"
-msgstr ""
+msgstr "أحداث Webhook لتنبيه CAP"
 
 #~ msgid "Page not found"
 #~ msgstr "لم يتم العثور على الصفحة"
@@ -836,18 +847,18 @@ msgstr ""
 #~ msgstr "الحساب مغلق"
 
 #~ msgid ""
-#~ "Your account has been locked due to multiple failed login attempts. "
-#~ "Please try again later."
+#~ "Your account has been locked due to multiple failed login attempts. Please "
+#~ "try again later."
 #~ msgstr ""
-#~ "لقد تم قفل حسابك بسبب عدة محاولات تسجيل دخول فاشلة. يرجى المحاولة مرة "
-#~ "أخرى في وقت لاحق."
+#~ "لقد تم قفل حسابك بسبب عدة محاولات تسجيل دخول فاشلة. يرجى المحاولة مرة أخرى "
+#~ "لاحقا."
 
 #~ msgid ""
 #~ "You account has been locked due to multiple failed login attempts. Please "
 #~ "contact our support team for assistance."
 #~ msgstr ""
-#~ "لقد تم قفل حسابك بسبب عدة محاولات تسجيل دخول فاشلة. يرجى الاتصال بفريق "
-#~ "الدعم لدينا للحصول على المساعدة."
+#~ "لقد تم قفل حسابك بسبب عدة محاولات تسجيل دخول فاشلة. يرجى الاتصال بفريق الدعم"
+#~ " لدينا للحصول على المساعدة."
 
 #~ msgid "Powered by CAPComposer"
 #~ msgstr "مدعوم من CAPComposer"
@@ -901,8 +912,8 @@ msgstr ""
 #~ "Assess - Evaluate the information in this message - DONT USE FOR PUBLIC "
 #~ "ALERTS"
 #~ msgstr ""
-#~ "التقييم - قم بتقييم المعلومات الواردة في هذه الرسالة - لا تستخدمها "
-#~ "للتنبيهات العامة"
+#~ "التقييم - قم بتقييم المعلومات الواردة في هذه الرسالة - لا تستخدمها للتنبيهات"
+#~ " العامة"
 
 #~ msgid ""
 #~ "All Clear - The subject event no longer poses a threat or concern and any "
@@ -922,9 +933,8 @@ msgstr ""
 #~ msgstr "اسم القيمة"
 
 #~ msgid ""
-#~ "User-assigned string designating the domain of the code. Acronyms SHOULD "
-#~ "be represented in all capital letters without periods (e.g., SAME, FIPS, "
-#~ "ZIP"
+#~ "User-assigned string designating the domain of the code. Acronyms SHOULD be "
+#~ "represented in all capital letters without periods (e.g., SAME, FIPS, ZIP"
 #~ msgstr ""
 #~ "سلسلة مخصصة للمستخدم تحدد مجال الكود. ينبغي تمثيل الاختصارات بأحرف كبيرة "
 #~ "بدون نقاط (على سبيل المثال، SAME، FIPS، ZIP)"
@@ -960,11 +970,11 @@ msgstr ""
 #~ msgstr "الحدود"
 
 #~ msgid ""
-#~ "The paired values of points defining a polygon that delineates the "
-#~ "affected area of the alert message"
+#~ "The paired values of points defining a polygon that delineates the affected "
+#~ "area of the alert message"
 #~ msgstr ""
-#~ "القيم المقترنة للنقاط التي تحدد المضلع الذي يحدد المنطقة المتأثرة من "
-#~ "رسالة التنبيه"
+#~ "القيم المقترنة للنقاط التي تحدد المضلع الذي يحدد المنطقة المتأثرة من رسالة "
+#~ "التنبيه"
 
 #~ msgid "Altitude"
 #~ msgstr "ارتفاع"
@@ -977,11 +987,11 @@ msgstr ""
 #~ msgstr "سقف"
 
 #~ msgid ""
-#~ "The maximum altitude of the affected area of the alert message.MUST NOT "
-#~ "be used except in combination with the altitude element. "
+#~ "The maximum altitude of the affected area of the alert message.MUST NOT be "
+#~ "used except in combination with the altitude element. "
 #~ msgstr ""
-#~ "الحد الأقصى لارتفاع المنطقة المتأثرة برسالة التنبيه. يجب عدم استخدامه إلا "
-#~ "مع عنصر الارتفاع."
+#~ "الحد الأقصى لارتفاع المنطقة المتأثرة برسالة التنبيه. يجب عدم استخدامه إلا مع"
+#~ " عنصر الارتفاع."
 
 #~ msgid "Geocode"
 #~ msgstr "الرمز الجغرافي"
@@ -995,15 +1005,14 @@ msgstr ""
 #~ msgid "Drag the marker to change position"
 #~ msgstr "اسحب العلامة لتغيير الموضع"
 
-#~ msgid ""
-#~ "The human-readable name of the agency or authority issuing this alert."
+#~ msgid "The human-readable name of the agency or authority issuing this alert."
 #~ msgstr ""
 #~ "الاسم الذي يمكن قراءته بواسطة الإنسان للوكالة أو السلطة التي تصدر هذا "
 #~ "التنبيه."
 
 #~ msgid ""
-#~ "The text describing the contact for follow-up and confirmation of the "
-#~ "alert message"
+#~ "The text describing the contact for follow-up and confirmation of the alert "
+#~ "message"
 #~ msgstr "النص الذي يصف جهة الاتصال للمتابعة وتأكيد رسالة التنبيه"
 
 #~ msgid "Resource Description"
@@ -1097,34 +1106,32 @@ msgstr ""
 #~ "The text describing the subject event of the alert message. An extended "
 #~ "description of the hazard or event that occasioned this message"
 #~ msgstr ""
-#~ "النص الذي يصف حدث موضوع رسالة التنبيه. وصف موسع للخطر أو الحدث الذي تسبب "
-#~ "في هذه الرسالة"
+#~ "النص الذي يصف حدث موضوع رسالة التنبيه. وصف موسع للخطر أو الحدث الذي تسبب في "
+#~ "هذه الرسالة"
 
 #~ msgid ""
-#~ "The text describing the recommended action to be taken by recipients of "
-#~ "the alert message"
+#~ "The text describing the recommended action to be taken by recipients of the "
+#~ "alert message"
 #~ msgstr "النص الذي يصف الإجراء الموصى باتخاذه من قبل مستلمي رسالة التنبيه"
 
 #~ msgid ""
-#~ "The effective time of the information of the alert message. If not set, "
-#~ "the sent date will be used"
+#~ "The effective time of the information of the alert message. If not set, the "
+#~ "sent date will be used"
 #~ msgstr ""
-#~ "الوقت الفعلي لمعلومات رسالة التنبيه. إذا لم يتم تعيينه، سيتم استخدام "
-#~ "تاريخ الإرسال"
+#~ "الوقت الفعلي لمعلومات رسالة التنبيه. إذا لم يتم تعيينه، سيتم استخدام تاريخ "
+#~ "الإرسال"
 
 #~ msgid ""
-#~ "The expected time of the beginning of the subject event of the alert "
-#~ "message"
+#~ "The expected time of the beginning of the subject event of the alert message"
 #~ msgstr "الوقت المتوقع لبداية حدث الموضوع لرسالة التنبيه"
 
 #~ msgid ""
 #~ "The expiry time of the information of the alert message. If not set, each "
-#~ "recipient is free to set its own policy as to when the message is no "
-#~ "longer in effect."
+#~ "recipient is free to set its own policy as to when the message is no longer "
+#~ "in effect."
 #~ msgstr ""
-#~ "وقت انتهاء معلومات رسالة التنبيه. إذا لم يتم التعيين، يكون لكل مستلم "
-#~ "الحرية في تعيين سياسته الخاصة فيما يتعلق بالوقت الذي تصبح فيه الرسالة غير "
-#~ "سارية."
+#~ "وقت انتهاء معلومات رسالة التنبيه. إذا لم يتم التعيين، يكون لكل مستلم الحرية "
+#~ "في تعيين سياسته الخاصة فيما يتعلق بالوقت الذي تصبح فيه الرسالة غير سارية."
 
 #~ msgid "Audience"
 #~ msgstr "جمهور"
@@ -1158,8 +1165,7 @@ msgstr ""
 #~ msgid "Parameters"
 #~ msgstr "حدود"
 
-#~ msgid ""
-#~ "The expiry time of the alert should be greater than the effective time"
+#~ msgid "The expiry time of the alert should be greater than the effective time"
 #~ msgstr "يجب أن يكون وقت انتهاء التنبيه أكبر من الوقت الفعلي"
 
 #~ msgid "The expiry time of the alert should be greater than the onset time"
@@ -1184,12 +1190,11 @@ msgstr ""
 #~ msgstr "سجل المنظمة (WMO) لسلطات التنبيه (OID)."
 
 #~ msgid ""
-#~ "WMO Register of Alerting Authorities Object Identifier (OID) of the "
-#~ "sending institution. This will be used to generate CAP messages "
-#~ "identifiers"
+#~ "WMO Register of Alerting Authorities Object Identifier (OID) of the sending "
+#~ "institution. This will be used to generate CAP messages identifiers"
 #~ msgstr ""
-#~ "سجل المنظمة (WMO) لسلطات التنبيه (OID) الخاص بالمؤسسة المرسلة. سيتم "
-#~ "استخدام هذا لإنشاء معرفات رسائل CAP"
+#~ "سجل المنظمة (WMO) لسلطات التنبيه (OID) الخاص بالمؤسسة المرسلة. سيتم استخدام "
+#~ "هذا لإنشاء معرفات رسائل CAP"
 
 #~ msgid "Logo of the sending institution"
 #~ msgstr "شعار المؤسسة المرسلة"
@@ -1207,8 +1212,8 @@ msgstr ""
 #~ "GeoJSON file of the UN Country Boundary. Setting this will enable the UN "
 #~ "Country Boundary check in the alertdrawing tools"
 #~ msgstr ""
-#~ "ملف GeoJSON لحدود الأمم المتحدة. سيؤدي ضبط هذا إلى تمكين فحص الحدود "
-#~ "القطرية للأمم المتحدة في أدوات رسم التنبيهات"
+#~ "ملف GeoJSON لحدود الأمم المتحدة. سيؤدي ضبط هذا إلى تمكين فحص الحدود القطرية "
+#~ "للأمم المتحدة في أدوات رسم التنبيهات"
 
 #~ msgid "Set a smaller number to improve perfomance for aggregators"
 #~ msgstr "قم بتعيين رقم أصغر لتحسين أداء أدوات التجميع"
@@ -1271,8 +1276,8 @@ msgstr ""
 #~ msgstr "المرافق والاتصالات والبنية التحتية الأخرى غير النقل"
 
 #~ msgid ""
-#~ "Chemical, Biological, Radiological, Nuclear or High-Yield Explosive "
-#~ "threat or attack"
+#~ "Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat "
+#~ "or attack"
 #~ msgstr "تهديد أو هجوم كيميائي أو بيولوجي أو إشعاعي أو نووي أو شديد الانفجار"
 
 #~ msgid "Other events"
@@ -1481,8 +1486,7 @@ msgstr ""
 #~ msgstr "لا يمكنك تحديد نفس التنبيه أكثر من مرة."
 
 #~ msgid ""
-#~ "Draft - A preliminary template or draft, not actionable in its current "
-#~ "form"
+#~ "Draft - A preliminary template or draft, not actionable in its current form"
 #~ msgstr "مسودة - قالب أو مسودة أولية، غير قابلة للتنفيذ في شكلها الحالي"
 
 #~ msgid "Actual - Actionable by all targeted recipients"
@@ -1501,8 +1505,7 @@ msgstr ""
 #~ msgid "System - For messages that support alert network internal functions"
 #~ msgstr "النظام - للرسائل التي تدعم الوظائف الداخلية لشبكة التنبيه"
 
-#~ msgid ""
-#~ "Alert - Initial information requiring attention by targeted recipients"
+#~ msgid "Alert - Initial information requiring attention by targeted recipients"
 #~ msgstr ""
 #~ "تنبيه - المعلومات الأولية التي تتطلب الاهتمام من قبل المستلمين المستهدفين"
 
@@ -1527,11 +1530,10 @@ msgstr ""
 #~ "الحال في مجال التقييد"
 
 #~ msgid ""
-#~ "Private - For dissemination only to specified addresses as in the "
-#~ "addresses field in the alert"
+#~ "Private - For dissemination only to specified addresses as in the addresses "
+#~ "field in the alert"
 #~ msgstr ""
-#~ "خاص - للنشر فقط على العناوين المحددة كما هو موضح في حقل العناوين في "
-#~ "التنبيه"
+#~ "خاص - للنشر فقط على العناوين المحددة كما هو موضح في حقل العناوين في التنبيه"
 
 #~ msgid "Id"
 #~ msgstr "بطاقة تعريف"
@@ -1566,8 +1568,8 @@ msgstr ""
 #~ "The text describing the rule for limiting distribution of the restricted "
 #~ "alert message. Used when scope value is Restricted"
 #~ msgstr ""
-#~ "النص الذي يصف قاعدة الحد من توزيع رسالة التنبيه المقيدة. يُستخدم عندما "
-#~ "تكون قيمة النطاق مقيدة"
+#~ "النص الذي يصف قاعدة الحد من توزيع رسالة التنبيه المقيدة. يُستخدم عندما تكون "
+#~ "قيمة النطاق مقيدة"
 
 #~ msgid "Restriction"
 #~ msgstr "تقييد"
@@ -1583,8 +1585,8 @@ msgstr ""
 #~ "message note is primarily intended for use with <status> 'Exercise' and "
 #~ "<msgType> 'Error'"
 #~ msgstr ""
-#~ "النص الذي يصف غرض رسالة التنبيه أو أهميتها. ملاحظة الرسالة مخصصة في "
-#~ "المقام الأول للاستخدام مع <status> 'Exercise' و<msgType> 'Error'"
+#~ "النص الذي يصف غرض رسالة التنبيه أو أهميتها. ملاحظة الرسالة مخصصة في المقام "
+#~ "الأول للاستخدام مع <status> 'Exercise' و<msgType> 'Error'"
 
 #~ msgid "Note"
 #~ msgstr "ملحوظة"
@@ -1593,8 +1595,8 @@ msgstr ""
 #~ msgstr "العناوين"
 
 #~ msgid ""
-#~ "The group listing of intended recipients of the alert message, if scope "
-#~ "is Private"
+#~ "The group listing of intended recipients of the alert message, if scope is "
+#~ "Private"
 #~ msgstr ""
 #~ "قائمة المجموعة للمستلمين المقصودين لرسالة التنبيه، إذا كان النطاق خاصًا"
 
@@ -1697,53 +1699,51 @@ msgstr ""
 #~ msgstr "تم نسخ الصفحة '%(page_title)s'."
 
 #~ msgid "English"
-#~ msgstr "English"
+#~ msgstr "إنجليزي"
 
 #~ msgid "French"
-#~ msgstr "French"
+#~ msgstr "فرنسي"
 
 #~ msgid ""
 #~ "The code denoting the category of the subject event of the alert message"
-#~ msgstr ""
-#~ "The code denoting the category of the subject event of the alert message"
+#~ msgstr "الرمز الذي يشير إلى فئة الحدث الموضوعي لرسالة التنبيه"
 
 #~ msgid "Event codes"
-#~ msgstr "Event codes"
+#~ msgstr "رموز الأحداث"
 
 #~ msgid "Time and date of origination of the alert"
-#~ msgstr "Time and date of origination of the alert"
+#~ msgstr "وقت وتاريخ إصدار التنبيه"
 
 #~ msgid "Unknown - Urgency not known"
-#~ msgstr "Unknown - Urgency not known"
+#~ msgstr "غير معروف - الاستعجال غير معروف"
 
 #~ msgid "Unknown - Certainty unknown"
-#~ msgstr "Unknown - Certainty unknown"
+#~ msgstr "غير معروف - اليقين غير معروف"
 
 #~ msgid "Intended audience"
-#~ msgstr "Intended audience"
+#~ msgstr "الجمهور المستهدف"
 
 #~ msgid "CAP Sender Identifier"
-#~ msgstr "CAP Sender Identifier"
+#~ msgstr "معرف مرسل CAP"
 
 #~ msgid "Can be the website link or email of the sending institution"
-#~ msgstr "Can be the website link or email of the sending institution"
+#~ msgstr ""
+#~ "يمكن أن يكون رابط الموقع الإلكتروني أو البريد الإلكتروني للمؤسسة المرسلة"
 
 #~ msgid "Audience Type"
-#~ msgstr "Audience Type"
+#~ msgstr "نوع الجمهور"
 
 #~ msgid "Audience Types"
-#~ msgstr "Audience Types"
+#~ msgstr "أنواع الجمهور"
 
 #~ msgid ""
 #~ "Acknowledge - Acknowledges receipt and acceptance of the message(s) "
 #~ "identified in references field"
-#~ msgstr ""
-#~ "Acknowledge - Acknowledges receipt and acceptance of the message(s) "
-#~ "identified in references field"
+#~ msgstr "إقرار - إقرار باستلام وقبول الرسالة (الرسائل) المحددة في حقل المراجع"
 
 #~ msgid ""
 #~ "Error -  Indicates rejection of the message(s) identified in references; "
 #~ "explanation SHOULD appear in note field"
 #~ msgstr ""
-#~ "Error -  Indicates rejection of the message(s) identified in references; "
-#~ "explanation SHOULD appear in note field"
+#~ "خطأ - يشير إلى رفض الرسالة (الرسائل) المحددة في المراجع؛ يجب أن يظهر الشرح "
+#~ "في حقل الملاحظة"

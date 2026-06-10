@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-11 13:58+0000\n"
+"POT-Creation-Date: 2026-06-05 11:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -928,62 +928,74 @@ msgstr "Outro"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:19
 #: capcomposer/src/capcomposer/capeditor/constants.py:197
+#: capcomposer/src/capcomposer/capeditor/constants.py:198
 msgid "Immediate"
 msgstr "Imediato"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:20
 #: capcomposer/src/capcomposer/capeditor/constants.py:202
+#: capcomposer/src/capcomposer/capeditor/constants.py:203
 #: capcomposer/src/capcomposer/capeditor/models.py:323
 msgid "Expected"
 msgstr "Esperado"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:21
 #: capcomposer/src/capcomposer/capeditor/constants.py:207
+#: capcomposer/src/capcomposer/capeditor/constants.py:208
 msgid "Future"
 msgstr "Futuro"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:22
 #: capcomposer/src/capcomposer/capeditor/constants.py:212
+#: capcomposer/src/capcomposer/capeditor/constants.py:213
 msgid "Past"
 msgstr "Passado"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:27
+#: capcomposer/src/capcomposer/capeditor/constants.py:154
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:146
 msgid "Extreme"
 msgstr "Extremo"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:28
+#: capcomposer/src/capcomposer/capeditor/constants.py:163
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:152
 msgid "Severe"
 msgstr "Forte"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:29
+#: capcomposer/src/capcomposer/capeditor/constants.py:172
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:158
 msgid "Moderate"
 msgstr "Moderado"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:30
+#: capcomposer/src/capcomposer/capeditor/constants.py:181
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:164
 msgid "Minor"
 msgstr "Menor"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:35
 #: capcomposer/src/capcomposer/capeditor/constants.py:225
+#: capcomposer/src/capcomposer/capeditor/constants.py:226
 msgid "Observed"
 msgstr "Observado"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:36
 #: capcomposer/src/capcomposer/capeditor/constants.py:230
+#: capcomposer/src/capcomposer/capeditor/constants.py:231
 msgid "Likely"
 msgstr "Provável"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:37
 #: capcomposer/src/capcomposer/capeditor/constants.py:235
+#: capcomposer/src/capcomposer/capeditor/constants.py:236
 msgid "Possible"
 msgstr "Possível"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:38
 #: capcomposer/src/capcomposer/capeditor/constants.py:240
+#: capcomposer/src/capcomposer/capeditor/constants.py:241
 msgid "Unlikely"
 msgstr "Improvável"
 
@@ -1169,8 +1181,11 @@ msgstr "Severidade menor"
 msgid "Unknown severity"
 msgstr "Severidade desconhecida"
 
+#: capcomposer/src/capcomposer/capeditor/constants.py:190
 #: capcomposer/src/capcomposer/capeditor/constants.py:217
+#: capcomposer/src/capcomposer/capeditor/constants.py:218
 #: capcomposer/src/capcomposer/capeditor/constants.py:245
+#: capcomposer/src/capcomposer/capeditor/constants.py:246
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:171
 msgid "Unknown"
 msgstr "Desconhecido"
@@ -1203,13 +1218,18 @@ msgstr "URL XML de alerta CAP"
 msgid "CAP File"
 msgstr "Arquivo CAP"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:35
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:21
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:87
+msgid "Include GUID"
+msgstr "Incluir GUID"
+
 #: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:37
 #: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:39
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:41
 msgid "This field is required."
 msgstr "Este campo é obrigatório."
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:75
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:78
 msgid ""
 "An error occurred while trying to load the CAP XML. Please check the data "
 "and try again."
@@ -1447,7 +1467,7 @@ msgid "Issued"
 msgstr "Publicado"
 
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:95
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:172
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:182
 msgid "Urgency:"
 msgstr "Urgência:"
 
@@ -1521,55 +1541,59 @@ msgstr "Status:"
 msgid "Message Type:"
 msgstr "Tipo de mensagem:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:112
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:101
+msgid "GUID:"
+msgstr "GUIA:"
+
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:122
 msgid "Create Draft Alert"
 msgstr "Criar alerta de rascunho"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:146
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:156
 msgid "Language:"
 msgstr "Linguagem:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:154
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:164
 msgid "Category:"
 msgstr "Categoria:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:164
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:174
 msgid "Event:"
 msgstr "Evento:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:180
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:190
 msgid "Severity:"
 msgstr "Gravidade:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:188
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:198
 msgid "Certainty:"
 msgstr "Certeza:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:199
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:209
 msgid "Effective:"
 msgstr "Eficaz:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:209
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:219
 msgid "Onset:"
 msgstr "Início:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:219
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:229
 msgid "Expires:"
 msgstr "Expira:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:231
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:241
 msgid "Headline:"
 msgstr "Título:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:239
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:249
 msgid "Description:"
 msgstr "Descrição:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:248
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:258
 msgid "Instruction:"
 msgstr "Instrução:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:258
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:268
 msgid "Area:"
 msgstr "Área:"
 
