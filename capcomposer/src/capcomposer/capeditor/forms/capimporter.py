@@ -1,6 +1,7 @@
 import requests
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from wagtail.models import Site
 
 from capcomposer.capeditor.caputils import cap_xml_to_alert_data
 from capcomposer.capeditor.errors import CAPImportError
@@ -12,17 +13,26 @@ class CAPLoadForm(forms.Form):
         ('url', _('URL')),
         ('file', _('File')),
     )
-    
+
     load_from = forms.ChoiceField(choices=LOAD_FROM_CHOICES, initial="text", widget=forms.RadioSelect,
                                   label=_('Load from'), )
     text = forms.CharField(required=False, widget=forms.Textarea, label=_('Paste your CAP XML here'))
     url = forms.URLField(required=False, label=_('CAP Alert XML URL'))
     file = forms.FileField(required=False, label=_('CAP File'))
     include_guid = forms.BooleanField(required=False, label=_('Include GUID'))
-    
-    def __init__(self, *args, **kwargs):
+    site = forms.ModelChoiceField(
+        queryset=Site.objects.all(),
+        label=_('Site'),
+        help_text=_('Select the site to import this alert into.'),
+    )
+
+    def __init__(self, *args, request=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['file'].widget.attrs.update({'accept': '.xml'})
+        if request:
+            current_site = Site.find_for_request(request)
+            if current_site:
+                self.initial['site'] = current_site.pk
     
     def clean(self):
         cleaned_data = super().clean()
@@ -85,3 +95,8 @@ class CAPLoadForm(forms.Form):
 class CAPImportForm(forms.Form):
     alert_data = forms.JSONField(widget=forms.HiddenInput)
     include_guid = forms.BooleanField(required=True, label=_('Include GUID'), widget=forms.HiddenInput)
+    site = forms.ModelChoiceField(
+        queryset=Site.objects.all(),
+        widget=forms.HiddenInput,
+        required=False,
+    )

@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models.signals import post_save, post_delete
@@ -5,6 +6,7 @@ from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from django_celery_beat.models import PeriodicTask
 from wagtail.admin.panels import FieldPanel
+from wagtail.models import Site
 
 
 class ExternalAlertFeed(models.Model):
@@ -34,6 +36,15 @@ class ExternalAlertFeed(models.Model):
                                                                              " for moderation"),
                                                 help_text=_("Check to automatically submit imported alerts "
                                                             "for moderation. Otherwise, alerts will be saved as drafts."))
+    site = models.ForeignKey(
+        Site,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="external_feeds",
+        help_text=_("The site this feed is associated with."),
+        verbose_name=_("Site"),
+    )
     
     panels = [
         FieldPanel('name'),
@@ -42,8 +53,15 @@ class ExternalAlertFeed(models.Model):
         FieldPanel('check_interval'),
         FieldPanel('validate_xml_signature'),
         FieldPanel('submit_for_moderation'),
+        FieldPanel('site'),
     ]
     
+    def clean(self):
+        if not self.site_id:
+            raise ValidationError({
+                "site": _("A site must be selected for this feed.")
+            })
+
     class Meta:
         verbose_name = _("External Alert Feed")
         verbose_name_plural = _("External Alert Feeds")

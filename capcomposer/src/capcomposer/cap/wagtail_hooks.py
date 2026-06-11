@@ -178,6 +178,10 @@ class CAPAlertWebhookAdmin(ModelAdmin):
     model = CAPAlertWebhook
     menu_label = _('Webhooks')
     menu_icon = 'multi-cluster-sector'
+    
+    def get_queryset(self, request):
+        site = Site.find_for_request(request)
+        return super().get_queryset(request).filter(site=site)
 
 
 class CAPAlertWebhookEventPermissionHelper(PermissionHelper):
@@ -203,6 +207,10 @@ class CAPAlertWebhookEventAdmin(ModelAdmin):
     inspect_view_enabled = True
     
     permission_helper_class = CAPAlertWebhookEventPermissionHelper
+    
+    def get_queryset(self, request):
+        site = Site.find_for_request(request)
+        return super().get_queryset(request).filter(webhook__site=site)
 
 
 class CAPAlertMQTTAdmin(ModelAdmin):
@@ -214,6 +222,10 @@ class CAPAlertMQTTAdmin(ModelAdmin):
     search_fields = ('name', 'wis2box_metadata_id')
     
     form_view_extra_js = ['cap/js/mqtt_collapse_panels.js']
+    
+    def get_queryset(self, request):
+        site = Site.find_for_request(request)
+        return super().get_queryset(request).filter(site=site)
 
 
 class CAPAlertMQTTEventPermissionHelper(PermissionHelper):
@@ -239,12 +251,20 @@ class CAPAlertMQTTEventAdmin(ModelAdmin):
     inspect_view_enabled = True
     
     permission_helper_class = CAPAlertMQTTEventPermissionHelper
+    
+    def get_queryset(self, request):
+        site = Site.find_for_request(request)
+        return super().get_queryset(request).filter(broker__site=site)
 
 
 class CAPExternalFeedAdmin(ModelAdmin):
     model = ExternalAlertFeed
     menu_label = _('External CAP Alert Feeds')
     menu_icon = 'link'
+    
+    def get_queryset(self, request):
+        site = Site.find_for_request(request)
+        return super().get_queryset(request).filter(site=site)
 
 
 class CAPMenuGroupAdminMenuItem(GroupMenuItem):
@@ -461,8 +481,10 @@ def before_delete_cap_alert_page(request, page):
 
 
 @hooks.register("before_import_cap_alert")
-def import_cap_alert(request, alert_data, include_guid=False):
-    new_cap_alert_page = create_draft_alert_from_alert_data(alert_data, request, include_guid=include_guid)
+def import_cap_alert(request, alert_data, include_guid=False, site=None):
+    new_cap_alert_page = create_draft_alert_from_alert_data(
+        alert_data, request, site=site, include_guid=include_guid
+    )
     
     if not new_cap_alert_page:
         return None

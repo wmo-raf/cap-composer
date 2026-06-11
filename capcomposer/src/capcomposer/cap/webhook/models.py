@@ -1,7 +1,9 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from modelcluster.models import ClusterableModel
 from wagtail.admin.panels import FieldPanel
+from wagtail.models import Site
 
 
 class CAPAlertWebhook(ClusterableModel):
@@ -13,15 +15,30 @@ class CAPAlertWebhook(ClusterableModel):
     retry_on_failure = models.BooleanField(default=True, verbose_name=_("Retry on failure"))
     include_auth_header = models.BooleanField(default=False, verbose_name=_("Include Header for Authentication"))
     header_value = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Header Value"))
-    
+    site = models.ForeignKey(
+        Site,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="webhooks",
+        verbose_name=_("Site"),
+    )
+
     panels = [
         FieldPanel("name"),
         FieldPanel("url"),
         FieldPanel("include_auth_header"),
         FieldPanel("header_value"),
         FieldPanel("active"),
+        FieldPanel("site"),
     ]
     
+    def clean(self):
+        if not self.site_id:
+            raise ValidationError({
+                "site": _("A site must be selected for this webhook.")
+            })
+
     class Meta:
         verbose_name = _("CAP Alert Webhook")
         verbose_name_plural = _("CAP Alert Webhooks")

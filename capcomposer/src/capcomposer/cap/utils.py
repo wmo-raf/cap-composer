@@ -292,18 +292,23 @@ def get_cap_audience_list_for_site(site):
 def create_draft_alert_from_alert_data(
         alert_data,
         request=None,
+        site=None,
         update_event_list=False,
         update_contact_list=False,
         submit_for_moderation=False,
         include_guid=False
 ):
     from .models import CapAlertPage, CapAlertListPage
-    
-    if request:
+
+    if site:
+        resolved_site = site
+        cap_settings = CapSetting.for_site(site)
+    elif request:
+        resolved_site = Site.find_for_request(request)
         cap_settings = CapSetting.for_request(request)
     else:
-        site = Site.objects.get(is_default_site=True)
-        cap_settings = CapSetting.for_site(site)
+        resolved_site = Site.objects.filter(is_default_site=True).first()
+        cap_settings = CapSetting.for_site(resolved_site)
     
     base_data = {
         "imported": True,  # mark this alert page as imported
@@ -510,7 +515,12 @@ def create_draft_alert_from_alert_data(
     new_cap_alert_page = CapAlertPage(**base_data, live=False)
     new_cap_alert_page.info = StreamValue(new_cap_alert_page.info.stream_block, info_blocks, is_lazy=True)
     
-    cap_list_page = CapAlertListPage.objects.live().first()
+    if resolved_site:
+        cap_list_page = CapAlertListPage.objects.live().descendant_of(
+            resolved_site.root_page, inclusive=True
+        ).first()
+    else:
+        cap_list_page = CapAlertListPage.objects.live().first()
     
     if cap_list_page:
         cap_list_page.add_child(instance=new_cap_alert_page)
