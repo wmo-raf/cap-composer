@@ -13,15 +13,9 @@ from .http import prepare_request
 def fire_alert_webhooks(cap_alert_id):
     from capcomposer.cap.models import CapAlertPage
     from .models import CAPAlertWebhook, CAPAlertWebhookEvent
-    
-    webhooks = CAPAlertWebhook.objects.filter(active=True)
-    
-    if not webhooks:
-        logging.warning("No active webhooks found")
-        return
-    
+
     cap_alert = get_object_or_none(CapAlertPage, id=cap_alert_id)
-    
+
     if not cap_alert:
         logging.warning(f"CAP Alert: {cap_alert_id} not found")
         return
@@ -33,9 +27,20 @@ def fire_alert_webhooks(cap_alert_id):
     if not cap_alert.status == "Actual" and not cap_alert.scope == "Public":
         logging.warning(f"CAP Alert: {cap_alert_id} is not Public")
         return
-    
+
+    site = cap_alert.get_site()
+    if not site:
+        logging.warning(f"CAP Alert: {cap_alert_id} has no associated site, skipping webhook fire")
+        return
+
+    webhooks = CAPAlertWebhook.objects.filter(active=True, site=site)
+
+    if not webhooks:
+        logging.warning("No active webhooks found")
+        return
+
     alert_xml, signed = serialize_and_sign_cap_alert(cap_alert)
-    
+
     for webhook in webhooks:
         req = prepare_request(webhook, alert_xml)
         

@@ -27,38 +27,42 @@ def publish_cap_to_all_mqtt_brokers(cap_alert_id):
     
     logging.info(
         f"Starting publish_cap_to_all_mqtt_brokers for CAP Alert ID: {cap_alert_id}")
-    
-    # Get all active brokers
-    brokers = CAPAlertMQTTBroker.objects.filter(active=True)
-    
-    if not brokers:
-        logging.warning("No MQTT brokers found")
-        return
-    
+
     # Get the cap alert data to be published
     cap_alert = get_object_or_none(CapAlertPage, id=cap_alert_id)
     logging.info(f"CAP Alert: {cap_alert} found")
-    
+
     if not cap_alert:
         logging.warning(f"CAP Alert: {cap_alert_id} not found")
         return
-    
+
     if not cap_alert.live:
         logging.warning(f"CAP Alert: {cap_alert_id} is not published")
         return
-    
+
     if cap_alert.status != "Actual":
         logging.warning(f"CAP Alert: {cap_alert_id} is not actionable")
         return
-    
+
+    site = cap_alert.get_site()
+    if not site:
+        logging.warning(f"CAP Alert: {cap_alert_id} has no associated site, skipping MQTT publish")
+        return
+
+    brokers = CAPAlertMQTTBroker.objects.filter(active=True, site=site)
+
+    if not brokers:
+        logging.warning("No MQTT brokers found")
+        return
+
     # Get the processed CAP alert XML
     alert_xml, signed = serialize_and_sign_cap_alert(cap_alert)
-    
+
     if not signed:
         logging.warning(f"CAP Alert: {cap_alert_id} not signed")
         # Continue to publish anyway, the acceptance/rejection of non-signed
         # alerts should be handled on the receiving side (e.g. a wis2box)
-    
+
     for broker in brokers:
         publish_cap_to_each_mqtt_broker(cap_alert, alert_xml, broker)
 

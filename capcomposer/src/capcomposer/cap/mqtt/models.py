@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.models import Site
 
 from .utils import encrypt_password
 
@@ -43,6 +44,15 @@ class CAPAlertMQTTBroker(models.Model):
                                                "before proceeding."))
     active = models.BooleanField(default=True, verbose_name=_("Active"),
                                  help_text=_("Automatically publish CAP alerts to this broker"))
+    site = models.ForeignKey(
+        Site,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="mqtt_brokers",
+        help_text=_("The site this broker is associated with."),
+        verbose_name=_("Site"),
+    )
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     retry_on_failure = models.BooleanField(default=True, verbose_name=_("Retry on failure"))
@@ -61,6 +71,7 @@ class CAPAlertMQTTBroker(models.Model):
         FieldPanel("wis2box_metadata_id"),
         FieldPanel("topic"),
         FieldPanel("active"),
+        FieldPanel("site"),
     ]
     
     def clean(self):
@@ -89,6 +100,11 @@ class CAPAlertMQTTBroker(models.Model):
         if not self.password and not self.new_password:
             raise ValidationError({
                 "new_password": _("Password is required if creating a new broker")
+            })
+
+        if not self.site_id:
+            raise ValidationError({
+                "site": _("A site must be selected for this broker.")
             })
     
     def save(self, *args, **kwargs):

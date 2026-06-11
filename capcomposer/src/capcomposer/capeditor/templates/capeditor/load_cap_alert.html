@@ -25,10 +25,10 @@
             {% endif %}
             {% csrf_token %}
             {% for field in form %}
-                {% if field.name != "load_from" and field.name != "include_guid" %}
-                    {% include "wagtailadmin/shared/field.html" with classname="w-hidden" %}
-                {% else %}
+                {% if field.name == "load_from" or field.name == "include_guid" or field.name == "site" %}
                     {% include "wagtailadmin/shared/field.html" %}
+                {% else %}
+                    {% include "wagtailadmin/shared/field.html" with classname="w-hidden" %}
                 {% endif %}
             {% endfor %}
 
