@@ -146,12 +146,26 @@ class CAPAlertMQTTBrokerEvent(models.Model):
                               editable=False)
     retries = models.IntegerField(default=0, verbose_name=_("Retries"))
     error = models.TextField(blank=True, null=True, verbose_name=_("Last Error Message"))
+    source_event = models.ForeignKey(
+        "self",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="republishes",
+        verbose_name=_("Republished from"),
+        help_text=_("The original event this republish was triggered from."),
+    )
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
+        ordering = ["-created"]
         verbose_name = _("MQTT Broker Event")
         verbose_name_plural = _("MQTT Broker Events")
-    
+
+    @property
+    def is_republish(self):
+        return self.source_event_id is not None
+
     def __str__(self):
         return f"{self.broker.name} - {self.alert.title}"

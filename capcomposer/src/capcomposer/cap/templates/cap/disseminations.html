@@ -1,0 +1,120 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+
+{% block titletag %}
+    {% blocktrans with title=alert.title %}
+        Disseminations for {{ title }}
+    {% endblocktrans %}
+{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        .disseminations-page {
+            padding: 0 30px 40px;
+        }
+
+        .dissemination-target {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .dissemination-target__head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 18px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .dissemination-target__title {
+            font-weight: 600;
+        }
+
+        .dissemination-target__meta {
+            color: #5c5c5c;
+            font-size: 0.85em;
+        }
+
+        .dissemination-attempts {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .dissemination-attempts th, .dissemination-attempts td {
+            text-align: left;
+            padding: 8px 18px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9em;
+        }
+
+        .status-badge {
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .status-SUCCESS {
+            background: #e3f5e1;
+            color: #1d7c2b;
+        }
+
+        .status-FAILURE {
+            background: #fbe3e3;
+            color: #b32d2d;
+        }
+
+        .status-PENDING {
+            background: #fff3d6;
+            color: #8a6d1a;
+        }
+
+        .dissemination-empty {
+            color: #5c5c5c;
+            font-style: italic;
+            padding: 8px 0 24px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title=_("Disseminations") subtitle=alert.title icon="resubmit" %}
+
+    <div class="disseminations-page">
+        <p>
+            <a href="{{ alerts_index_url }}" class="button button-secondary button-small">
+                {% trans "Back to alerts" %}
+            </a>
+        </p>
+
+        <h2>
+            {% trans "MQTT Brokers" %}
+        </h2>
+        {% if mqtt_groups %}
+            {% for group in mqtt_groups %}
+                {% include "cap/includes/dissemination_target.html" with group=group can_republish=can_republish %}
+            {% endfor %}
+        {% else %}
+            <p class="dissemination-empty">
+                {% trans "No MQTT broker events for this alert." %}
+            </p>
+        {% endif %}
+
+        <h2>
+            {% trans "Webhooks" %}
+        </h2>
+        {% if webhook_groups %}
+            {% for group in webhook_groups %}
+                {% include "cap/includes/dissemination_target.html" with group=group can_republish=can_republish %}
+            {% endfor %}
+        {% else %}
+            <p class="dissemination-empty">
+                {% trans "No webhook events for this alert." %}
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}
