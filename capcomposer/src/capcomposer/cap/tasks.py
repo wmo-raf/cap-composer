@@ -47,6 +47,34 @@ def handle_publish_alert_to_webhook(self, alert_id):
 
 
 @app.task(base=Singleton, bind=True)
+def handle_republish_alert_to_mqtt_broker(self, event_id):
+    from .mqtt.models import CAPAlertMQTTBrokerEvent
+    from .mqtt.publish import republish_cap_to_broker
+
+    event = CAPAlertMQTTBrokerEvent.objects.filter(id=event_id).first()
+    if not event:
+        logger.warning(f"MQTT broker event {event_id} not found, skipping republish")
+        return
+
+    logger.info(f"Republishing alert '{event.alert}' to MQTT broker '{event.broker}'...")
+    republish_cap_to_broker(event)
+
+
+@app.task(base=Singleton, bind=True)
+def handle_republish_alert_to_webhook(self, event_id):
+    from .webhook.models import CAPAlertWebhookEvent
+    from .webhook.utils import refire_alert_webhook
+
+    event = CAPAlertWebhookEvent.objects.filter(id=event_id).first()
+    if not event:
+        logger.warning(f"Webhook event {event_id} not found, skipping republish")
+        return
+
+    logger.info(f"Republishing alert '{event.alert}' to webhook '{event.webhook}'...")
+    refire_alert_webhook(event)
+
+
+@app.task(base=Singleton, bind=True)
 def handle_generate_multimedia(self, alert_id):
     alert = CapAlertPage.objects.get(id=alert_id)
     logger.info(f"Generating CAP multimedia for alert '{alert}'...")
