@@ -333,6 +333,9 @@ CAP_LIST_PAGE_PARENT_PAGE_TYPES = env.list("CAP_LIST_PAGE_PARENT_PAGE_TYPES", de
 CAP_MAX_LIST_PAGE_COUNT = env("CAP_MAX_LIST_PAGE_COUNT", default=None)
 CAP_WIS2BOX_INTERNAL_TOPIC = env.str("CAP_WIS2BOX_INTERNAL_TOPIC", default="wis2box/cap/publication")
 CAP_ALLOW_EDITING = env.bool("CAP_ALLOW_EDITING", default=False)
+# Minutes after which a stuck PENDING dissemination attempt is treated as stale
+# and no longer blocks an operator-triggered republish for the same target.
+CAP_REPUBLISH_PENDING_TIMEOUT_MINUTES = env.int("CAP_REPUBLISH_PENDING_TIMEOUT_MINUTES", default=10)
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = env.int("DATA_UPLOAD_MAX_MEMORY_SIZE", default=26214400)  # 25MB
 

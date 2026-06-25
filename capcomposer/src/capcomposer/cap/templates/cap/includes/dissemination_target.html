@@ -1,0 +1,46 @@
+{% load i18n %}
+<div class="dissemination-target">
+    <div class="dissemination-target__head">
+        <div>
+            <div class="dissemination-target__title">{{ group.target }}</div>
+            <div class="dissemination-target__meta">
+                {% blocktrans trimmed with status=group.latest.status time=group.latest.created %}
+                    Latest: {{ status }} at {{ time }}
+                {% endblocktrans %}
+            </div>
+        </div>
+        <div>
+            <span class="status-badge status-{{ group.latest.status }}">{{ group.latest.get_status_display }}</span>
+            {% if can_republish %}
+                <a href="{{ group.republish_url }}" class="button button-small">{% trans "Republish" %}</a>
+            {% endif %}
+        </div>
+    </div>
+    <table class="dissemination-attempts">
+        <thead>
+        <tr>
+            <th>{% trans "Time" %}</th>
+            <th>{% trans "Status" %}</th>
+            <th>{% trans "Type" %}</th>
+            <th>{% trans "Error" %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for attempt in group.attempts %}
+            <tr>
+                <td>{{ attempt.created }}</td>
+                <td><span class="status-badge status-{{ attempt.status }}">{{ attempt.get_status_display }}</span></td>
+                <td>
+                    {% if attempt.is_republish %}
+                        {% blocktrans trimmed with id=attempt.source_event_id %}Republish of #
+                            {{ id }}{% endblocktrans %}
+                    {% else %}
+                        {% trans "Original" %}
+                    {% endif %}
+                </td>
+                <td>{{ attempt.error|default:"—" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,44 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+
+{% block titletag %}
+    {% trans "Republish CAP alert" %}
+{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title=_("Republish CAP alert") icon="resubmit" %}
+
+    <div class="nice-padding">
+        {% if guard_error %}
+            <div class="help-block help-critical">
+                <p>{{ guard_error }}</p>
+            </div>
+            <p>
+                <a href="{{ next }}" class="button button-secondary">
+                    {% trans "Back" %}
+                </a>
+            </p>
+        {% else %}
+            <p>
+                {% blocktrans trimmed with alert=alert target=target target_verbose=target_verbose %}
+                    You are about to republish the alert <b>{{ alert }}</b>
+                    to the {{ target_verbose }} <b>{{ target }}</b>.
+                {% endblocktrans %}
+            </p>
+            <p>
+                {% trans "This re-sends the CAP XML to the selected target. A new attempt will be recorded." %}
+            </p>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <button type="submit" class="button">
+                    {% trans "Yes, republish" %}
+                </button>
+                <a href="{{ next }}" class="button button-secondary">
+                    {% trans "Cancel" %}
+                </a>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
