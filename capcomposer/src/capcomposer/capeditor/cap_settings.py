@@ -162,7 +162,7 @@ class HazardEventTypes(Orderable):
         ('Other', _("Other events")),
     )
     
-    setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="hazard_event_types")
+    setting = ParentalKey(CapSetting, on_delete=models.CASCADE, related_name="hazard_event_types")
     is_in_wmo_event_types_list = models.BooleanField(default=True,
                                                      verbose_name=_("Select from WMO list of Hazards Event Types"))
     event = models.CharField(max_length=35, verbose_name=_("Hazard"), help_text=_("Name of Hazard"))
@@ -200,7 +200,7 @@ class HazardEventTypes(Orderable):
 
 
 class PredefinedAlertArea(Orderable):
-    setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="predefined_alert_areas")
+    setting = ParentalKey(CapSetting, on_delete=models.CASCADE, related_name="predefined_alert_areas")
     name = models.CharField(max_length=50, verbose_name=_("Name"))
     geom = models.MultiPolygonField(srid=4326, verbose_name=_("Area"))
     
@@ -226,7 +226,7 @@ register_model_chooser(PredefinedAlertArea)
 
 
 class AlertLanguage(Orderable):
-    setting = ParentalKey(CapSetting, on_delete=models.PROTECT, related_name="alert_languages")
+    setting = ParentalKey(CapSetting, on_delete=models.CASCADE, related_name="alert_languages")
     code = models.CharField(max_length=10, verbose_name=_("Language Code"), help_text=_("ISO 639-1 language code"))
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Language Name"))
     
