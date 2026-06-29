@@ -206,7 +206,7 @@ OASIS_EVENT_TERMS = [
     {"code": "OET-199", "term": "traffic", "categories": ["Transport"]},
     {"code": "OET-200", "term": "transportation", "categories": ["Transport"]},
     {"code": "OET-201", "term": "tropical depression", "categories": ["Met"]},
-    {"code": "OET-202", "term": "tropical storm", "categories": ["Mer"]},
+    {"code": "OET-202", "term": "tropical storm", "categories": ["Met"]},
     {"code": "OET-203", "term": "tsunami", "categories": ["Geo"]},
     {"code": "OET-204", "term": "typhoon", "categories": ["Met"]},
     {"code": "OET-205", "term": "ultraviolet", "categories": ["Safety"]},
