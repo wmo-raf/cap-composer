@@ -44,7 +44,8 @@ from .republish import republish_mqtt_event, republish_webhook_event, disseminat
 from .utils import (
     create_draft_alert_from_alert_data
 )
-from .views import create_cap_png_pdf, send_private_alert_email_view, cap_statistics_view, cap_statistics_export_csv
+from .views import create_cap_png_pdf, send_private_alert_email_view, cap_statistics_view, cap_statistics_export_csv, \
+    create_alert_from_geometry
 
 CAN_EDIT_CAP = getattr(settings, "CAP_ALLOW_EDITING", False)
 
@@ -60,6 +61,7 @@ def urlconf_cap():
         path('cap/republish/mqtt/<int:event_id>/', republish_mqtt_event, name='republish_mqtt_event'),
         path('cap/republish/webhook/<int:event_id>/', republish_webhook_event, name='republish_webhook_event'),
         path('cap/disseminations/<int:alert_id>/', disseminations_view, name='cap_disseminations'),
+        path('cap/create-from-geometry/', create_alert_from_geometry, name='cap_alert_create_from_geometry'),
     ]
 
 

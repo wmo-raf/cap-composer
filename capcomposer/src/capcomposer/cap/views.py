@@ -1,9 +1,10 @@
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.syndication.views import Feed
 from django.core.validators import validate_email
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -13,7 +14,9 @@ from django.utils.feedgenerator import rfc2822_date
 from django.utils.translation import gettext as _
 from django.utils.xmlutils import SimplerXMLGenerator
 from wagtail.admin import messages
+from wagtail.admin.views.pages.create import CreateView
 from wagtail.api.v2.utils import get_full_url
+from wagtail.blocks import StreamValue
 from wagtail_modeladmin.helpers import AdminURLHelper
 import markdown
 
@@ -474,3 +477,137 @@ def cap_statistics_export_csv(request):
     response = HttpResponse(csv_content, content_type="text/csv")
     response["Content-Disposition"] = 'attachment; filename="cap_alerts_statistics.csv"'
     return response
+
+
+def _extract_polygon_geometry(geojson):
+    """
+    Return the first Polygon/MultiPolygon geometry found in a GeoJSON geometry,
+    Feature or FeatureCollection, or None if none is found.
+    """
+    if not isinstance(geojson, dict):
+        return None
+
+    geojson_type = geojson.get("type")
+
+    if geojson_type == "FeatureCollection":
+        for feature in geojson.get("features") or []:
+            geometry = _extract_polygon_geometry(feature)
+            if geometry is not None:
+                return geometry
+        return None
+
+    if geojson_type == "Feature":
+        return _extract_polygon_geometry(geojson.get("geometry"))
+
+    if geojson_type in ("Polygon", "MultiPolygon"):
+        return geojson
+
+    return None
+
+
+def _build_area_info_blocks(request):
+    """
+    Build the ``info`` StreamField raw value with a single Alert Information block
+    whose area is pre-filled from the ``geometry`` parameter, or None if no valid
+    Polygon/MultiPolygon geometry is provided.
+
+    The geometry is read from POST (the MapViewer submits it as a form body to
+    avoid GET URL length limits) with a GET fallback for manual testing.
+    """
+    data = request.POST if request.method == "POST" else request.GET
+
+    geometry_param = data.get("geometry")
+    if not geometry_param:
+        return None
+
+    try:
+        geojson = json.loads(geometry_param)
+    except (ValueError, TypeError):
+        return None
+
+    geometry = _extract_polygon_geometry(geojson)
+    if geometry is None:
+        return None
+
+    area_desc = (data.get("areaDesc") or "").strip()
+
+    return [
+        {
+            "type": "alert_info",
+            "value": {
+                "area": [
+                    {
+                        "type": "polygon_block",
+                        "value": {
+                            "areaDesc": area_desc,
+                            "polygon": json.dumps(geometry),
+                        },
+                    }
+                ],
+            },
+        }
+    ]
+
+
+class CreateAlertFromGeometryView(CreateView):
+    """
+    Wagtail page CreateView that opens the standard 'add CAP alert' editor with the
+    Alert Information area pre-filled from a GeoJSON geometry.
+
+    The MapViewer submits the geometry via POST (a hidden form targeting a new
+    tab) to avoid GET URL length limits; a GET fallback is kept for manual
+    testing. In both cases nothing is written to the database — POST here only
+    re-renders the prefilled add form, it does NOT run the CreateView create
+    logic. Saving/publishing happens through the normal Wagtail add page flow
+    (the rendered form posts to ``wagtailadmin_pages:add`` with its own CSRF
+    token), so all validation and the usual field prefills apply as normal.
+    """
+
+    def _prefilled_form_response(self, request):
+        info_blocks = _build_area_info_blocks(request)
+        if info_blocks:
+            self.page.info = StreamValue(
+                self.page.info.stream_block, info_blocks, is_lazy=True
+            )
+        return super().get(request)
+
+    def get(self, request):
+        return self._prefilled_form_response(request)
+
+    def post(self, request):
+        # Render the prefilled form; deliberately NOT super().post() (no create).
+        return self._prefilled_form_response(request)
+
+
+@csrf_exempt
+@login_required
+def create_alert_from_geometry(request):
+    """
+    Entry point used by the MapViewer 'Create CAP alert' button. Resolves the CAP
+    alert list page and renders the pre-filled add form via
+    :class:`CreateAlertFromGeometryView`. Permissions are enforced by the underlying
+    Wagtail CreateView (``can_add_subpage``).
+
+    The geometry is submitted as the ``geometry`` form field (POST body, URL-encoded
+    GeoJSON) so large polygons don't hit GET URL length limits; a GET ``geometry``
+    query param is still accepted for manual testing. A bare geometry, a Feature or a
+    FeatureCollection is accepted. An optional ``areaDesc`` field is used as the area
+    description.
+
+    ``csrf_exempt`` is safe here: this view only renders the prefilled add form and
+    writes nothing to the database (``@login_required`` still applies), while the
+    actual page creation posts to the CSRF-protected ``wagtailadmin_pages:add``.
+    """
+    cap_list_page = CapAlertListPage.objects.live().first()
+
+    if not cap_list_page:
+        return HttpResponseBadRequest(
+            _("No CAP alert list page found. Please create one before adding alerts.")
+        )
+
+    return CreateAlertFromGeometryView.as_view()(
+        request,
+        content_type_app_name="cap",
+        content_type_model_name="capalertpage",
+        parent_page_id=cap_list_page.id,
+    )
