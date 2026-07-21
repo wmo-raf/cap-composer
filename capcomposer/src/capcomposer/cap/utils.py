@@ -149,16 +149,20 @@ def create_cap_alert_multi_media(cap_alert_page_id, clear_cache_on_success=False
     logger.info(f"[CAP] Generating CAP Alert MultiMedia content for: {cap_alert.title} ")
     # create alert area map image
     cap_alert_area_map_image = create_alert_area_image(cap_alert.id)
-    
+
+    # These saves run *after* the alert has been disseminated, and map/PDF
+    # rendering takes long enough to cross a wall-clock minute. Narrow them to the
+    # media field each one actually sets, so nothing here can ever rewrite `sent`
+    # (and with it <identifier>) out from under an already-published alert.
     if cap_alert_area_map_image:
         logger.info(f"[CAP] CAP Alert Area Map Image created for: {cap_alert.title}")
         cap_alert.alert_area_map_image = cap_alert_area_map_image
-        cap_alert.save()
-        
+        cap_alert.save(update_fields=["alert_area_map_image"])
+
         # create_cap_pdf_document
         cap_preview_document = create_cap_pdf_document(cap_alert, template_name="cap/alert_detail_pdf.html")
         cap_alert.alert_pdf_preview = cap_preview_document
-        cap_alert.save()
+        cap_alert.save(update_fields=["alert_pdf_preview"])
         
         logger.info(f"[CAP] CAP Alert PDF Document created for: {cap_alert.title}")
         
@@ -177,7 +181,7 @@ def create_cap_alert_multi_media(cap_alert_page_id, clear_cache_on_success=False
         
         if cap_preview_image:
             cap_alert.search_image = cap_preview_image
-            cap_alert.save()
+            cap_alert.save(update_fields=["search_image"])
         
         logger.info(f"[CAP] CAP Alert MultiMedia content saved for: {cap_alert.title}")
         
@@ -208,19 +212,20 @@ def send_private_alert_email(alert_id):
                     "name": name
                 })
         
-        # Generate image if not available
+        # Generate image if not available (narrow save — see
+        # create_cap_alert_multi_media: post-publish saves must not touch `sent`)
         if not alert.alert_area_map_image or not alert.alert_area_map_image.file:
             image = create_alert_area_image(alert.id)
             if image:
                 alert.alert_area_map_image = image
-                alert.save()
-        
+                alert.save(update_fields=["alert_area_map_image"])
+
         # Generate PDF if not available
         if not alert.alert_pdf_preview or not alert.alert_pdf_preview.file:
             pdf = create_cap_pdf_document(alert, template_name="cap/alert_detail_pdf.html")
             if pdf:
                 alert.alert_pdf_preview = pdf
-                alert.save()
+                alert.save(update_fields=["alert_pdf_preview"])
         
         subject = f"CAP Alert: {alert.title}"
         # Get site base URL

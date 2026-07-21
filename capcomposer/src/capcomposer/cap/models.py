@@ -435,12 +435,34 @@ class CapAlertPage(MetadataPageMixin, NewsletterPageMixin, AbstractCapAlertPage)
         return context
     
     def save(self, *args, **kwargs):
-        # if not imported, set the sent date as now
+        # `sent` is the CAP dissemination time, and — when the site has a WMO OID
+        # configured — <identifier> is derived from it (see CapAlertPage.identifier).
+        # Both must be frozen the moment the alert goes out: a message that is
+        # re-serialized with a later `sent` is a *different* CAP message to every
+        # consumer, so it forks into a duplicate alert downstream, and any
+        # previously-issued Update/Cancel referencing the old identifier dangles.
+        #
+        # Stamping is therefore restricted to alerts that are not yet live in the
+        # database. Wagtail sets `self.live = True` in memory *before* calling
+        # save() (wagtail/actions/publish_revision.py), so the in-memory flag
+        # cannot distinguish a first publish from a re-publish — only the stored
+        # row can. Drafts are unaffected either way: Wagtail persists them with
+        # save(update_fields=["latest_revision"]).
+        #
+        # This also protects against the saves made *after* publication by
+        # create_cap_alert_multi_media(), which previously pushed `sent` minutes
+        # past the real dissemination time whenever map/PDF rendering crossed a
+        # minute boundary.
         if not self.imported:
-            # use current time. Replace seconds and microseconds to 0
-            sent = timezone.now().replace(second=0, microsecond=0)
-            self.sent = sent
-        
+            already_disseminated = (
+                self.pk is not None
+                and CapAlertPage.objects.filter(pk=self.pk, live=True).exists()
+            )
+            if not already_disseminated:
+                # use current time. Replace seconds and microseconds to 0
+                sent = timezone.now().replace(second=0, microsecond=0)
+                self.sent = sent
+
         return super().save(*args, **kwargs)
 
 
