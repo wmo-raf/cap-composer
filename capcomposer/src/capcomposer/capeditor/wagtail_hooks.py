@@ -10,6 +10,7 @@ from django.templatetags.static import static
 from django.urls import path
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
+from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail import hooks
 from wagtail.actions.copy_page import CopyPageAction
 from wagtail.admin import messages
@@ -60,19 +61,24 @@ def copy_cap_alert_page(request, page):
         # Parent page defaults to parent of source page
         parent_page = page.get_parent()
         
-        # Check if the user has permission to publish subpages on the parent
-        can_publish = parent_page.permissions_for_user(request.user).can_publish_subpage()
-        
-        # Create the form
-        form = CopyForm(
-            request.POST or None, user=request.user, page=page, can_publish=can_publish
-        )
-        
+        # Create the form.
+        # Wagtail < 7.3 requires an explicit can_publish kwarg; from 7.3 onwards
+        # CopyForm derives it internally and rejects the kwarg.
+        form_kwargs = {"user": request.user, "page": page}
+
+        if WAGTAIL_VERSION < (7, 3):
+            form_kwargs["can_publish"] = parent_page.permissions_for_user(
+                request.user
+            ).can_publish_subpage()
+
+        form = CopyForm(request.POST or None, **form_kwargs)
+
         next_url = get_valid_next_url_from_request(request)
-        
-        # Remove the publish_copies and alias fields from the form
-        form.fields.pop("publish_copies")
-        form.fields.pop("alias")
+
+        # Remove the publish_copies and alias fields from the form.
+        # They are only present when the user can publish, hence the guard.
+        for field_name in ("publish_copies", "alias"):
+            form.fields.pop(field_name, None)
         
         # Check if user is submitting
         if request.method == "POST":

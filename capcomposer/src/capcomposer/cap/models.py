@@ -473,7 +473,7 @@ class OtherCAPSettings(BaseSiteSetting):
         ("nav_top", _("Top of the Navbar")),
     ]
     
-    active_alert_style = models.CharField(max_length=50, choices=ACTIVE_ALERT_STYLE_CHOICES, default="nav_left",
+    active_alert_style = models.CharField(max_length=50, choices=ACTIVE_ALERT_STYLE_CHOICES, default="nav_top",
                                           verbose_name=_("Active Alert Style"),
                                           help_text=_("Choose the style of active alerts"))
     default_alert_display_language = models.ForeignKey("capeditor.AlertLanguage", null=True, blank=True,
