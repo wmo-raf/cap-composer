@@ -348,7 +348,7 @@ def get_latest_active_alert(request):
     if active_alert_style == "nav_top":
         return render(request, "cap/widgets/nav_top_alert.html", context)
     
-    return render(request, "cap/widgets/nav_left_alert.html", context)
+    return render(request, "cap/widgets/nav_top_alert.html", context)
 
 
 def create_cap_png_pdf(request, alert_id):

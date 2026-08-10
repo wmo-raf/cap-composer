@@ -1,82 +1,131 @@
 {% load static wagtailiconchooser_tags i18n %}
 
-<style>
-
-    .top-alert-wrapper {
-        height: 60px;
-        background-color: #f8f9fb;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .top-alert-wrapper .top-alert-container {
-        display: flex;
-        align-items: center;
-        width: 100%;
-    }
-
-    .top-alert-wrapper .alert-icon-wrapper {
-        position: relative;
-        width: 50px;
-        height: 50px;
-        border: 3px solid #fff;
-        padding: 10px;
-        border-radius: 50%;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        animation: pulse 2s infinite;
-    }
-
-    .top-alert-wrapper .alert-icon svg {
-        height: 80%;
-        width: 80%;
-    }
-
-    .top-alert-wrapper .alert-title {
-        margin-left: 10px;
-    }
-
-    .top-alert-wrapper .alert-warning {
-        font-weight: 600;
-    }
-
-    @keyframes pulse {
-        0% {
-            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+{% if latest_active_alert %}
+    <style>
+        /*
+         * Full-bleed alert strip, slim density (36px). Colours come from the
+         * CAP severity mapping — the same tokens the nav_left widget uses:
+         *   background_color -> strip tint      border_color -> accent, rule, text
+         *   icon_color       -> glyph
+         */
+        .top-alert-wrapper {
+            width: 100%;
+            border-inline-start: 5px solid transparent;
+            border-bottom: 1px solid transparent;
         }
-        100% {
-            box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+
+        .top-alert-wrapper .top-alert-link {
+            display: block;
+            color: inherit;
+            text-decoration: none;
         }
-    }
 
+        .top-alert-wrapper .top-alert-container {
+            height: 36px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
 
-</style>
+        .top-alert-wrapper .alert-icon-wrapper {
+            position: relative;
+            flex: 0 0 26px;
+            width: 26px;
+            height: 26px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
 
-<div class="top-alert-wrapper" data-alert-style="{{ alert_style }}">
-    <div class="container top-alert-container">
-        <div class="alert-icon-wrapper"
-             style="background-color: {{ latest_active_alert.severity.color }}; border-color: {{ latest_active_alert.severity.border_color }};
-                     {% if latest_active_alert.severity.icon_color %}color:{{ latest_active_alert.severity.icon_color }};{% endif %} ">
-            {% if latest_active_alert.event_icon %}
-                {% svg_icon name=latest_active_alert.event_icon %}
-            {% endif %}
-        </div>
-        <div class="alert-title">
-            <div class="alert-warning">
-                {% translate "Alert" %}
-            </div>
-            <a href="{{ latest_active_alert.url }}">
-                {% if latest_active_alert.properties.headline %}
-                    {{ latest_active_alert.properties.headline }}
-                {% else %}
-                    {{ latest_active_alert.title }}
+        .top-alert-wrapper .alert-icon-wrapper svg {
+            height: 70%;
+            width: 70%;
+            fill: currentColor;
+        }
+
+        .top-alert-wrapper .alert-warning {
+            flex: 0 0 auto;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        .top-alert-wrapper .alert-headline {
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+        }
+
+        .top-alert-wrapper .top-alert-link:hover .alert-headline {
+            text-decoration: underline;
+        }
+
+        .top-alert-wrapper .alert-severity-label {
+            margin-inline-start: auto;
+            flex: 0 0 auto;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 999px;
+            background-color: rgba(255, 255, 255, .65);
+            white-space: nowrap;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+            }
+            100% {
+                box-shadow: 0 0 0 12px rgba(0, 0, 0, 0);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .top-alert-wrapper .alert-severity-label {
+                display: none;
+            }
+        }
+    </style>
+
+    <div class="top-alert-wrapper"
+         data-alert-style="{{ alert_style }}"
+         style="background-color: {{ latest_active_alert.severity.background_color }};">
+        <a class="top-alert-link" href="{{ latest_active_alert.url }}">
+            <div class="container top-alert-container">
+                {% if latest_active_alert.event_icon %}
+                    <span class="alert-icon-wrapper"
+                          style="background-color: {{ latest_active_alert.severity.background_color }};
+                                  {% if latest_active_alert.severity.icon_color %}color: {{ latest_active_alert.severity.icon_color }};{% endif %}">
+                        {% svg_icon name=latest_active_alert.event_icon %}
+                    </span>
                 {% endif %}
-            </a>
-        </div>
-
+                <span class="alert-warning"
+                      style="background-color: {{ latest_active_alert.severity.border_color }};">
+                    {% translate "Alert" %}
+                </span>
+                <span class="alert-headline" style="color: {{ latest_active_alert.severity.border_color }};">
+                    {% if latest_active_alert.properties.headline %}
+                        {{ latest_active_alert.properties.headline }}
+                    {% else %}
+                        {{ latest_active_alert.title }}
+                    {% endif %}
+                </span>
+                <span class="alert-severity-label" style="color: {{ latest_active_alert.severity.border_color }};">
+                    {{ latest_active_alert.severity.label }}
+                </span>
+            </div>
+        </a>
     </div>
-
-</div>
+{% endif %}
