@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-26 13:28+0000\n"
+"POT-Creation-Date: 2026-06-05 11:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,31 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: capcomposer/build/lib/capcomposer/config/templates/404.html:19
 #: capcomposer/src/capcomposer/config/templates/404.html:19
 msgid "Page not found"
 msgstr "Ukurasa haujapatikana"
 
+#: capcomposer/build/lib/capcomposer/config/templates/404.html:23
 #: capcomposer/src/capcomposer/config/templates/404.html:23
 msgid "Sorry, this page could not be found"
 msgstr "Samahani, ukurasa huu haukuweza kupatikana"
 
+#: capcomposer/build/lib/capcomposer/config/templates/500.html:17
 #: capcomposer/src/capcomposer/config/templates/500.html:17
 msgid "Internal server error"
 msgstr "Hitilafu ya seva ya ndani"
 
+#: capcomposer/build/lib/capcomposer/config/templates/500.html:20
 #: capcomposer/src/capcomposer/config/templates/500.html:20
 msgid "Sorry, there seems to be an error. Please try again soon"
 msgstr ""
 "Samahani, inaonekana kuna hitilafu. Tafadhali jaribu tena hivi karibuni"
 
+#: capcomposer/build/lib/capcomposer/config/templates/axes/lockout.html:4
 #: capcomposer/src/capcomposer/config/templates/axes/lockout.html:4
 msgid "Sign in"
 msgstr "Ingia"
 
+#: capcomposer/build/lib/capcomposer/config/templates/axes/lockout.html:10
 #: capcomposer/src/capcomposer/config/templates/axes/lockout.html:10
 msgid "Account Locked"
 msgstr "Akaunti Imefungwa"
 
+#: capcomposer/build/lib/capcomposer/config/templates/axes/lockout.html:15
 #: capcomposer/src/capcomposer/config/templates/axes/lockout.html:15
 msgid ""
 "Your account has been locked due to multiple failed login attempts. Please "
@@ -51,6 +58,7 @@ msgstr ""
 "Akaunti yako imefungwa kwa sababu ya majaribio mengi yasiyofanikiwa ya "
 "kuingia. Tafadhali jaribu tena baadaye."
 
+#: capcomposer/build/lib/capcomposer/config/templates/axes/lockout.html:17
 #: capcomposer/src/capcomposer/config/templates/axes/lockout.html:17
 msgid ""
 "You account has been locked due to multiple failed login attempts. Please "
@@ -59,18 +67,22 @@ msgstr ""
 "Akaunti yako imefungwa kwa sababu ya majaribio mengi yasiyofanikiwa ya "
 "kuingia. Tafadhali wasiliana na timu yetu ya usaidizi kwa usaidizi."
 
+#: capcomposer/build/lib/capcomposer/config/templates/footer.html:5
 #: capcomposer/src/capcomposer/config/templates/footer.html:5
 msgid "Powered by CAPComposer"
 msgstr "Inaendeshwa na CAPComposer"
 
+#: capcomposer/build/lib/capcomposer/config/templates/wagtailadmin/home.html:5
 #: capcomposer/src/capcomposer/config/templates/wagtailadmin/home.html:5
 msgid "Welcome to"
 msgstr "Karibu kwa"
 
+#: capcomposer/build/lib/capcomposer/config/templates/wagtailadmin/home.html:9
 #: capcomposer/src/capcomposer/config/templates/wagtailadmin/home.html:9
 msgid "CAPComposer"
 msgstr "Mtunzi wa CAP"
 
+#: capcomposer/build/lib/capcomposer/home/models.py:19
 #: capcomposer/src/capcomposer/home/models.py:19
 msgid "Subtitle"
 msgstr "Manukuu"
@@ -78,7 +90,7 @@ msgstr "Manukuu"
 #: capcomposer/src/capcomposer/capeditor/blocks.py:117
 #: capcomposer/src/capcomposer/capeditor/blocks.py:145
 #: capcomposer/src/capcomposer/capeditor/blocks.py:502
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:163
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:204
 msgid "Name"
 msgstr "Jina"
 
@@ -95,7 +107,7 @@ msgid "Address Information of the recipient"
 msgstr "Maelezo ya Anwani ya mpokeaji"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:136
-#: capcomposer/src/capcomposer/capeditor/models.py:228
+#: capcomposer/src/capcomposer/capeditor/models.py:229
 msgid "Reference Alert"
 msgstr "Tahadhari ya Marejeleo"
 
@@ -104,7 +116,7 @@ msgid "Earlier alert referenced by this alert"
 msgstr "Tahadhari ya awali iliyorejelewa na tahadhari hii"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:141
-#: capcomposer/src/capcomposer/capeditor/models.py:233
+#: capcomposer/src/capcomposer/capeditor/models.py:234
 msgid "Incident"
 msgstr "Tukio"
 
@@ -287,7 +299,7 @@ msgid "Polygon"
 msgstr "Poligoni"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:380
-#: capcomposer/src/capcomposer/capeditor/blocks.py:693
+#: capcomposer/src/capcomposer/capeditor/blocks.py:718
 msgid "Circle"
 msgstr "Mduara"
 
@@ -296,8 +308,8 @@ msgid "Drag the marker to change position"
 msgstr "Buruta alama ili kubadilisha nafasi"
 
 #: capcomposer/src/capcomposer/capeditor/blocks.py:429
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:73
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:164
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:90
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:205
 msgid "Area"
 msgstr "Eneo"
 
@@ -345,64 +357,72 @@ msgstr "Jina la msimbo wa tukio"
 msgid "Value of the event code"
 msgstr "Thamani ya msimbo wa tukio"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:624
+#: capcomposer/src/capcomposer/capeditor/blocks.py:641
+msgid ""
+"Alert area polygons must not overlap each other. Intersecting areas are not "
+"allowed."
+msgstr ""
+"Poligoni za eneo la tahadhari lazima zisiingiliane. Maeneo ya kukatiza "
+"hayaruhusiwi."
+
+#: capcomposer/src/capcomposer/capeditor/blocks.py:649
 msgid "Immediate - Responsive action SHOULD be taken immediately"
 msgstr "Papo Hapo - Hatua ya kujibu INATAKIWA ichukuliwe mara moja"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:625
+#: capcomposer/src/capcomposer/capeditor/blocks.py:650
 msgid "Expected - Responsive action SHOULD be taken soon (within next hour)"
 msgstr ""
 "Inatarajiwa - Hatua ya kujibu LAZIMA ichukuliwe hivi karibuni (ndani ya saa "
 "ijayo)"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:626
+#: capcomposer/src/capcomposer/capeditor/blocks.py:651
 msgid "Future - Responsive action SHOULD be taken in the near future"
 msgstr ""
 "Wakati Ujao - Hatua ya kuitikia LAZIMA ichukuliwe katika siku za usoni"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:627
+#: capcomposer/src/capcomposer/capeditor/blocks.py:652
 msgid "Past - Responsive action is no longer required"
 msgstr "Zamani - Hatua ya kujibu haihitajiki tena"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:632
+#: capcomposer/src/capcomposer/capeditor/blocks.py:657
 msgid "Extreme - Extraordinary threat to life or property"
 msgstr "Uliokithiri - Tishio lisilo la kawaida kwa maisha au mali"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:633
+#: capcomposer/src/capcomposer/capeditor/blocks.py:658
 msgid "Severe - Significant threat to life or property"
 msgstr "Kali - Tishio kubwa kwa maisha au mali"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:634
+#: capcomposer/src/capcomposer/capeditor/blocks.py:659
 msgid "Moderate - Possible threat to life or property"
 msgstr "Wastani - Tishio linalowezekana kwa maisha au mali"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:635
+#: capcomposer/src/capcomposer/capeditor/blocks.py:660
 msgid "Minor - Minimal to no known threat to life or property"
 msgstr "Ndogo - Ndogo hadi tishio lisilojulikana kwa maisha au mali"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:640
+#: capcomposer/src/capcomposer/capeditor/blocks.py:665
 msgid "Observed - Determined to have occurred or to be ongoing"
 msgstr "Imezingatiwa - Imedhamiriwa kuwa imetokea au kuwa inaendelea"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:641
+#: capcomposer/src/capcomposer/capeditor/blocks.py:666
 msgid "Likely - Likely (percentage > ~50%)"
 msgstr "Huenda - Huenda (asilimia> ~50%)"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:642
+#: capcomposer/src/capcomposer/capeditor/blocks.py:667
 msgid "Possible - Possible but not likely (percentage <= ~50%)"
 msgstr "Inawezekana - Inawezekana lakini haiwezekani (asilimia <= ~50%)"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:643
+#: capcomposer/src/capcomposer/capeditor/blocks.py:668
 msgid "Unlikely - Not expected to occur (percentage ~ 0)"
 msgstr "Haiwezekani - Haitarajiwi kutokea (asilimia ~ 0)"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:647
+#: capcomposer/src/capcomposer/capeditor/blocks.py:672
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:30
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:195
 msgid "Event"
 msgstr "Tukio"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:648
+#: capcomposer/src/capcomposer/capeditor/blocks.py:673
 msgid ""
 "The text denoting the type of the subject event of the alert message. You "
 "can define hazards events monitored by your institution from CAP settings"
@@ -411,12 +431,12 @@ msgstr ""
 "Unaweza kufafanua matukio ya hatari yanayofuatiliwa na taasisi yako kutoka "
 "kwa mipangilio ya CAP"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:651
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:77
+#: capcomposer/src/capcomposer/capeditor/blocks.py:676
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:94
 msgid "Language"
 msgstr "Lugha"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:652
+#: capcomposer/src/capcomposer/capeditor/blocks.py:677
 #, fuzzy
 #| msgid "The code denoting the language of the alert message"
 msgid ""
@@ -426,40 +446,40 @@ msgstr ""
 "Msimbo unaoashiria lugha ya ujumbe wa arifa. Ikiwa hautachaguliwa, 'en-US' "
 "itatumika kama chaguo-msingi."
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:654
+#: capcomposer/src/capcomposer/capeditor/blocks.py:679
 msgid "Urgency"
 msgstr "Uharaka"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:655
+#: capcomposer/src/capcomposer/capeditor/blocks.py:680
 msgid ""
 "The code denoting the urgency of the subject event of the alert message"
 msgstr "Msimbo unaoashiria uharaka wa tukio la somo la ujumbe wa tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:657
+#: capcomposer/src/capcomposer/capeditor/blocks.py:682
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:104
 msgid "Severity"
 msgstr "Ukali"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:658
+#: capcomposer/src/capcomposer/capeditor/blocks.py:683
 msgid ""
 "The code denoting the severity of the subject event of the alert message"
 msgstr "Msimbo unaoashiria ukali wa tukio la somo la ujumbe wa tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:660
+#: capcomposer/src/capcomposer/capeditor/blocks.py:685
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:113
 msgid "Certainty"
 msgstr "Uhakika"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:661
+#: capcomposer/src/capcomposer/capeditor/blocks.py:686
 msgid ""
 "The code denoting the certainty of the subject event of the alert message"
 msgstr "Msimbo unaoashiria uhakika wa tukio la somo la ujumbe wa tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:663
+#: capcomposer/src/capcomposer/capeditor/blocks.py:688
 msgid "Headline"
 msgstr "Kichwa cha habari"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:664
+#: capcomposer/src/capcomposer/capeditor/blocks.py:689
 msgid ""
 "The text headline of the alert message. Make it direct and actionable as "
 "possible while remaining short"
@@ -467,11 +487,11 @@ msgstr ""
 "Kichwa cha maandishi cha ujumbe wa tahadhari. Ifanye moja kwa moja na iweze "
 "kutekelezeka iwezekanavyo huku ikisalia kuwa fupi"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:666
+#: capcomposer/src/capcomposer/capeditor/blocks.py:691
 msgid "Description"
 msgstr "Maelezo"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:668
+#: capcomposer/src/capcomposer/capeditor/blocks.py:693
 msgid ""
 "The text describing the subject event of the alert message. An extended "
 "description of the hazard or event that occasioned this message"
@@ -479,11 +499,11 @@ msgstr ""
 "Maandishi yanayoelezea tukio la somo la ujumbe wa tahadhari. Maelezo "
 "yaliyopanuliwa ya hatari au tukio lililosababisha ujumbe huu"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:670
+#: capcomposer/src/capcomposer/capeditor/blocks.py:695
 msgid "Instruction"
 msgstr "Maagizo"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:671
+#: capcomposer/src/capcomposer/capeditor/blocks.py:696
 msgid ""
 "The text describing the recommended action to be taken by recipients of the "
 "alert message"
@@ -491,12 +511,12 @@ msgstr ""
 "Maandishi yanayoelezea hatua iliyopendekezwa kuchukuliwa na wapokeaji wa "
 "ujumbe wa arifa"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:673
+#: capcomposer/src/capcomposer/capeditor/blocks.py:698
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:56
 msgid "Effective"
 msgstr "Ufanisi"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:674
+#: capcomposer/src/capcomposer/capeditor/blocks.py:699
 msgid ""
 "The effective time of the information of the alert message. If not set, the "
 "sent date will be used"
@@ -504,22 +524,22 @@ msgstr ""
 "Wakati mzuri wa taarifa ya ujumbe wa tahadhari. Ikiwa haijawekwa, tarehe "
 "iliyotumwa itatumika"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:676
+#: capcomposer/src/capcomposer/capeditor/blocks.py:701
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:72
 msgid "Onset"
 msgstr "Mwanzo"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:677
+#: capcomposer/src/capcomposer/capeditor/blocks.py:702
 msgid ""
 "The expected time of the beginning of the subject event of the alert message"
 msgstr "Muda unaotarajiwa wa mwanzo wa tukio la somo la ujumbe wa tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:679
+#: capcomposer/src/capcomposer/capeditor/blocks.py:704
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:81
 msgid "Expires"
 msgstr "Muda wake unaisha"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:680
+#: capcomposer/src/capcomposer/capeditor/blocks.py:705
 msgid ""
 "The expiry time of the information of the alert message. If not set, each "
 "recipient is free to set its own policy as to when the message is no longer "
@@ -529,53 +549,53 @@ msgstr ""
 "mpokeaji yuko huru kuweka sera yake mwenyewe kuhusu ni lini ujumbe haufanyi "
 "kazi tena."
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:683
+#: capcomposer/src/capcomposer/capeditor/blocks.py:708
 msgid "Response Types"
 msgstr "Aina za Majibu"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:685
+#: capcomposer/src/capcomposer/capeditor/blocks.py:710
 msgid "Sender name"
 msgstr "Jina la mtumaji"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:687
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:43
+#: capcomposer/src/capcomposer/capeditor/blocks.py:712
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:49
 msgid "Contact"
 msgstr "Wasiliana"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:688
+#: capcomposer/src/capcomposer/capeditor/blocks.py:713
 msgid "Audience"
 msgstr "Hadhira"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:689
+#: capcomposer/src/capcomposer/capeditor/blocks.py:714
 msgid "The text describing the intended audience of the alert message"
 msgstr "Maandishi yanayoelezea hadhira iliyokusudiwa ya ujumbe wa tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:691
+#: capcomposer/src/capcomposer/capeditor/blocks.py:716
 msgid "Admin Boundary"
 msgstr "Mpaka wa Utawala"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:692
+#: capcomposer/src/capcomposer/capeditor/blocks.py:717
 msgid "Draw Polygon"
 msgstr "Chora Polygon"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:694
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:167
+#: capcomposer/src/capcomposer/capeditor/blocks.py:719
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:208
 msgid "Predefined Area"
 msgstr "Eneo Lililoainishwa"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:695
+#: capcomposer/src/capcomposer/capeditor/blocks.py:720
 msgid "Alert Area"
 msgstr "Eneo la Tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:695
+#: capcomposer/src/capcomposer/capeditor/blocks.py:720
 msgid "Admin Boundary, Polygon, Circle, or Predefined area"
 msgstr "Mpaka wa Msimamizi, Poligoni, Mduara, au eneo Lililobainishwa Awali"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:700
+#: capcomposer/src/capcomposer/capeditor/blocks.py:725
 msgid "Resources"
 msgstr "Rasilimali"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:700
+#: capcomposer/src/capcomposer/capeditor/blocks.py:725
 msgid ""
 "Additional file with supplemental information related to this alert "
 "information"
@@ -583,23 +603,31 @@ msgstr ""
 "Faili ya ziada iliyo na maelezo ya ziada yanayohusiana na taarifa hii ya "
 "arifa"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:703
+#: capcomposer/src/capcomposer/capeditor/blocks.py:729
 msgid "Parameter"
 msgstr "Kigezo"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:703
+#: capcomposer/src/capcomposer/capeditor/blocks.py:729
 msgid "Parameters"
 msgstr "Vigezo"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:723
+#: capcomposer/src/capcomposer/capeditor/blocks.py:749
 msgid "The expiry time of the alert should be greater than the effective time"
 msgstr "Muda wa kuisha kwa arifa unapaswa kuwa mkubwa kuliko wakati unaofaa"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:728
+#: capcomposer/src/capcomposer/capeditor/blocks.py:754
 msgid "The expiry time of the alert should be greater than the onset time"
 msgstr "Muda wa kuisha kwa arifa unapaswa kuwa mkubwa kuliko wakati wa kuanza"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:735
+#: capcomposer/src/capcomposer/capeditor/blocks.py:779
+msgid ""
+"Alert area polygons must not overlap each other. CAP does not allow "
+"intersecting areas."
+msgstr ""
+"Poligoni za eneo la tahadhari lazima zisiingiliane. CAP hairuhusu maeneo ya "
+"kukatiza."
+
+#: capcomposer/src/capcomposer/capeditor/blocks.py:787
 msgid "Contact Detail"
 msgstr "Maelezo ya Mawasiliano"
 
@@ -619,35 +647,45 @@ msgstr "Jina la Mtumaji CAP"
 msgid "Name of the sending institution"
 msgstr "Jina la taasisi ya kutuma"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:34
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:37
 msgid "WMO Register of Alerting Authorities OID"
 msgstr "Sajili ya WMO ya Mamlaka ya Tahadhari OID"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:35
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:39
+#, fuzzy
+#| msgid ""
+#| "WMO Register of Alerting Authorities Object Identifier (OID) of the sending "
+#| "institution. This will be used to generate CAP messages identifiers"
 msgid ""
 "WMO Register of Alerting Authorities Object Identifier (OID) of the sending "
-"institution. This will be used to generate CAP messages identifiers"
+"institution. This will be used to generate CAP messages identifiers. Visit "
+"<a "
+"href='https://etrp.wmo.int/pluginfile.php/17873/mod_resource/content/1/AIR_PWS-20.pdf'"
+" target='_blank' rel='noopener'>WMO/TD No. 1556</a> for more information."
 msgstr ""
 "Sajili ya WMO ya Kitambulisho cha Kitu cha Mamlaka ya Arifa (OID) ya taasisi"
-" inayotuma. Hii itatumika kutengeneza vitambulishi vya ujumbe wa CAP"
+" inayotuma. Hii itatumika kutengeneza vitambulishi vya ujumbe wa CAP. "
+"Tembelea <a "
+"href='https://etrp.wmo.int/pluginfile.php/17873/mod_resource/content/1/AIR_PWS-20.pdf'"
+" target='_blank' rel='noopener'>WMO/TD No. 1556</a> kwa maelezo zaidi."
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:40
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:46
 msgid "Logo of the sending institution"
 msgstr "Nembo ya taasisi ya kutuma"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:44
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:50
 msgid "Contact Details"
 msgstr "Maelezo ya Mawasiliano"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:45
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:51
 msgid "Contact for follow-up and confirmation of the alert message"
 msgstr "Wasiliana kwa ufuatiliaji na uthibitisho wa ujumbe wa tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:47
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:53
 msgid "UN Country Boundary"
 msgstr "Mpaka wa Nchi wa Umoja wa Mataifa"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:48
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:54
 msgid ""
 "GeoJSON file of the UN Country Boundary. Setting this will enable the UN "
 "Country Boundary check in the alertdrawing tools"
@@ -656,109 +694,136 @@ msgstr ""
 "kutawezesha ukaguzi wa Mipaka ya Nchi ya Umoja wa Mataifa katika zana za "
 "kuchora arifa"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:54
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:60
 msgid "Number of latest Alerts to show in the XML CAP Feed"
 msgstr "Idadi ya Arifa za hivi punde za kuonyesha katika Milisho ya XML CAP"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:54
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:60
 msgid "Set a smaller number to improve perfomance for aggregators"
 msgstr "Weka nambari ndogo ili kuboresha utendaji kazi kwa wajumlishi"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:58
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:65
+msgid "Intersection Area Threshold (m²)"
+msgstr "Kizingiti cha Eneo la Makutano (m²)"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:67
+msgid ""
+"The maximum allowed overlap between two alert areas, in square meters. Areas"
+" that overlap by more than this value will be flagged as intersecting. The "
+"default of 1000m² accounts for small boundary imprecisions between adjacent "
+"areas. Increase this value if adjacent areas from your boundary data share "
+"imprecise borders."
+msgstr ""
+"Kiwango cha juu kinachoruhusiwa huingiliana kati ya maeneo mawili ya "
+"tahadhari, katika mita za mraba. Maeneo ambayo yanapishana kwa zaidi ya "
+"thamani hii yataalamishwa kama yanapishana. Chaguomsingi ya 1000m² huchangia"
+" dosari ndogo za mipaka kati ya maeneo ya karibu. Ongeza thamani hii ikiwa "
+"maeneo ya karibu kutoka kwa data ya mipaka yako yanashiriki mipaka isiyo "
+"sahihi."
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:75
 msgid "CAP Settings"
 msgstr "Mipangilio ya CAP"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:67
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:84
 msgid "Sender Details"
 msgstr "Maelezo ya Mtumaji"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:69
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:71
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:86
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:88
 msgid "Hazard Types"
 msgstr "Aina za Hatari"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:69
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:86
 msgid "Hazard Type"
 msgstr "Aina ya Hatari"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:70
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:87
 msgid "Hazards monitored by the institution"
 msgstr "Hatari zinazofuatiliwa na taasisi"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:73
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:90
 msgid "Predefined Alert Areas"
 msgstr "Maeneo ya Tahadhari Yaliyoainishwa"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:74
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:91
 msgid "Predefined areas for alerts"
 msgstr "Maeneo yaliyoainishwa awali kwa arifa"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:75
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:168
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:92
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:209
 msgid "Predefined Areas"
 msgstr "Maeneo Yaliyoainishwa"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:77
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:94
 msgid "Allowed Alert Languages"
 msgstr "Lugha za Tahadhari Zinazoruhusiwa"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:78
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:95
 #, fuzzy
 #| msgid "Language"
 msgid "Languages"
 msgstr "Lugha"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:83
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:100
 msgid "UN Boundary"
 msgstr "Mpaka wa Umoja wa Mataifa"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:86
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:104
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "Other Settings"
 msgstr "Mipangilio Mingine"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:110
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:145
+msgid ""
+"WMO OID must be in the form 2.49.0.1.<ISO-numeric-country>.<authority-id> "
+"(e.g. 2.49.0.1.231.0)"
+msgstr ""
+"WMO OID lazima iwe katika fomu 2.49.0.1.<ISO-numeric-country>.<authority-id>"
+" (k.m. 2.49.0.1.231.0)"
+
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:151
 msgid "Geophysical"
 msgstr "Kijiofizikia"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:111
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:152
 msgid "Meteorological"
 msgstr "Hali ya hewa"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:112
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:153
 msgid "General emergency and public safety"
 msgstr "Dharura ya jumla na usalama wa umma"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:113
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:154
 msgid "Law enforcement, military, homeland and local/private security"
 msgstr "Utekelezaji wa sheria, kijeshi, nchi na usalama wa ndani/binafsi"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:114
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:155
 msgid "Rescue and recovery"
 msgstr "Kuokoa na kupona"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:115
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:156
 msgid "Fire suppression and rescue"
 msgstr "Kuzuia moto na uokoaji"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:116
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:157
 msgid "Medical and public health"
 msgstr "Afya ya matibabu na ya umma"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:117
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:158
 msgid "Pollution and other environmental"
 msgstr "Uchafuzi na mazingira mengine"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:118
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:159
 msgid "Public and private transportation"
 msgstr "Usafiri wa umma na wa kibinafsi"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:119
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:160
 msgid "Utility, telecommunication, other non-transport infrastructure"
 msgstr "Huduma, mawasiliano ya simu, miundombinu mingine isiyo ya usafiri"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:120
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:161
 msgid ""
 "Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat "
 "or attack"
@@ -766,65 +831,65 @@ msgstr ""
 "Tishio au mashambulizi ya Kemikali, Baiolojia, Radiolojia, Nyuklia au Mavuno"
 " ya Juu"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:121
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:162
 msgid "Other events"
 msgstr "Matukio mengine"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:126
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:167
 msgid "Select from WMO list of Hazards Event Types"
 msgstr "Chagua kutoka kwa orodha ya WMO ya Aina za Matukio ya Hatari"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:127
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:168
 msgid "Hazard"
 msgstr "Hatari"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:127
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:168
 msgid "Name of Hazard"
 msgstr "Jina la Hazard"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:128
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:169
 msgid "Category"
 msgstr "Kategoria"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:130
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:171
 #, fuzzy
 #| msgid "Name of Hazard"
 msgid "Category of Hazard"
 msgstr "Jamii ya Hatari"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:131
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:172
 msgid "Event Code"
 msgstr "Msimbo wa Tukio"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:132
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:173
 msgid "Icon"
 msgstr "Aikoni"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:132
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:173
 msgid "Matching icon"
 msgstr "Aikoni inayolingana"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:145
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:186
 #, fuzzy
 #| msgid "Event Code"
 msgid "Event Code is required"
 msgstr "Msimbo wa Tukio unahitajika"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:153
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:194
 msgid "This event type already exists"
 msgstr "Aina hii ya tukio tayari ipo"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:189
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:230
 #, fuzzy
 #| msgid "Language"
 msgid "Language Code"
 msgstr "Msimbo wa Lugha"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:189
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:230
 msgid "ISO 639-1 language code"
 msgstr "Msimbo wa lugha wa ISO 639-1"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:190
+#: capcomposer/src/capcomposer/capeditor/cap_settings.py:231
 #, fuzzy
 #| msgid "Language"
 msgid "Language Name"
@@ -879,63 +944,75 @@ msgid "Other"
 msgstr "Nyingine"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:19
-#: capcomposer/src/capcomposer/capeditor/constants.py:194
+#: capcomposer/src/capcomposer/capeditor/constants.py:197
+#: capcomposer/src/capcomposer/capeditor/constants.py:198
 msgid "Immediate"
 msgstr "Mara moja"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:20
-#: capcomposer/src/capcomposer/capeditor/constants.py:199
-#: capcomposer/src/capcomposer/capeditor/models.py:322
+#: capcomposer/src/capcomposer/capeditor/constants.py:202
+#: capcomposer/src/capcomposer/capeditor/constants.py:203
+#: capcomposer/src/capcomposer/capeditor/models.py:323
 msgid "Expected"
 msgstr "Inatarajiwa"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:21
-#: capcomposer/src/capcomposer/capeditor/constants.py:204
+#: capcomposer/src/capcomposer/capeditor/constants.py:207
+#: capcomposer/src/capcomposer/capeditor/constants.py:208
 msgid "Future"
 msgstr "Baadaye"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:22
-#: capcomposer/src/capcomposer/capeditor/constants.py:209
+#: capcomposer/src/capcomposer/capeditor/constants.py:212
+#: capcomposer/src/capcomposer/capeditor/constants.py:213
 msgid "Past"
 msgstr "Zamani"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:27
+#: capcomposer/src/capcomposer/capeditor/constants.py:154
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:146
 msgid "Extreme"
 msgstr "Uliokithiri"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:28
+#: capcomposer/src/capcomposer/capeditor/constants.py:163
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:152
 msgid "Severe"
 msgstr "Mkali"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:29
+#: capcomposer/src/capcomposer/capeditor/constants.py:172
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:158
 msgid "Moderate"
 msgstr "Wastani"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:30
+#: capcomposer/src/capcomposer/capeditor/constants.py:181
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:164
 msgid "Minor"
 msgstr "Ndogo"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:35
-#: capcomposer/src/capcomposer/capeditor/constants.py:222
+#: capcomposer/src/capcomposer/capeditor/constants.py:225
+#: capcomposer/src/capcomposer/capeditor/constants.py:226
 msgid "Observed"
 msgstr "Imezingatiwa"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:36
-#: capcomposer/src/capcomposer/capeditor/constants.py:227
+#: capcomposer/src/capcomposer/capeditor/constants.py:230
+#: capcomposer/src/capcomposer/capeditor/constants.py:231
 msgid "Likely"
 msgstr "Yawezekana"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:37
-#: capcomposer/src/capcomposer/capeditor/constants.py:232
+#: capcomposer/src/capcomposer/capeditor/constants.py:235
+#: capcomposer/src/capcomposer/capeditor/constants.py:236
 msgid "Possible"
 msgstr "Inawezekana"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:38
-#: capcomposer/src/capcomposer/capeditor/constants.py:237
+#: capcomposer/src/capcomposer/capeditor/constants.py:240
+#: capcomposer/src/capcomposer/capeditor/constants.py:241
 msgid "Unlikely"
 msgstr "Haiwezekani"
 
@@ -1098,27 +1175,36 @@ msgid "Wind"
 msgstr "Upepo"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:149
-msgid "Red severity"
-msgstr "Ukali nyekundu"
+#, fuzzy
+#| msgid "Red severity"
+msgid "Extreme severity"
+msgstr "Ukali uliokithiri"
 
 #: capcomposer/src/capcomposer/capeditor/constants.py:158
-msgid "Orange severity"
-msgstr "Ukali wa machungwa"
+#, fuzzy
+#| msgid "Red severity"
+msgid "Severe severity"
+msgstr "Ukali mkali"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:166
-msgid "Yellow severity"
-msgstr "Ukali wa njano"
+#: capcomposer/src/capcomposer/capeditor/constants.py:167
+#, fuzzy
+#| msgid "Minor severity"
+msgid "Moderate severity"
+msgstr "Ukali wa wastani"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:174
+#: capcomposer/src/capcomposer/capeditor/constants.py:176
 msgid "Minor severity"
 msgstr "Ukali mdogo"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:182
+#: capcomposer/src/capcomposer/capeditor/constants.py:185
 msgid "Unknown severity"
 msgstr "Ukali usiojulikana"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:214
-#: capcomposer/src/capcomposer/capeditor/constants.py:242
+#: capcomposer/src/capcomposer/capeditor/constants.py:190
+#: capcomposer/src/capcomposer/capeditor/constants.py:217
+#: capcomposer/src/capcomposer/capeditor/constants.py:218
+#: capcomposer/src/capcomposer/capeditor/constants.py:245
+#: capcomposer/src/capcomposer/capeditor/constants.py:246
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:171
 msgid "Unknown"
 msgstr "Haijulikani"
@@ -1151,13 +1237,18 @@ msgstr "CAP Alert XML URL"
 msgid "CAP File"
 msgstr "Faili ya CAP"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:35
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:21
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:87
+msgid "Include GUID"
+msgstr "Jumuisha GUID"
+
 #: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:37
 #: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:39
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:41
 msgid "This field is required."
 msgstr "Sehemu hii inahitajika."
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:75
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:78
 msgid ""
 "An error occurred while trying to load the CAP XML. Please check the data "
 "and try again."
@@ -1165,7 +1256,7 @@ msgstr ""
 "Hitilafu ilitokea wakati wa kujaribu kupakia CAP XML. Tafadhali angalia data"
 " na ujaribu tena."
 
-#: capcomposer/src/capcomposer/capeditor/models.py:136
+#: capcomposer/src/capcomposer/capeditor/models.py:138
 msgid ""
 "You must select at least one reference alert for this message type. Only "
 "'Alert' Message Type can be saved without references."
@@ -1173,7 +1264,7 @@ msgstr ""
 "Lazima uchague angalau tahadhari moja ya marejeleo kwa aina hii ya ujumbe. "
 "Aina ya Ujumbe wa 'Alert' pekee ndiyo inaweza kuhifadhiwa bila marejeleo."
 
-#: capcomposer/src/capcomposer/capeditor/models.py:145
+#: capcomposer/src/capcomposer/capeditor/models.py:147
 msgid ""
 "You cannot reference an alert to itself. Please select a previously "
 "published alert."
@@ -1181,26 +1272,26 @@ msgstr ""
 "Huwezi kurejelea tahadhari yenyewe. Tafadhali chagua arifa iliyochapishwa "
 "hapo awali."
 
-#: capcomposer/src/capcomposer/capeditor/models.py:151
+#: capcomposer/src/capcomposer/capeditor/models.py:153
 msgid "You cannot select the same alert more than once."
 msgstr "Huwezi kuchagua arifa sawa zaidi ya mara moja."
 
-#: capcomposer/src/capcomposer/capeditor/models.py:161
+#: capcomposer/src/capcomposer/capeditor/models.py:163
 msgid ""
 "Draft - A preliminary template or draft, not actionable in its current form"
 msgstr ""
 "Rasimu - Kiolezo au rasimu ya awali, isiyoweza kutekelezeka katika umbo lake"
 " la sasa"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:162
+#: capcomposer/src/capcomposer/capeditor/models.py:164
 msgid "Actual - Actionable by all targeted recipients"
 msgstr "Halisi - Inaweza kutekelezwa na wapokeaji wote wanaolengwa"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:163
+#: capcomposer/src/capcomposer/capeditor/models.py:165
 msgid "Test - Technical testing only, all recipients disregard"
 msgstr "Jaribio - Jaribio la kiufundi pekee, wapokeaji wote hupuuza"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:164
+#: capcomposer/src/capcomposer/capeditor/models.py:166
 msgid ""
 "Exercise - Actionable only by designated exercise participants; exercise "
 "identifier SHOULD appear in note"
@@ -1208,16 +1299,16 @@ msgstr ""
 "Zoezi - Inaweza kutekelezwa tu na washiriki walioteuliwa wa mazoezi; "
 "kitambulisho cha zoezi LAZIMA kionekane kwenye dokezo"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:166
+#: capcomposer/src/capcomposer/capeditor/models.py:168
 msgid "System - For messages that support alert network internal functions"
 msgstr "Mfumo - Kwa ujumbe unaoauni vitendaji vya ndani vya arifa"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:170
+#: capcomposer/src/capcomposer/capeditor/models.py:172
 msgid "Alert - Initial information requiring attention by targeted recipients"
 msgstr ""
 "Tahadhari - Taarifa ya awali inayohitaji kushughulikiwa na wapokeaji lengwa"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:171
+#: capcomposer/src/capcomposer/capeditor/models.py:173
 msgid ""
 "Update - Updates and supersedes the earlier message(s) identified in "
 "referenced alerts"
@@ -1225,15 +1316,15 @@ msgstr ""
 "Sasisha - Inasasisha na kuchukua nafasi ya ujumbe wa awali uliotambuliwa "
 "katika arifa zilizorejelewa"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:172
+#: capcomposer/src/capcomposer/capeditor/models.py:174
 msgid "Cancel - Cancels the earlier message(s) identified in references"
 msgstr "Ghairi - Hughairi ujumbe wa awali uliotambuliwa katika marejeleo"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:183
+#: capcomposer/src/capcomposer/capeditor/models.py:185
 msgid "Public - For general dissemination to unrestricted audiences"
 msgstr "Umma - Kwa usambazaji wa jumla kwa hadhira isiyo na kikomo"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:184
+#: capcomposer/src/capcomposer/capeditor/models.py:186
 msgid ""
 "Restricted - For dissemination only to users with a known operational "
 "requirement as in the restriction field"
@@ -1241,7 +1332,7 @@ msgstr ""
 "Imezuiliwa - Kwa usambazaji tu kwa watumiaji walio na hitaji la kufanya kazi"
 " linalojulikana kama katika uga wa vizuizi"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:186
+#: capcomposer/src/capcomposer/capeditor/models.py:188
 msgid ""
 "Private - For dissemination only to specified addresses as in the addresses "
 "field in the alert"
@@ -1249,30 +1340,30 @@ msgstr ""
 "Faragha - Kwa usambazaji tu kwa anwani maalum kama katika sehemu ya anwani "
 "katika tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:189
+#: capcomposer/src/capcomposer/capeditor/models.py:191
 msgid "Id"
 msgstr "Kitambulisho"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:190
+#: capcomposer/src/capcomposer/capeditor/models.py:192
 msgid "Unique ID. Auto generated on creation."
 msgstr "Kitambulisho cha kipekee. Imetengenezwa kiotomatiki kwenye uundaji."
 
-#: capcomposer/src/capcomposer/capeditor/models.py:191
+#: capcomposer/src/capcomposer/capeditor/models.py:193
 msgid "Sender"
 msgstr "Mtumaji"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:192
+#: capcomposer/src/capcomposer/capeditor/models.py:194
 msgid ""
 "Identifies the originator of an alert. For example the website address of "
 "the institution"
 msgstr ""
 "Hubainisha mwanzilishi wa arifa. Kwa mfano anwani ya tovuti ya taasisi"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:194
+#: capcomposer/src/capcomposer/capeditor/models.py:196
 msgid "Sent"
 msgstr "Imetumwa"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:195
+#: capcomposer/src/capcomposer/capeditor/models.py:197
 msgid ""
 "Time and date of origination of the alert. Automatically generated by the "
 "system during publishing"
@@ -1280,39 +1371,39 @@ msgstr ""
 "Wakati na tarehe ya asili ya arifa. Imetolewa kiotomatiki na mfumo wakati wa"
 " uchapishaji"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:197
+#: capcomposer/src/capcomposer/capeditor/models.py:199
 msgid "Status"
 msgstr "Hali"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:198
+#: capcomposer/src/capcomposer/capeditor/models.py:200
 msgid "The code denoting the appropriate handling of the alert"
 msgstr "Msimbo unaoashiria utunzaji unaofaa wa tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:200
+#: capcomposer/src/capcomposer/capeditor/models.py:202
 msgid "Message Type"
 msgstr "Aina ya Ujumbe"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:201
+#: capcomposer/src/capcomposer/capeditor/models.py:203
 msgid "The code denoting the nature of the alert message"
 msgstr "Msimbo unaoashiria asili ya ujumbe wa arifa"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:202
+#: capcomposer/src/capcomposer/capeditor/models.py:204
 msgid "Scope"
 msgstr "Upeo"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:203
+#: capcomposer/src/capcomposer/capeditor/models.py:205
 msgid "The code denoting the intended distribution of the alert message"
 msgstr "Msimbo unaoashiria usambazaji unaokusudiwa wa ujumbe wa tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:204
+#: capcomposer/src/capcomposer/capeditor/models.py:206
 msgid "Source"
 msgstr "Chanzo"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:205
+#: capcomposer/src/capcomposer/capeditor/models.py:207
 msgid "The text identifying the source of the alert message"
 msgstr "Maandishi yanayotambulisha chanzo cha ujumbe wa arifa"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:207
+#: capcomposer/src/capcomposer/capeditor/models.py:209
 msgid ""
 "The text describing the rule for limiting distribution of the restricted "
 "alert message. Used when scope value is Restricted"
@@ -1320,19 +1411,19 @@ msgstr ""
 "Maandishi yanayoelezea sheria ya kuzuia usambazaji wa ujumbe wa tahadhari "
 "uliowekewa vikwazo. Inatumika wakati thamani ya upeo imezuiwa"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:209
+#: capcomposer/src/capcomposer/capeditor/models.py:211
 msgid "Restriction"
 msgstr "Kizuizi"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:211
+#: capcomposer/src/capcomposer/capeditor/models.py:213
 msgid "The code denoting the special handling of the alert message"
 msgstr "Msimbo unaoashiria utunzaji maalum wa ujumbe wa tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:212
+#: capcomposer/src/capcomposer/capeditor/models.py:214
 msgid "Code"
 msgstr "Kanuni"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:214
+#: capcomposer/src/capcomposer/capeditor/models.py:216
 msgid ""
 "The text describing the purpose or significance of the alert message.The "
 "message note is primarily intended for use with <status> 'Exercise' and "
@@ -1341,47 +1432,47 @@ msgstr ""
 "Maandishi yanayoelezea madhumuni au umuhimu wa ujumbe wa tahadhari. Ujumbe "
 "huu unakusudiwa kutumiwa na <status> 'Zoezi' na <msgType> 'Error'."
 
-#: capcomposer/src/capcomposer/capeditor/models.py:216
+#: capcomposer/src/capcomposer/capeditor/models.py:218
 msgid "Note"
 msgstr "Kumbuka"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:218
 #: capcomposer/src/capcomposer/capeditor/models.py:220
+#: capcomposer/src/capcomposer/capeditor/models.py:221
 msgid "Alert Information"
 msgstr "Taarifa za Tahadhari"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:223
+#: capcomposer/src/capcomposer/capeditor/models.py:224
 msgid "Recipient"
 msgstr "Mpokeaji"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:224
+#: capcomposer/src/capcomposer/capeditor/models.py:225
 msgid "Addresses"
 msgstr "Anwani"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:225
+#: capcomposer/src/capcomposer/capeditor/models.py:226
 msgid ""
 "The group listing of intended recipients of the alert message, if scope is "
 "Private"
 msgstr ""
 "Orodha ya kikundi ya walengwa wa ujumbe wa arifa, ikiwa upeo ni wa Faragha"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:230
+#: capcomposer/src/capcomposer/capeditor/models.py:231
 msgid "Reference Alerts"
 msgstr "Tahadhari za Marejeleo"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:235
+#: capcomposer/src/capcomposer/capeditor/models.py:236
 msgid "Incidents"
 msgstr "Matukio"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:252
+#: capcomposer/src/capcomposer/capeditor/models.py:253
 msgid "Alert Identification"
 msgstr "Kitambulisho cha Arifa"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:317
+#: capcomposer/src/capcomposer/capeditor/models.py:318
 msgid "Expired"
 msgstr "Muda wake umeisha"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:320
+#: capcomposer/src/capcomposer/capeditor/models.py:321
 msgid "Ongoing"
 msgstr "Inaendelea"
 
@@ -1390,7 +1481,7 @@ msgid "Issued"
 msgstr "Imetolewa"
 
 #: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:95
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:172
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:182
 msgid "Urgency:"
 msgstr "Dharura:"
 
@@ -1464,55 +1555,59 @@ msgstr "Hali:"
 msgid "Message Type:"
 msgstr "Aina ya Ujumbe:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:112
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:101
+msgid "GUID:"
+msgstr "KIONGOZI:"
+
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:122
 msgid "Create Draft Alert"
 msgstr "Unda Rasimu ya Arifa"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:146
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:156
 msgid "Language:"
 msgstr "Lugha:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:154
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:164
 msgid "Category:"
 msgstr "Kategoria:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:164
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:174
 msgid "Event:"
 msgstr "Tukio:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:180
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:190
 msgid "Severity:"
 msgstr "Ukali:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:188
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:198
 msgid "Certainty:"
 msgstr "Uhakika:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:199
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:209
 msgid "Effective:"
 msgstr "Inafaa:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:209
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:219
 msgid "Onset:"
 msgstr "Mwanzo:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:219
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:229
 msgid "Expires:"
 msgstr "Muda wake unaisha:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:231
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:241
 msgid "Headline:"
 msgstr "Kichwa cha habari:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:239
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:249
 msgid "Description:"
 msgstr "Maelezo:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:248
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:258
 msgid "Instruction:"
 msgstr "Maagizo:"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:258
+#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:268
 msgid "Area:"
 msgstr "Eneo:"
 
@@ -1528,10 +1623,16 @@ msgstr "Latitudo"
 msgid "Radius (in kilometers) "
 msgstr "Radius (katika kilomita)"
 
-#: capcomposer/src/capcomposer/capeditor/wagtail_hooks.py:93
+#: capcomposer/src/capcomposer/capeditor/wagtail_hooks.py:104
 #, python-format
 msgid "Page '%(page_title)s' copied."
 msgstr "Ukurasa '%(page_title)s' umenakiliwa."
+
+#~ msgid "Orange severity"
+#~ msgstr "Ukali wa machungwa"
+
+#~ msgid "Yellow severity"
+#~ msgstr "Ukali wa njano"
 
 #~ msgid "English"
 #~ msgstr "Kiingereza"
@@ -1585,7 +1686,7 @@ msgstr "Ukurasa '%(page_title)s' umenakiliwa."
 #~ "explanation SHOULD appear in note field"
 #~ msgstr ""
 #~ "Hitilafu - Huonyesha kukataliwa kwa ujumbe uliotambuliwa katika marejeleo; "
-#~ "maelezo LAZIMA yaonekane katika sehemu ya noti"
+#~ "maelezo LAZIMA kuonekana katika uga wa kumbukumbu"
 
 #~ msgid "Identifier"
 #~ msgstr "Kitambulisho"

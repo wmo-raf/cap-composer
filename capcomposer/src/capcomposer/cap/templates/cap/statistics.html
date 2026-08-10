@@ -1,0 +1,561 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n wagtailadmin_tags static %}
+
+{% block titletag %}{% trans "CAP Alert Statistics" %}{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        /* ── Layout ─────────────────────────────────────────────────── */
+        .stats-page { padding: 0 30px 40px; }
+
+        /* ── Filter bar ─────────────────────────────────────────────── */
+        .stats-filter-bar {
+            background: #f8f8f8;
+            border: 1px solid #e9e9e9;
+            border-radius: 6px;
+            padding: 18px 22px;
+            margin-bottom: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: flex-end;
+        }
+        .stats-filter-bar label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+        .stats-filter-bar input[type="date"],
+        .stats-filter-bar input[type="text"],
+        .stats-filter-bar select {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 13px;
+            height: 34px;
+        }
+        .stats-filter-bar .filter-group { flex: 0 0 auto; }
+        .stats-filter-bar .filter-status-group { flex: 0 0 auto; }
+        .stats-filter-bar .filter-actions { margin-left: auto; display: flex; gap: 8px; align-items: flex-end; }
+
+        /* ── Summary cards ──────────────────────────────────────────── */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+        .stat-card {
+            background: #fff;
+            border: 1px solid #e2e2e2;
+            border-radius: 8px;
+            padding: 18px 16px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,.05);
+        }
+        .stat-card .card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.1;
+        }
+        .stat-card .card-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: #666;
+            margin-top: 6px;
+        }
+        .stat-card.card-total .card-value { color: #2563EB; }
+        .stat-card.card-actual .card-value { color: #059669; }
+        .stat-card.card-extreme .card-value { color: #d42d41; }
+        .stat-card.card-severe .card-value { color: #f08c11; }
+
+        /* ── Chart grid ─────────────────────────────────────────────── */
+        .stats-charts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+        @media (max-width: 900px) {
+            .stats-charts { grid-template-columns: 1fr; }
+        }
+        .chart-card {
+            background: #fff;
+            border: 1px solid #e2e2e2;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.05);
+        }
+        .chart-card.chart-wide {
+            grid-column: 1 / -1;
+        }
+        .chart-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin: 0 0 14px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+        .chart-wrap { position: relative; height: 240px; }
+        .chart-wrap.chart-tall { height: 320px; }
+
+        /* ── Breakdown table ────────────────────────────────────────── */
+        .stats-table-section { margin-bottom: 28px; }
+        .stats-table-section h3 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: #333;
+            margin: 0 0 10px;
+        }
+        .stats-breakdown-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: #fff;
+            border: 1px solid #e2e2e2;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .stats-breakdown-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+            text-align: left;
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e2e2;
+        }
+        .stats-breakdown-table td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .stats-breakdown-table tr:last-child td { border-bottom: none; }
+        .stats-breakdown-table .pct-bar {
+            background: #e8f0fe;
+            border-radius: 3px;
+            height: 8px;
+            position: relative;
+            min-width: 40px;
+            width: 100%;
+        }
+        .stats-breakdown-table .pct-fill {
+            background: #2563EB;
+            border-radius: 3px;
+            height: 8px;
+            transition: width .3s;
+        }
+        .count-link { color: #2563EB; text-decoration: none; }
+        .count-link:hover { text-decoration: underline; }
+
+        /* ── Export row ─────────────────────────────────────────────── */
+        .stats-export-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .stats-export-row .export-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: #555;
+        }
+
+        .stats-export-row svg{
+            height: 14px;
+            width: 14px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% trans "CAP Alert Statistics" as header_str %}
+    {% include "wagtailadmin/shared/header.html" with title=header_str icon="date" %}
+
+    <div class="stats-page nice-padding">
+
+        {# ── Filter bar ─────────────────────────────────────────────── #}
+        <form method="get" action="">
+            <div class="stats-filter-bar">
+
+                <div class="filter-group">
+                    <label for="start_date">{% trans "From" %}</label>
+                    <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
+                </div>
+
+                <div class="filter-group">
+                    <label for="end_date">{% trans "To" %}</label>
+                    <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
+                </div>
+
+                <div class="filter-status-group">
+                    <label>{% trans "Severity" %}</label>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;padding-top:4px">
+                        {% for severity in severity_choices %}
+                            <label style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;display:flex;align-items:center;gap:4px">
+                                <input type="checkbox" name="severity" value="{{ severity }}"
+                                       {% if severity in selected_severities %}checked{% endif %}>
+                                {{ severity }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button type="submit" class="button button-secondary">{% trans "Apply" %}</button>
+                    <a href="{% url 'cap_statistics' %}" class="button button-secondary no">{% trans "Reset" %}</a>
+                </div>
+            </div>
+        </form>
+
+        {# ── Summary cards — total + per-severity ──────────────────── #}
+        <div class="stats-cards">
+            <div class="stat-card card-total">
+                <div class="card-value">{{ stats.total }}</div>
+                <div class="card-label">{% trans "Total Alerts" %}</div>
+            </div>
+
+            {% if stats.by_severity.Extreme %}
+            <div class="stat-card">
+                <div class="card-value" style="color:{{ stats.severity_colors.Extreme }}">{{ stats.by_severity.Extreme }}</div>
+                <div class="card-label">{% trans "Extreme" %}</div>
+            </div>
+            {% endif %}
+
+            {% if stats.by_severity.Severe %}
+            <div class="stat-card">
+                <div class="card-value" style="color:{{ stats.severity_colors.Severe }}">{{ stats.by_severity.Severe }}</div>
+                <div class="card-label">{% trans "Severe" %}</div>
+            </div>
+            {% endif %}
+
+            {% if stats.by_severity.Moderate %}
+            <div class="stat-card">
+                <div class="card-value" style="color:{{ stats.severity_colors.Moderate }}">{{ stats.by_severity.Moderate }}</div>
+                <div class="card-label">{% trans "Moderate" %}</div>
+            </div>
+            {% endif %}
+
+            {% if stats.by_severity.Minor %}
+            <div class="stat-card">
+                <div class="card-value" style="color:{{ stats.severity_colors.Minor }}">{{ stats.by_severity.Minor }}</div>
+                <div class="card-label">{% trans "Minor" %}</div>
+            </div>
+            {% endif %}
+        </div>
+
+        {# ── Export row ────────────────────────────────────────────── #}
+        <div class="stats-export-row">
+            <span class="export-label">{% trans "Export" %}</span>
+            <a href="{{ export_csv_url }}?{{ request.GET.urlencode }}"
+               class="button button-secondary">
+                {% icon name="download" %}
+                {% trans "Download CSV" %}
+            </a>
+        </div>
+
+        {# ── Charts ────────────────────────────────────────────────── #}
+        <div class="stats-charts">
+
+            {# Monthly trend #}
+            <div class="chart-card chart-wide">
+                <p class="chart-title">{% trans "Alerts Over Time (Monthly)" %}</p>
+                <div class="chart-wrap">
+                    <canvas id="chartTrend"></canvas>
+                </div>
+            </div>
+
+            {# By severity #}
+            <div class="chart-card">
+                <p class="chart-title">{% trans "By Severity" %}</p>
+                <div class="chart-wrap">
+                    <canvas id="chartSeverity"></canvas>
+                </div>
+            </div>
+
+            {# By urgency #}
+            <div class="chart-card">
+                <p class="chart-title">{% trans "By Urgency" %}</p>
+                <div class="chart-wrap">
+                    <canvas id="chartUrgency"></canvas>
+                </div>
+            </div>
+
+            {# By certainty #}
+            <div class="chart-card">
+                <p class="chart-title">{% trans "By Certainty" %}</p>
+                <div class="chart-wrap">
+                    <canvas id="chartCertainty"></canvas>
+                </div>
+            </div>
+
+            {# By status (doughnut) #}
+            <div class="chart-card">
+                <p class="chart-title">{% trans "By Status" %}</p>
+                <div class="chart-wrap">
+                    <canvas id="chartStatus"></canvas>
+                </div>
+            </div>
+
+            {# Top hazard types #}
+            <div class="chart-card chart-wide">
+                <p class="chart-title">{% trans "Top Hazard Types" %}</p>
+                <div class="chart-wrap chart-tall">
+                    <canvas id="chartEvent"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        {# ── Breakdown tables ──────────────────────────────────────── #}
+        {% if stats.by_event %}
+        <div class="stats-table-section">
+            <h3>{% trans "Alerts by Hazard Type" %}</h3>
+            <table class="stats-breakdown-table">
+                <thead>
+                    <tr>
+                        <th>{% trans "Hazard Type" %}</th>
+                        <th>{% trans "Count" %}</th>
+                        <th style="width:40%">{% trans "Distribution" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event, count in stats.by_event.items %}
+                    <tr>
+                        <td>{{ event }}</td>
+                        <td>
+                            <a class="count-link"
+                               href="{{ admin_list_url }}">{{ count }}</a>
+                        </td>
+                        <td>
+                            <div class="pct-bar">
+                                {% if stats.total %}
+                                <div class="pct-fill"
+                                     style="width:{% widthratio count stats.total 100 %}%"></div>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+    </div>{# /stats-page #}
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script>
+    /* ── Data injected at render time ───────────────────────────────── */
+    window._capStatsData = {
+        trendLabels:    {{ trend_labels_json|safe }},
+        trendData:      {{ trend_data_json|safe }},
+        severityLabels: {{ severity_labels_json|safe }},
+        severityData:   {{ severity_data_json|safe }},
+        severityColors: {{ severity_colors_json|safe }},
+        urgencyLabels:  {{ urgency_labels_json|safe }},
+        urgencyData:    {{ urgency_data_json|safe }},
+        certaintyLabels:{{ certainty_labels_json|safe }},
+        certaintyData:  {{ certainty_data_json|safe }},
+        statusLabels:   {{ status_labels_json|safe }},
+        statusData:     {{ status_data_json|safe }},
+        statusColors:   {{ status_colors_json|safe }},
+        eventLabels:    {{ event_labels_json|safe }},
+        eventData:      {{ event_data_json|safe }},
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"
+            onload="window._capInitCharts && window._capInitCharts()"></script>
+    <script>
+    (function () {
+        "use strict";
+
+        var PALETTE = [
+            '#2563EB','#7C3AED','#059669','#D97706','#DC2626',
+            '#0891B2','#65A30D','#DB2777','#9333EA','#EA580C',
+        ];
+
+        /* Helper: return canvas element only if it exists in the DOM */
+        function canvas(id) {
+            return document.getElementById(id) || null;
+        }
+
+        /* Hide a chart card when there is no data for it */
+        function hideCard(id) {
+            var el = canvas(id);
+            if (el && el.closest) {
+                el.closest('.chart-card').style.display = 'none';
+            }
+        }
+
+        function buildCharts() {
+            /* Bail out if Chart.js or the page data haven't loaded yet */
+            if (typeof Chart === 'undefined') return;
+            if (!window._capStatsData) return;
+
+            /* Bail out if we're not on the statistics page at all */
+            if (!canvas('chartTrend')) return;
+
+            var d = window._capStatsData;
+
+            Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+            Chart.defaults.font.size   = 12;
+            Chart.defaults.color       = '#555';
+
+            /* ── Monthly trend (line) ───────────────────────────────── */
+            if (d.trendLabels.length && canvas('chartTrend')) {
+                new Chart(canvas('chartTrend'), {
+                    type: 'line',
+                    data: {
+                        labels: d.trendLabels,
+                        datasets: [{
+                            label: '{% trans "Alerts" %}',
+                            data: d.trendData,
+                            borderColor: '#2563EB',
+                            backgroundColor: 'rgba(37,99,235,.12)',
+                            tension: .35,
+                            fill: true,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                    }
+                });
+            } else {
+                hideCard('chartTrend');
+            }
+
+            /* ── By severity (horizontal bar) ───────────────────────── */
+            if (d.severityLabels.length && canvas('chartSeverity')) {
+                new Chart(canvas('chartSeverity'), {
+                    type: 'bar',
+                    data: {
+                        labels: d.severityLabels,
+                        datasets: [{ data: d.severityData, backgroundColor: d.severityColors, borderRadius: 4 }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
+                    }
+                });
+            } else {
+                hideCard('chartSeverity');
+            }
+
+            /* ── By urgency (bar) ───────────────────────────────────── */
+            if (d.urgencyLabels.length && canvas('chartUrgency')) {
+                new Chart(canvas('chartUrgency'), {
+                    type: 'bar',
+                    data: {
+                        labels: d.urgencyLabels,
+                        datasets: [{ data: d.urgencyData, backgroundColor: ['#DC2626','#D97706','#2563EB','#9CA3AF'], borderRadius: 4 }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                    }
+                });
+            } else {
+                hideCard('chartUrgency');
+            }
+
+            /* ── By certainty (bar) ─────────────────────────────────── */
+            if (d.certaintyLabels.length && canvas('chartCertainty')) {
+                new Chart(canvas('chartCertainty'), {
+                    type: 'bar',
+                    data: {
+                        labels: d.certaintyLabels,
+                        datasets: [{ data: d.certaintyData, backgroundColor: ['#059669','#65A30D','#0891B2','#9CA3AF'], borderRadius: 4 }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                    }
+                });
+            } else {
+                hideCard('chartCertainty');
+            }
+
+            /* ── By status (doughnut) ───────────────────────────────── */
+            if (d.statusLabels.length && canvas('chartStatus')) {
+                new Chart(canvas('chartStatus'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: d.statusLabels,
+                        datasets: [{ data: d.statusData, backgroundColor: d.statusColors, hoverOffset: 6 }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'right' } }
+                    }
+                });
+            } else {
+                hideCard('chartStatus');
+            }
+
+            /* ── Top hazard types (horizontal bar) ──────────────────── */
+            if (d.eventLabels.length && canvas('chartEvent')) {
+                new Chart(canvas('chartEvent'), {
+                    type: 'bar',
+                    data: {
+                        labels: d.eventLabels,
+                        datasets: [{ data: d.eventData, backgroundColor: PALETTE, borderRadius: 4 }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
+                    }
+                });
+            } else {
+                hideCard('chartEvent');
+            }
+        }
+
+        /*
+         * Initialisation strategy:
+         *   1. If Chart.js is already loaded (e.g. cached), run now via requestAnimationFrame
+         *      so the browser has a chance to lay out the canvases first.
+         *   2. If Chart.js is still loading, the <script onload> above will call
+         *      window._capInitCharts() once it finishes.
+         */
+        window._capInitCharts = function () {
+            requestAnimationFrame(function () {
+                requestAnimationFrame(buildCharts);   /* two rAF = after layout/paint */
+            });
+        };
+
+        if (typeof Chart !== 'undefined') {
+            window._capInitCharts();
+        }
+        /* else: onload on the CDN <script> tag calls _capInitCharts */
+
+    })();
+    </script>
+{% endblock %}

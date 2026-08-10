@@ -1,8 +1,9 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: climweb-cap-composer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-26 13:28+0000\n"
+"POT-Creation-Date: 2026-06-10 08:33+0000\n"
 "PO-Revision-Date: 2026-05-11 09:48\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese\n"
@@ -11,1421 +12,1868 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: climweb-cap-composer\n"
-"X-Crowdin-Project-ID: 887364\n"
-"X-Crowdin-Language: pt-PT\n"
 "X-Crowdin-File: /capcomposer/src/capcomposer/capeditor/locale/en/LC_MESSAGES/django.po\n"
 "X-Crowdin-File-ID: 1634\n"
+"X-Crowdin-Language: pt-PT\n"
+"X-Crowdin-Project: climweb-cap-composer\n"
+"X-Crowdin-Project-ID: 887364\n"
 
-#: capcomposer/src/capcomposer/config/templates/404.html:19
-msgid "Page not found"
-msgstr "Página não encontrada"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:15
+#, fuzzy
+#| msgid "Sender name"
+msgid "Feed name"
+msgstr "Nome do feed"
 
-#: capcomposer/src/capcomposer/config/templates/404.html:23
-msgid "Sorry, this page could not be found"
-msgstr "Desculpe, esta página não foi encontrada"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:16
+msgid "Provide a name to identify the feed"
+msgstr "Forneça um nome para identificar o feed"
 
-#: capcomposer/src/capcomposer/config/templates/500.html:17
-msgid "Internal server error"
-msgstr "Erro do Servidor Interno"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:17
+#, fuzzy
+#| msgid "Message Type"
+msgid "Feed Type"
+msgstr "Tipo de feed"
 
-#: capcomposer/src/capcomposer/config/templates/500.html:20
-msgid "Sorry, there seems to be an error. Please try again soon"
-msgstr "Desculpe, parece haver um erro. Por favor, tente novamente em breve"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:18
+msgid "Select the type of feed"
+msgstr "Selecione o tipo de feed"
 
-#: capcomposer/src/capcomposer/config/templates/axes/lockout.html:4
-msgid "Sign in"
-msgstr "Entrar"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:19
+msgid "Feed URL"
+msgstr "URL do feed"
 
-#: capcomposer/src/capcomposer/config/templates/axes/lockout.html:10
-msgid "Account Locked"
-msgstr "Conta bloqueada"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:19
+msgid "Enter the URL of the feed"
+msgstr "Insira o URL do feed"
 
-#: capcomposer/src/capcomposer/config/templates/axes/lockout.html:15
-msgid "Your account has been locked due to multiple failed login attempts. Please try again later."
-msgstr "Sua conta foi bloqueada devido a diversas tentativas de login malsucedidas. Por favor, tente novamente mais tarde."
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:20
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:44
+#: capcomposer/src/capcomposer/cap/webhook/models.py:10
+#, fuzzy
+#| msgid "Effective"
+msgid "Active"
+msgstr "Ativo"
 
-#: capcomposer/src/capcomposer/config/templates/axes/lockout.html:17
-msgid "You account has been locked due to multiple failed login attempts. Please contact our support team for assistance."
-msgstr "Sua conta foi bloqueada devido a várias tentativas de login malsucedidas. Entre em contato com nossa equipe de suporte para obter assistência."
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:21
+msgid "Automatically fetch data from this feed. Uncheck to disable."
+msgstr "Busque dados deste feed automaticamente. Desmarque para desativar."
 
-#: capcomposer/src/capcomposer/config/templates/footer.html:5
-msgid "Powered by CAPComposer"
-msgstr "Desenvolvido por CAPComposer"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:22
+msgid "Feed check interval in minutes"
+msgstr "Intervalo de verificação de alimentação em minutos"
 
-#: capcomposer/src/capcomposer/config/templates/wagtailadmin/home.html:5
-msgid "Welcome to"
-msgstr "Bem-vindo ao"
-
-#: capcomposer/src/capcomposer/config/templates/wagtailadmin/home.html:9
-msgid "CAPComposer"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:27
+msgid "How often to check for new alerts in minutes. Min: 1, Max: 10"
 msgstr ""
+"Com que frequência verificar novos alertas em minutos. Mínimo: 1, Máx.: 10"
 
-#: capcomposer/src/capcomposer/home/models.py:19
-msgid "Subtitle"
-msgstr "Legenda"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:29
+msgid "Validate CAP XML Signature"
+msgstr "Validar assinatura XML CAP"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:117
-#: capcomposer/src/capcomposer/capeditor/blocks.py:145
-#: capcomposer/src/capcomposer/capeditor/blocks.py:502
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:163
-msgid "Name"
-msgstr "Nome"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:30
+msgid "Check to only import alerts with a valid XML signature."
+msgstr "Marque para importar apenas alertas com uma assinatura XML válida."
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:117
-msgid "Name of the recipient"
-msgstr "Nome do destinatário"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:33
+msgid "Submit imported alerts for moderation"
+msgstr "Envie alertas importados para moderação"
 
-#: capcomposer/src/capcomposer/capeditor/blocks.py:118
-msgid "Address"
-msgstr "Endereço"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:118
-msgid "Address Information of the recipient"
-msgstr "Informações de endereço do destinatário"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:136
-#: capcomposer/src/capcomposer/capeditor/models.py:228
-msgid "Reference Alert"
-msgstr "Alerta de referência"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:137
-msgid "Earlier alert referenced by this alert"
-msgstr "Alerta anterior referenciado por este alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:141
-#: capcomposer/src/capcomposer/capeditor/models.py:233
-msgid "Incident"
-msgstr "Incidente"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:141
-msgid "Referent incident to this alert message"
-msgstr "Incidente referente a esta mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:146
-#: capcomposer/src/capcomposer/capeditor/blocks.py:173
-#: capcomposer/src/capcomposer/capeditor/blocks.py:503
-msgid "Value"
-msgstr "Valor"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:151
-msgid "Shelter - Take shelter in place or per instruction"
-msgstr "Abrigo - Abrigue-se no local ou de acordo com as instruções"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:152
-msgid "Evacuate - Relocate as instructed in the instruction"
-msgstr "Evacuar - Realocar conforme as instruções"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:153
-msgid "Prepare - Relocate as instructed in the instruction"
-msgstr "Preparar - Realocar conforme as instruções"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:154
-msgid "Execute - Execute a pre-planned activity identified in instruction"
-msgstr "Executar - Executar uma atividade pré-planejada identificada na instrução"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:155
-msgid "Avoid - Avoid the subject event as per the instruction"
-msgstr "Evitar - Evite o evento em questão conforme as instruções"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:156
-msgid "Monitor - Attend to information sources as described in instruction"
-msgstr "Monitorar - Atender às fontes de informação conforme descrito nas instruções"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:157
-msgid "Assess - Evaluate the information in this message - DONT USE FOR PUBLIC ALERTS"
-msgstr "Avalie - Avalie as informações desta mensagem - NÃO USE PARA ALERTAS PÚBLICOS"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:158
-msgid "All Clear - The subject event no longer poses a threat or concern and any follow on action is described in instruction"
-msgstr "Tudo limpo - O evento em questão não representa mais uma ameaça ou preocupação e qualquer acção subsequente é descrita nas instruções"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:160
-msgid "No action recommended"
-msgstr "Nenhuma acção recomendada"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:163
-msgid "Response type"
-msgstr "Tipo de resposta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:164
-msgid "The code denoting the type of action recommended for the target audience"
-msgstr "O código que denota o tipo de acção recomendada para o público-alvo"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:169
-msgid "Value Name"
-msgstr "Nome do valor"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:171
-msgid "User-assigned string designating the domain of the code. Acronyms SHOULD be represented in all capital letters without periods (e.g., SAME, FIPS, ZIP"
-msgstr "String atribuída pelo usuário que designa o domínio do código. As siglas DEVEM ser representadas em letras maiúsculas sem pontos (por exemplo, SAME, FIPS, ZIP"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:174
-msgid "A string (which may represent a number) denoting the value itself"
-msgstr "Uma string (que pode representar um número) denotando o próprio valor"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:177
-msgid "Geographically-based code to describe a message target area"
-msgstr "Código com base geográfica para descrever uma área de destino de mensagem"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:233
-msgid "Level 0"
-msgstr "Nível 0"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:234
-msgid "Level 1"
-msgstr "Nível 1"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:235
-msgid "Level 2"
-msgstr "Nível 2"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:236
-msgid "Level 3"
-msgstr "Nível 3"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:239
-#: capcomposer/src/capcomposer/capeditor/blocks.py:299
-#: capcomposer/src/capcomposer/capeditor/blocks.py:377
-msgid "Affected areas / Regions"
-msgstr "Áreas/regiões afetadas"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:241
-#: capcomposer/src/capcomposer/capeditor/blocks.py:301
-#: capcomposer/src/capcomposer/capeditor/blocks.py:379
-msgid "The text describing the affected area of the alert message"
-msgstr "O texto que descreve a área afetada da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:242
-msgid "Administrative Level"
-msgstr "Nível Administrativo"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:243
-msgid "Boundary"
-msgstr "Limite"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:244
-#: capcomposer/src/capcomposer/capeditor/blocks.py:304
-msgid "The paired values of points defining a polygon that delineates the affected area of the alert message"
-msgstr "Os valores emparelhados de pontos que definem um polígono que delineia a área afetada da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:247
-#: capcomposer/src/capcomposer/capeditor/blocks.py:306
-#: capcomposer/src/capcomposer/capeditor/blocks.py:381
-#: capcomposer/src/capcomposer/capeditor/blocks.py:430
-msgid "Altitude"
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:35
+msgid ""
+"Check to automatically submit imported alerts for moderation. Otherwise, "
+"alerts will be saved as drafts."
 msgstr ""
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:248
-#: capcomposer/src/capcomposer/capeditor/blocks.py:307
-#: capcomposer/src/capcomposer/capeditor/blocks.py:382
-#: capcomposer/src/capcomposer/capeditor/blocks.py:431
-msgid "The specific or minimum altitude of the affected area of the alert message"
-msgstr "A altitude específica ou mínima da área afetada da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:250
-#: capcomposer/src/capcomposer/capeditor/blocks.py:309
-#: capcomposer/src/capcomposer/capeditor/blocks.py:384
-#: capcomposer/src/capcomposer/capeditor/blocks.py:433
-msgid "Ceiling"
-msgstr "Teto"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:251
-#: capcomposer/src/capcomposer/capeditor/blocks.py:310
-#: capcomposer/src/capcomposer/capeditor/blocks.py:385
-#: capcomposer/src/capcomposer/capeditor/blocks.py:434
-msgid "The maximum altitude of the affected area of the alert message.MUST NOT be used except in combination with the altitude element. "
-msgstr "A altitude máxima da área afetada da mensagem de alerta. NÃO DEVE ser usada, exceto em combinação com o elemento altitude."
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:254
-#: capcomposer/src/capcomposer/capeditor/blocks.py:312
-#: capcomposer/src/capcomposer/capeditor/blocks.py:387
-#: capcomposer/src/capcomposer/capeditor/blocks.py:436
-msgid "Geocode"
-msgstr "Geocódigo"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:302
-msgid "Polygon"
-msgstr "Polígono"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:380
-#: capcomposer/src/capcomposer/capeditor/blocks.py:693
-msgid "Circle"
-msgstr "Círculo"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:380
-msgid "Drag the marker to change position"
-msgstr "Arraste o marcador para mudar de posição"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:429
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:73
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:164
-msgid "Area"
-msgstr "Área"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:439
-msgid "The human-readable name of the agency or authority issuing this alert."
-msgstr "O nome legível da agência ou autoridade que emite este alerta."
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:440
-msgid "The text describing the contact for follow-up and confirmation of the alert message"
-msgstr "O texto que descreve o contato para acompanhamento e confirmação da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:482
-#: capcomposer/src/capcomposer/capeditor/blocks.py:491
-msgid "Resource Description"
-msgstr "Descrição do recurso"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:483
-#: capcomposer/src/capcomposer/capeditor/blocks.py:492
-msgid "The text describing the type and content of the resource file"
-msgstr "O texto que descreve o tipo e o conteúdo do arquivo de recursos"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:493
-msgid "External Resource Link"
-msgstr "Link de recurso externo"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:494
-msgid "Link to external resource. This can be for example a link to related websites. "
-msgstr "Link para recurso externo. Pode ser, por exemplo, um link para sites relacionados."
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:502
-msgid "Name for the event code"
-msgstr "Nome do código do evento"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:503
-msgid "Value of the event code"
-msgstr "Valor do código do evento"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:624
-msgid "Immediate - Responsive action SHOULD be taken immediately"
-msgstr "Imediato - Acção responsiva DEVE ser tomada imediatamente"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:625
-msgid "Expected - Responsive action SHOULD be taken soon (within next hour)"
-msgstr "Esperado - Acção responsiva DEVE ser tomada em breve (na próxima hora)"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:626
-msgid "Future - Responsive action SHOULD be taken in the near future"
-msgstr "Futuro - Ações responsivas DEVEM ser tomadas em um futuro próximo"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:627
-msgid "Past - Responsive action is no longer required"
-msgstr "Passado - A acção responsiva não é mais necessária"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:632
-msgid "Extreme - Extraordinary threat to life or property"
-msgstr "Extremo - Ameaça extraordinária à vida ou à propriedade"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:633
-msgid "Severe - Significant threat to life or property"
-msgstr "Grave - Ameaça significativa à vida ou propriedade"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:634
-msgid "Moderate - Possible threat to life or property"
-msgstr "Moderado - Possível ameaça à vida ou à propriedade"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:635
-msgid "Minor - Minimal to no known threat to life or property"
-msgstr "Menor - Mínima ou nenhuma ameaça conhecida à vida ou propriedade"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:640
-msgid "Observed - Determined to have occurred or to be ongoing"
-msgstr "Observado - Determinado como tendo ocorrido ou em andamento"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:641
-msgid "Likely - Likely (percentage > ~50%)"
-msgstr "Provável - Provável (porcentagem > ~50%)"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:642
-msgid "Possible - Possible but not likely (percentage <= ~50%)"
-msgstr "Possível - Possível, mas não provável (porcentagem <= ~50%)"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:643
-msgid "Unlikely - Not expected to occur (percentage ~ 0)"
-msgstr "Improvável - Não se espera que ocorra (porcentagem ~ 0)"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:647
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:30
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:195
-msgid "Event"
-msgstr "Evento"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:648
-msgid "The text denoting the type of the subject event of the alert message. You can define hazards events monitored by your institution from CAP settings"
-msgstr "O texto que indica o tipo de evento de assunto da mensagem de alerta. Você pode definir eventos de perigo monitorados pela sua instituição nas configurações do CAP"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:651
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:77
-msgid "Language"
-msgstr "Linguagem"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:652
-#| msgid "The code denoting the language of the alert message"
-msgid "The code denoting the language of the alert message.If not selected, 'en-US' will be used as default"
-msgstr "O código que indica o idioma da mensagem de alerta. Se não for selecionado, 'en-US' será usado como padrão"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:654
-msgid "Urgency"
-msgstr "Urgência"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:655
-msgid "The code denoting the urgency of the subject event of the alert message"
-msgstr "O código que denota a urgência do evento em questão da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:657
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:104
-msgid "Severity"
-msgstr "Gravidade"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:658
-msgid "The code denoting the severity of the subject event of the alert message"
-msgstr "O código que indica a gravidade do evento em questão da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:660
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:113
-msgid "Certainty"
-msgstr "Certeza"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:661
-msgid "The code denoting the certainty of the subject event of the alert message"
-msgstr "O código que denota a certeza do evento em questão da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:663
-msgid "Headline"
-msgstr "Título"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:664
-msgid "The text headline of the alert message. Make it direct and actionable as possible while remaining short"
-msgstr "O título do texto da mensagem de alerta. Torne-o o mais direto e acionável possível, mantendo-o curto"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:666
-msgid "Description"
-msgstr "Descrição"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:668
-msgid "The text describing the subject event of the alert message. An extended description of the hazard or event that occasioned this message"
-msgstr "O texto que descreve o evento de assunto da mensagem de alerta. Uma descrição extensa do perigo ou evento que ocasionou esta mensagem"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:670
-msgid "Instruction"
-msgstr "Instrução"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:671
-msgid "The text describing the recommended action to be taken by recipients of the alert message"
-msgstr "O texto que descreve a acção recomendada a ser tomada pelos destinatários da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:673
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:56
-msgid "Effective"
-msgstr "Eficaz"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:674
-msgid "The effective time of the information of the alert message. If not set, the sent date will be used"
-msgstr "O tempo efetivo das informações da mensagem de alerta. Se não for definido, a data de envio será usada"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:676
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:72
-msgid "Onset"
-msgstr "Início"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:677
-msgid "The expected time of the beginning of the subject event of the alert message"
-msgstr "A hora esperada do início do evento em questão da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:679
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:81
-msgid "Expires"
-msgstr "Expira"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:680
-msgid "The expiry time of the information of the alert message. If not set, each recipient is free to set its own policy as to when the message is no longer in effect."
-msgstr "O tempo de expiração das informações da mensagem de alerta. Se não for definido, cada destinatário poderá definir sua própria política sobre quando a mensagem não estará mais em vigor."
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:683
-msgid "Response Types"
-msgstr "Tipos de resposta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:685
-msgid "Sender name"
-msgstr "Nome do remetente"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:687
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:43
-msgid "Contact"
-msgstr "Contato"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:688
-msgid "Audience"
-msgstr "Público"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:689
-msgid "The text describing the intended audience of the alert message"
-msgstr "O texto que descreve o público-alvo da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:691
-msgid "Admin Boundary"
-msgstr "Limite de administração"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:692
-msgid "Draw Polygon"
-msgstr "Desenhar polígono"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:694
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:167
-msgid "Predefined Area"
-msgstr "Área predefinida"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:695
-msgid "Alert Area"
-msgstr "Área de Alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:695
-msgid "Admin Boundary, Polygon, Circle, or Predefined area"
-msgstr "Limite administrativo, polígono, círculo ou área predefinida"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:700
-msgid "Resources"
-msgstr "Recursos"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:700
-msgid "Additional file with supplemental information related to this alert information"
-msgstr "Arquivo adicional com informações suplementares relacionadas a essas informações de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:703
-msgid "Parameter"
-msgstr "Parâmetro"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:703
-msgid "Parameters"
-msgstr "Parâmetros"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:723
-msgid "The expiry time of the alert should be greater than the effective time"
-msgstr "O tempo de expiração do alerta deve ser maior que o tempo efetivo"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:728
-msgid "The expiry time of the alert should be greater than the onset time"
-msgstr "O tempo de expiração do alerta deve ser maior que o tempo de início"
-
-#: capcomposer/src/capcomposer/capeditor/blocks.py:735
-msgid "Contact Detail"
-msgstr "Detalhes de contato"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:29
-msgid "CAP Sender Email"
-msgstr "E-mail do remetente CAP"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:30
-msgid "Email of the sending institution"
-msgstr "E-mail da instituição remetente"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:31
-msgid "CAP Sender Name"
-msgstr "Nome do remetente CAP"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:32
-msgid "Name of the sending institution"
-msgstr "Nome da instituição remetente"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:34
-msgid "WMO Register of Alerting Authorities OID"
-msgstr "Registro de Autoridades de Alerta da OMM OID"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:35
-msgid "WMO Register of Alerting Authorities Object Identifier (OID) of the sending institution. This will be used to generate CAP messages identifiers"
-msgstr "Registro de Autoridades de Alerta da OMM Identificador de Objeto (OID) da instituição remetente. Isso será usado para gerar identificadores de mensagens CAP"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:40
-msgid "Logo of the sending institution"
-msgstr "Logotipo da instituição remetente"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:44
-msgid "Contact Details"
-msgstr "Detalhes de contato"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:45
-msgid "Contact for follow-up and confirmation of the alert message"
-msgstr "Contato para acompanhamento e confirmação da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:47
-msgid "UN Country Boundary"
-msgstr "Fronteira do país da ONU"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:48
-msgid "GeoJSON file of the UN Country Boundary. Setting this will enable the UN Country Boundary check in the alertdrawing tools"
-msgstr "Arquivo GeoJSON da fronteira do país da ONU. Definir isso permitirá a verificação das fronteiras do país da ONU nas ferramentas de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:54
-msgid "Number of latest Alerts to show in the XML CAP Feed"
-msgstr "Número de alertas mais recentes a serem exibidos no XML CAP Feed"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:54
-msgid "Set a smaller number to improve perfomance for aggregators"
-msgstr "Defina um número menor para melhorar o desempenho dos agregadores"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:58
-msgid "CAP Settings"
-msgstr "Configurações de CAP"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:67
-msgid "Sender Details"
-msgstr "Detalhes do remetente"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:69
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:71
-msgid "Hazard Types"
-msgstr "Tipos de perigo"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:69
-msgid "Hazard Type"
-msgstr "Tipo de perigo"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:70
-msgid "Hazards monitored by the institution"
-msgstr "Riscos monitorados pela instituição"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:73
-msgid "Predefined Alert Areas"
-msgstr "Áreas de alerta predefinidas"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:74
-msgid "Predefined areas for alerts"
-msgstr "Áreas predefinidas para alertas"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:75
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:168
-msgid "Predefined Areas"
-msgstr "Áreas predefinidas"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:77
-msgid "Allowed Alert Languages"
-msgstr "Idiomas de alerta permitidos"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:78
-#| msgid "Language"
-msgid "Languages"
-msgstr "Idiomas"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:83
-msgid "UN Boundary"
-msgstr "Limite da ONU"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:86
+"Marque para enviar automaticamente alertas importados para moderação. Caso "
+"contrário, os alertas serão salvos como rascunhos."
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:48
+msgid "External Alert Feed"
+msgstr "Feed de alerta externo"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:49
+msgid "External Alert Feeds"
+msgstr "Feeds de alertas externos"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:57
+#, fuzzy
+#| msgid "CAP Alert XML URL"
+msgid "Alert URL"
+msgstr "URL de alerta"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:57
+msgid "The URL of the alert XML"
+msgstr "A URL do XML de alerta"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:58
+#, fuzzy
+#| msgid "Reference Alert"
+msgid "Remote Alert ID"
+msgstr "ID de alerta remoto"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:59
+#, fuzzy
+#| msgid "The text identifying the source of the alert message"
+msgid "The unique identifier of the alert in the remote feed"
+msgstr "O identificador exclusivo do alerta no feed remoto"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:62
+msgid "The imported alert from this entry"
+msgstr "O alerta importado desta entrada"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:65
+msgid "External Alert Feed Entry"
+msgstr "Entrada de feed de alerta externo"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:66
+msgid "External Alert Feed Entries"
+msgstr "Entradas de feed de alerta externo"
+
+#: capcomposer/src/capcomposer/cap/mixins.py:21
+msgid "For search engines"
+msgstr "Para motores de busca"
+
+#: capcomposer/src/capcomposer/cap/mixins.py:27
+msgid "For site menus"
+msgstr "Para menus do site"
+
+#: capcomposer/src/capcomposer/cap/models.py:58
+#, fuzzy
 #| msgid "CAP Settings"
+msgid "CAP Alerts Heading"
+msgstr "Título de alertas CAP"
+
+#: capcomposer/src/capcomposer/cap/models.py:63
+#, fuzzy
+#| msgid "Number of latest Alerts to show in the XML CAP Feed"
+msgid "Number of alerts to show per page"
+msgstr "Número de alertas a serem exibidos por página"
+
+#: capcomposer/src/capcomposer/cap/models.py:231
+msgid "Effective date cannot be earlier than the alert sent date."
+msgstr "A data de vigência não pode ser anterior à data de envio do alerta."
+
+#: capcomposer/src/capcomposer/cap/models.py:234
+msgid "Expires date cannot be earlier than the alert sent date."
+msgstr "A data de expiração não pode ser anterior à data de envio do alerta."
+
+#: capcomposer/src/capcomposer/cap/models.py:270
+#, fuzzy
+#| msgid "Import Type:"
+msgid "Imported"
+msgstr "Importado"
+
+#: capcomposer/src/capcomposer/cap/models.py:280
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:56
+#, fuzzy
+#| msgid "Import CAP Alert"
+msgid "CAP Alert"
+msgstr "Alerta CAP"
+
+#: capcomposer/src/capcomposer/cap/models.py:298
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:74
+msgid "PDF"
+msgstr "PDF"
+
+#: capcomposer/src/capcomposer/cap/models.py:299
+msgid "Email"
+msgstr "E-mail"
+
+#: capcomposer/src/capcomposer/cap/models.py:450
+msgid "Left of the Navbar"
+msgstr "À esquerda da barra de navegação"
+
+#: capcomposer/src/capcomposer/cap/models.py:451
+msgid "Top of the Navbar"
+msgstr "Parte superior da barra de navegação"
+
+#: capcomposer/src/capcomposer/cap/models.py:455
+msgid "Active Alert Style"
+msgstr "Estilo de alerta ativo"
+
+#: capcomposer/src/capcomposer/cap/models.py:456
+msgid "Choose the style of active alerts"
+msgstr "Escolha o estilo dos alertas ativos"
+
+#: capcomposer/src/capcomposer/cap/models.py:466
+#: capcomposer/src/capcomposer/cap/models.py:467
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:305
 msgid "Other Settings"
 msgstr "Outras configurações"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:110
-msgid "Geophysical"
-msgstr "Geofísica"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:14
+msgid "At most once. Fire and forget"
+msgstr "No máximo uma vez. Dispare e esqueça"
 
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:111
-msgid "Meteorological"
-msgstr "Meteorológico"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:112
-msgid "General emergency and public safety"
-msgstr "Emergência geral e segurança pública"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:113
-msgid "Law enforcement, military, homeland and local/private security"
-msgstr "Aplicação da lei, forças armadas, segurança interna e local/privada"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:114
-msgid "Rescue and recovery"
-msgstr "Resgate e recuperação"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:115
-msgid "Fire suppression and rescue"
-msgstr "Supressão de incêndio e resgate"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:116
-msgid "Medical and public health"
-msgstr "Saúde médica e pública"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:117
-msgid "Pollution and other environmental"
-msgstr "Poluição e outros problemas ambientais"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:118
-msgid "Public and private transportation"
-msgstr "Transporte público e privado"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:119
-msgid "Utility, telecommunication, other non-transport infrastructure"
-msgstr "Serviços públicos, telecomunicações e outras infra-estruturas não relacionadas com os transportes"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:120
-msgid "Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat or attack"
-msgstr "Ameaça ou ataque químico, biológico, radiológico, nuclear ou explosivo de alto rendimento"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:121
-msgid "Other events"
-msgstr "Outros eventos"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:126
-msgid "Select from WMO list of Hazards Event Types"
-msgstr "Selecione na lista de tipos de eventos de perigo da OMM"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:127
-msgid "Hazard"
-msgstr "Perigo"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:127
-msgid "Name of Hazard"
-msgstr "Nome do Perigo"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:128
-msgid "Category"
-msgstr "Categoria"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:130
-#| msgid "Name of Hazard"
-msgid "Category of Hazard"
-msgstr "Categoria de perigo"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:131
-msgid "Event Code"
-msgstr "Código do Evento"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:132
-msgid "Icon"
-msgstr "Ícone"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:132
-msgid "Matching icon"
-msgstr "Ícone correspondente"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:145
-#| msgid "Event Code"
-msgid "Event Code is required"
-msgstr "O código do evento é obrigatório"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:153
-msgid "This event type already exists"
-msgstr "Este tipo de evento já existe"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:189
-#| msgid "Language"
-msgid "Language Code"
-msgstr "Código do idioma"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:189
-msgid "ISO 639-1 language code"
-msgstr "Código de idioma ISO 639-1"
-
-#: capcomposer/src/capcomposer/capeditor/cap_settings.py:190
-#| msgid "Language"
-msgid "Language Name"
-msgstr "Nome do idioma"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:4
-msgid "Geo"
-msgstr "Geografia"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:5
-msgid "Met"
-msgstr "Meteorologia"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:6
-msgid "Safety"
-msgstr "Segurança"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:7
-msgid "Security"
-msgstr "Segurança"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:8
-msgid "Rescue"
-msgstr "Resgatar"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:9
-msgid "Fire"
-msgstr "Fogo"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:10
-msgid "Health"
-msgstr "Saúde"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:11
-msgid "Env"
-msgstr "Ambiente"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:12
-msgid "Transport"
-msgstr "Transporte"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:13
-msgid "Infra"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:15
+msgid "At least once. I’ll keep sending until you say you got it"
 msgstr ""
+"Pelo menos uma vez. Vou continuar enviando até você dizer que entendeu"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:14
-msgid "CBRNE"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:19
+#: capcomposer/src/capcomposer/cap/webhook/models.py:8
+msgid "Name"
+msgstr "Nome"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:20
+msgid "Provide a name to identify the broker"
+msgstr "Forneça um nome para identificar o corretor"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:21
+msgid "Broker Host"
+msgstr "Host do corretor"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:22
+msgid "Provide the broker host name or IP address"
+msgstr "Forneça o nome do host do corretor ou endereço IP"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:23
+msgid "Broker Port"
+msgstr "Porta do Corretor"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:23
+msgid "Provide the broker port number"
+msgstr "Forneça o número da porta do corretor"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:26
+msgid "Broker Username"
+msgstr "Nome de usuário do corretor"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:27
+msgid "Broker Password"
+msgstr "Senha do corretor"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:28
+msgid "Enter a password. If a password already exists, it will be updated"
+msgstr "Digite uma senha. Se já existir uma senha, ela será atualizada"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:32
+msgid "Is WIS2Box Node"
+msgstr "É o nó WIS2Box"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:33
+msgid "Check this box if you are providing the broker details of a wis2box."
 msgstr ""
+"Marque esta caixa se você estiver fornecendo os detalhes do corretor de um "
+"wis2box."
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:15
-msgid "Other"
-msgstr "Outro"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:35
+msgid "Topic"
+msgstr "Tópico"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:19
-#: capcomposer/src/capcomposer/capeditor/constants.py:194
-msgid "Immediate"
-msgstr "Imediato"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:36
+msgid "Provide the MQTT topic to publish the CAP alerts."
+msgstr "Forneça o tópico MQTT para publicar os alertas CAP."
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:20
-#: capcomposer/src/capcomposer/capeditor/constants.py:199
-#: capcomposer/src/capcomposer/capeditor/models.py:322
-msgid "Expected"
-msgstr "Esperado"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:37
+msgid "Quality of Service (QoS)"
+msgstr "Qualidade de Serviço (QoS)"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:21
-#: capcomposer/src/capcomposer/capeditor/constants.py:204
-msgid "Future"
-msgstr "Futuro"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:39
+msgid "Dataset ID"
+msgstr "ID do conjunto de dados"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:22
-#: capcomposer/src/capcomposer/capeditor/constants.py:209
-msgid "Past"
-msgstr "Passado"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:27
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:146
-msgid "Extreme"
-msgstr "Extremo"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:28
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:152
-msgid "Severe"
-msgstr "Forte"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:29
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:158
-msgid "Moderate"
-msgstr "Moderado"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:30
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:164
-msgid "Minor"
-msgstr "Menor"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:35
-#: capcomposer/src/capcomposer/capeditor/constants.py:222
-msgid "Observed"
-msgstr "Observado"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:36
-#: capcomposer/src/capcomposer/capeditor/constants.py:227
-msgid "Likely"
-msgstr "Provável"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:37
-#: capcomposer/src/capcomposer/capeditor/constants.py:232
-msgid "Possible"
-msgstr "Possível"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:38
-#: capcomposer/src/capcomposer/capeditor/constants.py:237
-msgid "Unlikely"
-msgstr "Improvável"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:43
-msgid "Shelter"
-msgstr "Abrigo"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:44
-msgid "Evacuate"
-msgstr "Evacuar"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:45
-msgid "Prepare"
-msgstr "Preparar"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:46
-msgid "Execute"
-msgstr "Executar"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:47
-msgid "Avoid"
-msgstr "Evitar"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:48
-msgid "Monitor"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:41
+msgid ""
+"Provide the metadata ID for your dataset registered in the wis2box. If you "
+"do not have this, please create a dataset in the wis2box before proceeding."
 msgstr ""
+"Forneça o ID de metadados do seu conjunto de dados registrado no wis2box. Se"
+" você não tiver isso, crie um conjunto de dados no wis2box antes de "
+"continuar."
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:49
-msgid "Assess"
-msgstr "Avaliar"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:45
+msgid "Automatically publish CAP alerts to this broker"
+msgstr "Publicar automaticamente alertas CAP para este corretor"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:50
-msgid "AllClear"
-msgstr "Tudo limpo"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:48
+#: capcomposer/src/capcomposer/cap/webhook/models.py:13
+msgid "Retry on failure"
+msgstr "Tentar novamente em caso de falha"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:51
-msgid "None"
-msgstr "Nenhum"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:55
+#, fuzzy
+#| msgid "Alert Information"
+msgid "Broker Information"
+msgstr "Informações do corretor"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:56
-msgid "Avalanche"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:59
+#, fuzzy
+#| msgid "Alert Identification"
+msgid "Authentication"
+msgstr "Autenticação"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:76
+msgid "Dataset ID is required for a WIS2Box Broker"
+msgstr "O ID do conjunto de dados é necessário para um corretor WIS2Box"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:81
+#, fuzzy
+#| msgid "This field is required."
+msgid "Topic is required"
+msgstr "O tópico é obrigatório"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:86
+msgid ""
+"Secret key for encrypting passwords is not set. Please ensure the "
+"CAP_MQTT_SECRET_KEY is set "
 msgstr ""
+"A chave secreta para criptografar senhas não está definida. Certifique-se de"
+" que CAP_MQTT_SECRET_KEY esteja definido"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:57
-msgid "Cold wave"
-msgstr "Onda fria"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:91
+msgid "Password is required if creating a new broker"
+msgstr "A senha é necessária ao criar um novo corretor"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:58
-msgid "Drought/Dry spell"
-msgstr "Seca/período de seca"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:112
+msgid "MQTT Broker"
+msgstr "Corretor MQTT"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:59
-msgid "Dust storm/Sandstorm"
-msgstr "Tempestade de poeira/tempestade de areia"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:113
+msgid "MQTT Brokers"
+msgstr "Corretores MQTT"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:60
-msgid "Extra-tropical cyclone"
-msgstr "Ciclone extratropical"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:120
+#: capcomposer/src/capcomposer/cap/webhook/models.py:34
+msgid "Pending"
+msgstr "Pendente"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:61
-msgid "Flood"
-msgstr "Cheia"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:121
+#: capcomposer/src/capcomposer/cap/webhook/models.py:35
+msgid "Failure"
+msgstr "Falha"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:62
-msgid "Fog"
-msgstr "Nevoeiro"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:122
+#: capcomposer/src/capcomposer/cap/webhook/models.py:36
+msgid "Success"
+msgstr "Sucesso"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:63
-msgid "Haze/Smoke"
-msgstr "Neblina/fumaça"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:129
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:244
+#: capcomposer/src/capcomposer/cap/webhook/models.py:43
+msgid "Status"
+msgstr "Status"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:64
-msgid "Frost"
-msgstr "Geada"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:131
+#: capcomposer/src/capcomposer/cap/webhook/models.py:45
+msgid "Retries"
+msgstr "Novas tentativas"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:65
-msgid "Hail"
-msgstr "Granizo"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:132
+#: capcomposer/src/capcomposer/cap/webhook/models.py:46
+msgid "Last Error Message"
+msgstr "Última mensagem de erro"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:66
-msgid "Heat wave"
-msgstr "Onda de calor"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:137
+msgid "MQTT Broker Event"
+msgstr "Evento do corretor MQTT"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:67
-msgid "High UV radiation"
-msgstr "Alta radiação UV"
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:138
+msgid "MQTT Broker Events"
+msgstr "Eventos do corretor MQTT"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:68
-msgid "Icing"
-msgstr "Frio Intenso"
+#: capcomposer/src/capcomposer/cap/permissions.py:7
+msgid "CAP Menu Permission"
+msgstr "Permissão do menu CAP"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:69
-msgid "Freezing rain"
-msgstr "Chuvas moderadas a forte, trovoadas e granizo"
+#: capcomposer/src/capcomposer/cap/permissions.py:8
+msgid "CAP Menu Permissions"
+msgstr "Permissões do menu CAP"
 
-#: capcomposer/src/capcomposer/capeditor/constants.py:70
-msgid "Landslide/Mudslide & Debris flow"
-msgstr "Deslizamento de terra/deslizamento de lama e fluxo de detritos"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:71
-#| msgid "Lighting"
-msgid "Lightning"
-msgstr "Trovoada"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:72
-msgid "Pollen pollution/Polluted air"
-msgstr "Poluição do Ar"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:73
-msgid "Rain/Wet Spell"
-msgstr "Chuva moderada a forte e trovoada"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:74
-msgid "Snow"
-msgstr "Neve"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:75
-msgid "Snowstorm"
-msgstr "Tempestade de neve"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:76
-msgid "Space weather event"
-msgstr "Eventos meteorológicos espaciais"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:77
-msgid "High Seas/Rogue waves etc."
-msgstr "Agitação das ondas no mar"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:78
-msgid "Storm surge/Coastal flood"
-msgstr "Onda de tempestade/inundação costeira"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:79
-msgid "Thunderstorms/Squall lines"
-msgstr "Trovoadas Severas"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:80
-msgid "Tornado"
-msgstr ""
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:81
-msgid "Tropical cyclone"
-msgstr "Ciclone tropical"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:82
-msgid "Tsunami"
-msgstr ""
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:83
-msgid "Volcanic ash"
-msgstr "Cinza vulcânica"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:84
-msgid "Wild land fire/Forest fire"
-msgstr "Incêndio terrestre/incêndio florestal"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:85
-msgid "Wind"
-msgstr "Vento"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:149
-msgid "Red severity"
-msgstr "Severidade vermelha"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:158
-msgid "Orange severity"
-msgstr "Severidade laranja"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:166
-msgid "Yellow severity"
-msgstr "Severidade amarela"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:174
-msgid "Minor severity"
-msgstr "Severidade menor"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:182
-msgid "Unknown severity"
-msgstr "Severidade desconhecida"
-
-#: capcomposer/src/capcomposer/capeditor/constants.py:214
-#: capcomposer/src/capcomposer/capeditor/constants.py:242
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:171
+#: capcomposer/src/capcomposer/cap/statistics.py:95
+#: capcomposer/src/capcomposer/cap/statistics.py:129
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:11
-msgid "Copy Paste XML"
-msgstr "Copiar Colar XML"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:22
+msgid "Warning: This is not an Actual alert"
+msgstr "Aviso: este não é um alerta real"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:12
-msgid "URL"
-msgstr ""
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:23
+msgid "The alert below is marked as"
+msgstr "O alerta abaixo está marcado como"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:13
-msgid "File"
-msgstr "Arquivo"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:23
+msgid "not actionable to the general public."
+msgstr "não acionável ao público em geral."
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:17
-msgid "Load from"
-msgstr "Carregar de"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:32
+msgid "This alert updates the previously published alerts below:"
+msgstr "Este alerta atualiza os alertas publicados anteriormente abaixo:"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:18
-msgid "Paste your CAP XML here"
-msgstr "Cole seu XML CAP aqui"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:33
+#, fuzzy
+#| msgid "Target audiences for published alerts"
+msgid "This alert cancels the previously published alerts below:"
+msgstr "Este alerta cancela os alertas publicados anteriormente abaixo:"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:19
-msgid "CAP Alert XML URL"
-msgstr "URL XML de alerta CAP"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:68
+msgid "PNG"
+msgstr "png"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:20
-msgid "CAP File"
-msgstr "Arquivo CAP"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:115
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:56
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:552
+msgid "Urgency"
+msgstr "Urgência"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:35
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:37
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:39
-msgid "This field is required."
-msgstr "Este campo é obrigatório."
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:118
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:371
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:60
+msgid "Immediate"
+msgstr "Imediato"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:75
-msgid "An error occurred while trying to load the CAP XML. Please check the data and try again."
-msgstr "Ocorreu um erro ao tentar carregar o CAP XML. Verifique os dados e tente novamente."
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:119
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:371
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:62
+msgid "Expected"
+msgstr "Esperado"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:136
-msgid "You must select at least one reference alert for this message type. Only 'Alert' Message Type can be saved without references."
-msgstr "Você deve selecionar pelo menos um alerta de referência para esse tipo de mensagem. Apenas o tipo de mensagem 'Alerta' pode ser salvo sem referências."
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:120
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:371
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:64
+msgid "Future"
+msgstr "Futuro"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:145
-msgid "You cannot reference an alert to itself. Please select a previously published alert."
-msgstr "Você não pode fazer referência a um alerta para si mesmo. Selecione um alerta publicado anteriormente."
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:121
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:371
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:66
+msgid "Past"
+msgstr "Passado"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:151
-msgid "You cannot select the same alert more than once."
-msgstr "Você não pode selecionar o mesmo alerta mais de uma vez."
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:128
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:208
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:75
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:71
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:563
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:201
+msgid "Severity"
+msgstr "Gravidade"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:161
-msgid "Draft - A preliminary template or draft, not actionable in its current form"
-msgstr "Rascunho - Um modelo preliminar ou rascunho, não acionável em sua forma atual"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:131
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:210
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:79
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:440
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:230
+msgid "Extreme"
+msgstr "Extremo"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:162
-msgid "Actual - Actionable by all targeted recipients"
-msgstr "Real - Acionável por todos os destinatários-alvo"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:132
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:211
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:81
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:447
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:237
+msgid "Severe"
+msgstr "Severo"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:163
-msgid "Test - Technical testing only, all recipients disregard"
-msgstr "Teste - Apenas testes técnicos, todos os destinatários desconsideram"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:133
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:212
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:83
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:454
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:244
+msgid "Moderate"
+msgstr "Moderado"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:164
-msgid "Exercise - Actionable only by designated exercise participants; exercise identifier SHOULD appear in note"
-msgstr "Exercício - Acionável apenas por participantes designados do exercício; o identificador do exercício DEVE aparecer na nota"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:134
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:213
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:85
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:461
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:251
+msgid "Minor"
+msgstr "Menor"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:166
-msgid "System - For messages that support alert network internal functions"
-msgstr "Sistema - Para mensagens que suportam funções internas da rede de alerta"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:141
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:94
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:574
+msgid "Certainty"
+msgstr "Certeza"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:170
-msgid "Alert - Initial information requiring attention by targeted recipients"
-msgstr "Alerta - Informações iniciais que requerem atenção dos destinatários-alvo"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:144
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:373
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:98
+msgid "Observed"
+msgstr "Observado"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:171
-msgid "Update - Updates and supersedes the earlier message(s) identified in referenced alerts"
-msgstr "Atualizar - Atualiza e substitui as mensagens anteriores identificadas nos alertas referenciados"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:145
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:373
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:100
+msgid "Likely"
+msgstr "Provável"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:172
-msgid "Cancel - Cancels the earlier message(s) identified in references"
-msgstr "Cancelar - Cancela as mensagens anteriores identificadas nas referências"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:146
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:373
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:102
+msgid "Possible"
+msgstr "Possível"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:183
-msgid "Public - For general dissemination to unrestricted audiences"
-msgstr "Público - Para divulgação geral para públicos irrestritos"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:147
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:373
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:104
+msgid "Unlikely"
+msgstr "Improvável"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:184
-msgid "Restricted - For dissemination only to users with a known operational requirement as in the restriction field"
-msgstr "Restrito - Para divulgação apenas para usuários com requisito operacional conhecido como no campo de restrição"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:154
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:518
+msgid "Category"
+msgstr "Categoria"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:186
-msgid "Private - For dissemination only to specified addresses as in the addresses field in the alert"
-msgstr "Privado - Para divulgação apenas para endereços especificados como no campo de endereços do alerta"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:159
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:507
+msgid "Language"
+msgstr "Linguagem"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:189
-msgid "Id"
-msgstr "Eu ia"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:166
+msgid "Time period"
+msgstr "Período de tempo"
 
-#: capcomposer/src/capcomposer/capeditor/models.py:190
-msgid "Unique ID. Auto generated on creation."
-msgstr "ID exclusivo. Gerado automaticamente na criação."
-
-#: capcomposer/src/capcomposer/capeditor/models.py:191
-msgid "Sender"
-msgstr "Remetente"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:192
-msgid "Identifies the originator of an alert. For example the website address of the institution"
-msgstr "Identifica o originador de um alerta. Por exemplo, o endereço do site da instituição"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:194
-msgid "Sent"
-msgstr "Enviado"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:195
-msgid "Time and date of origination of the alert. Automatically generated by the system during publishing"
-msgstr "Hora e data de origem do alerta. Gerado automaticamente pelo sistema durante a publicação"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:197
-msgid "Status"
-msgstr ""
-
-#: capcomposer/src/capcomposer/capeditor/models.py:198
-msgid "The code denoting the appropriate handling of the alert"
-msgstr "O código que denota o tratamento adequado do alerta"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:200
-msgid "Message Type"
-msgstr "Tipo de mensagem"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:201
-msgid "The code denoting the nature of the alert message"
-msgstr "O código que denota a natureza da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:202
-msgid "Scope"
-msgstr "Escopo"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:203
-msgid "The code denoting the intended distribution of the alert message"
-msgstr "O código que denota a distribuição pretendida da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:204
-msgid "Source"
-msgstr "Fonte"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:205
-msgid "The text identifying the source of the alert message"
-msgstr "O texto que identifica a origem da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:207
-msgid "The text describing the rule for limiting distribution of the restricted alert message. Used when scope value is Restricted"
-msgstr "O texto que descreve a regra para limitar a distribuição da mensagem de alerta restrita. Usado quando o valor do escopo é Restrito"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:209
-msgid "Restriction"
-msgstr "Restrição"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:211
-msgid "The code denoting the special handling of the alert message"
-msgstr "O código que denota o tratamento especial da mensagem de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:212
-msgid "Code"
-msgstr "Código"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:214
-msgid "The text describing the purpose or significance of the alert message.The message note is primarily intended for use with <status> 'Exercise' and <msgType> 'Error'"
-msgstr "O texto que descreve o propósito ou significado da mensagem de alerta. A nota da mensagem destina-se principalmente ao uso com <status> 'Exercício' e <msgType> 'Erro'"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:216
-msgid "Note"
-msgstr "Observação"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:218
-#: capcomposer/src/capcomposer/capeditor/models.py:220
-msgid "Alert Information"
-msgstr "Informações de alerta"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:223
-msgid "Recipient"
-msgstr "Destinatário"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:224
-msgid "Addresses"
-msgstr "Endereços"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:225
-msgid "The group listing of intended recipients of the alert message, if scope is Private"
-msgstr "A listagem do grupo de destinatários pretendidos da mensagem de alerta, se o escopo for Privado"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:230
-msgid "Reference Alerts"
-msgstr "Alertas de referência"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:235
-msgid "Incidents"
-msgstr "Incidentes"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:252
-msgid "Alert Identification"
-msgstr "Identificação de Alerta"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:317
-msgid "Expired"
-msgstr "Expirado"
-
-#: capcomposer/src/capcomposer/capeditor/models.py:320
-msgid "Ongoing"
-msgstr "Em curso alerta de"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:47
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:171
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:114
 msgid "Issued"
 msgstr "Publicado"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:95
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:172
-msgid "Urgency:"
-msgstr "Urgência:"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:178
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:129
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:593
+msgid "Effective"
+msgstr "Eficaz"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:128
-msgid "CAP XML Link"
-msgstr "Link XML CAP"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:189
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:154
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:606
+msgid "Onset"
+msgstr "Início"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:140
-msgid "Alert Severity"
-msgstr "Gravidade do Alerta"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:197
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:170
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:618
+msgid "Expires"
+msgstr "Expira"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:180
-msgid "Affected area"
-msgstr "Área afetada"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:278
+#, fuzzy
+#| msgid "Response type"
+msgid "Response"
+msgstr "Resposta"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:209
-msgid "Event Description"
-msgstr "Descrição do Evento"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:282
+msgid "Shelter"
+msgstr "Abrigo"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/cap_alert_page.html:220
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:283
+msgid "Evacuate"
+msgstr "Evacuar"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:284
+msgid "Prepare"
+msgstr "Preparar"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:285
+msgid "Execute"
+msgstr "Executar"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:286
+msgid "Avoid"
+msgstr "Evitar"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:287
+msgid "Monitor"
+msgstr "Monitor"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:288
+msgid "Assess"
+msgstr "Avaliar"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:289
+#, fuzzy
+#| msgid "AllClear"
+msgid "All Clear"
+msgstr "Tudo limpo"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:290
+msgid "None"
+msgstr "Nenhum"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:301
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:259
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:653
+msgid "Area"
+msgstr "Área"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:317
+#, fuzzy
+#| msgid "Event Description"
+msgid "Event description"
+msgstr "Descrição do evento"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:324
 msgid "Instructions"
 msgstr "Instruções"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/load_cap_alert.html:6
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:6
-#, python-format
-msgid "Import CAP Alert %(title)s"
-msgstr "Importar Alerta CAP %(title)s"
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:272
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:637
+msgid "Description"
+msgstr "Descrição"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/load_cap_alert.html:15
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:285
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:645
+msgid "Instruction"
+msgstr "Instrução"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:33
+#, fuzzy
+#| msgid "Reference Alerts"
+msgid "Active Alerts"
+msgstr "Alertas ativos"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:46
+msgid "No active alerts currently"
+msgstr "Nenhum alerta ativo no momento"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:55
+msgid "Past Alerts"
+msgstr "Alertas anteriores"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:99
+#, fuzzy
+#| msgid "Event Code"
+msgid "Event type"
+msgstr "Tipo de evento"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:223
+msgid "Identifier"
+msgstr "Identifier"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:231
+msgid "Sender"
+msgstr "Remetente"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:238
+msgid "Sent"
+msgstr "Enviado"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:250
+msgid "Message Type"
+msgstr "Tipo de mensagem"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:256
+msgid "Scope"
+msgstr "Escopo"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:266
+msgid "Reference Alerts"
+msgstr "Alertas de referência"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:433
+msgid "Alert Severity"
+msgstr "Gravidade do Alerta"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:534
+msgid "Response Types"
+msgstr "Tipos de resposta"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:583
+msgid "Time"
+msgstr "Tempo"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:629
+msgid "Headline"
+msgstr "Título"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:681
+msgid "Contact"
+msgstr "Contato"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/include_alert_list_item.html:37
+#, fuzzy
+#| msgid "Issued"
+msgid "Issued:"
+msgstr "Publicado:"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/include_alert_list_item.html:39
+#, python-format
+msgid "%(issued_on)s"
+msgstr "%(issued_on)s"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:4
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:181
+#, fuzzy
+#| msgid "CAP Settings"
+msgid "CAP Alert Statistics"
+msgstr "Estatísticas de alerta CAP"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:191
+msgid "From"
+msgstr "De"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:196
+msgid "To"
+msgstr "Para"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:214
+msgid "Apply"
+msgstr "Aplicar"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:215
+msgid "Reset"
+msgstr "Reiniciar"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:224
+#, fuzzy
+#| msgid "Past Alerts"
+msgid "Total Alerts"
+msgstr "Alertas totais"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:258
+msgid "Export"
+msgstr "Exportar"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:262
+msgid "Download CSV"
+msgstr "Baixar CSV"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:271
+#, fuzzy
+#| msgid "Alert Severity"
+msgid "Alerts Over Time (Monthly)"
+msgstr "Alertas ao longo do tempo (mensal)"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:279
+#, fuzzy
+#| msgid "Severity"
+msgid "By Severity"
+msgstr "Por gravidade"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:287
+#, fuzzy
+#| msgid "Urgency"
+msgid "By Urgency"
+msgstr "Por Urgência"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:295
+#, fuzzy
+#| msgid "Certainty"
+msgid "By Certainty"
+msgstr "Por certeza"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:303
+#, fuzzy
+#| msgid "Status"
+msgid "By Status"
+msgstr "Por status"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:311
+#, fuzzy
+#| msgid "Hazard Types"
+msgid "Top Hazard Types"
+msgstr "Principais tipos de perigo"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:322
+#, fuzzy
+#| msgid "Hazard Type"
+msgid "Alerts by Hazard Type"
+msgstr "Alertas por tipo de perigo"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:326
+msgid "Hazard Type"
+msgstr "Tipo de perigo"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:327
+msgid "Count"
+msgstr "Contar"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:328
+#, fuzzy
+#| msgid "Restriction"
+msgid "Distribution"
+msgstr "Distribuição"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:423
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:122
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:256
+#, fuzzy
+#| msgid "Alert Area"
+msgid "Alerts"
+msgstr "Alertas"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_left_alert.html:97
+#: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:69
+#, fuzzy
+#| msgid "Alert Area"
+msgid "Alert"
+msgstr "Alerta"
+
+#: capcomposer/src/capcomposer/cap/views.py:106
+#: capcomposer/src/capcomposer/cap/views.py:112
+#, fuzzy
+#| msgid "Load different alert"
+msgid "Latest alerts"
+msgstr "Últimos alertas"
+
+#: capcomposer/src/capcomposer/cap/views.py:108
+#: capcomposer/src/capcomposer/cap/views.py:114
+#, python-format
+msgid "Latest alerts from %(sender_name)s"
+msgstr "Últimos alertas de %(sender_name)s"
+
+#: capcomposer/src/capcomposer/cap/views.py:366
+msgid "CAP Alert PNG and PDF created successfully."
+msgstr "CAP Alert PNG e PDF criados com sucesso."
+
+#: capcomposer/src/capcomposer/cap/views.py:368
+msgid "Failed to create CAP Alert PNG and PDF."
+msgstr "Falha ao criar PNG e PDF de alerta CAP."
+
+#: capcomposer/src/capcomposer/cap/views.py:382
+msgid "Private alert email sent successfully."
+msgstr "E-mail de alerta privado enviado com sucesso."
+
+#: capcomposer/src/capcomposer/cap/views.py:384
+msgid "Failed to send private alert email."
+msgstr "Falha ao enviar e-mail de alerta privado."
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:88
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:331
+msgid "Create PNG/PDF"
+msgstr "Criar PNG/PDF"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:100
+msgid "LIVE"
+msgstr "AO VIVO"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:102
+msgid "Visit the live page"
+msgstr "Visite a página ao vivo"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:111
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:337
+#, fuzzy
+#| msgid "Recipient"
+msgid "Email Recipients"
+msgstr "Destinatários de e-mail"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:113
+msgid "Send private alert email to recipients"
+msgstr "Envie e-mail de alerta privado aos destinatários"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:179
+msgid "Webhooks"
+msgstr "Webhooks"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:199
+msgid "Webhook Events"
+msgstr "Eventos de webhook"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:246
+msgid "External CAP Alert Feeds"
+msgstr "Feeds externos de alerta CAP"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:284
+#, fuzzy
+#| msgid "Status"
+msgid "Statistics"
+msgstr "Estatísticas"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:289
 msgid "Import CAP Alert"
 msgstr "Alerta de importação CAP"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/load_cap_alert.html:37
-msgid "Load"
-msgstr "Carregar"
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:297
+#, fuzzy
+#| msgid "CAP Settings"
+msgid "CAP Base Settings"
+msgstr "Configurações básicas do CAP"
 
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:17
-msgid "Import CAP Alert - Preview"
-msgstr "Alerta de importação CAP - Visualização"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:25
-msgid "Import Type:"
-msgstr "Tipo de importação:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:34
-msgid "Source URL:"
-msgstr "URL de origem:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:43
-msgid "Source File Name:"
-msgstr "Nome do arquivo de origem:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:59
-msgid "Load different alert"
-msgstr "Carregar alerta diferente"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:68
-msgid "Sender:"
-msgstr "Remetente:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:76
-msgid "Sent:"
-msgstr "Enviado:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:84
-msgid "Status:"
-msgstr ""
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:92
-msgid "Message Type:"
-msgstr "Tipo de mensagem:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:112
-msgid "Create Draft Alert"
-msgstr "Criar alerta de rascunho"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:146
-msgid "Language:"
-msgstr "Linguagem:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:154
-msgid "Category:"
-msgstr "Categoria:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:164
-msgid "Event:"
-msgstr "Evento:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:180
-msgid "Severity:"
-msgstr "Gravidade:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:188
-msgid "Certainty:"
-msgstr "Certeza:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:199
-msgid "Effective:"
-msgstr "Eficaz:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:209
-msgid "Onset:"
-msgstr "Início:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:219
-msgid "Expires:"
-msgstr "Expira:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:231
-msgid "Headline:"
-msgstr "Título:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:239
-msgid "Description:"
-msgstr "Descrição:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:248
-msgid "Instruction:"
-msgstr "Instrução:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/preview_cap_alert.html:258
-msgid "Area:"
-msgstr "Área:"
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/widgets/circle_widget.html:10
-msgid "Longitude"
-msgstr ""
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/widgets/circle_widget.html:22
-msgid "Latitude"
-msgstr ""
-
-#: capcomposer/src/capcomposer/capeditor/templates/capeditor/widgets/circle_widget.html:36
-msgid "Radius (in kilometers) "
-msgstr "Raio (em quilômetros)"
-
-#: capcomposer/src/capcomposer/capeditor/wagtail_hooks.py:93
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:414
 #, python-format
-msgid "Page '%(page_title)s' copied."
-msgstr "Página '%(page_title)s' copiada."
+msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
+msgstr ""
+"Alerta '%(page_title)s' copiado. Você pode editar o novo alerta abaixo."
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:444
+msgid "Actual Alerts cannot be Unpublished after they have been published"
+msgstr ""
+"Alertas reais não podem ser despublicados depois de terem sido publicados"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:457
+msgid ""
+"Actual Alerts cannot be deleted after they have been published. To cancel or"
+" publish an update to this alert, create a new alert of Message Type "
+"'Cancel' or 'Update' and reference this alert"
+msgstr ""
+"Alertas reais não podem ser excluídos após serem publicados. Para cancelar "
+"ou publicar uma atualização deste alerta, crie um novo alerta do tipo de "
+"mensagem 'Cancelar' ou 'Atualizar' e faça referência a este alerta"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:470
+msgid "CAP Alert draft created. You can now edit the alert."
+msgstr "Rascunho de Alerta CAP criado. Agora você pode editar o alerta."
+
+#: capcomposer/src/capcomposer/cap/webhook/models.py:9
+msgid "Webhook URL"
+msgstr "URL do webhook"
+
+#: capcomposer/src/capcomposer/cap/webhook/models.py:14
+msgid "Include Header for Authentication"
+msgstr "Incluir cabeçalho para autenticação"
+
+#: capcomposer/src/capcomposer/cap/webhook/models.py:15
+#, fuzzy
+#| msgid "Sender name"
+msgid "Header Value"
+msgstr "Valor do cabeçalho"
+
+#: capcomposer/src/capcomposer/cap/webhook/models.py:26
+msgid "CAP Alert Webhook"
+msgstr "Webhook de alerta CAP"
+
+#: capcomposer/src/capcomposer/cap/webhook/models.py:27
+msgid "CAP Alert Webhooks"
+msgstr "Webhooks de alerta CAP"
+
+#: capcomposer/src/capcomposer/cap/webhook/models.py:51
+msgid "CAP Alert Webhook Event"
+msgstr "Evento de webhook de alerta CAP"
+
+#: capcomposer/src/capcomposer/cap/webhook/models.py:52
+msgid "CAP Alert Webhook Events"
+msgstr "Eventos de webhook de alerta CAP"
+
+#~ msgid "Page not found"
+#~ msgstr "Página não encontrada"
+
+#~ msgid "Sorry, this page could not be found"
+#~ msgstr "Desculpe, esta página não foi encontrada"
+
+#~ msgid "Internal server error"
+#~ msgstr "Erro do Servidor Interno"
+
+#~ msgid "Sorry, there seems to be an error. Please try again soon"
+#~ msgstr ""
+#~ "Sorry, there seems to be an error. Por favor, tente novamente em breve"
+
+#~ msgid "Sign in"
+#~ msgstr "Entrar"
+
+#~ msgid "Account Locked"
+#~ msgstr "Conta bloqueada"
+
+#~ msgid ""
+#~ "Your account has been locked due to multiple failed login attempts. Please "
+#~ "try again later."
+#~ msgstr ""
+#~ "Sua conta foi bloqueada devido a diversas tentativas de login malsucedidas. "
+#~ "Por favor, tente novamente mais tarde."
+
+#~ msgid ""
+#~ "You account has been locked due to multiple failed login attempts. Please "
+#~ "contact our support team for assistance."
+#~ msgstr ""
+#~ "You account has been locked due to multiple failed login attempts. Entre em "
+#~ "contato com nossa equipe de suporte para obter assistência."
+
+#~ msgid "Powered by CAPComposer"
+#~ msgstr "Desenvolvido por CAPComposer"
+
+#~ msgid "Welcome to"
+#~ msgstr "Bem-vindo ao"
+
+#~ msgid "Subtitle"
+#~ msgstr "Legenda"
+
+#~ msgid "Name of the recipient"
+#~ msgstr "Nome do destinatário"
+
+#~ msgid "Address"
+#~ msgstr "Endereço"
+
+#~ msgid "Address Information of the recipient"
+#~ msgstr "Informações de endereço do destinatário"
+
+#~ msgid "Earlier alert referenced by this alert"
+#~ msgstr "Alerta anterior referenciado por este alerta"
+
+#~ msgid "Incident"
+#~ msgstr "Incidente"
+
+#~ msgid "Referent incident to this alert message"
+#~ msgstr "Incidente referente a esta mensagem de alerta"
+
+#~ msgid "Value"
+#~ msgstr "Valor"
+
+#~ msgid "Shelter - Take shelter in place or per instruction"
+#~ msgstr "Abrigo - Abrigue-se no local ou de acordo com as instruções"
+
+#~ msgid "Evacuate - Relocate as instructed in the instruction"
+#~ msgstr "Evacuar - Realocar conforme as instruções"
+
+#~ msgid "Prepare - Relocate as instructed in the instruction"
+#~ msgstr "Preparar - Realocar conforme as instruções"
+
+#~ msgid "Execute - Execute a pre-planned activity identified in instruction"
+#~ msgstr ""
+#~ "Executar - Executar uma atividade pré-planejada identificada na instrução"
+
+#~ msgid "Avoid - Avoid the subject event as per the instruction"
+#~ msgstr "Evitar - Evite o evento em questão conforme as instruções"
+
+#~ msgid "Monitor - Attend to information sources as described in instruction"
+#~ msgstr ""
+#~ "Monitorar - Atender às fontes de informação conforme descrito nas instruções"
+
+#~ msgid ""
+#~ "Assess - Evaluate the information in this message - DONT USE FOR PUBLIC "
+#~ "ALERTS"
+#~ msgstr ""
+#~ "Avalie - Avalie as informações desta mensagem - NÃO USE PARA ALERTAS "
+#~ "PÚBLICOS"
+
+#~ msgid ""
+#~ "All Clear - The subject event no longer poses a threat or concern and any "
+#~ "follow on action is described in instruction"
+#~ msgstr ""
+#~ "Tudo limpo - O evento em questão não representa mais uma ameaça ou "
+#~ "preocupação e qualquer ação subsequente é descrita nas instruções"
+
+#~ msgid "No action recommended"
+#~ msgstr "Nenhuma ação recomendada"
+
+#~ msgid ""
+#~ "The code denoting the type of action recommended for the target audience"
+#~ msgstr "O código que denota o tipo de ação recomendada para o público-alvo"
+
+#~ msgid "Value Name"
+#~ msgstr "Nome do valor"
+
+#~ msgid ""
+#~ "User-assigned string designating the domain of the code. Acronyms SHOULD be "
+#~ "represented in all capital letters without periods (e.g., SAME, FIPS, ZIP"
+#~ msgstr ""
+#~ "String atribuída pelo usuário que designa o domínio do código. As siglas "
+#~ "DEVEM ser representadas em letras maiúsculas sem pontos (por exemplo, SAME, "
+#~ "FIPS, ZIP"
+
+#~ msgid "A string (which may represent a number) denoting the value itself"
+#~ msgstr "Uma string (que pode representar um número) denotando o próprio valor"
+
+#~ msgid "Geographically-based code to describe a message target area"
+#~ msgstr ""
+#~ "Código com base geográfica para descrever uma área de destino de mensagem"
+
+#~ msgid "Level 0"
+#~ msgstr "Nível 0"
+
+#~ msgid "Level 1"
+#~ msgstr "Nível 1"
+
+#~ msgid "Level 2"
+#~ msgstr "Nível 2"
+
+#~ msgid "Level 3"
+#~ msgstr "Nível 3"
+
+#~ msgid "Affected areas / Regions"
+#~ msgstr "Áreas/regiões afetadas"
+
+#~ msgid "The text describing the affected area of the alert message"
+#~ msgstr "O texto que descreve a área afetada da mensagem de alerta"
+
+#~ msgid "Administrative Level"
+#~ msgstr "Nível Administrativo"
+
+#~ msgid "Boundary"
+#~ msgstr "Limite"
+
+#~ msgid ""
+#~ "The paired values of points defining a polygon that delineates the affected "
+#~ "area of the alert message"
+#~ msgstr ""
+#~ "Os valores emparelhados de pontos que definem um polígono que delineia a "
+#~ "área afetada da mensagem de alerta"
+
+#~ msgid ""
+#~ "The specific or minimum altitude of the affected area of the alert message"
+#~ msgstr "A altitude específica ou mínima da área afetada da mensagem de alerta"
+
+#~ msgid "Ceiling"
+#~ msgstr "Teto"
+
+#~ msgid ""
+#~ "The maximum altitude of the affected area of the alert message.MUST NOT be "
+#~ "used except in combination with the altitude element. "
+#~ msgstr ""
+#~ "A altitude máxima da área afetada da mensagem de alerta. NÃO DEVE ser usada,"
+#~ " exceto em combinação com o elemento altitude."
+
+#~ msgid "Geocode"
+#~ msgstr "Geocódigo"
+
+#~ msgid "Polygon"
+#~ msgstr "Polígono"
+
+#~ msgid "Circle"
+#~ msgstr "Círculo"
+
+#~ msgid "Drag the marker to change position"
+#~ msgstr "Arraste o marcador para mudar de posição"
+
+#~ msgid "The human-readable name of the agency or authority issuing this alert."
+#~ msgstr "O nome legível da agência ou autoridade que emite este alerta."
+
+#~ msgid ""
+#~ "The text describing the contact for follow-up and confirmation of the alert "
+#~ "message"
+#~ msgstr ""
+#~ "O texto que descreve o contato para acompanhamento e confirmação da mensagem"
+#~ " de alerta"
+
+#~ msgid "Resource Description"
+#~ msgstr "Descrição do recurso"
+
+#~ msgid "The text describing the type and content of the resource file"
+#~ msgstr "O texto que descreve o tipo e o conteúdo do arquivo de recurso"
+
+#~ msgid "External Resource Link"
+#~ msgstr "Link de recurso externo"
+
+#~ msgid ""
+#~ "Link to external resource. This can be for example a link to related "
+#~ "websites. "
+#~ msgstr ""
+#~ "Link para recurso externo. Pode ser, por exemplo, um link para sites "
+#~ "relacionados."
+
+#~ msgid "Name for the event code"
+#~ msgstr "Nome do código do evento"
+
+#~ msgid "Value of the event code"
+#~ msgstr "Valor do código do evento"
+
+#~ msgid "Immediate - Responsive action SHOULD be taken immediately"
+#~ msgstr "Imediato - Ação responsiva DEVE ser tomada imediatamente"
+
+#~ msgid "Expected - Responsive action SHOULD be taken soon (within next hour)"
+#~ msgstr "Esperado - Ação responsiva DEVE ser tomada em breve (na próxima hora)"
+
+#~ msgid "Future - Responsive action SHOULD be taken in the near future"
+#~ msgstr "Futuro - Ações responsivas DEVEM ser tomadas em um futuro próximo"
+
+#~ msgid "Past - Responsive action is no longer required"
+#~ msgstr "Passado - A ação responsiva não é mais necessária"
+
+#~ msgid "Extreme - Extraordinary threat to life or property"
+#~ msgstr "Extremo - Ameaça extraordinária à vida ou à propriedade"
+
+#~ msgid "Severe - Significant threat to life or property"
+#~ msgstr "Grave - Ameaça significativa à vida ou propriedade"
+
+#~ msgid "Moderate - Possible threat to life or property"
+#~ msgstr "Moderado - Possível ameaça à vida ou à propriedade"
+
+#~ msgid "Minor - Minimal to no known threat to life or property"
+#~ msgstr "Menor - Mínima ou nenhuma ameaça conhecida à vida ou propriedade"
+
+#~ msgid "Observed - Determined to have occurred or to be ongoing"
+#~ msgstr "Observado - Determinado como tendo ocorrido ou em andamento"
+
+#~ msgid "Likely - Likely (percentage > ~50%)"
+#~ msgstr "Provável - Provável (porcentagem > ~50%)"
+
+#~ msgid "Possible - Possible but not likely (percentage <= ~50%)"
+#~ msgstr "Possível - Possível, mas não provável (porcentagem <= ~50%)"
+
+#~ msgid "Unlikely - Not expected to occur (percentage ~ 0)"
+#~ msgstr "Improvável - Não se espera que ocorra (porcentagem ~ 0)"
+
+#~ msgid "Event"
+#~ msgstr "Evento"
+
+#~ msgid ""
+#~ "The text denoting the type of the subject event of the alert message. You "
+#~ "can define hazards events monitored by your institution from CAP settings"
+#~ msgstr ""
+#~ "O texto que indica o tipo de evento de assunto da mensagem de alerta. Você "
+#~ "pode definir eventos de perigo monitorados pela sua instituição nas "
+#~ "configurações do CAP"
+
+#~ msgid ""
+#~ "The code denoting the language of the alert message.If not selected, 'en-US'"
+#~ " will be used as default"
+#~ msgstr ""
+#~ "O código que indica o idioma da mensagem de alerta. Se não for selecionado, "
+#~ "'en-US' será usado como padrão"
+
+#~ msgid ""
+#~ "The code denoting the urgency of the subject event of the alert message"
+#~ msgstr ""
+#~ "O código que denota a urgência do evento em questão da mensagem de alerta"
+
+#~ msgid ""
+#~ "The code denoting the severity of the subject event of the alert message"
+#~ msgstr ""
+#~ "O código que indica a gravidade do evento em questão da mensagem de alerta"
+
+#~ msgid ""
+#~ "The code denoting the certainty of the subject event of the alert message"
+#~ msgstr ""
+#~ "O código que denota a certeza do evento em questão da mensagem de alerta"
+
+#~ msgid ""
+#~ "The text headline of the alert message. Make it direct and actionable as "
+#~ "possible while remaining short"
+#~ msgstr ""
+#~ "O título do texto da mensagem de alerta. Torne-o o mais direto e acionável "
+#~ "possível, mantendo-o curto"
+
+#~ msgid ""
+#~ "The text describing the subject event of the alert message. An extended "
+#~ "description of the hazard or event that occasioned this message"
+#~ msgstr ""
+#~ "O texto que descreve o evento de assunto da mensagem de alerta. Uma "
+#~ "descrição extensa do perigo ou evento que ocasionou esta mensagem"
+
+#~ msgid ""
+#~ "The text describing the recommended action to be taken by recipients of the "
+#~ "alert message"
+#~ msgstr ""
+#~ "O texto que descreve a ação recomendada a ser tomada pelos destinatários da "
+#~ "mensagem de alerta"
+
+#~ msgid ""
+#~ "The effective time of the information of the alert message. If not set, the "
+#~ "sent date will be used"
+#~ msgstr ""
+#~ "O tempo efetivo das informações da mensagem de alerta. Se não for definido, "
+#~ "a data de envio será usada"
+
+#~ msgid ""
+#~ "The expected time of the beginning of the subject event of the alert message"
+#~ msgstr "A hora esperada do início do evento em questão da mensagem de alerta"
+
+#~ msgid ""
+#~ "The expiry time of the information of the alert message. If not set, each "
+#~ "recipient is free to set its own policy as to when the message is no longer "
+#~ "in effect."
+#~ msgstr ""
+#~ "O tempo de expiração das informações da mensagem de alerta. Se não for "
+#~ "definido, cada destinatário poderá definir sua própria política sobre quando"
+#~ " a mensagem não estará mais em vigor."
+
+#~ msgid "Audience"
+#~ msgstr "Público"
+
+#~ msgid "The text describing the intended audience of the alert message"
+#~ msgstr "O texto que descreve o público-alvo da mensagem de alerta"
+
+#~ msgid "Admin Boundary"
+#~ msgstr "Limite de administração"
+
+#~ msgid "Draw Polygon"
+#~ msgstr "Desenhar polígono"
+
+#~ msgid "Predefined Area"
+#~ msgstr "Área predefinida"
+
+#~ msgid "Admin Boundary, Polygon, Circle, or Predefined area"
+#~ msgstr "Limite administrativo, polígono, círculo ou área predefinida"
+
+#~ msgid "Resources"
+#~ msgstr "Recursos"
+
+#~ msgid ""
+#~ "Additional file with supplemental information related to this alert "
+#~ "information"
+#~ msgstr ""
+#~ "Arquivo adicional com informações suplementares relacionadas a essas "
+#~ "informações de alerta"
+
+#~ msgid "Parameter"
+#~ msgstr "Parâmetro"
+
+#~ msgid "Parameters"
+#~ msgstr "Parâmetros"
+
+#~ msgid "The expiry time of the alert should be greater than the effective time"
+#~ msgstr "O tempo de expiração do alerta deve ser maior que o tempo efetivo"
+
+#~ msgid "The expiry time of the alert should be greater than the onset time"
+#~ msgstr "O tempo de expiração do alerta deve ser maior que o tempo de início"
+
+#~ msgid "Contact Detail"
+#~ msgstr "Detalhes de contato"
+
+#~ msgid "CAP Sender Email"
+#~ msgstr "E-mail do remetente CAP"
+
+#~ msgid "Email of the sending institution"
+#~ msgstr "E-mail da instituição remetente"
+
+#~ msgid "CAP Sender Name"
+#~ msgstr "Nome do remetente CAP"
+
+#~ msgid "Name of the sending institution"
+#~ msgstr "Nome da instituição remetente"
+
+#~ msgid "WMO Register of Alerting Authorities OID"
+#~ msgstr "Registro de Autoridades de Alerta da OMM OID"
+
+#~ msgid ""
+#~ "WMO Register of Alerting Authorities Object Identifier (OID) of the sending "
+#~ "institution. This will be used to generate CAP messages identifiers"
+#~ msgstr ""
+#~ "Registro de Autoridades de Alerta da OMM Identificador de Objeto (OID) da "
+#~ "instituição remetente. Isso será usado para gerar identificadores de "
+#~ "mensagens CAP"
+
+#~ msgid "Logo of the sending institution"
+#~ msgstr "Logotipo da instituição remetente"
+
+#~ msgid "Contact Details"
+#~ msgstr "Detalhes de contato"
+
+#~ msgid "Contact for follow-up and confirmation of the alert message"
+#~ msgstr "Contato para acompanhamento e confirmação da mensagem de alerta"
+
+#~ msgid "UN Country Boundary"
+#~ msgstr "Fronteira do país da ONU"
+
+#~ msgid ""
+#~ "GeoJSON file of the UN Country Boundary. Setting this will enable the UN "
+#~ "Country Boundary check in the alertdrawing tools"
+#~ msgstr ""
+#~ "Arquivo GeoJSON da fronteira do país da ONU. Definir isso permitirá a "
+#~ "verificação das fronteiras do país da ONU nas ferramentas de alerta"
+
+#~ msgid "Set a smaller number to improve perfomance for aggregators"
+#~ msgstr "Defina um número menor para melhorar o desempenho dos agregadores"
+
+#~ msgid "Sender Details"
+#~ msgstr "Detalhes do remetente"
+
+#~ msgid "Hazards monitored by the institution"
+#~ msgstr "Riscos monitorados pela instituição"
+
+#~ msgid "Predefined Alert Areas"
+#~ msgstr "Áreas de alerta predefinidas"
+
+#~ msgid "Predefined areas for alerts"
+#~ msgstr "Áreas predefinidas para alertas"
+
+#~ msgid "Predefined Areas"
+#~ msgstr "Áreas predefinidas"
+
+#~ msgid "Allowed Alert Languages"
+#~ msgstr "Idiomas de alerta permitidos"
+
+#~ msgid "Languages"
+#~ msgstr "Idiomas"
+
+#~ msgid "UN Boundary"
+#~ msgstr "Limite da ONU"
+
+#~ msgid "Geophysical"
+#~ msgstr "Geofísica"
+
+#~ msgid "Meteorological"
+#~ msgstr "Meteorológico"
+
+#~ msgid "General emergency and public safety"
+#~ msgstr "Emergência geral e segurança pública"
+
+#~ msgid "Law enforcement, military, homeland and local/private security"
+#~ msgstr "Aplicação da lei, forças armadas, segurança interna e local/privada"
+
+#~ msgid "Rescue and recovery"
+#~ msgstr "Resgate e recuperação"
+
+#~ msgid "Fire suppression and rescue"
+#~ msgstr "Supressão de incêndio e resgate"
+
+#~ msgid "Medical and public health"
+#~ msgstr "Saúde médica e pública"
+
+#~ msgid "Pollution and other environmental"
+#~ msgstr "Poluição e outros problemas ambientais"
+
+#~ msgid "Public and private transportation"
+#~ msgstr "Transporte público e privado"
+
+#~ msgid "Utility, telecommunication, other non-transport infrastructure"
+#~ msgstr ""
+#~ "Serviços públicos, telecomunicações e outras infra-estruturas não "
+#~ "relacionadas com os transportes"
+
+#~ msgid ""
+#~ "Chemical, Biological, Radiological, Nuclear or High-Yield Explosive threat "
+#~ "or attack"
+#~ msgstr ""
+#~ "Ameaça ou ataque químico, biológico, radiológico, nuclear ou explosivo de "
+#~ "alto rendimento"
+
+#~ msgid "Other events"
+#~ msgstr "Outros eventos"
+
+#~ msgid "Select from WMO list of Hazards Event Types"
+#~ msgstr "Selecione na lista de tipos de eventos de perigo da OMM"
+
+#~ msgid "Hazard"
+#~ msgstr "Perigo"
+
+#~ msgid "Name of Hazard"
+#~ msgstr "Nome do Perigo"
+
+#~ msgid "Category of Hazard"
+#~ msgstr "Categoria de perigo"
+
+#~ msgid "Icon"
+#~ msgstr "Ícone"
+
+#~ msgid "Matching icon"
+#~ msgstr "Ícone correspondente"
+
+#~ msgid "Event Code is required"
+#~ msgstr "O código do evento é obrigatório"
+
+#~ msgid "This event type already exists"
+#~ msgstr "Este tipo de evento já existe"
+
+#~ msgid "Language Code"
+#~ msgstr "Código do idioma"
+
+#~ msgid "ISO 639-1 language code"
+#~ msgstr "Código de idioma ISO 639-1"
+
+#~ msgid "Language Name"
+#~ msgstr "Nome do idioma"
+
+#~ msgid "Geo"
+#~ msgstr "Geografia"
+
+#~ msgid "Met"
+#~ msgstr "Conheci"
+
+#~ msgid "Safety"
+#~ msgstr "Segurança"
+
+#~ msgid "Security"
+#~ msgstr "Segurança"
+
+#~ msgid "Rescue"
+#~ msgstr "Resgatar"
+
+#~ msgid "Fire"
+#~ msgstr "Fogo"
+
+#~ msgid "Health"
+#~ msgstr "Saúde"
+
+#~ msgid "Env"
+#~ msgstr "Ambiente"
+
+#~ msgid "Transport"
+#~ msgstr "Transporte"
+
+#~ msgid "Other"
+#~ msgstr "Outro"
+
+#~ msgid "Cold wave"
+#~ msgstr "Onda fria"
+
+#~ msgid "Drought/Dry spell"
+#~ msgstr "Seca/período de seca"
+
+#~ msgid "Dust storm/Sandstorm"
+#~ msgstr "Tempestade de poeira/tempestade de areia"
+
+#~ msgid "Extra-tropical cyclone"
+#~ msgstr "Ciclone extratropical"
+
+#~ msgid "Flood"
+#~ msgstr "Enchente"
+
+#~ msgid "Fog"
+#~ msgstr "Névoa"
+
+#~ msgid "Haze/Smoke"
+#~ msgstr "Neblina/fumaça"
+
+#~ msgid "Frost"
+#~ msgstr "Geada"
+
+#~ msgid "Hail"
+#~ msgstr "Saudação"
+
+#~ msgid "Heat wave"
+#~ msgstr "Onda de calor"
+
+#~ msgid "High UV radiation"
+#~ msgstr "Alta radiação UV"
+
+#~ msgid "Icing"
+#~ msgstr "Glacê"
+
+#~ msgid "Freezing rain"
+#~ msgstr "Chuva congelante"
+
+#~ msgid "Landslide/Mudslide & Debris flow"
+#~ msgstr "Deslizamento de terra/deslizamento de lama e fluxo de detritos"
+
+#~ msgid "Lightning"
+#~ msgstr "Raio"
+
+#~ msgid "Pollen pollution/Polluted air"
+#~ msgstr "Poluição por pólen/Ar poluído"
+
+#~ msgid "Rain/Wet Spell"
+#~ msgstr "Feitiço de Chuva/Molhada"
+
+#~ msgid "Snow"
+#~ msgstr "Neve"
+
+#~ msgid "Snowstorm"
+#~ msgstr "Tempestade de neve"
+
+#~ msgid "Space weather event"
+#~ msgstr "Evento climático espacial"
+
+#~ msgid "High Seas/Rogue waves etc."
+#~ msgstr "Alto mar/ondas traiçoeiras etc."
+
+#~ msgid "Storm surge/Coastal flood"
+#~ msgstr "Onda de tempestade/inundação costeira"
+
+#~ msgid "Thunderstorms/Squall lines"
+#~ msgstr "Trovoadas/linhas de instabilidade"
+
+#~ msgid "Tropical cyclone"
+#~ msgstr "Ciclone tropical"
+
+#~ msgid "Volcanic ash"
+#~ msgstr "Cinza vulcânica"
+
+#~ msgid "Wild land fire/Forest fire"
+#~ msgstr "Incêndio terrestre/incêndio florestal"
+
+#~ msgid "Wind"
+#~ msgstr "Vento"
+
+#~ msgid "Red severity"
+#~ msgstr "Gravidade vermelha"
+
+#~ msgid "Orange severity"
+#~ msgstr "Gravidade laranja"
+
+#~ msgid "Yellow severity"
+#~ msgstr "Gravidade amarela"
+
+#~ msgid "Minor severity"
+#~ msgstr "Gravidade menor"
+
+#~ msgid "Unknown severity"
+#~ msgstr "Gravidade desconhecida"
+
+#~ msgid "Copy Paste XML"
+#~ msgstr "Copiar Colar XML"
+
+#~ msgid "File"
+#~ msgstr "Arquivo"
+
+#~ msgid "Load from"
+#~ msgstr "Carregar de"
+
+#~ msgid "Paste your CAP XML here"
+#~ msgstr "Cole seu XML CAP aqui"
+
+#~ msgid "CAP File"
+#~ msgstr "Arquivo CAP"
+
+#~ msgid ""
+#~ "An error occurred while trying to load the CAP XML. Please check the data "
+#~ "and try again."
+#~ msgstr ""
+#~ "Ocorreu um erro ao tentar carregar o CAP XML. Verifique os dados e tente "
+#~ "novamente."
+
+#~ msgid ""
+#~ "You must select at least one reference alert for this message type. Only "
+#~ "'Alert' Message Type can be saved without references."
+#~ msgstr ""
+#~ "Você deve selecionar pelo menos um alerta de referência para esse tipo de "
+#~ "mensagem. Apenas o tipo de mensagem 'Alerta' pode ser salvo sem referências."
+
+#~ msgid ""
+#~ "You cannot reference an alert to itself. Please select a previously "
+#~ "published alert."
+#~ msgstr ""
+#~ "Você não pode fazer referência a um alerta para si mesmo. Selecione um "
+#~ "alerta publicado anteriormente."
+
+#~ msgid "You cannot select the same alert more than once."
+#~ msgstr "Você não pode selecionar o mesmo alerta mais de uma vez."
+
+#~ msgid ""
+#~ "Draft - A preliminary template or draft, not actionable in its current form"
+#~ msgstr ""
+#~ "Rascunho - Um modelo preliminar ou rascunho, não acionável em sua forma "
+#~ "atual"
+
+#~ msgid "Actual - Actionable by all targeted recipients"
+#~ msgstr "Real - Acionável por todos os destinatários-alvo"
+
+#~ msgid "Test - Technical testing only, all recipients disregard"
+#~ msgstr "Teste - Apenas testes técnicos, todos os destinatários desconsideram"
+
+#~ msgid ""
+#~ "Exercise - Actionable only by designated exercise participants; exercise "
+#~ "identifier SHOULD appear in note"
+#~ msgstr ""
+#~ "Exercício - Acionável apenas por participantes designados do exercício; o "
+#~ "identificador do exercício DEVE aparecer na nota"
+
+#~ msgid "System - For messages that support alert network internal functions"
+#~ msgstr ""
+#~ "Sistema - Para mensagens que suportam funções internas da rede de alerta"
+
+#~ msgid "Alert - Initial information requiring attention by targeted recipients"
+#~ msgstr ""
+#~ "Alerta - Informações iniciais que requerem atenção dos destinatários-alvo"
+
+#~ msgid ""
+#~ "Update - Updates and supersedes the earlier message(s) identified in "
+#~ "referenced alerts"
+#~ msgstr ""
+#~ "Atualizar - Atualiza e substitui as mensagens anteriores identificadas nos "
+#~ "alertas referenciados"
+
+#~ msgid "Cancel - Cancels the earlier message(s) identified in references"
+#~ msgstr ""
+#~ "Cancelar - Cancela as mensagens anteriores identificadas nas referências"
+
+#~ msgid "Public - For general dissemination to unrestricted audiences"
+#~ msgstr "Público - Para divulgação geral para públicos irrestritos"
+
+#~ msgid ""
+#~ "Restricted - For dissemination only to users with a known operational "
+#~ "requirement as in the restriction field"
+#~ msgstr ""
+#~ "Restrito - Para divulgação apenas para usuários com requisito operacional "
+#~ "conhecido como no campo de restrição"
+
+#~ msgid ""
+#~ "Private - For dissemination only to specified addresses as in the addresses "
+#~ "field in the alert"
+#~ msgstr ""
+#~ "Privado - Para divulgação apenas para endereços especificados como no campo "
+#~ "de endereços do alerta"
+
+#~ msgid "Id"
+#~ msgstr "Eu ia"
+
+#~ msgid "Unique ID. Auto generated on creation."
+#~ msgstr "ID exclusivo. Gerado automaticamente na criação."
+
+#~ msgid ""
+#~ "Identifies the originator of an alert. For example the website address of "
+#~ "the institution"
+#~ msgstr ""
+#~ "Identifica o originador de um alerta. Por exemplo, o endereço do site da "
+#~ "instituição"
+
+#~ msgid ""
+#~ "Time and date of origination of the alert. Automatically generated by the "
+#~ "system during publishing"
+#~ msgstr ""
+#~ "Hora e data de origem do alerta. Gerado automaticamente pelo sistema durante"
+#~ " a publicação"
+
+#~ msgid "The code denoting the appropriate handling of the alert"
+#~ msgstr "O código que denota o tratamento adequado do alerta"
+
+#~ msgid "The code denoting the nature of the alert message"
+#~ msgstr "O código que denota a natureza da mensagem de alerta"
+
+#~ msgid "The code denoting the intended distribution of the alert message"
+#~ msgstr "O código que denota a distribuição pretendida da mensagem de alerta"
+
+#~ msgid "Source"
+#~ msgstr "Fonte"
+
+#~ msgid ""
+#~ "The text describing the rule for limiting distribution of the restricted "
+#~ "alert message. Used when scope value is Restricted"
+#~ msgstr ""
+#~ "O texto que descreve a regra para limitar a distribuição da mensagem de "
+#~ "alerta restrita. Usado quando o valor do escopo é Restrito"
+
+#~ msgid "The code denoting the special handling of the alert message"
+#~ msgstr "O código que denota o tratamento especial da mensagem de alerta"
+
+#~ msgid "Code"
+#~ msgstr "Código"
+
+#~ msgid ""
+#~ "The text describing the purpose or significance of the alert message.The "
+#~ "message note is primarily intended for use with <status> 'Exercise' and "
+#~ "<msgType> 'Error'"
+#~ msgstr ""
+#~ "O texto que descreve o propósito ou significado da mensagem de alerta. A "
+#~ "nota da mensagem destina-se principalmente ao uso com <status> 'Exercício' e"
+#~ " <msgType> 'Erro'"
+
+#~ msgid "Note"
+#~ msgstr "Observação"
+
+#~ msgid "Addresses"
+#~ msgstr "Endereços"
+
+#~ msgid ""
+#~ "The group listing of intended recipients of the alert message, if scope is "
+#~ "Private"
+#~ msgstr ""
+#~ "A listagem do grupo de destinatários pretendidos da mensagem de alerta, se o"
+#~ " escopo for Privado"
+
+#~ msgid "Incidents"
+#~ msgstr "Incidentes"
+
+#~ msgid "Expired"
+#~ msgstr "Expirado"
+
+#~ msgid "Ongoing"
+#~ msgstr "Em andamento"
+
+#~ msgid "Urgency:"
+#~ msgstr "Urgência:"
+
+#~ msgid "CAP XML Link"
+#~ msgstr "Link XML CAP"
+
+#~ msgid "Affected area"
+#~ msgstr "Área afetada"
+
+#, python-format
+#~ msgid "Import CAP Alert %(title)s"
+#~ msgstr "Importar Alerta CAP %(title)s"
+
+#~ msgid "Load"
+#~ msgstr "Carregar"
+
+#~ msgid "Import CAP Alert - Preview"
+#~ msgstr "Alerta de importação CAP - Visualização"
+
+#~ msgid "Source URL:"
+#~ msgstr "URL de origem:"
+
+#~ msgid "Source File Name:"
+#~ msgstr "Nome do arquivo de origem:"
+
+#~ msgid "Sender:"
+#~ msgstr "Remetente:"
+
+#~ msgid "Sent:"
+#~ msgstr "Enviado:"
+
+#~ msgid "Message Type:"
+#~ msgstr "Tipo de mensagem:"
+
+#~ msgid "Create Draft Alert"
+#~ msgstr "Criar alerta de rascunho"
+
+#~ msgid "Language:"
+#~ msgstr "Linguagem:"
+
+#~ msgid "Category:"
+#~ msgstr "Categoria:"
+
+#~ msgid "Event:"
+#~ msgstr "Evento:"
+
+#~ msgid "Severity:"
+#~ msgstr "Gravidade:"
+
+#~ msgid "Certainty:"
+#~ msgstr "Certeza:"
+
+#~ msgid "Effective:"
+#~ msgstr "Eficaz:"
+
+#~ msgid "Onset:"
+#~ msgstr "Início:"
+
+#~ msgid "Expires:"
+#~ msgstr "Expira:"
+
+#~ msgid "Headline:"
+#~ msgstr "Título:"
+
+#~ msgid "Description:"
+#~ msgstr "Descrição:"
+
+#~ msgid "Instruction:"
+#~ msgstr "Instrução:"
+
+#~ msgid "Area:"
+#~ msgstr "Área:"
+
+#~ msgid "Radius (in kilometers) "
+#~ msgstr "Raio (em quilômetros)"
+
+#, python-format
+#~ msgid "Page '%(page_title)s' copied."
+#~ msgstr "Página '%(page_title)s' copiada."
 
 #~ msgid "English"
-#~ msgstr "English"
+#~ msgstr "Inglês"
 
 #~ msgid "French"
-#~ msgstr "French"
+#~ msgstr "Francês"
 
 #~ msgid ""
 #~ "The code denoting the category of the subject event of the alert message"
 #~ msgstr ""
-#~ "The code denoting the category of the subject event of the alert message"
+#~ "O código que denota a categoria do evento em questão da mensagem de alerta"
 
 #~ msgid "Event codes"
-#~ msgstr "Event codes"
+#~ msgstr "Códigos de evento"
 
 #~ msgid "Time and date of origination of the alert"
-#~ msgstr "Time and date of origination of the alert"
+#~ msgstr "Hora e data de origem do alerta"
 
 #~ msgid "Unknown - Urgency not known"
-#~ msgstr "Unknown - Urgency not known"
+#~ msgstr "Desconhecido - Urgência desconhecida"
 
 #~ msgid "Unknown - Certainty unknown"
-#~ msgstr "Unknown - Certainty unknown"
+#~ msgstr "Desconhecido - Certeza desconhecida"
 
 #~ msgid "Intended audience"
-#~ msgstr "Intended audience"
+#~ msgstr "Público-alvo"
 
 #~ msgid "CAP Sender Identifier"
-#~ msgstr "CAP Sender Identifier"
+#~ msgstr "Identificador do remetente CAP"
 
 #~ msgid "Can be the website link or email of the sending institution"
-#~ msgstr "Can be the website link or email of the sending institution"
+#~ msgstr "Pode ser o link do site ou e-mail da instituição remetente"
 
 #~ msgid "Audience Type"
-#~ msgstr "Audience Type"
+#~ msgstr "Tipo de público"
 
 #~ msgid "Audience Types"
-#~ msgstr "Audience Types"
-
-#~ msgid "Target audiences for published alerts"
-#~ msgstr "Target audiences for published alerts"
+#~ msgstr "Tipos de público"
 
 #~ msgid ""
 #~ "Acknowledge - Acknowledges receipt and acceptance of the message(s) "
 #~ "identified in references field"
 #~ msgstr ""
-#~ "Acknowledge - Acknowledges receipt and acceptance of the message(s) "
-#~ "identified in references field"
+#~ "Acknowledge - Confirma o recebimento e aceitação da(s) mensagem(s) "
+#~ "identificada(s) no campo de referências"
 
 #~ msgid ""
 #~ "Error -  Indicates rejection of the message(s) identified in references; "
 #~ "explanation SHOULD appear in note field"
 #~ msgstr ""
-#~ "Error -  Indicates rejection of the message(s) identified in references; "
-#~ "explanation SHOULD appear in note field"
-
-#~ msgid "Identifier"
-#~ msgstr "Identifier"
-
+#~ "Erro - Indica rejeição da(s) mensagem(s) identificada(s) nas referências; a "
+#~ "explicação DEVE aparecer no campo de nota"

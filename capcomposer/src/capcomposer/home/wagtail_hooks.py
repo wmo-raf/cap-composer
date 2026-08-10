@@ -1,7 +1,7 @@
-# from adminboundarymanager.wagtail_hooks import AdminBoundaryViewSetGroup
-# from wagtail_modeladmin.options import (
-#     modeladmin_register
-# )
+from adminboundarymanager.wagtail_hooks import AdminBoundaryViewSetGroup
+from wagtail import hooks
 
-# modeladmin_register(AdminBoundaryViewSetGroup)
-from wagtail_modeladmin.options import modeladmin_register
+
+@hooks.register("register_admin_viewset")
+def register_admin_boundary_viewset():
+    return AdminBoundaryViewSetGroup()

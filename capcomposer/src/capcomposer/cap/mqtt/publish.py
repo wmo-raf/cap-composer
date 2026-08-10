@@ -27,62 +27,83 @@ def publish_cap_to_all_mqtt_brokers(cap_alert_id):
     
     logging.info(
         f"Starting publish_cap_to_all_mqtt_brokers for CAP Alert ID: {cap_alert_id}")
-    
-    # Get all active brokers
-    brokers = CAPAlertMQTTBroker.objects.filter(active=True)
-    
-    if not brokers:
-        logging.warning("No MQTT brokers found")
-        return
-    
+
     # Get the cap alert data to be published
     cap_alert = get_object_or_none(CapAlertPage, id=cap_alert_id)
     logging.info(f"CAP Alert: {cap_alert} found")
-    
+
     if not cap_alert:
         logging.warning(f"CAP Alert: {cap_alert_id} not found")
         return
-    
+
     if not cap_alert.live:
         logging.warning(f"CAP Alert: {cap_alert_id} is not published")
         return
-    
+
     if cap_alert.status != "Actual":
         logging.warning(f"CAP Alert: {cap_alert_id} is not actionable")
         return
-    
+
+    site = cap_alert.get_site()
+    if not site:
+        logging.warning(f"CAP Alert: {cap_alert_id} has no associated site, skipping MQTT publish")
+        return
+
+    brokers = CAPAlertMQTTBroker.objects.filter(active=True, site=site)
+
+    if not brokers:
+        logging.warning("No MQTT brokers found")
+        return
+
     # Get the processed CAP alert XML
     alert_xml, signed = serialize_and_sign_cap_alert(cap_alert)
-    
+
     if not signed:
         logging.warning(f"CAP Alert: {cap_alert_id} not signed")
         # Continue to publish anyway, the acceptance/rejection of non-signed
         # alerts should be handled on the receiving side (e.g. a wis2box)
-    
+
     for broker in brokers:
-        publish_cap_to_each_mqtt_broker(cap_alert, alert_xml, broker)
+        # Each publish is recorded as its own attempt (new event row)
+        event = CAPAlertMQTTBrokerEvent.objects.create(broker=broker, alert=cap_alert, status="PENDING")
+        publish_cap_to_each_mqtt_broker(cap_alert, alert_xml, broker, event)
 
 
-def publish_cap_to_each_mqtt_broker(alert, alert_xml, broker):
+def republish_cap_to_broker(event):
+    """Re-sends a CAP alert to the broker referenced by an existing
+    (PENDING) event row. Used by the operator-triggered republish flow.
+
+    The alert-level guards and concurrency checks are enforced by the
+    republish view before this runs; here we just (re)serialize and send.
+    """
+    alert = event.alert
+    broker = event.broker
+
+    alert_xml, signed = serialize_and_sign_cap_alert(alert)
+
+    if not signed:
+        logging.warning(f"CAP Alert: {alert.id} not signed (republish)")
+
+    publish_cap_to_each_mqtt_broker(alert, alert_xml, broker, event)
+
+
+def publish_cap_to_each_mqtt_broker(alert, alert_xml, broker, event):
     """Formats the message for MQTT publishing and publishes it
-    to a given broker.
+    to a given broker, recording the outcome on the supplied event.
 
     Args:
         alert (CapAlertPage): The CAP alert instance to obtain metadata.
         alert_xml (bytes): The CAP alert XML bytes to be published.
         broker (CAPALertMQTTBroker): The broker configured by the user,
         containing details such as the host, port, and authentication.
+        event (CAPAlertMQTTBrokerEvent): The pre-created event row whose
+        status is updated with the outcome of this attempt.
 
     Raises:
         ex: An exception if the Paho MQTT publishing step fails
         after all retries.
     """
-    
-    event = CAPAlertMQTTBrokerEvent.objects.filter(broker=broker, alert=alert).first()
-    
-    if not event:
-        event = CAPAlertMQTTBrokerEvent.objects.create(broker=broker, alert=alert, status="PENDING")
-    
+
     # Encode the CAP alert message in base64
     data = b64encode(alert_xml).decode()
     alert_dt = alert.sent.strftime("%Y%m%dT%H%M%S")

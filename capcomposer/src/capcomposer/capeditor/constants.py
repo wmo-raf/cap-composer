@@ -151,7 +151,7 @@ SEVERITY_MAPPING = {
         "background_color": "#FEE2E2",
         "border_color": "#DC2626",
         "icon_color": "#d42d41",
-        "severity": "Extreme",
+        "severity": _("Extreme"),
         "id": 4
     },
     "Severe": {
@@ -160,7 +160,7 @@ SEVERITY_MAPPING = {
         "background_color": "#FDE8D0", # soft peach
         "border_color": "#C2600A",
         "icon_color": "#f08c11",
-        "severity": "Severe",
+        "severity": _("Severe"),
         "id": 3
     },
     "Moderate": {
@@ -169,7 +169,7 @@ SEVERITY_MAPPING = {
         "background_color": "#FEF08A", # bright yellow bg
         "border_color": "#A16207",
         "icon_color": "#f4cf00",
-        "severity": "Moderate",
+        "severity": _("Moderate"),
         "id": 2
     },
     "Minor": {
@@ -178,7 +178,7 @@ SEVERITY_MAPPING = {
         "background_color": "#CFFAFE",
         "border_color": "#0E7490",
         "icon_color": "#399cc7",
-        "severity": "Minor",
+        "severity": _("Minor"),
         "id": 1
     },
     "Unknown": {
@@ -187,7 +187,7 @@ SEVERITY_MAPPING = {
         "background_color": "#E0E7FF",
         "border_color": "#4B6CB7",
         "icon_color": "#82a8df",
-        "severity": "Unknown",
+        "severity": _("Unknown"),
         "id": 0
     }
 }
@@ -195,27 +195,27 @@ SEVERITY_MAPPING = {
 URGENCY_MAPPING = {
     "Immediate": {
         "label": _("Immediate"),
-        "certainty": "Immediate",
+        "certainty": _("Immediate"),
         "id": 4
     },
     "Expected": {
         "label": _("Expected"),
-        "certainty": "Expected",
+        "certainty": _("Expected"),
         "id": 3
     },
     "Future": {
         "label": _("Future"),
-        "certainty": "Future",
+        "certainty": _("Future"),
         "id": 2
     },
     "Past": {
         "label": _("Past"),
-        "certainty": "Past",
+        "certainty": _("Past"),
         "id": 1
     },
     "Unknown": {
         "label": _("Unknown"),
-        "certainty": "Unknown",
+        "certainty": _("Unknown"),
         "id": 0
     },
 }
@@ -223,27 +223,27 @@ URGENCY_MAPPING = {
 CERTAINTY_MAPPING = {
     "Observed": {
         "label": _("Observed"),
-        "certainty": "Observed",
+        "certainty": _("Observed"),
         "id": 4
     },
     "Likely": {
         "label": _("Likely"),
-        "certainty": "Likely",
+        "certainty": _("Likely"),
         "id": 3
     },
     "Possible": {
         "label": _("Possible"),
-        "certainty": "Possible",
+        "certainty": _("Possible"),
         "id": 2
     },
     "Unlikely": {
         "label": _("Unlikely"),
-        "certainty": "Unlikely",
+        "certainty": _("Unlikely"),
         "id": 1
     },
     "Unknown": {
         "label": _("Unknown"),
-        "certainty": "Unknown",
+        "certainty": _("Unknown"),
         "id": 0
     },
 }
