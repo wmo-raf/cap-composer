@@ -27,6 +27,12 @@ from .models import (
     OtherCAPSettings,
 )
 from .statistics import _get_filtered_queryset, get_alert_statistics, export_alerts_csv
+from .stats_theme import (
+    get_stats_theme,
+    get_urgency_colors,
+    get_certainty_colors,
+    get_event_colors,
+)
 from .utils import get_full_url_by_site, create_cap_alert_multi_media, send_private_alert_email
 from .utils import (
     serialize_and_sign_cap_alert,
@@ -430,9 +436,19 @@ def cap_statistics_view(request):
     severity_colors_list = [stats["severity_colors"].get(k, "#ccc") for k in stats["by_severity"]]
     status_colors_list = [stats["status_colors"].get(k, "#ccc") for k in stats["by_status"]]
 
+    # Derive colours from the ClimWeb theme when running inside ClimWeb,
+    # otherwise keep the standalone palette.
+    theme = get_stats_theme()
+
+    urgency_labels = list(stats["by_urgency"].keys())
+    certainty_labels = list(stats["by_certainty"].keys())
+    event_labels = list(stats["by_event"].keys())
+
     context = {
         "stats": stats,
         "admin_list_url": admin_list_url,
+        "theme": theme["tokens"],
+        "theme_is_climweb": theme["themed"],
         "start_date": request.GET.get("start_date", ""),
         "end_date": request.GET.get("end_date", ""),
         "selected_severities": request.GET.getlist("severity"),
@@ -443,15 +459,20 @@ def cap_statistics_view(request):
         "severity_labels_json": json.dumps(list(stats["by_severity"].keys())),
         "severity_data_json": json.dumps(list(stats["by_severity"].values())),
         "severity_colors_json": json.dumps(severity_colors_list),
-        "urgency_labels_json": json.dumps(list(stats["by_urgency"].keys())),
+        "urgency_labels_json": json.dumps(urgency_labels),
         "urgency_data_json": json.dumps(list(stats["by_urgency"].values())),
-        "certainty_labels_json": json.dumps(list(stats["by_certainty"].keys())),
+        "urgency_colors_json": json.dumps(get_urgency_colors(urgency_labels, theme)),
+        "certainty_labels_json": json.dumps(certainty_labels),
         "certainty_data_json": json.dumps(list(stats["by_certainty"].values())),
+        "certainty_colors_json": json.dumps(get_certainty_colors(certainty_labels, theme)),
         "status_labels_json": json.dumps(list(stats["by_status"].keys())),
         "status_data_json": json.dumps(list(stats["by_status"].values())),
         "status_colors_json": json.dumps(status_colors_list),
-        "event_labels_json": json.dumps(list(stats["by_event"].keys())),
+        "event_labels_json": json.dumps(event_labels),
         "event_data_json": json.dumps(list(stats["by_event"].values())),
+        "event_colors_json": json.dumps(get_event_colors(event_labels, theme)),
+        "chart_primary_json": json.dumps(theme["tokens"]["primary"]),
+        "chart_primary_fill_json": json.dumps(theme["tokens"]["primary_light"]),
     }
 
     return render(request, "cap/statistics.html", context)

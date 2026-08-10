@@ -6,14 +6,31 @@
 {% block extra_css %}
     {{ block.super }}
     <style>
+        /*
+         * Colour tokens. Inside a ClimWeb deployment these are derived from the
+         * active ClimWeb theme (Admin → Settings → Theme) so the page follows the
+         * style guide; standalone they fall back to the original palette.
+         */
+        .stats-page {
+            --stats-primary: {{ theme.primary }};
+            --stats-primary-light: {{ theme.primary_light }};
+            --stats-primary-medium: {{ theme.primary_medium }};
+            --stats-bg: {{ theme.background }};
+            --stats-surface: {{ theme.surface }};
+            --stats-border: {{ theme.border }};
+            --stats-text: {{ theme.text }};
+            --stats-muted: {{ theme.muted }};
+            --stats-radius: {{ theme.border_radius }};
+        }
+
         /* ── Layout ─────────────────────────────────────────────────── */
         .stats-page { padding: 0 30px 40px; }
 
         /* ── Filter bar ─────────────────────────────────────────────── */
         .stats-filter-bar {
-            background: #f8f8f8;
-            border: 1px solid #e9e9e9;
-            border-radius: 6px;
+            background: var(--stats-bg);
+            border: 1px solid var(--stats-border);
+            border-radius: var(--stats-radius);
             padding: 18px 22px;
             margin-bottom: 28px;
             display: flex;
@@ -51,9 +68,9 @@
             margin-bottom: 28px;
         }
         .stat-card {
-            background: #fff;
-            border: 1px solid #e2e2e2;
-            border-radius: 8px;
+            background: var(--stats-surface);
+            border: 1px solid var(--stats-border);
+            border-radius: var(--stats-radius);
             padding: 18px 16px;
             text-align: center;
             box-shadow: 0 1px 3px rgba(0,0,0,.05);
@@ -61,18 +78,18 @@
         .stat-card .card-value {
             font-size: 2rem;
             font-weight: 700;
-            color: #1a1a1a;
+            color: var(--stats-text);
             line-height: 1.1;
         }
         .stat-card .card-label {
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: .05em;
-            color: #666;
+            color: var(--stats-muted);
             margin-top: 6px;
         }
-        .stat-card.card-total .card-value { color: #2563EB; }
-        .stat-card.card-actual .card-value { color: #059669; }
+        /* Total is brand-coloured; severity cards keep CAP-standard colours. */
+        .stat-card.card-total .card-value { color: var(--stats-primary); }
         .stat-card.card-extreme .card-value { color: #d42d41; }
         .stat-card.card-severe .card-value { color: #f08c11; }
 
@@ -87,9 +104,9 @@
             .stats-charts { grid-template-columns: 1fr; }
         }
         .chart-card {
-            background: #fff;
-            border: 1px solid #e2e2e2;
-            border-radius: 8px;
+            background: var(--stats-surface);
+            border: 1px solid var(--stats-border);
+            border-radius: var(--stats-radius);
             padding: 20px;
             box-shadow: 0 1px 3px rgba(0,0,0,.05);
         }
@@ -99,7 +116,7 @@
         .chart-title {
             font-size: 13px;
             font-weight: 600;
-            color: #333;
+            color: var(--stats-text);
             margin: 0 0 14px;
             text-transform: uppercase;
             letter-spacing: .04em;
@@ -114,32 +131,32 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: .04em;
-            color: #333;
+            color: var(--stats-text);
             margin: 0 0 10px;
         }
         .stats-breakdown-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 13px;
-            background: #fff;
-            border: 1px solid #e2e2e2;
-            border-radius: 8px;
+            background: var(--stats-surface);
+            border: 1px solid var(--stats-border);
+            border-radius: var(--stats-radius);
             overflow: hidden;
         }
         .stats-breakdown-table th {
-            background: #f5f5f5;
+            background: var(--stats-bg);
             font-weight: 600;
             text-align: left;
             padding: 10px 14px;
-            border-bottom: 1px solid #e2e2e2;
+            border-bottom: 1px solid var(--stats-border);
         }
         .stats-breakdown-table td {
             padding: 9px 14px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--stats-border);
         }
         .stats-breakdown-table tr:last-child td { border-bottom: none; }
         .stats-breakdown-table .pct-bar {
-            background: #e8f0fe;
+            background: var(--stats-primary-light);
             border-radius: 3px;
             height: 8px;
             position: relative;
@@ -147,12 +164,12 @@
             width: 100%;
         }
         .stats-breakdown-table .pct-fill {
-            background: #2563EB;
+            background: var(--stats-primary);
             border-radius: 3px;
             height: 8px;
             transition: width .3s;
         }
-        .count-link { color: #2563EB; text-decoration: none; }
+        .count-link { color: var(--stats-primary); text-decoration: none; }
         .count-link:hover { text-decoration: underline; }
 
         /* ── Export row ─────────────────────────────────────────────── */
@@ -167,7 +184,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: .05em;
-            color: #555;
+            color: var(--stats-muted);
         }
 
         .stats-export-row svg{
@@ -366,13 +383,18 @@
         severityColors: {{ severity_colors_json|safe }},
         urgencyLabels:  {{ urgency_labels_json|safe }},
         urgencyData:    {{ urgency_data_json|safe }},
+        urgencyColors:  {{ urgency_colors_json|safe }},
         certaintyLabels:{{ certainty_labels_json|safe }},
         certaintyData:  {{ certainty_data_json|safe }},
+        certaintyColors:{{ certainty_colors_json|safe }},
         statusLabels:   {{ status_labels_json|safe }},
         statusData:     {{ status_data_json|safe }},
         statusColors:   {{ status_colors_json|safe }},
         eventLabels:    {{ event_labels_json|safe }},
         eventData:      {{ event_data_json|safe }},
+        eventColors:    {{ event_colors_json|safe }},
+        primary:        {{ chart_primary_json|safe }},
+        primaryFill:    {{ chart_primary_fill_json|safe }},
     };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"
@@ -380,11 +402,6 @@
     <script>
     (function () {
         "use strict";
-
-        var PALETTE = [
-            '#2563EB','#7C3AED','#059669','#D97706','#DC2626',
-            '#0891B2','#65A30D','#DB2777','#9333EA','#EA580C',
-        ];
 
         /* Helper: return canvas element only if it exists in the DOM */
         function canvas(id) {
@@ -422,8 +439,8 @@
                         datasets: [{
                             label: '{% trans "Alerts" %}',
                             data: d.trendData,
-                            borderColor: '#2563EB',
-                            backgroundColor: 'rgba(37,99,235,.12)',
+                            borderColor: d.primary,
+                            backgroundColor: d.primaryFill,
                             tension: .35,
                             fill: true,
                             pointRadius: 4,
@@ -467,7 +484,7 @@
                     type: 'bar',
                     data: {
                         labels: d.urgencyLabels,
-                        datasets: [{ data: d.urgencyData, backgroundColor: ['#DC2626','#D97706','#2563EB','#9CA3AF'], borderRadius: 4 }]
+                        datasets: [{ data: d.urgencyData, backgroundColor: d.urgencyColors, borderRadius: 4 }]
                     },
                     options: {
                         responsive: true,
@@ -486,7 +503,7 @@
                     type: 'bar',
                     data: {
                         labels: d.certaintyLabels,
-                        datasets: [{ data: d.certaintyData, backgroundColor: ['#059669','#65A30D','#0891B2','#9CA3AF'], borderRadius: 4 }]
+                        datasets: [{ data: d.certaintyData, backgroundColor: d.certaintyColors, borderRadius: 4 }]
                     },
                     options: {
                         responsive: true,
@@ -523,7 +540,7 @@
                     type: 'bar',
                     data: {
                         labels: d.eventLabels,
-                        datasets: [{ data: d.eventData, backgroundColor: PALETTE, borderRadius: 4 }]
+                        datasets: [{ data: d.eventData, backgroundColor: d.eventColors, borderRadius: 4 }]
                     },
                     options: {
                         indexAxis: 'y',
