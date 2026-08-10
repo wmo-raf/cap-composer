@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: climweb-cap-composer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 08:33+0000\n"
+"POT-Creation-Date: 2026-08-10 13:29+0000\n"
 "PO-Revision-Date: 2026-05-11 09:48\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -18,71 +18,71 @@ msgstr ""
 "X-Crowdin-Project: climweb-cap-composer\n"
 "X-Crowdin-Project-ID: 887364\n"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:15
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:17
 #, fuzzy
 #| msgid "Sender name"
 msgid "Feed name"
 msgstr "Nom du flux"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:16
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:18
 msgid "Provide a name to identify the feed"
 msgstr "Fournissez un nom pour identifier le flux"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:17
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:19
 #, fuzzy
 #| msgid "Message Type"
 msgid "Feed Type"
 msgstr "Type d'alimentation"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:18
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:20
 msgid "Select the type of feed"
 msgstr "Sélectionnez le type de flux"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:19
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:21
 msgid "Feed URL"
 msgstr "URL du flux"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:19
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:21
 msgid "Enter the URL of the feed"
 msgstr "Saisissez l'URL du flux"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:20
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:44
-#: capcomposer/src/capcomposer/cap/webhook/models.py:10
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:22
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:45
+#: capcomposer/src/capcomposer/cap/webhook/models.py:12
 #, fuzzy
 #| msgid "Effective"
 msgid "Active"
 msgstr "Actif"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:21
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:23
 msgid "Automatically fetch data from this feed. Uncheck to disable."
 msgstr ""
 "Récupérez automatiquement les données de ce flux. Décochez pour désactiver."
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:22
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:24
 msgid "Feed check interval in minutes"
 msgstr "Intervalle de contrôle d'alimentation en minutes"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:27
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:29
 msgid "How often to check for new alerts in minutes. Min: 1, Max: 10"
 msgstr ""
 "À quelle fréquence vérifier les nouvelles alertes en quelques minutes. Min :"
 " 1, Max : 10"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:29
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:31
 msgid "Validate CAP XML Signature"
 msgstr "Valider la signature XML CAP"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:30
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:32
 msgid "Check to only import alerts with a valid XML signature."
 msgstr ""
 "Cochez pour importer uniquement les alertes avec une signature XML valide."
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:33
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:35
 msgid "Submit imported alerts for moderation"
 msgstr "Soumettre des alertes importées pour modération"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:35
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:37
 msgid ""
 "Check to automatically submit imported alerts for moderation. Otherwise, "
 "alerts will be saved as drafts."
@@ -90,45 +90,59 @@ msgstr ""
 "Cochez pour soumettre automatiquement les alertes importées pour modération."
 " Sinon, les alertes seront enregistrées sous forme de brouillons."
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:48
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:45
+msgid "The site this feed is associated with."
+msgstr "Le site auquel ce flux est associé."
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:46
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:54
+#: capcomposer/src/capcomposer/cap/webhook/models.py:24
+msgid "Site"
+msgstr "Site"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:62
+msgid "A site must be selected for this feed."
+msgstr "Un site doit être sélectionné pour ce flux."
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:66
 msgid "External Alert Feed"
 msgstr "Flux d'alerte externe"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:49
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:67
 msgid "External Alert Feeds"
 msgstr "Flux d'alertes externes"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:57
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:75
 #, fuzzy
 #| msgid "CAP Alert XML URL"
 msgid "Alert URL"
 msgstr "URL d'alerte"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:57
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:75
 msgid "The URL of the alert XML"
 msgstr "L'URL du XML d'alerte"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:58
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:76
 #, fuzzy
 #| msgid "Reference Alert"
 msgid "Remote Alert ID"
 msgstr "ID d'alerte à distance"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:59
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:77
 #, fuzzy
 #| msgid "The text identifying the source of the alert message"
 msgid "The unique identifier of the alert in the remote feed"
 msgstr "L'identifiant unique de l'alerte dans le flux distant"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:62
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:80
 msgid "The imported alert from this entry"
 msgstr "L'alerte importée de cette entrée"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:65
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:83
 msgid "External Alert Feed Entry"
 msgstr "Entrée de flux d’alerte externe"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:66
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:84
 msgid "External Alert Feed Entries"
 msgstr "Entrées de flux d’alertes externes"
 
@@ -174,7 +188,7 @@ msgstr "Importé"
 #, fuzzy
 #| msgid "Import CAP Alert"
 msgid "CAP Alert"
-msgstr "Alerte CAP"
+msgstr "Alerte PAC"
 
 #: capcomposer/src/capcomposer/cap/models.py:298
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:74
@@ -185,102 +199,102 @@ msgstr "PDF"
 msgid "Email"
 msgstr "E-mail"
 
-#: capcomposer/src/capcomposer/cap/models.py:450
+#: capcomposer/src/capcomposer/cap/models.py:472
 msgid "Left of the Navbar"
 msgstr "À gauche de la barre de navigation"
 
-#: capcomposer/src/capcomposer/cap/models.py:451
+#: capcomposer/src/capcomposer/cap/models.py:473
 msgid "Top of the Navbar"
 msgstr "Haut de la barre de navigation"
 
-#: capcomposer/src/capcomposer/cap/models.py:455
+#: capcomposer/src/capcomposer/cap/models.py:477
 msgid "Active Alert Style"
 msgstr "Style d'alerte active"
 
-#: capcomposer/src/capcomposer/cap/models.py:456
+#: capcomposer/src/capcomposer/cap/models.py:478
 msgid "Choose the style of active alerts"
 msgstr "Choisissez le style des alertes actives"
 
-#: capcomposer/src/capcomposer/cap/models.py:466
-#: capcomposer/src/capcomposer/cap/models.py:467
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:305
+#: capcomposer/src/capcomposer/cap/models.py:488
+#: capcomposer/src/capcomposer/cap/models.py:489
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:402
 msgid "Other Settings"
 msgstr "Autres paramètres"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:14
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:15
 msgid "At most once. Fire and forget"
 msgstr "Au plus une fois. Tire et oublie"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:15
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:16
 msgid "At least once. I’ll keep sending until you say you got it"
 msgstr ""
 "Au moins une fois. Je continuerai à envoyer jusqu'à ce que tu dises que tu "
 "l'as reçu"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:19
-#: capcomposer/src/capcomposer/cap/webhook/models.py:8
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:20
+#: capcomposer/src/capcomposer/cap/webhook/models.py:10
 msgid "Name"
 msgstr "Nom"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:20
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:21
 msgid "Provide a name to identify the broker"
 msgstr "Fournir un nom pour identifier le courtier"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:21
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:22
 msgid "Broker Host"
 msgstr "Courtier hôte"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:22
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:23
 msgid "Provide the broker host name or IP address"
 msgstr "Fournissez le nom d'hôte ou l'adresse IP du courtier"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:23
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:24
 msgid "Broker Port"
 msgstr "Port du courtier"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:23
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:24
 msgid "Provide the broker port number"
 msgstr "Fournir le numéro de port du courtier"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:26
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:27
 msgid "Broker Username"
 msgstr "Nom d'utilisateur du courtier"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:27
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:28
 msgid "Broker Password"
 msgstr "Mot de passe du courtier"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:28
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:29
 msgid "Enter a password. If a password already exists, it will be updated"
 msgstr ""
 "Entrez un mot de passe. Si un mot de passe existe déjà, il sera mis à jour"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:32
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:33
 msgid "Is WIS2Box Node"
 msgstr "Est-ce que le nœud WIS2Box"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:33
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:34
 msgid "Check this box if you are providing the broker details of a wis2box."
 msgstr ""
 "Cochez cette case si vous fournissez les détails du courtier d'une wis2box."
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:35
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:36
 msgid "Topic"
 msgstr "Sujet"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:36
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:37
 msgid "Provide the MQTT topic to publish the CAP alerts."
 msgstr "Fournissez la rubrique MQTT pour publier les alertes CAP."
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:37
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:38
 msgid "Quality of Service (QoS)"
 msgstr "Qualité de service (QoS)"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:39
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:40
 msgid "Dataset ID"
 msgstr "ID de l'ensemble de données"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:41
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:42
 msgid ""
 "Provide the metadata ID for your dataset registered in the wis2box. If you "
 "do not have this, please create a dataset in the wis2box before proceeding."
@@ -289,38 +303,42 @@ msgstr ""
 "la wis2box. Si vous ne l'avez pas, veuillez créer un ensemble de données "
 "dans la wis2box avant de continuer."
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:45
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:46
 msgid "Automatically publish CAP alerts to this broker"
 msgstr "Publier automatiquement les alertes CAP sur ce courtier"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:48
-#: capcomposer/src/capcomposer/cap/webhook/models.py:13
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:53
+msgid "The site this broker is associated with."
+msgstr "Le site auquel ce courtier est associé."
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:58
+#: capcomposer/src/capcomposer/cap/webhook/models.py:15
 msgid "Retry on failure"
 msgstr "Réessayer en cas d'échec"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:55
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:65
 #, fuzzy
 #| msgid "Alert Information"
 msgid "Broker Information"
 msgstr "Informations sur le courtier"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:59
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:69
 #, fuzzy
 #| msgid "Alert Identification"
 msgid "Authentication"
 msgstr "Authentification"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:76
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:87
 msgid "Dataset ID is required for a WIS2Box Broker"
 msgstr "L'ID de l'ensemble de données est requis pour un courtier WIS2Box"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:81
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:92
 #, fuzzy
 #| msgid "This field is required."
 msgid "Topic is required"
 msgstr "Le sujet est obligatoire"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:86
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:97
 msgid ""
 "Secret key for encrypting passwords is not set. Please ensure the "
 "CAP_MQTT_SECRET_KEY is set "
@@ -328,54 +346,71 @@ msgstr ""
 "La clé secrète pour crypter les mots de passe n'est pas définie. Veuillez "
 "vous assurer que CAP_MQTT_SECRET_KEY est défini"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:91
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:102
 msgid "Password is required if creating a new broker"
 msgstr "Un mot de passe est requis si vous créez un nouveau courtier"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:112
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:107
+msgid "A site must be selected for this broker."
+msgstr "Un site doit être sélectionné pour ce courtier."
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:128
 msgid "MQTT Broker"
 msgstr "Courtier MQTT"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:113
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:129
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:95
 msgid "MQTT Brokers"
 msgstr "Courtiers MQTT"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:120
-#: capcomposer/src/capcomposer/cap/webhook/models.py:34
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:136
+#: capcomposer/src/capcomposer/cap/webhook/models.py:51
 msgid "Pending"
 msgstr "En attente"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:121
-#: capcomposer/src/capcomposer/cap/webhook/models.py:35
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:137
+#: capcomposer/src/capcomposer/cap/webhook/models.py:52
 msgid "Failure"
 msgstr "Échec"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:122
-#: capcomposer/src/capcomposer/cap/webhook/models.py:36
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:138
+#: capcomposer/src/capcomposer/cap/webhook/models.py:53
 msgid "Success"
 msgstr "Succès"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:129
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:145
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:244
-#: capcomposer/src/capcomposer/cap/webhook/models.py:43
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:23
+#: capcomposer/src/capcomposer/cap/webhook/models.py:60
 msgid "Status"
 msgstr "Statut"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:131
-#: capcomposer/src/capcomposer/cap/webhook/models.py:45
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:147
+#: capcomposer/src/capcomposer/cap/webhook/models.py:62
 msgid "Retries"
 msgstr "Nouvelles tentatives"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:132
-#: capcomposer/src/capcomposer/cap/webhook/models.py:46
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:148
+#: capcomposer/src/capcomposer/cap/webhook/models.py:63
 msgid "Last Error Message"
 msgstr "Dernier message d'erreur"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:137
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:155
+#: capcomposer/src/capcomposer/cap/webhook/models.py:70
+msgid "Republished from"
+msgstr "Republié à partir de"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:156
+#: capcomposer/src/capcomposer/cap/webhook/models.py:71
+msgid "The original event this republish was triggered from."
+msgstr ""
+"L'événement d'origine à partir duquel cette republication a été déclenchée."
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:163
 msgid "MQTT Broker Event"
 msgstr "Événement de courtier MQTT"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:138
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:164
 msgid "MQTT Broker Events"
 msgstr "Événements du courtier MQTT"
 
@@ -386,6 +421,47 @@ msgstr "Autorisation du menu CAP"
 #: capcomposer/src/capcomposer/cap/permissions.py:8
 msgid "CAP Menu Permissions"
 msgstr "Autorisations du menu CAP"
+
+#: capcomposer/src/capcomposer/cap/republish.py:38
+msgid ""
+"This alert is no longer live, Actual and Public, and cannot be republished "
+"to an MQTT broker."
+msgstr ""
+"Cette alerte n'est plus active, réelle et publique, et ne peut pas être "
+"republiée sur un courtier MQTT."
+
+#: capcomposer/src/capcomposer/cap/republish.py:47
+msgid ""
+"This alert is no longer eligible (it must be live and either Actual or "
+"Public) and cannot be republished to a webhook."
+msgstr ""
+"Cette alerte n'est plus éligible (elle doit être en direct et soit réelle ou"
+" publique) et ne peut pas être republiée sur un webhook."
+
+#: capcomposer/src/capcomposer/cap/republish.py:55
+#, fuzzy
+#| msgid "MQTT Broker"
+msgid "MQTT broker"
+msgstr "Courtier MQTT"
+
+#: capcomposer/src/capcomposer/cap/republish.py:65
+#, fuzzy
+#| msgid "Webhooks"
+msgid "webhook"
+msgstr "webhook"
+
+#: capcomposer/src/capcomposer/cap/republish.py:125
+msgid ""
+"A republish is already in progress for this target. Please wait for it to "
+"complete."
+msgstr ""
+"Une réédition est déjà en cours pour cette cible. Veuillez attendre qu'il "
+"soit terminé."
+
+#: capcomposer/src/capcomposer/cap/republish.py:141
+#, python-format
+msgid "Republish queued for %(target)s '%(name)s'."
+msgstr "Republiation en file d'attente pour %(target)s '%(name)s'."
 
 #: capcomposer/src/capcomposer/cap/statistics.py:95
 #: capcomposer/src/capcomposer/cap/statistics.py:129
@@ -452,9 +528,9 @@ msgstr "Passé"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:128
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:208
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:75
-#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:71
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:70
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:563
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:201
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:218
 msgid "Severity"
 msgstr "Gravité"
 
@@ -463,7 +539,7 @@ msgstr "Gravité"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:79
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:440
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:230
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:247
 msgid "Extreme"
 msgstr "Extrême"
 
@@ -472,7 +548,7 @@ msgstr "Extrême"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:81
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:447
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:237
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:254
 msgid "Severe"
 msgstr "Sévère"
 
@@ -481,7 +557,7 @@ msgstr "Sévère"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:83
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:454
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:244
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:261
 msgid "Moderate"
 msgstr "Modéré"
 
@@ -490,7 +566,7 @@ msgstr "Modéré"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:85
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:461
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:251
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:268
 msgid "Minor"
 msgstr "Mineur"
 
@@ -631,21 +707,21 @@ msgstr "Description"
 msgid "Instruction"
 msgstr "Instruction"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:33
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:32
 #, fuzzy
 #| msgid "Reference Alerts"
 msgid "Active Alerts"
 msgstr "Alertes actives"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:46
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:45
 msgid "No active alerts currently"
 msgstr "Aucune alerte active actuellement"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:55
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:54
 msgid "Past Alerts"
 msgstr "Alertes passées"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:99
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:98
 #, fuzzy
 #| msgid "Event Code"
 msgid "Event type"
@@ -684,6 +760,7 @@ msgid "Response Types"
 msgstr "Types de réponses"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:583
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:22
 msgid "Time"
 msgstr "Temps"
 
@@ -694,6 +771,38 @@ msgstr "Titre"
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:681
 msgid "Contact"
 msgstr "Contact"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:5
+#, python-format
+msgid "Disseminations for %(title)s"
+msgstr "Diffusions pour %(title)s"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:85
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:116
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:434
+#, fuzzy
+#| msgid "Restriction"
+msgid "Disseminations"
+msgstr "Diffusions"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:90
+#, fuzzy
+#| msgid "Load different alert"
+msgid "Back to alerts"
+msgstr "Retour aux alertes"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:103
+msgid "No MQTT broker events for this alert."
+msgstr "Aucun événement de courtier MQTT pour cette alerte."
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:108
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:195
+msgid "Webhooks"
+msgstr "Webhooks"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:116
+msgid "No webhook events for this alert."
+msgstr "Aucun événement webhook pour cette alerte."
 
 #: capcomposer/src/capcomposer/cap/templates/cap/include_alert_list_item.html:37
 #, fuzzy
@@ -706,208 +815,294 @@ msgstr "Émis:"
 msgid "%(issued_on)s"
 msgstr "%(issued_on)s"
 
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:7
+#, python-format
+msgid "Latest: %(status)s at %(time)s"
+msgstr "Dernier : %(status)s à %(time)s"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:15
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:204
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:242
+msgid "Republish"
+msgstr "Republier"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:24
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:227
+#, fuzzy
+#| msgid "Message Type"
+msgid "Type"
+msgstr "Taper"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:25
+msgid "Error"
+msgstr "Erreur"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:35
+#, python-format
+msgid "Republish of # %(id)s"
+msgstr "Republiation de # %(id)s"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:38
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:224
+msgid "Original"
+msgstr "Original"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:5
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:9
+msgid "Republish CAP alert"
+msgstr "Republier l'alerte CAP"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:18
+msgid "Back"
+msgstr "Dos"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:23
+#, python-format
+msgid ""
+"You are about to republish the alert <b>%(alert)s</b> to the "
+"%(target_verbose)s <b>%(target)s</b>."
+msgstr ""
+"Vous êtes sur le point de republier l'alerte <b>%(alert)s</b> vers les "
+"%(target_verbose)s <b>%(target)s</b>."
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:29
+msgid ""
+"This re-sends the CAP XML to the selected target. A new attempt will be "
+"recorded."
+msgstr ""
+"Cela renvoie le CAP XML à la cible sélectionnée. Une nouvelle tentative sera"
+" enregistrée."
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:36
+msgid "Yes, republish"
+msgstr "Oui, republier"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:39
+msgid "Cancel"
+msgstr "Annuler"
+
 #: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:4
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:181
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:198
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "CAP Alert Statistics"
 msgstr "Statistiques d'alerte CAP"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:191
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:208
 msgid "From"
 msgstr "Depuis"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:196
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:213
 msgid "To"
 msgstr "À"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:214
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:231
 msgid "Apply"
 msgstr "Appliquer"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:215
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:232
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:224
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:241
 #, fuzzy
 #| msgid "Past Alerts"
 msgid "Total Alerts"
 msgstr "Alertes totales"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:258
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:275
 msgid "Export"
 msgstr "Exporter"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:262
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:279
 msgid "Download CSV"
 msgstr "Télécharger CSV"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:271
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:288
 #, fuzzy
 #| msgid "Alert Severity"
 msgid "Alerts Over Time (Monthly)"
 msgstr "Alertes au fil du temps (mensuel)"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:279
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:296
 #, fuzzy
 #| msgid "Severity"
 msgid "By Severity"
 msgstr "Par gravité"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:287
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:304
 #, fuzzy
 #| msgid "Urgency"
 msgid "By Urgency"
 msgstr "Par urgence"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:295
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:312
 #, fuzzy
 #| msgid "Certainty"
 msgid "By Certainty"
 msgstr "Par certitude"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:303
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:320
 #, fuzzy
 #| msgid "Status"
 msgid "By Status"
 msgstr "Par statut"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:311
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:328
 #, fuzzy
 #| msgid "Hazard Types"
 msgid "Top Hazard Types"
 msgstr "Principaux types de dangers"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:322
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:339
 #, fuzzy
 #| msgid "Hazard Type"
 msgid "Alerts by Hazard Type"
 msgstr "Alertes par type de danger"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:326
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:343
 msgid "Hazard Type"
 msgstr "Type de danger"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:327
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:344
 msgid "Count"
 msgstr "Compter"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:328
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:345
 #, fuzzy
 #| msgid "Restriction"
 msgid "Distribution"
 msgstr "Distribution"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:423
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:122
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:256
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:440
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:138
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:353
 #, fuzzy
 #| msgid "Alert Area"
 msgid "Alerts"
 msgstr "Alertes"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_left_alert.html:97
-#: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:69
+#: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:116
 #, fuzzy
 #| msgid "Alert Area"
 msgid "Alert"
 msgstr "Alerte"
 
-#: capcomposer/src/capcomposer/cap/views.py:106
 #: capcomposer/src/capcomposer/cap/views.py:112
+#: capcomposer/src/capcomposer/cap/views.py:118
 #, fuzzy
 #| msgid "Load different alert"
 msgid "Latest alerts"
 msgstr "Dernières alertes"
 
-#: capcomposer/src/capcomposer/cap/views.py:108
 #: capcomposer/src/capcomposer/cap/views.py:114
+#: capcomposer/src/capcomposer/cap/views.py:120
 #, python-format
 msgid "Latest alerts from %(sender_name)s"
 msgstr "Dernières alertes de %(sender_name)s"
 
-#: capcomposer/src/capcomposer/cap/views.py:366
+#: capcomposer/src/capcomposer/cap/views.py:373
 msgid "CAP Alert PNG and PDF created successfully."
 msgstr "CAP Alert PNG et PDF créés avec succès."
 
-#: capcomposer/src/capcomposer/cap/views.py:368
+#: capcomposer/src/capcomposer/cap/views.py:375
 msgid "Failed to create CAP Alert PNG and PDF."
 msgstr "Échec de la création du CAP Alert PNG et PDF."
 
-#: capcomposer/src/capcomposer/cap/views.py:382
+#: capcomposer/src/capcomposer/cap/views.py:389
 msgid "Private alert email sent successfully."
 msgstr "E-mail d'alerte privé envoyé avec succès."
 
-#: capcomposer/src/capcomposer/cap/views.py:384
+#: capcomposer/src/capcomposer/cap/views.py:391
 msgid "Failed to send private alert email."
 msgstr "Échec de l'envoi d'un e-mail d'alerte privé."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:88
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:331
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:96
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:428
 msgid "Create PNG/PDF"
 msgstr "Créer un PNG/PDF"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:100
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:108
 msgid "LIVE"
 msgstr "EN DIRECT"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:102
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:110
 msgid "Visit the live page"
 msgstr "Visitez la page en direct"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:111
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:337
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:118
+msgid "View MQTT and webhook dissemination events for this alert"
+msgstr ""
+"Afficher les événements de diffusion MQTT et webhook pour cette alerte"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:127
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:440
 #, fuzzy
 #| msgid "Recipient"
 msgid "Email Recipients"
 msgstr "Destinataires des e-mails"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:113
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:129
 msgid "Send private alert email to recipients"
 msgstr "Envoyer un e-mail d'alerte privé aux destinataires"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:179
-msgid "Webhooks"
-msgstr "Webhooks"
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:209
+msgid "Republishes only"
+msgstr "Republiations uniquement"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:199
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:210
+msgid "Originals only"
+msgstr "Originaux uniquement"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:223
+#, python-format
+msgid "Republish of #%(id)s"
+msgstr "Republiation de #%(id)s"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:244
+#, fuzzy
+#| msgid "Automatically publish CAP alerts to this broker"
+msgid "Republish this alert to this target"
+msgstr "Republier cette alerte vers cette cible"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:278
 msgid "Webhook Events"
 msgstr "Événements Webhook"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:246
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:339
 msgid "External CAP Alert Feeds"
 msgstr "Flux d’alertes CAP externes"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:284
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:381
 #, fuzzy
 #| msgid "Status"
 msgid "Statistics"
 msgstr "Statistiques"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:289
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:386
 msgid "Import CAP Alert"
 msgstr "Importer une alerte CAP"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:297
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:394
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "CAP Base Settings"
 msgstr "Paramètres de base du CAP"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:414
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:521
 #, python-format
 msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
 msgstr ""
 "Alerte '%(page_title)s' copiée. Vous pouvez modifier la nouvelle alerte ci-"
 "dessous."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:444
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:551
 msgid "Actual Alerts cannot be Unpublished after they have been published"
 msgstr ""
 "Les alertes réelles ne peuvent pas être annulées après leur publication."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:457
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:564
 msgid ""
 "Actual Alerts cannot be deleted after they have been published. To cancel or"
 " publish an update to this alert, create a new alert of Message Type "
@@ -918,37 +1113,41 @@ msgstr ""
 "alerte de type de message « Annuler » ou « Mettre à jour » et référencez "
 "cette alerte."
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:470
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:579
 msgid "CAP Alert draft created. You can now edit the alert."
 msgstr "Projet d'alerte CAP créé. Vous pouvez maintenant modifier l'alerte."
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:9
+#: capcomposer/src/capcomposer/cap/webhook/models.py:11
 msgid "Webhook URL"
 msgstr "URL du webhook"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:14
+#: capcomposer/src/capcomposer/cap/webhook/models.py:16
 msgid "Include Header for Authentication"
 msgstr "Inclure l'en-tête pour l'authentification"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:15
+#: capcomposer/src/capcomposer/cap/webhook/models.py:17
 #, fuzzy
 #| msgid "Sender name"
 msgid "Header Value"
 msgstr "Valeur d'en-tête"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:26
+#: capcomposer/src/capcomposer/cap/webhook/models.py:39
+msgid "A site must be selected for this webhook."
+msgstr "Un site doit être sélectionné pour ce webhook."
+
+#: capcomposer/src/capcomposer/cap/webhook/models.py:43
 msgid "CAP Alert Webhook"
 msgstr "Webhook d’alerte CAP"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:27
+#: capcomposer/src/capcomposer/cap/webhook/models.py:44
 msgid "CAP Alert Webhooks"
 msgstr "Webhooks d’alerte CAP"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:51
+#: capcomposer/src/capcomposer/cap/webhook/models.py:78
 msgid "CAP Alert Webhook Event"
 msgstr "Événement Webhook d’alerte CAP"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:52
+#: capcomposer/src/capcomposer/cap/webhook/models.py:79
 msgid "CAP Alert Webhook Events"
 msgstr "Événements du webhook d’alerte CAP"
 
@@ -1211,7 +1410,7 @@ msgstr "Événements du webhook d’alerte CAP"
 #~ msgstr "Possible - Possible mais peu probable (pourcentage <= ~50 %)"
 
 #~ msgid "Unlikely - Not expected to occur (percentage ~ 0)"
-#~ msgstr "Peu probable – Ne devrait pas se produire (pourcentage ~ 0)"
+#~ msgstr "Improbable – Ne devrait pas se produire (pourcentage ~ 0)"
 
 #~ msgid "Event"
 #~ msgstr "Événement"
@@ -1220,8 +1419,9 @@ msgstr "Événements du webhook d’alerte CAP"
 #~ "The text denoting the type of the subject event of the alert message. You "
 #~ "can define hazards events monitored by your institution from CAP settings"
 #~ msgstr ""
-#~ "Texte indiquant le type d'événement objet du message d'alerte. You can "
-#~ "define hazards events monitored by your institution from CAP settings"
+#~ "Texte indiquant le type d'événement objet du message d'alerte. Vous pouvez "
+#~ "définir les événements de danger surveillés par votre institution à partir "
+#~ "des paramètres du CAP."
 
 #~ msgid ""
 #~ "The code denoting the language of the alert message.If not selected, 'en-US'"
@@ -1504,7 +1704,7 @@ msgstr "Événements du webhook d’alerte CAP"
 #~ msgstr "Transport"
 
 #~ msgid "Infra"
-#~ msgstr "Infra"
+#~ msgstr "Infrarouge"
 
 #~ msgid "CBRNE"
 #~ msgstr "CBRNE"
