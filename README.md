@@ -35,6 +35,10 @@ at http://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html
 - Extendable to add your custom logic and functionality. The package provides an `abstract` django model that can be
   inherited for customizations.
 
+## Overall Architecture
+
+![CAPComposer Architecture](cap-composer-architecture.svg)
+
 ## 🛠️ Installation
 
 CAPComposer can be installed in two ways:
