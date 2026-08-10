@@ -63,7 +63,7 @@
 /* SHARE ROW */
 .cap-share-row {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   gap: 6px;
   flex-wrap: wrap;
   flex-shrink: 0;
@@ -99,6 +99,9 @@
 }
 .cap-share-social .button:hover { border-color: var(--primary-color) !important; color: var(--primary-color) !important; }
 
+.cap-share-social .button .share-button-title {
+  padding-right:1em;
+}
 /* ── MAIN CARD ── */
 .cap-card {
   background: #fff;
