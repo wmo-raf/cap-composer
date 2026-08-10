@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-05 11:51+0000\n"
+"POT-Creation-Date: 2026-08-10 13:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1209,46 +1209,54 @@ msgstr "Ukali usiojulikana"
 msgid "Unknown"
 msgstr "Haijulikani"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:11
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:12
 msgid "Copy Paste XML"
 msgstr "Nakili Bandika XML"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:12
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:13
 msgid "URL"
 msgstr "URL"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:13
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:14
 msgid "File"
 msgstr "Faili"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:17
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:18
 msgid "Load from"
 msgstr "Pakia kutoka"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:18
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:19
 msgid "Paste your CAP XML here"
 msgstr "Bandika CAP XML yako hapa"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:19
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:20
 msgid "CAP Alert XML URL"
 msgstr "CAP Alert XML URL"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:20
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:21
 msgid "CAP File"
 msgstr "Faili ya CAP"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:21
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:87
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:22
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:97
 msgid "Include GUID"
 msgstr "Jumuisha GUID"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:37
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:39
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:41
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:25
+msgid "Site"
+msgstr "Tovuti"
+
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:26
+msgid "Select the site to import this alert into."
+msgstr "Chagua tovuti ya kuingiza arifa hii."
+
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:47
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:49
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:51
 msgid "This field is required."
 msgstr "Sehemu hii inahitajika."
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:78
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:88
 msgid ""
 "An error occurred while trying to load the CAP XML. Please check the data "
 "and try again."
@@ -1623,7 +1631,7 @@ msgstr "Latitudo"
 msgid "Radius (in kilometers) "
 msgstr "Radius (katika kilomita)"
 
-#: capcomposer/src/capcomposer/capeditor/wagtail_hooks.py:104
+#: capcomposer/src/capcomposer/capeditor/wagtail_hooks.py:110
 #, python-format
 msgid "Page '%(page_title)s' copied."
 msgstr "Ukurasa '%(page_title)s' umenakiliwa."
@@ -1686,7 +1694,7 @@ msgstr "Ukurasa '%(page_title)s' umenakiliwa."
 #~ "explanation SHOULD appear in note field"
 #~ msgstr ""
 #~ "Hitilafu - Huonyesha kukataliwa kwa ujumbe uliotambuliwa katika marejeleo; "
-#~ "maelezo LAZIMA kuonekana katika uga wa kumbukumbu"
+#~ "maelezo LAZIMA yaonekane katika sehemu ya noti"
 
 #~ msgid "Identifier"
 #~ msgstr "Kitambulisho"

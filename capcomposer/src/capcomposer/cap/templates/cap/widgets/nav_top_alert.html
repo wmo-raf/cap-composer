@@ -123,7 +123,8 @@
                     {% endif %}
                 </span>
                 <span class="alert-severity-label" style="color: {{ latest_active_alert.severity.border_color }};">
-                    {% translate latest_active_alert.severity.label %}
+                    {# severity.label is already a lazy gettext string from SEVERITY_MAPPING #}
+                    {{ latest_active_alert.severity.label }}
                 </span>
             </div>
         </a>

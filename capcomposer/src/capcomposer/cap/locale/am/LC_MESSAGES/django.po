@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: climweb-cap-composer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 08:33+0000\n"
+"POT-Creation-Date: 2026-08-10 13:29+0000\n"
 "PO-Revision-Date: 2026-05-11 09:48\n"
 "Last-Translator: \n"
 "Language-Team: Amharic\n"
@@ -18,112 +18,126 @@ msgstr ""
 "X-Crowdin-Project: climweb-cap-composer\n"
 "X-Crowdin-Project-ID: 887364\n"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:15
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:17
 #, fuzzy
 #| msgid "Sender name"
 msgid "Feed name"
 msgstr "የምግቡ ስም"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:16
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:18
 msgid "Provide a name to identify the feed"
 msgstr "ምግቡን ለመለየት ስም ያቅርቡ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:17
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:19
 #, fuzzy
 #| msgid "Message Type"
 msgid "Feed Type"
 msgstr "የምግብ አይነት"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:18
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:20
 msgid "Select the type of feed"
 msgstr "የምግቡን አይነት ይምረጡ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:19
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:21
 msgid "Feed URL"
 msgstr "የዩአርኤል ምግብ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:19
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:21
 msgid "Enter the URL of the feed"
 msgstr "የምግቡን URL አስገባ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:20
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:44
-#: capcomposer/src/capcomposer/cap/webhook/models.py:10
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:22
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:45
+#: capcomposer/src/capcomposer/cap/webhook/models.py:12
 #, fuzzy
 #| msgid "Effective"
 msgid "Active"
 msgstr "ንቁ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:21
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:23
 msgid "Automatically fetch data from this feed. Uncheck to disable."
 msgstr "ከዚህ ምግብ በራስ ሰር ውሂብ ያውጡ። ለማሰናከል ምልክት ያንሱ።"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:22
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:24
 msgid "Feed check interval in minutes"
 msgstr "የምግብ ፍተሻ ልዩነት በደቂቃዎች ውስጥ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:27
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:29
 msgid "How often to check for new alerts in minutes. Min: 1, Max: 10"
 msgstr "በደቂቃዎች ውስጥ አዲስ ማንቂያዎችን ስንት ጊዜ እንደሚፈትሹ። ዝቅተኛ፡ 1፣ ከፍተኛ፡ 10"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:29
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:31
 msgid "Validate CAP XML Signature"
 msgstr "የCAP XML ፊርማ ያረጋግጡ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:30
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:32
 msgid "Check to only import alerts with a valid XML signature."
 msgstr "ማንቂያዎችን ከትክክለኛ የኤክስኤምኤል ፊርማ ጋር ለማስመጣት ያረጋግጡ።"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:33
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:35
 msgid "Submit imported alerts for moderation"
 msgstr "ከውጪ የሚመጡ ማንቂያዎችን ለሽምግልና አስገባ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:35
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:37
 msgid ""
 "Check to automatically submit imported alerts for moderation. Otherwise, "
 "alerts will be saved as drafts."
 msgstr ""
 "ለሽምግልና ከውጭ የሚመጡ ማንቂያዎችን በራስ ሰር ለማስገባት ያረጋግጡ። አለበለዚያ ማንቂያዎች እንደ ረቂቆች ይቀመጣሉ."
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:48
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:45
+msgid "The site this feed is associated with."
+msgstr "ይህ ምግብ የተገናኘበት ጣቢያ።"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:46
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:54
+#: capcomposer/src/capcomposer/cap/webhook/models.py:24
+msgid "Site"
+msgstr "ጣቢያ"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:62
+msgid "A site must be selected for this feed."
+msgstr "ለዚህ ምግብ ጣቢያ መመረጥ አለበት።"
+
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:66
 msgid "External Alert Feed"
 msgstr "የውጭ ማንቂያ ምግብ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:49
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:67
 msgid "External Alert Feeds"
 msgstr "የውጭ ማንቂያ ምግቦች"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:57
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:75
 #, fuzzy
 #| msgid "CAP Alert XML URL"
 msgid "Alert URL"
 msgstr "ማንቂያ URL"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:57
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:75
 msgid "The URL of the alert XML"
 msgstr "የማንቂያው XML URL"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:58
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:76
 #, fuzzy
 #| msgid "Reference Alert"
 msgid "Remote Alert ID"
 msgstr "የርቀት ማንቂያ መታወቂያ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:59
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:77
 #, fuzzy
 #| msgid "The text identifying the source of the alert message"
 msgid "The unique identifier of the alert in the remote feed"
 msgstr "በርቀት ምግብ ውስጥ ያለው የማንቂያ ልዩ መለያ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:62
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:80
 msgid "The imported alert from this entry"
 msgstr "ከዚህ ግቤት የመጣው ማንቂያ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:65
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:83
 msgid "External Alert Feed Entry"
 msgstr "የውጭ ማንቂያ ምግብ መግቢያ"
 
-#: capcomposer/src/capcomposer/cap/external_feed/models.py:66
+#: capcomposer/src/capcomposer/cap/external_feed/models.py:84
 msgid "External Alert Feed Entries"
 msgstr "የውጭ ማንቂያ ምግብ ምዝግቦች"
 
@@ -171,104 +185,104 @@ msgstr "CAP ማንቂያ"
 #: capcomposer/src/capcomposer/cap/models.py:298
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:74
 msgid "PDF"
-msgstr "ፒዲኤፍ"
+msgstr "PDF"
 
 #: capcomposer/src/capcomposer/cap/models.py:299
 msgid "Email"
 msgstr "ኢሜይል"
 
-#: capcomposer/src/capcomposer/cap/models.py:450
+#: capcomposer/src/capcomposer/cap/models.py:472
 msgid "Left of the Navbar"
 msgstr "ከናቭባር በስተግራ"
 
-#: capcomposer/src/capcomposer/cap/models.py:451
+#: capcomposer/src/capcomposer/cap/models.py:473
 msgid "Top of the Navbar"
 msgstr "የ Navbar አናት"
 
-#: capcomposer/src/capcomposer/cap/models.py:455
+#: capcomposer/src/capcomposer/cap/models.py:477
 msgid "Active Alert Style"
 msgstr "ንቁ የማንቂያ ዘይቤ"
 
-#: capcomposer/src/capcomposer/cap/models.py:456
+#: capcomposer/src/capcomposer/cap/models.py:478
 msgid "Choose the style of active alerts"
 msgstr "የነቃ ማንቂያዎችን ዘይቤ ይምረጡ"
 
-#: capcomposer/src/capcomposer/cap/models.py:466
-#: capcomposer/src/capcomposer/cap/models.py:467
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:305
+#: capcomposer/src/capcomposer/cap/models.py:488
+#: capcomposer/src/capcomposer/cap/models.py:489
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:402
 msgid "Other Settings"
 msgstr "ሌሎች ቅንብሮች"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:14
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:15
 msgid "At most once. Fire and forget"
 msgstr "ቢበዛ አንዴ። እሳት እና መርሳት"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:15
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:16
 msgid "At least once. I’ll keep sending until you say you got it"
 msgstr "ቢያንስ አንድ ጊዜ። አገኘኸው እስክትል ድረስ መላክ እቀጥላለሁ።"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:19
-#: capcomposer/src/capcomposer/cap/webhook/models.py:8
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:20
+#: capcomposer/src/capcomposer/cap/webhook/models.py:10
 msgid "Name"
 msgstr "ስም"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:20
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:21
 msgid "Provide a name to identify the broker"
 msgstr "ደላላውን ለመለየት ስም ያቅርቡ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:21
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:22
 msgid "Broker Host"
 msgstr "ደላላ አስተናጋጅ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:22
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:23
 msgid "Provide the broker host name or IP address"
 msgstr "የደላላው አስተናጋጅ ስም ወይም አይፒ አድራሻ ያቅርቡ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:23
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:24
 msgid "Broker Port"
 msgstr "ደላላ ወደብ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:23
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:24
 msgid "Provide the broker port number"
 msgstr "የደላላው ወደብ ቁጥር ያቅርቡ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:26
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:27
 msgid "Broker Username"
 msgstr "ደላላ የተጠቃሚ ስም"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:27
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:28
 msgid "Broker Password"
 msgstr "የደላላ የይለፍ ቃል"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:28
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:29
 msgid "Enter a password. If a password already exists, it will be updated"
 msgstr "የይለፍ ቃል አስገባ። የይለፍ ቃል አስቀድሞ ካለ ይዘምናል።"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:32
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:33
 msgid "Is WIS2Box Node"
 msgstr "WIS2Box Node ነው።"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:33
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:34
 msgid "Check this box if you are providing the broker details of a wis2box."
 msgstr "የ wis2box ደላላ ዝርዝሮችን እያቀረቡ ከሆነ በዚህ ሳጥን ላይ ምልክት ያድርጉ።"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:35
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:36
 msgid "Topic"
 msgstr "ርዕስ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:36
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:37
 msgid "Provide the MQTT topic to publish the CAP alerts."
 msgstr "የCAP ማንቂያዎችን ለማተም የMQTT ርዕስ ያቅርቡ።"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:37
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:38
 msgid "Quality of Service (QoS)"
 msgstr "የአገልግሎት ጥራት (QoS)"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:39
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:40
 msgid "Dataset ID"
 msgstr "የውሂብ ስብስብ መታወቂያ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:41
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:42
 msgid ""
 "Provide the metadata ID for your dataset registered in the wis2box. If you "
 "do not have this, please create a dataset in the wis2box before proceeding."
@@ -276,92 +290,112 @@ msgstr ""
 "በwis2box ውስጥ ለተመዘገበው የውሂብ ስብስብዎ የሜታዳታ መታወቂያ ያቅርቡ። ይህ ከሌለዎት ከመቀጠልዎ በፊት እባክዎ በ"
 " wis2box ውስጥ የውሂብ ስብስብ ይፍጠሩ።"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:45
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:46
 msgid "Automatically publish CAP alerts to this broker"
 msgstr "ለዚህ ደላላ የCAP ማንቂያዎችን በራስ-ሰር ያትሙ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:48
-#: capcomposer/src/capcomposer/cap/webhook/models.py:13
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:53
+msgid "The site this broker is associated with."
+msgstr "ይህ ደላላ የተገናኘበት ጣቢያ።"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:58
+#: capcomposer/src/capcomposer/cap/webhook/models.py:15
 msgid "Retry on failure"
 msgstr "ውድቀት ላይ እንደገና ይሞክሩ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:55
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:65
 #, fuzzy
 #| msgid "Alert Information"
 msgid "Broker Information"
 msgstr "ደላላ መረጃ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:59
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:69
 #, fuzzy
 #| msgid "Alert Identification"
 msgid "Authentication"
 msgstr "ማረጋገጫ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:76
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:87
 msgid "Dataset ID is required for a WIS2Box Broker"
 msgstr "የውሂብ ስብስብ መታወቂያ ለWIS2Box ደላላ ያስፈልጋል"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:81
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:92
 #, fuzzy
 #| msgid "This field is required."
 msgid "Topic is required"
 msgstr "ርዕስ ያስፈልጋል"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:86
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:97
 msgid ""
 "Secret key for encrypting passwords is not set. Please ensure the "
 "CAP_MQTT_SECRET_KEY is set "
 msgstr ""
 "የይለፍ ቃላትን ለማመስጠር የሚስጥር ቁልፍ አልተዘጋጀም። እባክዎ CAP_MQTT_SECRET_KEY መዘጋጀቱን ያረጋግጡ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:91
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:102
 msgid "Password is required if creating a new broker"
 msgstr "አዲስ ደላላ ከፈጠሩ የይለፍ ቃል ያስፈልጋል"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:112
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:107
+msgid "A site must be selected for this broker."
+msgstr "ለዚህ ደላላ ጣቢያ መመረጥ አለበት።"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:128
 msgid "MQTT Broker"
 msgstr "MQTT ደላላ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:113
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:129
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:95
 msgid "MQTT Brokers"
 msgstr "MQTT ደላላዎች"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:120
-#: capcomposer/src/capcomposer/cap/webhook/models.py:34
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:136
+#: capcomposer/src/capcomposer/cap/webhook/models.py:51
 msgid "Pending"
 msgstr "በመጠባበቅ ላይ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:121
-#: capcomposer/src/capcomposer/cap/webhook/models.py:35
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:137
+#: capcomposer/src/capcomposer/cap/webhook/models.py:52
 msgid "Failure"
 msgstr "ውድቀት"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:122
-#: capcomposer/src/capcomposer/cap/webhook/models.py:36
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:138
+#: capcomposer/src/capcomposer/cap/webhook/models.py:53
 msgid "Success"
 msgstr "ስኬት"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:129
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:145
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:244
-#: capcomposer/src/capcomposer/cap/webhook/models.py:43
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:23
+#: capcomposer/src/capcomposer/cap/webhook/models.py:60
 msgid "Status"
 msgstr "ሁኔታ"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:131
-#: capcomposer/src/capcomposer/cap/webhook/models.py:45
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:147
+#: capcomposer/src/capcomposer/cap/webhook/models.py:62
 msgid "Retries"
 msgstr "እንደገና ይሞክራል።"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:132
-#: capcomposer/src/capcomposer/cap/webhook/models.py:46
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:148
+#: capcomposer/src/capcomposer/cap/webhook/models.py:63
 msgid "Last Error Message"
 msgstr "የመጨረሻው የስህተት መልእክት"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:137
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:155
+#: capcomposer/src/capcomposer/cap/webhook/models.py:70
+msgid "Republished from"
+msgstr "ከ እንደገና ታትሟል"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:156
+#: capcomposer/src/capcomposer/cap/webhook/models.py:71
+msgid "The original event this republish was triggered from."
+msgstr "ይህ ዳግም መታተም የተቀሰቀሰው የመጀመሪያው ክስተት ነው።"
+
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:163
 msgid "MQTT Broker Event"
 msgstr "MQTT ደላላ ክስተት"
 
-#: capcomposer/src/capcomposer/cap/mqtt/models.py:138
+#: capcomposer/src/capcomposer/cap/mqtt/models.py:164
 msgid "MQTT Broker Events"
 msgstr "MQTT ደላላ ክስተቶች"
 
@@ -372,6 +406,43 @@ msgstr "የ CAP ምናሌ ፈቃድ"
 #: capcomposer/src/capcomposer/cap/permissions.py:8
 msgid "CAP Menu Permissions"
 msgstr "የ CAP ምናሌ ፈቃዶች"
+
+#: capcomposer/src/capcomposer/cap/republish.py:38
+msgid ""
+"This alert is no longer live, Actual and Public, and cannot be republished "
+"to an MQTT broker."
+msgstr "ይህ ማንቂያ ከአሁን በኋላ ቀጥታ እና ይፋዊ አይደለም እና ወደ MQTT ደላላ እንደገና ሊታተም አይችልም።"
+
+#: capcomposer/src/capcomposer/cap/republish.py:47
+msgid ""
+"This alert is no longer eligible (it must be live and either Actual or "
+"Public) and cannot be republished to a webhook."
+msgstr ""
+"ይህ ማንቂያ ከአሁን በኋላ ብቁ አይደለም (ቀጥታ እና ትክክለኛ ወይም ይፋዊ መሆን አለበት) እና ወደ ዌብ መንጠቆ "
+"እንደገና ሊታተም አይችልም።"
+
+#: capcomposer/src/capcomposer/cap/republish.py:55
+#, fuzzy
+#| msgid "MQTT Broker"
+msgid "MQTT broker"
+msgstr "MQTT ደላላ"
+
+#: capcomposer/src/capcomposer/cap/republish.py:65
+#, fuzzy
+#| msgid "Webhooks"
+msgid "webhook"
+msgstr "የድር መንጠቆ"
+
+#: capcomposer/src/capcomposer/cap/republish.py:125
+msgid ""
+"A republish is already in progress for this target. Please wait for it to "
+"complete."
+msgstr "ለዚህ ዒላማ ዳግም ማተም አስቀድሞ በሂደት ላይ ነው። እባክዎ እስኪጠናቀቅ ይጠብቁ።"
+
+#: capcomposer/src/capcomposer/cap/republish.py:141
+#, python-format
+msgid "Republish queued for %(target)s '%(name)s'."
+msgstr "%(target)s '%(name)s' ወረፋ እንደገና ማተም።"
 
 #: capcomposer/src/capcomposer/cap/statistics.py:95
 #: capcomposer/src/capcomposer/cap/statistics.py:129
@@ -437,9 +508,9 @@ msgstr "ያለፈው"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:128
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:208
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:75
-#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:71
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:70
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:563
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:201
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:218
 msgid "Severity"
 msgstr "ከባድነት"
 
@@ -448,7 +519,7 @@ msgstr "ከባድነት"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:79
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:440
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:230
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:247
 msgid "Extreme"
 msgstr "ጽንፍ"
 
@@ -457,7 +528,7 @@ msgstr "ጽንፍ"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:81
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:447
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:237
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:254
 msgid "Severe"
 msgstr "ከባድ"
 
@@ -466,7 +537,7 @@ msgstr "ከባድ"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:83
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:454
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:244
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:261
 msgid "Moderate"
 msgstr "መጠነኛ"
 
@@ -475,7 +546,7 @@ msgstr "መጠነኛ"
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail.html:372
 #: capcomposer/src/capcomposer/cap/templates/cap/alert_detail_pdf.html:85
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:461
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:251
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:268
 msgid "Minor"
 msgstr "አናሳ"
 
@@ -614,21 +685,21 @@ msgstr "መግለጫ"
 msgid "Instruction"
 msgstr "መመሪያ"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:33
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:32
 #, fuzzy
 #| msgid "Reference Alerts"
 msgid "Active Alerts"
 msgstr "ንቁ ማንቂያዎች"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:46
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:45
 msgid "No active alerts currently"
 msgstr "በአሁኑ ጊዜ ምንም ንቁ ማንቂያዎች የሉም"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:55
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:54
 msgid "Past Alerts"
 msgstr "ያለፉ ማንቂያዎች"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:99
+#: capcomposer/src/capcomposer/cap/templates/cap/alert_list.html:98
 #, fuzzy
 #| msgid "Event Code"
 msgid "Event type"
@@ -667,6 +738,7 @@ msgid "Response Types"
 msgstr "የምላሽ ዓይነቶች"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:583
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:22
 msgid "Time"
 msgstr "ጊዜ"
 
@@ -677,6 +749,38 @@ msgstr "ርዕስ"
 #: capcomposer/src/capcomposer/cap/templates/cap/cap-alert-stylesheet.html:681
 msgid "Contact"
 msgstr "ተገናኝ"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:5
+#, python-format
+msgid "Disseminations for %(title)s"
+msgstr "%(title)s ዎች ማሰራጫዎች"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:85
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:116
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:434
+#, fuzzy
+#| msgid "Restriction"
+msgid "Disseminations"
+msgstr "ስርጭቶች"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:90
+#, fuzzy
+#| msgid "Load different alert"
+msgid "Back to alerts"
+msgstr "ወደ ማንቂያዎች ተመለስ"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:103
+msgid "No MQTT broker events for this alert."
+msgstr "ለዚህ ማንቂያ ምንም MQTT ደላላ ክስተቶች የሉም።"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:108
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:195
+msgid "Webhooks"
+msgstr "የድር መንጠቆዎች"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/disseminations.html:116
+msgid "No webhook events for this alert."
+msgstr "ለዚህ ማንቂያ ምንም የድር መንጠቆ ክስተቶች የሉም።"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/include_alert_list_item.html:37
 #, fuzzy
@@ -689,205 +793,287 @@ msgstr "የተሰጠ፡"
 msgid "%(issued_on)s"
 msgstr "%(issued_on)s"
 
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:7
+#, python-format
+msgid "Latest: %(status)s at %(time)s"
+msgstr "የቅርብ ጊዜ፡ %(status)s በ%(time)s"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:15
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:204
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:242
+msgid "Republish"
+msgstr "እንደገና ያትሙ"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:24
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:227
+#, fuzzy
+#| msgid "Message Type"
+msgid "Type"
+msgstr "ዓይነት"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:25
+msgid "Error"
+msgstr "ስህተት"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:35
+#, python-format
+msgid "Republish of # %(id)s"
+msgstr "የ# %(id)s ዳግም አትም።"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/includes/dissemination_target.html:38
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:224
+msgid "Original"
+msgstr "ኦሪጅናል"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:5
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:9
+msgid "Republish CAP alert"
+msgstr "የ CAP ማንቂያን እንደገና ያትሙ"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:18
+msgid "Back"
+msgstr "ተመለስ"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:23
+#, python-format
+msgid ""
+"You are about to republish the alert <b>%(alert)s</b> to the "
+"%(target_verbose)s <b>%(target)s</b>."
+msgstr ""
+"ማንቂያውን <b>%(alert)s</b>ን ወደ %(target_verbose)s <b>%(target)s</b> እንደገና ልታተም ነው።"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:29
+msgid ""
+"This re-sends the CAP XML to the selected target. A new attempt will be "
+"recorded."
+msgstr "ይህ CAP ኤክስኤምኤልን ወደ ተመረጠው ኢላማ በድጋሚ ይልካል። አዲስ ሙከራ ይመዘገባል."
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:36
+msgid "Yes, republish"
+msgstr "አዎ፣ እንደገና ያትሙ"
+
+#: capcomposer/src/capcomposer/cap/templates/cap/republish_event_confirm.html:39
+msgid "Cancel"
+msgstr "ሰርዝ"
+
 #: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:4
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:181
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:198
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "CAP Alert Statistics"
 msgstr "CAP ማንቂያ ስታቲስቲክስ"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:191
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:208
 msgid "From"
 msgstr "ከ"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:196
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:213
 msgid "To"
 msgstr "ለ"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:214
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:231
 msgid "Apply"
 msgstr "ያመልክቱ"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:215
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:232
 msgid "Reset"
 msgstr "ዳግም አስጀምር"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:224
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:241
 #, fuzzy
 #| msgid "Past Alerts"
 msgid "Total Alerts"
 msgstr "ጠቅላላ ማንቂያዎች"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:258
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:275
 msgid "Export"
 msgstr "ወደ ውጪ ላክ"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:262
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:279
 msgid "Download CSV"
 msgstr "CSV አውርድ"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:271
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:288
 #, fuzzy
 #| msgid "Alert Severity"
 msgid "Alerts Over Time (Monthly)"
-msgstr "በጊዜ ሂደት ማንቂያዎች (ወርሃዊ)"
+msgstr "ማንቂያዎች በጊዜ ሂደት (ወርሃዊ)"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:279
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:296
 #, fuzzy
 #| msgid "Severity"
 msgid "By Severity"
 msgstr "በከባድነት"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:287
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:304
 #, fuzzy
 #| msgid "Urgency"
 msgid "By Urgency"
 msgstr "በአስቸኳይ"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:295
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:312
 #, fuzzy
 #| msgid "Certainty"
 msgid "By Certainty"
 msgstr "በእርግጠኛነት"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:303
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:320
 #, fuzzy
 #| msgid "Status"
 msgid "By Status"
 msgstr "በሁኔታ"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:311
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:328
 #, fuzzy
 #| msgid "Hazard Types"
 msgid "Top Hazard Types"
 msgstr "ከፍተኛ የአደጋ ዓይነቶች"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:322
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:339
 #, fuzzy
 #| msgid "Hazard Type"
 msgid "Alerts by Hazard Type"
 msgstr "በአደጋ ዓይነት ማንቂያዎች"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:326
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:343
 msgid "Hazard Type"
 msgstr "የአደጋ ዓይነት"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:327
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:344
 msgid "Count"
 msgstr "መቁጠር"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:328
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:345
 #, fuzzy
 #| msgid "Restriction"
 msgid "Distribution"
 msgstr "ስርጭት"
 
-#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:423
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:122
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:256
+#: capcomposer/src/capcomposer/cap/templates/cap/statistics.html:440
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:138
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:353
 #, fuzzy
 #| msgid "Alert Area"
 msgid "Alerts"
 msgstr "ማንቂያዎች"
 
 #: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_left_alert.html:97
-#: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:69
+#: capcomposer/src/capcomposer/cap/templates/cap/widgets/nav_top_alert.html:116
 #, fuzzy
 #| msgid "Alert Area"
 msgid "Alert"
 msgstr "ማንቂያ"
 
-#: capcomposer/src/capcomposer/cap/views.py:106
 #: capcomposer/src/capcomposer/cap/views.py:112
+#: capcomposer/src/capcomposer/cap/views.py:118
 #, fuzzy
 #| msgid "Load different alert"
 msgid "Latest alerts"
 msgstr "የቅርብ ጊዜ ማንቂያዎች"
 
-#: capcomposer/src/capcomposer/cap/views.py:108
 #: capcomposer/src/capcomposer/cap/views.py:114
+#: capcomposer/src/capcomposer/cap/views.py:120
 #, python-format
 msgid "Latest alerts from %(sender_name)s"
 msgstr "የቅርብ ጊዜ ማንቂያዎች ከ%(sender_name)s"
 
-#: capcomposer/src/capcomposer/cap/views.py:366
+#: capcomposer/src/capcomposer/cap/views.py:373
 msgid "CAP Alert PNG and PDF created successfully."
 msgstr "CAP ማንቂያ PNG እና ፒዲኤፍ በተሳካ ሁኔታ ተፈጥሯል።"
 
-#: capcomposer/src/capcomposer/cap/views.py:368
+#: capcomposer/src/capcomposer/cap/views.py:375
 msgid "Failed to create CAP Alert PNG and PDF."
 msgstr "የ CAP ማንቂያ PNG እና ፒዲኤፍ መፍጠር አልተሳካም።"
 
-#: capcomposer/src/capcomposer/cap/views.py:382
+#: capcomposer/src/capcomposer/cap/views.py:389
 msgid "Private alert email sent successfully."
 msgstr "የግል ማንቂያ ኢሜይል በተሳካ ሁኔታ ተልኳል።"
 
-#: capcomposer/src/capcomposer/cap/views.py:384
+#: capcomposer/src/capcomposer/cap/views.py:391
 msgid "Failed to send private alert email."
 msgstr "የግል ማንቂያ ኢሜይል መላክ አልተሳካም።"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:88
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:331
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:96
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:428
 msgid "Create PNG/PDF"
 msgstr "PNG/PDF ይፍጠሩ"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:100
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:108
 msgid "LIVE"
 msgstr "ቀጥታ ስርጭት"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:102
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:110
 msgid "Visit the live page"
 msgstr "የቀጥታ ገጹን ይጎብኙ"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:111
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:337
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:118
+msgid "View MQTT and webhook dissemination events for this alert"
+msgstr "ለዚህ ማንቂያ MQTT እና webhook ስርጭት ክስተቶችን ይመልከቱ"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:127
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:440
 #, fuzzy
 #| msgid "Recipient"
 msgid "Email Recipients"
 msgstr "የኢሜል ተቀባዮች"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:113
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:129
 msgid "Send private alert email to recipients"
 msgstr "የግል ማንቂያ ኢሜይል ለተቀባዮች ላክ"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:179
-msgid "Webhooks"
-msgstr "የድር መንጠቆዎች"
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:209
+msgid "Republishes only"
+msgstr "እንደገና የሚታተም ብቻ"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:199
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:210
+msgid "Originals only"
+msgstr "ኦሪጅናል ብቻ"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:223
+#, python-format
+msgid "Republish of #%(id)s"
+msgstr "የ#%(id)s ሰዎችን እንደገና ማተም"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:244
+#, fuzzy
+#| msgid "Automatically publish CAP alerts to this broker"
+msgid "Republish this alert to this target"
+msgstr "ለዚህ ዒላማ ይህን ማንቂያ እንደገና አትመው"
+
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:278
 msgid "Webhook Events"
 msgstr "Webhook ክስተቶች"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:246
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:339
 msgid "External CAP Alert Feeds"
 msgstr "የውጭ CAP ማንቂያ ምግቦች"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:284
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:381
 #, fuzzy
 #| msgid "Status"
 msgid "Statistics"
 msgstr "ስታትስቲክስ"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:289
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:386
 msgid "Import CAP Alert"
 msgstr "የ CAP ማንቂያ አስመጣ"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:297
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:394
 #, fuzzy
 #| msgid "CAP Settings"
 msgid "CAP Base Settings"
 msgstr "CAP ቤዝ ቅንብሮች"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:414
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:521
 #, python-format
 msgid "Alert '%(page_title)s' copied. You can edit the new alert below."
 msgstr "ማንቂያ '%(page_title)s' ተቀድቷል። አዲሱን ማንቂያ ከዚህ በታች ማርትዕ ይችላሉ።"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:444
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:551
 msgid "Actual Alerts cannot be Unpublished after they have been published"
 msgstr "ትክክለኛ ማንቂያዎች ከታተሙ በኋላ ሊታተሙ አይችሉም"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:457
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:564
 msgid ""
 "Actual Alerts cannot be deleted after they have been published. To cancel or"
 " publish an update to this alert, create a new alert of Message Type "
@@ -896,37 +1082,41 @@ msgstr ""
 "ትክክለኛ ማንቂያዎች ከታተሙ በኋላ ሊሰረዙ አይችሉም። የዚህን ማንቂያ ዝማኔ ለመሰረዝ ወይም ለማተም አዲስ የመልእክት "
 "አይነት 'ሰርዝ' ወይም 'አዘምን' የሚል ማንቂያ ይፍጠሩ እና ይህን ማንቂያ ያጣቅሱ።"
 
-#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:470
+#: capcomposer/src/capcomposer/cap/wagtail_hooks.py:579
 msgid "CAP Alert draft created. You can now edit the alert."
 msgstr "CAP ማንቂያ ረቂቅ ተፈጥሯል። አሁን ማንቂያውን ማርትዕ ይችላሉ።"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:9
+#: capcomposer/src/capcomposer/cap/webhook/models.py:11
 msgid "Webhook URL"
 msgstr "Webhook URL"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:14
+#: capcomposer/src/capcomposer/cap/webhook/models.py:16
 msgid "Include Header for Authentication"
 msgstr "ለማረጋገጫ ራስጌን ያካትቱ"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:15
+#: capcomposer/src/capcomposer/cap/webhook/models.py:17
 #, fuzzy
 #| msgid "Sender name"
 msgid "Header Value"
 msgstr "ራስጌ እሴት"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:26
+#: capcomposer/src/capcomposer/cap/webhook/models.py:39
+msgid "A site must be selected for this webhook."
+msgstr "ለዚህ የድር መንጠቆ ጣቢያ መመረጥ አለበት።"
+
+#: capcomposer/src/capcomposer/cap/webhook/models.py:43
 msgid "CAP Alert Webhook"
 msgstr "CAP ማንቂያ Webhook"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:27
+#: capcomposer/src/capcomposer/cap/webhook/models.py:44
 msgid "CAP Alert Webhooks"
 msgstr "CAP ማንቂያ Webhooks"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:51
+#: capcomposer/src/capcomposer/cap/webhook/models.py:78
 msgid "CAP Alert Webhook Event"
 msgstr "CAP ማንቂያ Webhook ክስተት"
 
-#: capcomposer/src/capcomposer/cap/webhook/models.py:52
+#: capcomposer/src/capcomposer/cap/webhook/models.py:79
 msgid "CAP Alert Webhook Events"
 msgstr "CAP ማንቂያ Webhook ክስተቶች"
 
@@ -1068,7 +1258,7 @@ msgstr "CAP ማንቂያ Webhook ክስተቶች"
 #~ msgid ""
 #~ "The paired values of points defining a polygon that delineates the affected "
 #~ "area of the alert message"
-#~ msgstr "የማንቂያ መልእክቱ የተጎዳውን አካባቢ የሚገልጽ ፖሊጎን የሚወስኑ ጥንድ ጥንድ እሴቶች"
+#~ msgstr "የማንቂያ መልእክቱ የተጎዳውን አካባቢ የሚገልጽ ፖሊጎን የሚወስኑ ጥምር የነጥቦች እሴቶች"
 
 #~ msgid "Altitude"
 #~ msgstr "ከፍታ"
@@ -1314,7 +1504,7 @@ msgstr "CAP ማንቂያ Webhook ክስተቶች"
 #~ msgstr "አስቀድሞ የተገለጹ የማንቂያ ቦታዎች"
 
 #~ msgid "Predefined areas for alerts"
-#~ msgstr "አስቀድሞ የተገለጹ ቦታዎች ለማንቂያዎች"
+#~ msgstr "ለማንቂያዎች አስቀድሞ የተገለጹ ቦታዎች"
 
 #~ msgid "Predefined Areas"
 #~ msgstr "አስቀድሞ የተገለጹ አካባቢዎች"
@@ -1335,7 +1525,7 @@ msgstr "CAP ማንቂያ Webhook ክስተቶች"
 #~ msgstr "አጠቃላይ ድንገተኛ እና የህዝብ ደህንነት"
 
 #~ msgid "Law enforcement, military, homeland and local/private security"
-#~ msgstr "ህግ አስከባሪ፣ ወታደራዊ፣ የሀገር እና የአካባቢ/የግል ደህንነት"
+#~ msgstr "የሕግ አስከባሪ፣ ወታደራዊ፣ የአገር ቤት እና የአካባቢ/የግል ደህንነት"
 
 #~ msgid "Rescue and recovery"
 #~ msgstr "ማዳን እና ማገገም"
@@ -1347,7 +1537,7 @@ msgstr "CAP ማንቂያ Webhook ክስተቶች"
 #~ msgstr "የሕክምና እና የህዝብ ጤና"
 
 #~ msgid "Pollution and other environmental"
-#~ msgstr "ብክለት እና ሌሎች አካባቢያዊ"
+#~ msgstr "ብክለት እና ሌሎች የአካባቢ"
 
 #~ msgid "Public and private transportation"
 #~ msgstr "የህዝብ እና የግል መጓጓዣ"
@@ -1472,7 +1662,7 @@ msgstr "CAP ማንቂያ Webhook ክስተቶች"
 #~ msgstr "በረዶ"
 
 #~ msgid "Snowstorm"
-#~ msgstr "የበረዶ አውሎ ንፋስ"
+#~ msgstr "የበረዶ አውሎ ነፋስ"
 
 #~ msgid "Space weather event"
 #~ msgstr "የጠፈር የአየር ሁኔታ ክስተት"
@@ -1505,7 +1695,7 @@ msgstr "CAP ማንቂያ Webhook ክስተቶች"
 #~ msgstr "ንፋስ"
 
 #~ msgid "Red severity"
-#~ msgstr "ቀይ ክብደት"
+#~ msgstr "ቀይ ከባድነት"
 
 #~ msgid "Orange severity"
 #~ msgstr "የብርቱካናማ ክብደት"
@@ -1544,7 +1734,7 @@ msgstr "CAP ማንቂያ Webhook ክስተቶች"
 #~ "You must select at least one reference alert for this message type. Only "
 #~ "'Alert' Message Type can be saved without references."
 #~ msgstr ""
-#~ "ለዚህ መልእክት አይነት ቢያንስ አንድ የማጣቀሻ ማንቂያ መምረጥ አለብህ። ያለ ማጣቀሻዎች 'ማንቂያ' የመልእክት አይነት "
+#~ "ለዚህ መልእክት አይነት ቢያንስ አንድ የማጣቀሻ ማንቂያ መምረጥ አለቦት። ያለ ማጣቀሻዎች 'ማንቂያ' የመልእክት አይነት "
 #~ "ብቻ ነው የሚቀመጠው።"
 
 #~ msgid ""
@@ -1557,13 +1747,13 @@ msgstr "CAP ማንቂያ Webhook ክስተቶች"
 
 #~ msgid ""
 #~ "Draft - A preliminary template or draft, not actionable in its current form"
-#~ msgstr "ረቂቅ - ቀዳሚ አብነት ወይም ረቂቅ፣ አሁን ባለው መልኩ ሊተገበር የሚችል አይደለም።"
+#~ msgstr "ረቂቅ - ቀዳሚ አብነት ወይም ረቂቅ፣ አሁን ባለው ቅጽ ሊተገበር አይችልም።"
 
 #~ msgid "Actual - Actionable by all targeted recipients"
 #~ msgstr "ትክክለኛ - በሁሉም የታለሙ ተቀባዮች ሊተገበር የሚችል"
 
 #~ msgid "Test - Technical testing only, all recipients disregard"
-#~ msgstr "ሙከራ - የቴክኒክ ሙከራ ብቻ፣ ሁሉም ተቀባዮች ችላ ይላሉ"
+#~ msgstr "ሙከራ - ቴክኒካዊ ሙከራ ብቻ ፣ ሁሉም ተቀባዮች ችላ ይላሉ"
 
 #~ msgid ""
 #~ "Exercise - Actionable only by designated exercise participants; exercise "
