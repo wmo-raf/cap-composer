@@ -1,0 +1,207 @@
+<svg viewBox="0 0 1760 1000" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#222"/>
+    </marker>
+    <marker id="arrowOpen" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,4 L0,8" fill="none" stroke="#222" stroke-width="1.4"/>
+    </marker>
+  </defs>
+
+  <style>
+    .lbl{font-size:18px;font-weight:700;fill:#1a1a1a;}
+    .col{font-size:21px;font-weight:700;fill:#1a1a1a;}
+    .box{fill:#ffffff;stroke:#222;stroke-width:1.6;}
+    .boxlbl{font-size:16px;font-weight:600;fill:#1a1a1a;}
+    .sub{font-size:12.5px;fill:#555;}
+    .dash{stroke:#333;stroke-width:1.6;stroke-dasharray:5 4;fill:none;}
+    .solid{stroke:#222;stroke-width:1.8;fill:none;}
+    .icon{font-size:11px;font-weight:700;fill:#fff;}
+    .pill{font-size:12px;font-weight:600;fill:#333;}
+  </style>
+
+  <!-- ================= TOP: DATABASE ================= -->
+  <g>
+    <ellipse cx="880" cy="60" rx="46" ry="14" fill="#2f6db5"/>
+    <path d="M834,60 v44 a46,14 0 0 0 92,0 v-44" fill="#3f8fd8" stroke="#2f6db5"/>
+    <ellipse cx="880" cy="60" rx="46" ry="14" fill="#5aa9ee"/>
+    <ellipse cx="880" cy="82" rx="46" ry="14" fill="none" stroke="#bfe0fb" stroke-width="1.4"/>
+    <ellipse cx="880" cy="100" rx="46" ry="14" fill="none" stroke="#bfe0fb" stroke-width="1.4"/>
+    <text x="940" y="68" class="lbl">PostGIS Database</text>
+    <text x="940" y="92" class="sub" font-size="14">Alerts, alert areas, admin boundaries,</text>
+    <text x="940" y="110" class="sub" font-size="14">geometries, hazard types</text>
+    <text x="700" y="158" class="lbl" text-anchor="middle">PostgreSQL + PostGIS / Redis cache</text>
+  </g>
+  <!-- DB <-> core arrow -->
+  <line x1="880" y1="116" x2="880" y2="300" class="solid" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+
+  <!-- ================= COLUMN LABELS ================= -->
+  <text x="120" y="210" class="col">Inputs / Sources</text>
+  <text x="540" y="360" class="col" text-anchor="middle">Authoring &amp; Ingestion</text>
+  <text x="1230" y="360" class="col" text-anchor="middle">Dissemination</text>
+  <text x="1640" y="300" class="col" text-anchor="middle">Receiving Channels</text>
+
+  <!-- ================= LEFT: SOURCES ================= -->
+  <rect x="48" y="240" width="190" height="540" rx="4" fill="none" stroke="#222" stroke-width="1.6"/>
+
+  <!-- Forecaster / browser -->
+  <rect x="92" y="270" width="100" height="68" rx="6" fill="#eef4fb" stroke="#2f6db5"/>
+  <rect x="104" y="282" width="76" height="34" rx="3" fill="#3f8fd8"/>
+  <text x="142" y="304" text-anchor="middle" class="icon">WWW</text>
+  <text x="142" y="356" text-anchor="middle" class="boxlbl">Forecasters</text>
+  <text x="142" y="374" text-anchor="middle" class="sub">(NMHS / DM agency)</text>
+
+  <!-- Admin boundaries -->
+  <rect x="92" y="410" width="100" height="64" rx="6" fill="#fff4d6" stroke="#caa42a"/>
+  <path d="M110,432 l16,-10 l20,8 l18,-8 v40 l-18,8 l-20,-8 l-16,10 z" fill="#7bb86f" stroke="#4f8a45"/>
+  <text x="142" y="492" text-anchor="middle" class="boxlbl">Admin Boundaries</text>
+  <text x="142" y="510" text-anchor="middle" class="sub">shapefile / GeoJSON</text>
+
+  <!-- Hazard types / predefined areas -->
+  <rect x="92" y="548" width="100" height="64" rx="6" fill="#fbe8ef" stroke="#b3527e"/>
+  <circle cx="142" cy="572" r="11" fill="none" stroke="#b3527e" stroke-width="2"/>
+  <path d="M142,566 v6 l4,3" stroke="#b3527e" stroke-width="2" fill="none"/>
+  <text x="142" y="592" text-anchor="middle" class="sub" font-size="11">hazards · areas</text>
+  <text x="142" y="630" text-anchor="middle" class="boxlbl">Predefined Data</text>
+  <text x="142" y="648" text-anchor="middle" class="sub">hazard types · alert areas</text>
+
+  <!-- ================= INGESTION REGION (green) ================= -->
+  <rect x="350" y="375" width="380" height="450" rx="6" fill="#dff0d8" stroke="#86b86f"/>
+
+  <g>
+    <rect x="385" y="405" width="310" height="60" class="box"/>
+    <text x="540" y="432" text-anchor="middle" class="boxlbl">CAP Composer Editor</text>
+    <text x="540" y="452" text-anchor="middle" class="sub">Wagtail StreamField · CAP 1.2 builder</text>
+
+    <rect x="385" y="485" width="310" height="60" class="box"/>
+    <text x="540" y="512" text-anchor="middle" class="boxlbl">Alert Area Map Tool</text>
+    <text x="540" y="532" text-anchor="middle" class="sub">draw / circle / boundary · Leaflet + Shapely</text>
+
+    <rect x="385" y="565" width="310" height="60" class="box"/>
+    <text x="540" y="592" text-anchor="middle" class="boxlbl">CAP Statistics</text>
+    <text x="540" y="612" text-anchor="middle" class="sub">internal analytics: severity / urgency / status</text>
+
+    <rect x="385" y="645" width="310" height="60" class="box"/>
+    <text x="540" y="672" text-anchor="middle" class="boxlbl">Approval Workflow</text>
+    <text x="540" y="692" text-anchor="middle" class="sub">draft · review · comments · email notify</text>
+
+    <rect x="385" y="725" width="310" height="56" class="box" fill="#f4f9f0"/>
+    <text x="540" y="758" text-anchor="middle" class="sub" font-size="14">CAP validation (capvalidator) &amp; preview</text>
+  </g>
+
+  <!-- ================= CORE ================= -->
+  <rect x="765" y="300" width="120" height="480" rx="4" fill="#f3efe2" stroke="#222"/>
+  <text x="825" y="532" text-anchor="middle" class="col" transform="rotate(0 825 532)">Core</text>
+  <text x="825" y="556" text-anchor="middle" class="sub" font-size="13">Wagtail</text>
+  <text x="825" y="573" text-anchor="middle" class="sub" font-size="13">CMS</text>
+  <text x="825" y="590" text-anchor="middle" class="sub" font-size="13">(Django)</text>
+  <text x="825" y="612" text-anchor="middle" class="sub" font-size="13">Gunicorn</text>
+
+  <!-- ingestion <-> core -->
+  <line x1="730" y1="560" x2="763" y2="560" class="solid" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <!-- core <-> dissemination -->
+  <line x1="887" y1="560" x2="930" y2="560" class="solid" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+
+  <!-- ================= DISSEMINATION REGION (red) ================= -->
+  <rect x="930" y="375" width="380" height="450" rx="6" fill="#f6dcdc" stroke="#cf8a8a"/>
+
+  <g>
+    <rect x="965" y="405" width="310" height="60" class="box"/>
+    <text x="1120" y="432" text-anchor="middle" class="boxlbl">CAP XML Generator + Signer</text>
+    <text x="1120" y="452" text-anchor="middle" class="sub">lxml · signxml · ECDSA / XMLDSig</text>
+
+    <rect x="965" y="485" width="310" height="60" class="box"/>
+    <text x="1120" y="512" text-anchor="middle" class="boxlbl">MQTT Publisher</text>
+    <text x="1120" y="532" text-anchor="middle" class="sub">paho-mqtt · realtime pub/sub</text>
+
+    <rect x="965" y="565" width="310" height="60" class="box"/>
+    <text x="1120" y="592" text-anchor="middle" class="boxlbl">Webhook Publisher</text>
+    <text x="1120" y="612" text-anchor="middle" class="sub">HTTP POST on publish</text>
+
+    <rect x="965" y="645" width="310" height="60" class="box"/>
+    <text x="1120" y="672" text-anchor="middle" class="boxlbl">Email / Newsletter</text>
+    <text x="1120" y="692" text-anchor="middle" class="sub">wagtail-newsletter · Mailchimp · SMTP</text>
+
+    <rect x="965" y="725" width="310" height="56" class="box" fill="#fbf2f2"/>
+    <text x="1120" y="747" text-anchor="middle" class="boxlbl" font-size="15">Output formats</text>
+    <text x="1120" y="767" text-anchor="middle" class="sub" font-size="13">signed XML · Home map · PDF · PNG</text>
+  </g>
+
+  <!-- Output format chips -->
+  <g>
+    <rect x="965" y="800" width="70" height="26" rx="13" fill="#e8f0fb" stroke="#2f6db5"/>
+    <text x="1000" y="817" text-anchor="middle" class="sub" font-size="12" font-weight="700" fill="#2f6db5">XML</text>
+    <rect x="1043" y="800" width="92" height="26" rx="13" fill="#e7f3e3" stroke="#4f8a45"/>
+    <text x="1089" y="817" text-anchor="middle" class="sub" font-size="12" font-weight="700" fill="#3d6f36">Home map</text>
+    <rect x="1143" y="800" width="62" height="26" rx="13" fill="#fde9d8" stroke="#cf7a2a"/>
+    <text x="1174" y="817" text-anchor="middle" class="sub" font-size="12" font-weight="700" fill="#b3631f">PDF</text>
+    <rect x="1213" y="800" width="62" height="26" rx="13" fill="#f0e9f7" stroke="#7a5aa6"/>
+    <text x="1244" y="817" text-anchor="middle" class="sub" font-size="12" font-weight="700" fill="#624593">PNG</text>
+  </g>
+
+  <!-- ================= RIGHT: RECEIVING CHANNELS ================= -->
+  <rect x="1530" y="330" width="200" height="480" rx="4" fill="none" stroke="#222" stroke-width="1.6"/>
+
+  <!-- WIS2 node -->
+  <rect x="1560" y="358" width="142" height="48" rx="6" fill="#fff" stroke="#2f6db5" stroke-width="2"/>
+  <circle cx="1585" cy="382" r="11" fill="none" stroke="#2f6db5" stroke-width="2"/>
+  <text x="1640" y="388" text-anchor="middle" class="boxlbl" fill="#2f6db5">WIS2 Node</text>
+
+  <!-- MQTT subscribers -->
+  <rect x="1560" y="430" width="142" height="48" rx="6" fill="#eef4fb" stroke="#2f6db5"/>
+  <text x="1631" y="450" text-anchor="middle" class="boxlbl">MQTT</text>
+  <text x="1631" y="468" text-anchor="middle" class="sub">Subscribers / broker</text>
+
+  <!-- RSS consumers -->
+  <rect x="1560" y="502" width="142" height="48" rx="6" fill="#fde9d8" stroke="#cf7a2a"/>
+  <text x="1631" y="522" text-anchor="middle" class="boxlbl">CAP Feed</text>
+  <text x="1631" y="540" text-anchor="middle" class="sub">RSS / Atom consumers</text>
+
+  <!-- Webhook endpoints -->
+  <rect x="1560" y="574" width="142" height="48" rx="6" fill="#f0e9f7" stroke="#7a5aa6"/>
+  <text x="1631" y="594" text-anchor="middle" class="boxlbl">Webhook</text>
+  <text x="1631" y="612" text-anchor="middle" class="sub">3rd-party endpoints</text>
+
+  <!-- Email recipients -->
+  <rect x="1560" y="646" width="142" height="48" rx="6" fill="#fff4d6" stroke="#caa42a"/>
+  <text x="1631" y="666" text-anchor="middle" class="boxlbl">Subscribers</text>
+  <text x="1631" y="684" text-anchor="middle" class="sub">email recipients / public</text>
+
+  <!-- Public website -->
+  <rect x="1560" y="718" width="142" height="48" rx="6" fill="#eef4fb" stroke="#2f6db5"/>
+  <text x="1631" y="738" text-anchor="middle" class="boxlbl">Public Web</text>
+  <text x="1631" y="756" text-anchor="middle" class="sub">Nginx · cached pages</text>
+
+  <!-- ================= ARROWS: sources -> ingestion ================= -->
+  <path d="M192,304 H300 V435 H383" class="dash" marker-end="url(#arrowOpen)"/>
+  <path d="M192,442 H340 V515 H383" class="dash" marker-end="url(#arrowOpen)"/>
+  <path d="M192,580 H330 V595 H383" class="dash" marker-end="url(#arrowOpen)"/>
+
+  <!-- ================= ARROWS: dissemination -> channels ================= -->
+  <path d="M1277,435 H1430 V382 H1558" class="dash" marker-end="url(#arrowOpen)"/>
+  <path d="M1277,515 H1420 V454 H1558" class="dash" marker-end="url(#arrowOpen)"/>
+  <path d="M1277,435 H1400 V526 H1558" class="dash" marker-end="url(#arrowOpen)"/>
+  <path d="M1277,595 H1440 V598 H1558" class="dash" marker-end="url(#arrowOpen)"/>
+  <path d="M1277,675 H1410 V670 H1558" class="dash" marker-end="url(#arrowOpen)"/>
+  <path d="M1277,755 H1390 V742 H1558" class="dash" marker-end="url(#arrowOpen)"/>
+
+  <!-- ================= OUTER PLATFORM BOX ================= -->
+  <rect x="330" y="276" width="1000" height="585" rx="6" fill="none" stroke="#222" stroke-width="2"/>
+
+  <!-- ================= SCHEDULED TASKS PILLS ================= -->
+  <g>
+    <rect x="455" y="872" width="180" height="34" rx="8" fill="#f0f0f0" stroke="#999"/>
+    <circle cx="475" cy="889" r="8" fill="#555"/>
+    <path d="M475,883 v6 l4,3" stroke="#fff" stroke-width="1.4" fill="none"/>
+    <text x="495" y="894" class="pill">Celery Beat — schedules</text>
+  </g>
+  <g>
+    <rect x="1025" y="872" width="190" height="34" rx="8" fill="#f0f0f0" stroke="#999"/>
+    <circle cx="1045" cy="889" r="8" fill="#555"/>
+    <path d="M1045,883 v6 l4,3" stroke="#fff" stroke-width="1.4" fill="none"/>
+    <text x="1065" y="894" class="pill">Celery Worker — async jobs</text>
+  </g>
+
+  <!-- ================= TITLE ================= -->
+  <text x="880" y="960" text-anchor="middle" font-size="30" font-weight="800" fill="#111">CAP Composer Architecture</text>
+</svg>
