@@ -304,7 +304,8 @@ def get_home_map_alerts(request):
 
 def get_latest_active_alert(request):
     other_cap_settings = OtherCAPSettings.for_request(request)
-    active_alert_style = other_cap_settings.active_alert_style or "nav_left"
+    # active_alert_style = other_cap_settings.active_alert_style or "nav_left
+    active_alert_style ="nav_top"
     default_alert_display_language = other_cap_settings.default_alert_display_language
     
     alerts = get_currently_active_alerts()
