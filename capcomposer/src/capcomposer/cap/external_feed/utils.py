@@ -14,6 +14,14 @@ logger = logging.getLogger(__name__)
 def fetch_and_process_feed(feed_id):
     # get feed by id
     external_feed = ExternalAlertFeed.objects.get(id=feed_id)
+
+    if not external_feed.site_id:
+        logger.error(
+            f"[EXTERNAL FEED] Feed '{external_feed.name}' has no site configured. "
+            "Set a site on the feed before it can import alerts."
+        )
+        return
+
     url = external_feed.url
     submit_for_moderation = external_feed.submit_for_moderation
     
@@ -75,7 +83,11 @@ def fetch_and_process_feed(feed_id):
         
         logger.info(f"[EXTERNAL FEED] Creating draft alert from CAP alert data for {entry_link}")
         # create draft alert page from alert data
-        imported_alert = create_draft_alert_from_alert_data(alert_data, submit_for_moderation=submit_for_moderation)
+        imported_alert = create_draft_alert_from_alert_data(
+            alert_data,
+            site=external_feed.site,
+            submit_for_moderation=submit_for_moderation,
+        )
         
         logger.info(f"[EXTERNAL FEED] Creating ExternalAlertFeedEntry for {entry_link}")
         if imported_alert:

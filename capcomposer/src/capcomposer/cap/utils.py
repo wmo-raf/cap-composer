@@ -149,16 +149,20 @@ def create_cap_alert_multi_media(cap_alert_page_id, clear_cache_on_success=False
     logger.info(f"[CAP] Generating CAP Alert MultiMedia content for: {cap_alert.title} ")
     # create alert area map image
     cap_alert_area_map_image = create_alert_area_image(cap_alert.id)
-    
+
+    # These saves run *after* the alert has been disseminated, and map/PDF
+    # rendering takes long enough to cross a wall-clock minute. Narrow them to the
+    # media field each one actually sets, so nothing here can ever rewrite `sent`
+    # (and with it <identifier>) out from under an already-published alert.
     if cap_alert_area_map_image:
         logger.info(f"[CAP] CAP Alert Area Map Image created for: {cap_alert.title}")
         cap_alert.alert_area_map_image = cap_alert_area_map_image
-        cap_alert.save()
-        
+        cap_alert.save(update_fields=["alert_area_map_image"])
+
         # create_cap_pdf_document
         cap_preview_document = create_cap_pdf_document(cap_alert, template_name="cap/alert_detail_pdf.html")
         cap_alert.alert_pdf_preview = cap_preview_document
-        cap_alert.save()
+        cap_alert.save(update_fields=["alert_pdf_preview"])
         
         logger.info(f"[CAP] CAP Alert PDF Document created for: {cap_alert.title}")
         
@@ -177,7 +181,7 @@ def create_cap_alert_multi_media(cap_alert_page_id, clear_cache_on_success=False
         
         if cap_preview_image:
             cap_alert.search_image = cap_preview_image
-            cap_alert.save()
+            cap_alert.save(update_fields=["search_image"])
         
         logger.info(f"[CAP] CAP Alert MultiMedia content saved for: {cap_alert.title}")
         
@@ -208,19 +212,20 @@ def send_private_alert_email(alert_id):
                     "name": name
                 })
         
-        # Generate image if not available
+        # Generate image if not available (narrow save — see
+        # create_cap_alert_multi_media: post-publish saves must not touch `sent`)
         if not alert.alert_area_map_image or not alert.alert_area_map_image.file:
             image = create_alert_area_image(alert.id)
             if image:
                 alert.alert_area_map_image = image
-                alert.save()
-        
+                alert.save(update_fields=["alert_area_map_image"])
+
         # Generate PDF if not available
         if not alert.alert_pdf_preview or not alert.alert_pdf_preview.file:
             pdf = create_cap_pdf_document(alert, template_name="cap/alert_detail_pdf.html")
             if pdf:
                 alert.alert_pdf_preview = pdf
-                alert.save()
+                alert.save(update_fields=["alert_pdf_preview"])
         
         subject = f"CAP Alert: {alert.title}"
         # Get site base URL
@@ -292,18 +297,23 @@ def get_cap_audience_list_for_site(site):
 def create_draft_alert_from_alert_data(
         alert_data,
         request=None,
+        site=None,
         update_event_list=False,
         update_contact_list=False,
         submit_for_moderation=False,
         include_guid=False
 ):
     from .models import CapAlertPage, CapAlertListPage
-    
-    if request:
+
+    if site:
+        resolved_site = site
+        cap_settings = CapSetting.for_site(site)
+    elif request:
+        resolved_site = Site.find_for_request(request)
         cap_settings = CapSetting.for_request(request)
     else:
-        site = Site.objects.get(is_default_site=True)
-        cap_settings = CapSetting.for_site(site)
+        resolved_site = Site.objects.filter(is_default_site=True).first()
+        cap_settings = CapSetting.for_site(resolved_site)
     
     base_data = {
         "imported": True,  # mark this alert page as imported
@@ -510,7 +520,12 @@ def create_draft_alert_from_alert_data(
     new_cap_alert_page = CapAlertPage(**base_data, live=False)
     new_cap_alert_page.info = StreamValue(new_cap_alert_page.info.stream_block, info_blocks, is_lazy=True)
     
-    cap_list_page = CapAlertListPage.objects.live().first()
+    if resolved_site:
+        cap_list_page = CapAlertListPage.objects.live().descendant_of(
+            resolved_site.root_page, inclusive=True
+        ).first()
+    else:
+        cap_list_page = CapAlertListPage.objects.live().first()
     
     if cap_list_page:
         cap_list_page.add_child(instance=new_cap_alert_page)
