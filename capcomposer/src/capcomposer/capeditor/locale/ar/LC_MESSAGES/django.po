@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-05 11:51+0000\n"
+"POT-Creation-Date: 2026-08-10 13:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1186,46 +1186,54 @@ msgstr "خطورة غير معروفة"
 msgid "Unknown"
 msgstr "مجهول"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:11
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:12
 msgid "Copy Paste XML"
 msgstr "نسخ ولصق XML"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:12
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:13
 msgid "URL"
 msgstr "عنوان URL"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:13
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:14
 msgid "File"
 msgstr "ملف"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:17
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:18
 msgid "Load from"
 msgstr "تحميل من"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:18
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:19
 msgid "Paste your CAP XML here"
 msgstr "الصق CAP XML هنا"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:19
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:20
 msgid "CAP Alert XML URL"
 msgstr "عنوان URL الخاص بتنبيه CAP بتنسيق XML"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:20
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:21
 msgid "CAP File"
 msgstr "ملف CAP"
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:21
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:87
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:22
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:97
 msgid "Include GUID"
 msgstr "قم بتضمين المعرف الدليلي العمومي (GUID)."
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:37
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:39
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:41
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:25
+msgid "Site"
+msgstr "موقع"
+
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:26
+msgid "Select the site to import this alert into."
+msgstr "حدد الموقع لاستيراد هذا التنبيه إليه."
+
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:47
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:49
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:51
 msgid "This field is required."
 msgstr "هذه الخانة مطلوبه."
 
-#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:78
+#: capcomposer/src/capcomposer/capeditor/forms/capimporter.py:88
 msgid ""
 "An error occurred while trying to load the CAP XML. Please check the data "
 "and try again."
@@ -1593,7 +1601,7 @@ msgstr "خط العرض"
 msgid "Radius (in kilometers) "
 msgstr "نصف القطر (بالكيلومترات)"
 
-#: capcomposer/src/capcomposer/capeditor/wagtail_hooks.py:104
+#: capcomposer/src/capcomposer/capeditor/wagtail_hooks.py:110
 #, python-format
 msgid "Page '%(page_title)s' copied."
 msgstr "تم نسخ الصفحة '%(page_title)s'."
