@@ -21,7 +21,7 @@ attrs==25.3.0
     # via
     #   service-identity
     #   twisted
-autobahn==24.4.2
+autobahn==26.7.1
     # via daphne
 automat==25.4.16
     # via twisted
@@ -31,6 +31,8 @@ beautifulsoup4==4.13.5
     #   wagtail
 billiard==4.2.1
     # via celery
+cbor2==6.1.4
+    # via autobahn
 celery==5.5.3
     # via
     #   -r standalone.in
@@ -41,7 +43,9 @@ celery-singleton==0.3.1
 certifi==2025.8.3
     # via requests
 cffi==2.0.0
-    # via cryptography
+    # via
+    #   autobahn
+    #   cryptography
 channels==4.3.1
     # via -r standalone.in
 charset-normalizer==3.4.3
@@ -174,6 +178,8 @@ laces==0.1.2
     # via wagtail
 modelsearch==1.2
     # via wagtail
+msgpack==1.2.2
+    # via autobahn
 openpyxl==3.1.5
     # via wagtail
 opentelemetry-api==1.40.0
@@ -339,7 +345,7 @@ tqdm==4.67.1
     # via django-deep-translator
 twisted[tls]==25.5.0
     # via daphne
-txaio==25.6.1
+txaio==26.6.1
     # via autobahn
 typing-extensions==4.15.0
     # via
@@ -359,6 +365,8 @@ tzdata==2025.2
     # via
     #   django-celery-beat
     #   kombu
+ujson==6.0.0
+    # via autobahn
 urllib3==2.6.3
     # via requests
 uvicorn[standard]==0.35.0
