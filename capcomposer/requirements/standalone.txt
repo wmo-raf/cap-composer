@@ -134,7 +134,7 @@ django-timezone-field==7.1
     # via django-celery-beat
 django-treebeard==4.7.1
     # via wagtail
-djangorestframework==3.16.1
+djangorestframework==3.17.2
     # via wagtail
 draftjs-exporter==5.1.0
     # via wagtail
