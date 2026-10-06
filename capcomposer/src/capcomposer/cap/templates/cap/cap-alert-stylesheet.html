@@ -280,42 +280,7 @@
                     <div id="map" class="map">
                         <script type="text/javascript">
                             // default base style
-                            const defaultStyle = {
-                                'version': 8,
-                                'sources': {
-                                    'carto-dark': {
-                                        'type': 'raster',
-                                        'tiles': [
-                                            "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-                                            "https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-                                            "https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
-                                            "https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png"
-                                        ]
-                                    },
-                                    'carto-light': {
-                                        'type': 'raster',
-                                        'tiles': [
-                                            "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
-                                            "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
-                                            "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png",
-                                            "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"
-                                        ]
-                                    },
-                                    'wikimedia': {
-                                        'type': 'raster',
-                                        'tiles': [
-                                            "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
-                                        ]
-                                    }
-                                },
-                                'layers': [{
-                                    'id': 'carto-light-layer',
-                                    'source': 'carto-light',
-                                    'type': 'raster',
-                                    'minzoom': 0,
-                                    'maxzoom': 22
-                                }]
-                            }
+                            const defaultStyle = "https://tiles.openfreemap.org/styles/positron";
 
                             const capData = {
                                 'type': 'FeatureCollection',
