@@ -337,7 +337,7 @@ telepath==0.3.1
     # via wagtail
 tqdm==4.67.1
     # via django-deep-translator
-twisted[tls]==25.5.0
+twisted[tls]==26.10.0rc1
     # via daphne
 txaio==25.6.1
     # via autobahn
@@ -397,7 +397,7 @@ wrapt==1.17.3
     #   opentelemetry-instrumentation-redis
 zipp==3.23.0
     # via importlib-metadata
-zope-interface==7.2
+zope-interface==8.7
     # via twisted
 
 # The following packages are considered to be unsafe in a requirements file:
