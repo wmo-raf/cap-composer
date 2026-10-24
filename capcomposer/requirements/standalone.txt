@@ -272,7 +272,7 @@ packaging==25.0
     #   gunicorn
     #   kombu
     #   opentelemetry-instrumentation
-pillow==12.1.1
+pillow==13.0.0
     # via
     #   pillow-heif
     #   wagtail
