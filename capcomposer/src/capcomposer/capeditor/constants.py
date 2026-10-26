@@ -144,6 +144,10 @@ CAP_MESSAGE_ORDER_SEQUENCE = {
     ]
 }
 
+# Severity colours. "color", "background_color" and "border_color" are the visual identity
+# (map fills, outlines, swatches). For readable text (WCAG AA, 4.5:1):
+#   text_color    - text on background_color or on white
+#   on_color_text - text placed on top of color
 SEVERITY_MAPPING = {
     "Extreme": {
         "label": _("Extreme severity"),
@@ -151,6 +155,8 @@ SEVERITY_MAPPING = {
         "background_color": "#FEE2E2",
         "border_color": "#DC2626",
         "icon_color": "#d42d41",
+        "text_color": "#b91c1c",
+        "on_color_text": "#ffffff",
         "severity": _("Extreme"),
         "id": 4
     },
@@ -160,6 +166,8 @@ SEVERITY_MAPPING = {
         "background_color": "#FDE8D0", # soft peach
         "border_color": "#C2600A",
         "icon_color": "#f08c11",
+        "text_color": "#9a3412",
+        "on_color_text": "#1a1a1a",
         "severity": _("Severe"),
         "id": 3
     },
@@ -169,6 +177,8 @@ SEVERITY_MAPPING = {
         "background_color": "#FEF08A", # bright yellow bg
         "border_color": "#A16207",
         "icon_color": "#f4cf00",
+        "text_color": "#854d0e",
+        "on_color_text": "#1a1a1a",
         "severity": _("Moderate"),
         "id": 2
     },
@@ -178,6 +188,8 @@ SEVERITY_MAPPING = {
         "background_color": "#CFFAFE",
         "border_color": "#0E7490",
         "icon_color": "#399cc7",
+        "text_color": "#0e7490",
+        "on_color_text": "#1a1a1a",
         "severity": _("Minor"),
         "id": 1
     },
@@ -187,6 +199,8 @@ SEVERITY_MAPPING = {
         "background_color": "#E0E7FF",
         "border_color": "#4B6CB7",
         "icon_color": "#82a8df",
+        "text_color": "#3b5aa0",
+        "on_color_text": "#1a1a1a",
         "severity": _("Unknown"),
         "id": 0
     }
