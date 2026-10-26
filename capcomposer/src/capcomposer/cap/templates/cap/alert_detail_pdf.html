@@ -42,7 +42,7 @@
         <div>
         {% endif %}
         <div class="alert-title-container"
-             style="background-color: {{ info.severity.color }};{% if info.severity.icon_color %}color:{{ info.severity.background_color }};{% endif %}">
+             style="background-color: {{ info.severity.color }};color:{{ info.severity.on_color_text|default:'#1a1a1a' }};">
             {% svg_icon name="warning-outline" %}
             <span class="alert-title">
                     {{ page.title }}
