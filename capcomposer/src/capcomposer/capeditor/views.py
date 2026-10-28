@@ -211,13 +211,42 @@ def translate_text(request):
         return JsonResponse({'error': f'Translation service unavailable: {e}'}, status=503)
     
     translated = {}
+    errors = {}
     for key, text in texts.items():
         if text and isinstance(text, str) and text.strip():
             try:
-                translated[key] = translator.translate_string(text, target_language, source_language)
-            except Exception:
-                translated[key] = text
+                translated[key] = _translate_string(translator, text, target_language, source_language)
+            except Exception as e:
+                errors[key] = str(e).splitlines()[0] if str(e) else e.__class__.__name__
         else:
             translated[key] = text
-    
-    return JsonResponse({'translated': translated})
+
+    # Nothing could be translated: report the failure instead of silently returning the source text
+    if errors and len(errors) == sum(1 for t in texts.values() if isinstance(t, str) and t.strip()):
+        return JsonResponse({'error': f'Translation failed: {next(iter(errors.values()))}', 'errors': errors},
+                            status=502)
+
+    return JsonResponse({'translated': translated, 'errors': errors})
+
+
+def _language_candidates(code):
+    """
+    Return the language code as given, followed by its primary subtag (e.g. 'en-US' -> 'en').
+    CAP uses RFC 3066 codes, while most translator services only accept ISO 639-1 codes.
+    """
+    candidates = [code]
+    primary = code.split('-')[0].split('_')[0]
+    if primary and primary != code:
+        candidates.append(primary)
+    return candidates
+
+
+def _translate_string(translator, text, target_language, source_language):
+    last_error = None
+    for target in _language_candidates(target_language):
+        for source in _language_candidates(source_language):
+            try:
+                return translator.translate_string(text, target, source)
+            except Exception as e:
+                last_error = e
+    raise last_error

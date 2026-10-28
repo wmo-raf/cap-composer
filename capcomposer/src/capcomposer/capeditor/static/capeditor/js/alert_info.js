@@ -62,6 +62,15 @@
         return m ? decodeURIComponent(m[1]) : null;
     }
 
+    // Alerts the user about fields the server could not translate (left untouched).
+    function warnTranslationErrors(data) {
+        var errors = (data && data.errors) || {};
+        var fields = Object.keys(errors);
+        if (fields.length === 0) return;
+        console.warn('[alert_info] Some fields could not be translated:', errors);
+        alert('Could not translate: ' + fields.join(', ') + '\n' + errors[fields[0]]);
+    }
+
     function injectLockStyles() {
         if (document.getElementById('alert-info-translation-styles')) return;
         var style = document.createElement('style');
@@ -249,6 +258,7 @@
                 return r.json();
             }).then(function (data) {
                 var translated = (data && data.translated) || {};
+                warnTranslationErrors(data);
                 translatedBlock.querySelectorAll('input:not([type="hidden"]), textarea').forEach(function (inp) {
                     if (!inp.name) return;
                     TRANSLATABLE_FIELDS.forEach(function (f) {
@@ -443,6 +453,7 @@
                     if (Object.keys(translated).length === 0) {
                         console.warn('[alert_info] Translation API returned no translated fields. Response:', data);
                     }
+                    warnTranslationErrors(data);
 
                     // Lock first so that change events fired during field updates below do not
                     // trigger the spurious "Update Translation" listener that decorateBlock may
