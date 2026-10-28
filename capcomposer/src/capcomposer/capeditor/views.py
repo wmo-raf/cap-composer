@@ -2,6 +2,7 @@ import json
 import os
 import tempfile
 
+from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
@@ -210,43 +211,75 @@ def translate_text(request):
     except Exception as e:
         return JsonResponse({'error': f'Translation service unavailable: {e}'}, status=503)
     
+    language_codes, supports_auto = _translator_languages(translator)
+    target_language = _resolve_language(target_language, language_codes)
+    if source_language == 'auto' and not supports_auto:
+        source_language = getattr(settings, 'LANGUAGE_CODE', 'en')
+    if source_language != 'auto':
+        source_language = _resolve_language(source_language, language_codes)
+    
     translated = {}
     errors = {}
     for key, text in texts.items():
         if text and isinstance(text, str) and text.strip():
             try:
-                translated[key] = _translate_string(translator, text, target_language, source_language)
+                result = translator.translate_string(text, target_language, source_language)
+                # Some services (e.g. MyMemory) return quota/validation errors as the translated text
+                if not result or result.startswith('MYMEMORY WARNING') or 'IS AN INVALID' in result:
+                    raise ValueError(result or 'Empty translation')
+                translated[key] = result
             except Exception as e:
                 errors[key] = str(e).splitlines()[0] if str(e) else e.__class__.__name__
         else:
             translated[key] = text
-
+    
     # Nothing could be translated: report the failure instead of silently returning the source text
     if errors and len(errors) == sum(1 for t in texts.values() if isinstance(t, str) and t.strip()):
         return JsonResponse({'error': f'Translation failed: {next(iter(errors.values()))}', 'errors': errors},
                             status=502)
-
+    
     return JsonResponse({'translated': translated, 'errors': errors})
 
 
-def _language_candidates(code):
+def _translator_languages(translator):
     """
-    Return the language code as given, followed by its primary subtag (e.g. 'en-US' -> 'en').
-    CAP uses RFC 3066 codes, while most translator services only accept ISO 639-1 codes.
+    Return the language codes accepted by the configured translator service (None if unknown),
+    and whether it can auto-detect the source language.
     """
-    candidates = [code]
-    primary = code.split('-')[0].split('_')[0]
-    if primary and primary != code:
-        candidates.append(primary)
-    return candidates
+    from deep_translator import constants
+    
+    languages = {
+        'GoogleTranslatorService': (constants.GOOGLE_LANGUAGES_TO_CODES, True),
+        'MyMemoryTranslatorService': (constants.MY_MEMORY_LANGUAGES_TO_CODES, False),
+        'DeeplTranslatorService': (constants.DEEPL_LANGUAGE_TO_CODE, False),
+        'LibreTranslatorService': (constants.LIBRE_LANGUAGES_TO_CODES, True),
+    }
+    codes, supports_auto = languages.get(translator.__class__.__name__, (None, True))
+    return (list(codes.values()) if codes else None), supports_auto
 
 
-def _translate_string(translator, text, target_language, source_language):
-    last_error = None
-    for target in _language_candidates(target_language):
-        for source in _language_candidates(source_language):
-            try:
-                return translator.translate_string(text, target, source)
-            except Exception as e:
-                last_error = e
-    raise last_error
+def _resolve_language(code, supported_codes):
+    """
+    Map a CAP language code (RFC 3066, e.g. 'en-US' or 'fr') to a code the translator accepts,
+    matching on the primary subtag when the exact code is not supported ('en-US' -> 'en', 'fr' -> 'fr-FR').
+    """
+    if not supported_codes:
+        return code
+    
+    by_lower = {c.lower(): c for c in supported_codes}
+    if code.lower() in by_lower:
+        return by_lower[code.lower()]
+    
+    primary = code.replace('_', '-').split('-')[0].lower()
+    if primary in by_lower:
+        return by_lower[primary]
+    
+    # Prefer the "main" region variant, e.g. fr-FR over fr-BE
+    if f'{primary}-{primary}' in by_lower:
+        return by_lower[f'{primary}-{primary}']
+    
+    for c in supported_codes:
+        if c.lower().split('-')[0] == primary:
+            return c
+    
+    return code

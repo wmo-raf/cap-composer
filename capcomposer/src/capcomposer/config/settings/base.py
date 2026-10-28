@@ -377,6 +377,11 @@ WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY = env("WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY
 WAGTAIL_NEWSLETTER_FROM_NAME = env("WAGTAIL_NEWSLETTER_FROM_NAME", default="")
 WAGTAIL_NEWSLETTER_REPLY_TO = env("WAGTAIL_NEWSLETTER_REPLY_TO", default="")
 
+# Translator used to translate alert info. Google is not the default because it blocks automated requests.
+PO_TRANSLATOR_SERVICE = env.str("PO_TRANSLATOR_SERVICE",
+                                default="django_deep_translator.services.MyMemoryTranslatorService")
+DEEPL_TRANSLATE_KEY = env.str("DEEPL_TRANSLATE_KEY", default=None)
+
 LOCALE_PATHS = [
     'capcomposer/src/capcomposer/capeditor/locale', 
     'capcomposer/src/capcomposer/cap/locale', 
