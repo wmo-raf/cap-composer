@@ -9,6 +9,8 @@ from django_deep_translator.services import BaseTranslatorService
 
 logger = logging.getLogger(__name__)
 
+DEFAULT_TRANSLATOR_SERVICE = "capcomposer.capeditor.translators.GoogleWithMyMemoryFallbackTranslatorService"
+
 GOOGLE_GTX_URL = "https://translate.googleapis.com/translate_a/single"
 
 # MyMemory rejects texts of 500 characters or more

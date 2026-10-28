@@ -379,8 +379,8 @@ WAGTAIL_NEWSLETTER_REPLY_TO = env("WAGTAIL_NEWSLETTER_REPLY_TO", default="")
 
 # Translator used to translate alert info. The default is free and needs no API key:
 # Google's gtx endpoint, falling back to MyMemory when Google fails or rate limits.
-PO_TRANSLATOR_SERVICE = env.str("PO_TRANSLATOR_SERVICE",
-                                default="capcomposer.capeditor.translators.GoogleWithMyMemoryFallbackTranslatorService")
+CAP_TRANSLATOR_SERVICE = env.str("CAP_TRANSLATOR_SERVICE",
+                                 default="capcomposer.capeditor.translators.GoogleWithMyMemoryFallbackTranslatorService")
 DEEPL_TRANSLATE_KEY = env.str("DEEPL_TRANSLATE_KEY", default=None)
 
 LOCALE_PATHS = [

@@ -10,7 +10,7 @@ from wagtail import hooks
 
 from capcomposer.capeditor.forms.capimporter import CAPLoadForm, CAPImportForm
 from .models import CapSetting
-from .translators import resolve_language
+from .translators import DEFAULT_TRANSLATOR_SERVICE, resolve_language
 
 
 def load_cap_alert(request):
@@ -207,8 +207,10 @@ def translate_text(request):
         return JsonResponse({'error': 'Missing required fields'}, status=400)
     
     try:
-        from django_deep_translator.utils import get_translator
-        translator = get_translator()
+        from django_deep_translator.utils import perform_import
+        # Own setting, so a host project's PO_TRANSLATOR_SERVICE (used for .po files) does not override it
+        translator_service = getattr(settings, 'CAP_TRANSLATOR_SERVICE', DEFAULT_TRANSLATOR_SERVICE)
+        translator = perform_import(translator_service, 'CAP_TRANSLATOR_SERVICE')()
     except Exception as e:
         return JsonResponse({'error': f'Translation service unavailable: {e}'}, status=503)
     
