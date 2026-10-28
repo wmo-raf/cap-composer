@@ -2,6 +2,7 @@ import json
 import os
 import tempfile
 
+from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
@@ -9,6 +10,7 @@ from wagtail import hooks
 
 from capcomposer.capeditor.forms.capimporter import CAPLoadForm, CAPImportForm
 from .models import CapSetting
+from .translators import DEFAULT_TRANSLATOR_SERVICE, resolve_language
 
 
 def load_cap_alert(request):
@@ -205,19 +207,55 @@ def translate_text(request):
         return JsonResponse({'error': 'Missing required fields'}, status=400)
     
     try:
-        from django_deep_translator.utils import get_translator
-        translator = get_translator()
+        from django_deep_translator.utils import perform_import
+        # Own setting, so a host project's PO_TRANSLATOR_SERVICE (used for .po files) does not override it
+        translator_service = getattr(settings, 'CAP_TRANSLATOR_SERVICE', DEFAULT_TRANSLATOR_SERVICE)
+        translator = perform_import(translator_service, 'CAP_TRANSLATOR_SERVICE')()
     except Exception as e:
         return JsonResponse({'error': f'Translation service unavailable: {e}'}, status=503)
     
+    language_codes, supports_auto = _translator_languages(translator)
+    target_language = resolve_language(target_language, language_codes)
+    if source_language == 'auto' and not supports_auto:
+        source_language = getattr(settings, 'LANGUAGE_CODE', 'en')
+    if source_language != 'auto':
+        source_language = resolve_language(source_language, language_codes)
+    
     translated = {}
+    errors = {}
     for key, text in texts.items():
         if text and isinstance(text, str) and text.strip():
             try:
-                translated[key] = translator.translate_string(text, target_language, source_language)
-            except Exception:
-                translated[key] = text
+                result = translator.translate_string(text, target_language, source_language)
+                # Some services (e.g. MyMemory) return quota/validation errors as the translated text
+                if not result or result.startswith('MYMEMORY WARNING') or 'IS AN INVALID' in result:
+                    raise ValueError(result or 'Empty translation')
+                translated[key] = result
+            except Exception as e:
+                errors[key] = str(e).splitlines()[0] if str(e) else e.__class__.__name__
         else:
             translated[key] = text
     
-    return JsonResponse({'translated': translated})
+    # Nothing could be translated: report the failure instead of silently returning the source text
+    if errors and len(errors) == sum(1 for t in texts.values() if isinstance(t, str) and t.strip()):
+        return JsonResponse({'error': f'Translation failed: {next(iter(errors.values()))}', 'errors': errors},
+                            status=502)
+    
+    return JsonResponse({'translated': translated, 'errors': errors})
+
+
+def _translator_languages(translator):
+    """
+    Return the language codes accepted by the configured translator service (None if unknown),
+    and whether it can auto-detect the source language.
+    """
+    from deep_translator import constants
+    
+    languages = {
+        'GoogleTranslatorService': (constants.GOOGLE_LANGUAGES_TO_CODES, True),
+        'MyMemoryTranslatorService': (constants.MY_MEMORY_LANGUAGES_TO_CODES, False),
+        'DeeplTranslatorService': (constants.DEEPL_LANGUAGE_TO_CODE, False),
+        'LibreTranslatorService': (constants.LIBRE_LANGUAGES_TO_CODES, True),
+    }
+    codes, supports_auto = languages.get(translator.__class__.__name__, (None, True))
+    return (list(codes.values()) if codes else None), supports_auto

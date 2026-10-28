@@ -377,6 +377,12 @@ WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY = env("WAGTAIL_NEWSLETTER_MAILCHIMP_API_KEY
 WAGTAIL_NEWSLETTER_FROM_NAME = env("WAGTAIL_NEWSLETTER_FROM_NAME", default="")
 WAGTAIL_NEWSLETTER_REPLY_TO = env("WAGTAIL_NEWSLETTER_REPLY_TO", default="")
 
+# Translator used to translate alert info. The default is free and needs no API key:
+# Google's gtx endpoint, falling back to MyMemory when Google fails or rate limits.
+CAP_TRANSLATOR_SERVICE = env.str("CAP_TRANSLATOR_SERVICE",
+                                 default="capcomposer.capeditor.translators.GoogleWithMyMemoryFallbackTranslatorService")
+DEEPL_TRANSLATE_KEY = env.str("DEEPL_TRANSLATE_KEY", default=None)
+
 LOCALE_PATHS = [
     'capcomposer/src/capcomposer/capeditor/locale', 
     'capcomposer/src/capcomposer/cap/locale', 
