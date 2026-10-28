@@ -10,6 +10,7 @@ from wagtail import hooks
 
 from capcomposer.capeditor.forms.capimporter import CAPLoadForm, CAPImportForm
 from .models import CapSetting
+from .translators import resolve_language
 
 
 def load_cap_alert(request):
@@ -212,11 +213,11 @@ def translate_text(request):
         return JsonResponse({'error': f'Translation service unavailable: {e}'}, status=503)
     
     language_codes, supports_auto = _translator_languages(translator)
-    target_language = _resolve_language(target_language, language_codes)
+    target_language = resolve_language(target_language, language_codes)
     if source_language == 'auto' and not supports_auto:
         source_language = getattr(settings, 'LANGUAGE_CODE', 'en')
     if source_language != 'auto':
-        source_language = _resolve_language(source_language, language_codes)
+        source_language = resolve_language(source_language, language_codes)
     
     translated = {}
     errors = {}
@@ -256,30 +257,3 @@ def _translator_languages(translator):
     }
     codes, supports_auto = languages.get(translator.__class__.__name__, (None, True))
     return (list(codes.values()) if codes else None), supports_auto
-
-
-def _resolve_language(code, supported_codes):
-    """
-    Map a CAP language code (RFC 3066, e.g. 'en-US' or 'fr') to a code the translator accepts,
-    matching on the primary subtag when the exact code is not supported ('en-US' -> 'en', 'fr' -> 'fr-FR').
-    """
-    if not supported_codes:
-        return code
-    
-    by_lower = {c.lower(): c for c in supported_codes}
-    if code.lower() in by_lower:
-        return by_lower[code.lower()]
-    
-    primary = code.replace('_', '-').split('-')[0].lower()
-    if primary in by_lower:
-        return by_lower[primary]
-    
-    # Prefer the "main" region variant, e.g. fr-FR over fr-BE
-    if f'{primary}-{primary}' in by_lower:
-        return by_lower[f'{primary}-{primary}']
-    
-    for c in supported_codes:
-        if c.lower().split('-')[0] == primary:
-            return c
-    
-    return code
