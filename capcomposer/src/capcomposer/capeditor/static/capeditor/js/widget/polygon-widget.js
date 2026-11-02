@@ -88,6 +88,7 @@ class PolygonWidget {
 
         this.initMap().then(() => {
             this.map.resize()
+            this.observeVisibility()
 
             this.fetchAndFitBounds()
             this.initLayer()
@@ -114,15 +115,50 @@ class PolygonWidget {
                     if (country_bounds) {
                         this.countriesBounds = country_bounds
                     }
-                    if (this.countriesBounds) {
-                        const bounds = [[this.countriesBounds[0], this.countriesBounds[1]], [this.countriesBounds[2], this.countriesBounds[3]]]
-                        this.map.fitBounds(bounds)
-                    }
+                    this.fitBounds()
                 })
                 .catch((error) => {
                     console.error('Error:', error);
                 });
         }
+    }
+
+    fitBounds() {
+        if (!this.map || window.document.fullscreenElement) {
+            return
+        }
+
+        // zoom to the area if there is one, otherwise to the country
+        const value = this.getState()
+        if (value) {
+            const bbox = turf.bbox(JSON.parse(value))
+            this.map.fitBounds([[bbox[0], bbox[1]], [bbox[2], bbox[3]]], {padding: 50})
+        } else if (this.countriesBounds) {
+            const bounds = [[this.countriesBounds[0], this.countriesBounds[1]], [this.countriesBounds[2], this.countriesBounds[3]]]
+            this.map.fitBounds(bounds)
+        }
+    }
+
+    observeVisibility() {
+        // maps created inside a hidden container (e.g. an inactive admin tab) have no size,
+        // so resize and fit again once the container becomes visible
+        const container = this.map.getContainer()
+        let wasHidden = container.clientWidth === 0 || container.clientHeight === 0
+
+        new ResizeObserver(() => {
+            const isHidden = container.clientWidth === 0 || container.clientHeight === 0
+            if (isHidden) {
+                wasHidden = true
+                return
+            }
+
+            this.map.resize()
+
+            if (wasHidden) {
+                wasHidden = false
+                this.fitBounds()
+            }
+        }).observe(container)
     }
 
 
