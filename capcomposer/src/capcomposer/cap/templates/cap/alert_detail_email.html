@@ -25,7 +25,7 @@
                 {% for info in page.infos %}
                     <tr dir="{% if info.info.value.language|slice:':2' == 'ar' %}rtl{% endif %}">
                         <td style="background-color:{{ info.severity.background_color }}; color:
-                                {{ info.severity.color|default:'#4a4a4a' }}; padding: 10px 15px;text-align: center;">
+                                {{ info.severity.text_color|default:'#4a4a4a' }}; padding: 10px 15px;text-align: center;">
                             <strong style="font-size: 20px;">⚠️ {{ page.title }}</strong>
                         </td>
                     </tr>

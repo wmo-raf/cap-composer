@@ -197,7 +197,7 @@
   align-items: center;
   gap: 4px;
   font-size: 11px;
-  color: #aaa;
+  color: var(--text-muted, #6b6b6b);
   margin-top: 1px;
 }
 
@@ -215,7 +215,7 @@
 
 .alert-time-info .time-em {
   font-weight: 600;
-  color: #888;
+  color: var(--text-muted, #6b6b6b);
 }
 
 /* ── RIGHT: pill + arrow ── */

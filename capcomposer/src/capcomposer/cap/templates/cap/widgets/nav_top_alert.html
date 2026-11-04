@@ -112,17 +112,17 @@
                     </span>
                 {% endif %}
                 <span class="alert-warning"
-                      style="background-color: {{ latest_active_alert.severity.border_color }};">
+                      style="background-color: {{ latest_active_alert.severity.text_color }};">
                     {% translate "Alert" %}
                 </span>
-                <span class="alert-headline" style="color: {{ latest_active_alert.severity.border_color }};">
+                <span class="alert-headline" style="color: {{ latest_active_alert.severity.text_color }};">
                     {% if latest_active_alert.properties.headline %}
                         {{ latest_active_alert.properties.headline }}
                     {% else %}
                         {{ latest_active_alert.title }}
                     {% endif %}
                 </span>
-                <span class="alert-severity-label" style="color: {{ latest_active_alert.severity.border_color }};">
+                <span class="alert-severity-label" style="color: {{ latest_active_alert.severity.text_color }};">
                     {# severity.label is already a lazy gettext string from SEVERITY_MAPPING #}
                     {{ latest_active_alert.severity.label }}
                 </span>
