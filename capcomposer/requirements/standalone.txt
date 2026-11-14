@@ -370,7 +370,7 @@ vine==5.1.0
     #   amqp
     #   celery
     #   kombu
-wagtail==7.3.1
+wagtail==7.3.4
     # via
     #   -c base.txt
     #   -r standalone.in
